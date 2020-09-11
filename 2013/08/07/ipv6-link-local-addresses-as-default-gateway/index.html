@@ -1,0 +1,913 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>IPv6 deployment: Using IPv6 link-local addresses as default gateway - Edge Cloud</title>
+<meta name="description" content="Using the simple to remember IPv6 link-local address fe80::1 as the default gateway.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="IPv6 deployment: Using IPv6 link-local addresses as default gateway">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/">
+
+
+  <meta property="og:description" content="Using the simple to remember IPv6 link-local address fe80::1 as the default gateway.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="IPv6 deployment: Using IPv6 link-local addresses as default gateway">
+  <meta name="twitter:description" content="Using the simple to remember IPv6 link-local address fe80::1 as the default gateway.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-08-07T09:24:26-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="IPv6 deployment: Using IPv6 link-local addresses as default gateway">
+    <meta itemprop="description" content="Using the simple to remember IPv6 link-local address fe80::1 as the default gateway.">
+    <meta itemprop="datePublished" content="August 07, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">IPv6 deployment: Using IPv6 link-local addresses as default gateway
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#ipv6-use-case">IPv6 use case</a></li>
+  <li><a href="#network-design">Network Design</a></li>
+  <li><a href="#implementation">Implementation</a></li>
+  <li><a href="#usage">Usage</a></li>
+  <li><a href="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#what-about-dns-via-anycast">What about DNS via Anycast?</a></li>
+  <li><a href="#where-is-it-used-in-the-wild">Where is it used in the wild?</a></li>
+  <li><a href="#hall-of-shame">Hall of shame</a></li>
+  <li><a href="#analogy">Analogy</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>One of the big benefits in IPv6 is the automatic configuration capability for hosts via <a href="/2013/11/18/ipv6-address-management-hosts/#3-stateless-address-auto-configuration-slaac">Stateless address autoconfiguration (SLAAC)</a>. Yet sometimes even in IPv6 one wants to solely manually configure hosts in a L2 segment. For this use case one needs to provide basic network information to the user configuring the host. This usually includes at least the IP address of the host along with the prefix length, the default gateway and the DNS resolver. Wouldn’t it be great if we could tell users that the default gateway and the DNS resolver are always the same, no matter what network segment the host is in? And wouldn’t it be great if these IPv6 addresses for default gateway and DNS resolver were short and easy to remember?</p>
+
+<h1 id="ipv6-use-case">IPv6 use case</h1>
+
+<p>While it’s already possible to achieve something similar for the DNS resolver in IPv4, in IPv6 link-local addresses enable us to use the same default gateway in every network segment. Simplified speaking link-local addresses translate into having the same subnet available on each L2 segment. Thus this allows network engineers to configure the default gateway for client machines to be always the same. Here it doesn’t matter whether this default gateway for static routing is provided via a single interface, via <a href="https://en.wikipedia.org/wiki/Hot_Standby_Router_Protocol" target="_blank" rel="noopener noreferrer">Hot Standby Router Protocol (HSRP)</a> or <a href="https://en.wikipedia.org/wiki/Virtual_Router_Redundancy_Protocol" target="_blank" rel="noopener noreferrer">Virtual Router Redundancy Protocol (VRPP)</a>.</p>
+
+<p>As a result a network engineer can give users a very simple to follow statement for manually configuring their hosts with IPv6: “The default gateway is always fe80::1”. Thanks to Anycast we can already make similar statements for e.g. DNS, with “The DNS resolvers are always fd53::11 and fd53::12”.</p>
+
+<h1 id="network-design">Network Design</h1>
+
+<p>In the IPv4 world it is very common to use the first address within an IPv4 subnet as the default gateway, along with the second and third address potentially being used for individual HSRP/VRPP nodes. Thus on the network 192.168.0.0/24, the default gateway would usually be 192.168.0.1. In case of network architects using /24 networks for end-user facing usage, this often translates into the easy statement of “Always use the .1 as the default gateway.” With IPv6 we can simplify this statement further and use a link-local address as the default gateway.</p>
+
+<p>In IPv6 Link-Local addresses are mandatory addresses according to <a href="https://tools.ietf.org/html/rfc4291" target="_blank" rel="noopener noreferrer">RFC 4291</a>. This means that all interfaces are required to have at least one Link-Local unicast address from the address block fe80::/10, which has been reserved for link-local unicast addressing. The actual link-local addresses are though assigned with the prefix fe80::/64.</p>
+
+<p>Combining what many of us are used to from the IPv4 world with this new feature particular to IPv6, the link-local address fe80::1 appears to be the perfect candidate for a generic default gateway within a data center or campus network. This address is for sure easier to remember and especially type in as e.g. <code class="highlighter-rouge">20ba:dd0g:f00d:1234::1</code>.</p>
+
+<p>As each IPv6-enabled router interface will already have a link-local address generated based on the <a href="https://en.wikipedia.org/wiki/IPv6_address#Modified_EUI-64" target="_blank" rel="noopener noreferrer">modified EUI-64</a> scheme, the address fe80::1 will either replace or augment this automatically generated address. At the same time an existing global unicast address on the interface will not be affected.</p>
+
+<h1 id="implementation">Implementation</h1>
+
+<p>After having decided to use the link-local address fe80::1 as the default gateway in all end-user facing subnets, we need to configure our network devices accordingly.</p>
+
+<p>Most network vendors offer a way for manually configuring an additional link-local address on an interface that slightly differs from the way a regular global unicast address is configured.</p>
+
+<p>Both Cisco and Brocade do not use a prefix-length as part of the configuration, but instead use the keyword “link-local”. Juniper on the other side treats configuring a link-local IPv6 address the same way as configuring a global unicast address.</p>
+
+<p>With a Cisco IOS device, the configuration would look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cisco(config)# interface gigabitEthernet3/1
+Cisco(config-if)# ipv6 address fe80::1 link-local
+Cisco(config-if)# end
+Cisco# show ipv6 interface gigabitEthernet3/1
+gigabitEthernet 3/1 is up, line protocol is up
+  IPv6 is enabled, link-local address is FE80::1
+  No Virtual link-local address(es):
+  Global unicast address(es):
+    20BA:DD06:F00D:1234::1, subnet is 20BA:DD06:F00D:1234::/48
+  Joined group address(es):
+    FF02::1
+    FF02::2
+    FF02::1:FF00:2
+    FF02::1:FFD0:DEBF
+  MTU is 1500 bytes
+  ICMP error messages limited to one every 100 milliseconds
+  ICMP redirects are enabled
+  ICMP unreachables are sent
+  ND DAD is enabled, number of DAD attempts: 1
+  ND reachable time is 30000 milliseconds (using 30000)
+  ND advertised reachable time is 0 (unspecified)
+  ND advertised retransmit interval is 0 (unspecified)
+  ND router advertisements are sent every 200 seconds
+  ND router advertisements live for 1800 seconds
+  ND advertised default router preference is Medium
+  Hosts use stateless autoconfig for addresses.
+</code></pre></div></div>
+
+<p>We can clearly see that the IPv6 link-local address for the interface was successfully modified to fe80::1, while the global unicast address remains in place.</p>
+
+<h1 id="usage">Usage</h1>
+
+<p>For end-users this approach simplifies manual configuration of hosts for IPv6 - as e.g. necessary for servers - dramatically. They can use the same set of easy to remember and especially quick to type values for the default gateway and the primary and secondary nameserver. Figure 1 shows how this could look like in Windows 2008R2.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/LinkLocalDefault.png" title="Figure 1: Using Link-Local IPv6 address as default gateway. " class="image-popup">
+<picture>
+  <source width="545" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/08/LinkLocalDefault-320.webp 320w, 
+
+    
+    /content/resized/2013/08/LinkLocalDefault-384.webp 384w, 
+
+    
+    /content/resized/2013/08/LinkLocalDefault-512.webp 512w, 
+
+ /content/uploads/2013/08/LinkLocalDefault.webp 545w" sizes="545px"></source>
+  <source width="545" data-srcset="
+
+    /content/resized/2013/08/LinkLocalDefault-320.png 320w, 
+
+    /content/resized/2013/08/LinkLocalDefault-384.png 384w, 
+
+    /content/resized/2013/08/LinkLocalDefault-512.png 512w, 
+
+ /content/uploads/2013/08/LinkLocalDefault.png 545w" sizes="545px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/LinkLocalDefault.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Using Link-Local IPv6 address as default gateway. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Using Link-Local IPv6 address as default gateway.
+</figcaption>
+
+</figure>
+
+<h1 id="troubleshooting">Troubleshooting</h1>
+
+<p>While we can simplify the life of end-users by using link-local addresses on router interfaces, we are slightly complicating the life of the network operations staff. As now multiple interfaces on a router can end up with the same link-local address of fe80::1, we need to be more explicit when using this interface in troubleshooting.</p>
+
+<p>As an example: In order to ping the above interface, we need to specify the <a href="https://en.wikipedia.org/wiki/IPv6_address#Link-local_addresses_and_zone_indices" target="_blank" rel="noopener noreferrer">zone index</a> - which usually corresponds to the interface name - besides the IP address of fe80::1.</p>
+
+<p>This would look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cisco# ping fe80::1%gigabitEthernet3/1
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to FE80::1, timeout is 2 seconds:
+Packet sent with a source address of FE80::1%gigabitEthernet3/1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/0 ms
+Cisco#
+</code></pre></div></div>
+
+<p>Be careful as Cisco IOS requires the interface name to be case sensitive. Also you cannot abbreviate it. This is definitely an annoyance that someone should file as a bug.</p>
+
+<p>You might wonder why we didn’t have to specify a zone index when we entered fe80::1 as the default gateway in Windows above. The answer to this can be found in <a href="https://tools.ietf.org/html/rfc4007#section-6" target="_blank" rel="noopener noreferrer">RFC 4007, section 6</a>, where it states: “An implementation should also support the concept of a “default” zone for each scope”. Thus Windows above is using this “default” zone.</p>
+
+<h1 id="what-about-dns-via-anycast">What about DNS via Anycast?</h1>
+
+<p>As mentioned earlier, Anycast - both in IPv4 and IPv6 - already gives us the possibility to provide end-users a single or single set of IP addresses for the DNS resolvers, irrespective of their physical location. But why should we “burn” a global unicast IPv6 address for this? Especially as these addresses can be quite long and hard to remember.</p>
+
+<p>Here <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">unique local addresses (ULA)</a> come to the rescue. In most cases ULA can be treated like <a href="https://tools.ietf.org/html/rfc1918" target="_blank" rel="noopener noreferrer">RFC 1918</a> addresses in IPv4. Prefixes in the fd00::/8 range have similar properties as those of the IPv4 private address ranges:</p>
+
+<ul>
+  <li>They are not allocated by an address registry and may be used in networks by anyone without outside involvement.</li>
+  <li>They are not guaranteed to be globally unique.</li>
+  <li>Reverse Domain Name System (DNS) entries (under ip6.arpa) for fd00::/8 ULAs cannot be delegated in the global DNS.</li>
+</ul>
+
+<p>It’s a good idea to keep DNS resolvers to be accessible from within an organization only, which is another good reason to use ULA for this use case. Also not everyone has the luxury to own an easy to remember IP address such as Google with 8.8.8.8 for their public resolver.</p>
+
+<p>Therefore let’s use the addresses fd53::11 and fd53::12 for our internal DNS resolver, making them easy to remember, by combining the non-changeable ULA address part with 53 as DNS uses the protocol TCP/53 and UDP/53. We can even make up the story for end-users that “fd” stands for “fixed DNS”, helping them to remember this service IP.</p>
+
+<p>Yet, we will chose the last octect to be 11 and 12 instead of 1 and 2 to ensure that users don’t confuse these addresses with an default gateway.</p>
+
+<p>With Anycast it’s actually not necessary to have two different IP addresses for a company-internal DNS resolver, as it’s a better idea to handle the failure of a DNS server via ther Anycast routing. But some applications and especially some humans are not happy, when they don’t see two different IP addresses for a DNS resolver.</p>
+
+<h1 id="where-is-it-used-in-the-wild">Where is it used in the wild?</h1>
+
+<p>Two examples of service providers that use the IPv6 default gateway of fe80::1 and document it accordingly for their end-users are the German hosting provider <a href="https://www.hetzner.de/en/hosting/produktmatrix/rootserver" target="_blank" rel="noopener noreferrer">Hetzner</a> as well as the <a href="https://kb.wisc.edu/ns/page.php?id=14099" target="_blank" rel="noopener noreferrer">University of Wisconsin-Madison</a>. Other examples exist, but without readily available documentation.</p>
+
+<p>The German ISP <a href="https://www.telekom.de/" target="_blank" rel="noopener noreferrer">Deutsche Telekom</a> uses their own line of branded home DSL routers called <a href="https://de.wikipedia.org/wiki/Speedport" target="_blank" rel="noopener noreferrer">Speedport</a>. Turns out that the routers within this line that are IPv6 capable use fe80::1 as the default gateway, both for static use as well as via SLAAC. These devices then also offer DNS resolver capabilities via the same IPv6 address.</p>
+
+<p>So far I have not seen anyone using ULA for internal DNS resolver.</p>
+
+<h1 id="hall-of-shame">Hall of shame</h1>
+
+<p>Unfortunately there are various vendors out there, crippling their product’s IPv6 support and thus preventing usage of the above IPv6 deployment pattern.</p>
+
+<p>Examples for this are VMware ESXi, which dropped support for link-local addresses as default gateways in version 5.0 of the hypervisor. Even the Cisco documentation <a href="http://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Borderless_Networks/Internet_Edge/InternetEdgeIPv6.html#wp390490" target="_blank" rel="noopener noreferrer">“Deploying IPv6 in the Internet Edge”</a> picked up on this shortcoming.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/ESX_LinkLocal_DefGW.png" title="Figure 2: ESXi refuses to use a link local IPv6 address as a default gateway during static configuration " class="image-popup">
+<picture>
+  <source width="564" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/08/ESX_LinkLocal_DefGW-320.webp 320w, 
+
+    
+    /content/resized/2013/08/ESX_LinkLocal_DefGW-384.webp 384w, 
+
+    
+    /content/resized/2013/08/ESX_LinkLocal_DefGW-512.webp 512w, 
+
+ /content/uploads/2013/08/ESX_LinkLocal_DefGW.webp 564w" sizes="564px"></source>
+  <source width="564" data-srcset="
+
+    /content/resized/2013/08/ESX_LinkLocal_DefGW-320.png 320w, 
+
+    /content/resized/2013/08/ESX_LinkLocal_DefGW-384.png 384w, 
+
+    /content/resized/2013/08/ESX_LinkLocal_DefGW-512.png 512w, 
+
+ /content/uploads/2013/08/ESX_LinkLocal_DefGW.png 564w" sizes="564px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/ESX_LinkLocal_DefGW.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: ESXi refuses to use a link local IPv6 address as a default gateway during static configuration ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: ESXi refuses to use a link local IPv6 address as a default gateway during static configuration
+</figcaption>
+
+</figure>
+
+<p>Another example is Arista, which doesn’t support manually configuring link-local addresses yet:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Arista(s2)(config-if-Vl51)#ipv6 address fe80::1/64
+% Configuring Link local addresses not yet supported
+</code></pre></div></div>
+
+<p>But at least Arista was quick to react when pointing out this shortcoming and created a request for enhancement (RFE).</p>
+
+<h1 id="analogy">Analogy</h1>
+
+<p>The proposed solution is similar to using a vanity number such as 55555 (5 times 5) for the internal helpdesk through a companies PBX. While employees could just as well use a phone book every time to lookup the Helpdesk’s phone number, using an easy to remember number makes life much easier for end-users.</p>
+
+<p>Also in this analogy the Helpdesk is for internal use only, why accomplishing the same with the global telephone number 1-800-HELP4ME would be possible but fulfill a different use case.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-08-07T09:24:26-07:00">August 07, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=IPv6+deployment%3A+Using+IPv6+link-local+addresses+as+default+gateway%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F&amp;title=IPv6+deployment%3A+Using+IPv6+link-local+addresses+as+default+gateway" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/07/18/terminating-a-6in4-tunnel-on-an-arista-switch/" class="pagination--pager" title="Terminating a 6in4 tunnel on an Arista switch
+">Previous</a>
+    
+    
+      <a href="/2013/08/12/f5-big-ip-ltm-with-ipv6/" class="pagination--pager" title="Using F5 Big-IP LTM with IPv6
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

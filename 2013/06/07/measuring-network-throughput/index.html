@@ -1,0 +1,1282 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Measuring Network Throughput - Edge Cloud</title>
+<meta name="description" content="The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps or being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.Let’s have a look behind the scenes of network throughput measurement and understand why users are actually measuring something completely different, but also how to get more “performance” out of these connections.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Measuring Network Throughput">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/06/07/measuring-network-throughput/">
+
+
+  <meta property="og:description" content="The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps or being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.Let’s have a look behind the scenes of network throughput measurement and understand why users are actually measuring something completely different, but also how to get more “performance” out of these connections.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Measuring Network Throughput">
+  <meta name="twitter:description" content="The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps or being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.Let’s have a look behind the scenes of network throughput measurement and understand why users are actually measuring something completely different, but also how to get more “performance” out of these connections.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/06/07/measuring-network-throughput/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-06-07T02:45:03-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/06/07/measuring-network-throughput/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Measuring Network Throughput">
+    <meta itemprop="description" content="The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps or being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.Let’s have a look behind the scenes of network throughput measurement and understand why users are actually measuring something completely different, but also how to get more “performance” out of these connections.">
+    <meta itemprop="datePublished" content="June 07, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Measuring Network Throughput
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#sliding-window-protocols">Sliding window protocols</a></li>
+  <li><a href="#bandwidth-delay-product-and-buffer-size">Bandwidth-delay Product and buffer size</a></li>
+  <li><a href="#limit-of-tcp-windows-field-in-the-protocol-header">Limit of TCP Windows field in the protocol header</a></li>
+  <li>
+<a href="#hands-on-tests">Hands-On Tests</a>
+    <ul>
+      <li><a href="#real-bandwidth-tests">Real “bandwidth” tests</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#time-to-bring-out-the-big-guns-udp">Time to bring out the big guns: UDP</a>
+    <ul>
+      <li><a href="#udp-test">UDP Test</a></li>
+      <li><a href="#tcp-test">TCP Test</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#solutions-to-improve-throughput">Solutions to improve throughput</a>
+    <ul>
+      <li><a href="#wan-optimization-controller">WAN Optimization Controller</a></li>
+      <li><a href="#content-distribution-networks-cdn">Content Distribution Networks (CDN)</a></li>
+      <li><a href="#udp-based-file-transfer">UDP-based file transfer</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and sometimes almost blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps to being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.</p>
+
+<p>Let’s have a look behind the scenes of network throughput measurement and understand why users are often actually measuring something completely different, but also how to get more “performance” out of these connections.</p>
+
+<h1 id="sliding-window-protocols">Sliding window protocols</h1>
+
+<p>Most user utilize software based on the <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol" target="_blank" rel="noopener noreferrer">Transmission Control Protocol (TCP)</a> for measuring the network throughput. It is very important to keep in mind that TCP is a <a href="https://en.wikipedia.org/wiki/Sliding_window_protocol" target="_blank" rel="noopener noreferrer">sliding window protocol</a>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/SlidingWindow.png" title="Figure 1: Sliding Window Protocol " class="image-popup">
+<picture>
+  <source width="371" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/SlidingWindow-320.webp 320w, 
+
+ /content/uploads/2013/06/SlidingWindow.webp 371w" sizes="371px"></source>
+  <source width="371" data-srcset="
+
+    /content/resized/2013/06/SlidingWindow-320.png 320w, 
+
+ /content/uploads/2013/06/SlidingWindow.png 371w" sizes="371px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/SlidingWindow.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Sliding Window Protocol ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Sliding Window Protocol
+</figcaption>
+
+</figure>
+
+<p>In order to guarantee reliable in-order delivery of packets, only a “window” of packets may be send without the receiver acknowledging them (See Figure 1). The size of this “window” is governed by the receiver and is referred to as the <em>TCP Window Size</em>. This way the receiver ensures that it can actually process the incoming data without “choking” on it.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/SlidingWindowIncrease.png" title="Figure 2: Sliding Window Protocol with increased t&lt;sub&gt;prop&lt;/sub&gt; " class="image-popup">
+<picture>
+  <source width="371" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/SlidingWindowIncrease-320.webp 320w, 
+
+ /content/uploads/2013/06/SlidingWindowIncrease.webp 371w" sizes="371px"></source>
+  <source width="371" data-srcset="
+
+    /content/resized/2013/06/SlidingWindowIncrease-320.png 320w, 
+
+ /content/uploads/2013/06/SlidingWindowIncrease.png 371w" sizes="371px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/SlidingWindowIncrease.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Sliding Window Protocol with increased t&lt;sub&gt;prop&lt;/sub&gt; ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Sliding Window Protocol with increased t<sub>prop</sub>
+</figcaption>
+
+</figure>
+
+<p>Looking at Figure 1 it should become clear that while increasing the value of the signal propagation time t<sub>prop</sub>, the amount of data that can be transferred in the same time period is reduced. This is caused by the sender spending more time waiting for acknowledgements, before it will send further packages. (See Figure 2)</p>
+
+<p>The propagation time t<sub>prop</sub> for a TCP packet can be determined by measuring the round-trip-time (RTT) of a packet. Here the round-trip-time is twice the propagation time for synchronous links. This can e.g. be done via the well known tool <em>ping</em>. The TCP window size is determined by the operating system. During a connection the receiver can also adapt the TCP Window Size - in both directions - if the situation changes due to packet loss or buffer fill levels.</p>
+
+<h1 id="bandwidth-delay-product-and-buffer-size">Bandwidth-delay Product and buffer size</h1>
+
+<p>Now that we have identified the two most important variables for the performance of TCP based data transfers, let’s look at the math behind the sliding window concept:</p>
+
+<p>An important formula is the one for the <a href="https://en.wikipedia.org/wiki/Bandwidth-delay_product" target="_blank" rel="noopener noreferrer">Bandwidth-delay product (BDP)</a>, which is the product of a data link’s capacity (in bits per second) and its end-to-end delay (in seconds). The result, an amount of data measured in bits (or bytes), is equivalent to the maximum amount of data on the network circuit at any given time, e.g. data that has been transmitted but not yet acknowledged.</p>
+
+<script type="math/tex; mode=display">Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)</script>
+
+<p>The result of the BDP can also be interpreted as the required receiver TCP window size to maximize the performance on the data link.</p>
+
+<p>Let’s use an example:</p>
+
+<p>Round-Trip-Time between the US west coast (Las Vegas) and Europe (Germany): 173 ms
+Available bandwidth between the two sites: 100 Mbit/s</p>
+
+<script type="math/tex; mode=display">173 ms × 100 Mbit/s = 0.173s × ( 100 × 1024 × 1024 bit/s) \\ = 18140365 bit = 2.1625 MByte</script>
+
+<p>This means that we would need a TCP Window Size of at least 2.1625 MByte to fully utilize the 100 Mbit/s link.</p>
+
+<p>We have seen, that in reality both the delay between sender and receiver as well as the TCP window size within the receiver are given. As we cannot change the laws of physics, the only value we can change is the TCP window size. Let’s shuffle the formula, to calculate the maximum bandwidth that can be achieved with a given RTT and TCP window size instead:</p>
+
+<script type="math/tex; mode=display">bandwidth (Mbit/s) = { Buffer (Mbit) \over delay (s) }</script>
+
+<p>Let’s use another example:</p>
+
+<p>Round-Trip-Time between the US west coast (Las Vegas) and Europe (Germany): 173 ms
+Standard TCP windows size on a Linux (Ubuntu) host: 64 KByte</p>
+
+<script type="math/tex; mode=display">{ 64 KByte \over 173 ms } = { (64 × 1024 × 8 bit) \over 0.173 s } = { 524288 bit \over 0.173s } \\ = 3030566.47 bit/s = 2.89 Mbit/s</script>
+
+<p>Irrelevant of the actual link speed between the two sites above we will not be able to transfer more than 2.89 Mbit/s with a single TCP stream. Keep in mind that this is the theoretical maximum. In reality the value will be even lower due to packet loss and packet header overhead.</p>
+
+<p>If you get tired of performing the math manually, have a look at the <a href="https://www.switch.ch/network/tools/tcp_throughput/" target="_blank" rel="noopener noreferrer">TCP throughput calculator</a> from switch.ch.</p>
+
+<h1 id="limit-of-tcp-windows-field-in-the-protocol-header">Limit of TCP Windows field in the protocol header</h1>
+
+<p>The TCP window size field within the TCP header is 16 bit and therefore cannot be expanded beyond 64K. How is it then possible to specify a TCP window size higher than 64K? That’s where <a href="https://www.ietf.org/rfc/rfc1323.txt" target="_blank" rel="noopener noreferrer">RFC 1323</a> defines a scaling factor, which allows scaling up to larger window sizes and thereby enables TCP tuning. This method increases the maximum window size from 65,535 bytes to 1 gigabyte.</p>
+
+<p>The window scale option is used only during the TCP 3-way handshake at the beginning of the connection. The window scale value represents the number of bits to left-shift the 16-bit window size field. The window scale value can be set from 0 (no shift) to 14 for each direction independently. Both sides must send the option in their SYN segments to enable window scaling in either direction.</p>
+
+<p>Here is a problem: Some routers and packet firewalls rewrite the window scaling factor during a transmission, which will cause sending and receiving sides to assume different TCP window sizes. The result is non-stable traffic that may be very slow. One can use packet sniffers such as <a href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer">Wireshark</a> to ensure that the TCP scaling factor are negotiated correctly on sender and receiver side. Figure 3 shows an example of this in Wireshark.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/WiresharkWindowScale.png" title="Figure 3: TCP Window scale in Wireshark " class="image-popup">
+<picture>
+  <source width="884" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/WiresharkWindowScale-320.webp 320w, 
+
+    
+    /content/resized/2013/06/WiresharkWindowScale-384.webp 384w, 
+
+    
+    /content/resized/2013/06/WiresharkWindowScale-512.webp 512w, 
+
+    
+    /content/resized/2013/06/WiresharkWindowScale-683.webp 683w, 
+
+    
+    /content/resized/2013/06/WiresharkWindowScale-800.webp 800w, 
+
+ /content/uploads/2013/06/WiresharkWindowScale.webp 884w" sizes="884px"></source>
+  <source width="884" data-srcset="
+
+    /content/resized/2013/06/WiresharkWindowScale-320.png 320w, 
+
+    /content/resized/2013/06/WiresharkWindowScale-384.png 384w, 
+
+    /content/resized/2013/06/WiresharkWindowScale-512.png 512w, 
+
+    /content/resized/2013/06/WiresharkWindowScale-683.png 683w, 
+
+    /content/resized/2013/06/WiresharkWindowScale-800.png 800w, 
+
+ /content/uploads/2013/06/WiresharkWindowScale.png 884w" sizes="884px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/WiresharkWindowScale.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: TCP Window scale in Wireshark ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: TCP Window scale in Wireshark
+</figcaption>
+
+</figure>
+
+<h1 id="hands-on-tests">Hands-On Tests</h1>
+
+<p>Now it’s time to verify above’s theory in practice: For this we will use the tool <a href="https://iperf.fr/" target="_blank" rel="noopener noreferrer">Iperf</a>, which is widely available on Linux. On Ubuntu you can e.g. install Iperf with <code class="highlighter-rouge">sudo apt-get install iperf</code>.</p>
+
+<p>In this case the sender host is an Ubuntu machine located in a data center in Frankfurt, Germany and the receiver host is an Ubuntu machine located in a data center in Las Vegas, USA. The latency between the two machines is 173 ms with both machines being connected via an 100 Mbit/s uplink to the internet.</p>
+
+<p>On the receiver host we will start iperf as a server and advice it to use the standard TCP window size of 64K:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 65536
+</code></pre></div></div>
+
+<p>From the sender side we start the test:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net
+------------------------------------------------------------
+Client connecting to receiver.edge-cloud.net, TCP port 5001
+TCP window size: 64 KByte (default)
+------------------------------------------------------------
+[  3] local 1.2.3.4 port 48448 connected with 5.6.7.8 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-10.6 sec  3.50 MBytes  2.77 Mbits/sec
+</code></pre></div></div>
+
+<p>The result is what we would expect from the theory and math in the previous section. It also shows nicely that the result is well below the 100 Mbit/s of the Internet links.</p>
+
+<p>Let’s try to increase the TCP Window size on the receiver and run the test again.
+As Iperf is a user process it cannot actually increase the TCP Window size beyond what’s set in the Kernel. We therefore have to make these changes directly in the Kernel.
+As a first step it’s advisable to have a look at the current TCP Window settings on the receiver and make note of them, so that they can be restored.</p>
+
+<p>The way the TCP Window works is that sender and receiver negotiate an optimal window size based on various factors. Therefore Linux has two values for the TCP Window. The <em>default</em> value, which is the starting window size and the <em>max</em> value, which is the upper bound of it:</p>
+
+<p>The maximum TCP windows size (receiving) in bit from the TCP autotuning settings:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ cat /proc/sys/net/ipv4/tcp_rmem
+4096    65536   65536
+</code></pre></div></div>
+
+<p>The first value tells the kernel the minimum receive buffer for each TCP connection, and this buffer is always allocated to a TCP socket, even under high pressure on the system.</p>
+
+<p>The second value specified tells the kernel the default receive buffer allocated for each TCP socket. This value overrides the <em>/proc/sys/net/core/rmem_default</em> value used by other protocols.</p>
+
+<p>The third and last value specified in this variable specifies the maximum receive buffer that can be allocated for a TCP socket. We want to manipulate this third value on the receiver side.</p>
+
+<p>The maximum TCP windows size (sending) in bit from the TCP autotuning settings:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ cat /proc/sys/net/ipv4/tcp_wmem
+4096    65536   65536
+</code></pre></div></div>
+
+<p>This variable takes 3 different values which holds information on how much TCP sendbuffer memory space each TCP socket has to use. Every TCP socket has this much buffer space to use before the buffer is filled up. Each of the three values are used under different conditions. The first value in this variable tells the minimum TCP send buffer space available for a single TCP socket. The second value in the variable tells us the default buffer space allowed for a single TCP socket to use. The third value tells the kernel the maximum TCP send buffer space. Again we want to manipulate the third value. This time on the sender side</p>
+
+<p>Let’s double the TCP Window size, thus reaching 128K. Using the <a href="https://www.switch.ch/network/tools/tcp_throughput/" target="_blank" rel="noopener noreferrer">TCP throughput calculator</a> from switch.ch, we should expect a maximum TCP throughput of 5.92 Mbit/sec with these settings:</p>
+
+<p>First, change the maximum TCP windows size (receiving) on the receiver:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ sysctl -w net.ipv4.tcp_rmem="4096 65536 131072"
+net.ipv4.tcp_wmem = 4096 65536 131072
+user@receiver:~$ sysctl -w net.core.rmem_max=131072
+net.core.rmem_max = 131072
+</code></pre></div></div>
+
+<p>Next, change the default TCP windows size (sending) on the sender:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ sysctl -w net.ipv4.tcp_wmem="4096 65536 131072"
+net.ipv4.tcp_wmem = 4096 65536 131072
+user@sender:~$ sysctl -w net.core.wmem_max=131072
+net.core.rmem_max = 131072
+</code></pre></div></div>
+
+<p>On the receiver host we will start iperf as a server and advice it to use the TCP window size of 128K:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 131072
+</code></pre></div></div>
+
+<p>Now we run the test again:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -w 131072
+------------------------------------------------------------
+Client connecting to receiver.edge-cloud.net, TCP port 5001
+TCP window size:  256 KByte (WARNING: requested  128 KByte)
+------------------------------------------------------------
+[  3] local 1.2.3.4 port 48448 connected with 5.6.7.8 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-10.2 sec  6.50 MBytes  5.35 Mbits/sec
+</code></pre></div></div>
+
+<p>Again, the result is what we would expect from the theory and math in the previous section.</p>
+
+<p>Be advised that there is a limit to this approach: If you keep doubling the TCP window size, you will at one point reach the buffer limits of your OS and therefore not experience any additional performance gains anymore.</p>
+
+<h2 id="real-bandwidth-tests">Real “bandwidth” tests</h2>
+
+<p class="notice--danger"><strong>Warning!</strong> You should perform “bandwidth” tests of your links only when they are not in use. Otherwise your results will not be meaningful. Also, while I show you how to use UDP to determine the bandwidth of a link, this protocol does not bring any form of congestion control. While this is a good thing for measuring the bandwidth on an un-utilized link, you will starve out other traffic on a utilized link. You will basically cause a denial of service attack on the link. Therefore proceed with uttermost care!</p>
+
+<p>So far we have learned that the throughput of a single TCP is limited by the TCP window size and the RTT. But what happens if I use multiple TCP streams in parallel? Looking at how TCP works, each of these TCP streams should be able to create an individual maximum throughput as determined in the previous section. Furthermore they should share the available bandwidth fairly with each other until nothing is left.</p>
+
+<p>Let’s see if this is really the case:</p>
+
+<p>On the receiver host we again start Iperf as a server and advice it to use the TCP window size of 128K:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 131072
+</code></pre></div></div>
+
+<p>But on the server side we will advise Iperf to start 10 parallel test:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -P 10 -w 131072
+------------------------------------------------------------
+Client connecting to receiver.edge-cloud.net, TCP port 5001
+TCP window size:  256 KByte (WARNING: requested  128 KByte)
+------------------------------------------------------------
+[  4] local 1.2.3.4 port 48524 connected with 4.3.2.1 port 5001
+[  6] local 1.2.3.4 port 48526 connected with 4.3.2.1 port 5001
+[  5] local 1.2.3.4 port 48525 connected with 4.3.2.1 port 5001
+[  8] local 1.2.3.4 port 48527 connected with 4.3.2.1 port 5001
+[  7] local 1.2.3.4 port 48529 connected with 4.3.2.1 port 5001
+[  9] local 1.2.3.4 port 48528 connected with 4.3.2.1 port 5001
+[ 11] local 1.2.3.4 port 48531 connected with 4.3.2.1 port 5001
+[ 10] local 1.2.3.4 port 48530 connected with 4.3.2.1 port 5001
+[  3] local 1.2.3.4 port 48523 connected with 4.3.2.1 port 5001
+[ 12] local 1.2.3.4 port 48532 connected with 4.3.2.1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  5]  0.0-10.0 sec  5.62 MBytes  4.70 Mbits/sec
+[  8]  0.0-10.2 sec  5.75 MBytes  4.73 Mbits/sec
+[  7]  0.0-10.2 sec  5.75 MBytes  4.73 Mbits/sec
+[  6]  0.0-10.2 sec  6.00 MBytes  4.93 Mbits/sec
+[ 12]  0.0-10.2 sec  5.75 MBytes  4.72 Mbits/sec
+[ 11]  0.0-10.2 sec  5.88 MBytes  4.81 Mbits/sec
+[  4]  0.0-10.3 sec  6.12 MBytes  4.99 Mbits/sec
+[  3]  0.0-10.3 sec  6.12 MBytes  4.98 Mbits/sec
+[  9]  0.0-10.3 sec  5.88 MBytes  4.76 Mbits/sec
+[ 10]  0.0-10.3 sec  6.00 MBytes  4.87 Mbits/sec
+[SUM]  0.0-10.3 sec  58.9 MBytes  47.8 Mbits/sec
+</code></pre></div></div>
+
+<p>We now see that the throughput result of 47.8 Mbit/s is almost 10x of the throughput of an individual test. Keep in mind additional overhead that this test has to deal with.</p>
+
+<p>Again, be advised that there is a limit to this approach: While you can keep increasing the number of parallel tests, there is a limit on how many parallel TCP streams your host can handle. At one point you will therefore not see a performance improvement anymore.</p>
+
+<h1 id="time-to-bring-out-the-big-guns-udp">Time to bring out the big guns: UDP</h1>
+
+<p>So far we have only been able to verify that we can transfer with rates of about 47.8 Mbit/s between sender and receiver in our example. While this is already a huge increase to the 2.77 Mbit/s that we measured originally, it still falls short of the 100 Mbit/s that we should be getting.</p>
+
+<p>Let’s change our so far strategy and switch over to a protocol that does not suffer from the limitations of a sliding window protocol: UDP to the rescue. UDP does not utilize a feedback channel to notice network congestion or receiver buffer exhaustion. It is a “fire and forget” protocol. That makes it very dangerous for sending data at a sustained high data rate, which data transfer would bring to the table. It will basically overrun any other TCP traffic and completely utilize any available bandwidth. Bottom line: Used on a shared link the following approach will equal to a denial of service attack. Therefore do not use it on a shared link, especially if it is carrying production traffic.</p>
+
+<p>On the receiver host we again start Iperf as a server. But this time we start it in UDP mode:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -u
+</code></pre></div></div>
+
+<p>On the sender side we also start Iperf in UDP mode and ask it to attempt to sent 110 Mbit/s of traffic. We will attempt to send a bit more than the expected maximum bandwidth, to understand when the links max out:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -u -b 110m
+------------------------------------------------------------
+Client connecting to receiver.edge-cloud.net, TCP port 5001
+Sending 1470 byte datagrams
+UDP buffer size:  224 KByte (default)
+------------------------------------------------------------
+[  3] local 1.2.3.4 port 43816 connected with 5.6.7.8 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-10.0 sec   132 MBytes   110 Mbits/sec
+[  3] Sent 93963 datagrams
+[  3] Server Report:
+[  3]  0.0-10.0 sec   117 MBytes  98.0 Mbits/sec   0.124 ms 10515/93962 (11%)
+[  3]  0.0-10.0 sec  114 datagrams received out-of-order
+</code></pre></div></div>
+
+<p>The results show that we can transfer 98.0 Mbit/s with UDP between sender and receiver host, which is close to the expected maximum of 100 Mbit/s. Again, you have to factor in protocol overhead why you will not achieve the full 100 Mbit/s throughput.</p>
+
+<p>Now let’s see what would happen to a TCP transfer between the same hosts running at the same time.</p>
+
+<p>For this we need to open two Terminal or SSH connections to the sender at the same time.</p>
+
+<p>On the receiver host we start one instance of Iperf as a UDP server and one instance as a TCP server with TCP window size of 128K. They will both spawn to the background.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -u &amp;
+user@receiver:~$ iperf -s -w 131072 &amp;
+</code></pre></div></div>
+
+<p>Don’t forget to kill these processes once you are done!</p>
+
+<p>On the sender side we will start two tests at exactly the same time. One test with Iperf in TCP mode. And another test with Iperf in UDP mode, again asking it to attempt to sent 110 Mbit/s of traffic. To showcase better the effect of UDP traffic flooding a link we will ask Iperf to run 10 UDP test in parallel. Make sure to start both tests at the same time:</p>
+
+<h2 id="udp-test">UDP Test</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -u -b 110m -P 10
+------------------------------------------------------------
+Client connecting to las-mgmt-ubu01.vmwcs.com, UDP port 5001
+Sending 1470 byte datagrams
+UDP buffer size:  224 KByte (default)
+------------------------------------------------------------
+[  4] local 1.2.3.4 port 48228 connected with 5.6.7.8 port 5001
+[  5] local 1.2.3.4 port 58444 connected with 5.6.7.8 port 5001
+[  7] local 1.2.3.4 port 56308 connected with 5.6.7.8 port 5001
+[  6] local 1.2.3.4 port 34767 connected with 5.6.7.8 port 5001
+[  8] local 1.2.3.4 port 32790 connected with 5.6.7.8 port 5001
+[  9] local 1.2.3.4 port 47212 connected with 5.6.7.8 port 5001
+[ 10] local 1.2.3.4 port 46375 connected with 5.6.7.8 port 5001
+[  3] local 1.2.3.4 port 51226 connected with 5.6.7.8 port 5001
+[ 11] local 1.2.3.4 port 40858 connected with 5.6.7.8 port 5001
+[ 12] local 1.2.3.4 port 51633 connected with 5.6.7.8 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  34.9 MBytes  29.3 Mbits/sec
+[  4] Sent 24875 datagrams
+[  5]  0.0-10.0 sec  34.8 MBytes  29.2 Mbits/sec
+[  5] Sent 24814 datagrams
+[  7]  0.0-10.0 sec  34.5 MBytes  28.9 Mbits/sec
+[  7] Sent 24601 datagrams
+[  6]  0.0-10.0 sec  34.9 MBytes  29.3 Mbits/sec
+[  6] Sent 24878 datagrams
+[  8]  0.0-10.0 sec  34.6 MBytes  29.1 Mbits/sec
+[  8] Sent 24704 datagrams
+[  9]  0.0-10.0 sec  34.9 MBytes  29.3 Mbits/sec
+[  9] Sent 24882 datagrams
+[ 10]  0.0-10.0 sec  34.5 MBytes  29.0 Mbits/sec
+[ 10] Sent 24634 datagrams
+[  3]  0.0-10.0 sec  35.1 MBytes  29.4 Mbits/sec
+[  3] Sent 25015 datagrams
+[ 11]  0.0-10.0 sec  34.8 MBytes  29.2 Mbits/sec
+[ 11] Sent 24805 datagrams
+[ 12]  0.0-10.0 sec  34.5 MBytes  28.9 Mbits/sec
+[ 12] Sent 24581 datagrams
+[SUM]  0.0-10.0 sec   347 MBytes   291 Mbits/sec
+[  3] Server Report:
+[  3]  0.0-10.0 sec  12.1 MBytes  10.1 Mbits/sec   2.309 ms 16396/25014 (66%)
+[  3]  0.0-10.0 sec  14 datagrams received out-of-order
+[  8] Server Report:
+[  8]  0.0-10.0 sec  12.1 MBytes  10.1 Mbits/sec   2.273 ms 16104/24703 (65%)
+[  8]  0.0-10.0 sec  1 datagrams received out-of-order
+[  5] Server Report:
+[  5]  0.0-10.0 sec  12.2 MBytes  10.2 Mbits/sec   1.844 ms 16117/24813 (65%)
+[  5]  0.0-10.0 sec  1 datagrams received out-of-order
+[  6] Server Report:
+[  6]  0.0-10.0 sec  12.1 MBytes  10.2 Mbits/sec   1.737 ms 16217/24877 (65%)
+[  6]  0.0-10.0 sec  1 datagrams received out-of-order
+[  7] Server Report:
+[  7]  0.0-10.0 sec  12.1 MBytes  10.1 Mbits/sec   1.883 ms 16003/24600 (65%)
+[  7]  0.0-10.0 sec  1 datagrams received out-of-order
+[ 11] Server Report:
+[ 11]  0.0-10.0 sec  9.14 MBytes  7.66 Mbits/sec   1.618 ms 18283/24804 (74%)
+[  4] Server Report:
+[  4]  0.0-10.2 sec  12.1 MBytes  9.88 Mbits/sec  15.864 ms 16255/24863 (65%)
+[  4]  0.0-10.2 sec  1 datagrams received out-of-order
+[  9] Server Report:
+[  9]  0.0-10.3 sec  9.17 MBytes  7.50 Mbits/sec  16.409 ms 18339/24881 (74%)
+[  9]  0.0-10.3 sec  1 datagrams received out-of-order
+[ 12] Server Report:
+[ 12]  0.0-10.3 sec  12.0 MBytes  9.83 Mbits/sec  15.975 ms 16005/24575 (65%)
+[ 12]  0.0-10.3 sec  1 datagrams received out-of-order
+[ 10] Server Report:
+[ 10]  0.0-10.3 sec  12.1 MBytes  9.87 Mbits/sec  16.419 ms 16022/24632 (65%)
+[ 10]  0.0-10.3 sec  1 datagrams received out-of-order
+</code></pre></div></div>
+
+<p>Adding together the throughput of the 10 UDP connections we get a total throughput of 76.331 Mbit/s.</p>
+
+<h2 id="tcp-test">TCP Test</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c las-mgmt-ubu01.vmwcs.com
+------------------------------------------------------------
+Client connecting to las-mgmt-ubu01.vmwcs.com, TCP port 5001
+TCP window size: 23.5 KByte (default)
+------------------------------------------------------------
+[  3] local 78.47.152.89 port 48587 connected with 64.79.130.189 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-10.6 sec  2.12 MBytes  1.68 Mbits/sec
+</code></pre></div></div>
+
+<p>On the other hand we see that these UDP connections starved our TCP connection from previously 5.35 Mbits/sec down to 1.68 Mbits/sec.</p>
+
+<p>Finally we have been able to confirm that our available bandwidth between sender and receiver is indeed 100 Mbit/s. Yet at the same time we have seen how dangerous UDP can be on a link. Many enterprises therefore apply rate limiting to UDP on their WAN links or block it altogether.</p>
+
+<p>It should also become clear that using a pure UDP based data transfer protocol on a shared link is a really bad idea.</p>
+
+<h1 id="solutions-to-improve-throughput">Solutions to improve throughput</h1>
+
+<p>We have seen that increasing the TCP Window Size on the receiver side helps increasing the throughput that is possible with a single TCP stream. Unfortunately it is not possible to tweak this TCP Window Size on all Receivers for the encountered latency for all downloads. That is especially the case as increasing the TCP Window Size also brings drawbacks.</p>
+
+<h2 id="wan-optimization-controller">WAN Optimization Controller</h2>
+
+<p>Instead network architects usually deploy a pair of specialized devices - called WAN Optimization Controller (WOC) within the network stream. Placed as close as possible to server and client of the stream they act like a proxy in front of the actual server. While these WOC devices also utilize other improvement capabilities, one of their main capabilities is using an optimized transport mechanism with an increased TCP Window size between the.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/WOC.png" title="Figure 4: WAN Optimization Controllers " class="image-popup">
+<picture>
+  <source width="831" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/WOC-320.webp 320w, 
+
+    
+    /content/resized/2013/06/WOC-384.webp 384w, 
+
+    
+    /content/resized/2013/06/WOC-512.webp 512w, 
+
+    
+    /content/resized/2013/06/WOC-683.webp 683w, 
+
+    
+    /content/resized/2013/06/WOC-800.webp 800w, 
+
+ /content/uploads/2013/06/WOC.webp 831w" sizes="831px"></source>
+  <source width="831" data-srcset="
+
+    /content/resized/2013/06/WOC-320.png 320w, 
+
+    /content/resized/2013/06/WOC-384.png 384w, 
+
+    /content/resized/2013/06/WOC-512.png 512w, 
+
+    /content/resized/2013/06/WOC-683.png 683w, 
+
+    /content/resized/2013/06/WOC-800.png 800w, 
+
+ /content/uploads/2013/06/WOC.png 831w" sizes="831px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/WOC.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: WAN Optimization Controllers ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: WAN Optimization Controllers
+</figcaption>
+
+</figure>
+
+<p>One vendor offering such devices is Silver Peak, which offers An interesting tool with its <a href="https://www.silver-peak.com/calculator/throughput-calculator" target="_blank" rel="noopener noreferrer">Throughput Calculator</a> from Silver Peak. Similar to the tool from Switch.ch, it will show you the maximum transfer speed that is possible with a given RTT and packet loss rate, while assuming a default TCP window size of 64K. in addition it will also show you the throughput that would be possible over the same link using a Silver Peak WOC pair.</p>
+
+<h2 id="content-distribution-networks-cdn">Content Distribution Networks (CDN)</h2>
+
+<p>While we can indeed not change the laws of physics to decrease the RTT in our equation, one could use other methods to decrease the RTT. One such method would be the usage of Content Distribution Network (CDN) to place the server from which a user wants to download a file closer to this user, thus reducing the RTT.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/cdn.png" title="Figure 5: Content Distribution Networks " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/cdn-320.webp 320w, 
+
+    
+    /content/resized/2013/06/cdn-384.webp 384w, 
+
+    
+    /content/resized/2013/06/cdn-512.webp 512w, 
+
+    
+    /content/resized/2013/06/cdn-683.webp 683w, 
+
+ /content/uploads/2013/06/cdn.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2013/06/cdn-320.png 320w, 
+
+    /content/resized/2013/06/cdn-384.png 384w, 
+
+    /content/resized/2013/06/cdn-512.png 512w, 
+
+    /content/resized/2013/06/cdn-683.png 683w, 
+
+ /content/uploads/2013/06/cdn.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/cdn.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Content Distribution Networks ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Content Distribution Networks
+</figcaption>
+
+</figure>
+
+<p>Instead of requesting a file from e.g Los Angeles while being in Munich, Germany, the file could be requested from a CDN node in Frankfurt, Germany. This would reduce the RTT from e.g. ~170 ms to ~4 ms. This is often used by companies and organizations to deliver large software downloads. One such example is <a href="https://my.vmware.com/web/vmware/downloads" target="_blank" rel="noopener noreferrer">VMware’s software download site using Akamai’s CDN</a>.</p>
+
+<h2 id="udp-based-file-transfer">UDP-based file transfer</h2>
+
+<p>Last but not least I would like to point out that there are in fact UDP based file transfer solutions out there, such as the one from <a href="http://asperasoft.com" target="_blank" rel="noopener noreferrer">Asperasoft</a>. They overcome the “dangers” of UDP with smartly using a TCP channel for congestion control. Yet at the same time the transfer limit of this pure protocol is bound by the actual link bandwidth. WOC on the other hand usually utilize additional optimization techniques beside TCP window adjustment, giving you effective throughput higher than the maximum link bandwidth. See the previously mentioned Silver Peak calculator for examples.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#performance" class="page__taxonomy-item" rel="tag">Performance</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-06-07T02:45:03-07:00">June 07, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Measuring+Network+Throughput%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F07%2Fmeasuring-network-throughput%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F07%2Fmeasuring-network-throughput%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F07%2Fmeasuring-network-throughput%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F07%2Fmeasuring-network-throughput%2F&amp;title=Measuring+Network+Throughput" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/" class="pagination--pager" title="Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS
+">Previous</a>
+    
+    
+      <a href="/2013/06/13/arista-veos-on-vmware-esx/" class="pagination--pager" title="Arista vEOS on VMware ESX
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

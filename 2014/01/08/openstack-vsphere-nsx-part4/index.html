@@ -1,0 +1,1561 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>OpenStack with vSphere and NSX - Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA) - Edge Cloud</title>
+<meta name="description" content="Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="OpenStack with vSphere and NSX - Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)">
+<meta property="og:url" content="https://www.edge-cloud.net/2014/01/08/openstack-vsphere-nsx-part4/">
+
+
+  <meta property="og:description" content="Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)">
+  <meta name="twitter:description" content="Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/01/08/openstack-vsphere-nsx-part4/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2014-01-08T00:29:08-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2014/01/08/openstack-vsphere-nsx-part4/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="OpenStack with vSphere and NSX - Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)">
+    <meta itemprop="description" content="Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+    <meta itemprop="datePublished" content="January 08, 2014">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">OpenStack with vSphere and NSX - Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#vmware-vsphere-openstack-virtual-appliance-vova">VMware vSphere OpenStack Virtual Appliance (VOVA)</a>
+    <ul>
+      <li><a href="#important-notes">Important Notes:</a></li>
+    </ul>
+  </li>
+  <li><a href="#gather-the-pre-requisites">Gather the pre-requisites</a></li>
+  <li>
+<a href="#installation">installation</a>
+    <ul>
+      <li><a href="#import-of-vova-ova">Import of VOVA OVA</a></li>
+      <li><a href="#firewall-settings-to-allow-vnc-access-to-vm-workloads">Firewall settings to allow VNC access to VM workloads</a></li>
+      <li><a href="#install-open-vswitch-on-vova">Install Open vSwitch on VOVA</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Welcome to part 4 of the <a href="/2013/12/12/openstack-vsphere-nsx/">series: “OpenStack with vSphere and NSX”</a> on installing OpenStack with VMware vSphere and VMware NSX. This series shows the deployment of an OpenStack cloud that leverages VMware vSphere – along with it’s well-known enterprise-class benefits such as VMotion – as the underlying Hypervisor. In addition, network virtualization within OpenStack will be provided via NSX as a Neutron plugin. This allows the creation of virtual networks within OpenStack that consist of L2 segments and can be interconnected via L3 to each other or the outside world.</p>
+
+<p>In the previous post we completed the installation of the NSX cluster, including ESXi as Hypervisors. In this article we will see the import and configuration of the VMware vSphere OpenStack Virtual Appliance (VOVA).</p>
+
+<h1 id="vmware-vsphere-openstack-virtual-appliance-vova">VMware vSphere OpenStack Virtual Appliance (VOVA)</h1>
+
+<p>VOVA is an appliance that was built to simplify an OpenStack deployment into a VMware vSphere environment for test, proof-of-concept and education purposes. VOVA runs all of the required OpenStack services (Nova, Glance, Cinder, Neutron, Keystone, and Horizon) in a single Ubuntu Linux appliance and can easily be deployed with an existing VMware vSphere cluster. VOVA is a Ubuntu Linux (64-bit) VM with 1 vCPU, 2 GB of RAM and 40 GB of disk space.</p>
+
+<p>It is available for download from the <a href="https://communities.vmware.com/community/vmtn/openstack/" target="_blank" rel="noopener noreferrer">VMware OpenStack community site</a>.</p>
+
+<h2 id="important-notes">Important Notes:</h2>
+
+<ul>
+  <li>The version currently available for download (VOVA 0.2.0) is not what I will be using. I’m using a special version that is not (yet?) publicly available and already includes the OpenStack neutron plugin for VMware NSX.</li>
+  <li>The network configuration required for VOVA 0.2.0 differs fundamentally from what you will see here, as it uses OpenStack <a href="https://wiki.openstack.org/wiki/UnderstandingFlatNetworking" target="_blank" rel="noopener noreferrer">Flat Networking</a> instead of Neutron.</li>
+  <li>In this setup we will use a very simple physical network setup. All components will attach to a common Mgmt / VM Network. This means that VOVA uses a single interface only. Please do not use such a simple network setup, sharing management and tenant traffic on the same network segment, in a production environment!</li>
+</ul>
+
+<p>After importing the VOVA appliance it will communicate with the NSX controller cluster and the VMware vSphere vCenter (See Figure 1). But it will also house the OpenStack Neutron plugin and thus provide the DHCP server capability to the OpenStack cloud. This will require VOVA to join the NSX overlay network as a transport node. How this is done will also be shown later on in this article. For now, let’s focus on importing and configuring VOVA.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/vPod-VOVA-Version2.png" title="Figure 1: VMware OpenStack Virtual Appliance (VOVA) in the overal setup " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/vPod-VOVA-Version2-320.webp 320w, 
+
+    
+    /content/resized/2014/01/vPod-VOVA-Version2-384.webp 384w, 
+
+    
+    /content/resized/2014/01/vPod-VOVA-Version2-512.webp 512w, 
+
+    
+    /content/resized/2014/01/vPod-VOVA-Version2-683.webp 683w, 
+
+ /content/uploads/2014/01/vPod-VOVA-Version2.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/vPod-VOVA-Version2-320.png 320w, 
+
+    /content/resized/2014/01/vPod-VOVA-Version2-384.png 384w, 
+
+    /content/resized/2014/01/vPod-VOVA-Version2-512.png 512w, 
+
+    /content/resized/2014/01/vPod-VOVA-Version2-683.png 683w, 
+
+ /content/uploads/2014/01/vPod-VOVA-Version2.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/vPod-VOVA-Version2.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: VMware OpenStack Virtual Appliance (VOVA) in the overal setup ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: VMware OpenStack Virtual Appliance (VOVA) in the overal setup
+</figcaption>
+
+</figure>
+
+<h1 id="gather-the-pre-requisites">Gather the pre-requisites</h1>
+
+<p>VOVA is provided as an <a href="https://en.wikipedia.org/wiki/Open_Virtualization_Format" target="_blank" rel="noopener noreferrer">Open Virtualization Format</a> image (OVA). During installation one needs to enter the initial configuration parameters, which consists of IP address information for the appliance itself, but also for the services that it interacts with. Before starting the actual OVA import, let’s make sure we have all the information available that we need.</p>
+
+<p>In particular we need:</p>
+
+<ul>
+  <li>IP addressing information for VOVA, including default gateway and DNS resolver.</li>
+  <li>IP address and account credentials of the vSphere vCenter.</li>
+  <li>IP address and account credentials of the NSX Controller Cluster.</li>
+  <li>Name of the “Datacenter”, “Clusters” and “Datastores” in vCenter for the cluster that VOVA will manage.</li>
+  <li>UUID of the NSX Transport Zone and UUID of the Gateway Service.</li>
+</ul>
+
+<p>Within the vSphere Web Client look up the Name of the “Datacenter”, “Clusters” and “Datastores” in vCenter (See Figure 2). If you are only using a single datastore that is accessible from all ESXi servers within the cluster, you do not need to look up its name.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-Pre01.png" title="Figure 2: Datacenter and Cluster name for configuration of VOVA " class="image-popup">
+<picture>
+  <source width="254" type="image/webp" data-srcset="
+
+ /content/uploads/2014/01/VOVA-Pre01.webp 254w" sizes="254px"></source>
+  <source width="254" data-srcset="
+
+ /content/uploads/2014/01/VOVA-Pre01.png 254w" sizes="254px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-Pre01.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Datacenter and Cluster name for configuration of VOVA ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Datacenter and Cluster name for configuration of VOVA
+</figcaption>
+
+</figure>
+
+<p>Next we need to return to the NSX Manager in order to look up the UUID of the NSX Transport Zone and Gateway Service. On the Dashboard click on the <strong>registered</strong> number for the corresponding entry (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-Pre00.png" title="Figure 3: Lookup Transport Zone and Gateway Services UUID in the NSX manager " class="image-popup">
+<picture>
+  <source width="421" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-Pre00-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-Pre00-384.webp 384w, 
+
+ /content/uploads/2014/01/VOVA-Pre00.webp 421w" sizes="421px"></source>
+  <source width="421" data-srcset="
+
+    /content/resized/2014/01/VOVA-Pre00-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-Pre00-384.png 384w, 
+
+ /content/uploads/2014/01/VOVA-Pre00.png 421w" sizes="421px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-Pre00.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Lookup Transport Zone and Gateway Services UUID in the NSX manager ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Lookup Transport Zone and Gateway Services UUID in the NSX manager
+</figcaption>
+
+</figure>
+
+<p>Note down the UUID of the NSX Gateway Service (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-Pre02.png" title="Figure 4: UUID of the NSX Gateway Service " class="image-popup">
+<picture>
+  <source width="719" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-Pre02-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-Pre02-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-Pre02-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-Pre02-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-Pre02.webp 719w" sizes="719px"></source>
+  <source width="719" data-srcset="
+
+    /content/resized/2014/01/VOVA-Pre02-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-Pre02-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-Pre02-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-Pre02-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-Pre02.png 719w" sizes="719px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-Pre02.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: UUID of the NSX Gateway Service ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: UUID of the NSX Gateway Service
+</figcaption>
+
+</figure>
+
+<p>Next, note down the UUID of the NSX Transport Zone (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-Pre03.png" title="Figure 5: UUID of the NSX Transport Zone " class="image-popup">
+<picture>
+  <source width="536" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-Pre03-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-Pre03-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-Pre03-512.webp 512w, 
+
+ /content/uploads/2014/01/VOVA-Pre03.webp 536w" sizes="536px"></source>
+  <source width="536" data-srcset="
+
+    /content/resized/2014/01/VOVA-Pre03-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-Pre03-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-Pre03-512.png 512w, 
+
+ /content/uploads/2014/01/VOVA-Pre03.png 536w" sizes="536px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-Pre03.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: UUID of the NSX Transport Zone ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: UUID of the NSX Transport Zone
+</figcaption>
+
+</figure>
+
+<p>Ensure that you collected the above information without any errors or mistakes. During the VOVA import you will not be able to verify if the information entered are correct. You will only find out after the VOVA import has completed, when things are not working as expected. Therefore please take your time now and ensure that the gathered information are correct.</p>
+
+<h1 id="installation">installation</h1>
+
+<h2 id="import-of-vova-ova">Import of VOVA OVA</h2>
+
+<p>Next comes the import of the OVA image for the VMware vSphere OpenStack Virtual Appliance. This step does not differ dramatically from what we already know about OVA imports.</p>
+
+<p>Let’s get started by picking the correct file for the import (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-Import01.png" title="Figure 6: OVA Import of VOVA - Step 1 " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-Import01-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-Import01-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-Import01-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-Import01-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-Import01.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-Import01-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-Import01-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-Import01-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-Import01-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-Import01.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-Import01.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: OVA Import of VOVA - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: OVA Import of VOVA - Step 1
+</figcaption>
+
+</figure>
+
+<p>Choose the default settings or your site specific settings for the rest of the import. Once you get to the <em>Customize template</em> tab, specify the VMware vSphere vCenter information (See Figure 7). This includes:</p>
+
+<ul>
+  <li>IP address and port of the vCenter Server.</li>
+  <li>Accound credential for the vCenter Server with sufficient privileges.</li>
+  <li>Name of the “Datacenter” that contains the clusters and name of the clusters that will be managed by OpenStack.</li>
+  <li>Search pattern for datastores that will be used by OpenStack. Leave this field blank to use all datastores or if you only have a single data store.</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-Import02.png" title="Figure 7: OVA Import of VOVA - Step 2 " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-Import02-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-Import02-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-Import02-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-Import02-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-Import02.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-Import02-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-Import02-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-Import02-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-Import02-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-Import02.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-Import02.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: OVA Import of VOVA - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: OVA Import of VOVA - Step 2
+</figcaption>
+
+</figure>
+
+<p>Specify the OpenStack Neutron plugin for VMware NSX information (See Figure 8). This includes:</p>
+
+<ul>
+  <li>One of the IP addresses for the NSX Controller cluster.</li>
+  <li>Account credentials for the NSX Controller cluster with sufficient privileges.</li>
+  <li>UUID of the L3 Gateway Service.</li>
+  <li>UUID of the Transport Zone.</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-Import03.png" title="Figure 8: OVA Import of VOVA - Step 3 " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-Import03-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-Import03-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-Import03-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-Import03-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-Import03.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-Import03-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-Import03-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-Import03-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-Import03-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-Import03.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-Import03.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: OVA Import of VOVA - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: OVA Import of VOVA - Step 3
+</figcaption>
+
+</figure>
+
+<p>Specify the networking properties for the VOVA appliance itself (See Figure 9).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-Import04.png" title="Figure 9: OVA Import of VOVA - Step 4 " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-Import04-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-Import04-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-Import04-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-Import04-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-Import04.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-Import04-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-Import04-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-Import04-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-Import04-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-Import04.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-Import04.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: OVA Import of VOVA - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: OVA Import of VOVA - Step 4
+</figcaption>
+
+</figure>
+
+<p>Complete the OVA import and boot up the VM. The startup procedure can take a few minutes, after which you can connect with a Web Browser to the IP address or hostname of the VOVA appliance (See Figure 10). Don’t login yet as we are not done yet.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA10.png" title="Figure 10: VMware OpenStack Virtual Appliance (VOVA) login screen " class="image-popup">
+<picture>
+  <source width="408" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA10-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA10-384.webp 384w, 
+
+ /content/uploads/2014/01/VOVA10.webp 408w" sizes="408px"></source>
+  <source width="408" data-srcset="
+
+    /content/resized/2014/01/VOVA10-320.png 320w, 
+
+    /content/resized/2014/01/VOVA10-384.png 384w, 
+
+ /content/uploads/2014/01/VOVA10.png 408w" sizes="408px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA10.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: VMware OpenStack Virtual Appliance (VOVA) login screen ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: VMware OpenStack Virtual Appliance (VOVA) login screen
+</figcaption>
+
+</figure>
+
+<h2 id="firewall-settings-to-allow-vnc-access-to-vm-workloads">Firewall settings to allow VNC access to VM workloads</h2>
+
+<p>OpenStack uses the <a href="https://en.wikipedia.org/wiki/Virtual_Network_Computing" target="_blank" rel="noopener noreferrer">Virtual Network Computing (VNC)</a> protocol to access the VM workloads from the web interface Horizon. In a VMware vSphere environment this requires that the port range TCP/5900 through TCP/6000 is available for VNC connections on every ESXi host in all the clusters that will be managed by the appliance. This in return requires that these ports are allowed within the ESXi firewall of all ESXi hosts. The easiest way to do this in a non-production is setting is just to abuse the existing firewall profile for gdbserver, since this opens everything VNC needs and more.</p>
+
+<p>Navigate to the ESXi host and select <strong>Manage -&gt; Settings -&gt; System -&gt; Security Profile -&gt; Edit</strong> (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA11.png" title="Figure 11: Edit the Security Profile of the ESXi hosts " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA11-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA11-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA11-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA11-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA11.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA11-320.png 320w, 
+
+    /content/resized/2014/01/VOVA11-384.png 384w, 
+
+    /content/resized/2014/01/VOVA11-512.png 512w, 
+
+    /content/resized/2014/01/VOVA11-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA11.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA11.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Edit the Security Profile of the ESXi hosts ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Edit the Security Profile of the ESXi hosts
+</figcaption>
+
+</figure>
+
+<p>Ensure the checkbox for the security profile <strong>gdbserver</strong> is ticked and confirm with <strong>OK</strong> (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA12.png" title="Figure 12: Enable the &lt;em&gt;gdbserver&lt;/em&gt; security profile to enable VNC access to guests " class="image-popup">
+<picture>
+  <source width="729" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA12-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA12-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA12-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA12-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA12.webp 729w" sizes="729px"></source>
+  <source width="729" data-srcset="
+
+    /content/resized/2014/01/VOVA12-320.png 320w, 
+
+    /content/resized/2014/01/VOVA12-384.png 384w, 
+
+    /content/resized/2014/01/VOVA12-512.png 512w, 
+
+    /content/resized/2014/01/VOVA12-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA12.png 729w" sizes="729px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA12.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Enable the &lt;em&gt;gdbserver&lt;/em&gt; security profile to enable VNC access to guests ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Enable the <em>gdbserver</em> security profile to enable VNC access to guests
+</figcaption>
+
+</figure>
+
+<p>This completes the import and configuration of the VMware vSphere OpenStack Virtual Appliance (VOVA). While we might be tempted login to VOVA and start playing around, we are not quite there yet. The network setup of VOVA in combination with the OpenStack Neutron plugin for VMware NSX is not yet complete.</p>
+
+<h2 id="install-open-vswitch-on-vova">Install Open vSwitch on VOVA</h2>
+
+<p>Next we need to install the Open vSwitch (OVS) on VOVA. This is necessary as the Neutron plugin of OpenStack serves as the DHCP server on the L2 segments that will be created. As the Neutron plugin resides on VOVA, it needs to have connectivity to the NSX overlay network.</p>
+
+<p>The OVS is not yet installed in VOVA out-of-the-box, as it needs to match the NSX version that is being used. In the future it might be possible that the following steps become largely redundant as VOVA might take the NSX version as a configuration parameter and install the correct corresponding OVS version. Let’s do it manually for now.</p>
+
+<p>Login via SSH to the VOVA host and use the default credentials with the username <code class="highlighter-rouge">root</code> and the password <code class="highlighter-rouge">vmware</code>.</p>
+
+<p>Ensure that you have the NSX OVS for Ubuntu package available on VOVA that matches your NSX version. For me the file <code class="highlighter-rouge">nsx-ovs-2.0.0-build30176-ubuntu_precise_amd64.tar</code> is the correct one.</p>
+
+<p>Next extract the OVS Tar archive into a folder:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@openstack:/tmp/ovs# ls
+nsx-ovs-2.0.0-build30176-ubuntu_precise_amd64.tar
+root@openstack:/tmp/ovs# tar xvzf nsx-ovs-2.0.0-build30176-ubuntu_precise_amd64.tar
+./
+./openvswitch-datapath-dkms_2.0.0.30176_all.deb
+./nicira-ovs-hypervisor-node_2.0.0.30176_all.deb
+./openvswitch-switch_2.0.0.30176_amd64.deb
+./nicira-flow-stats-exporter/
+./nicira-flow-stats-exporter/nicira-flow-stats-exporter_4.0.0.28083_amd64.deb
+./openvswitch-common_2.0.0.30176_amd64.deb
+root@openstack:/tmp/ovs#
+
+</code></pre></div></div>
+
+<p>We will now install all packages within the created folder. The package nicira-flow-stats-exporter in the sub-folder with the same name is not needed here. We will therefore skip it.</p>
+
+<p>Use the command <code class="highlighter-rouge">dpkg -i *.deb</code> to install all NSX OVS packages:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@openstack:/tmp/ovs# dpkg -i *.deb
+Selecting previously unselected package nicira-ovs-hypervisor-node.
+(Reading database ... 98439 files and directories currently installed.)
+Unpacking nicira-ovs-hypervisor-node (from nicira-ovs-hypervisor-node_2.0.0.30176_all.deb) ...
+Selecting previously unselected package openvswitch-common.
+Unpacking openvswitch-common (from openvswitch-common_2.0.0.30176_amd64.deb) ...
+Selecting previously unselected package openvswitch-datapath-dkms.
+Unpacking openvswitch-datapath-dkms (from openvswitch-datapath-dkms_2.0.0.30176_all.deb) ...
+Selecting previously unselected package openvswitch-switch.
+Unpacking openvswitch-switch (from openvswitch-switch_2.0.0.30176_amd64.deb) ...
+Setting up openvswitch-common (2.0.0.30176) ...
+Setting up openvswitch-datapath-dkms (2.0.0.30176) ...
+
+Creating symlink /var/lib/dkms/openvswitch/2.0.0.30176/source -&gt;
+                 /usr/src/openvswitch-2.0.0.30176
+
+DKMS: add completed.
+
+Kernel preparation unnecessary for this kernel.  Skipping...
+
+Building module:
+cleaning build area....(bad exit status: 2)
+./configure --with-linux='/lib/modules/3.5.0-45-generic/build' &amp;&amp; make -C datapath/linux............
+cleaning build area....(bad exit status: 2)
+
+DKMS: build completed.
+
+openvswitch:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/3.5.0-45-generic/updates/dkms/
+
+depmod............
+
+DKMS: install completed.
+Processing triggers for man-db ...
+Setting up openvswitch-switch (2.0.0.30176) ...
+ * Inserting openvswitch module
+ * /etc/openvswitch/conf.db does not exist
+ * Creating empty database /etc/openvswitch/conf.db
+ * Starting ovsdb-server
+ * Configuring Open vSwitch system IDs
+ * Starting ovs-vswitchd
+ * Enabling remote OVSDB managers
+Processing triggers for ureadahead ...
+ureadahead will be reprofiled on next reboot
+Setting up nicira-ovs-hypervisor-node (2.0.0.30176) ...
+ * successfully generated self-signed certificates.
+ * successfully created the integration bridge.
+ * Starting ovs-l3d
+root@openstack:/tmp/ovs#
+
+</code></pre></div></div>
+
+<p>Similar to the NSX appliances and the ESXi hosts, the next step registers the NSX vSwitch with the NSX controller. First use the command <code class="highlighter-rouge">ovs-vsctl set-manager ssl:&lt;IP address of a NSX controller node&gt;</code> to point the NSX vSwitch to the NSX controller. In the case of an NSX controller cluster you can specify any IP address of a cluster member.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@openstack:/tmp/ovs# ovs-vsctl set-manager ssl:192.168.110.101
+root@openstack:/tmp/ovs#
+
+</code></pre></div></div>
+
+<p>Next extract the SSL certificate from the NSX vSwitch with the command <code class="highlighter-rouge">cat /etc/openvswitch/ovsclient-cert.pem</code>.</p>
+
+<p>Copy the text including the line <code class="highlighter-rouge">---BEGIN CERTIFICATE---</code> and <code class="highlighter-rouge">---END CERTIFICATE---</code> (See Figure 13). You will need this text in the next step.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/OVS01.png" title="Figure 13: NSX OVS SSL certificate displayed for VOVA " class="image-popup">
+<picture>
+  <source width="664" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/OVS01-320.webp 320w, 
+
+    
+    /content/resized/2014/01/OVS01-384.webp 384w, 
+
+    
+    /content/resized/2014/01/OVS01-512.webp 512w, 
+
+ /content/uploads/2014/01/OVS01.webp 664w" sizes="664px"></source>
+  <source width="664" data-srcset="
+
+    /content/resized/2014/01/OVS01-320.png 320w, 
+
+    /content/resized/2014/01/OVS01-384.png 384w, 
+
+    /content/resized/2014/01/OVS01-512.png 512w, 
+
+ /content/uploads/2014/01/OVS01.png 664w" sizes="664px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/OVS01.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: NSX OVS SSL certificate displayed for VOVA ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: NSX OVS SSL certificate displayed for VOVA
+</figcaption>
+
+</figure>
+
+<p>Return to the NSX Manager Dashboard. Within the Summary of Transport Components section, click on Add within the Hypervisor row (See Figure 14).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/OVS02.png" title="Figure 14: Add a new Hypervisor in NSX Manager " class="image-popup">
+<picture>
+  <source width="416" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/OVS02-320.webp 320w, 
+
+    
+    /content/resized/2014/01/OVS02-384.webp 384w, 
+
+ /content/uploads/2014/01/OVS02.webp 416w" sizes="416px"></source>
+  <source width="416" data-srcset="
+
+    /content/resized/2014/01/OVS02-320.png 320w, 
+
+    /content/resized/2014/01/OVS02-384.png 384w, 
+
+ /content/uploads/2014/01/OVS02.png 416w" sizes="416px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/OVS02.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Add a new Hypervisor in NSX Manager ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Add a new Hypervisor in NSX Manager
+</figcaption>
+
+</figure>
+
+<p>What follows now should look familiar from when you added the ESXi hosts as hypervisors to the NSX Manager in the <a href="/2014/01/03/openstack-with-vsphere-and-nsx-part3/">previous post: “OpenStack with vSphere and NSX – Part 3: Install and configure the Open vSwitch inside the ESXi hosts”</a>:</p>
+
+<ul>
+  <li>Confirm that the pre-selected transport type is <strong>Hypervisor</strong>.</li>
+  <li>Give the gateway node a name. I usually pick the hostname.</li>
+  <li>As the <em>Integration Bridge Id</em> specify <strong>br-int</strong>. Leave the other values with the default setting.</li>
+  <li>Select the <em>Credential Type</em> of <strong>Security Certificate</strong> and paste the previously copied certificate into the <em>Security Certificate</em> field.</li>
+  <li>Create a transport connector for the NSX vSwitch using <strong>STT</strong> as the <em>transport type</em> and the IP address of your VOVA.</li>
+</ul>
+
+<p>Return to the NSX Manager Dashboard, where you will see the new Hypervisor of type <em>Ubuntu</em> within the <em>Hypervisor Software Version Summary</em> section (See Figure 15).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/OVS03.png" title="Figure 15: VOVA successfully added as Hypervisor " class="image-popup">
+<picture>
+  <source width="479" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/OVS03-320.webp 320w, 
+
+    
+    /content/resized/2014/01/OVS03-384.webp 384w, 
+
+ /content/uploads/2014/01/OVS03.webp 479w" sizes="479px"></source>
+  <source width="479" data-srcset="
+
+    /content/resized/2014/01/OVS03-320.png 320w, 
+
+    /content/resized/2014/01/OVS03-384.png 384w, 
+
+ /content/uploads/2014/01/OVS03.png 479w" sizes="479px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/OVS03.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: VOVA successfully added as Hypervisor ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: VOVA successfully added as Hypervisor
+</figcaption>
+
+</figure>
+
+<h1 id="summary">Summary</h1>
+
+<p>Congratulations! This completes the installation of VOVA and NSX. Now you are ready to go and use your OpenStack cloud leveraging VMware vSphere – along with its well-known enterprise-class benefits such as VMotion – as the underlying Hypervisor as well as network virtualization provided via VMware NSX as a Neutron plugin.</p>
+
+<p>Next in the <a href="/2013/12/12/openstack-vsphere-nsx/">series</a> on OpenStack with vSphere and NSX is <a href="/2014/01/24/openstack-vsphere-nsx-part5/">Part 5: “OpenStack with vSphere and NSX – Part 5: Create virtual networks and launch a VM instance in OpenStack”</a> where we will take our new cloud for a quick spin and see what we can do with it, creating virtual networks within OpenStack that consist of L2 segments and interconnecting them via L3 to each other or the outside world. Also we will create our first VM instance via OpenStack.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#nsx" class="page__taxonomy-item" rel="tag">NSX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#openstack" class="page__taxonomy-item" rel="tag">OpenStack</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-01-08T00:29:08-08:00">January 08, 2014</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+4%3A+Import+and+configure+the+VMware+vSphere+OpenStack+Virtual+Appliance+%28VOVA%29%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+4%3A+Import+and+configure+the+VMware+vSphere+OpenStack+Virtual+Appliance+%28VOVA%29" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2014/01/03/openstack-with-vsphere-and-nsx-part3/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 3: Install and configure the Open vSwitch inside the ESXi hosts
+">Previous</a>
+    
+    
+      <a href="/2014/01/24/openstack-vsphere-nsx-part5/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 5: Create virtual networks and launch a VM instance in OpenStack
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

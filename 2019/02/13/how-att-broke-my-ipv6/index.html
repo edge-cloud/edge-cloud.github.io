@@ -1,0 +1,1111 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>How AT&amp;T broke my IPv6 Internet connection - Edge Cloud</title>
+<meta name="description" content="Using RIPE Atlas to show how AT&amp;T broke IPv6 on my home Internet connection.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="How AT&amp;T broke my IPv6 Internet connection">
+<meta property="og:url" content="https://www.edge-cloud.net/2019/02/13/how-att-broke-my-ipv6/">
+
+
+  <meta property="og:description" content="Using RIPE Atlas to show how AT&amp;T broke IPv6 on my home Internet connection.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="How AT&amp;T broke my IPv6 Internet connection">
+  <meta name="twitter:description" content="Using RIPE Atlas to show how AT&amp;T broke IPv6 on my home Internet connection.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/02/13/how-att-broke-my-ipv6/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2019-02-13T00:00:00-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2019/02/13/how-att-broke-my-ipv6/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How AT&amp;T broke my IPv6 Internet connection">
+    <meta itemprop="description" content="Using RIPE Atlas to show how AT&amp;T broke IPv6 on my home Internet connection.">
+    <meta itemprop="datePublished" content="February 13, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">How AT&amp;T broke my IPv6 Internet connection
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#first-look-at-ripe-atlas">First look at RIPE Atlas</a></li>
+  <li><a href="#measurement-targets">Measurement targets</a></li>
+  <li><a href="#when-did-things-break">When did things break?</a></li>
+  <li><a href="#where-is-the-fault">Where is the fault?</a></li>
+  <li><a href="#overall-quality-of-atts-internet-offering">Overall quality of AT&amp;T’s Internet offering</a></li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>A few days ago I discovered that my <a href="https://www.att.com/internet/" target="_blank" rel="noopener noreferrer">AT&amp;T Internet</a> connection at Home wasn’t working as expected. Websites were loading sluggish and access to Ubuntu’s repo via APT flat-out failed. My first suspicion that there must be an issue with the IPv6 connectivity was confirmed after heading to <a href="https://test-ipv6.com/" target="_blank" rel="noopener noreferrer">Test-IPv6.com</a>.</p>
+
+<p>It was time to start the troubleshooting and take a closer look:</p>
+
+<h1 id="first-look-at-ripe-atlas">First look at RIPE Atlas</h1>
+<p>I have had a <a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> probe directly connected to my AT&amp;T Home-gateway for the last 5 years. RIPE Atlas is a global network of hardware devices, called probes and anchors, that actively measure Internet connectivity. Anyone can access this data via Internet traffic maps, streaming data visualisations, and an API. RIPE Atlas users can also perform customised measurements to gain valuable data about their own networks. The data collected by this probe allows me to gain interesting insights into my own Internet connectivity at home, but also the global Internet connectivity.</p>
+
+<p>In this case the status page for my RIPE Atlas probe showed me in plain English that “IPv6 Doesn’t Work Properly” (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/02/ATT_RIPE_Warning.png" title="Figure 1: RIPE Atlas showing that IPv6 isn’t working properly " class="image-popup">
+<picture>
+  <source width="630" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/02/ATT_RIPE_Warning-320.webp 320w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_Warning-384.webp 384w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_Warning-512.webp 512w, 
+
+ /content/uploads/2019/02/ATT_RIPE_Warning.webp 630w" sizes="630px"></source>
+  <source width="630" data-srcset="
+
+    /content/resized/2019/02/ATT_RIPE_Warning-320.png 320w, 
+
+    /content/resized/2019/02/ATT_RIPE_Warning-384.png 384w, 
+
+    /content/resized/2019/02/ATT_RIPE_Warning-512.png 512w, 
+
+ /content/uploads/2019/02/ATT_RIPE_Warning.png 630w" sizes="630px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/02/ATT_RIPE_Warning.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: RIPE Atlas showing that IPv6 isn’t working properly ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: RIPE Atlas showing that IPv6 isn’t working properly
+</figcaption>
+
+</figure>
+
+<h1 id="measurement-targets">Measurement targets</h1>
+
+<p>The RIPE Atlas error message talks about “stable and cooperating targets (i.e. targets known to respond to pings)”. Looking at the built-in measurements, we can see that these targets include some of the <a href="https://www.iana.org/domains/root/servers" target="_blank" rel="noopener noreferrer">root name server</a>. The root name servers are a authoritative name server for the root zone (“.”) of the Domain Name System (DNS) of the Internet. Due to the important role of these name servers to the overall DNS architecture, these servers are implemented in a highly reliable way, using e.g. <a href="https://en.wikipedia.org/wiki/Anycast" target="_blank" rel="noopener noreferrer">Anycast</a>, making them stable anchor points throughout different international locations.</p>
+
+<p>And as all but the “G” root server respond to ICMP echo requests (aka. “Ping”) over IPv4 and IPv6, the root name servers are excellent targets for availability tests.
+In the case of my RIPE Atlas probe, we can see that all Pings to root name servers over IPv6 are failing, while Pings over IPv4 are successful (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/02/ATT_RIPE_RootServers_Fail.png" title="Figure 2: Tests to Root DNS server over IPv6 failing while IPv4 is working " class="image-popup">
+<picture>
+  <source width="621" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Fail-320.webp 320w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Fail-384.webp 384w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Fail-512.webp 512w, 
+
+ /content/uploads/2019/02/ATT_RIPE_RootServers_Fail.webp 621w" sizes="621px"></source>
+  <source width="621" data-srcset="
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Fail-320.png 320w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Fail-384.png 384w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Fail-512.png 512w, 
+
+ /content/uploads/2019/02/ATT_RIPE_RootServers_Fail.png 621w" sizes="621px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/02/ATT_RIPE_RootServers_Fail.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Tests to Root DNS server over IPv6 failing while IPv4 is working ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Tests to Root DNS server over IPv6 failing while IPv4 is working
+</figcaption>
+
+</figure>
+
+<p>This shows that the actual Internet connection is up and at least working as expected for IPv4 traffic, while IPv6 traffic is facing issues. Disabling IPv6 while AT&amp;T fixes the issue should provide a temporary workaround, which isn’t great.</p>
+
+<h1 id="when-did-things-break">When did things break?</h1>
+
+<p>Next, let’s have a look at the question when things broke. Drilling down on the measurements for the Ping test over IPv6 to the “A” root server, allows us to look at the moment when the RIPE Atlas probe was last able to successfully ping this name server. Here we can see that the last successful IPv6 contact to the “A” root name server happened on February 6th, 2019 at 8:53 UTC (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown.png" title="Figure 3: Pin-pointing the date and time of the failure " class="image-popup">
+<picture>
+  <source width="942" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-320.webp 320w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-384.webp 384w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-512.webp 512w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-683.webp 683w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-800.webp 800w, 
+
+ /content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown.webp 942w" sizes="942px"></source>
+  <source width="942" data-srcset="
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-320.png 320w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-384.png 384w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-512.png 512w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-683.png 683w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown-800.png 800w, 
+
+ /content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown.png 942w" sizes="942px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Pin-pointing the date and time of the failure ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Pin-pointing the date and time of the failure
+</figcaption>
+
+</figure>
+
+<p>For the other root name servers the last IPv6 contact was also at the same time, indicating a general IPv6 connectivity issue on this AT&amp;T connection.</p>
+
+<h1 id="where-is-the-fault">Where is the fault?</h1>
+
+<p>Now that we know that IPv6 is broken and when it broke, let’s try to figure out where things are broken. Is the link between the AT&amp;T home gateway and the next hop upstream router broken or is the culprit further down in the AT&amp;T network? RIPE Atlas can also help answer this question.</p>
+
+<p>To do so we create a One-off measurement from solely the affected Probe to one of the IPv6 addresses of <a href="https://developers.google.com/speed/public-dns/docs/using" target="_blank" rel="noopener noreferrer">Google Public DNS</a> resolvers at 2001:4860:4860::8888. We could also use any other host that is known to respond to IPv6 pings.
+Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" rel="noopener noreferrer">RIPE Atlas API</a>, this test can quickly be created via:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    curl --dump-header - -H "Content-Type: application/json" -H "Accept:
+    application/json" -X POST -d '{
+      "definitions":[
+      {
+        "target":"2001:4860:4860::8888",
+        "af":6,
+        "timeout":4000,
+        "description":"Traceroute measurement to 2001:4860:4860::8888",
+        "protocol":"ICMP",
+        "resolve_on_probe":false,
+        "packets":3,
+        "size":48,
+        "first_hop":1,
+        "max_hops":32,
+        "paris":16,
+        "destination_option_size":0,
+        "hop_by_hop_option_size":0,
+        "dont_fragment":false,
+        "skip_dns_check":false,
+        "type":"traceroute"
+      }],
+      "probes":[
+      {
+        "value":"12345",
+        "type":"probes",
+        "requested":1
+      }],
+      "is_oneoff":true,
+      "bill_to":"mymail@edge-cloud.net"
+      }' https://atlas.ripe.net/api/v2/measurements//?key=YOUR_KEY_HERE
+</code></pre></div></div>
+
+<p>The result shows the Traceroute timing out after the 3rd IPv6 hop inside the AT&amp;T network (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/02/ATT_Broken.png" title="Figure 4: Traceroute to Google’s Public DNS on broken AT&amp;T connection " class="image-popup">
+<picture>
+  <source width="486" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/02/ATT_Broken-320.webp 320w, 
+
+    
+    /content/resized/2019/02/ATT_Broken-384.webp 384w, 
+
+ /content/uploads/2019/02/ATT_Broken.webp 486w" sizes="486px"></source>
+  <source width="486" data-srcset="
+
+    /content/resized/2019/02/ATT_Broken-320.png 320w, 
+
+    /content/resized/2019/02/ATT_Broken-384.png 384w, 
+
+ /content/uploads/2019/02/ATT_Broken.png 486w" sizes="486px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/02/ATT_Broken.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Traceroute to Google’s Public DNS on broken AT&amp;T connection ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Traceroute to Google’s Public DNS on broken AT&amp;T connection
+</figcaption>
+
+</figure>
+
+<p>To have another data point and to understand how a successful IPv6 Traceroute to Google Public DNS resolvers should look like, let’s run the same measurement from a RIPE Atlas probe that is also connected to AT&amp;T - indicated by the same <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">ASN</a>. The RIPE Atlas website allows you to find probes based on various characteristics, such as IPv6 working state, ASN but also location. With this it was easy to find a probe that is connected to AT&amp;T with a working IPv6 connection.</p>
+
+<p>As expected, the traceroute to the Google Public DNS Resolver at 2001:4860:4860::8888 successfully completes after 9 hops (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/02/ATT_Working.png" title="Figure 5: Traceroute to Google’s Public DNS on working AT&amp;T connection " class="image-popup">
+<picture>
+  <source width="492" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/02/ATT_Working-320.webp 320w, 
+
+    
+    /content/resized/2019/02/ATT_Working-384.webp 384w, 
+
+ /content/uploads/2019/02/ATT_Working.webp 492w" sizes="492px"></source>
+  <source width="492" data-srcset="
+
+    /content/resized/2019/02/ATT_Working-320.png 320w, 
+
+    /content/resized/2019/02/ATT_Working-384.png 384w, 
+
+ /content/uploads/2019/02/ATT_Working.png 492w" sizes="492px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/02/ATT_Working.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Traceroute to Google’s Public DNS on working AT&amp;T connection ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Traceroute to Google’s Public DNS on working AT&amp;T connection
+</figcaption>
+
+</figure>
+
+<p>This indicates that the issue is not just on the direct link between my AT&amp;T home gateway and the next hop upstream, but deeper inside the AT&amp;T network. Therefore this problem most likely affects other users within my neighborhood. And of course I was able to find other reports of this issue on the <a href="https://forums.att.com/" target="_blank" rel="noopener noreferrer">AT&amp;T Forum</a>, <a href="https://www.dslreports.com" target="_blank" rel="noopener noreferrer">DSLReports</a> and <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">Reddit</a>. Here is a small selection:</p>
+<ul>
+  <li>AT&amp;T Forum: <a href="https://forums.att.com/t5/AT-T-Fiber-Installation/ipv6-broken/m-p/5805237#M5197" target="_blank" rel="noopener noreferrer">ipv6 broken?</a>
+</li>
+  <li>DSLReports: <a href="http://www.dslreports.com/forum/r31897147-Replacement-BGW210-and-can-t-route-IPV6" target="_blank" rel="noopener noreferrer">Replacement BGW210 and can’t route IPV6</a>
+</li>
+  <li>Reddit: <a href="https://www.reddit.com/r/Austin/comments/7etbro/ipv6_broken_on_att_uverse_gigapower_fiber/" target="_blank" rel="noopener noreferrer">IPv6 Broken on AT&amp;T U-verse Gigapower (Fiber) (Northeast Austin)</a>
+</li>
+</ul>
+
+<p>Unfortunately the reported troubleshooting attempts from AT&amp;T staff on these posts were pretty useless.</p>
+
+<h1 id="overall-quality-of-atts-internet-offering">Overall quality of AT&amp;T’s Internet offering</h1>
+
+<p>Before finishing up, let’s have a look at the overall quality of the AT&amp;T Internet connection at my home. For this we can compare the availability of the “A” root name server over IPv6 and IPv4 over the last 3 years.</p>
+
+<p>First looking at IPv6, we can see frequent packet loss and even full outages (late 2017) for multiple days (See Figure 6). I would definitely not call this is a stellar performance for an ISP.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears.png" title="Figure 6: RTT to A-Root Server over IPv6 over 3 years " class="image-popup">
+<picture>
+  <source width="942" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-320.webp 320w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-384.webp 384w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-512.webp 512w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-683.webp 683w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-800.webp 800w, 
+
+ /content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears.webp 942w" sizes="942px"></source>
+  <source width="942" data-srcset="
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-320.png 320w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-384.png 384w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-512.png 512w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-683.png 683w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears-800.png 800w, 
+
+ /content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears.png 942w" sizes="942px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: RTT to A-Root Server over IPv6 over 3 years ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: RTT to A-Root Server over IPv6 over 3 years
+</figcaption>
+
+</figure>
+
+<p>At least for IPv4 things look a little better since my upgrade to <a href="https://en.wikipedia.org/wiki/Passive_optical_network" target="_blank" rel="noopener noreferrer">GPON</a> in mid 2017. Since then connectivity has been mosly stable with some packet loss, but no full outages (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4.png" title="Figure 7: RTT to A-Root Server over IPv4 over 3 years " class="image-popup">
+<picture>
+  <source width="944" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-320.webp 320w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-384.webp 384w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-512.webp 512w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-683.webp 683w, 
+
+    
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-800.webp 800w, 
+
+ /content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4.webp 944w" sizes="944px"></source>
+  <source width="944" data-srcset="
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-320.png 320w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-384.png 384w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-512.png 512w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-683.png 683w, 
+
+    /content/resized/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4-800.png 800w, 
+
+ /content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4.png 944w" sizes="944px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/02/ATT_RIPE_RootServers_Drilldown_MultYears_IPv4.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: RTT to A-Root Server over IPv4 over 3 years ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: RTT to A-Root Server over IPv4 over 3 years
+</figcaption>
+
+</figure>
+
+<h1 id="summary">Summary</h1>
+
+<p>RIPE Atlas provides an awesome tool to keep an eye on the performance and availability of your own Internet connection, but also helps troubleshooting. Keep in mind that for none of the steps shown above I had to be actually at home. You can use RIPE Atlas from anywhere.</p>
+
+<p>I highly recommend you to consider <a href="https://atlas.ripe.net/get-involved/become-a-host/" target="_blank" rel="noopener noreferrer">hosting a RIPE Atlas probe</a> yourself. Not only will you benefit from the data that it collects, but it will also benefit the overall Internet community.</p>
+
+<p>At this point I have no hope whatsoever that AT&amp;T will fix this issue anytime soon. Getting in contact with a human at AT&amp;T is already a daunting task and finding someone with knowledge of IPv6 who can actually fix this issue seems impossible. As AT&amp;T also blocks 6in4 tunnels, I’ll be forced to disable IPv6 on my home internet connection for the time being.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-02-13T00:00:00-08:00">February 13, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=How+AT%26T+broke+my+IPv6+Internet+connection%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F&amp;title=How+AT%26T+broke+my+IPv6+Internet+connection" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2016/12/12/ipv6-aws-ec2/" class="pagination--pager" title="IPv6 with Amazon Web Services VPC and EC2
+">Previous</a>
+    
+    
+      <a href="/2019/03/01/limitations-of-geo-dns/" class="pagination--pager" title="Limitations of DNS-based geographic routing
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

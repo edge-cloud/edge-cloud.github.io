@@ -1,0 +1,1348 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Jumbo Frames with VMware ESXi - Edge Cloud</title>
+<meta name="description" content="Using Jumbo Frames with ESXi reduces CPU overhead and gives you much higher performance with 10 GigE. This article shows you how to enable Jumbo Frames with vSphere 5.1 or higher.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Jumbo Frames with VMware ESXi">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/11/11/jumbo-frames-vmware-esxi/">
+
+
+  <meta property="og:description" content="Using Jumbo Frames with ESXi reduces CPU overhead and gives you much higher performance with 10 GigE. This article shows you how to enable Jumbo Frames with vSphere 5.1 or higher.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Jumbo Frames with VMware ESXi">
+  <meta name="twitter:description" content="Using Jumbo Frames with ESXi reduces CPU overhead and gives you much higher performance with 10 GigE. This article shows you how to enable Jumbo Frames with vSphere 5.1 or higher.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/11/11/jumbo-frames-vmware-esxi/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-11-11T03:11:09-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/11/11/jumbo-frames-vmware-esxi/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Jumbo Frames with VMware ESXi">
+    <meta itemprop="description" content="Using Jumbo Frames with ESXi reduces CPU overhead and gives you much higher performance with 10 GigE. This article shows you how to enable Jumbo Frames with vSphere 5.1 or higher.">
+    <meta itemprop="datePublished" content="November 11, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Jumbo Frames with VMware ESXi
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#background">Background</a></li>
+  <li><a href="#goal">Goal</a></li>
+  <li>
+<a href="#configuring-esxi">Configuring ESXi</a>
+    <ul>
+      <li><a href="#default-vswitch">Default vSwitch</a></li>
+      <li><a href="#distributed-vswitch">Distributed vSwitch</a></li>
+      <li><a href="#vmkernel-ports">VMKernel ports</a></li>
+    </ul>
+  </li>
+  <li><a href="#testing-functionality">Testing functionality</a></li>
+  <li>
+<a href="#configuring-jumbo-frames-via-cli">Configuring Jumbo Frames via CLI</a>
+    <ul>
+      <li><a href="#example-for-vswitch">Example for vSwitch</a></li>
+      <li><a href="#example-for-vmkernel-interface">Example for VMkernel interface</a></li>
+    </ul>
+  </li>
+  <li><a href="#jumbo-frames-on-guests-virtual-machines">Jumbo Frames on guests (Virtual Machines)</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Ethernet’s default maximum size for data transmission is 1500 bytes due to legacy compatibility reasons. Unfortunately with newer high-speed networks - such as 10 Gigabit Ethernet (10 GigE) - breaking up data into chunks of 1500 bytes - also called frames - creates a lot of overhead with a high header to payload ratio. This not only creates a higher than necessary overhead on the Hypervisor’s CPU, but also prevents one from utilizing the full capabilities of the network hardware. For example: On a 10Gbit link it is possible that you will only be able to transmit about 3-4 Gbps of data between machines using 1500 byte frames, while you can easily saturate 10Gbit when using jumbo frames.</p>
+
+<h1 id="background">Background</h1>
+
+<p>Modern full-featured network equipment can transmit larger frame sizes if configured to do so, usually up to a value of at least 9000 bytes. Even though almost every vendor of network equipment has a different maximum value of what their products can be configured with for MTU, it is recommended to stick to a MTU of 9000 bytes for Jumbo Frames. This value is easy to remember and all network products that support Jumbo frames usually support at least this value.</p>
+
+<p>Jumbo frames should only used in a controlled and segmented environment, for example within an iSCSI or NFS SAN, as they can cause additional overhead from the need for packet fragmentation at the point when converting between a 9000 byte frame network and a standard 1500 byte frame network.</p>
+
+<h1 id="goal">Goal</h1>
+
+<p>One of the main use case for Jumbo Frames within VMware vSphere is between an ESXi host and an iSCSI or NFS storage array. Another common use case is between ESXi hosts for VMotion traffic. While this post focuses on the former use case, it is easily transferable to the later.</p>
+
+<p>VMware ESXi uses so-called VMkernel ports to connect the Hypervisor to a storage array. You can think of this port as the Hypervisor kernel’s equivalent to a vNIC for Virtual Machines. In order to use Jumbo Frames between the Hypervisor and the storage array, all elements in between need to be configured for at least the desired MTU size - here 9000. (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/JumboFrames.png" title="Figure 1: Jumbo Frames for storage arrays with VMware ESXi " class="image-popup">
+<picture>
+  <source width="512" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/JumboFrames-320.webp 320w, 
+
+    
+    /content/resized/2013/11/JumboFrames-384.webp 384w, 
+
+ /content/uploads/2013/11/JumboFrames.webp 512w" sizes="512px"></source>
+  <source width="512" data-srcset="
+
+    /content/resized/2013/11/JumboFrames-320.png 320w, 
+
+    /content/resized/2013/11/JumboFrames-384.png 384w, 
+
+ /content/uploads/2013/11/JumboFrames.png 512w" sizes="512px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/JumboFrames.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Jumbo Frames for storage arrays with VMware ESXi ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Jumbo Frames for storage arrays with VMware ESXi
+</figcaption>
+
+</figure>
+
+<p>This includes the physical storage array, the physical switch, potentially the physical server (e.g. for the Cisco UCS, where this server includes networking capabilities), the VMware Virtual Switch (both default vSwitch and Distributed vSwitch) and last but not least the VMkernel port itself.</p>
+
+<p>It is important to note that the network elements only need to be configured for <strong>at least</strong> the desired MTU size. If the MTU size ends up being higher, it will not impact functionality. As an example: The <a href="https://www.arista.com/en/" target="_blank" rel="noopener noreferrer">Arista Networks</a> switches have a default MTU size of 9216 bytes, which can remain as is. No need to make any changes here.</p>
+
+<p>I’ll leave the exercise of figuring out how to configure your physical equipment to a MTU size of 9000 to you. Unfortunately almost every vendor has a different approach for achieving this.</p>
+
+<h1 id="configuring-esxi">Configuring ESXi</h1>
+
+<p>Support for jumbo frames has been included in ESX and ESXi for quite a while. But up until version 5.0 of vSphere is was not exposed in the GUI for both the default vSwitch and Distributed vSwitch implementation. It had to be configured via the ESX CLI for a default vSwitch and VMkernel port. Since vSphere 5.1 it is possible to configure the MTU settings via the GUI for all three elements.</p>
+
+<p>Keeping in mind Figure, we will need to change the MTU settings both for the virtual Switch (irrespective of whether this is a default vSwitch or a Distributed vSwitch) and the VMKernel port.</p>
+
+<h2 id="default-vswitch">Default vSwitch</h2>
+
+<p>For the Default vSwitch navigate to host to which this vSwitch belongs to and choose <strong>Manage -&gt; Networking -&gt; Virtual Switches -&gt; Name of Virtual Switch -&gt; Edit</strong>. (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture10.png" title="Figure 2: Jumbo Frames in Default vSwitches " class="image-popup">
+<picture>
+  <source width="882" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture10-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture10-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture10-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Capture10-683.webp 683w, 
+
+    
+    /content/resized/2013/11/Capture10-800.webp 800w, 
+
+ /content/uploads/2013/11/Capture10.webp 882w" sizes="882px"></source>
+  <source width="882" data-srcset="
+
+    /content/resized/2013/11/Capture10-320.png 320w, 
+
+    /content/resized/2013/11/Capture10-384.png 384w, 
+
+    /content/resized/2013/11/Capture10-512.png 512w, 
+
+    /content/resized/2013/11/Capture10-683.png 683w, 
+
+    /content/resized/2013/11/Capture10-800.png 800w, 
+
+ /content/uploads/2013/11/Capture10.png 882w" sizes="882px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture10.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Jumbo Frames in Default vSwitches ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Jumbo Frames in Default vSwitches
+</figcaption>
+
+</figure>
+
+<p>Next change the <em>MTU (Bytes)</em> setting to 9000 under Properties and confirm your choice with a click on <strong>OK</strong>. (See Figure 3)</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture04.png" title="Figure 3: Changing MTU settings for a Default vSwitch " class="image-popup">
+<picture>
+  <source width="964" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture04-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture04-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture04-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Capture04-683.webp 683w, 
+
+    
+    /content/resized/2013/11/Capture04-800.webp 800w, 
+
+    
+    /content/resized/2013/11/Capture04-960.webp 960w, 
+
+ /content/uploads/2013/11/Capture04.webp 964w" sizes="964px"></source>
+  <source width="964" data-srcset="
+
+    /content/resized/2013/11/Capture04-320.png 320w, 
+
+    /content/resized/2013/11/Capture04-384.png 384w, 
+
+    /content/resized/2013/11/Capture04-512.png 512w, 
+
+    /content/resized/2013/11/Capture04-683.png 683w, 
+
+    /content/resized/2013/11/Capture04-800.png 800w, 
+
+    /content/resized/2013/11/Capture04-960.png 960w, 
+
+ /content/uploads/2013/11/Capture04.png 964w" sizes="964px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture04.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Changing MTU settings for a Default vSwitch ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Changing MTU settings for a Default vSwitch
+</figcaption>
+
+</figure>
+
+<p>You will have to repeat these steps for all Default vSwitches on all your hosts that you want to leverage Jumbo Frames on.</p>
+
+<h2 id="distributed-vswitch">Distributed vSwitch</h2>
+
+<p>To change the MTU settings of a Distributed vSwitch navigate to the desired vDS. Next choose <strong>Manage -&gt; Settings -&gt; Properties -&gt; Edit</strong>. (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture11.png" title="Figure 4: Jumbo Frames with Distributed vSwitch " class="image-popup">
+<picture>
+  <source width="1117" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture11-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture11-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture11-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Capture11-683.webp 683w, 
+
+    
+    /content/resized/2013/11/Capture11-800.webp 800w, 
+
+    
+    /content/resized/2013/11/Capture11-960.webp 960w, 
+
+ /content/uploads/2013/11/Capture11.webp 1117w" sizes="1117px"></source>
+  <source width="1117" data-srcset="
+
+    /content/resized/2013/11/Capture11-320.png 320w, 
+
+    /content/resized/2013/11/Capture11-384.png 384w, 
+
+    /content/resized/2013/11/Capture11-512.png 512w, 
+
+    /content/resized/2013/11/Capture11-683.png 683w, 
+
+    /content/resized/2013/11/Capture11-800.png 800w, 
+
+    /content/resized/2013/11/Capture11-960.png 960w, 
+
+ /content/uploads/2013/11/Capture11.png 1117w" sizes="1117px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture11.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Jumbo Frames with Distributed vSwitch ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Jumbo Frames with Distributed vSwitch
+</figcaption>
+
+</figure>
+
+<p>Under the <em>NIC settings</em> tab change the value for <em>MTU</em> to 9000. (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture02.png" title="Figure 5: Change MTU settings for a Distributed vSwitch " class="image-popup">
+<picture>
+  <source width="965" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture02-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture02-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture02-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Capture02-683.webp 683w, 
+
+    
+    /content/resized/2013/11/Capture02-800.webp 800w, 
+
+    
+    /content/resized/2013/11/Capture02-960.webp 960w, 
+
+ /content/uploads/2013/11/Capture02.webp 965w" sizes="965px"></source>
+  <source width="965" data-srcset="
+
+    /content/resized/2013/11/Capture02-320.png 320w, 
+
+    /content/resized/2013/11/Capture02-384.png 384w, 
+
+    /content/resized/2013/11/Capture02-512.png 512w, 
+
+    /content/resized/2013/11/Capture02-683.png 683w, 
+
+    /content/resized/2013/11/Capture02-800.png 800w, 
+
+    /content/resized/2013/11/Capture02-960.png 960w, 
+
+ /content/uploads/2013/11/Capture02.png 965w" sizes="965px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture02.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Change MTU settings for a Distributed vSwitch ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Change MTU settings for a Distributed vSwitch
+</figcaption>
+
+</figure>
+
+<h2 id="vmkernel-ports">VMKernel ports</h2>
+
+<p>Next change the MTU setting of the VMKernel that you want to use with Jumbo Frames. This could e.g. be the VMkernel port used for iSCSI or NFS storage, or the VMKernel port used for VMotion.</p>
+
+<p>Select the ESXi host that hosts the desired VMkernel port and navigate to <strong>Manage -&gt; Networking -&gt; Virtual adapters -&gt; Desired VMKernel Device -&gt; Edit</strong>. (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture03.png" title="Figure 6: Jumbo Frames with VMkernel ports " class="image-popup">
+<picture>
+  <source width="888" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture03-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture03-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture03-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Capture03-683.webp 683w, 
+
+    
+    /content/resized/2013/11/Capture03-800.webp 800w, 
+
+ /content/uploads/2013/11/Capture03.webp 888w" sizes="888px"></source>
+  <source width="888" data-srcset="
+
+    /content/resized/2013/11/Capture03-320.png 320w, 
+
+    /content/resized/2013/11/Capture03-384.png 384w, 
+
+    /content/resized/2013/11/Capture03-512.png 512w, 
+
+    /content/resized/2013/11/Capture03-683.png 683w, 
+
+    /content/resized/2013/11/Capture03-800.png 800w, 
+
+ /content/uploads/2013/11/Capture03.png 888w" sizes="888px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture03.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Jumbo Frames with VMkernel ports ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Jumbo Frames with VMkernel ports
+</figcaption>
+
+</figure>
+
+<p>Under the <em>NIC settings</em> tab, change the <em>MTU</em> value to be 9000. (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture05.png" title="Figure 7: Changing MTU settings of a VMkernel port " class="image-popup">
+<picture>
+  <source width="967" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture05-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture05-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture05-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Capture05-683.webp 683w, 
+
+    
+    /content/resized/2013/11/Capture05-800.webp 800w, 
+
+    
+    /content/resized/2013/11/Capture05-960.webp 960w, 
+
+ /content/uploads/2013/11/Capture05.webp 967w" sizes="967px"></source>
+  <source width="967" data-srcset="
+
+    /content/resized/2013/11/Capture05-320.png 320w, 
+
+    /content/resized/2013/11/Capture05-384.png 384w, 
+
+    /content/resized/2013/11/Capture05-512.png 512w, 
+
+    /content/resized/2013/11/Capture05-683.png 683w, 
+
+    /content/resized/2013/11/Capture05-800.png 800w, 
+
+    /content/resized/2013/11/Capture05-960.png 960w, 
+
+ /content/uploads/2013/11/Capture05.png 967w" sizes="967px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture05.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Changing MTU settings of a VMkernel port ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Changing MTU settings of a VMkernel port
+</figcaption>
+
+</figure>
+
+<p>You will have to repeat these steps for all VMkernel ports on all your hosts that you want to leverage Jumbo Frames on.</p>
+
+<h1 id="testing-functionality">Testing functionality</h1>
+
+<p>With all the configuration changes needed at so many different places, it is easy to miss a spot or two. Therefore it is highly recommend to test your settings, before declaring victory.</p>
+
+<p>For this purpose we will use the ESXi tool vmkping to send test traffic from an ESXi host to the storage array or another ESXi host - depending on your use case.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture09.png" title="Figure 8: Options for the tool vmkping " class="image-popup">
+<picture>
+  <source width="595" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture09-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture09-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture09-512.webp 512w, 
+
+ /content/uploads/2013/11/Capture09.webp 595w" sizes="595px"></source>
+  <source width="595" data-srcset="
+
+    /content/resized/2013/11/Capture09-320.png 320w, 
+
+    /content/resized/2013/11/Capture09-384.png 384w, 
+
+    /content/resized/2013/11/Capture09-512.png 512w, 
+
+ /content/uploads/2013/11/Capture09.png 595w" sizes="595px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture09.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Options for the tool vmkping ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Options for the tool vmkping
+</figcaption>
+
+</figure>
+
+<p>Looking at the options of the vmkping tool, we see two options that are important for this test. (See Figure 8).</p>
+
+<p>One is the ability to set the so-called DF bit or “Do not fragment” with the <em>-d</em> switch. The other is the ability to specify the desired payload size for the ping packet with the <em>-s</em> switch.</p>
+
+<p>Unfortunately the build-in documentation for this tool isn’t very good, as it doesn’t tell you that the <em>-s</em> switch specifies the payload size of the ICMP packet. You therefore need to add 8 bytes of ICMP headers and 20 bytes of IP headers before you end up with the frame size that will actually hit the wire. (See Figure 9).</p>
+
+<p>Also the “Do not fragment” will instruct the network layer of the ESXi host as well as all other network elements not to fragment - therefore not to split up - the packet.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/ICMP-Packet.png" title="Figure 9: IP Datagram " class="image-popup">
+<picture>
+  <source width="569" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/ICMP-Packet-320.webp 320w, 
+
+    
+    /content/resized/2013/11/ICMP-Packet-384.webp 384w, 
+
+    
+    /content/resized/2013/11/ICMP-Packet-512.webp 512w, 
+
+ /content/uploads/2013/11/ICMP-Packet.webp 569w" sizes="569px"></source>
+  <source width="569" data-srcset="
+
+    /content/resized/2013/11/ICMP-Packet-320.png 320w, 
+
+    /content/resized/2013/11/ICMP-Packet-384.png 384w, 
+
+    /content/resized/2013/11/ICMP-Packet-512.png 512w, 
+
+ /content/uploads/2013/11/ICMP-Packet.png 569w" sizes="569px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/ICMP-Packet.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: IP Datagram ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: IP Datagram
+</figcaption>
+
+</figure>
+
+<p>In order to assemble a test frame with the size of 9000 bytes, you only need to specify an ICMP payload of 8972 bytes.</p>
+
+<p>If you configured your network correctly, using <code class="highlighter-rouge">vmkping -d -s 8972 &lt;IP of storage array&gt;</code> should therefore generate test traffic which is transported to the storage array and back. (See Figure 10).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture07.png" title="Figure 10: Successful vmkping with Jumbo Frames " class="image-popup">
+<picture>
+  <source width="534" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture07-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture07-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture07-512.webp 512w, 
+
+ /content/uploads/2013/11/Capture07.webp 534w" sizes="534px"></source>
+  <source width="534" data-srcset="
+
+    /content/resized/2013/11/Capture07-320.png 320w, 
+
+    /content/resized/2013/11/Capture07-384.png 384w, 
+
+    /content/resized/2013/11/Capture07-512.png 512w, 
+
+ /content/uploads/2013/11/Capture07.png 534w" sizes="534px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture07.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Successful vmkping with Jumbo Frames ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Successful vmkping with Jumbo Frames
+</figcaption>
+
+</figure>
+
+<p>In case you forgot to configure one of the network elements or specified the wrong payload size, vmkping will indicate that it cannot send the desired test frame. (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture08.png" title="Figure 11: Unsuccessful vmkping with Jumbo Frames " class="image-popup">
+<picture>
+  <source width="513" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture08-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture08-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture08-512.webp 512w, 
+
+ /content/uploads/2013/11/Capture08.webp 513w" sizes="513px"></source>
+  <source width="513" data-srcset="
+
+    /content/resized/2013/11/Capture08-320.png 320w, 
+
+    /content/resized/2013/11/Capture08-384.png 384w, 
+
+    /content/resized/2013/11/Capture08-512.png 512w, 
+
+ /content/uploads/2013/11/Capture08.png 513w" sizes="513px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture08.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Unsuccessful vmkping with Jumbo Frames ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Unsuccessful vmkping with Jumbo Frames
+</figcaption>
+
+</figure>
+
+<h1 id="configuring-jumbo-frames-via-cli">Configuring Jumbo Frames via CLI</h1>
+
+<p>In case you want to configure Jumbo Frames via the CLI for a Default vSwitch or a VMKernel ports, here is what you need to do:</p>
+
+<h2 id="example-for-vswitch">Example for vSwitch</h2>
+
+<p>List available Default vSwitches:</p>
+
+<p><code class="highlighter-rouge">esxcfg-vswitch --list</code></p>
+
+<p>Change the MTU setting for vSwitch0:</p>
+
+<p><code class="highlighter-rouge">esxcfg-vswitch --mtu 9000 vSwitch0</code></p>
+
+<h2 id="example-for-vmkernel-interface">Example for VMkernel interface</h2>
+
+<p>List available VMKernel ports:</p>
+
+<p><code class="highlighter-rouge">esxcfg-vmknic --list</code></p>
+
+<p>Change the MTU settings for a VMKernel port:</p>
+
+<p><code class="highlighter-rouge">esxcfg-vmknic --mtu 9000 "VMkernel Portgroup Name"</code></p>
+
+<h1 id="jumbo-frames-on-guests-virtual-machines">Jumbo Frames on guests (Virtual Machines)</h1>
+
+<p>The default emulated Intel E1000 network device presented to guests in VMware ESX does not support Jumbo Frames, one must install VMware Tools and enable a VMXNET3 or newer interface to take advantage of Jumbo Frames.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-11-11T03:11:09-08:00">November 11, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Jumbo+Frames+with+VMware+ESXi%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F11%2F11%2Fjumbo-frames-vmware-esxi%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F11%2F11%2Fjumbo-frames-vmware-esxi%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F11%2F11%2Fjumbo-frames-vmware-esxi%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F11%2F11%2Fjumbo-frames-vmware-esxi%2F&amp;title=Jumbo+Frames+with+VMware+ESXi" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/09/04/physical-networks-for-vmware-nsx/" class="pagination--pager" title="Physical networks for VMware NSX
+">Previous</a>
+    
+    
+      <a href="/2013/11/18/ipv6-address-management-hosts/" class="pagination--pager" title="IPv6 Address management of hosts
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

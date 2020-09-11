@@ -1,0 +1,2051 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Deploy WordPress with AWS OpsWorks - Edge Cloud</title>
+<meta name="description" content="How to automatically deploy Wordpress with AWS OpsWorks for a new site, as part of a disaster recovery (DR) setup, for Dev/Test or for a fresh blank site.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Deploy WordPress with AWS OpsWorks">
+<meta property="og:url" content="https://www.edge-cloud.net/2014/02/14/deploy-wordpress-aws-opsworks/">
+
+
+  <meta property="og:description" content="How to automatically deploy Wordpress with AWS OpsWorks for a new site, as part of a disaster recovery (DR) setup, for Dev/Test or for a fresh blank site.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Deploy WordPress with AWS OpsWorks">
+  <meta name="twitter:description" content="How to automatically deploy Wordpress with AWS OpsWorks for a new site, as part of a disaster recovery (DR) setup, for Dev/Test or for a fresh blank site.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/02/14/deploy-wordpress-aws-opsworks/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2014-02-14T00:20:48-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2014/02/14/deploy-wordpress-aws-opsworks/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Deploy WordPress with AWS OpsWorks">
+    <meta itemprop="description" content="How to automatically deploy Wordpress with AWS OpsWorks for a new site, as part of a disaster recovery (DR) setup, for Dev/Test or for a fresh blank site.">
+    <meta itemprop="datePublished" content="February 14, 2014">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Deploy WordPress with AWS OpsWorks
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#about-opsworks">About Opsworks</a></li>
+  <li><a href="#use-case">Use case</a></li>
+  <li>
+<a href="#getting-started-with-aws-opsworks">Getting Started with AWS OpsWorks</a>
+    <ul>
+      <li><a href="#add-a-stack">Add a stack</a></li>
+      <li><a href="#add-layers">Add Layers</a></li>
+      <li><a href="#add-an-app">Add an App</a></li>
+      <li><a href="#deploy-your-stack">Deploy your stack</a></li>
+    </ul>
+  </li>
+  <li><a href="#shutdown-and-redeploy">Shutdown and Redeploy</a></li>
+  <li><a href="#references">References</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p><a href="https://aws.amazon.com/opsworks/" target="_blank" rel="noopener noreferrer">AWS OpsWorks</a> is an application management service that makes it easy for DevOps users to model and manage the entire application from load balancers to databases. It offers a very powerful solution for users to deploy their application easily in AWS without giving up control.</p>
+
+<p>In this post I want to show you how easy it is to use AWS OpsWorks for deploying WordPress - a typical <a href="https://en.wikipedia.org/wiki/LAMP_(software_bundle)" target="_blank" rel="noopener noreferrer">LAMP</a> application. This includes deploying a fresh blank WordPress install as well as re-creating a WordPress site from a backup for Dev/Test or Disaster Recovery purposes. In all cases it should take you only a few minutes to have a running WordPress site.</p>
+
+<p>While I use a Webhoster for running Edge Cloud, I do use the described approach to test changes to WordPress before deploying them into production. And I thereby also know that I could restore Edge Cloud as part of a Disaster Recovery (DR) plan via this approach.</p>
+
+<h1 id="about-opsworks">About Opsworks</h1>
+
+<p>With the availability of AWS OpsWorks Amazon Web Services now has a number of different Application Management Services that address the different needs of Administrators and Developers (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/app-svcs-comparison-graphic.png" title="Figure 1: OpsWorks fit in the AWS Application Management Solutions " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/app-svcs-comparison-graphic-320.webp 320w, 
+
+    
+    /content/resized/2014/02/app-svcs-comparison-graphic-384.webp 384w, 
+
+    
+    /content/resized/2014/02/app-svcs-comparison-graphic-512.webp 512w, 
+
+ /content/uploads/2014/02/app-svcs-comparison-graphic.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/app-svcs-comparison-graphic-320.png 320w, 
+
+    /content/resized/2014/02/app-svcs-comparison-graphic-384.png 384w, 
+
+    /content/resized/2014/02/app-svcs-comparison-graphic-512.png 512w, 
+
+ /content/uploads/2014/02/app-svcs-comparison-graphic.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/app-svcs-comparison-graphic.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: OpsWorks fit in the AWS Application Management Solutions ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: OpsWorks fit in the AWS Application Management Solutions
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>
+<a href="https://aws.amazon.com/elasticbeanstalk/" target="_blank" rel="noopener noreferrer">AWS Elastic Beanstalk</a> is an easy-to-use solution for building web apps and web services with popular application containers such as Java, PHP, Python, Ruby and .NET. You upload your code and Elastic Beanstalk automatically does the rest. Elastic Beanstalk supports the most common web architectures, application containers, and frameworks.</li>
+  <li>
+<a href="https://aws.amazon.com/opsworks/" target="_blank" rel="noopener noreferrer">AWS OpsWorks</a> is a powerful end-to-end solution that gives you an easy way to manage applications of nearly any scale and complexity without sacrificing control. You model, customize, and automate the entire application throughout its lifecycle. OpsWorks provides integrated experiences for IT administrators and ops-minded developers who want a high degree of productivity and control over operations.</li>
+  <li>
+<a href="https://aws.amazon.com/cloudformation/" target="_blank" rel="noopener noreferrer">AWS CloudFormation</a> is a building block service that enables customers to provision and manage almost any AWS resource via a domain specific language. You define JSON templates and use them to provision and manage AWS resources, operating systems and application code. CloudFormation focuses on providing foundational capabilities for the full breadth of AWS, without prescribing a particular model for development and operations.</li>
+</ul>
+
+<h1 id="use-case">Use case</h1>
+
+<p>The goal for this post will be to use AWS OpsWorks to deploy a WordPress site, automating as much of the deployment as possible. We will include two distinct use cases:</p>
+
+<ul>
+  <li>
+<strong>Fresh blank site:</strong> Create a fresh blank WordPress site that you can use to start hosting your own blog.</li>
+  <li>
+<strong>Re-Created site from an existing backup:</strong> If you have an existing WordPress site, you can use a WordPress Backup Plugin, such as <a href="https://wordpress.org/plugins/backwpup/" target="_blank" rel="noopener noreferrer">BackWPup</a>. Using AWS OpsWorks will allow you to recover your WordPress site from a backup as a Dev/Test site. This way you can e.g. test installing a new plugin before doing so in the production site. But you can also use the recovered WordPress site for a disaster recovery scenario in case your primary site is hard down. The benefit here is that the recovery can happen almost entirely automated, which is always a good idea for a DR solution.</li>
+</ul>
+
+<p>Even though we will run the WordPress site in AWS, we will not make use of AWS cloud concepts in order to achieve high availability for coping with AWS failures. Instead we will keep it very simple (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Architecture.png" title="Figure 2: Architecture for a simple WordPress deployment in AWS " class="image-popup">
+<picture>
+  <source width="452" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Architecture-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Architecture-384.webp 384w, 
+
+ /content/uploads/2014/02/Architecture.webp 452w" sizes="452px"></source>
+  <source width="452" data-srcset="
+
+    /content/resized/2014/02/Architecture-320.png 320w, 
+
+    /content/resized/2014/02/Architecture-384.png 384w, 
+
+ /content/uploads/2014/02/Architecture.png 452w" sizes="452px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Architecture.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Architecture for a simple WordPress deployment in AWS ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Architecture for a simple WordPress deployment in AWS
+</figcaption>
+
+</figure>
+
+<p>The deployed architecture will include:</p>
+
+<ul>
+  <li>
+<strong>WordPress PHP App:</strong> An EC2 server running Ubuntu Linux with an Apache webserver to host the WordPress PHP application. End-users will be able to access the site via an Elastic IP, which guarantees that the IP address - or an associated DNS entry - will remain in place, even if the environment is rebuild.</li>
+  <li>
+<strong>MySQL Server:</strong> An EC2 server running Ubuntu Linux with MySQL. MySQL will host the database for the WordPress application.</li>
+  <li>
+<strong>Existing Backup (Optional):</strong> A full backup of an existing WordPress site as a Zip file in a S3 bucket.</li>
+  <li>
+<strong>WordPress source code (Optional):</strong> The WordPress source code - available at <a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer">www.wordpress.org</a> for a fresh install of WordPress.</li>
+</ul>
+
+<h1 id="getting-started-with-aws-opsworks">Getting Started with AWS OpsWorks</h1>
+
+<p>Let’s head over to the AWS OpsWorks console at <a href="https://console.aws.amazon.com/opsworks" target="_blank" rel="noopener noreferrer">console.aws.amazon.com/opsworks</a> to get started. Login with your existing AWS credentials. AWS OpsWorks itself is a global service and you therefore do not need to pick a region at this point.</p>
+
+<p>Creating a service or application in AWS OpsWorks includes 4 steps (See Figure 3):</p>
+
+<ol>
+  <li>
+<strong>Add a stack:</strong> Define a stack for an application which includes information about e.g. the AWS region. You can have multiple stacks in various regions.</li>
+  <li>
+<strong>Add layers:</strong> Each stack consist of one or more layers, with each layer having a certain function. Here we will use a PHP App Server layer and a MySQL database layer.</li>
+  <li>
+<strong>Add an app:</strong> Define the application to be run via a source code repository or file bundle. This includes the ability to use <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Github</a> and <a href="https://en.wikipedia.org/wiki/Apache_Subversion" target="_blank" rel="noopener noreferrer">Subversion</a>, a simple Zip file via a HTTP or HTTPS URL or a ZIP file in a S3 bucket.</li>
+  <li>
+<strong>Deploy and manage:</strong> Deploy the application by starting the layer’s instances. Manage further capabilities such as deploying another application version at runtime.</li>
+</ol>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Steps.png" title="Figure 3: AWS OpsWorks Deployment Steps " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Steps-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Steps-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Steps-512.webp 512w, 
+
+ /content/uploads/2014/02/Steps.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Steps-320.png 320w, 
+
+    /content/resized/2014/02/Steps-384.png 384w, 
+
+    /content/resized/2014/02/Steps-512.png 512w, 
+
+ /content/uploads/2014/02/Steps.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Steps.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: AWS OpsWorks Deployment Steps ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: AWS OpsWorks Deployment Steps
+</figcaption>
+
+</figure>
+
+<h2 id="add-a-stack">Add a stack</h2>
+
+<p>First we will deploy a new stack, which will correspond to the WordPress application. AWS Opsworks also lets you clone an existing stack, which provides capabilities for additional interesting use cases.</p>
+
+<p>Within the AWS OpsWorks console click on <strong>Add Your First Stack</strong> (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks01.png" title="Figure 4: Add your first stack " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks01-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks01-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks01-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks01.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks01-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks01-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks01-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks01.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks01.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Add your first stack ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Add your first stack
+</figcaption>
+
+</figure>
+
+<p>Next configure the basic information of your new stack. Give it a useful <strong>Name</strong> such as <em>WordPress</em> and select your <strong>Region</strong>. Select your preferred <strong>Default Operating System</strong>. Personally I prefer Ubuntu over Amazon Linux. If you want to login to the created EC2 instances via SSH, make sure to select a valid <strong>Default SSH key</strong>. All other settings you can leave as is for now. Click on the <strong>Advanced</strong> link at the bottom of the page for further configuration options.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks02.png" title="Figure 5: Add Stack - Step 1 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks02-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks02-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks02-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks02.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks02-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks02-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks02-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks02.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks02.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Add Stack - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Add Stack - Step 1
+</figcaption>
+
+</figure>
+
+<p>AWS OpsWorks uses the configuration management tool <a href="https://www.chef.io/chef/" target="_blank" rel="noopener noreferrer">Chef</a> to configure the EC2 instances within each layer. For this it provides so-called Chef “recipes” that describe how server applications (such as Apache or MySQL) are managed and how they are to be configured. These recipes describe a series of resources that should be in a particular state: packages that should be installed, services that should be running, or files that should be written.</p>
+
+<p>While AWS OpsWorks provides many useful recipes out of the box we want to add a few minor custom recipes. In particular we will use two custom recipes which can be found at <a href="https://github.com/chriselsen/opsworks-cookbooks" target="_blank" rel="noopener noreferrer">https://github.com/chriselsen/opsworks-cookbooks</a>:</p>
+
+<ul>
+  <li>AWS-Ubuntu: Configure an AWS Opsworks Ubuntu image with a swap space. This is aimed at t1.micro instances to prevent “out of memory” issues.</li>
+  <li>WordPress: Configure WordPress via the wp-config.php file to interact with the MySQL server. It can be used for a fresh install or a restore from a Backup using BackWPup. The wp-config.php will be filled with the IP address and credentials to access the MySQL server.</li>
+</ul>
+
+<p>You don’t need to understand or even recreate these recipes. I have provided them in a form that allows you to directly use them yourself.</p>
+
+<p>Within the Configuration Management section make sure the selected <em>Chef version</em> is <strong>11.4</strong> and that <em>Use custom Chef cookbooks</em> is selected with <strong>Yes</strong>. Specify the <em>Repository type</em> with <strong>Git</strong> and the <em>Repository URL</em> with <strong>https://github.com/chriselsen/opsworks-cookbooks.git</strong> (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks03.png" title="Figure 6: Add Stack - Step 2 " class="image-popup">
+<picture>
+  <source width="480" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks03-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks03-384.webp 384w, 
+
+ /content/uploads/2014/02/Opsworks03.webp 480w" sizes="480px"></source>
+  <source width="480" data-srcset="
+
+    /content/resized/2014/02/Opsworks03-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks03-384.png 384w, 
+
+ /content/uploads/2014/02/Opsworks03.png 480w" sizes="480px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks03.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Add Stack - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Add Stack - Step 2
+</figcaption>
+
+</figure>
+
+<p>Next we want to perform some tuning for the components as we will be using the t1.micro instance later on.</p>
+
+<p>The two things to tune will be:</p>
+
+<ol>
+  <li>WWW Document Root permission: We want to change the www document root permission to the default user www-data under Ubuntu.</li>
+  <li>Apache Prefork and Keepalive tuning: As we will be using the memory constraint EC2 flavor t1.micro, we want to make changes to the Apache Prefork and Keepalive settings to better adapt to this flavor type.</li>
+</ol>
+
+<p>In AWS Opsworks the setup and configuration of Apache is performed by Chef recipes that use various parameters which can be controlled by the user via a simple JSON file. This way we don’t have to create a custom Chef recipe or even manually perform changes of our servers. Instead we can look up the <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/attributes-recipes-apache.html" target="_blank" rel="noopener noreferrer">apache2 attributes</a> which are configurable and create a custom JSON file.</p>
+
+<p>This JSON file will look as follows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "opsworks" : {
+    "deploy_user" : {
+      "user" : "www-data"
+    }
+  },
+
+  "apache" : {
+    "timeout" : 40,
+    "keepalive" : "On",
+    "keepaliverequests" : 200,
+    "keepalivetimeout" : 2,
+    "prefork" : {
+      "startservers" : 3,
+      "minspareservers" : 3,
+      "maxspareservers" : 10,
+      "serverlimit" : 32,
+      "maxclients" : 32,
+      "maxrequestsperchild" : 2000
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>Paste above Chef JSON code into the <em>Custom Chef JSON</em> field. Then click on <strong>Add Stack</strong> to finalize the creation of the stack (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks04.png" title="Figure 7: Add Stack - Step 3 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks04-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks04-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks04-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks04.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks04-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks04-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks04-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks04.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks04.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Add Stack - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Add Stack - Step 3
+</figcaption>
+
+</figure>
+
+<p>This completes the creation of the stack.</p>
+
+<h2 id="add-layers">Add Layers</h2>
+
+<p>Next is the creation of the application stack layers. One for the PHP App Server layer and one for the MySQL database layer. Let’s start with the PHP App Server layer.</p>
+
+<p>After you finished creating the Stack you’ll end up on the <em>Stack</em> tab. There under the <em>Add your first layer section</em> click on <strong>Add a layer</strong> (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks05.png" title="Figure 8: Add Layer - Step 1 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks05-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks05-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks05-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks05.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks05-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks05-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks05-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks05.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks05.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Add Layer - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Add Layer - Step 1
+</figcaption>
+
+</figure>
+
+<p>As the <em>Layer type</em> select <strong>PHP App Server</strong> and click on <strong>Add Layer</strong> (See Figure 9).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks06.png" title="Figure 9: Add Layer - Step 2 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks06-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks06-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks06-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks06.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks06-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks06-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks06-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks06.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks06.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Add Layer - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Add Layer - Step 2
+</figcaption>
+
+</figure>
+
+<p>You will see your first layer successfully created. Click on <em>+ Layer</em> to create the next layer (See Figure 10).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks07.png" title="Figure 10: Add Layer - Step 3 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks07-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks07-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks07-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks07.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks07-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks07-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks07-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks07.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks07.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Add Layer - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Add Layer - Step 3
+</figcaption>
+
+</figure>
+
+<p>As the <em>Layer type</em> select <strong>MySQL</strong>. If you later want to manually connect to the MySQL server - e.g. for troubleshooting - note down the automatically created MySQL root password. Next click on <strong>Add Layer</strong> (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks08.png" title="Figure 11: Add Layer - Step 4 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks08-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks08-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks08-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks08.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks08-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks08-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks08-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks08.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks08.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Add Layer - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Add Layer - Step 4
+</figcaption>
+
+</figure>
+
+<p>We are almost done with the layers. We only need to perform some minor changes on the PHP App Server layer. Therefore in the <em>PHP App Server</em> layer row under <em>Actions</em> click on <strong>Edit</strong> (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks09.png" title="Figure 12: Edit PHP Layer - Step 1 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks09-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks09-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks09-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks09.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks09-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks09-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks09-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks09.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks09.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Edit PHP Layer - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Edit PHP Layer - Step 1
+</figcaption>
+
+</figure>
+
+<p>Although we have already pointed AWS OpsWorks to our custom Chef cookbooks, we still need to assign the individual recipes to the correct layer and lifecycle event. In AWS OpsWorks a layer has a sequence of <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-events.html" target="_blank" rel="noopener noreferrer">five lifecycle events</a>, each of which has an associated set of recipes that are specific to the layer. When an event occurs on a layer’s instance, AWS OpsWorks automatically runs the appropriate set of recipes.</p>
+
+<p>For the PHP App Server layer we need to define the following two recipes to lifecycle events (See Figure 13).</p>
+
+<ul>
+  <li>
+<strong>Setup</strong> lifecycle event: Recipe <strong>aws-ubuntu::setup</strong>
+</li>
+  <li>
+<strong>Configure</strong> lifecycle event: Recipe <strong>wordpress::configure</strong>
+</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks10.png" title="Figure 13: Edit PHP Layer - Step 2 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks10-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks10-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks10-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks10.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks10-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks10-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks10-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks10.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks10.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Edit PHP Layer - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: Edit PHP Layer - Step 2
+</figcaption>
+
+</figure>
+
+<p>Next scroll down to the <em>Automatically Assign IP Addresses</em> section and set <em>Elastic IP addresses</em> to <strong>Yes</strong> (See Figure 14).</p>
+
+<p>This assigns a so-called elastic IP address to the PHP App Server EC2 instance, an IP address that remains available even if the concrete EC instance is later replaced. It therefore allows you to place a DNS record on this Elastic IP address.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks11.png" title="Figure 14: Edit PHP Layer - Step 3 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks11-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks11-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks11-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks11.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks11-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks11-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks11-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks11.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks11.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Edit PHP Layer - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Edit PHP Layer - Step 3
+</figcaption>
+
+</figure>
+
+<p>Scroll down to the <em>Auto Healing</em> section and make sure that <em>Auto healing enabled</em> is set to <strong>No</strong> (See Figure 15). As we will be using EC2 t1.micro instances, these instances can generate a very high load and/or memory usage - especially at boot time. With auto healing enabled it is possible that AWS OpsWorks interprets this as an issue and attempts to rectify it by recreating the corresponding EC2 instance. Therefore with this simple setup it’s safer to leave this turned off.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks12.png" title="Figure 15: Edit PHP Layer - Step 4 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks12-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks12-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks12-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks12.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks12-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks12-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks12-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks12.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks12.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Edit PHP Layer - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: Edit PHP Layer - Step 4
+</figcaption>
+
+</figure>
+
+<p>Next we need to create EC2 instances, one instance per layer in our case. Start with the <em>PHP App Server</em> layer and select <strong>Add an instance</strong> (See Figure 16).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks13.png" title="Figure 16: Add an instance - Step 1 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks13-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks13-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks13-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks13.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks13-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks13-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks13-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks13.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks13.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Add an instance - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 16: Add an instance - Step 1
+</figcaption>
+
+</figure>
+
+<p>As the <em>Size</em> select <strong>t1.micro</strong> and click on <strong>Add instance</strong> (See Figure 17).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks14.png" title="Figure 17: Add an instance - Step 2 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks14-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks14-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks14-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks14.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks14-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks14-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks14-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks14.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks14.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Add an instance - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 17: Add an instance - Step 2
+</figcaption>
+
+</figure>
+
+<p>Now for the <em>MySQL Server</em> layer select <strong>Add an instance</strong> (See Figure 18).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks15.png" title="Figure 18: Add an instance - Step 3 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks15-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks15-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks15-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks15.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks15-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks15-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks15-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks15.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks15.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Add an instance - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 18: Add an instance - Step 3
+</figcaption>
+
+</figure>
+
+<p>As the <em>Size</em> select <strong>t1.micro</strong> and select the same or a different <em>Availability Zone</em> depending on your preference. Click on <strong>Add instance</strong> (See Figure 19).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks16.png" title="Figure 19: Add an instance - Step 4 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks16-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks16-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks16-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks16.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks16-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks16-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks16-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks16.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks16.png" class="blur-up lazyautosizes lazyload" alt="Figure 19: Add an instance - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 19: Add an instance - Step 4
+</figcaption>
+
+</figure>
+
+<p>Notice that each layer now has one EC2 instance associated. At this point both instances are still in the <em>Stopped</em> state (See Figure 20). Before we can power them on, we need to define the actual application that is being run.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks17.png" title="Figure 20: Successfully created instances " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks17-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks17-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks17-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks17.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks17-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks17-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks17-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks17.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks17.png" class="blur-up lazyautosizes lazyload" alt="Figure 20: Successfully created instances ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 20: Successfully created instances
+</figcaption>
+
+</figure>
+
+<h2 id="add-an-app">Add an App</h2>
+
+<p>Next we need to tell AWS OpsWorks which application to run on our stack. This is done by pointing to a source code repository or file bundle. Supported repositories include Github and Subversion. The bundles can be a simple Zip file via a HTTP or HTTPS URL or a ZIP file in a S3 bucket.</p>
+
+<p>Navigate to the <em>Apps</em> tab and click on <strong>Add an app</strong> (See Figure 21).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks18.png" title="Figure 21: Add an App - Step 1 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks18-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks18-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks18-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks18.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks18-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks18-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks18-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks18.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks18.png" class="blur-up lazyautosizes lazyload" alt="Figure 21: Add an App - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 21: Add an App - Step 1
+</figcaption>
+
+</figure>
+
+<p>For the case of installing a fresh blank WordPress install you can therefore choose the <em>Repository type</em> to be <strong>Http archive</strong> and use for the <em>Repository URL</em> the URL <strong>http://wordpress.org/latest.zip</strong> (See Figure 22). This will allow you to install the latest version of WordPress.</p>
+
+<p>In case you want to restore a backup from the WordPress Backup Plugin BackWPup, you can use Amazon S3 to store the backup files. This will allow you to directly specify this backup file in S3 here. When using BackWPup include the MySQL database as a Zip file inside the Backup file. The Chef recipe for WordPress mentioned above will then automatically import the database dump file back into MySQL.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks19.png" title="Figure 22: Add an App - Step 2 " class="image-popup">
+<picture>
+  <source width="504" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks19-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks19-384.webp 384w, 
+
+ /content/uploads/2014/02/Opsworks19.webp 504w" sizes="504px"></source>
+  <source width="504" data-srcset="
+
+    /content/resized/2014/02/Opsworks19-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks19-384.png 384w, 
+
+ /content/uploads/2014/02/Opsworks19.png 504w" sizes="504px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks19.png" class="blur-up lazyautosizes lazyload" alt="Figure 22: Add an App - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 22: Add an App - Step 2
+</figcaption>
+
+</figure>
+
+<p>This completes the configuration of the app, but also the layers and stack itself. Your new WordPress application is now ready for deployment.</p>
+
+<h2 id="deploy-your-stack">Deploy your stack</h2>
+
+<p>So far we have not created any EC2 instance yet, but only defined Meta data in AWS OpsWorks. In order to actually use the WordPress application, we need to deploy it by starting the layer instances.</p>
+
+<p>Return to the <em>Instances</em> tab and click on <strong>Start All Instances</strong> (See Figure 23). This will create, boot and configure all instances in all layers. It can take up to 10 minutes for the operation to complete. Therefore please be patient.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks20.png" title="Figure 23: Start all instances " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks20-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks20-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks20-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks20.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks20-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks20-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks20-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks20.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks20.png" class="blur-up lazyautosizes lazyload" alt="Figure 23: Start all instances ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 23: Start all instances
+</figcaption>
+
+</figure>
+
+<p>Once the instances are fully deployed, you’ll see the instances to move from the <em>stopped</em> state to the <em>online</em> state. Look up the IP address for the instance in the PHP App Server layer. This IP address should be marked with <em>EIP</em> for Elastic IP (See Figure 24). This is the IP address under which your WordPress installation will be available.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks21.png" title="Figure 24: All instances are active " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks21-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks21-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks21-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks21.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks21-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks21-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks21-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks21.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks21.png" class="blur-up lazyautosizes lazyload" alt="Figure 24: All instances are active ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 24: All instances are active
+</figcaption>
+
+</figure>
+
+<p>Connect with your favorite Web Browser to the IP address that you retrieved in the previous step. Or create a DNS name and connect to the DNS name. You will see your WordPress ready to be used (See Figure 25).</p>
+
+<p>In case of a fresh blank install you start with the basic configuration of the site via the WordPress web interface. If on the other side you re-created the site from a backup, you should find the site running as it was during the backup run.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks22.png" title="Figure 25: Fully installed WordPress site " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks22-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks22-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks22-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks22.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks22-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks22-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks22-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks22.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks22.png" class="blur-up lazyautosizes lazyload" alt="Figure 25: Fully installed WordPress site ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 25: Fully installed WordPress site
+</figcaption>
+
+</figure>
+
+<p>This completes this guide on using AWS OpsWorks to deploy a fresh blank WordPress install or to recover as WordPress site as part of a Dev/Test or Disaster Recovery (DR) use case.</p>
+
+<h1 id="shutdown-and-redeploy">Shutdown and Redeploy</h1>
+
+<p>You can shutdown instances and restart them if you want to take a break in your work and keep working where you left off.</p>
+
+<p>But in the case you want to keep the stack for disaster recovery purposes, you want the instances to be rebuild with the latest version of your application and database during the recovery. Therefore you will want to discard the EC2 instances while keeping the Elastic IP address.</p>
+
+<p>Therefore first power down all layer instances. Then delete the PHP App Server instance. Make sure to untick the box for <em>Delete Instance’s Elastic IP</em> for the PHP App Server instance (See Figure 26). This way you can reuse the Elastic IP address when you spin up new instances again.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks23.png" title="Figure 26: Keep the Elastic IP when deleting a PHP App Server instance " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks23-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks23-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks23-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks23.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks23-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks23-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks23-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks23.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks23.png" class="blur-up lazyautosizes lazyload" alt="Figure 26: Keep the Elastic IP when deleting a PHP App Server instance ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 26: Keep the Elastic IP when deleting a PHP App Server instance
+</figcaption>
+
+</figure>
+
+<p>Next delete the MySQL instance. Here select <strong>Delete instance’s EBS volumes</strong> to delete the current database content (See Figure 27). The database content will be restored as part of the restore process from the backup in the S3 bucket.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/02/Opsworks24.png" title="Figure 27: Delete the instances EBS volume for the MySQL server " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/02/Opsworks24-320.webp 320w, 
+
+    
+    /content/resized/2014/02/Opsworks24-384.webp 384w, 
+
+    
+    /content/resized/2014/02/Opsworks24-512.webp 512w, 
+
+ /content/uploads/2014/02/Opsworks24.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/02/Opsworks24-320.png 320w, 
+
+    /content/resized/2014/02/Opsworks24-384.png 384w, 
+
+    /content/resized/2014/02/Opsworks24-512.png 512w, 
+
+ /content/uploads/2014/02/Opsworks24.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/02/Opsworks24.png" class="blur-up lazyautosizes lazyload" alt="Figure 27: Delete the instances EBS volume for the MySQL server ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 27: Delete the instances EBS volume for the MySQL server
+</figcaption>
+
+</figure>
+
+<p>Now recreate the instances as described above.</p>
+
+<h1 id="references">References</h1>
+
+<p>If you want to find out more about AWS OpsWorks, have a look at the AWS re:Invent 2013 presentation <a href="http://www.slideshare.net/AmazonWebServices/zero-to-sixty-aws-opsworks-dmg202-aws-reinvent-2013" target="_blank" rel="noopener noreferrer">Zero to Sixty: AWS OpsWorks (DMG202)</a> or the excellent <a href="https://aws.amazon.com/documentation/opsworks/" target="_blank" rel="noopener noreferrer">AWS OpsWorks Documentation</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-02-14T00:20:48-08:00">February 14, 2014</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Deploy+WordPress+with+AWS+OpsWorks%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F&amp;title=Deploy+WordPress+with+AWS+OpsWorks" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2014/02/08/openstack-vsphere-nsx-part-6/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes
+">Previous</a>
+    
+    
+      <a href="/2014/03/11/architecture-design-vsphere-ipv6/" class="pagination--pager" title="Architecture Design: vSphere with IPv6
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

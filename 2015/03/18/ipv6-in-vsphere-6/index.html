@@ -1,0 +1,1527 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>IPv6 in vSphere 6 - Edge Cloud</title>
+<meta name="description" content="Note: Last updated on May 1st, 2015">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="IPv6 in vSphere 6">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/03/18/ipv6-in-vsphere-6/">
+
+
+  <meta property="og:description" content="Note: Last updated on May 1st, 2015">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="IPv6 in vSphere 6">
+  <meta name="twitter:description" content="Note: Last updated on May 1st, 2015">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/03/18/ipv6-in-vsphere-6/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-03-18T10:13:53-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/03/18/ipv6-in-vsphere-6/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="IPv6 in vSphere 6">
+    <meta itemprop="description" content="Note: Last updated on May 1st, 2015">
+    <meta itemprop="datePublished" content="March 18, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">IPv6 in vSphere 6
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#use-cases">Use Cases</a>
+    <ul>
+      <li>
+<a href="#tenant-use-case">Tenant Use Case</a>
+        <ul>
+          <li><a href="#vsphere">vSphere</a></li>
+          <li><a href="#vcns--nsx-v">vCNS / NSX-v</a></li>
+        </ul>
+      </li>
+      <li>
+<a href="#managemenet-use-case">Managemenet Use Case</a>
+        <ul>
+          <li><a href="#vsphere-1">vSphere</a></li>
+          <li><a href="#vcns--nsx-v-1">vCNS / NSX-v</a></li>
+        </ul>
+      </li>
+      <li>
+<a href="#related-vmware-products">Related VMware products</a>
+        <ul>
+          <li><a href="#horizon-view">Horizon View</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p class="notice--info"><strong>Note:</strong> Last updated on May 1st, 2015</p>
+
+<p>With the <a href="https://www.vmware.com/support/vsphere6/doc/vsphere-esxi-vcenter-server-60-release-notes.html" target="_blank" rel="noopener noreferrer">release of vSphere 6</a>, the IPv6 capabilities of vSphere have greatly improved. In this post I want to provide an overview of these new capabilities for vSphere as well as NSX for vSphere (NSX-v). Together these two products are now able to form a decent virtual infrastructure layer, supporting many capabilities in IPv6.</p>
+
+<p>This IPv6-enabled virtual infrastructure in return can be the foundation for Horizon View, which also supports IPv6 since version 6.1.</p>
+
+<h1 id="use-cases">Use Cases</h1>
+
+<p>The overview will be grouped by use case, product and then by function. The two use cases for IPv6 are:</p>
+
+<ul>
+  <li>
+<strong>Tenant Use Case:</strong> Ultimate Goal: Provide IPv4/IPv6 connectivity to tenant workloads</li>
+  <li>
+<strong>Management Use Case:</strong> Ultimate Goal: Manage entire vCloud backend via IPv6-only</li>
+</ul>
+
+<p>For each use case this article lists what capabilities and features supported IPv6 in vSphere 5.1, vSphere 5.5, vSphere 6.0, vCNS 5.5, NSX-v 6.0 and NSX-v 6.1.</p>
+
+<p class="notice--info"><strong>Note:</strong> Only NSX-v 6.1.3, <a href="http://www.vmware.com/resources/compatibility/sim/interop_matrix.php" target="_blank" rel="noopener noreferrer">supports</a> vSphere 6.0.</p>
+
+<p>Let’s have a look at these two use cases in more detail:</p>
+
+<h2 id="tenant-use-case">Tenant Use Case</h2>
+
+<p>Ultimate Goal: Provide IPv4/IPv6 connectivity to tenant workloads (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/03/IPv6-Use-Cases-Tenant.png" title="Figure 1: IPv6 Tenant Use Case " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/03/IPv6-Use-Cases-Tenant-320.webp 320w, 
+
+    
+    /content/resized/2015/03/IPv6-Use-Cases-Tenant-384.webp 384w, 
+
+    
+    /content/resized/2015/03/IPv6-Use-Cases-Tenant-512.webp 512w, 
+
+ /content/uploads/2015/03/IPv6-Use-Cases-Tenant.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/03/IPv6-Use-Cases-Tenant-320.png 320w, 
+
+    /content/resized/2015/03/IPv6-Use-Cases-Tenant-384.png 384w, 
+
+    /content/resized/2015/03/IPv6-Use-Cases-Tenant-512.png 512w, 
+
+ /content/uploads/2015/03/IPv6-Use-Cases-Tenant.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/03/IPv6-Use-Cases-Tenant.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: IPv6 Tenant Use Case ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: IPv6 Tenant Use Case
+</figcaption>
+
+</figure>
+
+<p>The tenant use case is geared towards providing full IPv4/IPv6 network connectivity to workloads running on top of a virtual infrastructure. This includes the tenant path of network infrastructure elements, but does not include the management of non-end-user exposed component.</p>
+
+<p>This use case includes the following requirements:</p>
+
+<ul>
+  <li>Support for Workloads
+    <ul>
+      <li>Guest customization (Configure IP settings from outside VM)</li>
+      <li>Virtual Network Access (vNIC): IPv6 Offload, App Firewall</li>
+    </ul>
+  </li>
+  <li>Support for Workload Management/Configuration
+    <ul>
+      <li>“Awareness” of IPv6: Ability to manage IPv6-capable configuration items (interfaces, pools, route tables, ACLs, …)</li>
+      <li>Support for network devices (switch, router, security device, load balancer). Applies to vSS, vDS and vShield/NSX Edge (Multiple profiles).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="vsphere">vSphere</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product/Function</th>
+      <th>vSphere 5.1</th>
+      <th>vSphere 5.5</th>
+      <th>vSphere 6.0</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>General Operation</td>
+      <td><em>Yes</em></td>
+      <td><em>Yes</em></td>
+      <td><em>Yes</em></td>
+      <td>Functionality has to be provided by Guest OS</td>
+    </tr>
+    <tr>
+      <td><strong>Guest OS</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>TCP Segmentation Offload (TSO) over IPv6</td>
+      <td><em>Yes</em></td>
+      <td><em>Yes</em></td>
+      <td><em>Yes</em></td>
+      <td>Only supported by <a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=1001805" target="_blank" rel="noopener noreferrer">VMXNET3 vNIC</a>. Not supported by <a href="http://kb.vmware.com/kb/1009548" target="_blank" rel="noopener noreferrer">E1000 vNIC</a>.</td>
+    </tr>
+    <tr>
+      <td>Guest Customization (Sysprep)</td>
+      <td>No</td>
+      <td>No</td>
+      <td><em>Yes</em></td>
+      <td>No support to join Active Directory via IPv6 in vSphere 6.0. <a href="http://kb.vmware.com/kb/2105648" target="_blank" rel="noopener noreferrer">Certain limitations</a> apply.</td>
+    </tr>
+    <tr>
+      <td><strong>Virtual Switch (vSS/vDS)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Multicast support</td>
+      <td><em>Yes</em></td>
+      <td><em>Yes</em></td>
+      <td><em>Yes</em></td>
+      <td>
+<a href="https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.networking.doc/GUID-97724211-5167-428F-A217-871963A7DFF7.html" target="_blank" rel="noopener noreferrer">Snooping modes supported</a>: IGMPv1, IGMPv2, IGMPv3 for IPv4, MLDv1 and MLDv2 for IPv6 supported.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="vcns--nsx-v">vCNS / NSX-v</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product/Function</th>
+      <th>vCNS 5.5</th>
+      <th>NSX-v 6.0/6.1</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Guest VM Addressing</td>
+      <td><em>Yes</em></td>
+      <td><em>Yes</em></td>
+      <td>VXLAN encap packets (VXLAN Encapsulated Inner Header) are capable of carrying IPv6 payload. If IP hashing is configured, ESXi can base decisions on IPv4 or IPv6 packets.</td>
+    </tr>
+    <tr>
+      <td><strong>vCNS / NSX Edge</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Edge Interface IP Address</td>
+      <td>No</td>
+      <td>Partially</td>
+      <td>Only support for static IPv6. No support for DHCPv6 or SLAAC.</td>
+    </tr>
+    <tr>
+      <td>DNS Resolver</td>
+      <td> </td>
+      <td>Yes</td>
+      <td>IPv4 and IPv6 Listener. Supports AAAA records.</td>
+    </tr>
+    <tr>
+      <td>Router Announcements (RA) for SLAAC</td>
+      <td>No</td>
+      <td>No</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>DHCP server / relay</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Supports IPv4 only</td>
+    </tr>
+    <tr>
+      <td>Static Routing</td>
+      <td>No</td>
+      <td><em>Yes</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Dynamic Routing (OSPF, ISIS, BGP)</td>
+      <td> </td>
+      <td>No</td>
+      <td>No dynamic routing with IPv6</td>
+    </tr>
+    <tr>
+      <td>Firewall</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Load Balancer</td>
+      <td>No</td>
+      <td><em>Yes</em></td>
+      <td>IPv4 and IPv6 VIP. Transparent Mode: IPv4 VIP with IPv4 Pool, IPv4 VIP with IPv6 Pool.Proxy Mode: IPv4 VIP with IPv4 Pool, IPv6 VIP with IPv6 Pool, IPv6 VIP with IPv4 Pool (L7 only), IPv4 VIP with IPv6 Pool (L7 only)</td>
+    </tr>
+    <tr>
+      <td>NAT</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No support for NAT64 or NAT66</td>
+    </tr>
+    <tr>
+      <td>IPSec</td>
+      <td>No</td>
+      <td><em>Yes</em></td>
+      <td>IPv4, IPv6 and Hybrid. IPv6 Peers with IPv6 Internal Subnet. IPv6 Peers with IPv4 internal Subnet.</td>
+    </tr>
+    <tr>
+      <td>SSL VPN</td>
+      <td> </td>
+      <td>Partially</td>
+      <td>IPv4, IPv6 Listener. IPv6 Listener Address. IPv6 Listener with IPv4 private subnet.</td>
+    </tr>
+    <tr>
+      <td>L2 VPN</td>
+      <td> </td>
+      <td>Partially</td>
+      <td>IPv4, IPv6 Listener. Outer packet can be IPv4 and IPv6. Inner packet can only be IPv4.</td>
+    </tr>
+    <tr>
+      <td><strong>NSX Virtual Distributed Router (VDR)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Static Routing</td>
+      <td> </td>
+      <td>No</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Dynamic Routing (OSPF, ISIS, BGP)</td>
+      <td> </td>
+      <td>No</td>
+      <td>No dynamic routing with IPv6.</td>
+    </tr>
+    <tr>
+      <td>Distributed Firewall</td>
+      <td> </td>
+      <td><em>Yes</em></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="managemenet-use-case">Managemenet Use Case</h2>
+
+<p>Ultimate Goal: Manage entire vCloud backend via IPv6-only (See Figure 2).</p>
+
+<div id="attachment_1568" style="width: 610px" class="wp-caption aligncenter">
+  <img class="size-full wp-image-1568" src="/content/uploads/2015/03/IPv6-Use-Cases-Mgmt.png" alt="Figure 2: IPv6 Management Use Case" width="600" height="312" srcset="/content/uploads/2015/03/IPv6-Use-Cases-Mgmt.png 600w, /content/uploads/2015/03/IPv6-Use-Cases-Mgmt-360x187.png 360w" sizes="(max-width: 600px) 100vw, 600px">
+
+  <p class="wp-caption-text">
+    Figure 2: IPv6 Management Use Case
+  </p>
+</div>
+
+<p>The management use case assumes that the operator of the virtual infrastructure has exhausted its IPv4 address space. The goal is therefore to move all management traffic (all traffic not directly visible to customers or tenants) to IPv6-only, potentially with the interim step of IPv4/IPv6 Dualstack. Therefore all non-tenant traffic of the virtual infrastructure with external systems, but also between components residing on different devices needs to be IPv6-only. This use case includes the following requirements:</p>
+
+<ul>
+  <li>Operating System (OS) support
+    <ul>
+      <li>Fulfill device requirements for hosts with the goal for an OS: Ability to offer IPv4/IPv6 transport services to applications</li>
+    </ul>
+  </li>
+  <li>Application support
+    <ul>
+      <li>Server applications vs. client applications: Accept vs. initiate IPv6 communication.</li>
+      <li>Be able to communicate over IPv4-only and IPv6-only networks.</li>
+      <li>Network parameters in local or remote server settings, need to support configuration of IPv6 parameters</li>
+      <li>All features offered over IPv4 must be available over IPv6 without any noticeable difference (usability, performance), unless providing explicit benefit to the user.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="vsphere-1">vSphere</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product/Function</th>
+      <th>vSphere 5.1</th>
+      <th>vSphere 5.5</th>
+      <th>vSphere 6.0</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>vCenter Server</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vCenter on Windows</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>For deploying a single instance standalone. To configure vCenter Server with an external database, provide the FQDN of the target database server.</td>
+    </tr>
+    <tr>
+      <td>vCenter Linux appliance (vCVA/CloudVM)</td>
+      <td>No support, but may work</td>
+      <td>No support, but may work</td>
+      <td><strong>Yes</strong></td>
+      <td>For deploying a single instance standalone. vCenter Server Appliance deployment wizard requires a DNS entry for the ESXi host and does not support a literal IPv6 address. Connection of the vCenter Server Appliance to Active Directory is not supported over IPv6. Use Active Directory over LDAP as an identity source in vCenter Single Sign-On instead.</td>
+    </tr>
+    <tr>
+      <td>PSC / SSO, Inventory Services</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>For deploying vC across multiple hosts. Includes STS (secure token service), Lotus (directory service / key value store), IDM (identity manager), VMCA (certification service). To configure the Platform Services Controller with an external database, provide the FQDN of the target database server.</td>
+    </tr>
+    <tr>
+      <td>Common Logging Infrastructure</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vCenter Converter</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>VMotion</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>VMotion incorrectly prefers transport via IPv4 if both IPv4 and IPv6 transport (aka Dualstack) are available</td>
+    </tr>
+    <tr>
+      <td>Auto Deploy / PXE boot / UEFI boot</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Partially</td>
+      <td>There is currently no definition of IPv6 support in the PXE hardware agents. <a href="https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface" target="_blank" rel="noopener noreferrer">UEFI</a> will allow remote boot via IPv6. Or PXE boot the ESXi host over IPv4 and configure the host for IPv6 by using Host Profiles.</td>
+    </tr>
+    <tr>
+      <td>Host Profiles</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vAPI</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vCLI</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vSphere Management SDK</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Includes: Web Services SDK, SSO Client SDK, EAM SDK, SMS SDK, and SPBM SDK.</td>
+    </tr>
+    <tr>
+      <td>vCloud Suite SDK</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Includes: SDK for Java, .NET, Python, Ruby, and Perl.</td>
+    </tr>
+    <tr>
+      <td>vSphere Authentication Proxy</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>The vSphere Authentication Proxy service binds to an IPv4 address for communication with vCenter Server, and <a href="http://pubs.vmware.com/vsphere-50/index.jsp?topic=%2Fcom.vmware.vsphere.install.doc_50%2FGUID-EA920335-2608-4127-9B57-DB3809BA4BB9.html" target="_blank" rel="noopener noreferrer">does not support IPv6</a>.</td>
+    </tr>
+    <tr>
+      <td><strong>Other Management</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vSphere Management Assistant (vMA)</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vSphere Update Manager (VUM)</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vCenter Client</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Windows version</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>Partially</td>
+      <td>Use of the vSphere Client to enable IPv6 on vSphere features is not supported. Use the vSphere Web Client to enable IPv6 for vSphere features instead.</td>
+    </tr>
+    <tr>
+      <td>Web Client</td>
+      <td>No support, but may work</td>
+      <td>No support, but may work</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>ESXi</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Transport for Management Communication</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>Certified via <a href="https://www.iol.unh.edu/registry/usgv6?company_name=VMware%2C%20Inc.#eqplist" target="_blank" rel="noopener noreferrer">USGv6 certification</a>
+</td>
+    </tr>
+    <tr>
+      <td>ESXi Firewall</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Netdump</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Syslog Agent</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>Syslog collector / server <a href="https://www.vmware.com/support/developer/PowerCLI/PowerCLI41/html/Set-VMHostSysLogServer.html" target="_blank" rel="noopener noreferrer">can be configured</a> via IPv4 address, IPv6 address or DNS name.</td>
+    </tr>
+    <tr>
+      <td>Using Active Directory to authenticate Users</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>The vSphere Authentication Proxy service binds to an IPv4 address for communication with vCenter Server, and <a href="http://pubs.vmware.com/vsphere-50/index.jsp?topic=%2Fcom.vmware.vsphere.install.doc_50%2FGUID-EA920335-2608-4127-9B57-DB3809BA4BB9.html" target="_blank" rel="noopener noreferrer">does not support IPv6</a>.</td>
+    </tr>
+    <tr>
+      <td>Network Time Protocol (NTP)</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>You can use the name or IP address to specify the NTP server (<a href="http://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.vcli.ref.doc%2Fvicfg-ntp.html" target="_blank" rel="noopener noreferrer">IPv6 address valid for vSphere 4.0 and later</a>)</td>
+    </tr>
+    <tr>
+      <td>SNMP</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Virtual Distributed Switch (vDS)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Link Layer Discovery Protocol (LLDP) / Cisco Discovery Protocol (CDP)</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Internet Protocol Flow Information Export (IPFIX)</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>L3-SPAN</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Storage</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>iSCSI (HW and SW initiator)</td>
+      <td>No support, but may work</td>
+      <td>No support, but may work</td>
+      <td><strong>Yes</strong></td>
+      <td>While SW iSCSI initiator work in vSphere 5.1 and 5.5, they are not supported. The <a href="http://pubs.vmware.com/vsphere-51/topic/com.vmware.ICbase/PDF/vsphere-esxi-vcenter-server-51-storage-guide.pdf" target="_blank" rel="noopener noreferrer">vSphere 5.1 Storage Guide</a> and <a href="http://pubs.vmware.com/vsphere-55/topic/com.vmware.ICbase/PDF/vsphere-esxi-vcenter-server-55-storage-guide.pdf" target="_blank" rel="noopener noreferrer">vSphere 5.5 Storage Guide</a> explicitly call iSCSI with IPv6 unsupported. Previous versions (e.g. 4.1 had “Experimental support”). vSphere 6.0 does support iSCSI.</td>
+    </tr>
+    <tr>
+      <td>NFS (HW and SW adapters)</td>
+      <td>No support, but may work</td>
+      <td>No support, but may work</td>
+      <td>Partially</td>
+      <td>While NFS works in vSphere 5.1 and 5.5, they are not supported. The <a href="http://pubs.vmware.com/vsphere-51/topic/com.vmware.ICbase/PDF/vsphere-esxi-vcenter-server-51-storage-guide.pdf" target="_blank" rel="noopener noreferrer">vSphere 5.1 Storage Guide</a> and <a href="http://pubs.vmware.com/vsphere-55/topic/com.vmware.ICbase/PDF/vsphere-esxi-vcenter-server-55-storage-guide.pdf" target="_blank" rel="noopener noreferrer">vSphere 5.5 Storage Guide</a> explicitly call NFS over L3 with IPv6 unsupported, but also make no positive support statement for NFS over L2, therefore making it not supported. Previous versions (e.g. 4.1 had “Experimental support”). In vSphere 6.0 NFS 4.1 storage with Kerberos auth is not supported; use NFS 4.1 with AUTH_SYS instead.</td>
+    </tr>
+    <tr>
+      <td>vStorage APIs for Array Integration (VAAI)</td>
+      <td>No support, but may work</td>
+      <td>No support, but may work</td>
+      <td><strong>Yes</strong></td>
+      <td>Could work in vSphere 5.1 and 5.5, if the vendor provides an IPv6-capable VAAI plugin. NetApp provides an <a href="https://library.netapp.com/ecmdocs/ECMP1368924/html/GUID-33CA873C-D4FC-4D96-AFFA-6DFD95337032.html" target="_blank" rel="noopener noreferrer">IPv6 capable VAAI plugin</a>. This combination would not be supported by VMware in vSphere 5.1 or vSphere 5.5. It is supported in vSphere 6.0 for both NFS and iSCSI.</td>
+    </tr>
+    <tr>
+      <td>APIs for Storage Awareness (VASA) / Virtual Volumes (VVols)</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Virtual Storage Area Network (vSAN)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Transport between storage nodes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Virtual SAN does not support <a href="https://docs.vmware.com/en/VMware-vSphere/5.5/com.vmware.vsphere.storage.doc/GUID-8408319D-CA53-4241-A3E4-70057F70030F.html" target="_blank" rel="noopener noreferrer">IPv6 as transport mechanism</a> between nodes.</td>
+    </tr>
+    <tr>
+      <td><strong>Availability</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Fault Tolerance (FT)</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>High Availability (HA)</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>vSphere HA supports both IPv4 and IPv6. A cluster that mixes the use of both of these protocol versions, however, is more likely to <a href="http://pubs.vmware.com/vsphere-50/index.jsp?topic=%2Fcom.vmware.vsphere.avail.doc_50%2FGUID-BA85FEC4-A37C-45BA-938D-37B309010D93.html" target="_blank" rel="noopener noreferrer">result in a network partition</a>.</td>
+    </tr>
+    <tr>
+      <td>Symmetric multiprocessing fault tolerance (SMP-FT)</td>
+      <td> </td>
+      <td> </td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>vStorage APIs for Data Protection (VADP)</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Dynamic Power Management (DPM)</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Partially</td>
+      <td>DPM on IPv6 will only support Wake-on-LAN</td>
+    </tr>
+    <tr>
+      <td><strong>Orchestrator (vCO)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Transport for All Communication</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>All vCenter Orchestrator components, including plug-ins built by VMware, have been <a href="https://www.vmware.com/support/orchestrator/doc/vcenter-orchestrator-51-release-notes.html" target="_blank" rel="noopener noreferrer">tested and certified to run on IPv6 networks</a>.</td>
+    </tr>
+    <tr>
+      <td><strong>Site Recovery Manager (SRM)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SRM to vCenter communication</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>Site Recovery Manager <a href="http://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/techpaper/whats-new-vmware-vcenter-site-recovery-manager-50-technical-white-paper.pdf" target="_blank" rel="noopener noreferrer">supports IPv6 for all network links</a>
+</td>
+    </tr>
+    <tr>
+      <td>vSphere Replication</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td>Site Recovery Manager <a href="http://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/techpaper/whats-new-vmware-vcenter-site-recovery-manager-50-technical-white-paper.pdf" target="_blank" rel="noopener noreferrer">supports IPv6 for all network links</a>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="vcns--nsx-v-1">vCNS / NSX-v</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product/Function</th>
+      <th>vCNS 5.5</th>
+      <th>NSX-v 6.0/6.1</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>VXLAN Transport (Outer Header of a VXLAN Encapsulated Packet)</td>
+      <td>No</td>
+      <td>No</td>
+      <td>The VXLAN specification includes IPv6 for the outer header since <a href="https://tools.ietf.org/html/draft-mahalingam-dutt-dcops-vxlan-03" target="_blank" rel="noopener noreferrer">revision 2 from February 22, 2013</a>. The VMware implementation does not address IPv6.</td>
+    </tr>
+    <tr>
+      <td>vCNS / NSX Manager IP Address</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Only support for static IPv6. No DHCPv6 / Autoconf.</td>
+    </tr>
+    <tr>
+      <td>vCNS / NSX Edge Management IP Address</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Only support for static IPv6. No DHCPv6 / Autoconf.</td>
+    </tr>
+    <tr>
+      <td>vCNS / NSX Syslog</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Export logs to both IPv4 and IPv6 Syslog Servers.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="related-vmware-products">Related VMware products</h2>
+
+<p>The only other VMware product line that supports IPv6 is Horizon View with <a href="https://www.vmware.com/support/horizon-view/doc/horizon-61-view-release-notes.html" target="_blank" rel="noopener noreferrer">version 6.1</a>.</p>
+
+<h3 id="horizon-view">Horizon View</h3>
+
+<p>With Horizon View the machine/OS can be configured for IPv4-only, IPv6-only or for IPv4/IPv6 dual stack. But Horizon components will not dynamically select IPv4 or IPv6 connections depending on the availability of those protocols on the entities that are involved in making the connection.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product/Function</th>
+      <th>Horizon 5.3</th>
+      <th>Horizon 6.0</th>
+      <th>Horizon 6.1</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>VMware Horizon View Components</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>View Connection Server</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Support for PCoIP and RDP client connections.</td>
+    </tr>
+    <tr>
+      <td>View Security Server</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Support for PCoIP and RDP client connections.</td>
+    </tr>
+    <tr>
+      <td>View Agent</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Can communicate with other View components over IPv6.</td>
+    </tr>
+    <tr>
+      <td>View Client</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Partial</td>
+      <td>Only the Windows platforms is supported. Mac, iOS, and Android are not supported.</td>
+    </tr>
+    <tr>
+      <td>View Administrator</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Web Service usable over IPv6 connection. Can manage IPv6-enabled desktops and configure components for IPv6.</td>
+    </tr>
+    <tr>
+      <td>View Composer</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Allow View to rapidly deploy multiple linked-clone desktops from a single centralized base image, over IPv6.</td>
+    </tr>
+    <tr>
+      <td><strong>VMware Horizon View Integration Interfaces</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Event database</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Interact with MS SQL or Oracle database over IPv6.</td>
+    </tr>
+    <tr>
+      <td>View PowerCLI</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Use of IPv6 in PowerCli scripts not supported. Interact with View from PowerCLI over IPv6 not supported.</td>
+    </tr>
+    <tr>
+      <td>Lightweight Directory Access Protocol (LDAP)</td>
+      <td>No</td>
+      <td>No</td>
+      <td><strong>Yes</strong></td>
+      <td>Interact with LDAP server over IPv6.</td>
+    </tr>
+    <tr>
+      <td>Microsoft System Center Operations Manager (SCOM)</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Interact with SCOM server over IPv6 not supported.</td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-03-18T10:13:53-07:00">March 18, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=IPv6+in+vSphere+6%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F03%2F18%2Fipv6-in-vsphere-6%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F03%2F18%2Fipv6-in-vsphere-6%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F03%2F18%2Fipv6-in-vsphere-6%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F03%2F18%2Fipv6-in-vsphere-6%2F&amp;title=IPv6+in+vSphere+6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2015/03/10/sddc-architecture-core-pod/" class="pagination--pager" title="SDDC Architecture – Core and POD design
+">Previous</a>
+    
+    
+      <a href="/2015/05/26/vmware-vrealize-automation-workloads-with-ipv6/" class="pagination--pager" title="VMware vRealize Automation workloads with IPv6
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

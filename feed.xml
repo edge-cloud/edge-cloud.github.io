@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">Edge Cloud</title>
+  <subtitle type="html">On the edge of cloud computing</subtitle>
+  <updated>2020-09-10T17:32:27-07:00</updated>
+  <id>https://www.edge-cloud.net/feed.xml</id>
+  <author>
+    <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="https://www.edge-cloud.net/feed.xml" />
+  <link rel="alternate" type="text/html" href="https://www.edge-cloud.net" />
+
+  
+    <entry>
+      <title>Multicast with AWS Transit Gateway</title>
+      <id>https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/</id>
+      <updated>2020-05-01T00:00:00-07:00</updated>
+      <published>2020-05-01T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/" />
+      <summary type="html">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)</summary>
+      <content type="html">At the beginning of December 2019, AWS released Multicast support within the AWS Transit Gateway. This marked the beginning of being able to use applications that require support for IP Multicast within AWS. The following article will give you a brief overview of how to use IP Multicast with the AWS Transit Gateway and especially how to validate that your setup is working correctly. Multicast Let’s have a look at the basics of IP Multicasting...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>Drawing monitor for network diagrams</title>
+      <id>https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/</id>
+      <updated>2020-04-19T00:00:00-07:00</updated>
+      <published>2020-04-19T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/" />
+      <summary type="html">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams</summary>
+      <content type="html">As a Senior Solutions Architect Specialist for Networking at AWS, I spent a lot of time in online meetings with customers, helping them design networks or understand AWS networking better. Part of these meetings usually involves whiteboarding network diagrams. While visualizing ideas or concepts is something very common and straight forward on a physical whiteboard, it is not trivial in an online meeting. As I often get asked about my setup during or after calls,...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>Enabling connectivity between on-premises locations connected to AWS through Direct Connect</title>
+      <id>https://www.edge-cloud.net/2019/12/27/aws-dx-connect-on-premises/</id>
+      <updated>2019-12-27T00:00:00-08:00</updated>
+      <published>2019-12-27T00:00:00-08:00</published>
+      <link href="https://www.edge-cloud.net/2019/12/27/aws-dx-connect-on-premises/" />
+      <summary type="html">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway</summary>
+      <content type="html">This post covers the caveats of data flow between on-premises locations that are each connected to AWS via AWS Direct Connect. In case you have multiple on-premise locations connected to AWS via Direct Connect, enabling the data flow between these locations is not always trivial. Therefore this blog post highlights some of the pitfalls and outlines possible solutions. Introduction This blog post assumes the fundamental design as depicted in Figure 1. One or more on-premises...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>Block access from certain countries with Route 53 Geolocation</title>
+      <id>https://www.edge-cloud.net/2019/12/09/block-countries-with-route53/</id>
+      <updated>2019-12-09T00:00:00-08:00</updated>
+      <published>2019-12-09T00:00:00-08:00</published>
+      <link href="https://www.edge-cloud.net/2019/12/09/block-countries-with-route53/" />
+      <summary type="html">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.</summary>
+      <content type="html">This article walks you through using Amazon Route 53 Geolocation Routing, in order to block access to your services from certain countries. In addition RIPE Atlas is used in a subsequent step to validate the setup. Motivation There are multiple reasons why you might want to block access to your website or API from certain countries. If you are a US based company, you are required to comply with US regulations regarding sanctions against countries...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF</title>
+      <id>https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/</id>
+      <updated>2019-09-10T00:00:00-07:00</updated>
+      <published>2019-09-10T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/" />
+      <summary type="html">Troubleshooting a BGP neighbor issue of &quot;active open failed - tcb is not available&quot; on a Megaport Hosted VIF due to unset BGP MD5 Auth key</summary>
+      <content type="html">Here is a quick look at an issue with a BGP session between a customer router (customer-premises equipment; CPE) and an AWS Direct Connect peer. Problem While it was possible to ping the AWS Direct Connect peer interface from the customer peer interface the BGP remained in the Idle state. Local and remote ASNs matched up and IP addresses also matched up. Turning on “debug ip bgp” gave the following insight, which solely showed that...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>AWS Direct Connect Gateway Deep Dive</title>
+      <id>https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/</id>
+      <updated>2019-09-06T00:00:00-07:00</updated>
+      <published>2019-09-06T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/" />
+      <summary type="html">A deep dive look into the AWS Direct Connect Gateway</summary>
+      <content type="html">In November 2017 AWS released AWS Direct Connect Gateway, which is probably one of the biggest innovations within the AWS Direct Connect product in recent years. At the same time Direct Connect Gateway is often overlooked or not well understood. Therefore this blog post will dive deeper at the ins and outs of this extremely helpful AWS network capability. Use Cases AWS Direct Connect Gateway allows you establish connectivity that spans Virtual Private Clouds (VPCs)...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup</title>
+      <id>https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/</id>
+      <updated>2019-08-16T00:00:00-07:00</updated>
+      <published>2019-08-16T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/" />
+      <summary type="html">This article shows you how to setup a primary active Direct Connect connection between an AWS Transit Gateway and on-premises networks via Direct Connect Gateway, while leveraging a Site-to-Site (IPSec) VPN as backup.</summary>
+      <content type="html">A very common network architecture pattern on AWS is to deploy an AWS Site-to-Site (IPSec) VPN connection as the backup for an AWS Direct Connect (DX) connection between on-premises networks and AWS VPCs. With the introduction of AWS Transit Gateway and AWS Direct Connect Gateway, this architecture pattern is no longer a trivial task. This blog post highlights the associated challenges and offers a solution using BGP route summarization and BGP prefix filtering to manage...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>BGP route summarization with AWS Transit Gateway</title>
+      <id>https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/</id>
+      <updated>2019-08-07T00:00:00-07:00</updated>
+      <published>2019-08-07T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/" />
+      <summary type="html">Step-by-step guide to summarize BGP routes with AWS Transit Gateway and Cisco IOS</summary>
+      <content type="html">This blog post will look at using BGP Route Aggregation from the AWS Transit Gateway via IPSec VPN to a customer gateway. While the example configuration and output provided for the customer gateway are using a Cisco CSR1000V with IOS-XE, you can replicate the same with e.g. Ubuntu Linux, StrongSwan and FFRouting. Have a look at the previous post “AWS Site-to-Site VPN with IPSec VPN (Strongwan) and BGP (FRRouting)”, which describes how to setup such...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>AWS Site-to-Site VPN with IPSec VPN (Strongwan) and BGP (FRRouting)</title>
+      <id>https://www.edge-cloud.net/2019/07/18/aws-site-2-site-vpn-with-strongswan-frrouting/</id>
+      <updated>2019-07-18T00:00:00-07:00</updated>
+      <published>2019-07-18T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2019/07/18/aws-site-2-site-vpn-with-strongswan-frrouting/" />
+      <summary type="html">Step-by-step guide to setup an AWS Site-to-Site VPN with Strongswan for IPSec VPN and FRRouting for BGP.</summary>
+      <content type="html">This blog post walks through the setup of an EC2-based VPN endpoint - using Ubuntu Linux 18.04 with Strongswan and FRRouting - for a Site-to-Site VPN connection to AWS with BGP routing. It will allow you to experiment with BGP in your AWS account, test out new AWS features such as AWS Transit Gateway or use it for many other things. Especially if you are interested in learning more about the interaction of BGP over...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>Limitations of Anycast for distributed content delivery</title>
+      <id>https://www.edge-cloud.net/2019/04/08/limitations-of-anycast/</id>
+      <updated>2019-04-08T00:00:00-07:00</updated>
+      <published>2019-04-08T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2019/04/08/limitations-of-anycast/" />
+      <summary type="html">Exploring the limitations of Anycast using AWS Global Accelerator and RIPE Atlas, through visualizing the real life results.</summary>
+      <content type="html">In the previous article on Limitations of DNS-based geographic routing we have explored how DNS-based geographic routing works and especially what limitations you have to consider and accept, while using such a solution. In this article we will have a look at using Anycast instead. We will use the same set of origin locations within AWS and RIPE Atlas test probes as with the above referenced DNS-based geographic routing setup, to discover limitations of Anycast....</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+</feed>

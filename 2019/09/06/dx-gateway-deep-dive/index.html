@@ -1,0 +1,1135 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>AWS Direct Connect Gateway Deep Dive - Edge Cloud</title>
+<meta name="description" content="A deep dive look into the AWS Direct Connect Gateway">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="AWS Direct Connect Gateway Deep Dive">
+<meta property="og:url" content="https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/">
+
+
+  <meta property="og:description" content="A deep dive look into the AWS Direct Connect Gateway">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="AWS Direct Connect Gateway Deep Dive">
+  <meta name="twitter:description" content="A deep dive look into the AWS Direct Connect Gateway">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2019-09-06T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AWS Direct Connect Gateway Deep Dive">
+    <meta itemprop="description" content="A deep dive look into the AWS Direct Connect Gateway">
+    <meta itemprop="datePublished" content="September 06, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">AWS Direct Connect Gateway Deep Dive
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#use-cases">Use Cases</a>
+    <ul>
+      <li><a href="#direct-connect-to-remote-regions">Direct Connect to remote regions</a></li>
+      <li><a href="#connectivity-to-multiple-virtual-private-clouds-vpc">Connectivity to multiple Virtual Private Clouds (VPC)</a></li>
+      <li><a href="#aws-transit-gateway-with-direct-connect">AWS Transit Gateway with Direct Connect</a></li>
+    </ul>
+  </li>
+  <li><a href="#attachments-and-associations">Attachments and associations</a></li>
+  <li><a href="#automation">Automation</a></li>
+  <li><a href="#multi-account-support">Multi-Account support</a></li>
+  <li>
+<a href="#restrictions-and-limits">Restrictions and Limits</a>
+    <ul>
+      <li><a href="#object-limits">Object Limits</a></li>
+      <li><a href="#data-flow">Data flow</a></li>
+      <li><a href="#bgp-prefixes">BGP prefixes</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>In November 2017 AWS <a href="https://aws.amazon.com/blogs/aws/new-aws-direct-connect-gateway-inter-region-vpc-access/" target="_blank" rel="noopener noreferrer">released</a> AWS Direct Connect Gateway, which is probably one of the biggest innovations within the <a href="https://aws.amazon.com/directconnect/" target="_blank" rel="noopener noreferrer">AWS Direct Connect</a> product in recent years. At the same time Direct Connect Gateway is often overlooked or not well understood. Therefore this blog post will dive deeper at the ins and outs of this extremely helpful AWS network capability.</p>
+
+<h1 id="use-cases">Use Cases</h1>
+
+<p><a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-gateways.html" target="_blank" rel="noopener noreferrer">AWS Direct Connect Gateway</a> allows you establish connectivity that spans Virtual Private Clouds (VPCs) spread across multiple AWS Regions. Instead of establishing multiple BGP sessions for each VPC, you only need to establish a single BGP session with the Direct Connect Gateway per DX location.
+As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in any location (except China) can be bridged.</p>
+
+<p class="notice--info">The rules of IP routing still apply and you will only be able to reach VPCs from on-premises locations if the IP CIDRs don’t overlap.</p>
+
+<p>This functionality of AWS Direct Connect Gateway allows you to accomplish the following very common use cases:</p>
+
+<h2 id="direct-connect-to-remote-regions">Direct Connect to remote regions</h2>
+
+<p>Before Direct Connect Gateway you were only able to reach the AWS Region <a href="https://aws.amazon.com/directconnect/features/#AWS_Direct_Connect_Geographic_Regions" target="_blank" rel="noopener noreferrer">associated with a DX location</a> via a Private Virtual Interface (VIF). With this the AWS DX location at e.g. CoreSite NY1, New York, NY could only establish a Private VIF for usage in the US-East (N. Virginia) region, but not for the US-West (Oregon) region (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/09/DX-Associated-Region.png" title="Figure 1: Direct Connect with associated AWS region. " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/09/DX-Associated-Region-320.webp 320w, 
+
+    
+    /content/resized/2019/09/DX-Associated-Region-384.webp 384w, 
+
+    
+    /content/resized/2019/09/DX-Associated-Region-512.webp 512w, 
+
+    
+    /content/resized/2019/09/DX-Associated-Region-683.webp 683w, 
+
+ /content/uploads/2019/09/DX-Associated-Region.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2019/09/DX-Associated-Region-320.png 320w, 
+
+    /content/resized/2019/09/DX-Associated-Region-384.png 384w, 
+
+    /content/resized/2019/09/DX-Associated-Region-512.png 512w, 
+
+    /content/resized/2019/09/DX-Associated-Region-683.png 683w, 
+
+ /content/uploads/2019/09/DX-Associated-Region.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/09/DX-Associated-Region.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Direct Connect with associated AWS region. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Direct Connect with associated AWS region.
+</figcaption>
+
+</figure>
+
+<p>If you required to access multiple AWS regions via Direct Connect over Private VIFs you had to work with <a href="https://aws.amazon.com/directconnect/partners/" target="_blank" rel="noopener noreferrer">AWS Direct Connect Partners</a> to establish a presence in a DX location associated with the AWS Region of interest. Depending on your location and the location of the DX location this could become very expensive.</p>
+
+<p>With AWS Direct Connect Gateway you can now access Virtual Private Clouds (VPC) via Virtual Private Gateways (VGW) in any AWS region (except China) from any Direct Connect location (except China), simplifying this use case dramatically (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/09/DX-with-DXGW.png" title="Figure 2: Direct Connect with Direct Connect Gateway. " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/09/DX-with-DXGW-320.webp 320w, 
+
+    
+    /content/resized/2019/09/DX-with-DXGW-384.webp 384w, 
+
+    
+    /content/resized/2019/09/DX-with-DXGW-512.webp 512w, 
+
+    
+    /content/resized/2019/09/DX-with-DXGW-683.webp 683w, 
+
+ /content/uploads/2019/09/DX-with-DXGW.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2019/09/DX-with-DXGW-320.png 320w, 
+
+    /content/resized/2019/09/DX-with-DXGW-384.png 384w, 
+
+    /content/resized/2019/09/DX-with-DXGW-512.png 512w, 
+
+    /content/resized/2019/09/DX-with-DXGW-683.png 683w, 
+
+ /content/uploads/2019/09/DX-with-DXGW.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/09/DX-with-DXGW.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Direct Connect with Direct Connect Gateway. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Direct Connect with Direct Connect Gateway.
+</figcaption>
+
+</figure>
+
+<p>This dramatically improves flexibility and reduces cost, when connecting from on-premises to AWS regions. Looking at the <a href="https://aws.amazon.com/directconnect/pricing/#AWS_Direct_Connect_data_transfer" target="_blank" rel="noopener noreferrer">AWS Direct Connect data transfer cost</a> for AWS Regions in North America, you can see that the data transfer OUT price to any of the Direct Connect locations in North America is the same at currently $0.02. Therefore in this case picking a Direct Connect location within North America that is the closest to your on-premises location does not increase the AWS cost.</p>
+
+<h2 id="connectivity-to-multiple-virtual-private-clouds-vpc">Connectivity to multiple Virtual Private Clouds (VPC)</h2>
+
+<p>If you want to connect from on-premises to multiple Virtual Private Clouds (VPCs) within AWS, without Direct Connect Gateway you had to create a separate Private Virtual Interface on your DX connection for each of these VPCs. In addition you had to create a separate BGP peering over the different VLANs for each of these Private Virtual Interfaces between your physical router and the Virtual Private Gateway (VGW) in AWS.</p>
+
+<p>As depicted in Figure 2, with Direct Connect Gateway there is only one Private Virtual Interface necessary to connect to multiple VPCs. As a result you now only need to establish a single BGP session between your on-premises router and the Direct Connect gateway. When attaching additional VPCs their CIDRs are propagated towards on-premises - with the Direct Connect Gateway’s ASN as the origin - towards on-premises.</p>
+
+<p>This also simplifies the physical setup of your Direct Connect dramatically.</p>
+
+<h2 id="aws-transit-gateway-with-direct-connect">AWS Transit Gateway with Direct Connect</h2>
+
+<p>If you want to connect an <a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway</a> to on-premises via AWS Direct Connect, you have to leverage AWS Direct Connect Gateway (See Figure 3). It is not possible to connect directly to a Direct Connect connection from a Transit Gateway.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/09/DXGW-with-TGW.png" title="Figure 3: Direct Connect Gateway with Transit Gateway. " class="image-popup">
+<picture>
+  <source width="851" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/09/DXGW-with-TGW-320.webp 320w, 
+
+    
+    /content/resized/2019/09/DXGW-with-TGW-384.webp 384w, 
+
+    
+    /content/resized/2019/09/DXGW-with-TGW-512.webp 512w, 
+
+    
+    /content/resized/2019/09/DXGW-with-TGW-683.webp 683w, 
+
+    
+    /content/resized/2019/09/DXGW-with-TGW-800.webp 800w, 
+
+ /content/uploads/2019/09/DXGW-with-TGW.webp 851w" sizes="851px"></source>
+  <source width="851" data-srcset="
+
+    /content/resized/2019/09/DXGW-with-TGW-320.png 320w, 
+
+    /content/resized/2019/09/DXGW-with-TGW-384.png 384w, 
+
+    /content/resized/2019/09/DXGW-with-TGW-512.png 512w, 
+
+    /content/resized/2019/09/DXGW-with-TGW-683.png 683w, 
+
+    /content/resized/2019/09/DXGW-with-TGW-800.png 800w, 
+
+ /content/uploads/2019/09/DXGW-with-TGW.png 851w" sizes="851px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/09/DXGW-with-TGW.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Direct Connect Gateway with Transit Gateway. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Direct Connect Gateway with Transit Gateway.
+</figcaption>
+
+</figure>
+
+<p>As reference, AWS Transit Gateway only supports the following attachment types:</p>
+<ul>
+  <li><a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html" target="_blank" rel="noopener noreferrer">Virtual Private Cloud (VPC)</a></li>
+  <li><a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-dcg-attachments.html" target="_blank" rel="noopener noreferrer">Direct Connect Gateway</a></li>
+  <li><a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpn-attachments.html" target="_blank" rel="noopener noreferrer">Site-to-Site (IPSec) VPN</a></li>
+</ul>
+
+<h1 id="attachments-and-associations">Attachments and associations</h1>
+
+<p>AWS Direct Connect Gateway is a global AWS object which supports “Virtual Interface Attachments” on the on-premises facing side and “Gateway Associations” on the AWS facing side. These attachments and associations cannot be freely mixed and matched, but instead only allow two fixed combinations. Below is an overview of these two combinations and resulting attachments and associations.</p>
+
+<ul>
+  <li>
+    <p><strong>Virtual Private Gateway with Private Virtual Interface:</strong> In this case the AWS-facing termination point, or gateway association, is a Virtual Private Gateway (VGW). A VGW can connect to exactly one VPC. The on-premises facing corresponding attachment for this scenario is a private virtual interface.
+An AWS Direct Connect <em>Dedicated Connection</em> or <em>Hosted Connection</em> can support up to 50 such private virtual interfaces. A <em>Hosted Virtual Interface</em> on the other hand support only supports a single virtual Interface, which can be Private Virtual Interface.</p>
+  </li>
+  <li>
+    <p><strong>Transit Gateway with Transit Virtual interface:</strong> A Transit Gateway is an AWS networking component, which allows you to connect multiple VPCs, Direct Connect Gateways, and Site-to-Site (IPSec) VPNs together via attachments. Currently these attachments have to reside in the same AWS region, although cross-region support has been announced. In this case the on-premises facing attachment of the Direct Connect Gateway is a Transit Virtual Interface (VIF).
+Only AWS Direct Connect <em>Dedicated Connections</em> or <em>Hosted Connections</em> with a capacity of <a href="https://aws.amazon.com/directconnect/partners/" target="_blank" rel="noopener noreferrer">greater than or equal to 1G</a> support Transit VIFs. In the case of a Dedicated Connection you can use one Transit VIF in addition to 50 private or public VIFs. In the case of a Hosted Connection - which only provides a single Virtual Interface - that VIF can either be a private, public or transit Virtual Interface.
+AWS Direct Connect <em>Hosted Virtual Interfaces</em> do not support Transit VIFs at all.</p>
+  </li>
+</ul>
+
+<h1 id="automation">Automation</h1>
+
+<p>AWS Direct Connect gateway supports various forms of automation via it’s API.</p>
+
+<ul>
+  <li>
+<strong>API and SDKs:</strong> The AWS Direct Connect gateway’s API is part of the <a href="https://docs.aws.amazon.com/cli/latest/reference/directconnect/index.html" target="_blank" rel="noopener noreferrer">AWS Direct Connect API</a>. Therefore you can manage AWS Direct Connect gateway via <a href="https://aws.amazon.com/tools/" target="_blank" rel="noopener noreferrer">AWS SDKs and command line tools</a>.</li>
+  <li>
+<strong>CloudFormation:</strong> As of today, CloudFormation does not support AWS Direct Connect and therefore also does not support AWS Direct Connect gateway.</li>
+  <li>
+<strong>TerraForm:</strong> HashiCorp’s TerraForm does support creation and management of <a href="https://www.terraform.io/docs/providers/aws/r/dx_gateway.html" target="_blank" rel="noopener noreferrer">AWS Direct Connect gateways</a>.</li>
+</ul>
+
+<h1 id="multi-account-support">Multi-Account support</h1>
+
+<p>Similar to AWS Direct Connect itself, DX Gateway also support multi-account setups. This is especially important for larger customer that want to split ownership of the components across teams or units. Also customers of <a href="https://aws.amazon.com/govcloud-us/" target="_blank" rel="noopener noreferrer">AWS GovCloud (US)</a> benefit from this capability, as various components can be managed from a standard commercial account instead of the GovCloud account.</p>
+
+<p>Lookin at a standard deployment as depicted in Figure 4, it is possible - although not necessary - to split ownership of the three component types across different accounts.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/09/DXGW-Owner.png" title="Figure 4: Possible account ownership in multi-account setup. " class="image-popup">
+<picture>
+  <source width="801" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/09/DXGW-Owner-320.webp 320w, 
+
+    
+    /content/resized/2019/09/DXGW-Owner-384.webp 384w, 
+
+    
+    /content/resized/2019/09/DXGW-Owner-512.webp 512w, 
+
+    
+    /content/resized/2019/09/DXGW-Owner-683.webp 683w, 
+
+    
+    /content/resized/2019/09/DXGW-Owner-800.webp 800w, 
+
+ /content/uploads/2019/09/DXGW-Owner.webp 801w" sizes="801px"></source>
+  <source width="801" data-srcset="
+
+    /content/resized/2019/09/DXGW-Owner-320.png 320w, 
+
+    /content/resized/2019/09/DXGW-Owner-384.png 384w, 
+
+    /content/resized/2019/09/DXGW-Owner-512.png 512w, 
+
+    /content/resized/2019/09/DXGW-Owner-683.png 683w, 
+
+    /content/resized/2019/09/DXGW-Owner-800.png 800w, 
+
+ /content/uploads/2019/09/DXGW-Owner.png 801w" sizes="801px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/09/DXGW-Owner.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Possible account ownership in multi-account setup. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Possible account ownership in multi-account setup.
+</figcaption>
+
+</figure>
+
+<p>To share ownership between DX Gateway and the DX Connection, the owner of the DX connection creates a new Virtual Interface and assigns it to the account that owns the DX Gateway. The account owning the DX Gateway can then accept this Virtual Interface and attach it to a DX Gateway.</p>
+
+<p>Similarly if the account owning the AWS Virtual Private Gateway (VGW) or AWS Transit Gateway (TGW), as well as the account owning the Direct Connect gateway belong to the same AWS payer account ID, sharing is here possible as well. In that case the account owner of the AWS Virtual Private Gateway (VGW) or AWS Transit Gateway (TGW) <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html" target="_blank" rel="noopener noreferrer">initiates the association proposal</a>, which has to be approved by the account owning the Direct Connect Gateway.</p>
+
+<h1 id="restrictions-and-limits">Restrictions and Limits</h1>
+
+<p>The following limits and restrictions apply to Direct Connect Gateway.</p>
+
+<h2 id="object-limits">Object Limits</h2>
+
+<p>The number of AWS Direct Connect gateways and associated objects is <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/limits.html" target="_blank" rel="noopener noreferrer">limited</a> within a single AWS account to the following values:</p>
+<ul>
+  <li>
+<strong>AWS Direct Connect gateways per account:</strong> 200</li>
+  <li>
+<strong>Virtual Interfaces:</strong> 30 (Either Private Virtual Interfaces or Transit Virtual Interfaces)</li>
+  <li>
+<strong>Transit Gateways:</strong> 3 (Cannot be combined with Virtual Private Gateways)</li>
+  <li>
+<strong>Virtual Private Gateways:</strong> 30 (Cannot be combined with Transit Gateways)</li>
+</ul>
+
+<h2 id="data-flow">Data flow</h2>
+
+<p>It is important to point out that only data flow between AWS-facing Gateway associations and on-premises facing VIF attachments is possible. This is depicted in Figure 5 as green pathes. Data flow between associated Gateways or data flow between multiple VIFs, connected to the same Direct Connect Gateway, is not possible. This is depicted in Figure 5 as red pathes.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/09/DXGW-DataFlow.png" title="Figure 5: Permitted data flow (green) and not permitted data flow (red) with Direct Connect Gateway. " class="image-popup">
+<picture>
+  <source width="801" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/09/DXGW-DataFlow-320.webp 320w, 
+
+    
+    /content/resized/2019/09/DXGW-DataFlow-384.webp 384w, 
+
+    
+    /content/resized/2019/09/DXGW-DataFlow-512.webp 512w, 
+
+    
+    /content/resized/2019/09/DXGW-DataFlow-683.webp 683w, 
+
+    
+    /content/resized/2019/09/DXGW-DataFlow-800.webp 800w, 
+
+ /content/uploads/2019/09/DXGW-DataFlow.webp 801w" sizes="801px"></source>
+  <source width="801" data-srcset="
+
+    /content/resized/2019/09/DXGW-DataFlow-320.png 320w, 
+
+    /content/resized/2019/09/DXGW-DataFlow-384.png 384w, 
+
+    /content/resized/2019/09/DXGW-DataFlow-512.png 512w, 
+
+    /content/resized/2019/09/DXGW-DataFlow-683.png 683w, 
+
+    /content/resized/2019/09/DXGW-DataFlow-800.png 800w, 
+
+ /content/uploads/2019/09/DXGW-DataFlow.png 801w" sizes="801px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/09/DXGW-DataFlow.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Permitted data flow (green) and not permitted data flow (red) with Direct Connect Gateway. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Permitted data flow (green) and not permitted data flow (red) with Direct Connect Gateway.
+</figcaption>
+
+</figure>
+
+<p>It is important to point out that the red depicted data flow not only includes BGP routing traffic, but also routed traffic. Looking at the VIFs facing on-premises, you will not receive BGP route announcements from the Direct Connect Gateway that were originated by one of the other VIFs. But even attempting to place a static route towards the Direct Connect for traffic from one VIF to another will fail.</p>
+
+<h2 id="bgp-prefixes">BGP prefixes</h2>
+
+<p>You are also limited by the number of BGP prefixes that you can announce from on-premises networks towards AWS, as well as from AWS towards on-premises (Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/09/DXGW-BGP-Limits.png" title="Figure 6: BGP prefix limits with Direct Connect Gateway. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/09/DXGW-BGP-Limits-320.webp 320w, 
+
+    
+    /content/resized/2019/09/DXGW-BGP-Limits-384.webp 384w, 
+
+    
+    /content/resized/2019/09/DXGW-BGP-Limits-512.webp 512w, 
+
+    
+    /content/resized/2019/09/DXGW-BGP-Limits-683.webp 683w, 
+
+    
+    /content/resized/2019/09/DXGW-BGP-Limits-800.webp 800w, 
+
+    
+    /content/resized/2019/09/DXGW-BGP-Limits-960.webp 960w, 
+
+" sizes="4025px"></source>
+  <source data-srcset="
+
+    /content/resized/2019/09/DXGW-BGP-Limits-320.png 320w, 
+
+    /content/resized/2019/09/DXGW-BGP-Limits-384.png 384w, 
+
+    /content/resized/2019/09/DXGW-BGP-Limits-512.png 512w, 
+
+    /content/resized/2019/09/DXGW-BGP-Limits-683.png 683w, 
+
+    /content/resized/2019/09/DXGW-BGP-Limits-800.png 800w, 
+
+    /content/resized/2019/09/DXGW-BGP-Limits-960.png 960w, 
+
+" sizes="4025px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/09/DXGW-BGP-Limits.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: BGP prefix limits with Direct Connect Gateway. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: BGP prefix limits with Direct Connect Gateway.
+</figcaption>
+
+</figure>
+
+<p>Looking at the example in Figure, you also want to keep aggregates in mind. While you can e.g. announce 100 prefixes from each of the two corporate data center depicted, in the case of these prefixes being non-overlapping, not all 200 prefixes will make it into an associated VPC route table. That’s due to the VPC route table only being able to hold <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-route-tables" target="_blank" rel="noopener noreferrer">100 BGP advertised (propagated) routes</a>.</p>
+
+<p class="notice--info">If you advertise more than 100 routes over the BGP session, the BGP session will go into an idle state.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This article provided deeper insights into AWS Direct Connect Gateway, covering use cases, the Direct Connect Gateway components, multi-account setup support, as well as limits and restrictions.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-09-06T00:00:00-07:00">September 06, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=AWS+Direct+Connect+Gateway+Deep+Dive%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F&amp;title=AWS+Direct+Connect+Gateway+Deep+Dive" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/" class="pagination--pager" title="AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup
+">Previous</a>
+    
+    
+      <a href="/2019/09/09/troubleshooting-bgp-session-hosted-vif/" class="pagination--pager" title="Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

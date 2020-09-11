@@ -1,0 +1,1139 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>RUM “Light” with CloudFlare and Google Analytics - Edge Cloud</title>
+<meta name="description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="RUM “Light” with CloudFlare and Google Analytics">
+<meta property="og:url" content="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">
+
+
+  <meta property="og:description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="RUM “Light” with CloudFlare and Google Analytics">
+  <meta name="twitter:description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2016-02-05T00:00:31-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="RUM “Light” with CloudFlare and Google Analytics">
+    <meta itemprop="description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
+    <meta itemprop="datePublished" content="February 05, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">RUM “Light” with CloudFlare and Google Analytics
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#possible-custom-dimensions">Possible custom dimensions</a></li>
+  <li><a href="#how-does-real-user-monitoring-fit-into-the-picture">How does Real User Monitoring fit into the picture?</a></li>
+  <li><a href="#create-custom-dimensiosn-in-google-analytics">Create custom dimensiosn in Google Analytics</a></li>
+  <li>
+<a href="#embed-the-google-analytics-tracking-code">Embed the Google Analytics Tracking Code</a>
+     -  <a href="#create-custom-reports-in-google-analytics">Create custom reports in Google Analytics</a>
+</li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1?</p>
+
+<p>Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of <a href="https://en.wikipedia.org/wiki/Real_user_monitoring" target="_blank" rel="noopener noreferrer">Real User Monitoring (RUM)</a>.</p>
+
+<p>In a <a href="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">previous post</a> I’ve already shown how we can track the usage of CloudFlare data centers for the delivery of our website in Google Analytics. In this blog post I want to show you how to refine this method even further and also include information about other interesting metrics, such as IPv6 and HTTP/2 usage .</p>
+
+<h1 id="possible-custom-dimensions">Possible custom dimensions</h1>
+
+<p>In the <a href="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">previous post</a> I used response header information, presented by the CloudFlare edge servers to extract information about the served traffic.</p>
+
+<p>This time we will instead use a <a href="https://support.cloudflare.com/hc/en-us/articles/200169986-Which-CloudFlare-data-center-do-I-reach-" target="_blank" rel="noopener noreferrer">special debugging URL</a> that is available for all CloudFlare powered sites. It is available under <em>https://www.example.com/cdn-cgi/trace</em>, where <em>https://www.example.com/</em> corresponds to the CloudFlare powered domain.</p>
+
+<p>The result will look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fl=4f96
+h=www.cloudflare.com
+ip=2606:4700:1000:8200:7847:642:dc8e:b176
+ts=1454615047.969
+visit_scheme=https
+uag=Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36
+colo=SJC
+spdy=h2
+loc=US
+</code></pre></div></div>
+
+<p>Let’s have a closer look at the fields that are interesting to us and what they mean:</p>
+
+<ul>
+  <li>
+<strong>ip:</strong> This lists the IP address that was used to contact CloudFlare for this request. We can use this value to determine whether the request was made over IPv4 or IPv6.</li>
+  <li>
+<strong>visit_scheme:</strong> This will tell you whether the request was made over HTTP or HTTPS. In case you serve traffic only over HTTPS, this is rather not interesting. Otherwise you could use it to determine the traffic split between visitor using an encrypted vs. un-encrypted connection.</li>
+  <li>
+<strong>colo:</strong> The CloudFlare Points-of-Presence (PoP), which served this traffic. In the <a href="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">previous post</a> you have already seen how to use this.</li>
+  <li>
+<strong>spdy:</strong> The HTTP protocol version that was used to serve this content. Even though the key is called “spdy”, the value can also indicate HTTP/2 via “h2” (as depicted above). A value of “3.1” will indicate SPDY/3.1 and “off” will indicate HTTP 1.x.
+It would make more sense to have the field “http” available with ”http=h2” for HTTP/2, ”http=spdy/3.1” for SPDY/3.1, and ”http=http/1.x” for HTTP/1.x. But for now the “spdy” field is good enough.</li>
+  <li>
+<strong>loc:</strong> The country that CloudFlare located the visitor in. This information is already available in Google Analytics, we therefore do not need to extract it here.</li>
+</ul>
+
+<h1 id="how-does-real-user-monitoring-fit-into-the-picture">How does Real User Monitoring fit into the picture?</h1>
+
+<p>Now that we know about all this great data at <em>/cdn-cgi/trace</em> for our website, how can we make this accessible in Google Analytics? Especially while keeping in mind, that this data is only available for the current connection and differs from user to user.</p>
+
+<p>The trick: We make the user download the data, extract the values and push the results into Google Analytics.</p>
+
+<p>This approach of leveraging a real user to measure or monitor something is called <a href="https://en.wikipedia.org/wiki/Real_user_monitoring" target="_blank" rel="noopener noreferrer">Real User Monitoring</a> or RUM for short.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/02/RUM-Flowchart.png" title="Figure 1: Interaction between browser, CloudFlare and Google Analytics " class="image-popup">
+<picture>
+  <source width="943" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/02/RUM-Flowchart-320.webp 320w, 
+
+    
+    /content/resized/2016/02/RUM-Flowchart-384.webp 384w, 
+
+    
+    /content/resized/2016/02/RUM-Flowchart-512.webp 512w, 
+
+    
+    /content/resized/2016/02/RUM-Flowchart-683.webp 683w, 
+
+    
+    /content/resized/2016/02/RUM-Flowchart-800.webp 800w, 
+
+ /content/uploads/2016/02/RUM-Flowchart.webp 943w" sizes="943px"></source>
+  <source width="943" data-srcset="
+
+    /content/resized/2016/02/RUM-Flowchart-320.png 320w, 
+
+    /content/resized/2016/02/RUM-Flowchart-384.png 384w, 
+
+    /content/resized/2016/02/RUM-Flowchart-512.png 512w, 
+
+    /content/resized/2016/02/RUM-Flowchart-683.png 683w, 
+
+    /content/resized/2016/02/RUM-Flowchart-800.png 800w, 
+
+ /content/uploads/2016/02/RUM-Flowchart.png 943w" sizes="943px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/02/RUM-Flowchart.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Interaction between browser, CloudFlare and Google Analytics ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Interaction between browser, CloudFlare and Google Analytics
+</figcaption>
+
+</figure>
+
+<p>The workflow that will be execute on every page load is as follows (See Figure 1):</p>
+
+<ul>
+  <li>
+<strong>Step 1:</strong> A user requests a page via his or her browser.</li>
+  <li>
+<strong>Step 2:</strong> The content is returned and includes a JavaScript to be executed by the browser.</li>
+  <li>
+<strong>Step 3:</strong> The JavaScript requests the content from /cdn-cgi/trace.</li>
+  <li>
+<strong>Step 4:</strong> The different values for that particular visitor and browsing session are returned to the JavaScript.</li>
+  <li>
+<strong>Step 5:</strong> The JavaScript pushes the values as custom dimension into Google Analytics.</li>
+</ul>
+
+<p>The additional request of the browser to <em>/cdn-cgi/trace</em> is similar to the browser loading stylesheets or images for rendering a page. This added round-trip to the closest CloudFlare edge for one more element does not impact the performance of the site.</p>
+
+<h1 id="create-custom-dimensiosn-in-google-analytics">Create custom dimensiosn in Google Analytics</h1>
+
+<p>For each value from <em>/cdn-cgi/trace</em> that we want to track, we need to create a custom dimension in Google Analytics. Here is an example mapping for the values that we want to track in this blog post:</p>
+
+<ul>
+  <li>dimension1: CloudFlare PoP location</li>
+  <li>dimension2: Access Scheme (HTTPS vs. HTTP)</li>
+  <li>dimension3: IP Transport Method (IPv4 vs. IPv6)</li>
+  <li>dimension4: HTTP version (HTTP 1.1 vs. SPDY vs. HTTP/2)</li>
+</ul>
+
+<p>First, set up the custom dimensions in Google Analytics:</p>
+
+<ol>
+  <li>Sign in to <a href="https://www.google.com/analytics/web/#home/" target="_blank" rel="noopener noreferrer">Google Analytics</a>.</li>
+  <li>Select the <strong>Admin</strong> tab and navigate to the <strong>property to which you want to add custom dimensions</strong>.</li>
+  <li>In the <strong>Property</strong> column, click <strong>Custom Definitions</strong>, then click <strong>Custom Dimensions</strong>.</li>
+  <li>Click <strong>New Custom Dimension</strong>.</li>
+  <li>Add a <strong>Name</strong>. This can be any string, but use something unique so it’s not confused with any other dimension or metric in your reports. Only you will see this name in the Google Analytics page.</li>
+  <li>Select the <strong>Scope</strong>. Choose to track at the Hit, Session, User, or Product level. For this scenario I recommend to choose Hit or rather Session.</li>
+  <li>Check the <strong>Active</strong> box to start collecting data and see the dimension in your reports right away. To create the dimension but have it remain inactive, uncheck the box.</li>
+  <li>Click <strong>Create</strong>.</li>
+  <li>Note down the dimension ID from the displayed example codes. In the example for this blog post the dimension IDs are listed above for the three monitored values.</li>
+</ol>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/02/RUM_01.png" title="Figure 2: Create a Google Analytics Custom Dimension " class="image-popup">
+<picture>
+  <source width="1108" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/02/RUM_01-320.webp 320w, 
+
+    
+    /content/resized/2016/02/RUM_01-384.webp 384w, 
+
+    
+    /content/resized/2016/02/RUM_01-512.webp 512w, 
+
+    
+    /content/resized/2016/02/RUM_01-683.webp 683w, 
+
+    
+    /content/resized/2016/02/RUM_01-800.webp 800w, 
+
+    
+    /content/resized/2016/02/RUM_01-960.webp 960w, 
+
+ /content/uploads/2016/02/RUM_01.webp 1108w" sizes="1108px"></source>
+  <source width="1108" data-srcset="
+
+    /content/resized/2016/02/RUM_01-320.png 320w, 
+
+    /content/resized/2016/02/RUM_01-384.png 384w, 
+
+    /content/resized/2016/02/RUM_01-512.png 512w, 
+
+    /content/resized/2016/02/RUM_01-683.png 683w, 
+
+    /content/resized/2016/02/RUM_01-800.png 800w, 
+
+    /content/resized/2016/02/RUM_01-960.png 960w, 
+
+ /content/uploads/2016/02/RUM_01.png 1108w" sizes="1108px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/02/RUM_01.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Create a Google Analytics Custom Dimension ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Create a Google Analytics Custom Dimension
+</figcaption>
+
+</figure>
+
+<h1 id="embed-the-google-analytics-tracking-code">Embed the Google Analytics Tracking Code</h1>
+
+<p>Next we need to embed the Google Analytics tracking code within the website, in order to fill the newly created custom dimensions with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="highlighter-rouge">__gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="highlighter-rouge">__gaTracker('send','pageview');</code>.</p>
+
+<p>If you are using WordPress the easiest way to include the custom tracking code is by using the “<a href="https://wordpress.org/plugins/google-analytics-for-wordpress/" target="_blank" rel="noopener noreferrer">Google Analytics by Yoast</a>” plugin. This plugin allows you under <em>Advanced &gt; Custom Code</em> to embed the below code right away and without any coding requirements.</p>
+
+<p>The below JavaScript code will read the values from <em>/cdn-cgi/trace</em>, extract the information we are interested it and push it into the Google Analytics custom dimension variables. Ensure that the numeric IDs of these custom dimension variables matches what you have created in above steps.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    function processData(x) {
+      var y = {};
+      for (var i = 0; i &lt; x.length-1; i++) {
+        var split = x[i].split('=');
+        y[split[0].trim()] = split[1].trim();
+      }
+      return y;
+    }
+
+    function objData(x) {
+      return obj[x];
+    }
+
+    function isIPv6() {
+      ipv6 = (objData('ip').indexOf(":") &gt; -1);
+      switch (ipv6){
+        case true:
+          return "IPv6";
+          break;
+        default:
+          return "IPv4";
+      }
+    }
+
+    var data;
+    var obj;
+    var client = new XMLHttpRequest();
+    client.open("GET", "/cdn-cgi/trace", false);
+    client.onreadystatechange =
+            function () {
+                    if(client.readyState === 4){
+                            if(client.status === 200 || client.status == 0){
+                                    data = client.responseText.split("\n");
+                            }
+                    }
+            };
+    client.send(null);
+    obj= processData(data);
+
+    __gaTracker('set','dimension1',objData('colo'));
+    __gaTracker('set','dimension2',isIPv6());
+    __gaTracker('set','dimension3',objData('spdy'));
+</code></pre></div></div>
+<p>Embedded in your website along with the standard Google Analytics tracking code, this custom JavaScript code will be executed by a visitor, collect metrics data from <em>/cdn-cgi/trace</em> and push it into Google Analytics.</p>
+
+<p>A few hours after embedding the code you should see your first custom dimension data in Google Analytics.</p>
+
+<h3 id="create-custom-reports-in-google-analytics">Create custom reports in Google Analytics</h3>
+
+<p>You can now create custom reports with the custom dimensions in Google Analytics. A simple example would be to determine the IPv4 vs. IPv6 traffic ratio.</p>
+
+<ol>
+  <li>Make sure you are still signed in to <a href="https://www.google.com/analytics/web/#home/" target="_blank" rel="noopener noreferrer">Google Analytics</a>.</li>
+  <li>Select the <strong>Customization</strong> tab and click on <strong>New Custom Report</strong>.</li>
+  <li>
+<strong>Name</strong> your Custom Report here.</li>
+  <li>Select a Metric for which you want to see your Custom Dimensions. I recommend the metric “Sessions” within the “Users” Metric Group.</li>
+  <li>Next select the custom dimension for the IP Transport Method (IPv4 vs. IPv6), that you created as the “Dimension Drilldown” (See Figure 3).</li>
+  <li>Click on the <strong>Save</strong> button.</li>
+</ol>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/02/RUM_02.png" title="Figure 3: Create a Custom Report in Google Analytics " class="image-popup">
+<picture>
+  <source width="661" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/02/RUM_02-320.webp 320w, 
+
+    
+    /content/resized/2016/02/RUM_02-384.webp 384w, 
+
+    
+    /content/resized/2016/02/RUM_02-512.webp 512w, 
+
+ /content/uploads/2016/02/RUM_02.webp 661w" sizes="661px"></source>
+  <source width="661" data-srcset="
+
+    /content/resized/2016/02/RUM_02-320.png 320w, 
+
+    /content/resized/2016/02/RUM_02-384.png 384w, 
+
+    /content/resized/2016/02/RUM_02-512.png 512w, 
+
+ /content/uploads/2016/02/RUM_02.png 661w" sizes="661px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/02/RUM_02.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Create a Custom Report in Google Analytics ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Create a Custom Report in Google Analytics
+</figcaption>
+
+</figure>
+
+<p>The resulting Custom Report will show you how many session - in total numbers, but also in percent - were served by which transport method.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/02/RUM_03.png" title="Figure 4: Traffic served over IPv4 vs. IPv6 " class="image-popup">
+<picture>
+  <source width="936" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/02/RUM_03-320.webp 320w, 
+
+    
+    /content/resized/2016/02/RUM_03-384.webp 384w, 
+
+    
+    /content/resized/2016/02/RUM_03-512.webp 512w, 
+
+    
+    /content/resized/2016/02/RUM_03-683.webp 683w, 
+
+    
+    /content/resized/2016/02/RUM_03-800.webp 800w, 
+
+ /content/uploads/2016/02/RUM_03.webp 936w" sizes="936px"></source>
+  <source width="936" data-srcset="
+
+    /content/resized/2016/02/RUM_03-320.png 320w, 
+
+    /content/resized/2016/02/RUM_03-384.png 384w, 
+
+    /content/resized/2016/02/RUM_03-512.png 512w, 
+
+    /content/resized/2016/02/RUM_03-683.png 683w, 
+
+    /content/resized/2016/02/RUM_03-800.png 800w, 
+
+ /content/uploads/2016/02/RUM_03.png 936w" sizes="936px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/02/RUM_03.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Traffic served over IPv4 vs. IPv6 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Traffic served over IPv4 vs. IPv6
+</figcaption>
+
+</figure>
+
+<p>You can generate similar graphs for the other custom dimensions. E.g. in order to find out how much of your web-sites traffic was served over HTTP/2 (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/02/RUM_04.png" title="Figure 5: Traffic served over HTTP/2 vs. SPDY vs. HTTP 1.x " class="image-popup">
+<picture>
+  <source width="969" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/02/RUM_04-320.webp 320w, 
+
+    
+    /content/resized/2016/02/RUM_04-384.webp 384w, 
+
+    
+    /content/resized/2016/02/RUM_04-512.webp 512w, 
+
+    
+    /content/resized/2016/02/RUM_04-683.webp 683w, 
+
+    
+    /content/resized/2016/02/RUM_04-800.webp 800w, 
+
+    
+    /content/resized/2016/02/RUM_04-960.webp 960w, 
+
+ /content/uploads/2016/02/RUM_04.webp 969w" sizes="969px"></source>
+  <source width="969" data-srcset="
+
+    /content/resized/2016/02/RUM_04-320.png 320w, 
+
+    /content/resized/2016/02/RUM_04-384.png 384w, 
+
+    /content/resized/2016/02/RUM_04-512.png 512w, 
+
+    /content/resized/2016/02/RUM_04-683.png 683w, 
+
+    /content/resized/2016/02/RUM_04-800.png 800w, 
+
+    /content/resized/2016/02/RUM_04-960.png 960w, 
+
+ /content/uploads/2016/02/RUM_04.png 969w" sizes="969px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/02/RUM_04.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Traffic served over HTTP/2 vs. SPDY vs. HTTP 1.x ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Traffic served over HTTP/2 vs. SPDY vs. HTTP 1.x
+</figcaption>
+
+</figure>
+
+<p>By combining data from the custom dimension with data collected by Google Analytcis natively you can answer many interesting questions for your website, such as: Is IPv6 traffic really mostly driven by mobile traffic? Where are all these users with HTTP/2 capable browsers located?</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This article has shown you, that you can easily built your own Real User Monitoring system with Google Analytics Custom dimension and some JavaScript code. It allows you to extract many interesting metrics out of your CloudFlare usage and make it available in Google Analytics for further data analysis.</p>
+
+<p>Not only has this site been using the above described method since November 2015, but also another <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer">HTTP/2 adoption</a>, which has provided <a href="https://blog.cloudflare.com/introducing-http2/" target="_blank" rel="noopener noreferrer">interesting insights</a> into the <a href="https://blog.cloudflare.com/cloudflares-impact-on-the-http-2-universe/" target="_blank" rel="noopener noreferrer">HTTP/2 adoption</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#cloudflare" class="page__taxonomy-item" rel="tag">Cloudflare</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#google-analytics" class="page__taxonomy-item" rel="tag">Google-Analytics</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#http-2" class="page__taxonomy-item" rel="tag">HTTP/2</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-02-05T00:00:31-08:00">February 05, 2016</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=RUM+%22Light%22+with+CloudFlare+and+Google+Analytics%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F&amp;title=RUM+%22Light%22+with+CloudFlare+and+Google+Analytics" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2016/01/15/cf-redirect-to-social-media/" class="pagination--pager" title="CloudFlare: Redirect to Social Media on origin failure
+">Previous</a>
+    
+    
+      <a href="/2016/02/17/cloudflare-railgun-on-aws/" class="pagination--pager" title="CloudFlare Railgun on AWS
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

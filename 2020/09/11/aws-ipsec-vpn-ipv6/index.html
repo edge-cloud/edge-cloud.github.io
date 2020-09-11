@@ -1,0 +1,1017 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>AWS Site-to-Site VPN (IPSec) with IPv6 - Edge Cloud</title>
+<meta name="description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="AWS Site-to-Site VPN (IPSec) with IPv6">
+<meta property="og:url" content="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
+
+
+  <meta property="og:description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="AWS Site-to-Site VPN (IPSec) with IPv6">
+  <meta name="twitter:description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AWS Site-to-Site VPN (IPSec) with IPv6">
+    <meta itemprop="description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">AWS Site-to-Site VPN (IPSec) with IPv6
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#constraints">Constraints</a></li>
+  <li>
+<a href="#configuration">Configuration</a>
+    <ul>
+      <li><a href="#aws-setup">AWS Setup</a></li>
+      <li>
+<a href="#customer-side-configuration">Customer-side Configuration</a>
+        <ul>
+          <li><a href="#basic-configuration-information">Basic configuration information</a></li>
+          <li><a href="#configuration-download">Configuration download</a></li>
+          <li><a href="#tunnel-interface-configuration">Tunnel Interface Configuration</a></li>
+          <li><a href="#border-gateway-protocol-bgp-configuration">Border Gateway Protocol (BGP) Configuration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#validation">Validation</a></li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Recently AWS finally <a href="https://aws.amazon.com/about-aws/whats-new/2020/08/aws-site-to-site-vpn-supports-ipv6-traffic/" target="_blank" rel="noopener noreferrer">released support for IPv6 traffic over the AWS Site-to-Site VPN (IPSec)</a>. The <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html" target="_blank" rel="noopener noreferrer">setup of the AWS Site-to-Site VPN</a> has always been quite straight forward and thanks to the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config" target="_blank" rel="noopener noreferrer">downloadable configuration files</a> at times even trivial.
+With the introduction of IPv6 support this is unfortunately no longer the case. Therefore this blog post will guide you around some of the pitfalls, hoping that they will eventually be removed and this post become unnecessary.</p>
+
+<h1 id="constraints">Constraints</h1>
+
+<p>A few <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" target="_blank" rel="noopener noreferrer">constraints apply</a> when using AWS Site-to-Site VPN (IPSec) with IPv6:</p>
+<ul>
+  <li>The outside tunnel IP addresses - which are the public non-RFC1918 addresses - still only support IPv4. You can only use IPv6 on the inside of the tunnel, in order to carry IPv6 traffic between your on-premises network and AWS.</li>
+  <li>You have to use an <a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway (TGW)</a> as the AWS termination of your VPN. Site-to-Site VPNs to a Virtual Private Gateways (VGW) do not support IPv6.</li>
+  <li>You cannot retrofit existing Site-to-Site connections with IPv6, but need to create a new connection.</li>
+  <li>A Site-to-Site VPN connection can only support IPv4, or IPv6. This means that if you need to carry both IPv4 and IPv6 traffic between AWS and on-premises you need to create two separate connections, one for IPv4 and one for IPv6 (See Figure 1).</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png" title="Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support. " class="image-popup">
+<picture>
+  <source width="901" type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-320.webp 320w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-384.webp 384w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-512.webp 512w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-683.webp 683w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-800.webp 800w, 
+
+ /content/uploads/2020/09/S2S-VPN-with-IPv6-1.webp 901w" sizes="901px"></source>
+  <source width="901" data-srcset="
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-320.png 320w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-384.png 384w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-512.png 512w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-683.png 683w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-800.png 800w, 
+
+ /content/uploads/2020/09/S2S-VPN-with-IPv6-1.png 901w" sizes="901px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support.
+</figcaption>
+
+</figure>
+
+<p>As each AWS Site-to-Site VPN connection consist of two tunnels, in the case of supporting IPv4/IPv6 Dualstack traffic you will therefore end up with a total of 4 tunnels, 2 for IPv4 traffic and 2 for IPv6 traffic.
+Also note that this means you’ll be paying separately for the tunnel carrying the IPv4 traffic as well as for the tunnel carrying the IPv6 traffic.</p>
+
+<h1 id="configuration">Configuration</h1>
+
+<h2 id="aws-setup">AWS Setup</h2>
+
+<p>The <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-create-vpn-connection" target="_blank" rel="noopener noreferrer">creation of a Site-to-Site VPN connection</a> is straight forward and only differs from its IPv4 counterpart by setting the “Tunnel Inside IP version” to IPv6 instead of IPv4 (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png" title="Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support. " class="image-popup">
+<picture>
+  <source width="1061" type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-320.webp 320w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-384.webp 384w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-512.webp 512w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-683.webp 683w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-800.webp 800w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-960.webp 960w, 
+
+ /content/uploads/2020/09/S2S-VPN-with-IPv6-2.webp 1061w" sizes="1061px"></source>
+  <source width="1061" data-srcset="
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-320.png 320w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-384.png 384w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-512.png 512w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-683.png 683w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-800.png 800w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-960.png 960w, 
+
+ /content/uploads/2020/09/S2S-VPN-with-IPv6-2.png 1061w" sizes="1061px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support.
+</figcaption>
+
+</figure>
+
+<p>The IPv6 enabled Site-to-Site VPN connection also supports defining the IPv6 addresses used within the tunnel yourself. If you want to make use of this capability you have to select a /126 IPv6 subent out of the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">Unique local address</a> address range.</p>
+
+<h2 id="customer-side-configuration">Customer-side Configuration</h2>
+
+<h3 id="basic-configuration-information">Basic configuration information</h3>
+
+<p>When configuring the costumer-side of the solution, the challenges will start. Having a look at the Tunnel details for a newly created AWS Site-to-Site VPN with IPv6 support will yield some surprising results (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png" title="Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-320.webp 320w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-384.webp 384w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-512.webp 512w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-683.webp 683w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-800.webp 800w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-960.webp 960w, 
+
+" sizes="1438px"></source>
+  <source data-srcset="
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-320.png 320w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-384.png 384w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-512.png 512w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-683.png 683w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-800.png 800w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-960.png 960w, 
+
+" sizes="1438px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support.
+</figcaption>
+
+</figure>
+
+<p>You’ll see that for both tunnels “Inside IPv4 CIDRs” from the 169.254.0.0/16 <a href="https://en.wikipedia.org/wiki/Link-local_address" target="_blank" rel="noopener noreferrer">Link-local address</a> range will be shown. As mentioned previously an AWS Site-to-Site connection - and thereby its tunnels - only supports either IPv4 or IPv6. As this is an IPv6 enabled tunnel, the displayed Inner IPv4 CIDRs are irrelevant and cannot be used for anything. Therefore it’s best to completely ignore this particular column here.</p>
+
+<p>Next you will notice that for the “Inside IPv6 CIDRs” the addresses are provided with a /128 netmask - which is the IPv6 equivalent of /32 and therefore a “host-only” netmask and therefor only contains a single IP address. Yet the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" target="_blank" rel="noopener noreferrer">documentation clearly calls out</a> that these “Inside IPv6 CIDRs” should be a /126 IPv6 CIDR block, which includes 4 IPv6 addresses.
+Also the provided IPv6 address from the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">Unique local address</a> address range ends in an odd number and is therefore not a network address, which always end in even numbers.
+Turns out that the displayed IPv6 address is actually the AWS side of the inner connection.</p>
+
+<p>So with the value of “fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>5</strong>/128” displayed in the provided example, the relevant IPv6 information would be:</p>
+<ul>
+  <li>Subnet (aka CIDR): fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>4</strong>/12<strong>6</strong>
+</li>
+  <li>AWS-side interface address: fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>5</strong>/12<strong>6</strong>
+</li>
+  <li>Customer-side address: fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>6</strong>/12<strong>6</strong>
+</li>
+</ul>
+
+<h3 id="configuration-download">Configuration download</h3>
+
+<p>The next challenge you will notice is that when downloading the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config" target="_blank" rel="noopener noreferrer">downloadable configuration files</a> from the AWS Console, you will notice that it does not include any IPv6 address information. Instead for the inner address it includes IPv4 address information that are irrelevant as already pointed out.</p>
+
+<p>Nevertheless you can leverage the downloadable configuration file for the Internet Key Exchange (IKE) and IPSec Configuration of your tunnels. These two sections within the file can be used without any changes.</p>
+
+<h3 id="tunnel-interface-configuration">Tunnel Interface Configuration</h3>
+
+<p>But the Tunnel Interface Configuration has to be adapted from IPv4 to IPv6. Using a Cisco IOS configuration as an example, the downloadable configuration file will provide the following Interface Configuration.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Tunnel1
+  ip address 169.254.123.90 255.255.255.252
+  ip virtual-reassembly
+  tunnel source 198.51.100.123
+  tunnel destination 54.68.62.136
+  tunnel mode ipsec ipv4
+  tunnel protection ipsec profile ipsec-vpn-0b1561f60da62e5eb-0
+  ip tcp adjust-mss 1379
+
+</code></pre></div></div>
+
+<p>Within this configuration we have to replace the inner IPv4 address with an IPv6 and also specify that that IPv6 should be used within the inside of the tunnel. The resulting corrected configuration using the IPv6 address as outlined in the previous section becomes as follows.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Tunnel1
+ no ip address
+ ip virtual-reassembly
+ ipv6 address FDBE:1A26:45B0:4631:CA60:3307:371B:6316/126
+ tunnel source 10.0.1.254
+ tunnel mode ipsec ipv4 v6-overlay
+ tunnel destination 54.68.62.136
+ tunnel protection ipsec profile ipsec-vpn-0b1561f60da62e5eb-0
+ ip tcp adjust-mss 1379
+
+</code></pre></div></div>
+
+<h3 id="border-gateway-protocol-bgp-configuration">Border Gateway Protocol (BGP) Configuration</h3>
+
+<p>Next the Border Gateway Protocol (BGP) Configuration also needs to be adapted, replacing the IPv4 configuration with a corresponding IPv6 configuration.</p>
+
+<p>The downloadable configuration will provide the following BGP configuration.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
+  neighbor 169.254.123.89 remote-as 64512
+  neighbor 169.254.123.89 activate
+  neighbor 169.254.123.89 timers 10 30 30
+  address-family ipv4 unicast
+    neighbor 169.254.123.89 remote-as 64512
+    neighbor 169.254.123.89 timers 10 30 30
+    neighbor 169.254.123.89 activate
+    neighbor 169.254.123.89 soft-reconfiguration inbound
+</code></pre></div></div>
+
+<p>As we want to run BGP over the inner IPv6 connection, we again have to replace all IPv4 configuration items for IPv6.
+The result will look as follows.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
+  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 remote-as 64512
+  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 activate
+  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 timers 10 30 30
+  address-family ipv6 unicast
+    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 remote-as 64512
+    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 timers 10 30 30
+    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 activate
+    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 soft-reconfiguration inbound
+</code></pre></div></div>
+
+<p>Here you effectively have to replace the unusable IPv4 address for the neighbor with the correct IPv6 address and change the address-family section from IPv4 to IPv6.</p>
+
+<h1 id="validation">Validation</h1>
+
+<p>As a final step, we can validate that IPv6 routes are being learned from the TGW via the Site-to-Site VPN.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ipv6 route bgp
+IPv6 Routing Table - default - 13 entries
+Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
+       B - BGP, R - RIP, H - NHRP, I1 - ISIS L1
+       I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary, D - EIGRP
+       EX - EIGRP external, ND - ND Default, NDp - ND Prefix, DCE - Destination
+       NDr - Redirect, RL - RPL, O - OSPF Intra, OI - OSPF Inter
+       OE1 - OSPF ext 1, OE2 - OSPF ext 2, ON1 - OSPF NSSA ext 1
+       ON2 - OSPF NSSA ext 2, la - LISP alt, lr - LISP site-registrations
+       ld - LISP dyn-eid, lA - LISP away, le - LISP extranet-policy
+       lp - LISP publications, a - Application, m - OMP
+B   2600:1234::/64 [20/100]
+     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
+     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
+B   2600:1A14:5DE:DB00::/56 [20/100]
+     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
+     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
+B   2600:1A16:807:3A00::/56 [20/100]
+     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
+     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
+
+</code></pre></div></div>
+
+<p>In this case we can see that a total of three prefixes is learned, whereas the first prefix is originated on the TGW via a <a href="https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/">summary route</a>, while the other two prefixes correspond to VPCs.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This blog post guided you around some of the pitfalls when setting up an IPv6 capable AWS Site-to-Site VPN connection. It covered some of the rather cosmetic imperfections within the AWS Console around unusable IPv4 addresses, as well as generating a working Customer Gateway (CGW) configruation based on the downloadable configuration files.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F&amp;title=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" class="pagination--pager" title="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup
+">Previous</a>
+    
+    
+      <a href="/2019/12/13/dx-deep-dive/" class="pagination--pager" title="AWS Direct Connect deep dive
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

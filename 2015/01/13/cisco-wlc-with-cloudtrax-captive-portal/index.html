@@ -1,0 +1,1099 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Use a Cisco WLC based Wifi with the CloudTrax captive portal - Edge Cloud</title>
+<meta name="description" content="The Cisco Wireless LAN Controller (WLC) solution provides 802.11 wireless networking solutions for enterprises and service providers via a combination of a central wireless LAN controllers and associated lightweight access points controlled by the controller, all concurrently managed by any or all of the operating system user interfaces.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Use a Cisco WLC based Wifi with the CloudTrax captive portal">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/01/13/cisco-wlc-with-cloudtrax-captive-portal/">
+
+
+  <meta property="og:description" content="The Cisco Wireless LAN Controller (WLC) solution provides 802.11 wireless networking solutions for enterprises and service providers via a combination of a central wireless LAN controllers and associated lightweight access points controlled by the controller, all concurrently managed by any or all of the operating system user interfaces.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Use a Cisco WLC based Wifi with the CloudTrax captive portal">
+  <meta name="twitter:description" content="The Cisco Wireless LAN Controller (WLC) solution provides 802.11 wireless networking solutions for enterprises and service providers via a combination of a central wireless LAN controllers and associated lightweight access points controlled by the controller, all concurrently managed by any or all of the operating system user interfaces.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/01/13/cisco-wlc-with-cloudtrax-captive-portal/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-01-13T04:49:21-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/01/13/cisco-wlc-with-cloudtrax-captive-portal/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Use a Cisco WLC based Wifi with the CloudTrax captive portal">
+    <meta itemprop="description" content="The Cisco Wireless LAN Controller (WLC) solution provides 802.11 wireless networking solutions for enterprises and service providers via a combination of a central wireless LAN controllers and associated lightweight access points controlled by the controller, all concurrently managed by any or all of the operating system user interfaces.">
+    <meta itemprop="datePublished" content="January 13, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Use a Cisco WLC based Wifi with the CloudTrax captive portal
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#existing-cisco-wlc-network">Existing Cisco WLC network</a></li>
+  <li><a href="#open-mesh-physical-setup">Open-Mesh physical setup</a></li>
+  <li>
+<a href="#cloudtrax-online-dashboard-configuration">CloudTrax Online Dashboard Configuration</a>
+    <ul>
+      <li><a href="#public-ssid-settings-tab">Public SSID settings tab</a></li>
+      <li><a href="#private-ssid-settings-tab">Private SSID settings tab</a></li>
+      <li><a href="#radio-settings-tab">Radio settings tab</a></li>
+    </ul>
+  </li>
+  <li><a href="#cloudtrax-scripting">CloudTrax scripting</a></li>
+  <li><a href="#results">Results</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>The <a href="http://www.cisco.com/c/en/us/products/wireless/virtual-wireless-controller/index.html" target="_blank" rel="noopener noreferrer">Cisco Wireless LAN Controller (WLC)</a> solution provides 802.11 wireless networking solutions for enterprises and service providers via a combination of a central wireless LAN controllers and associated lightweight access points controlled by the controller, all concurrently managed by any or all of the operating system user interfaces.</p>
+
+<p>The solution simplifies deploying and managing large-scale wireless LANs by managing all data client, communications, and system administration functions, performing radio resource management (RRM) functions, managing system-wide mobility policies, and coordinating all security functions (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/01/142251.jpg" title="Figure 1: Simple Cisco WLC based network " class="image-popup">
+<picture>
+  <source width="253" type="image/webp" data-srcset="
+
+ /content/uploads/2015/01/142251.webp 253w" sizes="253px"></source>
+  <source width="253" data-srcset="
+
+ /content/uploads/2015/01/142251.jpg 253w" sizes="253px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/01/142251.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 1: Simple Cisco WLC based network ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Simple Cisco WLC based network
+</figcaption>
+
+</figure>
+
+<p>Despite these outstanding capabilities, Cisco’s WLC brings rather limited and complicated capabilities to the table when it comes to creating a simple captive portal for Wifi users, where authentication of valid customers is performed via voucher codes.</p>
+
+<p>Here <a href="http://www.open-mesh.com/" target="_blank" rel="noopener noreferrer">Open-Mesh</a> with it’s cloud-based <a href="https://www.cloudtrax.com/" target="_blank" rel="noopener noreferrer">CloudTrax controller</a> offers a very simple and cost-effective solution to deploy a Wifi network - e.g. within a hotel, restaurant, college campus or other location - for users to authenticate via a Captive Portal for free, with a free or prepaid voucher or via PayPal payment (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/01/cloudtrax-stati-008.png" title="Figure 2: Captive Portal provided by CloudTrax " class="image-popup">
+<picture>
+  <source width="287" type="image/webp" data-srcset="
+
+ /content/uploads/2015/01/cloudtrax-stati-008.webp 287w" sizes="287px"></source>
+  <source width="287" data-srcset="
+
+ /content/uploads/2015/01/cloudtrax-stati-008.png 287w" sizes="287px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/01/cloudtrax-stati-008.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Captive Portal provided by CloudTrax ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Captive Portal provided by CloudTrax
+</figcaption>
+
+</figure>
+
+<p>But if you already made a large financial and time investment into your Cisco WLC based Wifi network you do not necessarily want to rip and replace this network with an Open-Mesh network. Instead you might want to use the best of both worlds: The rock solid Cisco hardware with the easy to use CloudTrax captive portal. In this article I’ll show you how to do exactly this.</p>
+
+<h1 id="existing-cisco-wlc-network">Existing Cisco WLC network</h1>
+
+<p>With Cisco WLC a service set identifier (SSID) is mapped to a VLAN within a port. As shown in Figure 3, each controller port connection is an 802.1Q trunk and should be configured as such on the neighbor switch. As an alternative you can also use the untagged VLAN within the WLC, thus not requiring a 802.1Q on the neighbor switch side. But in this case only a single SSID can be configured. As we want to provide a single public SSID with a CloudTrax backed captive portal, this setup would be sufficient.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/01/146947.jpg" title="Figure 3: Ports, Interfaces, and WLANs in a Cisco WLC " class="image-popup">
+<picture>
+  <source width="589" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/01/146947-320.webp 320w, 
+
+    
+    /content/resized/2015/01/146947-384.webp 384w, 
+
+    
+    /content/resized/2015/01/146947-512.webp 512w, 
+
+ /content/uploads/2015/01/146947.webp 589w" sizes="589px"></source>
+  <source width="589" data-srcset="
+
+    /content/resized/2015/01/146947-320.jpg 320w, 
+
+    /content/resized/2015/01/146947-384.jpg 384w, 
+
+    /content/resized/2015/01/146947-512.jpg 512w, 
+
+ /content/uploads/2015/01/146947.jpg 589w" sizes="589px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/01/146947.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 3: Ports, Interfaces, and WLANs in a Cisco WLC ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Ports, Interfaces, and WLANs in a Cisco WLC
+</figcaption>
+
+</figure>
+
+<h1 id="open-mesh-physical-setup">Open-Mesh physical setup</h1>
+
+<p>The Cisco WLC does not directly support interacting with the CloudTrax-based Captive Portal. This capability is restricted to Open-Mesh based devices. In order to make a Cisco WLC based WiFi network work with CloudTrax, the solution is to place an Open-Mesh device - e.g. the <a href="http://www.open-mesh.com/products/access-points/grp-om2p.html" target="_blank" rel="noopener noreferrer">OM2P</a> - between the Cisco WLC based WiFi network an the internet (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/01/OM2P.png" title="Figure 4: Physical Open-Mesh setup " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/01/OM2P-320.webp 320w, 
+
+    
+    /content/resized/2015/01/OM2P-384.webp 384w, 
+
+    
+    /content/resized/2015/01/OM2P-512.webp 512w, 
+
+ /content/uploads/2015/01/OM2P.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/01/OM2P-320.png 320w, 
+
+    /content/resized/2015/01/OM2P-384.png 384w, 
+
+    /content/resized/2015/01/OM2P-512.png 512w, 
+
+ /content/uploads/2015/01/OM2P.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/01/OM2P.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Physical Open-Mesh setup ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Physical Open-Mesh setup
+</figcaption>
+
+</figure>
+
+<p>Make sure to plug the internet uplink into the port closest to the power plug and the Cisco WLC to the other port. Also keep in mind that not all Open-Mesh devices come with a second ethernet port. The Open-Mesh <a href="http://www.open-mesh.com/products/access-points/grp-om2p.html" target="_blank" rel="noopener noreferrer">OM2P</a> does and is therefore the recommended device for this project.</p>
+
+<p>From the perspective of the Cisco WLC, the OM2P just acts like an upstream switch and from the perspective of the OM2P the Cisco WLC just appears to be a wired device.</p>
+
+<p>Keep in mind that the OM2P does not support an 802.1Q trunk towards the WLC. You therefore either have to use the native VLAN capability on the WLC when connecting it directly to the OM2P. Or you have to place a switch that does support an 802.1Q trunk between the WLC and the OM2P. In this case the VLAN from the 802.1Q trunk towards the WLC needs to be mapped to an access port towards the OM2P.</p>
+
+<h1 id="cloudtrax-online-dashboard-configuration">CloudTrax Online Dashboard Configuration</h1>
+
+<p>Please refer to the CloudTrax documentation at <a href="https://www.cloudtrax.com/" target="_blank" rel="noopener noreferrer">https://www.cloudtrax.com/</a> for the quick start guide and documentation on how to use the splash page. Below are the configuration items that need to be changed for CloudTrax to work with the WLC:</p>
+
+<h2 id="public-ssid-settings-tab">Public SSID settings tab</h2>
+
+<p>You don’t actually want to use the Open-Mesh device to provide any wireless capabilities. This should all be handled by the Cisco WLC-based network. Unfortunately it is not possible to turn off the wireless capabilities on an Open-Mesh device completely. Instead we will need to make some configuration changes to make the wireless network on the Open-Mesh device as inaccessible as possible. First, choose an SSID that <em>does not</em> correspond to the SSID that is configured in the Cisco WLC for the public accessible network and also hide this SSID (See Figure 5). Bottom-line: You don’t want clients to connect to the Open-Mesh device, but to the Cisco WLC network.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/01/CloudTraxPortal11.png" title="Figure 5: CloudTrax Public SSID settings " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/01/CloudTraxPortal11-320.webp 320w, 
+
+    
+    /content/resized/2015/01/CloudTraxPortal11-384.webp 384w, 
+
+    
+    /content/resized/2015/01/CloudTraxPortal11-512.webp 512w, 
+
+ /content/uploads/2015/01/CloudTraxPortal11.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/01/CloudTraxPortal11-320.png 320w, 
+
+    /content/resized/2015/01/CloudTraxPortal11-384.png 384w, 
+
+    /content/resized/2015/01/CloudTraxPortal11-512.png 512w, 
+
+ /content/uploads/2015/01/CloudTraxPortal11.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/01/CloudTraxPortal11.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: CloudTrax Public SSID settings ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: CloudTrax Public SSID settings
+</figcaption>
+
+</figure>
+
+<h2 id="private-ssid-settings-tab">Private SSID settings tab</h2>
+
+<p>Similar for the private SSID. You do not actually want to provide this network via the Open-Mesh device. Therefore turn it off completely. But also make sure that the “Wired Clients” tick box <em>is not</em> selected (See Figure 6). This way the Cisco WLC based network will be mapped to the public network in CloudTrax and can use the captive portal.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/01/CloudTraxPortal3.png" title="Figure 6: CloudTrax Private SSID settings " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/01/CloudTraxPortal3-320.webp 320w, 
+
+    
+    /content/resized/2015/01/CloudTraxPortal3-384.webp 384w, 
+
+    
+    /content/resized/2015/01/CloudTraxPortal3-512.webp 512w, 
+
+ /content/uploads/2015/01/CloudTraxPortal3.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/01/CloudTraxPortal3-320.png 320w, 
+
+    /content/resized/2015/01/CloudTraxPortal3-384.png 384w, 
+
+    /content/resized/2015/01/CloudTraxPortal3-512.png 512w, 
+
+ /content/uploads/2015/01/CloudTraxPortal3.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/01/CloudTraxPortal3.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: CloudTrax Private SSID settings ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: CloudTrax Private SSID settings
+</figcaption>
+
+</figure>
+
+<h2 id="radio-settings-tab">Radio settings tab</h2>
+
+<p>Next reduce the transmit power of the Open-Mesh device to the minimum available (See Figure 7). This will reduce the likelihood that devices can connect to the Open-Mesh device over the wireless network. Instead they will connect over the Cisco WLC network.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/01/CloudTraxPortal2.png" title="Figure 7: CloudTrax Radio settings " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/01/CloudTraxPortal2-320.webp 320w, 
+
+    
+    /content/resized/2015/01/CloudTraxPortal2-384.webp 384w, 
+
+    
+    /content/resized/2015/01/CloudTraxPortal2-512.webp 512w, 
+
+ /content/uploads/2015/01/CloudTraxPortal2.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/01/CloudTraxPortal2-320.png 320w, 
+
+    /content/resized/2015/01/CloudTraxPortal2-384.png 384w, 
+
+    /content/resized/2015/01/CloudTraxPortal2-512.png 512w, 
+
+ /content/uploads/2015/01/CloudTraxPortal2.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/01/CloudTraxPortal2.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: CloudTrax Radio settings ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: CloudTrax Radio settings
+</figcaption>
+
+</figure>
+
+<p>You can also remove the antenna from the Open-Mesh device to further reduce the likelihood of a device connecting over the wireless interface to that device. But doing so will burn out the wireless chip of the Open-Mesh device over time. This approach is therefore not advisable if you plan on using this Open-Mesh device as a WiFi unit in the future.</p>
+
+<h1 id="cloudtrax-scripting">CloudTrax scripting</h1>
+
+<p>Unfortunately we are not done yet at this point. We need to add a custom script on the Open-Mesh device, so that it can handle the static IP address of the WLC device. We also need to configure the WLC with such a static address for the network issued by the Open-Mesh device.</p>
+
+<p>First connect to the Open-Mesh device via SSH and lookup the IP address information used for the public SSID via the command “ifconfig br-pub”. The result should look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@N3:~# ifconfig br-pub
+br-pub    Link encap:Ethernet  HWaddr AC:86:12:34:56:78
+          inet addr:10.255.48.1  Bcast:10.255.51.255  Mask:255.255.252.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:2379186 errors:0 dropped:306 overruns:0 frame:0
+          TX packets:1812674 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:178505478 (170.2 MiB)  TX bytes:2171022384 (2.0 GiB)
+
+root@N3:~#
+</code></pre></div></div>
+
+<p>Note that in this case the public SSID network operated by Open-Mesh is 10.255.48.0 with a netmask of 255.255.252.0 and the Open-Mesh device itself will operate at 10.255.48.1.</p>
+
+<p>With these information we can now configure the Cisco WLC device to be at 10.255.48.2 (See Figure 8). Note that both the Gateway and the Primary DHCP Server are filled with the IP address of the Open-Mesh device.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/01/WLC_Interface.png" title="Figure 8: Cisco WLC Interface configuration " class="image-popup">
+<picture>
+  <source width="441" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/01/WLC_Interface-320.webp 320w, 
+
+    
+    /content/resized/2015/01/WLC_Interface-384.webp 384w, 
+
+ /content/uploads/2015/01/WLC_Interface.webp 441w" sizes="441px"></source>
+  <source width="441" data-srcset="
+
+    /content/resized/2015/01/WLC_Interface-320.png 320w, 
+
+    /content/resized/2015/01/WLC_Interface-384.png 384w, 
+
+ /content/uploads/2015/01/WLC_Interface.png 441w" sizes="441px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/01/WLC_Interface.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Cisco WLC Interface configuration ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Cisco WLC Interface configuration
+</figcaption>
+
+</figure>
+
+<p>Next create the file <code class="highlighter-rouge">/sbin/wlc</code> inside the Open-Mesh device with the following content. Replace the IP address 10.255.48.2 with the IP address that corresponds to the WLC in your setup.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="nb">echo</span> <span class="s2">"Checking for WLC"</span>
+ping <span class="nt">-c3</span> 10.255.48.2 <span class="o">&gt;</span> /dev/null 2&gt;&amp;1 <span class="o">||</span> <span class="o">{</span>
+        ifconfig br-lan2 down
+        ifconfig br-pub down
+        brctl delif br-lan2 eth1
+        brctl addif br-pub eth1
+        ifconfig br-pub up
+        ifconfig br-lan2 up
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This script will test connectivity to the WLC and if this test fails, re-configure the network interfaces on the Open-Mesh device. This script should run regularly, as configuration changes pushed from CloudTrax can undo any changes. This can be accomplished by creating a symbolic link from /sbin/wlc to /etc/cron.5mins/wlc with the command <code class="highlighter-rouge">ln -s /sbin/wlc /etc/cron.5mins/wlc</code>.</p>
+
+<p>Check your results with:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@N3:~# ls -l /etc/cron.5mins/wlc
+lrwxrwxrwx    1 root     root             9 Dec 29 22:41 /etc/cron.5mins/wlc -&gt; /sbin/wlc
+root@N3:~#
+</code></pre></div></div>
+
+<h1 id="results">Results</h1>
+
+<p>After a maximum of 5 minutes you should be able to connect to the Cisco WLC-provided SSID and receive an IP address on the above mentioned network. Upon opening a web browser and connecting to any web-page you will be displayed with the captive portal, where you can login via a free or prepaid voucher.</p>
+
+<p>The client device will connect to the lightweight Cisco access point that is managed via the WLC. When asking for an IPv4 address via DHCP, the WLC acts as a DHCP proxy with the Open-Mesh device being the actual DHCP server.</p>
+
+<p>Keep in mind that all Internet traffic from the Cisco WLC based WiFi network will now traverse through the Open-Mesh device. This means that a high number of parallel user sessions on the WiFi network can cause a high CPU utilization on the Open-Mesh device.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#wifi" class="page__taxonomy-item" rel="tag">WiFi</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-01-13T04:49:21-08:00">January 13, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Use+a+Cisco+WLC+based+Wifi+with+the+CloudTrax+captive+portal%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F01%2F13%2Fcisco-wlc-with-cloudtrax-captive-portal%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F01%2F13%2Fcisco-wlc-with-cloudtrax-captive-portal%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F01%2F13%2Fcisco-wlc-with-cloudtrax-captive-portal%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F01%2F13%2Fcisco-wlc-with-cloudtrax-captive-portal%2F&amp;title=Use+a+Cisco+WLC+based+Wifi+with+the+CloudTrax+captive+portal" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2014/06/25/implementing-ipv6-six-steps-success/" class="pagination--pager" title="Implementing IPv6: Six steps to success
+">Previous</a>
+    
+    
+      <a href="/2015/02/20/sddc-architecture-introduction/" class="pagination--pager" title="Software Defined Data Center (SDDC) Architecture - Introduction
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,867 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>“Breaking” Amazon AWS S3 - Edge Cloud</title>
+<meta name="description" content="While working with Amazon AWS S3 it turned out, that it allows users to specify S3 bucket names in the “US Standard” regions that are not allowed like this in any other zone. As most libraries building on top of S3 assume the naming restrictions for all non-“US Standard” regions are also enforced in “US Standard”, this breaks quite a bit of things.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="“Breaking” Amazon AWS S3">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/06/21/breaking-amazon-aws-s3/">
+
+
+  <meta property="og:description" content="While working with Amazon AWS S3 it turned out, that it allows users to specify S3 bucket names in the “US Standard” regions that are not allowed like this in any other zone. As most libraries building on top of S3 assume the naming restrictions for all non-“US Standard” regions are also enforced in “US Standard”, this breaks quite a bit of things.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="“Breaking” Amazon AWS S3">
+  <meta name="twitter:description" content="While working with Amazon AWS S3 it turned out, that it allows users to specify S3 bucket names in the “US Standard” regions that are not allowed like this in any other zone. As most libraries building on top of S3 assume the naming restrictions for all non-“US Standard” regions are also enforced in “US Standard”, this breaks quite a bit of things.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/06/21/breaking-amazon-aws-s3/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-06-21T14:09:31-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/06/21/breaking-amazon-aws-s3/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="“Breaking” Amazon AWS S3">
+    <meta itemprop="description" content="While working with Amazon AWS S3 it turned out, that it allows users to specify S3 bucket names in the “US Standard” regions that are not allowed like this in any other zone. As most libraries building on top of S3 assume the naming restrictions for all non-“US Standard” regions are also enforced in “US Standard”, this breaks quite a bit of things.">
+    <meta itemprop="datePublished" content="June 21, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">“Breaking” Amazon AWS S3
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#creating-an-s3-bucket-outside-us-standard">Creating an S3 bucket outside “US Standard”</a></li>
+  <li><a href="#creating-an-s3-bucket-in-us-standard">Creating an S3 bucket in “US Standard”</a></li>
+  <li><a href="#where-the-problems-start">Where the problems start</a></li>
+  <li><a href="#why-does-it-matter">Why does it matter?</a></li>
+  <li><a href="#its-all-in-the-documentation">It’s all in the documentation</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>I have used various services from <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon AWS</a> for quite a while now and have always been amazed by what interesting things one can do with this services. Recently I took the AWS training course <a href="https://www.edge-cloud.net/2014/03/11/architecture-design-vsphere-ipv6/">Architecting on AWS</a>, which gives an awesome overview on what’s possible with the AWS service.</p>
+
+<p>During the training some of the participants had quite some trouble with one of the hands-on exercises. As my exercise worked without a flaw, I used the time and started digging deeper what could be wrong. Turns out that <a href="https://aws.amazon.com/s3/" target="_blank" rel="noopener noreferrer">Amazon AWS S3</a> allows users to specify S3 bucket names in the “US Standard” regions that are not allowed like this in any other zone. As most libraries building on top of S3 assume the naming restrictions for all non-“US Standard” regions are also enforced in “US Standard”, it breaks functionality of some of these libraries.</p>
+
+<p>Let’s have a closer look:</p>
+
+<h1 id="creating-an-s3-bucket-outside-us-standard">Creating an S3 bucket outside “US Standard”</h1>
+
+<p>When creating an S3 bucket outside “US Standard” neither the S3 Management Console nor the underlying REST API accepts the name to contain upper case letters. Figure 1 shows an example of the error message in the Console.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/Capture09.png" title="Figure 1: Upper case letters are not allowed in S3 bucket names in the Oregon region " class="image-popup">
+<picture>
+  <source width="732" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/Capture09-320.webp 320w, 
+
+    
+    /content/resized/2013/06/Capture09-384.webp 384w, 
+
+    
+    /content/resized/2013/06/Capture09-512.webp 512w, 
+
+    
+    /content/resized/2013/06/Capture09-683.webp 683w, 
+
+ /content/uploads/2013/06/Capture09.webp 732w" sizes="732px"></source>
+  <source width="732" data-srcset="
+
+    /content/resized/2013/06/Capture09-320.png 320w, 
+
+    /content/resized/2013/06/Capture09-384.png 384w, 
+
+    /content/resized/2013/06/Capture09-512.png 512w, 
+
+    /content/resized/2013/06/Capture09-683.png 683w, 
+
+ /content/uploads/2013/06/Capture09.png 732w" sizes="732px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/Capture09.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Upper case letters are not allowed in S3 bucket names in the Oregon region ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Upper case letters are not allowed in S3 bucket names in the Oregon region
+</figcaption>
+
+</figure>
+
+<p>This behavior makes sense as the above bucket name would become reachable under the URL <em>http://ThisBucketWillLiveInOregon.s3.amazonaws.com/</em> which is equivalent to e.g. <em>http://thisbucketwillliveinoregon.s3.amazonaws.com/</em>. On this topic <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank" rel="noopener noreferrer">RFC1035</a> notes: <em>Note that while upper and lower case letters are allowed in domain names, no significance is attached to the case. That is, two names with the same spelling but different case are to be treated as if identical.</em></p>
+
+<h1 id="creating-an-s3-bucket-in-us-standard">Creating an S3 bucket in “US Standard”</h1>
+
+<p>For S3 buckets created in the AWS region “US Standard”, things look a bit different. As Figure 2 shows, it is very well possible to create two buckets with the same name, that only differentiate in case.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/Capture02.png" title="Figure 2: The &lt;em&gt;US Standard&lt;/em&gt; region differentiates case in S3 bucket names " class="image-popup">
+<picture>
+  <source width="431" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/Capture02-320.webp 320w, 
+
+    
+    /content/resized/2013/06/Capture02-384.webp 384w, 
+
+ /content/uploads/2013/06/Capture02.webp 431w" sizes="431px"></source>
+  <source width="431" data-srcset="
+
+    /content/resized/2013/06/Capture02-320.png 320w, 
+
+    /content/resized/2013/06/Capture02-384.png 384w, 
+
+ /content/uploads/2013/06/Capture02.png 431w" sizes="431px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/Capture02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: The &lt;em&gt;US Standard&lt;/em&gt; region differentiates case in S3 bucket names ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: The <em>US Standard</em> region differentiates case in S3 bucket names
+</figcaption>
+
+</figure>
+
+<p>On a first glimpse that isn’t that bad, as in contrary to other regions, buckets in the “US Standard” region are mapped to the URL http://s3.amazonaws.com/<bucket name="">/. And here there is indeed a difference between the URL _"http://s3.amazonaws.com/DifferentiateBetweenUPPERcaseANDlowerCASE"_ and the folder _"http://s3.amazonaws.com/DifferentiateBetweenupperCASEANDLOWERCASE"_.</bucket></p>
+
+<h1 id="where-the-problems-start">Where the problems start</h1>
+
+<p>One problem starts when you want to use that bucket in the “US Standard” region for static website hosting. As Figure 3 shows, attempting to enable website hosting for an S3 bucket in the “US Standard” region that uses upper case letters will fail. Unfortunately the error message is quite useless. Here Amazon AWS should provide better feedback through a useful error message.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/Capture08_SMall.png" title="Figure 3: Website hosting for an S3 bucket in the region &lt;em&gt;US Standard&lt;/em&gt; fails " class="image-popup">
+<picture>
+  <source width="900" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/Capture08_SMall-320.webp 320w, 
+
+    
+    /content/resized/2013/06/Capture08_SMall-384.webp 384w, 
+
+    
+    /content/resized/2013/06/Capture08_SMall-512.webp 512w, 
+
+    
+    /content/resized/2013/06/Capture08_SMall-683.webp 683w, 
+
+    
+    /content/resized/2013/06/Capture08_SMall-800.webp 800w, 
+
+ /content/uploads/2013/06/Capture08_SMall.webp 900w" sizes="900px"></source>
+  <source width="900" data-srcset="
+
+    /content/resized/2013/06/Capture08_SMall-320.png 320w, 
+
+    /content/resized/2013/06/Capture08_SMall-384.png 384w, 
+
+    /content/resized/2013/06/Capture08_SMall-512.png 512w, 
+
+    /content/resized/2013/06/Capture08_SMall-683.png 683w, 
+
+    /content/resized/2013/06/Capture08_SMall-800.png 800w, 
+
+ /content/uploads/2013/06/Capture08_SMall.png 900w" sizes="900px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/Capture08_SMall.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Website hosting for an S3 bucket in the region &lt;em&gt;US Standard&lt;/em&gt; fails ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Website hosting for an S3 bucket in the region <em>US Standard</em> fails
+</figcaption>
+
+</figure>
+
+<p>Yet again, this also makes sense: The above S3 bucket would be hosted under the URL <em>http://DifferentiateBetweenUPPERcaseANDlowerCASE.s3-website-us-east-1.amazonaws.com</em> which according to RFC1035 doesn’t differ from <em>http://DifferentiateBetweenupperCASEANDLOWERCASE.s3-website-us-east-1.amazonaws.com</em> which the other bucket - that we previously created - would receive. Thus two buckets would receive the same URL. That clearly shouldn’t happen.</p>
+
+<h1 id="why-does-it-matter">Why does it matter?</h1>
+
+<p>Turns out that some libraries for making the S3 REST API available in various programming languages do not take into consideration that “US Standard” allows mixed case S3 buckets. The Python interface to Amazon Web Services “<a href="https://aws.amazon.com/sdk-for-python/" target="_blank" rel="noopener noreferrer">boto</a>” for example assumes that bucket names are always in lower case. Using a bucket with a mixed case name will break uploads and thereby the functionality of the library.</p>
+
+<p>That’s exactly what happened with other members of the training course: Their bucket name used non-lower case letters, breaking the provided Python script.</p>
+
+<h1 id="its-all-in-the-documentation">It’s all in the documentation</h1>
+
+<p>At the same time, the Amazon AWS documentation is pretty extensive and does mention the above special cases. Although one has to say that they are “well hidden”.</p>
+
+<p>In the Amazon S3 Developer Guide, the section “<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html" target="_blank" rel="noopener noreferrer">Bucket Restrictions and Limitations</a>” clearly states that in all regions except for the US Standard region a bucket name must comply with certain rules, that will result in a DNS compliant bucket name. While the rules for bucket names in the US Standard region are similar but less restrictive and can result in a bucket name that is not DNS-compliant.</p>
+
+<p>The section “<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html" target="_blank" rel="noopener noreferrer">Virtual Hosting of Buckets</a>” in the same guide then also states that only lower-case buckets are addressable using the virtual hosting method.</p>
+
+<p>While it’s great that the documentation clearly mentions the restrictions, as an end-user I would prefer consistency between the regions and better error messages.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-06-21T14:09:31-07:00">June 21, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=%22Breaking%22+Amazon+AWS+S3%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F21%2Fbreaking-amazon-aws-s3%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F21%2Fbreaking-amazon-aws-s3%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F21%2Fbreaking-amazon-aws-s3%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F21%2Fbreaking-amazon-aws-s3%2F&amp;title=%22Breaking%22+Amazon+AWS+S3" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/06/13/arista-veos-on-vmware-esx/" class="pagination--pager" title="Arista vEOS on VMware ESX
+">Previous</a>
+    
+    
+      <a href="/2013/06/24/network-troubleshooting-via-arista-eos-shell/" class="pagination--pager" title="Network troubleshooting via Arista EOS shell
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

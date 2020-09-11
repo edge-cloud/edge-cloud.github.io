@@ -1,0 +1,2222 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>OpenStack with vSphere and NSX - Part 5: Create virtual networks and launch a VM instance in OpenStack - Edge Cloud</title>
+<meta name="description" content="Create virtual networks and launch a VM instance for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="OpenStack with vSphere and NSX - Part 5: Create virtual networks and launch a VM instance in OpenStack">
+<meta property="og:url" content="https://www.edge-cloud.net/2014/01/24/openstack-vsphere-nsx-part5/">
+
+
+  <meta property="og:description" content="Create virtual networks and launch a VM instance for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 5: Create virtual networks and launch a VM instance in OpenStack">
+  <meta name="twitter:description" content="Create virtual networks and launch a VM instance for a setup including VMware vSphere, VMware NSX and OpenStack.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/01/24/openstack-vsphere-nsx-part5/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2014-01-24T02:26:16-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2014/01/24/openstack-vsphere-nsx-part5/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="OpenStack with vSphere and NSX - Part 5: Create virtual networks and launch a VM instance in OpenStack">
+    <meta itemprop="description" content="Create virtual networks and launch a VM instance for a setup including VMware vSphere, VMware NSX and OpenStack.">
+    <meta itemprop="datePublished" content="January 24, 2014">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">OpenStack with vSphere and NSX - Part 5: Create virtual networks and launch a VM instance in OpenStack
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#initial-login-to-openstack">Initial Login to OpenStack</a></li>
+  <li>
+<a href="#admin-view">Admin view</a>
+    <ul>
+      <li><a href="#creating-an-external-network">Creating an external network</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#tenants-view">Tenant’s view</a>
+    <ul>
+      <li><a href="#creating-networks">Creating networks</a></li>
+      <li><a href="#deploying-a-virtual-machine">Deploying a Virtual Machine</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Welcome to part 5 of the <a href="/2013/12/12/openstack-vsphere-nsx/">series: “OpenStack with vSphere and NSX”</a> on installing OpenStack with VMware vSphere and VMware NSX. This series shows the deployment of an OpenStack cloud that leverages VMware vSphere – along with it’s well-known enterprise-class benefits such as VMotion – as the underlying Hypervisor. In addition, network virtualization within OpenStack will be provided via NSX as a Neutron plugin. This allows the creation of virtual networks within OpenStack that consist of L2 segments and can be interconnected via L3 to each other or the outside world.</p>
+
+<p>In the <a href="/2014/01/08/openstack-vsphere-nsx-part4/">previous post: “OpenStack with vSphere and NSX – Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)”</a> we completed the import and configuration of the VMware vSphere OpenStack Virtual Appliance (VOVA). In this article we will take our new cloud for a quick spin and see what we can do with it, creating virtual networks within OpenStack that consist of L2 segments and interconnecting them via L3 to each other or the outside world. Also we will create our first VM instance via OpenStack. In the next post we will then dig a bit deeper and look behind the scenes.</p>
+
+<h1 id="initial-login-to-openstack">Initial Login to OpenStack</h1>
+
+<p>Let’s start with the initial login into OpenStack via VOVA. Point your preferred browser to the IP address or associated DNS name that you gave VOVA and login with the standard credentials. The username is <code class="highlighter-rouge">admin</code> and the password is <code class="highlighter-rouge">vmware</code> (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA01.png" title="Figure 1: Login to OpenStack Horizon " class="image-popup">
+<picture>
+  <source width="468" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA01-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA01-384.webp 384w, 
+
+ /content/uploads/2014/01/VOVA01.webp 468w" sizes="468px"></source>
+  <source width="468" data-srcset="
+
+    /content/resized/2014/01/VOVA01-320.png 320w, 
+
+    /content/resized/2014/01/VOVA01-384.png 384w, 
+
+ /content/uploads/2014/01/VOVA01.png 468w" sizes="468px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Login to OpenStack Horizon ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Login to OpenStack Horizon
+</figcaption>
+
+</figure>
+
+<p>After successful login as the user admin you will end up in the admin view of the OpenStack Dashboard Horizon. This is the view that the operator of the OpenStack cloud would see and use (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-02.png" title="Figure 2: OpenStack Horizon - Admin View " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-02-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-02-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-02-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-02-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-02.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-02-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-02-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-02-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-02-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-02.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: OpenStack Horizon - Admin View ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: OpenStack Horizon - Admin View
+</figcaption>
+
+</figure>
+
+<p>Let’s change over to the project view and see what a tenant would see. While the admin account allows you to see both, a regular tenant would only see the project view and not the admin view (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA03.png" title="Figure 3: OpenStack Horizon - Project View " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA03-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA03-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA03-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA03-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA03.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA03-320.png 320w, 
+
+    /content/resized/2014/01/VOVA03-384.png 384w, 
+
+    /content/resized/2014/01/VOVA03-512.png 512w, 
+
+    /content/resized/2014/01/VOVA03-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA03.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA03.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: OpenStack Horizon - Project View ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: OpenStack Horizon - Project View
+</figcaption>
+
+</figure>
+
+<p>Next, let’s have a look at the initial virtual network topology available to us. Click on the <strong>Network Topology</strong> tab within the Project area (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-03.png" title="Figure 4: Tenant View - Initially empty network topology " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-03-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-03-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-03-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-03-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-03.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-03-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-03-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-03-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-03-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-03.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-03.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Tenant View - Initially empty network topology ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Tenant View - Initially empty network topology
+</figcaption>
+
+</figure>
+
+<p>Initially the Network Topology is empty. This means that we do not have any network available to connect Virtual Machines to. As this situation is not very useful to us, let’s start by creating some networks. Here’s what we need at a base level (See Figure 5):</p>
+
+<ol>
+  <li>An external (sometimes also called public) network that corresponds to the physical network segment providing us external connectivity.</li>
+  <li>An internal network per tenant to which we can attach VMs. These per tenant VM can use this internal network to communicate with each other. But also we don’t necessarily want to connect every VM to the outside world.</li>
+  <li>In order for the VMs, connected to the internal network, to reach the outside world (e.g. Internet) we also need a router providing Source NAT (SNAT) capability between internal and external network.</li>
+</ol>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/OpenStackInternalExternalNetwork.png" title="Figure 5: Simple Virtual Network for OpenStack " class="image-popup">
+<picture>
+  <source width="255" type="image/webp" data-srcset="
+
+ /content/uploads/2014/01/OpenStackInternalExternalNetwork.webp 255w" sizes="255px"></source>
+  <source width="255" data-srcset="
+
+ /content/uploads/2014/01/OpenStackInternalExternalNetwork.png 255w" sizes="255px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/OpenStackInternalExternalNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Simple Virtual Network for OpenStack ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Simple Virtual Network for OpenStack
+</figcaption>
+
+</figure>
+
+<p>The first component will need to be provided by the cloud operator, while component 2 and 3 are created by the individual tenant. Let’s therefore consciously split these two jobs into their own sections.</p>
+
+<h1 id="admin-view">Admin view</h1>
+
+<h2 id="creating-an-external-network">Creating an external network</h2>
+
+<p>As mentioned earlier the cloud operator of the OpenStack cloud will need to create the external network. The <em>admin</em> user that you are currently logged in with has the ability to perform operations as such a cloud operator. But we will later also use it to perform pure tenant operations.</p>
+
+<p>Return to the <em>Admin</em> view, choose the <strong>Networks</strong> tab and click on <strong>Create Network</strong> (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-05.png" title="Figure 6: Admin View - Create new network " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-05-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-05-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-05-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-05-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-05.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-05-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-05-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-05-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-05-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-05.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-05.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Admin View - Create new network ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Admin View - Create new network
+</figcaption>
+
+</figure>
+
+<p>Give the new network a useful name such as <em>External</em> and tick the <strong>External Network</strong> box to designate it as an external network. You need to specify a project when you create a new network. Yet, an external network will be visible from all projects. It therefore doesn’t really matter which project you assign this network to. A good project to pick is the <strong>service</strong> project, as it is a core part of OpenStack and therefore won’t go away. Finalize the creation by clicking on <strong>Create Network</strong> (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-06.png" title="Figure 7: Create External Network " class="image-popup">
+<picture>
+  <source width="698" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-06-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-06-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-06-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-06-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-06.webp 698w" sizes="698px"></source>
+  <source width="698" data-srcset="
+
+    /content/resized/2014/01/VOVA-06-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-06-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-06-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-06-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-06.png 698w" sizes="698px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-06.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Create External Network ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Create External Network
+</figcaption>
+
+</figure>
+
+<p>Next click on the network name - here <em>External</em> - to configure additional settings such as the subnet (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-07.png" title="Figure 8: Change network settings " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-07-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-07-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-07-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-07-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-07.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-07-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-07-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-07-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-07-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-07.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-07.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Change network settings ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Change network settings
+</figcaption>
+
+</figure>
+
+<p>Within the Network Detail view, click on <strong>Create Subnet</strong> to associate a subnet with this network (See Figure 9).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-08.png" title="Figure 9: Create new subnet " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-08-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-08-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-08-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-08-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-08.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-08-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-08-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-08-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-08-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-08.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-08.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Create new subnet ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Create new subnet
+</figcaption>
+
+</figure>
+
+<p>Give the Subnet a meaningful name. I usually use the same name for the Subnet as the Network. Although keep in mind that you can have multiple subnets per network. Furthermore specify the IP range of your external or public network along with the default gateway. In this simple setup, this is the network that all our components (ESXi hosts, vCenter, NSX and VOVA) connect to.</p>
+
+<p>In a realistic, production oriented network, this would be the subnet for the external network that the NSX gateway connects to.</p>
+
+<p>Click on <strong>Subnet Detail</strong> to continue.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-09.png" title="Figure 10: Create Subnet - Step 1 " class="image-popup">
+<picture>
+  <source width="696" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-09-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-09-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-09-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-09-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-09.webp 696w" sizes="696px"></source>
+  <source width="696" data-srcset="
+
+    /content/resized/2014/01/VOVA-09-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-09-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-09-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-09-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-09.png 696w" sizes="696px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-09.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Create Subnet - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Create Subnet - Step 1
+</figcaption>
+
+</figure>
+
+<p>Unselect the <strong>Enable DHCP</strong> checkbox as this is an external network which either already has an existing DHCP service available, or on which you don’t want OpenStack to supply DHCP capabilities. Specify the <em>Allocation pools</em> specific to your environment with an IP range that is not already in use within the selected subnet. Specify the <em>DNS Name Servers</em> and click <strong>Create</strong> to finalize the creation of the subnet (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-10.png" title="Figure 11: Create Subnet - Step 2 " class="image-popup">
+<picture>
+  <source width="698" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-10-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-10-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-10-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-10-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-10.webp 698w" sizes="698px"></source>
+  <source width="698" data-srcset="
+
+    /content/resized/2014/01/VOVA-10-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-10-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-10-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-10-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-10.png 698w" sizes="698px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-10.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Create Subnet - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Create Subnet - Step 2
+</figcaption>
+
+</figure>
+
+<p>Verify that the external network has been successfully created and is in the <em>UP</em> state (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-11.png" title="Figure 12: Successfully created External Network " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-11-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-11-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-11-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-11-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-11.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-11-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-11-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-11-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-11-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-11.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-11.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Successfully created External Network ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Successfully created External Network
+</figcaption>
+
+</figure>
+
+<h1 id="tenants-view">Tenant’s view</h1>
+
+<h2 id="creating-networks">Creating networks</h2>
+
+<p>Let’s return to the tenant’s view and see how the previously created external network will look like. Choose the <em>Project</em> view, then click on the <strong>Network Topology</strong> tab. You can see the external network available to the tenant (See Figure 13).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA-12.png" title="Figure 13: Tenant View - Create internal network " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA-12-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA-12-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA-12-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA-12-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA-12.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA-12-320.png 320w, 
+
+    /content/resized/2014/01/VOVA-12-384.png 384w, 
+
+    /content/resized/2014/01/VOVA-12-512.png 512w, 
+
+    /content/resized/2014/01/VOVA-12-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA-12.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA-12.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Tenant View - Create internal network ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: Tenant View - Create internal network
+</figcaption>
+
+</figure>
+
+<p>Next we will create the internal network. This task will be completed by the tenant within a project. Therefore still within project view, click on the <strong>Create Networks</strong> button (See Figure 13).</p>
+
+<p>Enter a useful name as the <em>Network Name</em> and click on the <strong>Subnet</strong> to specify additional information (See Figure 14).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA15.png" title="Figure 14: Create Network - Step 1 " class="image-popup">
+<picture>
+  <source width="702" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA15-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA15-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA15-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA15-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA15.webp 702w" sizes="702px"></source>
+  <source width="702" data-srcset="
+
+    /content/resized/2014/01/VOVA15-320.png 320w, 
+
+    /content/resized/2014/01/VOVA15-384.png 384w, 
+
+    /content/resized/2014/01/VOVA15-512.png 512w, 
+
+    /content/resized/2014/01/VOVA15-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA15.png 702w" sizes="702px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA15.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Create Network - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Create Network - Step 1
+</figcaption>
+
+</figure>
+
+<p>Specify a <em>Subnet Name</em> - e.g. the value <strong>Internal</strong> - along with the <em>Network Address</em>. Click on <strong>Subnet Detail</strong> to continue (See Figure 15).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA16.png" title="Figure 15: Create Network - Step 2 " class="image-popup">
+<picture>
+  <source width="701" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA16-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA16-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA16-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA16-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA16.webp 701w" sizes="701px"></source>
+  <source width="701" data-srcset="
+
+    /content/resized/2014/01/VOVA16-320.png 320w, 
+
+    /content/resized/2014/01/VOVA16-384.png 384w, 
+
+    /content/resized/2014/01/VOVA16-512.png 512w, 
+
+    /content/resized/2014/01/VOVA16-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA16.png 701w" sizes="701px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA16.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Create Network - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: Create Network - Step 2
+</figcaption>
+
+</figure>
+
+<p>Enter the value of the <em>DNS Name Server</em> and finish the dialog with a click on <strong>Create</strong> (See Figure 16).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA17.png" title="Figure 16: Create Network - Step 3 " class="image-popup">
+<picture>
+  <source width="701" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA17-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA17-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA17-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA17-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA17.webp 701w" sizes="701px"></source>
+  <source width="701" data-srcset="
+
+    /content/resized/2014/01/VOVA17-320.png 320w, 
+
+    /content/resized/2014/01/VOVA17-384.png 384w, 
+
+    /content/resized/2014/01/VOVA17-512.png 512w, 
+
+    /content/resized/2014/01/VOVA17-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA17.png 701w" sizes="701px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA17.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Create Network - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 16: Create Network - Step 3
+</figcaption>
+
+</figure>
+
+<p>The result is now an external network, which was created and is owned by the cloud administrator and an internal network, which was created and is owned by a project tenant.</p>
+
+<p>But we are not done yet: If we connect a workload to the internal network, it will obviously not have outbound connectivity as internal and external network are not connected. We can fix this by creating a router between the two.</p>
+
+<p>Click on <strong>Create Router</strong> to get started (See Figure 17).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA18.png" title="Figure 17: Network Topology with Internal and External network " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA18-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA18-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA18-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA18-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA18.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA18-320.png 320w, 
+
+    /content/resized/2014/01/VOVA18-384.png 384w, 
+
+    /content/resized/2014/01/VOVA18-512.png 512w, 
+
+    /content/resized/2014/01/VOVA18-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA18.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA18.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Network Topology with Internal and External network ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 17: Network Topology with Internal and External network
+</figcaption>
+
+</figure>
+
+<p>Give the Router a useful <em>Router Name</em> and finish the creation of the router with a click on <strong>Create Router</strong> (See Figure 18).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA19.png" title="Figure 18: Create Router dialog " class="image-popup">
+<picture>
+  <source width="700" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA19-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA19-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA19-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA19-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA19.webp 700w" sizes="700px"></source>
+  <source width="700" data-srcset="
+
+    /content/resized/2014/01/VOVA19-320.png 320w, 
+
+    /content/resized/2014/01/VOVA19-384.png 384w, 
+
+    /content/resized/2014/01/VOVA19-512.png 512w, 
+
+    /content/resized/2014/01/VOVA19-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA19.png 700w" sizes="700px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA19.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Create Router dialog ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 18: Create Router dialog
+</figcaption>
+
+</figure>
+
+<p>Next we need to create the router’s interfaces on the two networks. Click on the router and choose <strong>view router details</strong> to get started (See Figure 19).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA20.png" title="Figure 19: Network Topology with unconnected router " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA20-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA20-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA20-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA20-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA20.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA20-320.png 320w, 
+
+    /content/resized/2014/01/VOVA20-384.png 384w, 
+
+    /content/resized/2014/01/VOVA20-512.png 512w, 
+
+    /content/resized/2014/01/VOVA20-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA20.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA20.png" class="blur-up lazyautosizes lazyload" alt="Figure 19: Network Topology with unconnected router ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 19: Network Topology with unconnected router
+</figcaption>
+
+</figure>
+
+<p>Now click on <strong>Add Interface</strong> to add the internal interface first (See Figure 20).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA21.png" title="Figure 20: Router Overview " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA21-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA21-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA21-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA21-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA21.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA21-320.png 320w, 
+
+    /content/resized/2014/01/VOVA21-384.png 384w, 
+
+    /content/resized/2014/01/VOVA21-512.png 512w, 
+
+    /content/resized/2014/01/VOVA21-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA21.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA21.png" class="blur-up lazyautosizes lazyload" alt="Figure 20: Router Overview ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 20: Router Overview
+</figcaption>
+
+</figure>
+
+<p>As the Subnet choose the internal network that you created in an earlier step (See Figure 21). In case you are tempted to think that it doesn’t matter which interface we add first: The interface to the external network is an uplink for this router and is therefore added differently. Click on <strong>Add interface</strong> to finish your selection.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA22.png" title="Figure 21: Add interface to router " class="image-popup">
+<picture>
+  <source width="701" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA22-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA22-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA22-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA22-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA22.webp 701w" sizes="701px"></source>
+  <source width="701" data-srcset="
+
+    /content/resized/2014/01/VOVA22-320.png 320w, 
+
+    /content/resized/2014/01/VOVA22-384.png 384w, 
+
+    /content/resized/2014/01/VOVA22-512.png 512w, 
+
+    /content/resized/2014/01/VOVA22-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA22.png 701w" sizes="701px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA22.png" class="blur-up lazyautosizes lazyload" alt="Figure 21: Add interface to router ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 21: Add interface to router
+</figcaption>
+
+</figure>
+
+<p>Notice that the result will include an interface with a fixed address from the subnet that is part of the internal network, but also an interface with an IPv4 link local address (See Figure 22). This special interface and address can be used by VMs in OpenStack to query an API in order to learn more about themselves.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA24.png" title="Figure 22: Router with connection to internal network " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA24-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA24-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA24-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA24-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA24.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA24-320.png 320w, 
+
+    /content/resized/2014/01/VOVA24-384.png 384w, 
+
+    /content/resized/2014/01/VOVA24-512.png 512w, 
+
+    /content/resized/2014/01/VOVA24-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA24.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA24.png" class="blur-up lazyautosizes lazyload" alt="Figure 22: Router with connection to internal network ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 22: Router with connection to internal network
+</figcaption>
+
+</figure>
+
+<p>Next we need to configure the external network as the upstream network. This is done by setting the gateway for the router. For some reason that capability is not available from within the <em>Router Detail</em> view, adding one more step to our setup.</p>
+
+<p>Click on the <em>Routers</em> tab to leave the Router Detail view (See Figure 22).</p>
+
+<p>Under <em>Actions</em> for the router click on <strong>Set Gateway</strong> (See Figure 23).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA25.png" title="Figure 23: Specify the Router Gateway " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA25-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA25-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA25-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA25-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA25.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA25-320.png 320w, 
+
+    /content/resized/2014/01/VOVA25-384.png 384w, 
+
+    /content/resized/2014/01/VOVA25-512.png 512w, 
+
+    /content/resized/2014/01/VOVA25-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA25.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA25.png" class="blur-up lazyautosizes lazyload" alt="Figure 23: Specify the Router Gateway ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 23: Specify the Router Gateway
+</figcaption>
+
+</figure>
+
+<p>As the External Network chose the network that is provided by the cloud operator and confirm the selection by clicking on <strong>Set Gateway</strong> (See Figure 24).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA26.png" title="Figure 24: Set Router Gateway dialog " class="image-popup">
+<picture>
+  <source width="699" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA26-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA26-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA26-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA26-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA26.webp 699w" sizes="699px"></source>
+  <source width="699" data-srcset="
+
+    /content/resized/2014/01/VOVA26-320.png 320w, 
+
+    /content/resized/2014/01/VOVA26-384.png 384w, 
+
+    /content/resized/2014/01/VOVA26-512.png 512w, 
+
+    /content/resized/2014/01/VOVA26-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA26.png 699w" sizes="699px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA26.png" class="blur-up lazyautosizes lazyload" alt="Figure 24: Set Router Gateway dialog ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 24: Set Router Gateway dialog
+</figcaption>
+
+</figure>
+
+<p>Return to the <em>Network Topology</em> view to see the result (See Figure 25).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA28.png" title="Figure 25: Network Topology with Internal Network, External Network and Router between them " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA28-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA28-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA28-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA28-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA28.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA28-320.png 320w, 
+
+    /content/resized/2014/01/VOVA28-384.png 384w, 
+
+    /content/resized/2014/01/VOVA28-512.png 512w, 
+
+    /content/resized/2014/01/VOVA28-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA28.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA28.png" class="blur-up lazyautosizes lazyload" alt="Figure 25: Network Topology with Internal Network, External Network and Router between them ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 25: Network Topology with Internal Network, External Network and Router between them
+</figcaption>
+
+</figure>
+
+<p>Finally our virtual network in OpenStack as shown in Figure 5 has been completed and we are ready to deploy our first virtual machine.</p>
+
+<h2 id="deploying-a-virtual-machine">Deploying a Virtual Machine</h2>
+
+<p>Now with the network in place, we are finally ready to deploy a first VM in our OpenStack cloud. From the <em>Network Topology</em> tab click on the <strong>Launch Instance</strong> button (See Figure 25).</p>
+
+<p>Give your new instance a meaningful name as the <em>Instance Name</em> and select an appropriate <em>Flavor</em> - e.g. m1.tiny. As the <em>Instance Boot Source</em> choose <strong>Boot from image</strong> and select as the <em>Image Name</em> the image <strong>debian-2.6.32-i686 (1 GB)</strong>, which comes packaged with VOVA. Click on the <em>Networking</em> tab to continue (See Figure 26).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA29.png" title="Figure 26: Launch Instance - Step 1 " class="image-popup">
+<picture>
+  <source width="699" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA29-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA29-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA29-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA29-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA29.webp 699w" sizes="699px"></source>
+  <source width="699" data-srcset="
+
+    /content/resized/2014/01/VOVA29-320.png 320w, 
+
+    /content/resized/2014/01/VOVA29-384.png 384w, 
+
+    /content/resized/2014/01/VOVA29-512.png 512w, 
+
+    /content/resized/2014/01/VOVA29-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA29.png 699w" sizes="699px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA29.png" class="blur-up lazyautosizes lazyload" alt="Figure 26: Launch Instance - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 26: Launch Instance - Step 1
+</figcaption>
+
+</figure>
+
+<p>Move the network <em>Internal</em> from the <em>Available networks</em> pool to the <em>Selected networks</em>, by either clicking on the plus icon or using drag-and-drop (See Figure 27).</p>
+
+<p>This connect the internal network that we previously created to the first NIC of the new VM instance. Click on <strong>Launch</strong> to finalize the creation of your VM instance.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA30.png" title="Figure 27: Launch Instance - Step 2 " class="image-popup">
+<picture>
+  <source width="699" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA30-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA30-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA30-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA30-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA30.webp 699w" sizes="699px"></source>
+  <source width="699" data-srcset="
+
+    /content/resized/2014/01/VOVA30-320.png 320w, 
+
+    /content/resized/2014/01/VOVA30-384.png 384w, 
+
+    /content/resized/2014/01/VOVA30-512.png 512w, 
+
+    /content/resized/2014/01/VOVA30-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA30.png 699w" sizes="699px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA30.png" class="blur-up lazyautosizes lazyload" alt="Figure 27: Launch Instance - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 27: Launch Instance - Step 2
+</figcaption>
+
+</figure>
+
+<p>Wait for the new VM instance to be created and powered up. Once the Status indicates Active and the Power State shows running, you’re all set (See Figure 28). The first deployment of a VM instance can take up to a few minutes, as vSphere needs to import the above selected Debian image from VOVA into its local storage. Subsequent deploys will just use a clone of this imported image and are therefore much faster. Click on the name of the VM to see the <em>Instance Detail</em>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA31.png" title="Figure 28: Successful Launch of Instance " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA31-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA31-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA31-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA31-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA31.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA31-320.png 320w, 
+
+    /content/resized/2014/01/VOVA31-384.png 384w, 
+
+    /content/resized/2014/01/VOVA31-512.png 512w, 
+
+    /content/resized/2014/01/VOVA31-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA31.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA31.png" class="blur-up lazyautosizes lazyload" alt="Figure 28: Successful Launch of Instance ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 28: Successful Launch of Instance
+</figcaption>
+
+</figure>
+
+<p>You can see information about the running VM instance - such as the ID, the status or the IP address. Click on the <strong>Console</strong> tab to connect to the VM (See Figure 29).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA32.png" title="Figure 29: Instance Details " class="image-popup">
+<picture>
+  <source width="402" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA32-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA32-384.webp 384w, 
+
+ /content/uploads/2014/01/VOVA32.webp 402w" sizes="402px"></source>
+  <source width="402" data-srcset="
+
+    /content/resized/2014/01/VOVA32-320.png 320w, 
+
+    /content/resized/2014/01/VOVA32-384.png 384w, 
+
+ /content/uploads/2014/01/VOVA32.png 402w" sizes="402px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA32.png" class="blur-up lazyautosizes lazyload" alt="Figure 29: Instance Details ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 29: Instance Details
+</figcaption>
+
+</figure>
+
+<p>Via the <em>Console</em> you can access your VM instance. Login with the standard username <code class="highlighter-rouge">root</code> and the password <code class="highlighter-rouge">vmware</code> to this provided Debian image. Afterwards you can control your VM and e.g. test connectivity by pinging the <a href="https://developers.google.com/speed/public-dns/" target="_blank" rel="noopener noreferrer">Google Public DNS Resolver</a> at 8.8.8.8 (See Figure 30).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VOVA33.png" title="Figure 30: Instance Console " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VOVA33-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VOVA33-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VOVA33-512.webp 512w, 
+
+    
+    /content/resized/2014/01/VOVA33-683.webp 683w, 
+
+ /content/uploads/2014/01/VOVA33.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2014/01/VOVA33-320.png 320w, 
+
+    /content/resized/2014/01/VOVA33-384.png 384w, 
+
+    /content/resized/2014/01/VOVA33-512.png 512w, 
+
+    /content/resized/2014/01/VOVA33-683.png 683w, 
+
+ /content/uploads/2014/01/VOVA33.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VOVA33.png" class="blur-up lazyautosizes lazyload" alt="Figure 30: Instance Console ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 30: Instance Console
+</figcaption>
+
+</figure>
+
+<p>Congratulations! You have gotten your feet wet using your OpenStack cloud, implementing your first virtual network and attaching a new VM instance to it. All this while leveraging VMware vSphere as the underlying Hypervisor as well as network virtualization provided via VMware NSX as a Neutron plugin.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>Next in the <a href="/2013/12/12/openstack-vsphere-nsx/">series: “OpenStack with vSphere and NSX”</a> on OpenStack with vSphere and NSX is <a href="/2014/02/08/openstack-vsphere-nsx-part-6/">Part 6: “OpenStack with vSphere and NSX – Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes”</a> where we will look behind the scenes into VMware vSphere to see what’s happening during the operation of OpenStack on vSphere. We will also install the VMware vCenter Plugin for Openstack to gain more insight into OpenStack from vSphere, as well as use some of the well-known enterprise-class benefits of vSphere - such as VMotion – along with OpenStack. Furthermore we will see how to use OpenStack’s legendary APIs to automate the deployment of a VM.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#nsx" class="page__taxonomy-item" rel="tag">NSX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#openstack" class="page__taxonomy-item" rel="tag">OpenStack</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-01-24T02:26:16-08:00">January 24, 2014</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+5%3A+Create+virtual+networks+and+launch+a+VM+instance+in+OpenStack%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+5%3A+Create+virtual+networks+and+launch+a+VM+instance+in+OpenStack" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2014/01/08/openstack-vsphere-nsx-part4/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)
+">Previous</a>
+    
+    
+      <a href="/2014/02/08/openstack-vsphere-nsx-part-6/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

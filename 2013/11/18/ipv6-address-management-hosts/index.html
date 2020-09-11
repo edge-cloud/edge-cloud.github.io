@@ -1,0 +1,1581 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>IPv6 Address management of hosts - Edge Cloud</title>
+<meta name="description" content="This article explores the address management concepts available with IPv6: None, Manual, Stateless Address Auto Configuration (SLLAC), Statefull with DHCPv6">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="IPv6 Address management of hosts">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">
+
+
+  <meta property="og:description" content="This article explores the address management concepts available with IPv6: None, Manual, Stateless Address Auto Configuration (SLLAC), Statefull with DHCPv6">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="IPv6 Address management of hosts">
+  <meta name="twitter:description" content="This article explores the address management concepts available with IPv6: None, Manual, Stateless Address Auto Configuration (SLLAC), Statefull with DHCPv6">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-11-18T00:04:50-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="IPv6 Address management of hosts">
+    <meta itemprop="description" content="This article explores the address management concepts available with IPv6: None, Manual, Stateless Address Auto Configuration (SLLAC), Statefull with DHCPv6">
+    <meta itemprop="datePublished" content="November 18, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">IPv6 Address management of hosts
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#ipv6-address-management">IPv6 Address Management</a>
+    <ul>
+      <li><a href="#1-none">1. None</a></li>
+      <li><a href="#2-manual">2. Manual</a></li>
+      <li>
+<a href="#3-stateless-address-auto-configuration-slaac">3. Stateless Address Auto Configuration (SLAAC)</a>
+        <ul>
+          <li><a href="#31-stateless---nameserver-configured-manually">3.1 Stateless - Nameserver configured manually</a></li>
+          <li><a href="#32-stateless---nameserver-via-rdnss">3.2 Stateless - Nameserver via RDNSS</a></li>
+          <li><a href="#33-stateless---nameserver-with-dhcpv6">3.3 Stateless - Nameserver with DHCPv6</a></li>
+        </ul>
+      </li>
+      <li><a href="#4-stateful-with-dhcpv6">4. Stateful with DHCPv6</a></li>
+    </ul>
+  </li>
+  <li><a href="#dhcpv6-prefix-delegation-dhcpv6-pd">DHCPv6 Prefix Delegation (DHCPv6-PD)</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>IPv6 brings a few new address management concepts to the table, that are unknown in IPv4. This article will shed some light on these mechanism along with some guidance on using them as well as giving examples with Linux and Windows hosts.</p>
+
+<p>While IPv4 knew the address management mechanism of None, Manual and DHCP, IPv6 offers the following options:</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>None</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>Manual</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>Stateless Address Auto Configuration (SLAAC) (<a href="https://tools.ietf.org/html/rfc4862" target="_blank" rel="noopener noreferrer">RFC 4862</a>)
+        <ul>
+          <li>3.1 Nameserver configured manually</li>
+          <li>3.2 Nameserver via RDNSS (<a href="https://tools.ietf.org/html/rfc6106" target="_blank" rel="noopener noreferrer">RFC 6106</a>)</li>
+          <li>3.3 Nameserver via DHCPv6 (<a href="https://tools.ietf.org/html/rfc3736" target="_blank" rel="noopener noreferrer">RFC 3736</a>)</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>Statefull with DHCPv6 (<a href="https://tools.ietf.org/html/rfc3315" target="_blank" rel="noopener noreferrer">RFC 3315</a>)</li>
+    </ol>
+  </li>
+</ul>
+
+<h1 id="ipv6-address-management">IPv6 Address Management</h1>
+
+<h2 id="1-none">1. None</h2>
+
+<p>Unfortunately I’ve seen a few cases where products didn’t allow disabling IPv6 on their network interface. And I’ve also seen more than enough networks where architects and engineers decided to “disable” IPv6 by just ignoring it.</p>
+
+<p>Both poses a fundamental security risk, as it exposes an attack vector that is unmanaged or even unknown to the organization.</p>
+
+<p>Therefore network devices and hosts need to offer the option to disable the IPv6 stack.</p>
+
+<p>From a router perspective on the other hand it is not sufficient to just leave away an IPv6 address on an interface. You need to actively suppress IPv6 Router Announcements (RA) and DHCPv6 Replys as well as filter out IPv6 tunnel protocols.</p>
+
+<p>Tools that come in handy here are IPv6 Router Advertisement Guard (<a href="https://tools.ietf.org/html/rfc6105" target="_blank" rel="noopener noreferrer">RFC 6105</a>) as well as <a href="https://tools.ietf.org/html/draft-ietf-opsec-dhcpv6-shield-01" target="_blank" rel="noopener noreferrer">DHCPv6 Shield</a>, also known as <a href="http://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/configuration/15-2s/ip6-15-2s-book/ip6-dhcpv6-guard.html" target="_blank" rel="noopener noreferrer">DHCPv6 Guard</a>.</p>
+
+<h2 id="2-manual">2. Manual</h2>
+
+<p>The next approach is manually configuring an IPv6 address. This will require manual assignment and configuration of IPv6 addresses along with a prefix length and nameservers on the the client side.</p>
+
+<p>While this approach is straightforward on a router for IPv4 by solely specifying an IPv4 address, it requires a bit more in IPv6. Here we need to ensure that the router will not send out Router Announcements (RA), including those responding to a router solicitation. Otherwise devices in a network will learn about the used prefix and automatically generate an IPv6 address. That’s what SLAAC does and it is described in the next section.</p>
+
+<p>Here is an example for configuring an interface for static IPv6 addressing mode on an <a href="https://www.arista.com/en/" target="_blank" rel="noopener noreferrer">Arista Networks</a> device.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+   description IPv6-Only (Manual)
+   ipv6 address fdd2:3a59:6db7:3340::1/64
+   ipv6 nd ra suppress all
+   ipv6 ospf 1 area 0.0.0.0
+</code></pre></div></div>
+
+<p>Let’s attach a Windows 2012 host to the above network segment and see what happens. Figure 1 shows that the Windows 2012 machine fails to automatically acquire a global IPv6 address as expected. Solely the link local address is generated.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Windows2012_Manual.png" title="Figure 1: Windows fails to acquire a global IPv6 address " class="image-popup">
+<picture>
+  <source width="377" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Windows2012_Manual-320.webp 320w, 
+
+ /content/uploads/2013/11/Windows2012_Manual.webp 377w" sizes="377px"></source>
+  <source width="377" data-srcset="
+
+    /content/resized/2013/11/Windows2012_Manual-320.png 320w, 
+
+ /content/uploads/2013/11/Windows2012_Manual.png 377w" sizes="377px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Windows2012_Manual.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Windows fails to acquire a global IPv6 address ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Windows fails to acquire a global IPv6 address
+</figcaption>
+
+</figure>
+
+<p>If we want to connect this Windows 2008R2 machine to the network via IPv6, we need to configure the IPv6 network settings manually as shown in Figure 2.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Windows2012_Manual_Config.png" title="Figure 2: Manual IPv6 address configuration in Windows " class="image-popup">
+<picture>
+  <source width="557" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Windows2012_Manual_Config-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Windows2012_Manual_Config-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Windows2012_Manual_Config-512.webp 512w, 
+
+ /content/uploads/2013/11/Windows2012_Manual_Config.webp 557w" sizes="557px"></source>
+  <source width="557" data-srcset="
+
+    /content/resized/2013/11/Windows2012_Manual_Config-320.png 320w, 
+
+    /content/resized/2013/11/Windows2012_Manual_Config-384.png 384w, 
+
+    /content/resized/2013/11/Windows2012_Manual_Config-512.png 512w, 
+
+ /content/uploads/2013/11/Windows2012_Manual_Config.png 557w" sizes="557px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Windows2012_Manual_Config.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Manual IPv6 address configuration in Windows ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Manual IPv6 address configuration in Windows
+</figcaption>
+
+</figure>
+
+<p>Let’s do the same on Linux with an Ubuntu 13.10 machine. As expected Figure 3 shows us that also the Ubuntu machine will fail to acquire a global IPv6 address automatically as expected. Only the link local address is automatically generated.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Ubuntu_Manual.png" title="Figure 3: Ubuntu fails to acquire an IPv6 address " class="image-popup">
+<picture>
+  <source width="725" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Ubuntu_Manual-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Manual-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Manual-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Manual-683.webp 683w, 
+
+ /content/uploads/2013/11/Ubuntu_Manual.webp 725w" sizes="725px"></source>
+  <source width="725" data-srcset="
+
+    /content/resized/2013/11/Ubuntu_Manual-320.png 320w, 
+
+    /content/resized/2013/11/Ubuntu_Manual-384.png 384w, 
+
+    /content/resized/2013/11/Ubuntu_Manual-512.png 512w, 
+
+    /content/resized/2013/11/Ubuntu_Manual-683.png 683w, 
+
+ /content/uploads/2013/11/Ubuntu_Manual.png 725w" sizes="725px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Ubuntu_Manual.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Ubuntu fails to acquire an IPv6 address ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Ubuntu fails to acquire an IPv6 address
+</figcaption>
+
+</figure>
+
+<p>Configuration of a manual IPv6 address is done in Ubuntu 13.10 via the file <code class="highlighter-rouge">/etc/network/interfaces</code> as shown in Figure 4.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Ubuntu_Manual_Config.png" title="Figure 4: Configure static IPv6 address in Ubuntu via &lt;em&gt;/etc/network/interfaces&lt;/em&gt; " class="image-popup">
+<picture>
+  <source width="642" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Ubuntu_Manual_Config-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Manual_Config-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Manual_Config-512.webp 512w, 
+
+ /content/uploads/2013/11/Ubuntu_Manual_Config.webp 642w" sizes="642px"></source>
+  <source width="642" data-srcset="
+
+    /content/resized/2013/11/Ubuntu_Manual_Config-320.png 320w, 
+
+    /content/resized/2013/11/Ubuntu_Manual_Config-384.png 384w, 
+
+    /content/resized/2013/11/Ubuntu_Manual_Config-512.png 512w, 
+
+ /content/uploads/2013/11/Ubuntu_Manual_Config.png 642w" sizes="642px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Ubuntu_Manual_Config.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Configure static IPv6 address in Ubuntu via &lt;em&gt;/etc/network/interfaces&lt;/em&gt; ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Configure static IPv6 address in Ubuntu via <em>/etc/network/interfaces</em>
+</figcaption>
+
+</figure>
+
+<h2 id="3-stateless-address-auto-configuration-slaac">3. Stateless Address Auto Configuration (SLAAC)</h2>
+
+<p>The next mechanism is completely unknown in IPv4 and therefore new to IPv6. Stateless Address Auto Configuration (SLLAC) is a mechanism described in <a href="https://tools.ietf.org/html/rfc4862" target="_blank" rel="noopener noreferrer">RFC 4862</a>, which uses ICMPv6 packets to let routers in a network regularly announce the configured IPv6 prefix. Upon receiving of such an ICMPv6 packet - called Router Advertisement (RA), hosts will automatically generate an IPv6 address based on their own MAC address and this prefix. The mechanism is called “Stateless” as it doesn’t require any state to be kept within the router to avoid IPv6 address collision. Prevention of collisions is solely achieved by utilizing a modified <a href="https://en.wikipedia.org/wiki/MAC_address" target="_blank" rel="noopener noreferrer">EUI-64 mechanism</a>.</p>
+
+<p>Figure shows how such a Router Advertisement packet looks like in Wireshark. We can clearly see the advertised prefix as well as the prefix length.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture_RA.png" title="Figure 5: Router Announcement packet in Wireshark " class="image-popup">
+<picture>
+  <source width="1173" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture_RA-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture_RA-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture_RA-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Capture_RA-683.webp 683w, 
+
+    
+    /content/resized/2013/11/Capture_RA-800.webp 800w, 
+
+    
+    /content/resized/2013/11/Capture_RA-960.webp 960w, 
+
+ /content/uploads/2013/11/Capture_RA.webp 1173w" sizes="1173px"></source>
+  <source width="1173" data-srcset="
+
+    /content/resized/2013/11/Capture_RA-320.png 320w, 
+
+    /content/resized/2013/11/Capture_RA-384.png 384w, 
+
+    /content/resized/2013/11/Capture_RA-512.png 512w, 
+
+    /content/resized/2013/11/Capture_RA-683.png 683w, 
+
+    /content/resized/2013/11/Capture_RA-800.png 800w, 
+
+    /content/resized/2013/11/Capture_RA-960.png 960w, 
+
+ /content/uploads/2013/11/Capture_RA.png 1173w" sizes="1173px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture_RA.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Router Announcement packet in Wireshark ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Router Announcement packet in Wireshark
+</figcaption>
+
+</figure>
+
+<p>Before we can dive into the configuration of SLAAC, we need to understand that SLAAC by itself only provides a mechanism for assigning a host an IPv6 address as well as a default gateway. It does not provide information for a nameserver to be used as a resolver. To provide this information we need to combine SLAAC with either RDNSS or DHCPv6.</p>
+
+<p>For Linux to pick up IPv6 via SLAAC, the interface has to be configured in <code class="highlighter-rouge">/etc/network/interfaces</code> via <code class="highlighter-rouge">iface eth0 inet6 auto</code>.</p>
+
+<h3 id="31-stateless---nameserver-configured-manually">3.1 Stateless - Nameserver configured manually</h3>
+
+<p>In this approach we will combine SLAAC for automatic configuration of the hosts address and gateway information along with manually configuring the Nameserver on each host.</p>
+
+<p>An example router configuration for an Arista Networks device would look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+   description IPv6-Only (Stateless with manual DNS)
+   ipv6 address fdd2:3a59:6db7:3340::1/64
+   ipv6 ospf 1 area 0.0.0.0
+</code></pre></div></div>
+
+<p>Figure 6 shows an example of how this would look like in Windows.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Windows2012_Manual_Config_DNS.png" title="Figure 6: SLAAC with Manual Nameserver in Windows " class="image-popup">
+<picture>
+  <source width="551" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Windows2012_Manual_Config_DNS-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Windows2012_Manual_Config_DNS-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Windows2012_Manual_Config_DNS-512.webp 512w, 
+
+ /content/uploads/2013/11/Windows2012_Manual_Config_DNS.webp 551w" sizes="551px"></source>
+  <source width="551" data-srcset="
+
+    /content/resized/2013/11/Windows2012_Manual_Config_DNS-320.png 320w, 
+
+    /content/resized/2013/11/Windows2012_Manual_Config_DNS-384.png 384w, 
+
+    /content/resized/2013/11/Windows2012_Manual_Config_DNS-512.png 512w, 
+
+ /content/uploads/2013/11/Windows2012_Manual_Config_DNS.png 551w" sizes="551px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Windows2012_Manual_Config_DNS.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: SLAAC with Manual Nameserver in Windows ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: SLAAC with Manual Nameserver in Windows
+</figcaption>
+
+</figure>
+
+<p>The manual configuration under Ubuntu 13.10 is quite simple: Just add the line <code class="highlighter-rouge">dns-nameservers fd80::10 fd80::11</code> to the corresponding interface section within the file <code class="highlighter-rouge">/etc/network/interfaces</code>.</p>
+
+<h3 id="32-stateless---nameserver-via-rdnss">3.2 Stateless - Nameserver via RDNSS</h3>
+
+<p>Recursive DNS Server (RDNSS) and DNS Search List (DNSSL) as defined in <a href="https://tools.ietf.org/html/rfc6106" target="_blank" rel="noopener noreferrer">RFC 6106</a> are basically an extensions to the RA mechanism.</p>
+
+<p>Figure 7 shows the additional options within an ICMPv6 RA packet to carry the nameserver information.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture_RA_RDNSS.png" title="Figure 7: RA packet with RDNSS and DNSSL options " class="image-popup">
+<picture>
+  <source width="1176" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture_RA_RDNSS-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture_RA_RDNSS-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture_RA_RDNSS-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Capture_RA_RDNSS-683.webp 683w, 
+
+    
+    /content/resized/2013/11/Capture_RA_RDNSS-800.webp 800w, 
+
+    
+    /content/resized/2013/11/Capture_RA_RDNSS-960.webp 960w, 
+
+ /content/uploads/2013/11/Capture_RA_RDNSS.webp 1176w" sizes="1176px"></source>
+  <source width="1176" data-srcset="
+
+    /content/resized/2013/11/Capture_RA_RDNSS-320.png 320w, 
+
+    /content/resized/2013/11/Capture_RA_RDNSS-384.png 384w, 
+
+    /content/resized/2013/11/Capture_RA_RDNSS-512.png 512w, 
+
+    /content/resized/2013/11/Capture_RA_RDNSS-683.png 683w, 
+
+    /content/resized/2013/11/Capture_RA_RDNSS-800.png 800w, 
+
+    /content/resized/2013/11/Capture_RA_RDNSS-960.png 960w, 
+
+ /content/uploads/2013/11/Capture_RA_RDNSS.png 1176w" sizes="1176px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture_RA_RDNSS.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: RA packet with RDNSS and DNSSL options ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: RA packet with RDNSS and DNSSL options
+</figcaption>
+
+</figure>
+
+<p>Configuration of RDNSS is straight forward on an Arista Networks device as the example below highlights.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+   description IPv6-Only (Stateless with RDNSS)
+   ipv6 address fdd2:3a59:6db7:3340::1/64
+   ipv6 nd ra dns-server fd80::10
+   ipv6 nd ra dns-server fd80::11
+   ipv6 nd ra dns-suffix ipv6.vmwcs.com
+   ipv6 ospf 1 area 0.0.0.0
+</code></pre></div></div>
+
+<p>But what about the clients? Windows does not support acquiring the nameserver information via RDNSS and DNSSL.</p>
+
+<p>And also with Ubuntu 13.10 you are out of luck in an out-of-the-box installation. But with Linux you can at least easily retrofit the RDNSS and DNSSL capability. Here is how:</p>
+
+<p>Install the RDNSS package via <code class="highlighter-rouge">sudo apt-get install rdnssd</code> and add the line <code class="highlighter-rouge">*.rdnssd</code> at the top of the file <code class="highlighter-rouge">/etc/resolvconf/interface-order</code>. After restarting the network with <code class="highlighter-rouge">sudo service networking restart</code>, your Ubuntu machine will acquire the nameserver information along with the IP address information as shown in Figure 8.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Ubuntu_Stateless_RDNSS.png" title="Figure 8: Acquiring nameserver information via RDNSS " class="image-popup">
+<picture>
+  <source width="717" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_RDNSS-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_RDNSS-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_RDNSS-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_RDNSS-683.webp 683w, 
+
+ /content/uploads/2013/11/Ubuntu_Stateless_RDNSS.webp 717w" sizes="717px"></source>
+  <source width="717" data-srcset="
+
+    /content/resized/2013/11/Ubuntu_Stateless_RDNSS-320.png 320w, 
+
+    /content/resized/2013/11/Ubuntu_Stateless_RDNSS-384.png 384w, 
+
+    /content/resized/2013/11/Ubuntu_Stateless_RDNSS-512.png 512w, 
+
+    /content/resized/2013/11/Ubuntu_Stateless_RDNSS-683.png 683w, 
+
+ /content/uploads/2013/11/Ubuntu_Stateless_RDNSS.png 717w" sizes="717px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Ubuntu_Stateless_RDNSS.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Acquiring nameserver information via RDNSS ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Acquiring nameserver information via RDNSS
+</figcaption>
+
+</figure>
+
+<p>As very few clients support RDNSS and DNSSL today, this addressing approach is not recommended for production usage.</p>
+
+<h3 id="33-stateless---nameserver-with-dhcpv6">3.3 Stateless - Nameserver with DHCPv6</h3>
+
+<p>The next approach involves still using Router Advertisements for the address assignment, but relying on DHCPv6 to hand out the Nameserver information. This approach is still stateless as the DHCPv6 server solely hands out static information about a networks domain information. It does not keep any state about a DHCPv6 lease for a client.</p>
+
+<p>This approach is accomplished by setting the so called “Other” or just “O” flag within the Router Advertisements as shown in Figure 9. This will instruct clients to generate their IPv6 address based on the included prefix, but use DHCP for the nameserver - or “other” - information.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Capture_RA_O-Flag.png" title="Figure 9: RA with &lt;em&gt;Other&lt;/em&gt; flag set " class="image-popup">
+<picture>
+  <source width="565" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Capture_RA_O-Flag-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Capture_RA_O-Flag-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Capture_RA_O-Flag-512.webp 512w, 
+
+ /content/uploads/2013/11/Capture_RA_O-Flag.webp 565w" sizes="565px"></source>
+  <source width="565" data-srcset="
+
+    /content/resized/2013/11/Capture_RA_O-Flag-320.png 320w, 
+
+    /content/resized/2013/11/Capture_RA_O-Flag-384.png 384w, 
+
+    /content/resized/2013/11/Capture_RA_O-Flag-512.png 512w, 
+
+ /content/uploads/2013/11/Capture_RA_O-Flag.png 565w" sizes="565px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Capture_RA_O-Flag.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: RA with &lt;em&gt;Other&lt;/em&gt; flag set ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: RA with <em>Other</em> flag set
+</figcaption>
+
+</figure>
+
+<p>Before we can configure the “Other” flag on our router, we need to setup a DHCP server, which will serve the nameserver information. In this example I’m using an <a href="https://www.infoblox.com/products/infoblox-appliances/" target="_blank" rel="noopener noreferrer">Infoblox vNIOS grid</a> to do so. Figure 10 shows the configuration.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Infoblox_Nameserver.png" title="Figure 10: Infoblox DHCPv6 basic configuration " class="image-popup">
+<picture>
+  <source width="786" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Infoblox_Nameserver-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Infoblox_Nameserver-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Infoblox_Nameserver-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Infoblox_Nameserver-683.webp 683w, 
+
+ /content/uploads/2013/11/Infoblox_Nameserver.webp 786w" sizes="786px"></source>
+  <source width="786" data-srcset="
+
+    /content/resized/2013/11/Infoblox_Nameserver-320.png 320w, 
+
+    /content/resized/2013/11/Infoblox_Nameserver-384.png 384w, 
+
+    /content/resized/2013/11/Infoblox_Nameserver-512.png 512w, 
+
+    /content/resized/2013/11/Infoblox_Nameserver-683.png 683w, 
+
+ /content/uploads/2013/11/Infoblox_Nameserver.png 786w" sizes="786px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Infoblox_Nameserver.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Infoblox DHCPv6 basic configuration ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Infoblox DHCPv6 basic configuration
+</figcaption>
+
+</figure>
+
+<p>Besides setting the “Other” flag within RA, we now also need to configure a DHCP relay on our router’s interface.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+   description IPv6-Only (Stateless with DHCPv6)
+   ipv6 address fdd2:3a59:6db7:3340::1/64
+   ipv6 nd other-config-flag
+   ipv6 dhcp relay destination fdd2:3a59:6db7:3310::240
+   ipv6 ospf 1 area 0.0.0.0
+</code></pre></div></div>
+
+<p>This approach would be very handy if there weren’t these pesky clients. Both Windows and Linux don’t behave at all as we expect them to.</p>
+
+<p>For Windows if a DHCPv6 server is available but doesn’t offer IPv6 addresses (which is what we want with the Stateless DHCPv6 setup), Windows will ignore the results from the server altogether and not take over the nameserver information. However, if the DHCPv6 server returns an IPv6 address along with the nameserver information, Windows will add the address to the interface and use the additional information. That means your Windows system now has two IPv6 addresses and can use and be reached on either address. Worse, both addresses will be published in DNS.</p>
+
+<p>Linux doesn’t behave that much better as it will ignore the “Other” flag and not ask for nameserver information via DHCPv6. At least here we can fix it quickly by forcing Linux to call “dhclient” once the interface goes up (See Figure 11) and configure “dhclient” to only ask for the IPv6 namesever relevant information, but not for an address (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Ubuntu_Stateless_DHCPv6_Fix1.png" title="Figure 11: Force Linux to request additional information via DHCPv6 " class="image-popup">
+<picture>
+  <source width="656" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix1-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix1-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix1-512.webp 512w, 
+
+ /content/uploads/2013/11/Ubuntu_Stateless_DHCPv6_Fix1.webp 656w" sizes="656px"></source>
+  <source width="656" data-srcset="
+
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix1-320.png 320w, 
+
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix1-384.png 384w, 
+
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix1-512.png 512w, 
+
+ /content/uploads/2013/11/Ubuntu_Stateless_DHCPv6_Fix1.png 656w" sizes="656px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Ubuntu_Stateless_DHCPv6_Fix1.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Force Linux to request additional information via DHCPv6 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Force Linux to request additional information via DHCPv6
+</figcaption>
+
+</figure>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Ubuntu_Stateless_DHCPv6_Fix2.png" title="Figure 12: Instruct Linux only to ask for nameserver-relevant information via DHCPv6 " class="image-popup">
+<picture>
+  <source width="719" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix2-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix2-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix2-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix2-683.webp 683w, 
+
+ /content/uploads/2013/11/Ubuntu_Stateless_DHCPv6_Fix2.webp 719w" sizes="719px"></source>
+  <source width="719" data-srcset="
+
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix2-320.png 320w, 
+
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix2-384.png 384w, 
+
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix2-512.png 512w, 
+
+    /content/resized/2013/11/Ubuntu_Stateless_DHCPv6_Fix2-683.png 683w, 
+
+ /content/uploads/2013/11/Ubuntu_Stateless_DHCPv6_Fix2.png 719w" sizes="719px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Ubuntu_Stateless_DHCPv6_Fix2.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Instruct Linux only to ask for nameserver-relevant information via DHCPv6 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Instruct Linux only to ask for nameserver-relevant information via DHCPv6
+</figcaption>
+
+</figure>
+
+<h2 id="4-stateful-with-dhcpv6">4. Stateful with DHCPv6</h2>
+
+<p>Last but not least we have the option to use stateful address assignments via DHCPv6. This approach isn’t very different from what we know from IPv4. You can either specify a pool of addresses from which addresses are randomly drawn for a client. Or you can assign IP addresses fixed to a given host based on it’s NIC’s MAC address.</p>
+
+<p>What’s different with DHCPv6 is that this fixed mapping isn’t based on the MAC address anymore, but on a DHCP Unique Identifier (DUID). There are three types of DUIDs:</p>
+
+<ol>
+  <li>Link-layer address plus time</li>
+  <li>Vendor-assigned unique ID based on Enterprise Number</li>
+  <li>Link-layer address, based on universally unique identifier (UUID)</li>
+</ol>
+
+<p>This makes finding the DUID not trivial.</p>
+
+<p>Another difference from IPV4 is that we can actually instruct the clients to use DHCP via the Router Advertisements. Besides setting the “Other” flag for obtaining the nameserver information via DHCP, we now also set the “Managed” or “M” flag. This will tell clients to acquire an IPv6 address via DHCPv6 instead of generating one based on the local prefix.</p>
+
+<p>Below is an example for configuring this with an Arista Networks device:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+   description IPv6-Only (Stateful with DHCPv6)
+   ipv6 address fdd2:3a59:6db7:3340::1/64
+   ipv6 nd managed-config-flag
+   ipv6 nd other-config-flag
+   ipv6 dhcp relay destination fdd2:3a59:6db7:3310::240
+   ipv6 ospf 1 area 0.0.0.0
+</code></pre></div></div>
+
+<p>This ends up actually being a hybrid between SLAAC, Nameserver via DHCPv6 and Statefull with DHCPv6:</p>
+
+<p>Once again, these pesky clients make it a bit complicated as they now acquire an IPv6 address via SLAAC and DHCPv6. The solution for this is not to set the (A)utonomous flag when advertising the prefix.</p>
+
+<p>This would change the configuration into:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+   description IPv6-Only (Stateful with DHCPv6)
+   ipv6 address fdd2:3a59:6db7:3340::1/64
+   ipv6 nd prefix fdd2:3a59:6db7:3340::/64 no-autoconfig
+   ipv6 nd managed-config-flag
+   ipv6 nd other-config-flag
+   ipv6 dhcp relay destination fdd2:3a59:6db7:3310::240
+   ipv6 ospf 1 area 0.0.0.0
+</code></pre></div></div>
+
+<p>With this Windows will behave as expected and only acquire a single IPv6 address via DHCPv6 along with the nameserver information (See Figure 13).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Win2012_Statefull.png" title="Figure 13: Stateful IPv6 address assignment via DHCPv6 " class="image-popup">
+<picture>
+  <source width="372" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Win2012_Statefull-320.webp 320w, 
+
+ /content/uploads/2013/11/Win2012_Statefull.webp 372w" sizes="372px"></source>
+  <source width="372" data-srcset="
+
+    /content/resized/2013/11/Win2012_Statefull-320.png 320w, 
+
+ /content/uploads/2013/11/Win2012_Statefull.png 372w" sizes="372px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Win2012_Statefull.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Stateful IPv6 address assignment via DHCPv6 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: Stateful IPv6 address assignment via DHCPv6
+</figcaption>
+
+</figure>
+
+<p>For Linux to pick up IPv6 via DHCPv6, the interface has to be configured in <code class="highlighter-rouge">/etc/network/interfaces</code> via <code class="highlighter-rouge">iface eth0 inet6 dhcp</code>. Once this is done, it will also acquire a single IPv6 address via DHCPv6 along with the nameserver information (See Figure 14).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Ubuntu_Statefull.png" title="Figure 14: Stateful address assignment via DHCPv6 " class="image-popup">
+<picture>
+  <source width="712" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Ubuntu_Statefull-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Statefull-384.webp 384w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Statefull-512.webp 512w, 
+
+    
+    /content/resized/2013/11/Ubuntu_Statefull-683.webp 683w, 
+
+ /content/uploads/2013/11/Ubuntu_Statefull.webp 712w" sizes="712px"></source>
+  <source width="712" data-srcset="
+
+    /content/resized/2013/11/Ubuntu_Statefull-320.png 320w, 
+
+    /content/resized/2013/11/Ubuntu_Statefull-384.png 384w, 
+
+    /content/resized/2013/11/Ubuntu_Statefull-512.png 512w, 
+
+    /content/resized/2013/11/Ubuntu_Statefull-683.png 683w, 
+
+ /content/uploads/2013/11/Ubuntu_Statefull.png 712w" sizes="712px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Ubuntu_Statefull.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Stateful address assignment via DHCPv6 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Stateful address assignment via DHCPv6
+</figcaption>
+
+</figure>
+
+<p>Last but not least this approach has the benefit that IPv6 address usage is tracked within the DHCPv6 server (See Figure 15).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/11/Infoblox_Statefull_Leases.png" title="Figure 15: IPv6 address leases within Infoblox " class="image-popup">
+<picture>
+  <source width="460" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/11/Infoblox_Statefull_Leases-320.webp 320w, 
+
+    
+    /content/resized/2013/11/Infoblox_Statefull_Leases-384.webp 384w, 
+
+ /content/uploads/2013/11/Infoblox_Statefull_Leases.webp 460w" sizes="460px"></source>
+  <source width="460" data-srcset="
+
+    /content/resized/2013/11/Infoblox_Statefull_Leases-320.png 320w, 
+
+    /content/resized/2013/11/Infoblox_Statefull_Leases-384.png 384w, 
+
+ /content/uploads/2013/11/Infoblox_Statefull_Leases.png 460w" sizes="460px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/11/Infoblox_Statefull_Leases.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: IPv6 address leases within Infoblox ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: IPv6 address leases within Infoblox
+</figcaption>
+
+</figure>
+
+<h1 id="dhcpv6-prefix-delegation-dhcpv6-pd">DHCPv6 Prefix Delegation (DHCPv6-PD)</h1>
+
+<p>One addressing scheme that we will glance over in this article is DHCPv6 Prefix Delegation (DHCPv6-PD). This approach is used to assign entire prefixes to downstream routers, so that they can be re-assigned to the downstream router’s subnet. This is e.g. used in an ISP setup where each customer is delegated a /60 prefix, which can the be split into 16x /64 networks within the customer premises.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#arista" class="page__taxonomy-item" rel="tag">Arista</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#infoblox" class="page__taxonomy-item" rel="tag">Infoblox</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-11-18T00:04:50-08:00">November 18, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=IPv6+Address+management+of+hosts%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F11%2F18%2Fipv6-address-management-hosts%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F11%2F18%2Fipv6-address-management-hosts%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F11%2F18%2Fipv6-address-management-hosts%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F11%2F18%2Fipv6-address-management-hosts%2F&amp;title=IPv6+Address+management+of+hosts" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/11/11/jumbo-frames-vmware-esxi/" class="pagination--pager" title="Jumbo Frames with VMware ESXi
+">Previous</a>
+    
+    
+      <a href="/2013/12/12/openstack-vsphere-nsx/" class="pagination--pager" title="OpenStack with vSphere and NSX
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

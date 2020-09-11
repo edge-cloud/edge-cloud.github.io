@@ -1,0 +1,947 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>SDDC Architecture - Virtual PODs for Management applications - Edge Cloud</title>
+<meta name="description" content="This article is part of a series of articles, focusing on the architecture of an SDDC via VMware Validated Designs.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="SDDC Architecture - Virtual PODs for Management applications">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/08/31/sddc-architecture-vpods-for-management-applications/">
+
+
+  <meta property="og:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC via VMware Validated Designs.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="SDDC Architecture - Virtual PODs for Management applications">
+  <meta name="twitter:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC via VMware Validated Designs.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/08/31/sddc-architecture-vpods-for-management-applications/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-08-31T06:00:48-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/08/31/sddc-architecture-vpods-for-management-applications/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="SDDC Architecture - Virtual PODs for Management applications">
+    <meta itemprop="description" content="This article is part of a series of articles, focusing on the architecture of an SDDC via VMware Validated Designs.">
+    <meta itemprop="datePublished" content="August 31, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">SDDC Architecture - Virtual PODs for Management applications
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#requirements">Requirements</a></li>
+  <li><a href="#the-motivation">The motivation</a></li>
+  <li><a href="#the-container-concept">The container concept</a></li>
+  <li><a href="#virtual-pods-for-cross-region-failover-via-srm">Virtual PODs for cross-region failover via SRM</a></li>
+  <li><a href="#virtual-pods-and-srm-failover-testing">Virtual PODs and SRM failover testing</a></li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>This article is part of a <a href="/2015/02/20/sddc-architecture-introduction/">series of articles</a>, focusing on the architecture of an SDDC via VMware Validated Designs.</p>
+
+<h1 id="requirements">Requirements</h1>
+
+<p>A Software Defined Data Center promises to be the new underpinning or platform for delivering today’s and tomorrow’s IT services. As such this next generation infrastructure needs to address some shortcomings of today’s infrastructure in order to be successful:</p>
+
+<ul>
+  <li>
+<strong>Highly automated operation at Scale:</strong> Leaner organization that scales sub-linearly with an operating model build around automation. Leverage modular web-scale designs for unhampered scalability.</li>
+  <li>
+<strong>Hardware and Software efficiencies:</strong> Support on-demand scaling for varying capacity needs. Improved resource pooling to drive increased utilization of resources and reduce cost.</li>
+  <li>
+<strong>New and old business needs:</strong> Support legacy applications with traditional business continuity and disaster recovery, besides new cloud-native applications.</li>
+</ul>
+
+<h1 id="the-motivation">The motivation</h1>
+
+<p>The concept of the Management Stack Virtual POD can be considered as part of the secret sauce for the VMware Validated Designs. This is a concept only found in the management stack and aims at providing SDDC management application with low integration efforts, while treating them as sub-systems and providing advanced security.</p>
+
+<p>One of the main ideas behind this concept is depicted in Figure 1:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/VVRD-Network-Segments.png" title="Figure 1: Virtual POD for SDDC Management Applications " class="image-popup">
+<picture>
+  <source width="1057" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/VVRD-Network-Segments-320.webp 320w, 
+
+    
+    /content/resized/2015/08/VVRD-Network-Segments-384.webp 384w, 
+
+    
+    /content/resized/2015/08/VVRD-Network-Segments-512.webp 512w, 
+
+    
+    /content/resized/2015/08/VVRD-Network-Segments-683.webp 683w, 
+
+    
+    /content/resized/2015/08/VVRD-Network-Segments-800.webp 800w, 
+
+    
+    /content/resized/2015/08/VVRD-Network-Segments-960.webp 960w, 
+
+ /content/uploads/2015/08/VVRD-Network-Segments.webp 1057w" sizes="1057px"></source>
+  <source width="1057" data-srcset="
+
+    /content/resized/2015/08/VVRD-Network-Segments-320.png 320w, 
+
+    /content/resized/2015/08/VVRD-Network-Segments-384.png 384w, 
+
+    /content/resized/2015/08/VVRD-Network-Segments-512.png 512w, 
+
+    /content/resized/2015/08/VVRD-Network-Segments-683.png 683w, 
+
+    /content/resized/2015/08/VVRD-Network-Segments-800.png 800w, 
+
+    /content/resized/2015/08/VVRD-Network-Segments-960.png 960w, 
+
+ /content/uploads/2015/08/VVRD-Network-Segments.png 1057w" sizes="1057px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/VVRD-Network-Segments.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Virtual POD for SDDC Management Applications ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Virtual POD for SDDC Management Applications
+</figcaption>
+
+</figure>
+
+<p>The SDDC based on a VMware Validated Design use two main network segments:</p>
+
+<ul>
+  <li>
+<strong>Business Network:</strong> This network must be connected to the corporate network of the organization where the SDDC is being deployed. Otherwise end-users and tenant admins of the SDDC have no ability to access components such as VMware vRealize Automation. As a result the SDDC would not be able to deliver any business value.</li>
+  <li>
+<strong>Management Network:</strong> Only infrastructure-admins should have access to this network. In fact end-users and tenant-admins should not have access to this network at all. The VMWare Validated Design supports various options for connecting to this network, where the best choice depends on the use cases for the SDDC within the organization where it is deployed:
+    <ul>
+      <li>Directly connect to the corporate network via static or dynamic routing with a firewall in between</li>
+      <li>Connect via MPLS from off-site for a managed services offering. Turns out that a VMware Integration Partner, delivering VMware SDDC today, follows exactly this path.</li>
+      <li>Provide a Jump-Host for more secure access from the corporate network</li>
+      <li>Many other ways to connect admins to admin network</li>
+    </ul>
+  </li>
+</ul>
+
+<p>SDDC management workloads are placed on the management network and fronted with a load balancer. This is a typical concept for web application and shouldn’t be new or surprising. With VMware products this concept already used widely by <a href="http://www.vmware.com/products/openstack.html" target="_blank" rel="noopener noreferrer">VMware Integrated OpenStack</a> (VIO), but also <a href="http://www.vmware.com/products/vcloud-director.html" target="_blank" rel="noopener noreferrer">VMware vCloud Director</a> and <a href="http://www.vmware.com/products/vrealize-automation.html" target="_blank" rel="noopener noreferrer">VMware vRealize Automation</a>. &lt;/li&gt; &lt;/ul&gt;</p>
+
+<h1 id="the-container-concept">The container concept</h1>
+
+<p>The above concept depicted in Figure 1 can only be considered as an interim step. We will certainly keep the concept of the business network vs. the management network. But in addition we place each management application in a dedicated Virtual POD with an VMware NSX Edge acting as router, firewall, and load balancer at the boundary of this container. As such we end up with one container for VMware vRealize Automation, another one for VMware vRealize Operations and the third one for VMware vRealize LogInsight (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Network-Container-General.png" title="Figure 2: Virtual POD for SDDC Management Applications " class="image-popup">
+<picture>
+  <source width="758" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Network-Container-General-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Network-Container-General-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Network-Container-General-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Network-Container-General-683.webp 683w, 
+
+ /content/uploads/2015/08/Network-Container-General.webp 758w" sizes="758px"></source>
+  <source width="758" data-srcset="
+
+    /content/resized/2015/08/Network-Container-General-320.png 320w, 
+
+    /content/resized/2015/08/Network-Container-General-384.png 384w, 
+
+    /content/resized/2015/08/Network-Container-General-512.png 512w, 
+
+    /content/resized/2015/08/Network-Container-General-683.png 683w, 
+
+ /content/uploads/2015/08/Network-Container-General.png 758w" sizes="758px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Network-Container-General.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Virtual POD for SDDC Management Applications ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Virtual POD for SDDC Management Applications
+</figcaption>
+
+</figure>
+
+<p>This approach provides the following benefits:</p>
+
+<ul>
+  <li>
+<strong>Security:</strong> Granular yet simple control who can access what services within a Virtual POD.</li>
+  <li>
+<strong>Modularity:</strong> Replace or upgrade an application without breaking the entire SDDC as dependencies go via well-know interfaces.</li>
+  <li>
+<strong>Simplicity:</strong> Reduces the number of required IP addresses on the corporate network, but also keeps the integration effort low, by not requiring dynamic routing towards the corporate network.</li>
+  <li>
+<strong>Business Continuity / Disaster Recovery (BC/DR):</strong> Simplifies the Business Continuity / Disaster Recovery (BC/DR) story with <a href="http://www.vmware.com/products/site-recovery-manager.html" target="_blank" rel="noopener noreferrer">VMware Site Recovery Manager (SRM)</a>. See below for more.</li>
+  <li>
+<strong>IPv6:</strong> Ability to provide the management applications over IPv6 by solely enabling IPv6 on the Virtual IP (VIP) of the NSX Edge load balancer.</li>
+</ul>
+
+<h1 id="virtual-pods-for-cross-region-failover-via-srm">Virtual PODs for cross-region failover via SRM</h1>
+
+<p>Let’s have another look at the Virtual POD concept and see how it performs within a multi-region setup, using VMware Site Recovery Manager (SRM) for Business Continuity / Disaster Recovery (BC/DR) purposes (See Figure 3). The key benefit of this approach is the ability to use a purely DNS-based service failover mechanism, instead of having to re-announce IPv4 routes from the recovery location.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Network-Container-Dual-Site.png" title="Figure 3: Virtual POD with Site Recovery Manager " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Network-Container-Dual-Site-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Network-Container-Dual-Site-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Network-Container-Dual-Site-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Network-Container-Dual-Site-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Network-Container-Dual-Site-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Network-Container-Dual-Site-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Network-Container-Dual-Site-320.png 320w, 
+
+    /content/resized/2015/08/Network-Container-Dual-Site-384.png 384w, 
+
+    /content/resized/2015/08/Network-Container-Dual-Site-512.png 512w, 
+
+    /content/resized/2015/08/Network-Container-Dual-Site-683.png 683w, 
+
+    /content/resized/2015/08/Network-Container-Dual-Site-800.png 800w, 
+
+    /content/resized/2015/08/Network-Container-Dual-Site-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Network-Container-Dual-Site.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Virtual POD with Site Recovery Manager ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Virtual POD with Site Recovery Manager
+</figcaption>
+
+</figure>
+
+<p>One of the fundamental concepts of the Virtual PODs is that for a given management application, the same IPv4 subnet is used within each region’s VPOD. In the example, depicted in Figure 3 this means that the Virtual POD in bother regions uses the IPv4 subnet 192.168.11.0/24.</p>
+
+<p>As a result, in combination with VMware SRM, there is no need to change the IP addresses and therefore also SSL certificates of the service nodes for a recovered application like VMware vRealize Automation. This is a major benefit as an application like VMware vRealize Automation requires multiple cumbersome steps - including manipulation of the database entries - to change the IP addresses of a once installed instance.</p>
+
+<p>The NSX Edge devices in both regions have equivalent settings for load balancer rules and firewall rules, except for the IP addresses on the Business and Management network. As a result the virtual IPs (VIP) between these two different load balancers are obviously different, but the underlying load balancer configuration is the same.</p>
+
+<p>The external facing service, while the Management application resides in Region A, is reachable under the VIP of that regions NSX Edge device. After a failover via SRM of the Management Application to Region B, the service is alive under that regions NSX Edge device.</p>
+
+<p>Therefore in order to make the failover complete for end-users of the service, a change to the DNS name of the service is necessary. With that change the DNS entry is re-pointed from the VIP on the NSX Edge in Region A to the VIP on the NSX Edge in Region B.</p>
+
+<p>Performing such a DNS update can be easily done using corresponding <a href="http://dyn.com/dns/" target="_blank" rel="noopener noreferrer">Dynamic DNS services</a> on the Internet, <a href="http://gnudip2.sourceforge.net/" target="_blank" rel="noopener noreferrer">building your own</a> equivalent or using a <a href="https://gallery.technet.microsoft.com/scriptcenter/Update-DNS-records-with-da10910d" target="_blank" rel="noopener noreferrer">simple script</a> to update you Microsoft DNS server.</p>
+
+<p>Again, no dynamic routing updates are necessary after a SRM failover towards the business network. In fact, you don’t even need to run dynamic routing towards the business network unless you want to.</p>
+
+<h1 id="virtual-pods-and-srm-failover-testing">Virtual PODs and SRM failover testing</h1>
+
+<p>An interesting, but also very important feature of VMware Site Recovery Manager (SRM) is the ability to test a failover. In this case the application remains operational and untouched in the primary location. In the recovery location a second instance of the application is created based on a snapshot of the most recent replicated data. While this failover-test application is running, replication between sites is unaffected. Also after the test completes the failover-test application along with the snapshot data can be discarded.</p>
+
+<p>With the Virtual PODs you can test the functionality of the failover-test application in the actual environment that the application would be restored to. No special test network constructs are necessary. Instead you deploy the failover-test application into the second regions vPOD where you can access this application under the corresponding Virtual IP. You could even place a test DNS entry on this VIP. As long as you don’t touch the DNS entry for the primary application it will not be affected.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>The Virtual POD network container is a very powerful, yet simple concept to provide the management applications of the SDDC with security, modularity, simplicity, improved BC/DR capabilities and IPv6 support. All this with a minimum of integration effort. I can therefore be seen as a major enabler for an SDDC based on the VMware Validated Design.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#architecture" class="page__taxonomy-item" rel="tag">Architecture</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#sddc" class="page__taxonomy-item" rel="tag">SDDC</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-08-31T06:00:48-07:00">August 31, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=SDDC+Architecture+-+Virtual+PODs+for+Management+applications%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F31%2Fsddc-architecture-vpods-for-management-applications%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F31%2Fsddc-architecture-vpods-for-management-applications%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F31%2Fsddc-architecture-vpods-for-management-applications%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F31%2Fsddc-architecture-vpods-for-management-applications%2F&amp;title=SDDC+Architecture+-+Virtual+PODs+for+Management+applications" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2015/08/27/sddc-architecture-what-is-a-vmware-validated-design/" class="pagination--pager" title="SDDC Architecture - What is a VMware validated design?
+">Previous</a>
+    
+    
+      <a href="/2015/09/09/sddc-architecture-mapping-of-logical-components-to-physical-location/" class="pagination--pager" title="SDDC Architecture - Mapping of Logical Components to Physical Location
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

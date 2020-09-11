@@ -1,0 +1,1784 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Configuring F5 Big-IP LTM with VMware vCloud Director [Updated] - Edge Cloud</title>
+<meta name="description" content="Complete and comprehensive walk through guide for the load balancing configuration of an F5 Big-IP LTM with VMware vCloud Director (vCD).">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Configuring F5 Big-IP LTM with VMware vCloud Director [Updated]">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/05/20/configuring-f5-big-ip-with-vcd/">
+
+
+  <meta property="og:description" content="Complete and comprehensive walk through guide for the load balancing configuration of an F5 Big-IP LTM with VMware vCloud Director (vCD).">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Configuring F5 Big-IP LTM with VMware vCloud Director [Updated]">
+  <meta name="twitter:description" content="Complete and comprehensive walk through guide for the load balancing configuration of an F5 Big-IP LTM with VMware vCloud Director (vCD).">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/05/20/configuring-f5-big-ip-with-vcd/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-05-20T13:30:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/05/20/configuring-f5-big-ip-with-vcd/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Configuring F5 Big-IP LTM with VMware vCloud Director [Updated]">
+    <meta itemprop="description" content="Complete and comprehensive walk through guide for the load balancing configuration of an F5 Big-IP LTM with VMware vCloud Director (vCD).">
+    <meta itemprop="datePublished" content="May 20, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Configuring F5 Big-IP LTM with VMware vCloud Director [Updated]
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#1-logical-setup-of-a-load-balanced-vmware-vcloud-director-configuration">1. Logical setup of a load-balanced VMware vCloud Director configuration</a>
+    <ul>
+      <li><a href="#11-https">1.1 HTTPS</a></li>
+      <li><a href="#12-http">1.2 HTTP</a></li>
+      <li><a href="#13-console-proxy">1.3 Console Proxy</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#2-configuring-f5-big-ip-ltm">2. Configuring F5 Big-IP LTM</a>
+    <ul>
+      <li>
+<a href="#21-creating-a-custom-health-monitor-for-vcd-https-and-console-proxy">2.1 Creating a custom health monitor for vCD HTTPS and Console Proxy</a>
+        <ul>
+          <li><a href="#211-https-health-monitor">2.1.1 HTTPS Health Monitor</a></li>
+          <li><a href="#212-console-proxy-health-monitor">2.1.2 Console Proxy Health Monitor</a></li>
+        </ul>
+      </li>
+      <li><a href="#22-creating-member-pools-with-the-vcd-cells-to-distribute-requests-among">2.2 Creating member pools with the vCD cells to distribute requests among</a></li>
+      <li><a href="#23-creating-an-irule-for-the-http-to-https-redirect">2.3 Creating an iRule for the HTTP to HTTPS redirect</a></li>
+      <li><a href="#24-creating-the-virtual-servers-accessible-by-end-users-for-https-and-console-proxy">2.4 Creating the virtual servers accessible by end-users for HTTPS and Console Proxy</a></li>
+      <li><a href="#40-configuring-vmware-vcloud-director">4.0 Configuring VMware vCloud Director</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#4-additional-comments">4 Additional Comments</a>
+    <ul>
+      <li><a href="#41-session-persistence">4.1 Session persistence</a></li>
+      <li><a href="#42-ssl-termination">4.2 SSL termination</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>While there are numerous instructions and blog posts out there which try to show the load balancing configuration of an F5 Big-IP LTM with VMware vCloud Director (vCD), none of them proved to be complete and comprehensive. This post attempts to give this complete and comprehensive walk through guide.</p>
+
+<p class="notice--info"><strong>Update June 06, 2013:</strong> In the original version of this article, I described the usage of a standard F5 TCP monitor for the vCD Console Proxy. This will lead to a log pollution, as each connection by the F5 monitor is logged as a failed attempt on vCD. Thus this revised guide makes usage of a console proxy feature to access the SDK to monitor the health of a cell for the Console Proxy.</p>
+
+<h1 id="1-logical-setup-of-a-load-balanced-vmware-vcloud-director-configuration">1. Logical setup of a load-balanced VMware vCloud Director configuration</h1>
+
+<p>The goal will be to frontend two or more VMware vCloud Director cells with a F5 Big-IP LTM as shown in Figure 1. HTTPS and Console Proxy traffic shall be forwarded to one of the cells and HTTP traffic shall be terminated on the load balancer and answered with a HTTP 301 (Redirect) answer to the https://… URL.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD11.png" title="Figure 1: VMware vCloud Director with an F5 Big-IP LTM load balancer " class="image-popup">
+<picture>
+  <source width="731" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD11-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD11-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD11-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD11-683.webp 683w, 
+
+ /content/uploads/2013/05/vCD11.webp 731w" sizes="731px"></source>
+  <source width="731" data-srcset="
+
+    /content/resized/2013/05/vCD11-320.png 320w, 
+
+    /content/resized/2013/05/vCD11-384.png 384w, 
+
+    /content/resized/2013/05/vCD11-512.png 512w, 
+
+    /content/resized/2013/05/vCD11-683.png 683w, 
+
+ /content/uploads/2013/05/vCD11.png 731w" sizes="731px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD11.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: VMware vCloud Director with an F5 Big-IP LTM load balancer ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: VMware vCloud Director with an F5 Big-IP LTM load balancer
+</figcaption>
+
+</figure>
+
+<p>Each VMware vCloud Director cell is configured with at least two IP addresses. One to terminate HTTP and HTTPS communication to access the web-based GUI as well as the REST API, the other one for accessing the Console Proxy. As a result also the F5 Big-IP LTM needs to host two Virtual IP (VIP) to offer the corresponding services.</p>
+
+<p>Let’s look at the desired traffic flow for HTTPS, HTTP and Console Proxy in detail:</p>
+
+<h2 id="11-https">1.1 HTTPS</h2>
+
+<p>As shown in Figure 2, HTTPS traffic will reside on IP 1 with the port TCP/443 of the LTM and be load balanced across the cells to port TCP/443 on their IP 1. This traffic is standard HTTPS traffic and used for accessing the web-based GUI by either Administrators or End-Users as well as API access. It is therefore possible to use L7 load balancing and apply WAN acceleration as well as SSL termination to this traffic. This virtual server will later be accessible e.g. under the URL https://vcd.edge-cloud.net</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD21.png" title="Figure 2: Desired traffic flow for HTTPS " class="image-popup">
+<picture>
+  <source width="730" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD21-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD21-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD21-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD21-683.webp 683w, 
+
+ /content/uploads/2013/05/vCD21.webp 730w" sizes="730px"></source>
+  <source width="730" data-srcset="
+
+    /content/resized/2013/05/vCD21-320.png 320w, 
+
+    /content/resized/2013/05/vCD21-384.png 384w, 
+
+    /content/resized/2013/05/vCD21-512.png 512w, 
+
+    /content/resized/2013/05/vCD21-683.png 683w, 
+
+ /content/uploads/2013/05/vCD21.png 730w" sizes="730px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD21.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Desired traffic flow for HTTPS ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Desired traffic flow for HTTPS
+</figcaption>
+
+</figure>
+
+<h2 id="12-http">1.2 HTTP</h2>
+
+<p>HTTP traffic is automatically redirected by VMware vCloud Director cells to HTTPS. Instead of forwarding HTTP traffic to the vCD cells, this redirect should be performed by the LTM as shown in Figure 3. Using an F5 iRule script this also gives the added benefit of specifying the destination of this redirect. As an example http://vcd.edge-cloud.net/ could be redirected to https://vcd.edge-cloud.net/cloud/org/MyOrg/.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD311.png" title="Figure 3: Desired traffic flow for HTTPS " class="image-popup">
+<picture>
+  <source width="731" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD311-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD311-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD311-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD311-683.webp 683w, 
+
+ /content/uploads/2013/05/vCD311.webp 731w" sizes="731px"></source>
+  <source width="731" data-srcset="
+
+    /content/resized/2013/05/vCD311-320.png 320w, 
+
+    /content/resized/2013/05/vCD311-384.png 384w, 
+
+    /content/resized/2013/05/vCD311-512.png 512w, 
+
+    /content/resized/2013/05/vCD311-683.png 683w, 
+
+ /content/uploads/2013/05/vCD311.png 731w" sizes="731px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD311.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Desired traffic flow for HTTPS ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Desired traffic flow for HTTPS
+</figcaption>
+
+</figure>
+
+<h2 id="13-console-proxy">1.3 Console Proxy</h2>
+
+<p>Although the Console Proxy uses the port TCP/443, the VMware Remote Console (VMRC) traffic across it, is not HTTPS traffic. Instead it is a VMware proprietary protocol that is tunneled through this well-known port. It is therefore only possible to use L4 load balancing and cannot use additional WAN acceleration or SSL termination. As port TCP/443 is also already used for the web-based GUI on IP 1, the Console Proxy has to be bound to IP 2.</p>
+
+<p>To make things a bit more confusing, the Console Proxy can actually reply to standard HTTPS requests and thus acts like a standard web server in some way. We will use this capability to monitor the Console Proxy for health. More later in section 2.1.2.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD41.png" title="Figure 4: Desired traffic flow for Console Proxy " class="image-popup">
+<picture>
+  <source width="730" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD41-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD41-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD41-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD41-683.webp 683w, 
+
+ /content/uploads/2013/05/vCD41.webp 730w" sizes="730px"></source>
+  <source width="730" data-srcset="
+
+    /content/resized/2013/05/vCD41-320.png 320w, 
+
+    /content/resized/2013/05/vCD41-384.png 384w, 
+
+    /content/resized/2013/05/vCD41-512.png 512w, 
+
+    /content/resized/2013/05/vCD41-683.png 683w, 
+
+ /content/uploads/2013/05/vCD41.png 730w" sizes="730px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD41.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Desired traffic flow for Console Proxy ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Desired traffic flow for Console Proxy
+</figcaption>
+
+</figure>
+
+<h1 id="2-configuring-f5-big-ip-ltm">2. Configuring F5 Big-IP LTM</h1>
+
+<p>Configuring the F5 Big-IP LTM to reside in front of VMware vCloud Director cells requires a common set of configuration steps:</p>
+
+<ol>
+  <li>Creating custom health monitors for vCD HTTPS and Console Proxy</li>
+  <li>Creating member pools with the vCD cells to distribute requests among</li>
+  <li>Creating an iRule for the HTTP to HTTPS redirect</li>
+  <li>Creating the virtual servers accessible by end-users for HTTPS and Console Proxy</li>
+</ol>
+
+<h2 id="21-creating-a-custom-health-monitor-for-vcd-https-and-console-proxy">2.1 Creating a custom health monitor for vCD HTTPS and Console Proxy</h2>
+
+<h3 id="211-https-health-monitor">2.1.1 HTTPS Health Monitor</h3>
+
+<p>A VMware vCloud Director cell offers the special URL <em>https://hostname-of-cell/cloud/server_status</em>, which shows whether the web-based GUI and API on that cell is fully functional or not. This provides advanced health information beyond e.g. just monitoring port TCP/443 for accessibility. Therefore we will create a custom health monitor (Figure 5) within F5 Big-IP to make use of this capability.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD_HTTPS_Monitor.png" title="Figure 5: Custom HTTP monitor in F5 Big-IP for VMware vCloud Director " class="image-popup">
+<picture>
+  <source width="880" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD_HTTPS_Monitor-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD_HTTPS_Monitor-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD_HTTPS_Monitor-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD_HTTPS_Monitor-683.webp 683w, 
+
+    
+    /content/resized/2013/05/vCD_HTTPS_Monitor-800.webp 800w, 
+
+ /content/uploads/2013/05/vCD_HTTPS_Monitor.webp 880w" sizes="880px"></source>
+  <source width="880" data-srcset="
+
+    /content/resized/2013/05/vCD_HTTPS_Monitor-320.png 320w, 
+
+    /content/resized/2013/05/vCD_HTTPS_Monitor-384.png 384w, 
+
+    /content/resized/2013/05/vCD_HTTPS_Monitor-512.png 512w, 
+
+    /content/resized/2013/05/vCD_HTTPS_Monitor-683.png 683w, 
+
+    /content/resized/2013/05/vCD_HTTPS_Monitor-800.png 800w, 
+
+ /content/uploads/2013/05/vCD_HTTPS_Monitor.png 880w" sizes="880px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD_HTTPS_Monitor.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Custom HTTP monitor in F5 Big-IP for VMware vCloud Director ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Custom HTTP monitor in F5 Big-IP for VMware vCloud Director
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>Step 1: Click on the “plus” icon right next to <em>Monitors</em> to create a new monitor.</li>
+  <li>Step 2: Make sure to select <strong>HTTPS</strong> as the parent monitor type.</li>
+  <li>Step 3: Reduce the <em>Interval</em> and <em>Timeout</em> value for this monitor to be a bit more aggressive in detecting failures in a timely fashion.</li>
+  <li>Step 4: Enter the Send String <strong>GET /cloud/server_statusrn</strong>. This string includes the above mentioned URL.</li>
+  <li>Step 5: Enter the Receive String <strong>“Service is up.”</strong>. This string is the expected string for the case that the service is healthy.</li>
+</ul>
+
+<h3 id="212-console-proxy-health-monitor">2.1.2 Console Proxy Health Monitor</h3>
+
+<p>The actual VMware Remote Console (VMRC) traffic is only using the well-known port of 443, but is itself not HTTPS traffic. Nevertheless, the Console Proxy on the vCD cells does react to certain types of HTTPS requests and delivers information back via HTTPS.</p>
+
+<p>Although it would be sufficient to configure the F5 load balancer with a standard TCP monitor – that monitors if port TCP/443 is alive – this leads to log file pollution on the corresponding vCD cells. Each such monitor request would be considered a failed connection and logged accordingly.</p>
+
+<p>Thus a better approach is to use the possibility to connect with a standard webbrowser to the special URL <em>https://hostname-of-console-proxy-cell/sdk/vimServiceVersions.xml</em>, which delivers back an XML file with information about the Console Proxy version.</p>
+
+<p>While the Console Proxy is healthy and able to proxy VMRC traffic, it will serve this XML file. Therefore we will create a custom health monitor (Figure 6) within F5 Big-IP to make use of this capability.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD_CP_Monitor.png" title="Figure 6: Custom Console Proxy monitor in F5 Big-IP for VMware vCloud Director " class="image-popup">
+<picture>
+  <source width="707" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD_CP_Monitor-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD_CP_Monitor-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD_CP_Monitor-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD_CP_Monitor-683.webp 683w, 
+
+ /content/uploads/2013/05/vCD_CP_Monitor.webp 707w" sizes="707px"></source>
+  <source width="707" data-srcset="
+
+    /content/resized/2013/05/vCD_CP_Monitor-320.png 320w, 
+
+    /content/resized/2013/05/vCD_CP_Monitor-384.png 384w, 
+
+    /content/resized/2013/05/vCD_CP_Monitor-512.png 512w, 
+
+    /content/resized/2013/05/vCD_CP_Monitor-683.png 683w, 
+
+ /content/uploads/2013/05/vCD_CP_Monitor.png 707w" sizes="707px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD_CP_Monitor.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Custom Console Proxy monitor in F5 Big-IP for VMware vCloud Director ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Custom Console Proxy monitor in F5 Big-IP for VMware vCloud Director
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>Step 1: Click on the “plus” icon right next to <em>Monitors</em> to create a new monitor and make sure to select <strong>HTTPS</strong> as the parent monitor type.</li>
+  <li>Step 2: Reduce the <em>Interval</em> and <em>Timeout</em> value for this monitor to be a bit more aggressive in detecting failures in a timely fashion.</li>
+  <li>Step 3: Enter the Send String <strong>GET /sdk/vimServiceVersions.xml HTTP/1.1rnrnConnection: Closernrn</strong>. This string includes the above mentioned URL.</li>
+  <li>Step 4: Enter the Receive String <strong>urn:vim25</strong>. This string is the expected string for the case that the service is healthy.</li>
+</ul>
+
+<h2 id="22-creating-member-pools-with-the-vcd-cells-to-distribute-requests-among">2.2 Creating member pools with the vCD cells to distribute requests among</h2>
+
+<p>As shown in the Logical Setup section each vCD cell consist of two IP addresses. One used for the web-based GUI and API, the other one for the Console Proxy. As such we need to create two member pools (Figure 7):</p>
+
+<ul>
+  <li>HTTPS Pool: This pool includes IP 1 of all vCD cells and is used to distribute HTTPS request for the web-based GUI and API.</li>
+  <li>Console Proxy Pool: This pool includes IP 2 of all vCD cells and is used to distribute the Console Proxy requests.</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/pools_overview.png" title="Figure 7: Overview of the pools to be created " class="image-popup">
+<picture>
+  <source width="1013" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/pools_overview-320.webp 320w, 
+
+    
+    /content/resized/2013/05/pools_overview-384.webp 384w, 
+
+    
+    /content/resized/2013/05/pools_overview-512.webp 512w, 
+
+    
+    /content/resized/2013/05/pools_overview-683.webp 683w, 
+
+    
+    /content/resized/2013/05/pools_overview-800.webp 800w, 
+
+    
+    /content/resized/2013/05/pools_overview-960.webp 960w, 
+
+ /content/uploads/2013/05/pools_overview.webp 1013w" sizes="1013px"></source>
+  <source width="1013" data-srcset="
+
+    /content/resized/2013/05/pools_overview-320.png 320w, 
+
+    /content/resized/2013/05/pools_overview-384.png 384w, 
+
+    /content/resized/2013/05/pools_overview-512.png 512w, 
+
+    /content/resized/2013/05/pools_overview-683.png 683w, 
+
+    /content/resized/2013/05/pools_overview-800.png 800w, 
+
+    /content/resized/2013/05/pools_overview-960.png 960w, 
+
+ /content/uploads/2013/05/pools_overview.png 1013w" sizes="1013px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/pools_overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Overview of the pools to be created ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Overview of the pools to be created
+</figcaption>
+
+</figure>
+
+<p>Let’s start with the HTTPS pool:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD_Pool_HTTPS1.png" title="Figure 8: HTTPS pool in F5 Big-IP for VMware vCloud Director " class="image-popup">
+<picture>
+  <source width="719" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD_Pool_HTTPS1-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD_Pool_HTTPS1-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD_Pool_HTTPS1-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD_Pool_HTTPS1-683.webp 683w, 
+
+ /content/uploads/2013/05/vCD_Pool_HTTPS1.webp 719w" sizes="719px"></source>
+  <source width="719" data-srcset="
+
+    /content/resized/2013/05/vCD_Pool_HTTPS1-320.png 320w, 
+
+    /content/resized/2013/05/vCD_Pool_HTTPS1-384.png 384w, 
+
+    /content/resized/2013/05/vCD_Pool_HTTPS1-512.png 512w, 
+
+    /content/resized/2013/05/vCD_Pool_HTTPS1-683.png 683w, 
+
+ /content/uploads/2013/05/vCD_Pool_HTTPS1.png 719w" sizes="719px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD_Pool_HTTPS1.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: HTTPS pool in F5 Big-IP for VMware vCloud Director ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: HTTPS pool in F5 Big-IP for VMware vCloud Director
+</figcaption>
+
+</figure>
+
+<p>Select the previously created custom health monitor for vCD as Health Monitor.</p>
+
+<p>For the members specify the IP 1 of all your vCD cells along with HTTPS as the service port.</p>
+
+<p>Next, create the Console Proxy pool:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD_Pool_CP1.png" title="Figure 9: Console Proxy pool in F5 Big-IP for VMware vCloud Director " class="image-popup">
+<picture>
+  <source width="741" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD_Pool_CP1-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD_Pool_CP1-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD_Pool_CP1-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD_Pool_CP1-683.webp 683w, 
+
+ /content/uploads/2013/05/vCD_Pool_CP1.webp 741w" sizes="741px"></source>
+  <source width="741" data-srcset="
+
+    /content/resized/2013/05/vCD_Pool_CP1-320.png 320w, 
+
+    /content/resized/2013/05/vCD_Pool_CP1-384.png 384w, 
+
+    /content/resized/2013/05/vCD_Pool_CP1-512.png 512w, 
+
+    /content/resized/2013/05/vCD_Pool_CP1-683.png 683w, 
+
+ /content/uploads/2013/05/vCD_Pool_CP1.png 741w" sizes="741px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD_Pool_CP1.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Console Proxy pool in F5 Big-IP for VMware vCloud Director ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Console Proxy pool in F5 Big-IP for VMware vCloud Director
+</figcaption>
+
+</figure>
+
+<p>Ensure that <strong>tcp</strong> is selected as health monitor and not e.g. <em>https</em>. Keep in mind that even though the Console Proxy used the port TCP/443, it is not HTTPS traffic.</p>
+
+<p>For the members specify the IP 2 of all your vCD cells along with HTTPS (port 443) as the service port. The selection of HTTPS will only enter 443 as the port but does not have any influence on the F5 Big-IP treating this traffic as HTTPS traffic.</p>
+
+<h2 id="23-creating-an-irule-for-the-http-to-https-redirect">2.3 Creating an iRule for the HTTP to HTTPS redirect</h2>
+
+<p>A custom iRule will allow you to redirect users accessing the IP 1 of the Big-IP load balancer via HTTP to the desired URL of the vCloud Service including the HTTPS part. This destination could e.g. be <em>https://vcd.edge-cloud.net/cloud/</em> to access the web-based admin UI or <em>https://vcd.edge-cloud.net/cloud/org/MyOrg/</em> to reach the web-based UI for a certain Org VDC.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/iRule1.png" title="Figure 10: Custom iRule for redirecting HTTP traffic to a custom vCD URL " class="image-popup">
+<picture>
+  <source width="861" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/iRule1-320.webp 320w, 
+
+    
+    /content/resized/2013/05/iRule1-384.webp 384w, 
+
+    
+    /content/resized/2013/05/iRule1-512.webp 512w, 
+
+    
+    /content/resized/2013/05/iRule1-683.webp 683w, 
+
+    
+    /content/resized/2013/05/iRule1-800.webp 800w, 
+
+ /content/uploads/2013/05/iRule1.webp 861w" sizes="861px"></source>
+  <source width="861" data-srcset="
+
+    /content/resized/2013/05/iRule1-320.png 320w, 
+
+    /content/resized/2013/05/iRule1-384.png 384w, 
+
+    /content/resized/2013/05/iRule1-512.png 512w, 
+
+    /content/resized/2013/05/iRule1-683.png 683w, 
+
+    /content/resized/2013/05/iRule1-800.png 800w, 
+
+ /content/uploads/2013/05/iRule1.png 861w" sizes="861px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/iRule1.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Custom iRule for redirecting HTTP traffic to a custom vCD URL ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Custom iRule for redirecting HTTP traffic to a custom vCD URL
+</figcaption>
+
+</figure>
+
+<h2 id="24-creating-the-virtual-servers-accessible-by-end-users-for-https-and-console-proxy">2.4 Creating the virtual servers accessible by end-users for HTTPS and Console Proxy</h2>
+
+<p>To implement the Logical Setup shown above we need to create a total of three virtual servers on the F5 Big-IP LTM (Figure 11):</p>
+
+<ol>
+  <li>HTTPS Virtual Server: This server is attached to IP 1 of the Big-IP LTM and serves web-based GUI and API.</li>
+  <li>HTTP Virtual Server: This server is attached to IP 1 of the Big-IP LTM and redirects clients to the HTTPS virtual server.</li>
+  <li>Console Proxy Server: This server is attached to IP 2 of the Big-IP LTM and serves the Console Proxy.</li>
+</ol>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vip_overview.png" title="Figure 11: Overview of Virtual Servers to be created " class="image-popup">
+<picture>
+  <source width="987" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vip_overview-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vip_overview-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vip_overview-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vip_overview-683.webp 683w, 
+
+    
+    /content/resized/2013/05/vip_overview-800.webp 800w, 
+
+    
+    /content/resized/2013/05/vip_overview-960.webp 960w, 
+
+ /content/uploads/2013/05/vip_overview.webp 987w" sizes="987px"></source>
+  <source width="987" data-srcset="
+
+    /content/resized/2013/05/vip_overview-320.png 320w, 
+
+    /content/resized/2013/05/vip_overview-384.png 384w, 
+
+    /content/resized/2013/05/vip_overview-512.png 512w, 
+
+    /content/resized/2013/05/vip_overview-683.png 683w, 
+
+    /content/resized/2013/05/vip_overview-800.png 800w, 
+
+    /content/resized/2013/05/vip_overview-960.png 960w, 
+
+ /content/uploads/2013/05/vip_overview.png 987w" sizes="987px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vip_overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Overview of Virtual Servers to be created ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Overview of Virtual Servers to be created
+</figcaption>
+
+</figure>
+
+<p>Let’s start with the HTTPS Virtual Server:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/VirtServ_HTTPS_1.png" title="Figure 12: Virtual Server for HTTPS - General Properties and Configuration " class="image-popup">
+<picture>
+  <source width="932" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/VirtServ_HTTPS_1-320.webp 320w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTPS_1-384.webp 384w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTPS_1-512.webp 512w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTPS_1-683.webp 683w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTPS_1-800.webp 800w, 
+
+ /content/uploads/2013/05/VirtServ_HTTPS_1.webp 932w" sizes="932px"></source>
+  <source width="932" data-srcset="
+
+    /content/resized/2013/05/VirtServ_HTTPS_1-320.png 320w, 
+
+    /content/resized/2013/05/VirtServ_HTTPS_1-384.png 384w, 
+
+    /content/resized/2013/05/VirtServ_HTTPS_1-512.png 512w, 
+
+    /content/resized/2013/05/VirtServ_HTTPS_1-683.png 683w, 
+
+    /content/resized/2013/05/VirtServ_HTTPS_1-800.png 800w, 
+
+ /content/uploads/2013/05/VirtServ_HTTPS_1.png 932w" sizes="932px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/VirtServ_HTTPS_1.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Virtual Server for HTTPS - General Properties and Configuration ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Virtual Server for HTTPS - General Properties and Configuration
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>Step 1: Specify the IP 1 of the Big-IP LTM under which you will serve the VMware vCloud Director.</li>
+  <li>Step 2: Specify <strong>HTTPS</strong> as the <em>“Service Port”</em>.</li>
+  <li>Step 3: Choose <strong>http</strong> as the <em>“HTTP Profile”</em>. This Virtual Server serves standard HTTPS content and can therefore make use of L7 load balancing.</li>
+  <li>Step 4: Pick <strong>wan-optimized-compression</strong> as <em>“HTTP Compression Profile”</em>. This will compress this standard HTTPS content stream.</li>
+  <li>Step 5: Pick the SSL certificate corresponding to your VMware vCloud Director service in the <em>“SSL Profile (Client)”</em>. As we are using L7 load balancing, the SSL connection will actually be terminated on the F5 Big-IP LTM.</li>
+  <li>Step 6: Specify <strong>serverssl-insecure-compatible</strong> as the <em>SSL Profile (Server)</em>.</li>
+  <li>Step 7: Choose <strong>Auto Map</strong> as the <em>SNAT Pool</em> to make use of Static NAT. This is for the case where your VMware vCloud Director cell’s IP addresses are not directly accessible by the clients.</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/VirtServ_CP_21.png" title="Figure 13: Virtual Server for HTTPS – Resources " class="image-popup">
+<picture>
+  <source width="671" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/VirtServ_CP_21-320.webp 320w, 
+
+    
+    /content/resized/2013/05/VirtServ_CP_21-384.webp 384w, 
+
+    
+    /content/resized/2013/05/VirtServ_CP_21-512.webp 512w, 
+
+ /content/uploads/2013/05/VirtServ_CP_21.webp 671w" sizes="671px"></source>
+  <source width="671" data-srcset="
+
+    /content/resized/2013/05/VirtServ_CP_21-320.png 320w, 
+
+    /content/resized/2013/05/VirtServ_CP_21-384.png 384w, 
+
+    /content/resized/2013/05/VirtServ_CP_21-512.png 512w, 
+
+ /content/uploads/2013/05/VirtServ_CP_21.png 671w" sizes="671px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/VirtServ_CP_21.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Virtual Server for HTTPS – Resources ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: Virtual Server for HTTPS – Resources
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>Step 8: As the <em>Default Pool</em> choose the HTTPS pool created in step 2.2.</li>
+  <li>Step 9: As the <em>Default Persistence Profile</em> choose <strong>source_address</strong>
+</li>
+</ul>
+
+<p>Although a once established VMRC connection remains connected through the same vCD irrespective of the above setting, new and re-established connections might be distributed by the F5 to another cell. If this connection is not a new VMRC connection, but a re-established one, vCD will complain in it’s log files and the connection might fail. The above setting will pin all connections originating from the same source address to the same vCD cell and thereby prevent any issues.</p>
+
+<p>Next we will create the HTTP Virtual Server:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/VirtServ_HTTP_1.png" title="Figure 14: Virtual Server for HTTP - General Properties and Configuration " class="image-popup">
+<picture>
+  <source width="882" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_1-320.webp 320w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_1-384.webp 384w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_1-512.webp 512w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_1-683.webp 683w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_1-800.webp 800w, 
+
+ /content/uploads/2013/05/VirtServ_HTTP_1.webp 882w" sizes="882px"></source>
+  <source width="882" data-srcset="
+
+    /content/resized/2013/05/VirtServ_HTTP_1-320.png 320w, 
+
+    /content/resized/2013/05/VirtServ_HTTP_1-384.png 384w, 
+
+    /content/resized/2013/05/VirtServ_HTTP_1-512.png 512w, 
+
+    /content/resized/2013/05/VirtServ_HTTP_1-683.png 683w, 
+
+    /content/resized/2013/05/VirtServ_HTTP_1-800.png 800w, 
+
+ /content/uploads/2013/05/VirtServ_HTTP_1.png 882w" sizes="882px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/VirtServ_HTTP_1.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Virtual Server for HTTP - General Properties and Configuration ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Virtual Server for HTTP - General Properties and Configuration
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>Step 1: Specify the IP 1 of the Big-IP LTM under which you will serve the VMware vCloud Director.</li>
+  <li>Step 2: Specify <strong>HTTPS</strong> as the <em>“Service Port”</em>.</li>
+  <li>Step 3: Choose <strong>http</strong> as the <em>“HTTP Profile”</em>. This Virtual Server serves standard HTTPS content and can therefore make use of L7 load balancing.</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/VirtServ_HTTP_2.png" title="Figure 15: Virtual Server for HTTP - Resources " class="image-popup">
+<picture>
+  <source width="692" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_2-320.webp 320w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_2-384.webp 384w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_2-512.webp 512w, 
+
+    
+    /content/resized/2013/05/VirtServ_HTTP_2-683.webp 683w, 
+
+ /content/uploads/2013/05/VirtServ_HTTP_2.webp 692w" sizes="692px"></source>
+  <source width="692" data-srcset="
+
+    /content/resized/2013/05/VirtServ_HTTP_2-320.png 320w, 
+
+    /content/resized/2013/05/VirtServ_HTTP_2-384.png 384w, 
+
+    /content/resized/2013/05/VirtServ_HTTP_2-512.png 512w, 
+
+    /content/resized/2013/05/VirtServ_HTTP_2-683.png 683w, 
+
+ /content/uploads/2013/05/VirtServ_HTTP_2.png 692w" sizes="692px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/VirtServ_HTTP_2.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Virtual Server for HTTP - Resources ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: Virtual Server for HTTP - Resources
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>Step 4: As iRule choose the custom iRule created in step 2.3.</li>
+</ul>
+
+<p>Last let’s create the Console Proxy Virtual Server:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/VirtServ_CP_1.png" title="Figure 16: Virtual Server for Console Proxy - General Properties and Configuration " class="image-popup">
+<picture>
+  <source width="882" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/VirtServ_CP_1-320.webp 320w, 
+
+    
+    /content/resized/2013/05/VirtServ_CP_1-384.webp 384w, 
+
+    
+    /content/resized/2013/05/VirtServ_CP_1-512.webp 512w, 
+
+    
+    /content/resized/2013/05/VirtServ_CP_1-683.webp 683w, 
+
+    
+    /content/resized/2013/05/VirtServ_CP_1-800.webp 800w, 
+
+ /content/uploads/2013/05/VirtServ_CP_1.webp 882w" sizes="882px"></source>
+  <source width="882" data-srcset="
+
+    /content/resized/2013/05/VirtServ_CP_1-320.png 320w, 
+
+    /content/resized/2013/05/VirtServ_CP_1-384.png 384w, 
+
+    /content/resized/2013/05/VirtServ_CP_1-512.png 512w, 
+
+    /content/resized/2013/05/VirtServ_CP_1-683.png 683w, 
+
+    /content/resized/2013/05/VirtServ_CP_1-800.png 800w, 
+
+ /content/uploads/2013/05/VirtServ_CP_1.png 882w" sizes="882px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/VirtServ_CP_1.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Virtual Server for Console Proxy - General Properties and Configuration ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 16: Virtual Server for Console Proxy - General Properties and Configuration
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>Step 1: Specify the IP 1 of the Big-IP LTM under which you will serve the VMware vCloud Director.</li>
+  <li>Step 2: Specify <strong>HTTPS</strong> as the <em>“Service Port”</em>.</li>
+  <li>Step 3: Choose <strong>none</strong> as the <em>“HTTP Profile”</em>. This Virtual Server serves the Console Proxy and can therefore only make usage of L3 load balancing (TCP).</li>
+  <li>Step 4: Choose <strong>Auto Map</strong> as the <em>SNAT Pool</em> to make use of static NAT. This is for the case where your VMware vCloud Director cell’s IP addresses are not directly accessible by the clients.</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/VirtServ_CP_2.png" title="Figure 17: Virtual Server for Console Proxy - Resources " class="image-popup">
+<picture>
+  <source width="671" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/VirtServ_CP_2-320.webp 320w, 
+
+    
+    /content/resized/2013/05/VirtServ_CP_2-384.webp 384w, 
+
+    
+    /content/resized/2013/05/VirtServ_CP_2-512.webp 512w, 
+
+ /content/uploads/2013/05/VirtServ_CP_2.webp 671w" sizes="671px"></source>
+  <source width="671" data-srcset="
+
+    /content/resized/2013/05/VirtServ_CP_2-320.png 320w, 
+
+    /content/resized/2013/05/VirtServ_CP_2-384.png 384w, 
+
+    /content/resized/2013/05/VirtServ_CP_2-512.png 512w, 
+
+ /content/uploads/2013/05/VirtServ_CP_2.png 671w" sizes="671px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/VirtServ_CP_2.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Virtual Server for Console Proxy - Resources ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 17: Virtual Server for Console Proxy - Resources
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>Step 5: As the Default Pool choose the Console Proxy pool created in step 2.2.</li>
+</ul>
+
+<h2 id="40-configuring-vmware-vcloud-director">4.0 Configuring VMware vCloud Director</h2>
+
+<p>As a last step the DNS names mapped to the IP addresses of the virtual servers above need to be configured within VMware vCloud Director under <strong>Administration -&gt; System Settings -&gt; Public Addresses</strong>. Refer to Figure 16 for an example.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/vCD_public_address.png" title="Figure 18: Configuring Public Addresses in vCD " class="image-popup">
+<picture>
+  <source width="949" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/vCD_public_address-320.webp 320w, 
+
+    
+    /content/resized/2013/05/vCD_public_address-384.webp 384w, 
+
+    
+    /content/resized/2013/05/vCD_public_address-512.webp 512w, 
+
+    
+    /content/resized/2013/05/vCD_public_address-683.webp 683w, 
+
+    
+    /content/resized/2013/05/vCD_public_address-800.webp 800w, 
+
+ /content/uploads/2013/05/vCD_public_address.webp 949w" sizes="949px"></source>
+  <source width="949" data-srcset="
+
+    /content/resized/2013/05/vCD_public_address-320.png 320w, 
+
+    /content/resized/2013/05/vCD_public_address-384.png 384w, 
+
+    /content/resized/2013/05/vCD_public_address-512.png 512w, 
+
+    /content/resized/2013/05/vCD_public_address-683.png 683w, 
+
+    /content/resized/2013/05/vCD_public_address-800.png 800w, 
+
+ /content/uploads/2013/05/vCD_public_address.png 949w" sizes="949px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/vCD_public_address.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Configuring Public Addresses in vCD ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 18: Configuring Public Addresses in vCD
+</figcaption>
+
+</figure>
+
+<h1 id="4-additional-comments">4 Additional Comments</h1>
+
+<h2 id="41-session-persistence">4.1 Session persistence</h2>
+
+<p>Although not required it is possible to configure the Virtual Server for HTTPS with session persistence (Figure 12), similar to the Console Proxy. Possible options would be Cookie-based or Source-IP address-based.</p>
+
+<h2 id="42-ssl-termination">4.2 SSL termination</h2>
+
+<p>Unfortunately VMware vCloud Director does not allow disabling of HTTPS in favor of HTTP. This would allow termination of the SSL session on the F5 Big-IP LTM – as the configuration above showcases – while at the same time offloading the vCD cell from SSL encryption/decryption load. Thus traffic from the load balancer to the cells still need to be SSL encrypted.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#f5" class="page__taxonomy-item" rel="tag">F5</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-05-20T13:30:00-07:00">May 20, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Configuring+F5+Big-IP+LTM+with+VMware+vCloud+Director+%5BUpdated%5D%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F20%2Fconfiguring-f5-big-ip-with-vcd%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F20%2Fconfiguring-f5-big-ip-with-vcd%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F20%2Fconfiguring-f5-big-ip-with-vcd%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F20%2Fconfiguring-f5-big-ip-with-vcd%2F&amp;title=Configuring+F5+Big-IP+LTM+with+VMware+vCloud+Director+%5BUpdated%5D" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2020/01/01/template/" class="pagination--pager" title="Title goes here
+">Previous</a>
+    
+    
+      <a href="/2013/05/21/infoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere/" class="pagination--pager" title="Infoblox vNIOS HA pair VIP unreachable when deployed on vSphere
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

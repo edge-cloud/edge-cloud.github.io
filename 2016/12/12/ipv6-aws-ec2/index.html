@@ -1,0 +1,1312 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>IPv6 with Amazon Web Services VPC and EC2 - Edge Cloud</title>
+<meta name="description" content="Step-by-step instructions for enabling your AWS Default VPC and Subnets for IPv6">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="IPv6 with Amazon Web Services VPC and EC2">
+<meta property="og:url" content="https://www.edge-cloud.net/2016/12/12/ipv6-aws-ec2/">
+
+
+  <meta property="og:description" content="Step-by-step instructions for enabling your AWS Default VPC and Subnets for IPv6">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="IPv6 with Amazon Web Services VPC and EC2">
+  <meta name="twitter:description" content="Step-by-step instructions for enabling your AWS Default VPC and Subnets for IPv6">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/12/12/ipv6-aws-ec2/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2016-12-12T00:19:42-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2016/12/12/ipv6-aws-ec2/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="IPv6 with Amazon Web Services VPC and EC2">
+    <meta itemprop="description" content="Step-by-step instructions for enabling your AWS Default VPC and Subnets for IPv6">
+    <meta itemprop="datePublished" content="December 12, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">IPv6 with Amazon Web Services VPC and EC2
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#background">Background</a></li>
+  <li><a href="#pre-requisites">Pre-Requisites</a></li>
+  <li>
+<a href="#enable-default-vpc-and-default-subnets-for-ipv6">Enable Default VPC and Default Subnets for IPv6</a>
+    <ul>
+      <li><a href="#edit-vpc-cidr-for-ipv6">Edit VPC CIDR for IPv6</a></li>
+      <li><a href="#edit-subnet-cidrs">Edit Subnet CIDRs</a></li>
+      <li><a href="#enable-auto-assign-of-ipv6-addresses">Enable auto-assign of IPv6 addresses</a></li>
+      <li><a href="#update-the-route-table">Update the route table</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#launching-ec2-instances">Launching EC2 instances</a>
+    <ul>
+      <li><a href="#ubuntu-1604">Ubuntu 16.04</a></li>
+      <li><a href="#ubuntu-1404">Ubuntu 14.04</a></li>
+      <li><a href="#rhel-7--centos-7">RHEL 7 / CentOS 7</a></li>
+      <li><a href="#rhel-6--centos-6">RHEL 6 / CentOS 6</a></li>
+      <li><a href="#windows-server-2016">Windows Server 2016</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>On December 1st, 2016 AWS released <a href="https://aws.amazon.com/blogs/aws/new-ipv6-support-for-ec2-instances-in-virtual-private-clouds/" target="_blank" rel="noopener noreferrer">IPv6 Support for EC2 Instances in Virtual Private Clouds (VPCs)</a>, currently limited to the <a href="https://aws.amazon.com/blogs/aws/now-open-aws-us-east-ohio-region/" target="_blank" rel="noopener noreferrer">US-East-2 (Ohio)</a> region.</p>
+
+<p>This post will show you how to enable your existing <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html" target="_blank" rel="noopener noreferrer">Default VPC and Default Subnets</a> for IPv6.</p>
+
+<h1 id="background">Background</h1>
+
+<p><a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html" target="_blank" rel="noopener noreferrer">Amazon Virtual Private Cloud (Amazon VPC)</a> enables you to launch Amazon Web Services (AWS) resources into a virtual network that you’ve defined. This virtual network closely resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable infrastructure of AWS. A virtual private cloud (VPC) is logically isolated from other virtual networks in the AWS Cloud and allows you to launch your AWS resources, such as Amazon EC2 instances, isolated from other VPCs within your own or other accounts.</p>
+
+<p>A <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html" target="_blank" rel="noopener noreferrer">default VPC</a> allows you to jump-start your AWS EC2 experience, without having to worry about VPCs and subnets. It is ready for you to use — you can immediately start launching instances into your default VPC without having to perform any additional configuration steps.</p>
+
+<p>Unfortunately with the introduction of IPv6 within VPC, you do need to once perform some manual configuration steps in order to enable your VPC for IPv6. This blog post will show you the minimal required steps to do so.</p>
+
+<h1 id="pre-requisites">Pre-Requisites</h1>
+
+<p>Please note that as of this writing IPv6 within VPC is only in the US-East-2 (Ohio) region. You therefore need to perform the below configurations in this region. Within your AWS Console, navigate to <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#vpcs:" target="_blank" rel="noopener noreferrer">VPC section within the US-East-2 (Ohio) region</a>.</p>
+
+<h1 id="enable-default-vpc-and-default-subnets-for-ipv6">Enable Default VPC and Default Subnets for IPv6</h1>
+
+<h2 id="edit-vpc-cidr-for-ipv6">Edit VPC CIDR for IPv6</h2>
+
+<p>Each default VPC comes with a default IPv4 CIDR block of 172.31.0.0/16, but no default IPv6 CIDR block (See Figure 1). Therefore the first step is to allocated a /56 IPv6 block from the Amazon provided IPv6 block to your VPC.</p>
+
+<p>First, right-click on your Default VPC and select <strong>Edit CIDRS</strong> (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/12/Default_VPC02.png" title="Figure 1: Edit VPC CIDRs" class="image-popup">
+<picture>
+  <source width="969" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/12/Default_VPC02-320.webp 320w, 
+
+    
+    /content/resized/2016/12/Default_VPC02-384.webp 384w, 
+
+    
+    /content/resized/2016/12/Default_VPC02-512.webp 512w, 
+
+    
+    /content/resized/2016/12/Default_VPC02-683.webp 683w, 
+
+    
+    /content/resized/2016/12/Default_VPC02-800.webp 800w, 
+
+    
+    /content/resized/2016/12/Default_VPC02-960.webp 960w, 
+
+ /content/uploads/2016/12/Default_VPC02.webp 969w" sizes="969px"></source>
+  <source width="969" data-srcset="
+
+    /content/resized/2016/12/Default_VPC02-320.png 320w, 
+
+    /content/resized/2016/12/Default_VPC02-384.png 384w, 
+
+    /content/resized/2016/12/Default_VPC02-512.png 512w, 
+
+    /content/resized/2016/12/Default_VPC02-683.png 683w, 
+
+    /content/resized/2016/12/Default_VPC02-800.png 800w, 
+
+    /content/resized/2016/12/Default_VPC02-960.png 960w, 
+
+ /content/uploads/2016/12/Default_VPC02.png 969w" sizes="969px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/12/Default_VPC02.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Edit VPC CIDRs">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Edit VPC CIDRs.
+</figcaption>
+
+</figure>
+
+<p>Within the <em>VPC IPv6 CIDRS</em> section click on <strong>Add IPv6 CIDR</strong> to allocate a random /56 CIDR from the Amazon IPv6 address pool to your Default VPC (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/12/Default_VPC03.png" title="Figure 2: Edit VPC IPv6 CIDRs" class="image-popup">
+<picture>
+  <source width="1092" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/12/Default_VPC03-320.webp 320w, 
+
+    
+    /content/resized/2016/12/Default_VPC03-384.webp 384w, 
+
+    
+    /content/resized/2016/12/Default_VPC03-512.webp 512w, 
+
+    
+    /content/resized/2016/12/Default_VPC03-683.webp 683w, 
+
+    
+    /content/resized/2016/12/Default_VPC03-800.webp 800w, 
+
+    
+    /content/resized/2016/12/Default_VPC03-960.webp 960w, 
+
+ /content/uploads/2016/12/Default_VPC03.webp 1092w" sizes="1092px"></source>
+  <source width="1092" data-srcset="
+
+    /content/resized/2016/12/Default_VPC03-320.png 320w, 
+
+    /content/resized/2016/12/Default_VPC03-384.png 384w, 
+
+    /content/resized/2016/12/Default_VPC03-512.png 512w, 
+
+    /content/resized/2016/12/Default_VPC03-683.png 683w, 
+
+    /content/resized/2016/12/Default_VPC03-800.png 800w, 
+
+    /content/resized/2016/12/Default_VPC03-960.png 960w, 
+
+ /content/uploads/2016/12/Default_VPC03.png 1092w" sizes="1092px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/12/Default_VPC03.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Edit VPC IPv6 CIDRs">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Edit VPC IPv6 CIDRs
+</figcaption>
+
+</figure>
+
+<p>All your IPv6 subnets will come from this /56 IPv6 CIDR block.</p>
+
+<h2 id="edit-subnet-cidrs">Edit Subnet CIDRs</h2>
+
+<p>Your default VPC will come with one subnet per <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html" target="_blank" rel="noopener noreferrer">Availability Zone (AZ)</a>. As US-East-2 (Ohio) has three availability zones, you will have the subnets 172.31.0.0/20 for the AZ us-east-2a, 172.31.16.0/20 for the AZ us-east-2b, and 172.31.32.0/20 for the AZ us-east-2c. In this step we will want to assign each of these subnets a /64 IPv6 CIDR block.</p>
+
+<p>Navigate to the <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#subnets:" target="_blank" rel="noopener noreferrer">Subnets</a>. Start with a right-click on the first subnet and select <strong>Edit IPv6 CIDRs</strong> (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/12/Default_VPC06.png" title="Figure 3: Edit a Subnet IPv6 CIDRs" class="image-popup">
+<picture>
+  <source width="512" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/12/Default_VPC06-320.webp 320w, 
+
+    
+    /content/resized/2016/12/Default_VPC06-384.webp 384w, 
+
+ /content/uploads/2016/12/Default_VPC06.webp 512w" sizes="512px"></source>
+  <source width="512" data-srcset="
+
+    /content/resized/2016/12/Default_VPC06-320.png 320w, 
+
+    /content/resized/2016/12/Default_VPC06-384.png 384w, 
+
+ /content/uploads/2016/12/Default_VPC06.png 512w" sizes="512px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/12/Default_VPC06.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Edit a Subnet IPv6 CIDRs">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Edit a Subnet IPv6 CIDRs
+</figcaption>
+
+</figure>
+
+<p>Within the <em>VPC IPv6 CIDRs</em> section click on <strong>Add IPv6 CIDR</strong>. Confirm your selection by clicking on the <strong>check mark</strong> to the right of the line (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/12/Default_VPC07.png" title="Figure 4: Subnet CIDR blocks" class="image-popup">
+<picture>
+  <source width="1199" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/12/Default_VPC07-320.webp 320w, 
+
+    
+    /content/resized/2016/12/Default_VPC07-384.webp 384w, 
+
+    
+    /content/resized/2016/12/Default_VPC07-512.webp 512w, 
+
+    
+    /content/resized/2016/12/Default_VPC07-683.webp 683w, 
+
+    
+    /content/resized/2016/12/Default_VPC07-800.webp 800w, 
+
+    
+    /content/resized/2016/12/Default_VPC07-960.webp 960w, 
+
+ /content/uploads/2016/12/Default_VPC07.webp 1199w" sizes="1199px"></source>
+  <source width="1199" data-srcset="
+
+    /content/resized/2016/12/Default_VPC07-320.png 320w, 
+
+    /content/resized/2016/12/Default_VPC07-384.png 384w, 
+
+    /content/resized/2016/12/Default_VPC07-512.png 512w, 
+
+    /content/resized/2016/12/Default_VPC07-683.png 683w, 
+
+    /content/resized/2016/12/Default_VPC07-800.png 800w, 
+
+    /content/resized/2016/12/Default_VPC07-960.png 960w, 
+
+ /content/uploads/2016/12/Default_VPC07.png 1199w" sizes="1199px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/12/Default_VPC07.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Subnet CIDR blocks">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Subnet CIDR blocks
+</figcaption>
+
+</figure>
+
+<p>Close the window and repeat the above steps for the remaining two subnets. After you’re done, each subnet should have a distinct /64 CIDR allocated to it (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/12/Default_VPC08.png" title="Figure 5: Default Subnets with IPv6 CIDRs" class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/12/Default_VPC08-320.webp 320w, 
+
+    
+    /content/resized/2016/12/Default_VPC08-384.webp 384w, 
+
+    
+    /content/resized/2016/12/Default_VPC08-512.webp 512w, 
+
+    
+    /content/resized/2016/12/Default_VPC08-683.webp 683w, 
+
+    
+    /content/resized/2016/12/Default_VPC08-800.webp 800w, 
+
+    
+    /content/resized/2016/12/Default_VPC08-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/12/Default_VPC08-320.png 320w, 
+
+    /content/resized/2016/12/Default_VPC08-384.png 384w, 
+
+    /content/resized/2016/12/Default_VPC08-512.png 512w, 
+
+    /content/resized/2016/12/Default_VPC08-683.png 683w, 
+
+    /content/resized/2016/12/Default_VPC08-800.png 800w, 
+
+    /content/resized/2016/12/Default_VPC08-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/12/Default_VPC08.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Default Subnets with IPv6 CIDRs">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Default Subnets with IPv6 CIDRs
+</figcaption>
+
+</figure>
+
+<h2 id="enable-auto-assign-of-ipv6-addresses">Enable auto-assign of IPv6 addresses</h2>
+
+<p>By default each EC2 instance launched into the default VPC will be assigned a public IPv4 address. The instance can therefore not only reach other hosts on the Internet, but is also reachable from them Internet. The same is not true for IPv6. Instead your default subnets have to be enabled to automatically assign an IPv6 to each newly created EC2 instance within the default VPC. With the configuration in the last step of this blog post, this will ensure that each new EC2 instance within your default VPC will have outbound connectivity over IPv6, but will also be reachable from the Internet over IPv6.</p>
+
+<p>Perform a right-click on your first default subnet and select <strong>Modify auto-assign IP settings</strong> (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/12/Default_VPC09.png" title="Figure 6: Modify auto-assign IP settings" class="image-popup">
+<picture>
+  <source width="592" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/12/Default_VPC09-320.webp 320w, 
+
+    
+    /content/resized/2016/12/Default_VPC09-384.webp 384w, 
+
+    
+    /content/resized/2016/12/Default_VPC09-512.webp 512w, 
+
+ /content/uploads/2016/12/Default_VPC09.webp 592w" sizes="592px"></source>
+  <source width="592" data-srcset="
+
+    /content/resized/2016/12/Default_VPC09-320.png 320w, 
+
+    /content/resized/2016/12/Default_VPC09-384.png 384w, 
+
+    /content/resized/2016/12/Default_VPC09-512.png 512w, 
+
+ /content/uploads/2016/12/Default_VPC09.png 592w" sizes="592px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/12/Default_VPC09.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Modify auto-assign IP settings">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Modify auto-assign IP settings
+</figcaption>
+
+</figure>
+
+<p>Next, enable the tick box for <strong>Enable auto-assign IPv6 address</strong> (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/12/Default_VPC10.png" title="Figure 7: Enable auto-assign IPv6 address" class="image-popup">
+<picture>
+  <source width="1126" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/12/Default_VPC10-320.webp 320w, 
+
+    
+    /content/resized/2016/12/Default_VPC10-384.webp 384w, 
+
+    
+    /content/resized/2016/12/Default_VPC10-512.webp 512w, 
+
+    
+    /content/resized/2016/12/Default_VPC10-683.webp 683w, 
+
+    
+    /content/resized/2016/12/Default_VPC10-800.webp 800w, 
+
+    
+    /content/resized/2016/12/Default_VPC10-960.webp 960w, 
+
+ /content/uploads/2016/12/Default_VPC10.webp 1126w" sizes="1126px"></source>
+  <source width="1126" data-srcset="
+
+    /content/resized/2016/12/Default_VPC10-320.png 320w, 
+
+    /content/resized/2016/12/Default_VPC10-384.png 384w, 
+
+    /content/resized/2016/12/Default_VPC10-512.png 512w, 
+
+    /content/resized/2016/12/Default_VPC10-683.png 683w, 
+
+    /content/resized/2016/12/Default_VPC10-800.png 800w, 
+
+    /content/resized/2016/12/Default_VPC10-960.png 960w, 
+
+ /content/uploads/2016/12/Default_VPC10.png 1126w" sizes="1126px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/12/Default_VPC10.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Enable auto-assign IPv6 address">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Enable auto-assign IPv6 address
+</figcaption>
+
+</figure>
+
+<p>Close the window and repeat the above steps for the remaining two subnets.</p>
+
+<h2 id="update-the-route-table">Update the route table</h2>
+
+<p>As a last step we need to update the route table for the default VPC with a default route to the Internet Gateway. This will allow our EC2 instances to be able to reach hosts on the Internet via IPv6, but also to be reachable from the Internet.</p>
+
+<p>In case you only want your EC2 instances to reach the outside world but not be reachable via the Internet over IPv6, you need to first create an “Egress Only Internet Gateway”. This concept is new to VPC and only available for IPv6. It allows you to block incoming traffic while still allowing outbound traffic (think of it as an Internet Gateway mated to a Security Group).</p>
+
+<p>Navigate to the <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#routetables:" target="_blank" rel="noopener noreferrer"><em>“Route Tables”</em></a>, select the route table for your default VPC and click <strong>Edit</strong>. Add a route with the <strong>Destination</strong> of “::/” and the target of your Internet Gateway (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/12/Default_VPC12.png" title="Figure 8: Default route for IPv6" class="image-popup">
+<picture>
+  <source width="1250" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/12/Default_VPC12-320.webp 320w, 
+
+    
+    /content/resized/2016/12/Default_VPC12-384.webp 384w, 
+
+    
+    /content/resized/2016/12/Default_VPC12-512.webp 512w, 
+
+    
+    /content/resized/2016/12/Default_VPC12-683.webp 683w, 
+
+    
+    /content/resized/2016/12/Default_VPC12-800.webp 800w, 
+
+    
+    /content/resized/2016/12/Default_VPC12-960.webp 960w, 
+
+ /content/uploads/2016/12/Default_VPC12.webp 1250w" sizes="1250px"></source>
+  <source width="1250" data-srcset="
+
+    /content/resized/2016/12/Default_VPC12-320.png 320w, 
+
+    /content/resized/2016/12/Default_VPC12-384.png 384w, 
+
+    /content/resized/2016/12/Default_VPC12-512.png 512w, 
+
+    /content/resized/2016/12/Default_VPC12-683.png 683w, 
+
+    /content/resized/2016/12/Default_VPC12-800.png 800w, 
+
+    /content/resized/2016/12/Default_VPC12-960.png 960w, 
+
+ /content/uploads/2016/12/Default_VPC12.png 1250w" sizes="1250px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/12/Default_VPC12.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Default route for IPv6">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Default route for IPv6
+</figcaption>
+
+</figure>
+
+<h1 id="launching-ec2-instances">Launching EC2 instances</h1>
+
+<p>You can now head over to <a href="https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId" target="_blank" rel="noopener noreferrer">EC2 within the AWS Console</a> and launch your first IPv6-enabled EC2 instance.</p>
+
+<p>AWS uses <a href="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">stateful IPv6 address assignment</a>. Therefore IPv6 addresses are assigned via DHCPv6 and not Stateless Autoconfiguration (SLAAC). Most operating systems (OS) are not prepared to acquire an IPv6 address via DHCPv6 out of the box and AWS has unfortunately only updated the AMI for Amazon Linux to do so. The common AMI for Ubuntu 16.04 will fail to acquire an IPv6 address out of the box and the Windows 2016 AMI should be updated to disable Teredo.</p>
+
+<p>Also older versions of Ubuntu Linux and Windows 2016 might have issues picking up an IPv6 address at all. Here it is recommended to use the latest AMI version.</p>
+
+<h2 id="ubuntu-1604">Ubuntu 16.04</h2>
+
+<p>Under Ubuntu 16.04 you will need to update the new file <em>“/etc/network/interfaces.d/60-eth0-with-ipv6.cfg”</em> and add the following content:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iface eth0 inet6 dhcp
+</code></pre></div></div>
+
+<p>Afterwards restart the network stack with <code class="highlighter-rouge">sudo service networking restart</code>.</p>
+
+<p>Using the command <code class="highlighter-rouge">ip -6 address</code> you will see the IPv6 address assigned to eth0 via DHCPv6:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ip-172-31-8-35:~$ ip -6 address
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 state UNKNOWN qlen 1
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 9001 state UP qlen 1000
+    inet6 2600:1f16:dc1:f800:4e68:4a28:f5b6:22bd/128 scope global
+       valid_lft forever preferred_lft forever
+    inet6 fe80::6d:ceff:fe42:4535/64 scope link
+       valid_lft forever preferred_lft forever
+</code></pre></div></div>
+
+<p>You can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" target="_blank" rel="noopener noreferrer">User Data</a>, when creating a new Ubuntu instance:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"iface eth0 inet6 dhcp"</span> <span class="o">&gt;&gt;</span> /etc/network/interfaces.d/60-eth0-with-ipv6.cfg
+dhclient <span class="nt">-6</span> <span class="nt">-N</span>
+</code></pre></div></div>
+
+<p>This will setup DHCPv6 persistently for subsequent boots and acquire an IPv6 during the initial boot.</p>
+
+<h2 id="ubuntu-1404">Ubuntu 14.04</h2>
+
+<p>The above instructions for Ubuntu 16.04 do not work under Ubuntu 14.04 and actually render an EC2 host inaccessible.</p>
+
+<p>Instead you will need to update the file <em>/etc/network/interfaces.d/eth0.cfg</em> to look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>auto eth0
+iface eth0 inet dhcp
+    up dhclient -6 $IFACE
+</code></pre></div></div>
+
+<p>Here, you can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" target="_blank" rel="noopener noreferrer">User Data</a>, when creating a new Ubuntu instance:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"    up dhclient -6 </span><span class="nv">$IFACE</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> /etc/network/interfaces.d/eth0.cfg
+dhclient <span class="nt">-6</span> <span class="nt">-N</span>
+</code></pre></div></div>
+
+<p>This will setup DHCPv6 persistently for subsequent boots and acquire an IPv6 during the initial boot.</p>
+
+<h2 id="rhel-7--centos-7">RHEL 7 / CentOS 7</h2>
+
+<p>If you’re using Redhat Enterprise Linux 7 or CentOS 7 you will need to update two files:</p>
+
+<p>First update <em>/etc/sysconfig/network</em> to look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NETWORKING=yes
+NETWORKING_IPV6=yes
+</code></pre></div></div>
+
+<p>Next update <em>/etc/sysconfig/network-scripts/ifcfg-eth0</em> to this content:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEVICE="eth0"
+BOOTPROTO="dhcp"
+IPV6INIT=yes
+DHCPV6C=yes
+NM_CONTROLLED=no
+ONBOOT="yes"
+TYPE="Ethernet"
+USERCTL="yes"
+PEERDNS="yes"
+</code></pre></div></div>
+
+<p>Same as with Ubuntu you can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" target="_blank" rel="noopener noreferrer">User Data</a>, when creating a new RHEL7/CentOS7 instance:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"NETWORKING_IPV6=yes"</span> <span class="o">&gt;&gt;</span> /etc/sysconfig/network
+<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"BOOTPROTO=</span><span class="se">\"</span><span class="s2">dhcp</span><span class="se">\"\n</span><span class="s2">IPV6INIT=</span><span class="se">\"</span><span class="s2">yes</span><span class="se">\"\n</span><span class="s2">DHCPV6C=</span><span class="se">\"</span><span class="s2">yes</span><span class="se">\"\n</span><span class="s2">NM_CONTROLLED=</span><span class="se">\"</span><span class="s2">no</span><span class="se">\"</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> /etc/sysconfig/network-scripts/ifcfg-eth0
+service network restart
+</code></pre></div></div>
+
+<p>This will setup DHCPv6 persistently for subsequent boots and acquire an IPv6 during the initial boot.</p>
+
+<h2 id="rhel-6--centos-6">RHEL 6 / CentOS 6</h2>
+
+<p>While RHEL 6 and CentOS should follow the same process as RHEL 7 and CentOS 7, it includes a bug which prevents DHCPv6 from being usable and has only been <a href="https://github.com/fedora-sysv/initscripts/commit/590adf623afff95c4b601f6e" target="_blank" rel="noopener noreferrer">fixed in very recent versions</a>. Therefore before you can use the above configuration you need to change the file <em>/etc/sysconfig/network-scripts/ifup-eth</em> and change line 327 from <code class="highlighter-rouge">if /sbin/dhclient “$DHCLIENTARGS”; then</code> to <code class="highlighter-rouge">if /sbin/dhclient $DHCLIENTARGS; then</code>. Yes, that’s correct: Just drop the double quotes.</p>
+
+<h2 id="windows-server-2016">Windows Server 2016</h2>
+
+<p>The AMI for Windows Server 2016 configured to create an IPv6 over IPv4 tunnel via <a href="https://en.wikipedia.org/wiki/Teredo_tunneling" target="_blank" rel="noopener noreferrer">Teredo</a>. The security implications for using IPv6 over IPv4 tunnels are described in <a href="https://tools.ietf.org/html/rfc7123" target="_blank" rel="noopener noreferrer">RFC7123</a>, while <a href="https://tools.ietf.org/html/rfc6169" target="_blank" rel="noopener noreferrer">RFC6169</a> clearly spells out the security concerns with IPv6 tunnels.</p>
+
+<p>Instead we want to solely use a native IPv6 address and disable any IPv6 over IPv4 tunnels.</p>
+
+<p>Open a command prompt in your Windows Server 2016 instance. First remove the Teredo and Isatap tunnel support:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netsh int ipv6 isatap set state disabled
+netsh interface teredo set state disable
+</code></pre></div></div>
+
+<p>Your Windows host will now solely have IPv6 connectivity via the Ethernet interface.</p>
+
+<p>But you might notice that your Windows instance will prefer IPv4 connections over IPv6. You can easily test this by opening <a href="http://test-ipv6.com/" target="_blank" rel="noopener noreferrer">http://test-ipv6.com/</a> from a browser on the Windows instance.</p>
+
+<p>This non-recommended behavior can be fixed by downloading and running the Microsoft easy fix wizard for “Prefer IPv6 over IPv4 in prefix policies” from the Windows Support <a href="https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows" target="_blank" rel="noopener noreferrer">Guidance for configuring IPv6 in Windows for advanced users</a> article. It’s the second item in the second row.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This blog post showed you how to retrofit your AWS Default VPC and subnets for IPv6. It also showed you how to enable Ubuntu 16.04 and Windows Server 2016 to acquire an IPv6 address via DHCPv6.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-12T00:19:42-08:00">December 12, 2016</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=IPv6+with+Amazon+Web+Services+VPC+and+EC2%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F&amp;title=IPv6+with+Amazon+Web+Services+VPC+and+EC2" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2016/10/24/cloudfront-metadata-google-analytics/" class="pagination--pager" title="AWS CloudFront meta data in Google Analytics
+">Previous</a>
+    
+    
+      <a href="/2019/02/13/how-att-broke-my-ipv6/" class="pagination--pager" title="How AT&amp;T broke my IPv6 Internet connection
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

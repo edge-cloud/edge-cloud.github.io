@@ -1,0 +1,942 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Drawing monitor for network diagrams - Edge Cloud</title>
+<meta name="description" content="Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Drawing monitor for network diagrams">
+<meta property="og:url" content="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/">
+
+
+  <meta property="og:description" content="Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Drawing monitor for network diagrams">
+  <meta name="twitter:description" content="Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-04-19T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Drawing monitor for network diagrams">
+    <meta itemprop="description" content="Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams">
+    <meta itemprop="datePublished" content="April 19, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Drawing monitor for network diagrams
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#home-office-setup">Home office setup</a>
+    <ul>
+      <li><a href="#hardware">Hardware</a></li>
+      <li><a href="#software">Software</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>As a Senior Solutions Architect Specialist for Networking at <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">AWS</a>, I spent a lot of time in online meetings with customers, helping them design networks or understand AWS networking better. Part of these meetings usually involves whiteboarding network diagrams. While visualizing ideas or concepts is something very common and straight forward on a physical whiteboard, it is not trivial in an online meeting.</p>
+
+<p>As I often get asked about my setup during or after calls, I want to shed some light on what I’m using and what’s working for me.</p>
+
+<h1 id="home-office-setup">Home office setup</h1>
+
+<p>As I primarily work from home, my home office setup (See Figure 1) provides everything I need to get through the day.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/04/HomeOffice1.jpg" title="Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/04/HomeOffice1-320.webp 320w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-384.webp 384w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-512.webp 512w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-683.webp 683w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-800.webp 800w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-960.webp 960w, 
+
+" sizes="4032px"></source>
+  <source data-srcset="
+
+    /content/resized/2020/04/HomeOffice1-320.jpg 320w, 
+
+    /content/resized/2020/04/HomeOffice1-384.jpg 384w, 
+
+    /content/resized/2020/04/HomeOffice1-512.jpg 512w, 
+
+    /content/resized/2020/04/HomeOffice1-683.jpg 683w, 
+
+    /content/resized/2020/04/HomeOffice1-800.jpg 800w, 
+
+    /content/resized/2020/04/HomeOffice1-960.jpg 960w, 
+
+" sizes="4032px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/04/HomeOffice1.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor.
+</figcaption>
+
+</figure>
+
+<p>This article will focus on the Drawing monitor, visible in the lower left.</p>
+
+<h2 id="hardware">Hardware</h2>
+
+<p>The key component of my home office setup is a <a href="https://amzn.to/3afaZhe" target="_blank" rel="noopener noreferrer">Huion Kamvas Pro 12 Drawing Monitor</a>, connected via HDMI and USB to the docking station of my notebook. On my PC it shows up as a secondary screen in addition to my primary <a href="https://amzn.to/2RQheSq" target="_blank" rel="noopener noreferrer">Dell U3419 Ultrasharp monitor</a>. Pen input on the Huion monitor is translated into standard mouse input.</p>
+
+<p>It’s important to point out that in contrary to touch enabled notebooks, this monitor does not provide touch input. It only reacts to the provided pen. Therefore you can touch it with the balm of your hand while drawing (See Figure 2). Although that does leave smudges and you’ll have to clean the screen with a good <a href="https://amzn.to/2KjB3xe" target="_blank" rel="noopener noreferrer">microfiber clearning cloth</a> from time to time.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/04/HomeOffice3.jpg" title="Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/04/HomeOffice3-320.webp 320w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-384.webp 384w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-512.webp 512w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-683.webp 683w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-800.webp 800w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-960.webp 960w, 
+
+" sizes="4032px"></source>
+  <source data-srcset="
+
+    /content/resized/2020/04/HomeOffice3-320.jpg 320w, 
+
+    /content/resized/2020/04/HomeOffice3-384.jpg 384w, 
+
+    /content/resized/2020/04/HomeOffice3-512.jpg 512w, 
+
+    /content/resized/2020/04/HomeOffice3-683.jpg 683w, 
+
+    /content/resized/2020/04/HomeOffice3-800.jpg 800w, 
+
+    /content/resized/2020/04/HomeOffice3-960.jpg 960w, 
+
+" sizes="4032px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/04/HomeOffice3.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen.
+</figcaption>
+
+</figure>
+
+<h2 id="software">Software</h2>
+
+<p>As mentioned before the pen input on the drawing monitor is translated to standard mouse input. You can therefore use any software that allows drawing with a mouse, ranging from common software such as Acrobat Reader to Microsoft PowerPoint.</p>
+
+<p>For my particular use case the software <a href="https://openboard.ch/index.en.html" target="_blank" rel="noopener noreferrer">OpenBoard</a> has proven to be most effective. OpenBoard is an open source teaching software for interactive whiteboards designed primarily for use in schools and universities. It is maintained by the Education Department (DIP) of the canton of Geneva, in Switzerland.</p>
+
+<p>OpenBoard not only allows free-hand drawing, but you can also quickly and easily import existing customer design documents or pull up pre-made diagrams to draw over (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/04/HomeOffice2.jpg" title="Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/04/HomeOffice2-320.webp 320w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-384.webp 384w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-512.webp 512w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-683.webp 683w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-800.webp 800w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-960.webp 960w, 
+
+" sizes="3853px"></source>
+  <source data-srcset="
+
+    /content/resized/2020/04/HomeOffice2-320.jpg 320w, 
+
+    /content/resized/2020/04/HomeOffice2-384.jpg 384w, 
+
+    /content/resized/2020/04/HomeOffice2-512.jpg 512w, 
+
+    /content/resized/2020/04/HomeOffice2-683.jpg 683w, 
+
+    /content/resized/2020/04/HomeOffice2-800.jpg 800w, 
+
+    /content/resized/2020/04/HomeOffice2-960.jpg 960w, 
+
+" sizes="3853px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/04/HomeOffice2.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings.
+</figcaption>
+
+</figure>
+
+<p>Effectively having two mice as input along with two monitors can cause unwanted situations in the form of not finding the mouse pointer. Under Windows 10 you can enable the setting “Show location of pointer when I press the CTRL key” under the mouse properties to mitigate this challenge (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/04/HomeOffice4.jpg" title="Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’. " class="image-popup">
+<picture>
+  <source width="552" type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/04/HomeOffice4-320.webp 320w, 
+
+    
+    /content/resized/2020/04/HomeOffice4-384.webp 384w, 
+
+    
+    /content/resized/2020/04/HomeOffice4-512.webp 512w, 
+
+ /content/uploads/2020/04/HomeOffice4.webp 552w" sizes="552px"></source>
+  <source width="552" data-srcset="
+
+    /content/resized/2020/04/HomeOffice4-320.jpg 320w, 
+
+    /content/resized/2020/04/HomeOffice4-384.jpg 384w, 
+
+    /content/resized/2020/04/HomeOffice4-512.jpg 512w, 
+
+ /content/uploads/2020/04/HomeOffice4.jpg 552w" sizes="552px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/04/HomeOffice4.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’.
+</figcaption>
+
+</figure>
+
+<h1 id="summary">Summary</h1>
+
+<p>This article showed you my home office setup for visualizing ideas and concepts during customer calls with a drawing monitor and interactive whiteboard software. If you wonder who these birds on the pictures are. That’s <a href="https://www.rainbowsprings.co.nz/" target="_blank" rel="noopener noreferrer">Jenny the Kea</a> and <a href="https://www.youtube.com/watch?v=dykrPi9P_Ak" target="_blank" rel="noopener noreferrer">Pete the Pukeko</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-04-19T00:00:00-07:00">April 19, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Drawing+monitor+for+network+diagrams%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F04%2F19%2Fdrawing-monitor-for-network-diagrams%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F04%2F19%2Fdrawing-monitor-for-network-diagrams%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F04%2F19%2Fdrawing-monitor-for-network-diagrams%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F04%2F19%2Fdrawing-monitor-for-network-diagrams%2F&amp;title=Drawing+monitor+for+network+diagrams" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2019/12/27/aws-dx-connect-on-premises/" class="pagination--pager" title="Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+">Previous</a>
+    
+    
+      <a href="/2020/05/01/tgw-multicast-intro/" class="pagination--pager" title="Multicast with AWS Transit Gateway
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/09/09/troubleshooting-bgp-session-hosted-vif/" rel="permalink">Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Troubleshooting a BGP neighbor issue of “active open failed - tcb is not available” on a Megaport Hosted VIF due to unset BGP MD5 Auth key
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

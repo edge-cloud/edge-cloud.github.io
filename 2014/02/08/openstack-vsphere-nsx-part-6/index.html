@@ -1,0 +1,1664 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes - Edge Cloud</title>
+<meta name="description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes">
+<meta property="og:url" content="https://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/">
+
+
+  <meta property="og:description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes">
+  <meta name="twitter:description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2014-02-08T02:44:46-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes">
+    <meta itemprop="description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+    <meta itemprop="datePublished" content="February 08, 2014">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#configure-the-vmware-vcenter-plugin-for-openstack">Configure the VMware vCenter Plugin for OpenStack</a></li>
+  <li><a href="#perform-a-vmotion-of-an-openstack-vm">Perform a VMotion of an OpenStack VM</a></li>
+  <li><a href="#configure-a-floating-ip">Configure a floating IP</a></li>
+  <li><a href="#api-driven-creation-of-a-vm-in-openstack">API-driven creation of a VM in OpenStack</a></li>
+  <li><a href="#wrap-up">Wrap-Up</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Welcome to the final part of the <a href="/2013/12/12/openstack-vsphere-nsx/">series: “OpenStack with vSphere and NSX”</a> on installing OpenStack with VMware vSphere and VMware NSX. This series shows the deployment of an OpenStack cloud that leverages VMware vSphere – along with it’s well-known enterprise-class benefits such as VMotion – as the underlying Hypervisor. In addition, network virtualization within OpenStack will be provided via NSX as a Neutron plugin. This allows the creation of virtual networks within OpenStack that consist of L2 segments and can be interconnected via L3 to each other or the outside world.</p>
+
+<p>In the <a href="/2014/01/24/openstack-vsphere-nsx-part5/">previous post: “OpenStack with vSphere and NSX – Part 5: Create virtual networks and launch a VM instance in OpenStack”</a> we took our new cloud for a quick spin and saw what we can do with it, creating virtual networks within OpenStack that consist of L2 segments and interconnecting them via L3 to each other or the outside world. Also we created our first VM instance via the OpenStack Horizon Web Interface.</p>
+
+<p>In this post we will dig a bit deeper and look behind the scenes of our Cloud. First we will configure the VMware vCenter Plugin for OpenStack that provides operators using the vSphere Web Client insight into the OpenStack layer running on top. Next we will explore one of the main benefits of merging the enterprise class vSphere platform with OpenStack, by performing a vMotion operation on a VM that was created via OpenStack. Furthermore we will create a floating IP address in OpenStack and show how to connect to our VM with this IP address. Last but least, we will have a quick glance at the API capabilities of OpenStack.</p>
+
+<h1 id="configure-the-vmware-vcenter-plugin-for-openstack">Configure the VMware vCenter Plugin for OpenStack</h1>
+
+<p>The idea behind the <a href="http://blogs.vmware.com/vsphere/2013/11/vcenter-web-client-plug-in-for-openstack.html" target="_blank" rel="noopener noreferrer">VMware vCenter Plugin for OpenStack</a> is to provide operators of the virtualization layer insight into the OpenStack layer running on top. This can greatly enhance troubleshooting capabilities, especially for the case that the vSphere virtualization layer and the OpenStack layer are managed by different people or teams.</p>
+
+<p>The VMware vCenter Plugin for OpenStack is part of VOVA and is automatically installed once VOVA is pointed to a vCenter. For some reason it currently doesn’t auto-configure itself, but requires manual intervention in the vSphere Web Client. Let’s therefore perform this manual configuration:</p>
+
+<p>First you need to lookup the Identity API Endpoint information within your OpenStack deployment. Navigate to the <em>Project</em> view and the <em>Access &amp; Security</em> tab. Under the <em>API Access</em> tab lookup the <em>Service Endpoint</em> for the <em>Identity</em> service (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Plugin_01.png" title="Figure 1: OpenStack API Endpoint Information " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Plugin_01-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Plugin_01-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Plugin_01-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Plugin_01.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Plugin_01-320.png 320w, 
+
+    /content/resized/2014/01/VC_Plugin_01-384.png 384w, 
+
+    /content/resized/2014/01/VC_Plugin_01-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Plugin_01.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Plugin_01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: OpenStack API Endpoint Information ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: OpenStack API Endpoint Information
+</figcaption>
+
+</figure>
+
+<p>Within the vSphere Web Client navigate to the <em>Administration</em> tab (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Plugin_02.png" title="Figure 2: vSphere Web Client Administration tab " class="image-popup">
+<picture>
+  <source width="246" type="image/webp" data-srcset="
+
+ /content/uploads/2014/01/VC_Plugin_02.webp 246w" sizes="246px"></source>
+  <source width="246" data-srcset="
+
+ /content/uploads/2014/01/VC_Plugin_02.png 246w" sizes="246px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Plugin_02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: vSphere Web Client Administration tab ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: vSphere Web Client Administration tab
+</figcaption>
+
+</figure>
+
+<p>Next navigate to the <em>OpenStack</em> item in the left-hand navigation tree. Clicking the <strong>+</strong> button on the top of the grid to start the endpoint configuration (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Plugin_03.png" title="Figure 3: Unconfigured vSphere Web Client Openstack Plugin " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Plugin_03-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Plugin_03-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Plugin_03-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Plugin_03.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Plugin_03-320.png 320w, 
+
+    /content/resized/2014/01/VC_Plugin_03-384.png 384w, 
+
+    /content/resized/2014/01/VC_Plugin_03-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Plugin_03.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Plugin_03.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Unconfigured vSphere Web Client Openstack Plugin ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Unconfigured vSphere Web Client Openstack Plugin
+</figcaption>
+
+</figure>
+
+<p>Configure the <em>vCenter</em> Endpoint first, providing the URL <code class="highlighter-rouge">https://vcenter_ip_or_fqdn/sdk</code> and the required credentials.</p>
+
+<p>Next configure the <em>OpenStack</em> Keystone Endpoint. Click on the <strong>+</strong> button on the top of the grid, select Keystone and provide the URL - that you have looked up in the previous step - and the required credentials. The URL should look like <code class="highlighter-rouge">http://vova_ip_or_fqdn:5000/v2.0</code>. In my case the Endpoint configuration proved to be very finicky and random. I had to repeat these steps multiple time until both endpoint showed as Active with a green checkmark (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Plugin_04.png" title="Figure 4: Fully configured vSphere Web Client Openstack Plugin " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Plugin_04-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Plugin_04-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Plugin_04-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Plugin_04.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Plugin_04-320.png 320w, 
+
+    /content/resized/2014/01/VC_Plugin_04-384.png 384w, 
+
+    /content/resized/2014/01/VC_Plugin_04-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Plugin_04.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Plugin_04.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Fully configured vSphere Web Client Openstack Plugin ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Fully configured vSphere Web Client Openstack Plugin
+</figcaption>
+
+</figure>
+
+<p>Before you can use the vSphere Web Client OpenStack plugin, you need to logout of the vSphere Web Client and log back in.</p>
+
+<p>Once this has been done you can navigate inside the vSphere Web Client to a VMs summary tab. A new portlet named “OpenStack VM” displays the data properties related to OpenStack instances including the Server name, tenant name of flavor (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Plugin_05.png" title="Figure 5: Information provided by the vSphere Web Client OpenStack plugin " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Plugin_05-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Plugin_05-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Plugin_05-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Plugin_05.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Plugin_05-320.png 320w, 
+
+    /content/resized/2014/01/VC_Plugin_05-384.png 384w, 
+
+    /content/resized/2014/01/VC_Plugin_05-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Plugin_05.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Plugin_05.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Information provided by the vSphere Web Client OpenStack plugin ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Information provided by the vSphere Web Client OpenStack plugin
+</figcaption>
+
+</figure>
+
+<h1 id="perform-a-vmotion-of-an-openstack-vm">Perform a VMotion of an OpenStack VM</h1>
+
+<p>One of the most heavily used features in VMware vSphere is probably VMotion. Together with the core concept of server virtualization it allows operators to migrate virtual machines within a cluster off a specific hardware host and perform maintenance on this host. This in return leads to a huge increase of uptime for workloads. We will now demonstrate exactly this capability by moving a VM that was created on vSphere via the OpenStack interface from one host to another host. This would allow us to perform maintenance on the physical host without affecting the workloads presented in OpenStack. Let’s get started.</p>
+
+<p>Within the vSphere Web Client navigate to a VM that was created via OpenStack. Note down the current host that this VM is running on. Perform a right-click and choose <strong>Migrate…</strong> (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Manage01.png" title="Figure 6: Perform a VMotion of an OpenStack VM - Step 1 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Manage01-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Manage01-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Manage01-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Manage01.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Manage01-320.png 320w, 
+
+    /content/resized/2014/01/VC_Manage01-384.png 384w, 
+
+    /content/resized/2014/01/VC_Manage01-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Manage01.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Manage01.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Perform a VMotion of an OpenStack VM - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Perform a VMotion of an OpenStack VM - Step 1
+</figcaption>
+
+</figure>
+
+<p>As the migration method choose <strong>Change Host</strong> in order to move the VM to another host (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Manage02.png" title="Figure 7: Perform a VMotion of an OpenStack VM - Step 2 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Manage02-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Manage02-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Manage02-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Manage02.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Manage02-320.png 320w, 
+
+    /content/resized/2014/01/VC_Manage02-384.png 384w, 
+
+    /content/resized/2014/01/VC_Manage02-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Manage02.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Manage02.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Perform a VMotion of an OpenStack VM - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Perform a VMotion of an OpenStack VM - Step 2
+</figcaption>
+
+</figure>
+
+<p>Select the destination cluster and tick the box for <strong>Allow host selection within this cluster</strong> in order to pick a specific host (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Manage03.png" title="Figure 8: Perform a VMotion of an OpenStack VM - Step 3 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Manage03-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Manage03-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Manage03-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Manage03.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Manage03-320.png 320w, 
+
+    /content/resized/2014/01/VC_Manage03-384.png 384w, 
+
+    /content/resized/2014/01/VC_Manage03-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Manage03.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Manage03.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Perform a VMotion of an OpenStack VM - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Perform a VMotion of an OpenStack VM - Step 3
+</figcaption>
+
+</figure>
+
+<p>Select the specific host to which you want to migrate the VM (See Figure 9). This host should obviously differ from the initial host.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Manage04.png" title="Figure 9: Perform a VMotion of an OpenStack VM - Step 4 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Manage04-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Manage04-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Manage04-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Manage04.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Manage04-320.png 320w, 
+
+    /content/resized/2014/01/VC_Manage04-384.png 384w, 
+
+    /content/resized/2014/01/VC_Manage04-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Manage04.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Manage04.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Perform a VMotion of an OpenStack VM - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Perform a VMotion of an OpenStack VM - Step 4
+</figcaption>
+
+</figure>
+
+<p>Wait for the VMotion to complete successfully. Note that the VM now resided on a different host (See Figure 10).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/VC_Manage05.png" title="Figure 10: Perform a VMotion of an OpenStack VM - Step 5 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/VC_Manage05-320.webp 320w, 
+
+    
+    /content/resized/2014/01/VC_Manage05-384.webp 384w, 
+
+    
+    /content/resized/2014/01/VC_Manage05-512.webp 512w, 
+
+ /content/uploads/2014/01/VC_Manage05.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/VC_Manage05-320.png 320w, 
+
+    /content/resized/2014/01/VC_Manage05-384.png 384w, 
+
+    /content/resized/2014/01/VC_Manage05-512.png 512w, 
+
+ /content/uploads/2014/01/VC_Manage05.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/VC_Manage05.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Perform a VMotion of an OpenStack VM - Step 5 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Perform a VMotion of an OpenStack VM - Step 5
+</figcaption>
+
+</figure>
+
+<p>You will not notice any difference from within OpenStack about the performed VMotion. In fact, the above operation remains completely invisible and unnoticed from OpenStack, which is exactly what we want.</p>
+
+<h1 id="configure-a-floating-ip">Configure a floating IP</h1>
+
+<p>Next we will configure a floating IP address for a VM in OpenStack. A floating IP address allows you to reach VMs connected to an internal network from the outside or external network. This is accomplished by OpenStack configuring a Destination NAT (DNAT) rule on the L3 gateway between the external and internal networks.</p>
+
+<p>Within the OpenStack Web interface navigate to the <em>Project</em> view and there pick the <em>Instances</em> tab. Select a VM and click on <strong>More</strong> within the <em>Actions</em> column. Now select <strong>Associate Floating IP</strong> (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT01.png" title="Figure 11: Associate a floating IP in OpenStack - Step 1 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT01-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT01-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT01-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT01.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT01-320.png 320w, 
+
+    /content/resized/2014/01/DNAT01-384.png 384w, 
+
+    /content/resized/2014/01/DNAT01-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT01.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT01.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Associate a floating IP in OpenStack - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Associate a floating IP in OpenStack - Step 1
+</figcaption>
+
+</figure>
+
+<p>Initially no floating IP address is available within the project to be used. We therefore need to allocate a new address. For this click on the “+” icon next to the IP address field (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT02.png" title="Figure 12: Associate a floating IP in OpenStack - Step 2 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT02-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT02-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT02-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT02.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT02-320.png 320w, 
+
+    /content/resized/2014/01/DNAT02-384.png 384w, 
+
+    /content/resized/2014/01/DNAT02-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT02.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT02.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Associate a floating IP in OpenStack - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Associate a floating IP in OpenStack - Step 2
+</figcaption>
+
+</figure>
+
+<p>Now select the pool from which you want to select the floating IP address. In this setup only the <em>External</em> pool, which corresponds to the external network is available. Click on <strong>Allocate IP</strong> to finish the allocation (See Figure 13).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT03.png" title="Figure 13: Associate a floating IP in OpenStack - Step 3 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT03-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT03-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT03-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT03.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT03-320.png 320w, 
+
+    /content/resized/2014/01/DNAT03-384.png 384w, 
+
+    /content/resized/2014/01/DNAT03-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT03.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT03.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Associate a floating IP in OpenStack - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: Associate a floating IP in OpenStack - Step 3
+</figcaption>
+
+</figure>
+
+<p>Now that an IP address from the External pool has been successfully allocated, it can be associated with the internal IP address of the VM. Click on Associate to finish this association (See Figure 14).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT04.png" title="Figure 14: Associate a floating IP in OpenStack - Step 4 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT04-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT04-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT04-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT04.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT04-320.png 320w, 
+
+    /content/resized/2014/01/DNAT04-384.png 384w, 
+
+    /content/resized/2014/01/DNAT04-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT04.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT04.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Associate a floating IP in OpenStack - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Associate a floating IP in OpenStack - Step 4
+</figcaption>
+
+</figure>
+
+<p>The instances view will now display the associated external IP address for the VM besides the internal address (See Figure 15).</p>
+
+<p>In case you would try to connect to this external IP address now, the result would be disappointing: It won’t work. That’s because the default Security Group settings associated with the VM prevent this access. The idea here is to prevent any kind of external access by default and require users to explicitly grant specific access. Therefore we need to e.g. allow SSH access to the VM, before we can fire up Putty and connect.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT05.png" title="Figure 15: Successfully associate a floating IP in OpenStack " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT05-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT05-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT05-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT05.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT05-320.png 320w, 
+
+    /content/resized/2014/01/DNAT05-384.png 384w, 
+
+    /content/resized/2014/01/DNAT05-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT05.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT05.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Successfully associate a floating IP in OpenStack ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: Successfully associate a floating IP in OpenStack
+</figcaption>
+
+</figure>
+
+<p>Navigate to the <em>Access &amp; Security</em> tab and select Security Groups. You will find the security group <em>default</em>, which is the only security group currently in use. Click on <strong>Edit Rules</strong> to start editing (See Figure 16).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT06.png" title="Figure 16: Edit Security Groups in OpenStack - Step 1 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT06-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT06-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT06-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT06.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT06-320.png 320w, 
+
+    /content/resized/2014/01/DNAT06-384.png 384w, 
+
+    /content/resized/2014/01/DNAT06-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT06.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT06.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Edit Security Groups in OpenStack - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 16: Edit Security Groups in OpenStack - Step 1
+</figcaption>
+
+</figure>
+
+<p>Next click on <strong>Add Rules</strong> to add a rule for SSH (See Figure 17).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT07.png" title="Figure 17: Edit Security Groups in OpenStack - Step 2 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT07-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT07-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT07-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT07.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT07-320.png 320w, 
+
+    /content/resized/2014/01/DNAT07-384.png 384w, 
+
+    /content/resized/2014/01/DNAT07-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT07.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT07.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Edit Security Groups in OpenStack - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 17: Edit Security Groups in OpenStack - Step 2
+</figcaption>
+
+</figure>
+
+<p>As <em>Rule</em> select <strong>SSH</strong>. For <em>Remote</em> select <strong>CIDR</strong> and for <em>CIDR</em> enter <strong>0.0.0.0/0</strong>. This will allow SSH from anywhere. Click on <strong>Add</strong> to finalize the wizard. (See Figure 18).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT08.png" title="Figure 18: Edit Security Groups in OpenStack - Step 3 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT08-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT08-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT08-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT08.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT08-320.png 320w, 
+
+    /content/resized/2014/01/DNAT08-384.png 384w, 
+
+    /content/resized/2014/01/DNAT08-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT08.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT08.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Edit Security Groups in OpenStack - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 18: Edit Security Groups in OpenStack - Step 3
+</figcaption>
+
+</figure>
+
+<p>Notice the new rule for SSH, which indicates the correct TCP port 22 for SSH (See Figure 19).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT09.png" title="Figure 19: Edit Security Groups in OpenStack - Step 4 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT09-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT09-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT09-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT09.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT09-320.png 320w, 
+
+    /content/resized/2014/01/DNAT09-384.png 384w, 
+
+    /content/resized/2014/01/DNAT09-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT09.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT09.png" class="blur-up lazyautosizes lazyload" alt="Figure 19: Edit Security Groups in OpenStack - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 19: Edit Security Groups in OpenStack - Step 4
+</figcaption>
+
+</figure>
+
+<p>Now you can use Putty or any other SSH client and successfully connect to the external floating IP address of the VM (See Figure 20).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/01/DNAT10.png" title="Figure 20: Connect via SSH to the floating IP address " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/01/DNAT10-320.webp 320w, 
+
+    
+    /content/resized/2014/01/DNAT10-384.webp 384w, 
+
+    
+    /content/resized/2014/01/DNAT10-512.webp 512w, 
+
+ /content/uploads/2014/01/DNAT10.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/01/DNAT10-320.png 320w, 
+
+    /content/resized/2014/01/DNAT10-384.png 384w, 
+
+    /content/resized/2014/01/DNAT10-512.png 512w, 
+
+ /content/uploads/2014/01/DNAT10.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/01/DNAT10.png" class="blur-up lazyautosizes lazyload" alt="Figure 20: Connect via SSH to the floating IP address ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 20: Connect via SSH to the floating IP address
+</figcaption>
+
+</figure>
+
+<h1 id="api-driven-creation-of-a-vm-in-openstack">API-driven creation of a VM in OpenStack</h1>
+
+<p>One of the big benefits of OpenStack is the simple, yet very powerful API along with various SDK for all kinds of programming languages. Let’s use the <a href="http://docs.openstack.org/developer/python-novaclient/" target="_blank" rel="noopener noreferrer">Python SDK</a> for creating a new VM via the OpenStack API.</p>
+
+<p>Below is a simple Python script, which will connect to your OpenStack cloud, create a new VM and start it.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import novaclient.v1_1.client as nclient
+import time
+creds = {"username":"admin",
+         "api_key":"VMware1!",
+         "project_id":"admin",
+         "auth_url":" http://localhost:5000/v2.0/ "
+}
+print "Booting a debian VM from python..."
+nova = nclient.Client(**creds)
+print nova.images.list()
+image = nova.images.find(name="debian-2.6.32-i686")
+print nova.flavors.list()
+flavor = nova.flavors.find(name="m1.tiny")
+print nova.networks.list()
+network = nova.networks.find(label="Internal_Shared")
+instance = nova.servers.create(name="created-from-python",image=image, flavor=flavor, nics=[{'net-id': network.id}])
+while instance.status != 'ACTIVE':
+        print "Waiting for VM... (current status '%s')" % instance.status
+        time.sleep(5)
+        instance = nova.servers.get(instance.id)
+print "VM booted to status '%s'" % instance.status
+</code></pre></div></div>
+
+<p>The elements that you need to adapt to your own environment are:</p>
+
+<ul>
+  <li>username: Your OpenStack username</li>
+  <li>api_key: Your OpenStack password</li>
+  <li>project_id: The name of the project in which the VM should be created.</li>
+  <li>auth_url: Change it to the IP address of your local OpenStack cloud.</li>
+  <li>image: The name of the available image you want to use.</li>
+  <li>flavor: The flavor of the VM you want to use.</li>
+  <li>network: The name of the network to which this VM should get connected to.</li>
+</ul>
+
+<p>You can run this script directly from VOVA. As VOVA is based on <a href="https://www.ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a> you can use the command <code class="highlighter-rouge">sudo apt-get install python-novaclient</code> to install the required SDK.</p>
+
+<h1 id="wrap-up">Wrap-Up</h1>
+
+<p>Congratulation! We successfully looked behind the scenes into VMware vSphere to see what’s happening during the operation of OpenStack on vSphere. We also installed the VMware vCenter Plugin for Openstack to gain more insight into OpenStack from vSphere, as well as used some of the well-known enterprise-class benefits of vSphere – such as VMotion – along with OpenStack. Furthermore we took a glimpse at how to use OpenStack’s legendary APIs to automate the deployment of a VM. This completes the <a href="/2013/12/12/openstack-vsphere-nsx/">series: “OpenStack with vSphere and NSX”</a> on OpenStack with vSphere and NSX.</p>
+
+<p>If you are at <a href="https://www.vmworld.com/en/us/programs/partner-exchange.html" target="_blank" rel="noopener noreferrer">VMware Partner Exchange (PEX)</a> from February 10-13 2014, head over to the Hands-On Labs and check out the lab “HOL-SDC-1320 - OpenStack on VMware vSphere” in order to get hands-on experience with the setup described in this setup. After PEX this lab will also become available for general usage within the VMware Hands-On labs.</p>
+
+<p>Also if you want to learn more about using OpenStack with VMware vSphere, have a look at the VMware whitepaper “<a href="http://blogs.vmware.com/vsphere/2014/01/getting-started-with-openstack-and-vmware-vsphere-white-paper.html" target="_blank" rel="noopener noreferrer">Getting Started with OpenStack and VMware vSphere</a>”.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#nsx" class="page__taxonomy-item" rel="tag">NSX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#openstack" class="page__taxonomy-item" rel="tag">OpenStack</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-02-08T02:44:46-08:00">February 08, 2014</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2014/01/24/openstack-vsphere-nsx-part5/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 5: Create virtual networks and launch a VM instance in OpenStack
+">Previous</a>
+    
+    
+      <a href="/2014/02/14/deploy-wordpress-aws-opsworks/" class="pagination--pager" title="Deploy WordPress with AWS OpsWorks
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

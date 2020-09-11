@@ -1,0 +1,853 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Implementing IPv6: Six steps to success - Edge Cloud</title>
+<meta name="description" content="Implementing IPv6 in your network does not require tearing down your aging IPv4 network and replacing it with a new IPv6-enabled network. Instead it is possible - and often wise - to run the IPv4 and IPv6 networks in parallel in what the industry calls a “dual-stack” network, thus adding IPv6 capabilities to your network’s existing IPv4 capabilities. While such an endeavor is certainly not trivial, it might be easier than your think.The following article introduces a six step plan for implementing IPv6. It has served me well in past deployments and will hopefully give you some ideas and guidance.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Implementing IPv6: Six steps to success">
+<meta property="og:url" content="https://www.edge-cloud.net/2014/06/25/implementing-ipv6-six-steps-success/">
+
+
+  <meta property="og:description" content="Implementing IPv6 in your network does not require tearing down your aging IPv4 network and replacing it with a new IPv6-enabled network. Instead it is possible - and often wise - to run the IPv4 and IPv6 networks in parallel in what the industry calls a “dual-stack” network, thus adding IPv6 capabilities to your network’s existing IPv4 capabilities. While such an endeavor is certainly not trivial, it might be easier than your think.The following article introduces a six step plan for implementing IPv6. It has served me well in past deployments and will hopefully give you some ideas and guidance.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Implementing IPv6: Six steps to success">
+  <meta name="twitter:description" content="Implementing IPv6 in your network does not require tearing down your aging IPv4 network and replacing it with a new IPv6-enabled network. Instead it is possible - and often wise - to run the IPv4 and IPv6 networks in parallel in what the industry calls a “dual-stack” network, thus adding IPv6 capabilities to your network’s existing IPv4 capabilities. While such an endeavor is certainly not trivial, it might be easier than your think.The following article introduces a six step plan for implementing IPv6. It has served me well in past deployments and will hopefully give you some ideas and guidance.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/06/25/implementing-ipv6-six-steps-success/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2014-06-25T03:00:08-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2014/06/25/implementing-ipv6-six-steps-success/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Implementing IPv6: Six steps to success">
+    <meta itemprop="description" content="Implementing IPv6 in your network does not require tearing down your aging IPv4 network and replacing it with a new IPv6-enabled network. Instead it is possible - and often wise - to run the IPv4 and IPv6 networks in parallel in what the industry calls a “dual-stack” network, thus adding IPv6 capabilities to your network’s existing IPv4 capabilities. While such an endeavor is certainly not trivial, it might be easier than your think.The following article introduces a six step plan for implementing IPv6. It has served me well in past deployments and will hopefully give you some ideas and guidance.">
+    <meta itemprop="datePublished" content="June 25, 2014">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Implementing IPv6: Six steps to success
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#goal">Goal</a></li>
+  <li>
+<a href="#overview">Overview</a>
+    <ul>
+      <li><a href="#step-1-training-and-education">Step 1: Training and Education</a></li>
+      <li><a href="#step-2-network-audit">Step 2: Network Audit</a></li>
+      <li><a href="#step-3-network-optimization">Step 3: Network Optimization</a></li>
+      <li><a href="#step-4-managing-ipv6-address-space">Step 4: Managing IPv6 address space</a></li>
+      <li><a href="#step-5-deploy-ipv6-in-the-network">Step 5: Deploy IPv6 in the network</a></li>
+      <li><a href="#step-6-enable-network-services">Step 6: Enable Network Services</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Implementing IPv6 in your network does not require tearing down your aging IPv4 network and replacing it with a new IPv6-enabled network. Instead it is possible - usually even wise - to run the IPv4 and IPv6 networks in parallel in what the industry calls a “dual-stack” network, thus adding IPv6 capabilities to your network’s existing IPv4 capabilities. While such an endeavor is certainly not trivial, it might be easier than your think.</p>
+
+<p>The following article introduces a six step process for successfully implementing IPv6. It has served me well in past deployments and will hopefully give you some ideas and guidance.</p>
+
+<h1 id="goal">Goal</h1>
+
+<p>Dual-stack as defined in <a href="https://tools.ietf.org/html/rfc4213" target="_blank" rel="noopener noreferrer">RFC 4213</a> refers to side-by-side implementation of IPv4 and IPv6. In this case both protocols run on the same network infrastructure, and there’s no need to encapsulate IPv6 inside IPv4 (using tunneling) or vice-versa. This approach has to be considered the most desirable IPv6 transition mechanisms until IPv6 completely supplants IPv4. While it avoids many complexities and pitfalls of tunneling, it is not always possible to implement, since outdated network equipment may not support IPv6 at all.</p>
+
+<p>The goal of the highlighted implementation steps in this article will focus on implementing dual-stack in an existing network. Such a network could be a data center network, a campus network, a Wide Area Network, or even wireless network. You should still have a look at <a href="https://en.wikipedia.org/wiki/IPv6#Transition_mechanisms" target="_blank" rel="noopener noreferrer">other transition mechanism</a> and decide what best suits your requirements.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p>After having determined the goal, let’s have a first look at the mentioned six steps for implementing IPv6, before going into details (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/06/6StepsToIPv6.png" title="Figure 1: Six steps for a successful IPv6 implementation " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/06/6StepsToIPv6-320.webp 320w, 
+
+    
+    /content/resized/2014/06/6StepsToIPv6-384.webp 384w, 
+
+    
+    /content/resized/2014/06/6StepsToIPv6-512.webp 512w, 
+
+ /content/uploads/2014/06/6StepsToIPv6.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/06/6StepsToIPv6-320.png 320w, 
+
+    /content/resized/2014/06/6StepsToIPv6-384.png 384w, 
+
+    /content/resized/2014/06/6StepsToIPv6-512.png 512w, 
+
+ /content/uploads/2014/06/6StepsToIPv6.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/06/6StepsToIPv6.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Six steps for a successful IPv6 implementation ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Six steps for a successful IPv6 implementation
+</figcaption>
+
+</figure>
+
+<p>The proposed steps include:</p>
+
+<ol>
+  <li>
+<strong>Training and Education</strong>: Enable technical staff (engineers, support, …) with IPv6 experience.</li>
+  <li>
+<strong>Network Audit</strong>: What can run IPv6 today, and what needs to be upgraded?</li>
+  <li>
+<strong>Network Optimization</strong>: Is the IPv4 network the best it can be?</li>
+  <li>
+<strong>Managing IPv6 address space</strong>: Acquire IPv6 address space and transit, draft your IPv6 address plan.</li>
+  <li>
+<strong>Deploy IPv6 in the network</strong>: Roll-Out IPv6 addressing and routing in the network.</li>
+  <li>
+<strong>Enable Network Services</strong>: This includes Active Directory/LDAP, DNS, NTP, …</li>
+</ol>
+
+<p>Let’s look at each of these steps in more detail.</p>
+
+<h2 id="step-1-training-and-education">Step 1: Training and Education</h2>
+
+<p>While IPv6 is very similar to IPv4, it is still different enough to stumble at times. An example for this is the functionality of <a href="/2013/11/18/ipv6-address-management-hosts/">automatic address assignment</a> via DHCPv6, which is quite different from DHCP in the IPv4 world.</p>
+
+<p>Therefore it is very important to train and educate the involved technical stakeholders in an IPv6 implementation project. Ensuring that network architects, engineers and support staff not only know the theory of IPv6, but at least had some hands-on experience in a lab setup, is crucial to the overall success.</p>
+
+<p>A good start for IPv6 related training is the <a href="http://www.6deploy.eu/e-learning/english/" target="_blank" rel="noopener noreferrer">6deploy IPv6 e-learning package</a>. Other valuable resources are the <a href="https://getipv6.info/display/IPv6/Educating+Yourself+about+IPv6" target="_blank" rel="noopener noreferrer">ARIN IPv6 wiki</a>, the <a href="https://www.ripe.net/publications/ipv6-info-centre/" target="_blank" rel="noopener noreferrer">RIPE IPv6 Act Now</a> page or <a href="https://training.apnic.net/" target="_blank" rel="noopener noreferrer">APNIC’s Training</a> page.</p>
+
+<h2 id="step-2-network-audit">Step 2: Network Audit</h2>
+
+<p>Next you need to find out not only what equipment you have in your network, but also if it will support IPv6. The ugly truth is that products from almost all vendors have issues and bugs when it comes to IPv6. In many cases even though IPv6 functionality is available according to product specifications, these capabilities are either not tested at all or not to the breadth and depth of IPv4. Even if equipment meets requirements of the <a href="https://www-x.antd.nist.gov/usgv6/index.html" target="_blank" rel="noopener noreferrer">NIST USGv6</a> or the <a href="https://www.ipv6ready.org/" target="_blank" rel="noopener noreferrer">IPv6 Ready logo</a> program, it doesn’t mean that it’s usable in your network for your use case.</p>
+
+<p>With this it is unfortunately unrealistic to just “move” an Enterprise network to IPv6, as you can’t necessarily believe all the vendor specifications. Instead you will have to go beyond the pure cataloging of your equipment and actually need to test the required IPv6 functionality yourself.</p>
+
+<p>For missing or broken IPv6 functionality, you will then have to work with the product’s vendor to acquire a fix, e.g. via a software upgrade or update. Often it is not possible to update the software and a hardware upgrade is required. In case the vendor cannot provide such a fix, or at least a roadmap with a firm timeline on anticipated fixes, it is highly recommended that you completely replace this vendor’s product.</p>
+
+<p>As the outcome of this step, you should have information on what equipment you use, what can be made to support IPv6 via software changes, what needs a hardware swap and especially within which time frame you can realistically expect all these upgrades and swaps to happen.</p>
+
+<h2 id="step-3-network-optimization">Step 3: Network Optimization</h2>
+
+<p>The IPv6 implementation in a network is often a quite large endeavor. But it is also your perfect chance to clean up your existing network - which some might even call a “mess”. Most enterprise networks have organically grown over time into what they are today and include numerous artifacts from different implementation phases.</p>
+
+<p>As such, you should have another look at your existing network and attempt to optimize it. Whatever you can optimize and especially simplify in your existing network today will make your life easier when adding IPv6.</p>
+
+<p>While optimizing your network, you should use the following guidelines:</p>
+
+<ul>
+  <li>
+<strong>Simplify</strong>: Reduce the complexity of your network as much as possible, as you’ll end up adding complexity unintentionally over time again anyways.</li>
+  <li>
+<strong>Unify</strong>: Standardize on components within your network. More coherence leads to less headaches while managing components.</li>
+  <li>
+<strong>Amplify</strong>: As your previous network plans probably ended up being too small, this time plan big, really big!</li>
+</ul>
+
+<p>Keep in mind: If you can get rid of a component altogether, there is no need to upgrade it to IPv6.</p>
+
+<h2 id="step-4-managing-ipv6-address-space">Step 4: Managing IPv6 address space</h2>
+
+<p>Nowadays it is very easy to acquire IPv6 address space as well as transit for it. If you already own IPv4 address space with your own Autonomous System (AS) you can request IPv6 address space from your <a href="https://en.wikipedia.org/wiki/Regional_Internet_registry" target="_blank" rel="noopener noreferrer">Regional Internet registry (RIR)</a>. For transit of this IPv6 address space contact your existing  IPv4 peering partners who can usually provide you with IPv6 peering as well. In case they do not offer IPv6 peering it’s a good idea to look for another ISP, one that can.</p>
+
+<p>If you do not own your address space, but use IPv4 addresses provided by your service provider, you can usually receive IPv6 addresses and associated transit from this service provider.</p>
+
+<p>You will either receive a /32 or a /48 IPv6 address space. In IPv6 addressing, a /32 results in 65,536 subnets, each of which is the size of a /48. Each /48 contains 65,536 /64s, which is the minimum size of a subnet. Each /64 contains 18,446,744,073,709,551,616 IPv6 addresses. This means that each IPv6 /32 allocation contains 4.29 billion /64s. This is probably enough address space for a typical enterprise network. But on the other hand: What are we gonna do with all these addresses? That’s where a solid IPv6 address plan comes into the picture, allocating this address space to locations and/or functions. While you might not necessarily have such an address plan for your IPv4 network, it is crucial to have one for IPv6.</p>
+
+<p>If you ask “Why?”, consider the following analogy: It might be possible to put together a puzzle with a few hundred or even thousand pieces without looking at the cover and seeing the picture of the final puzzle. But it’s pretty much impossible to do he same with a few million or billion puzzle pieces.</p>
+
+<p>A very good resource on IPv6 address planning is RIPE’s document on <a href="https://www.ripe.net/support/training/material/IPv6-for-LIRs-Training-Course/Preparing-an-IPv6-Addressing-Plan.pdf/view" target="_blank" rel="noopener noreferrer">Preparing an IPv6 address plan</a> or the book <a href="http://amzn.to/1nA8ckm" target="_blank" rel="noopener noreferrer">IPv6 Address Planning</a> from Infoblox’ IPv6 evangelist Tom Coffeen.</p>
+
+<p>As highlighted in my previous article <a href="/2013/08/07/ipv6-link-local-addresses-as-default-gateway/">IPv6 deployment: Using link-local addresses as default gateway</a>, I’m using the ULA address range fd53::/64 for DNS Anycast, where my DNS resolvers are fd53::11 and fd53::12 everywhere in the network. Also I use the Link Local address fe80::1 as the default gateway for static addressing. Following RIPE’s recommendation I reserve a /64 network for point-to-point links, while addressing them as a /127 for 2 member addresses or /126 for 4 member addresses (e.g. for VRPP/HSRP). Furthermore I only subnet on nibble boundaries (network mask which aligns on a 4-bit boundary), making it easier to perform the math around IPv6 addresses and subnets.</p>
+
+<p>Last but not least: At this point often the question comes up whether to use ULA addresses throughout the entire company along with IPv6-to-IPv6 Network Prefix Translation (<a href="https://tools.ietf.org/html/rfc6296" target="_blank" rel="noopener noreferrer">RFC 6296</a>) or IPv6-to-IPv6 Network Address Translation (<a href="https://tools.ietf.org/html/draft-mrw-behave-nat66-02" target="_blank" rel="noopener noreferrer">NAT66</a>), or not. This question is especially posed based on the desire to simulate the usage of IPv4’s <a href="https://tools.ietf.org/html/rfc1918" target="_blank" rel="noopener noreferrer">RFC 1918</a> address space along with NAT, coupled with the false believe that this provides security to your network. In short: <a href="http://blog.ipspace.net/2011/12/is-nat-security-feature.html" target="_blank" rel="noopener noreferrer">It doesn’t</a>.</p>
+
+<p>From my experience of using both approaches, Global Address space as well as ULA with NPT, I could not find any benefit of the ULA+NPT approach. Instead it only created more hassles and work. With this approach you now have to managed twice the amount of address space. So instead be happy that NAT is (hopefully) finally dead with IPv6 and use Global Unicast addresses.</p>
+
+<h2 id="step-5-deploy-ipv6-in-the-network">Step 5: Deploy IPv6 in the network</h2>
+
+<p>Once you made it up to here, it’s time to put your preparation into action. Surprisingly this step will be very easy, if you’ve done all your homework right. Configuring IPv6 addresses on network device interfaces is usually straight forward and configuring routing protocols - such as OSPFv3 - with IPv6 is also quite simple.</p>
+
+<p>For Cisco IOS devices you can refer to the <a href="http://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/configuration/15-2s/ipv6-15-2s-book.html" target="_blank" rel="noopener noreferrer">IPv6 Implementation Guide</a> or the book <a href="http://amzn.to/1l7EFfh" target="_blank" rel="noopener noreferrer">Cisco Self-Study: Implementing Cisco IPv6 Networks</a>. Also recent course material for the <a href="https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/associate/ccna-routing-switching.html" target="_blank" rel="noopener noreferrer">Cisco Certified Network Associate (CCNA) Routing and Switching</a> certification includes details on implementing IPv6.</p>
+
+<p>For address management in IPv6 you have different options as I described in the previous article <a href="/2013/11/18/ipv6-address-management-hosts/">IPv6 Address management of hosts</a>. In real life you will usually either use manual assignment of IPv6 addresses to e.g. server systems, or Stateful DHCPv6, where O(ther) and M(anaged) flags are set, while the (A)utonomous flag is unset inside the Router Announcements (RA). While address assignment via Stateless Address Auto Configuration (SLAAC) is often touted as one of the benefits of IPv6, it still requires DHCPv6 to assign DNS resolver information due to the lack of RDNSS (<a href="https://tools.ietf.org/html/rfc6106" target="_blank" rel="noopener noreferrer">RFC 6106</a>) support in modern client OSes. This makes this approach as complicated and complex as using Stateful DHCPv6 right away.</p>
+
+<h2 id="step-6-enable-network-services">Step 6: Enable Network Services</h2>
+
+<p>After configuring your network components, ranging from L3 switches, over firewalls and routers to load balancers or WAN accelerators, you’re almost ready to connect end-users via IPv6. What’s missing are network services such as <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer">Domain Name System</a> (DNS), <a href="https://en.wikipedia.org/wiki/Network_Time_Protocol" target="_blank" rel="noopener noreferrer">Network Time Protocol</a> (NTP), <a href="https://en.wikipedia.org/wiki/RADIUS" target="_blank" rel="noopener noreferrer">Remote Authentication Dial In User Service</a> (RADIUS) or Microsoft Active Directory.</p>
+
+<p>While the network services available in your network might vary and differ from the list above, only by making services available via IPv6, are you actually adding value via IPv6. Otherwise your IPv6 implementation is like a highway without any on or off ramps.</p>
+
+<p>Similar to the previous step, enabling IPv6 on devices or hosts for such network services is usually straight forward once you have verified that the product in its current version actually supports IPv6.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>Hopefully you’ve seen that implementing IPv6 in addition to IPv4 in your network isn’t that hard. A successful IPv6 implementation often comes down to the right mindset of the involved stakeholders. The team needs to realize that IPv6 is not a bolt-on to IPv4. Instead it will replace IPv4, eventually. As such you should focus on designing based on this reality and ensure that IPv6 has at least the same status as IPv4. Even if you don’t change any existing equipment and services, but make sure that all new equipment and services are IPv6 capable, it’s just a matter of time until your network will support IPv6.</p>
+
+<p>With that  IPv4 is the past, IPv6 is the future. You should know your history, but put your energy into the future.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-06-25T03:00:08-07:00">June 25, 2014</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Implementing+IPv6%3A+Six+steps+to+success%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F25%2Fimplementing-ipv6-six-steps-success%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F25%2Fimplementing-ipv6-six-steps-success%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F25%2Fimplementing-ipv6-six-steps-success%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F25%2Fimplementing-ipv6-six-steps-success%2F&amp;title=Implementing+IPv6%3A+Six+steps+to+success" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2014/06/16/practical-guide-dns-based-authentication-named-entities-dane/" class="pagination--pager" title="Protecting your website with DNS-Based Authentication of Named Entities (DANE)
+">Previous</a>
+    
+    
+      <a href="/2015/01/13/cisco-wlc-with-cloudtrax-captive-portal/" class="pagination--pager" title="Use a Cisco WLC based Wifi with the CloudTrax captive portal
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

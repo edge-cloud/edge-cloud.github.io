@@ -1,0 +1,1110 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>OpenStack with vSphere and NSX - Part 1: Install and configure the VMware NSX appliances - Edge Cloud</title>
+<meta name="description" content="Install and configure the VMware NSX appliances for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="OpenStack with vSphere and NSX - Part 1: Install and configure the VMware NSX appliances">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/12/17/openstack-with-vsphere-and-nsx-part1/">
+
+
+  <meta property="og:description" content="Install and configure the VMware NSX appliances for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 1: Install and configure the VMware NSX appliances">
+  <meta name="twitter:description" content="Install and configure the VMware NSX appliances for a setup including VMware vSphere, VMware NSX and OpenStack.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/12/17/openstack-with-vsphere-and-nsx-part1/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-12-17T01:10:57-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/12/17/openstack-with-vsphere-and-nsx-part1/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="OpenStack with vSphere and NSX - Part 1: Install and configure the VMware NSX appliances">
+    <meta itemprop="description" content="Install and configure the VMware NSX appliances for a setup including VMware vSphere, VMware NSX and OpenStack.">
+    <meta itemprop="datePublished" content="December 17, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">OpenStack with vSphere and NSX - Part 1: Install and configure the VMware NSX appliances
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#vmware-nsx-components-and-their-role">VMware NSX components and their role</a></li>
+  <li><a href="#install-virtual-appliances">Install Virtual Appliances</a></li>
+  <li><a href="#basic-configuration">Basic Configuration</a></li>
+  <li>
+<a href="#node-specific-configuration">Node-specific configuration</a>
+    <ul>
+      <li><a href="#controller-node">Controller Node</a></li>
+      <li><a href="#gateway-node-and-service-node">Gateway Node and Service Node</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Welcome to part 1 of the <a href="/2013/12/12/openstack-vsphere-nsx/">series</a> on installing OpenStack with VMware vSphere and VMware NSX. This series shows the deployment of an OpenStack cloud that leverages VMware vSphere – along with it’s well-known enterprise-class benefits such as VMotion – as the underlying Hypervisor. In addition, network virtualization within OpenStack will be provided via NSX as a Neutron plugin. This allows the creation of virtual networks within OpenStack that consist of L2 segments and can be interconnected via L3 to each other or the outside world.</p>
+
+<h1 id="vmware-nsx-components-and-their-role">VMware NSX components and their role</h1>
+
+<p>A VMware NSX setup consists of various components. Each of them has a specific role in the overall setup. Some components are deployed in form of an appliance, other are installed as a module into the Hypervisor:</p>
+
+<ul>
+  <li>
+<strong>NSX Controller</strong><br>
+The NSX Controllers implements a network control plane for controlling the Open vSwitch (OVS) devices that perform packet forwarding. Controller Cluster nodes cooperate to manage all OVS devices and enforce consistency between the logical network view (defined via the NSX API) and the transport network view (implemented by OVS-enabled access switches).</li>
+  <li>
+<strong>Transport Nodes</strong><br>
+Hypervisors, NSX Service Nodes, and NSX Gateways are represented in NSX as transport nodes. A transport node is any physical or virtual device that runs Open vSwitch and is managed by the NSX Controller to implement logical networks. How the NSX Controller manages the transport node depends on the role of that transport node:
+    <ul>
+      <li>
+<strong>Hypervisors</strong><br>
+Leverage an Open vSwitch to provide network connectivity for VM-based workloads. Like Service Nodes and Gateways, hypervisors are represented in NSX using the transport node entity.</li>
+      <li>
+<strong>Gateways</strong><br>
+An NSX Gateway connects logical networks to the data center’s physical network or to physical applications.</li>
+      <li>
+<strong>Service Node</strong><br>
+NSX Service Nodes offload network packet processing from hypervisor Open vSwitches, such as broadcast, unknown unicast and multicast (BUM) replication and CPU-intensive cryptographic processing</li>
+    </ul>
+  </li>
+  <li>
+<strong>NSX Manager</strong><br>
+The NSX Manager provides a GUI for operators to setup and configure an NSX network. It is not used by OpenStack itself and could be removed in the case that the operator uses CLI commands for all setup and configuration steps.</li>
+</ul>
+
+<p>If you want to learn more about the architecture of VMware NSX, check out the <a href="http://www.vmware.com/files/pdf/products/nsx/vmw-nsx-network-virtualization-design-guide.pdf" target="_blank" rel="noopener noreferrer">VMware NSX Network Virtualization Design Guide (PDF)</a>.</p>
+
+<h1 id="install-virtual-appliances">Install Virtual Appliances</h1>
+
+<p>As a first step we will install the NSX appliances as form of a virtual appliance, thus inside a VM (See figure 1). VMware provides the software for the NSX appliances as an ISO file.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/vPod-VOVA-Version2-NSXAppliances.png" title="Figure 1: NSX appliances as part of the setup " class="image-popup">
+<picture>
+  <source width="1022" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-320.webp 320w, 
+
+    
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-384.webp 384w, 
+
+    
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-512.webp 512w, 
+
+    
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-683.webp 683w, 
+
+    
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-800.webp 800w, 
+
+    
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-960.webp 960w, 
+
+ /content/uploads/2013/12/vPod-VOVA-Version2-NSXAppliances.webp 1022w" sizes="1022px"></source>
+  <source width="1022" data-srcset="
+
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-320.png 320w, 
+
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-384.png 384w, 
+
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-512.png 512w, 
+
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-683.png 683w, 
+
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-800.png 800w, 
+
+    /content/resized/2013/12/vPod-VOVA-Version2-NSXAppliances-960.png 960w, 
+
+ /content/uploads/2013/12/vPod-VOVA-Version2-NSXAppliances.png 1022w" sizes="1022px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/vPod-VOVA-Version2-NSXAppliances.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: NSX appliances as part of the setup ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: NSX appliances as part of the setup
+</figcaption>
+
+</figure>
+
+<p>Inside VMware vSphere create four virtual machines with the following settings:</p>
+
+<ul>
+  <li>Guest Operating System: Ubuntu Linux (64-bit)</li>
+  <li>CPU: 1</li>
+  <li>Memory: 2 GB</li>
+  <li>Network: 1 vNIC (E1000)</li>
+  <li>Disk Size: 16 GB</li>
+</ul>
+
+<p>Note that these values are well below the supported minimum requirements for VMware NSX in a production environment. As this setup is for test, proof-of-concept and education purposes only, it is sufficient to deploy it with the above settings.</p>
+
+<p>Next mount the corresponding ISO image to each of the four appliances. The VMs should boot via CD-ROM and display an installation screen (See Figure 2). Choose <strong>Automated Install</strong> to proceed.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSXControllerInstall.png" title="Figure 2: NSX Installer " class="image-popup">
+<picture>
+  <source width="640" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSXControllerInstall-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSXControllerInstall-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSXControllerInstall-512.webp 512w, 
+
+ /content/uploads/2013/12/NSXControllerInstall.webp 640w" sizes="640px"></source>
+  <source width="640" data-srcset="
+
+    /content/resized/2013/12/NSXControllerInstall-320.png 320w, 
+
+    /content/resized/2013/12/NSXControllerInstall-384.png 384w, 
+
+    /content/resized/2013/12/NSXControllerInstall-512.png 512w, 
+
+ /content/uploads/2013/12/NSXControllerInstall.png 640w" sizes="640px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSXControllerInstall.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: NSX Installer ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: NSX Installer
+</figcaption>
+
+</figure>
+
+<p>An automated installation of the NSX appliance will start. This can take several minutes. (See Figure 3)</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSXApplianceInstall.png" title="Figure 3: NSX Installation Process " class="image-popup">
+<picture>
+  <source width="800" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSXApplianceInstall-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSXApplianceInstall-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSXApplianceInstall-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSXApplianceInstall-683.webp 683w, 
+
+ /content/uploads/2013/12/NSXApplianceInstall.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
+
+    /content/resized/2013/12/NSXApplianceInstall-320.png 320w, 
+
+    /content/resized/2013/12/NSXApplianceInstall-384.png 384w, 
+
+    /content/resized/2013/12/NSXApplianceInstall-512.png 512w, 
+
+    /content/resized/2013/12/NSXApplianceInstall-683.png 683w, 
+
+ /content/uploads/2013/12/NSXApplianceInstall.png 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSXApplianceInstall.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: NSX Installation Process ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: NSX Installation Process
+</figcaption>
+
+</figure>
+
+<p>At the end of the installation you will be greeted with a login screen. Login with the username <strong>admin</strong> and the password <strong>admin</strong>. (See Figure 4)</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSXApplianceLoginPrompt.png" title="Figure 4: Login into NSX appliance after successful install " class="image-popup">
+<picture>
+  <source width="801" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSXApplianceLoginPrompt-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSXApplianceLoginPrompt-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSXApplianceLoginPrompt-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSXApplianceLoginPrompt-683.webp 683w, 
+
+    
+    /content/resized/2013/12/NSXApplianceLoginPrompt-800.webp 800w, 
+
+ /content/uploads/2013/12/NSXApplianceLoginPrompt.webp 801w" sizes="801px"></source>
+  <source width="801" data-srcset="
+
+    /content/resized/2013/12/NSXApplianceLoginPrompt-320.png 320w, 
+
+    /content/resized/2013/12/NSXApplianceLoginPrompt-384.png 384w, 
+
+    /content/resized/2013/12/NSXApplianceLoginPrompt-512.png 512w, 
+
+    /content/resized/2013/12/NSXApplianceLoginPrompt-683.png 683w, 
+
+    /content/resized/2013/12/NSXApplianceLoginPrompt-800.png 800w, 
+
+ /content/uploads/2013/12/NSXApplianceLoginPrompt.png 801w" sizes="801px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSXApplianceLoginPrompt.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Login into NSX appliance after successful install ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Login into NSX appliance after successful install
+</figcaption>
+
+</figure>
+
+<h1 id="basic-configuration">Basic Configuration</h1>
+
+<p>After you are logged in, we will perform the basic configuration. This basic configuration will be the same for all four appliances. I therefore recommend, that you first complete the installation of all four appliances.</p>
+
+<p>First, configure a new admin password for each of the appliances with the command <code class="highlighter-rouge">set user &lt;username&gt; password</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsx-controller # set user admin password
+Enter new password:
+Retype new password:
+Password updated successfully.
+nsx-controller #  
+</code></pre></div></div>
+
+<p>Next, configure the appliance’s hostname with the <code class="highlighter-rouge">set hostname &lt;hostname&gt;</code> command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsx-controller # set hostname nsxc-l-01a
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Although NSX appliances are based on Ubuntu Linux they do not use eth0 as the network interface. Instead they use a so-called integration bridge interface for network connectivity. This device is called breth0. In this step we will configure an IP address on this physical interface via the command <code class="highlighter-rouge">set network interface breth0 ip config static &lt;IP address&gt; &lt;Netmask&gt;</code>. Notice that the NSX appliance will clear the DNS settings if it had acquired an IP address and DNS settings via DHCP before.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # set network interface breth0 ip config static 192.168.110.101 255.255.255.0
+Setting IP for interface breth0...
+Clearing DNS configuration...
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>You can verify the network settings with the command <code class="highlighter-rouge">show network interface breth0</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # show network interface breth0
+IP config: static
+Address: 192.168.110.101
+Netmask: 255.255.255.0
+Broadcast: 192.168.110.255
+MTU: 1500
+MAC: 00:50:56:12:34:56
+Admin-Status: UP
+Link-Status: UP
+SNMP: disabled
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Next, it’s time to add a default route via the command <code class="highlighter-rouge">add network route 0.0.0.0 0.0.0.0 &lt;gateway&gt;</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # add network route 0.0.0.0 0.0.0.0 192.168.110.1
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Again, we can verify the settings via the command <code class="highlighter-rouge">show network route</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # show network route
+Prefix/Mask          Gateway          Metric  MTU     Iface
+0.0.0.0/0            192.168.110.2    0       intf    breth0
+192.168.110.0/24     0.0.0.0          0       intf    breth0
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Now add the DNS servers via the command <code class="highlighter-rouge">add network dns-server &lt;Server name&gt;</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # add network dns-server 192.168.110.10
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Last, but not least add the NTP server via the command <code class="highlighter-rouge">add network ntp-server &lt;Server name&gt;</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # add network ntp-server 192.168.110.1
+* Stopping NTP server ntpd                                               [ OK ]
+Synchronizing with NTP servers. This may take a few seconds ...
+12 Dec 20:34:51 ntpdate[3241]: step time server 192.168.110.1 offset - 7.140147
+sec
+* Starting NTP server ntpd
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>All the above basic configuration steps are the same for all four NSX appliances, except that each appliance needs to receive its own IP address and hostname. Therefore ensure that you complete the above steps before moving on.</p>
+
+<h1 id="node-specific-configuration">Node-specific configuration</h1>
+
+<p>Next we will perform the node specific configuration on the Controller node, the Gateway node and the Service node. The configuration of the Management VM is already complete with the steps above.</p>
+
+<h2 id="controller-node">Controller Node</h2>
+
+<p>We need to specify for the controller node which IP address should be used as the management address as well as the API address. This is necessary for the case that an NSX controller is deployed with multiple IP addresses in different subnets. As mentioned earlier I’ll keep it single, utilizing only a single subnet.</p>
+
+<p>First, set the IP address the controller should use for management traffic with the command <code class="highlighter-rouge">set control-cluster management-address &lt;IP address&gt;</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # set control-cluster management-address 192.168.110.101
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Next tell the NSX controller which IP address to use for the switch manager traffic (this is the traffic that communicates with OVS interfaces) via the command <code class="highlighter-rouge">set control-cluster role switch_manager listen-ip &lt;IP address&gt;</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # set control-cluster role switch_manager listen-ip 192.168.110.101
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Then instruct the controller which IP address to use for the API interface traffic (this is the interface that handles northbound REST API traffic) with the command <code class="highlighter-rouge">set control-cluster role api_provider listen-ip &lt;IP address&gt;</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l-01a # set control-cluster role api_provider listen-ip 192.168.110.101
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Once you have completed these steps, you can turn up the controller cluster with the command <code class="highlighter-rouge">join control-cluster &lt;own IP address&gt;</code>. Notice that for the first controller you are basically joining the controller to itself. In the case that the controller has multiple IP addresses, the address to use is the one you specified when you set the management IP address earlier.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxc-l01a # join control-cluster 192.168.110.101
+Clearing controller state and restarting
+Stopping nicira-nvp-controller: [Done]
+Clearing nicira-nvp-controller's state: OK
+Starting nicira-nvp-controller: CLI revert file already exists
+mapping eth0 -&gt; bridge-pif
+ssh stop/waiting
+ssh start/running, process 3908
+mapping breth0 -&gt; eth0
+mapping breth0 -&gt; eth0
+ssh stop/waiting
+ssh start/running, process 4057
+Setting core limit to unlimited
+Setting file descriptor limit to 100000
+ nicira-nvp-controller [OK]
+** Watching control-cluster history; ctrl-c to exit **
+===================================
+Host nsxc-l-01a
+Node a57282ce-87fe-44ed-9db1-9dcc21204e33 (192.168.110.101)
+  ---------------------------------
+  12/12 20:53:20: Joining cluster via node 192.168.110.101
+  12/12 20:53:20: Waiting to join cluster
+  12/12 20:53:20: Joined cluster; initializing local components
+  12/12 20:53:24: Initializing data contact with cluster
+  12/12 20:53:32: Fetching initial configuration data
+  12/12 20:53:34: Join complete
+nsxc-l-01a #
+</code></pre></div></div>
+
+<p>Note that for the second and third controllers in a cluster, you would point them to the IP address of any existing controller in the cluster. But as we are only using a single controller here, this is not necessary.</p>
+
+<h2 id="gateway-node-and-service-node">Gateway Node and Service Node</h2>
+
+<p>The Gateway nodes as well as the service nodes need to be made aware of the controller cluster.</p>
+
+<p>On both nodes this is done with the command <code class="highlighter-rouge">add switch manager &lt;IP address of a controller node&gt;</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nsxg-l-01a # add switch manager 192.168.110.152
+Waiting for the manager CA certificate to synchronize...
+Manager CA certificate synchronized
+nsxg-l-01a #
+</code></pre></div></div>
+
+<p>This completes the installation of the NSX appliances. Next in the <a href="/2013/12/12/openstack-vsphere-nsx/" title="OpenStack with vSphere and NSX">series on OpenStack with vSphere and NSX</a> is <a href="/2013/12/27/openstack-with-vsphere-and-nsx-part2/" title="OpenStack with vSphere and NSX – Part 2: Create and configure the VMware NSX cluster">Part 2</a> with the creation and configuration the VMware NSX cluster via the NSX manager. While we finished the installation and basic configuration of the VMware NSX appliances in this post, the next post will show how to use the NSX Manager’s web-based GUI to join these parts together and build the basic functionality of an NSX installation.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#nsx" class="page__taxonomy-item" rel="tag">NSX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#openstack" class="page__taxonomy-item" rel="tag">OpenStack</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-12-17T01:10:57-08:00">December 17, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+1%3A+Install+and+configure+the+VMware+NSX+appliances%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F17%2Fopenstack-with-vsphere-and-nsx-part1%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F17%2Fopenstack-with-vsphere-and-nsx-part1%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F17%2Fopenstack-with-vsphere-and-nsx-part1%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F17%2Fopenstack-with-vsphere-and-nsx-part1%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+1%3A+Install+and+configure+the+VMware+NSX+appliances" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/12/12/openstack-vsphere-nsx/" class="pagination--pager" title="OpenStack with vSphere and NSX
+">Previous</a>
+    
+    
+      <a href="/2013/12/20/handling-vmware-vsphere-5-5-active-directory-integration-error/" class="pagination--pager" title="Handling the VMware vSphere 5.5 Active Directory integration error
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

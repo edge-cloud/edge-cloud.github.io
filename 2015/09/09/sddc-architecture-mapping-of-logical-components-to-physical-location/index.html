@@ -1,0 +1,927 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>SDDC Architecture - Mapping of Logical Components to Physical Location - Edge Cloud</title>
+<meta name="description" content="This article is part of a series of articles, focusing on the architecture of an SDDC via VMware Validated Designs.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="SDDC Architecture - Mapping of Logical Components to Physical Location">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/09/09/sddc-architecture-mapping-of-logical-components-to-physical-location/">
+
+
+  <meta property="og:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC via VMware Validated Designs.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="SDDC Architecture - Mapping of Logical Components to Physical Location">
+  <meta name="twitter:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC via VMware Validated Designs.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/09/09/sddc-architecture-mapping-of-logical-components-to-physical-location/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-09-09T02:30:55-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/09/09/sddc-architecture-mapping-of-logical-components-to-physical-location/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="SDDC Architecture - Mapping of Logical Components to Physical Location">
+    <meta itemprop="description" content="This article is part of a series of articles, focusing on the architecture of an SDDC via VMware Validated Designs.">
+    <meta itemprop="datePublished" content="September 09, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">SDDC Architecture - Mapping of Logical Components to Physical Location
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#requirements">Requirements</a></li>
+  <li>
+<a href="#logical-space">Logical Space</a>
+    <ul>
+      <li><a href="#vsphere-clusters">vSphere Clusters</a></li>
+      <li>
+<a href="#vsphere-vcenter-domains">vSphere vCenter domains</a>
+        <ul>
+          <li><a href="#rationale">Rationale</a></li>
+        </ul>
+      </li>
+      <li><a href="#virtual-distributed-switches">Virtual Distributed Switches</a></li>
+      <li><a href="#nsx-transport-zones">NSX Transport Zones</a></li>
+      <li><a href="#vcenter-server-to-platform-service-controller-mapping">vCenter Server to Platform Service Controller Mapping</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>This article is part of a <a href="/2015/02/20/sddc-architecture-introduction/">series of articles</a>, focusing on the architecture of an SDDC via VMware Validated Designs.</p>
+
+<h1 id="requirements">Requirements</h1>
+
+<p>A Software Defined Data Center promises to be the new underpinning or platform for delivering today’s and tomorrow’s IT services. As such this next generation infrastructure needs to address some shortcomings of today’s infrastructure in order to be successful:</p>
+
+<ul>
+  <li>
+<strong>Highly automated operation at Scale:</strong> Leaner organization that scales sub-linearly with an operating model build around automation. Leverage modular web-scale designs for unhampered scalability.</li>
+  <li>
+<strong>Hardware and Software efficiencies:</strong> Support on-demand scaling for varying capacity needs. Improved resource pooling to drive increased utilization of resources and reduce cost.</li>
+  <li>
+<strong>New and old business needs:</strong> Support legacy applications with traditional business continuity and disaster recovery, besides new cloud-native applications.</li>
+</ul>
+
+<h1 id="logical-space">Logical Space</h1>
+
+<p>In this post we will map the <a href="/2015/03/10/sddc-architecture-core-pod/">physical space</a> of the SDDC architecture to the logical space (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/VMWare_Pod_Design_VM_Assignment.png" title="Figure 1: Mapping of logical to physical components within the SDDC " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-320.webp 320w, 
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-384.webp 384w, 
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-512.webp 512w, 
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-683.webp 683w, 
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-800.webp 800w, 
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-960.webp 960w, 
+
+" sizes="1300px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-320.png 320w, 
+
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-384.png 384w, 
+
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-512.png 512w, 
+
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-683.png 683w, 
+
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-800.png 800w, 
+
+    /content/resized/2015/08/VMWare_Pod_Design_VM_Assignment-960.png 960w, 
+
+" sizes="1300px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/VMWare_Pod_Design_VM_Assignment.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Mapping of logical to physical components within the SDDC ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Mapping of logical to physical components within the SDDC
+</figcaption>
+
+</figure>
+
+<h2 id="vsphere-clusters">vSphere Clusters</h2>
+
+<p>For this we will start with the <a href="/2015/03/10/sddc-architecture-core-pod/">physical space</a> that includes a Management POD, an Edge POD, and one or more Compute PODs. Each of these PODs maps to one cluster.</p>
+
+<p>As a result we will end up with a single Management Cluster, one Edge cluster, and one or more Compute Clusters.</p>
+
+<p>Here it is important to point out, that one Compute POD could house more than one Compute Cluster. This purely depends on the use case for this specific SDDC instance. In order to keep things simple and uniform it is recommended that in this case, the cluster size should be 1/4, 1/2, or 1/1 of the total available server count within a POD. This allows you to create multiple clusters in a uniform manner, without any waste. It is also important to point out, that a compute cluster cannot span more than one compute POD, as L2 host network traffic is not carried across PODs.</p>
+
+<h2 id="vsphere-vcenter-domains">vSphere vCenter domains</h2>
+
+<p>The vSphere cluster above are distributed across two or more vCenters, which we will call stack. Each stack is therefore managed by one or more different vCenter and includes one or more vSphere cluster.</p>
+
+<p>With that the Compute Stack includes:</p>
+
+<ul>
+  <li>
+<strong>Compute cluster:</strong> Used to host workloads (also called payloads). These are tenant VMs that an operator of an SDDC could effectively charge for.</li>
+  <li>
+<strong>Edge cluster:</strong> This vSphere cluster hosts the three NSX Controller VMs and NSX Provider Edge devices for the Compute Stack. NSX Provider Edges provide network connectivity between a physical VLAN based network and a VXLAN based overlay network.</li>
+</ul>
+
+<p>The Management Stack includes:</p>
+
+<ul>
+  <li>
+<strong>Management cluster:</strong> The management stack houses two different set of virtual machines. Both sets are necessary for the operation of the SDDC itself.
+    <ul>
+      <li>
+<strong>Virtual Infrastructure Management components:</strong> vSphere vCenter server, Platform Services Controller, NSX Managers, NSX Controller and NSX Edges for the Management stack. These components are part of the Virtual Infrastructure itself and are necessary in each SDDC Region.</li>
+      <li>
+<strong>Cloud Management and Service Management applications:</strong> vRealize Automation, vRealize Operations, vRealize Log Insight. These components are encapsulated within <a href="/2015/08/31/sddc-architecture-vpods-for-management-applications/">Virtual PODs</a>.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="rationale">Rationale</h3>
+
+<p>The rationale behind using two or more vCenters is based on the following items:</p>
+
+<ul>
+  <li>
+<strong>Safety:</strong> Ensure that excessive operations of a cloud management platform on one of the the Compute vCenter Servers has no negative impact on the Management vCenter Server and thereby the management stack. It is therefore possible to still manage the SDDC itself in such a situation.</li>
+  <li>
+<strong>Security:</strong> The Cloud Management Platform only needs access to the Compute vCenter Servers and never needs to access the Management vCenter Server. This improves security as even when messing up the <a href="https://en.wikipedia.org/wiki/Role-based_access_control" target="_blank" rel="noopener noreferrer">Role-Based Access Control (RBAC)</a> within vCenter, the Cloud Management Platform can never accidentally or on purpose harm the applications within the management stack.</li>
+  <li>
+<strong>Scale out:</strong> Using separate vCenter Server for Compute and Management stack allows us to add additional vCenter Servers within the Compute stack in order to cope with increased payload churn rates. This refers to the case where the number of VM lifecycle operations per unit of time exceeds the capacity of a single vCenter. In these cases the task queue would increase without vCenter ever having a chance to work through them in a reasonable time. To get around this scenario you would add Compute vCenter Server(s) and let the Cloud Management Platform distribute the load across them.</li>
+</ul>
+
+<p>With this an SDDC will usually have a single vCenter Server for the Management Stack and one or more vCenter Server for the Compute Stack within a region.</p>
+
+<h2 id="virtual-distributed-switches">Virtual Distributed Switches</h2>
+
+<p>This design uses three Virtual Distributed Switches (vDS), one for each type of POD. The rationale behind this is that each type of POD has a different kind of network connectivity and therefore needs a separate vDS.</p>
+
+<p>In detail these vDS are:</p>
+
+<ul>
+  <li>
+<strong>Compute vDS:</strong> This vDS stretches across all Compute PODs and therefore all Compute clusters.</li>
+  <li>
+<strong>Edge vDS:</strong> This vDS stretches across the Edge POD and therefore all Edge clusters.</li>
+  <li>
+<strong>Management vDS:</strong> This vDS stretches across the Management POD and includes the Management cluster.</li>
+</ul>
+
+<h2 id="nsx-transport-zones">NSX Transport Zones</h2>
+
+<p>Each stack would use a dedicated NSX Transport Zone. The reason for this is that today a 1:1 mapping between NSX Manager and vCenter Server exist. Therefore having 2 separate vCenter Server domains, means that you also end up with two NSX Manager domains. Within each of these domains it is then sufficient to create a single NSX Transport Zone.</p>
+
+<h2 id="vcenter-server-to-platform-service-controller-mapping">vCenter Server to Platform Service Controller Mapping</h2>
+
+<p>In this design we use vSphere 6.0, which introduces the <a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2113115" target="_blank" rel="noopener noreferrer">Platform Services Controller (PSC)</a>. The PSC provides a set of common infrastructure services encompassing Single Sign-On (SSO), Licensing, and Certificate Authority. As a result an administrator could log in to any one of the vCenter Servers attached to PSC within a single SSO domain and manage all resources within these attached vCenters. The result is a single pane of glass from a management perspective.</p>
+
+<p>While an <a href="https://blogs.vmware.com/vsphere/2015/03/vcenter-server-6-topology-ha.html" target="_blank" rel="noopener noreferrer">HA deployment scenario</a> does exist for the Platform Services Controller, this scenario is not necessary and not recommended in this design. The High Availability (HA) topology would add additional components with the load balancer and would require additional configuration steps. While this would improve the availability of the PSC itself dramatically, the consumer of the PSC - the vCenter Server - are only able to leverage vSphere HA. As such PSC itself could also use vSphere HA, simplifying the topology.</p>
+
+<p>The resulting design (See Figure 2) would also prepare the overall SDDC design to upcoming capabilities around high availability of the PSC.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/09/vC_to_PSC_Mapping.png" title="Figure 2: vCenter Server to Platform Services Controller mapping " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/09/vC_to_PSC_Mapping-320.webp 320w, 
+
+    
+    /content/resized/2015/09/vC_to_PSC_Mapping-384.webp 384w, 
+
+    
+    /content/resized/2015/09/vC_to_PSC_Mapping-512.webp 512w, 
+
+    
+    /content/resized/2015/09/vC_to_PSC_Mapping-683.webp 683w, 
+
+    
+    /content/resized/2015/09/vC_to_PSC_Mapping-800.webp 800w, 
+
+    
+    /content/resized/2015/09/vC_to_PSC_Mapping-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/09/vC_to_PSC_Mapping-320.png 320w, 
+
+    /content/resized/2015/09/vC_to_PSC_Mapping-384.png 384w, 
+
+    /content/resized/2015/09/vC_to_PSC_Mapping-512.png 512w, 
+
+    /content/resized/2015/09/vC_to_PSC_Mapping-683.png 683w, 
+
+    /content/resized/2015/09/vC_to_PSC_Mapping-800.png 800w, 
+
+    /content/resized/2015/09/vC_to_PSC_Mapping-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/09/vC_to_PSC_Mapping.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: vCenter Server to Platform Services Controller mapping ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: vCenter Server to Platform Services Controller mapping
+</figcaption>
+
+</figure>
+
+<p>The recommended design is to deploy a pair of Platform Services Controllers per <a href="/2015/07/31/sddc-architecture-regions-and-availability-zones-azs/">Region and Availability Zones (AZ)</a> and join all PSC in a single Single Sign On (SSO) domain. A maximum of 8 PSC can be placed into a single SSO domain. With this restriction it would be possible to span a single SDDC across up to 2 regions with 2 AZs each.</p>
+
+<p>Within each AZ, the deployed vCenter Server will be split across the available PSC. In the minimum deployment size where you have only one vCenter Server for Management and one vCenter Server for Compute, this would result in a one-to-one mapping.</p>
+
+<p>In the case of a PSC failure, due to an underlying ESXi host failure, the PSC would be restarted via vSphere HA on another ESXi hosts. This would result in a downtime of multiple minutes for the attached vCenter Servers.</p>
+
+<p>In case of a prolonged downtime of a PSC - e.g. due to VM corruption or alike - the vCenter Servers mapped to this PSC (Red arrows in Figure 2) would not be able to leverage this PSC anymore. In this situation the <a href="http://kb.vmware.com/kb/2113917" target="_blank" rel="noopener noreferrer">vCenter Servers should be re-pointed</a> to the remaining active PSC within a region (Blue arrows in Figure 2). At this point the SDDC is operational again and the defective PSC can be re-build, for the SDDC to return to a redundant operational state.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#architecture" class="page__taxonomy-item" rel="tag">Architecture</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#sddc" class="page__taxonomy-item" rel="tag">SDDC</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-09-09T02:30:55-07:00">September 09, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=SDDC+Architecture+-+Mapping+of+Logical+Components+to+Physical+Location%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F09%2F09%2Fsddc-architecture-mapping-of-logical-components-to-physical-location%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F09%2F09%2Fsddc-architecture-mapping-of-logical-components-to-physical-location%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F09%2F09%2Fsddc-architecture-mapping-of-logical-components-to-physical-location%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F09%2F09%2Fsddc-architecture-mapping-of-logical-components-to-physical-location%2F&amp;title=SDDC+Architecture+-+Mapping+of+Logical+Components+to+Physical+Location" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2015/08/31/sddc-architecture-vpods-for-management-applications/" class="pagination--pager" title="SDDC Architecture - Virtual PODs for Management applications
+">Previous</a>
+    
+    
+      <a href="/2015/09/11/sddc-architecture-business-continuity-with-multiple-regions/" class="pagination--pager" title="SDDC Architecture - Business Continuity with multiple regions
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

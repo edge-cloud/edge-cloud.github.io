@@ -1,0 +1,1084 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>BGP route summarization with AWS Transit Gateway - Edge Cloud</title>
+<meta name="description" content="Step-by-step guide to summarize BGP routes with AWS Transit Gateway and Cisco IOS">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="BGP route summarization with AWS Transit Gateway">
+<meta property="og:url" content="https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/">
+
+
+  <meta property="og:description" content="Step-by-step guide to summarize BGP routes with AWS Transit Gateway and Cisco IOS">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="BGP route summarization with AWS Transit Gateway">
+  <meta name="twitter:description" content="Step-by-step guide to summarize BGP routes with AWS Transit Gateway and Cisco IOS">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2019-08-07T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="BGP route summarization with AWS Transit Gateway">
+    <meta itemprop="description" content="Step-by-step guide to summarize BGP routes with AWS Transit Gateway and Cisco IOS">
+    <meta itemprop="datePublished" content="August 07, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">BGP route summarization with AWS Transit Gateway
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#bgp-route-aggregation">BGP Route Aggregation</a></li>
+  <li><a href="#aws-transit-gateway">AWS Transit Gateway</a></li>
+  <li>
+<a href="#bgp-route-aggregation-1">BGP Route Aggregation</a>
+    <ul>
+      <li><a href="#problem-description">Problem Description</a></li>
+      <li><a href="#static-tgw-route">Static TGW Route</a></li>
+      <li><a href="#customer-gateway-route-filtering">Customer gateway route filtering</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>This blog post will look at using BGP Route Aggregation from the AWS Transit Gateway via IPSec VPN to a customer gateway. While the example configuration and output provided for the customer gateway are using a Cisco CSR1000V with IOS-XE, you can replicate the same with e.g. Ubuntu Linux, StrongSwan and FFRouting.
+Have a look at the previous post “<a href="/2019/07/18/aws-site-2-site-vpn-with-strongswan-frrouting/">AWS Site-to-Site VPN with IPSec VPN (Strongwan) and BGP (FRRouting)</a>”, which describes how to setup such a testbed.</p>
+
+<h1 id="bgp-route-aggregation">BGP Route Aggregation</h1>
+
+<p>BGP Route Aggregation (RA) - also sometimes referred to as BGP Route Summarization - is a method to minimize the size of the routing table. RA reduces the size of the global routing table, decreases routers’ workload and saves network bandwidth.
+As an example: Instead of announcing the four routes of 192.168.0.0/24, 192.168.1.0/24, 192.168.2.0/24, and 192.168.3.0/24, one can announce the single route of 192.168.0.0/22 instead.</p>
+
+<h1 id="aws-transit-gateway">AWS Transit Gateway</h1>
+
+<p><a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway</a> is a service that enables customers to connect their Amazon Virtual Private Clouds (VPCs) and their on-premises networks to a single gateway. For on-premises connectivity the AWS Transit Gateway allows you to leverage AWS Site-to-Site VPNs (IPSec) or AWS Direct Connect via <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html" target="_blank" rel="noopener noreferrer">AWS Direct Connect Gateways</a> (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/07/AWS-Transit-GW.png" title="Figure 1: AWS Transit Gateway provides dynamic routing between VPCs, Site-to-Site VPNs, and AWS Direct Connect Gateways " class="image-popup">
+<picture>
+  <source width="1185" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/07/AWS-Transit-GW-320.webp 320w, 
+
+    
+    /content/resized/2019/07/AWS-Transit-GW-384.webp 384w, 
+
+    
+    /content/resized/2019/07/AWS-Transit-GW-512.webp 512w, 
+
+    
+    /content/resized/2019/07/AWS-Transit-GW-683.webp 683w, 
+
+    
+    /content/resized/2019/07/AWS-Transit-GW-800.webp 800w, 
+
+    
+    /content/resized/2019/07/AWS-Transit-GW-960.webp 960w, 
+
+ /content/uploads/2019/07/AWS-Transit-GW.webp 1185w" sizes="1185px"></source>
+  <source width="1185" data-srcset="
+
+    /content/resized/2019/07/AWS-Transit-GW-320.png 320w, 
+
+    /content/resized/2019/07/AWS-Transit-GW-384.png 384w, 
+
+    /content/resized/2019/07/AWS-Transit-GW-512.png 512w, 
+
+    /content/resized/2019/07/AWS-Transit-GW-683.png 683w, 
+
+    /content/resized/2019/07/AWS-Transit-GW-800.png 800w, 
+
+    /content/resized/2019/07/AWS-Transit-GW-960.png 960w, 
+
+ /content/uploads/2019/07/AWS-Transit-GW.png 1185w" sizes="1185px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/07/AWS-Transit-GW.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: AWS Transit Gateway provides dynamic routing between VPCs, Site-to-Site VPNs, and AWS Direct Connect Gateways ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: AWS Transit Gateway provides dynamic routing between VPCs, Site-to-Site VPNs, and AWS Direct Connect Gateways
+</figcaption>
+
+</figure>
+
+<p>A transit gateway acts as a regional virtual router for traffic flowing between your virtual private clouds (VPC) and VPN or DX connections. A transit gateway scales elastically based on the volume of network traffic. Routing through a transit gateway operates at layer 3, where the packets are sent to a specific next-hop attachment, based on their destination IP addresses.</p>
+
+<p>The AWS Transit Gateway’s hub and spoke model simplifies management and reduces operational costs because each network only has to connect to the Transit Gateway and not to every other network. Any new VPC is simply connected to the Transit Gateway and is then automatically available to every other network that is connected to the Transit Gateway. This ease of connectivity makes it easy to scale your network as you grow.</p>
+
+<h1 id="bgp-route-aggregation-1">BGP Route Aggregation</h1>
+
+<h2 id="problem-description">Problem Description</h2>
+
+<p>As previously mentioned, AWS Transit Gateway allows you to connect multiple AWS VPCs to on-premises networks via an IPSec VPN or Direct Connect. In the case of an AWS IPSec VPN connection, AWS Transit Gateway will announce over BGP a separate route for each of these connected VPCs.</p>
+
+<p>Figure 2 shows an example, where the four subnets 172.16.1.0/24, 172.16.2.0/24, 172.16.3.0/24, and 172.16.4.0/24 correspond to a separate VPC each.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/08/TGW_Route_Table_1.jpg" title="Figure 2: Transit Gateway Route Table with individual VPC routes. " class="image-popup">
+<picture>
+  <source width="1206" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/08/TGW_Route_Table_1-320.webp 320w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_1-384.webp 384w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_1-512.webp 512w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_1-683.webp 683w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_1-800.webp 800w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_1-960.webp 960w, 
+
+ /content/uploads/2019/08/TGW_Route_Table_1.webp 1206w" sizes="1206px"></source>
+  <source width="1206" data-srcset="
+
+    /content/resized/2019/08/TGW_Route_Table_1-320.jpg 320w, 
+
+    /content/resized/2019/08/TGW_Route_Table_1-384.jpg 384w, 
+
+    /content/resized/2019/08/TGW_Route_Table_1-512.jpg 512w, 
+
+    /content/resized/2019/08/TGW_Route_Table_1-683.jpg 683w, 
+
+    /content/resized/2019/08/TGW_Route_Table_1-800.jpg 800w, 
+
+    /content/resized/2019/08/TGW_Route_Table_1-960.jpg 960w, 
+
+ /content/uploads/2019/08/TGW_Route_Table_1.jpg 1206w" sizes="1206px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/08/TGW_Route_Table_1.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Transit Gateway Route Table with individual VPC routes. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Transit Gateway Route Table with individual VPC routes.
+</figcaption>
+
+</figure>
+
+<p>On the customer gateway the routes for these four VPCs are then received separately as individual routes.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR100V-01#sh ip route bgp
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.0.1.1 to network 0.0.0.0
+
+      10.0.0.0/8 is variably subnetted, 6 subnets, 2 masks
+B        10.1.16.0/24 [20/100] via 169.254.15.221, 1d01h
+                      [20/100] via 169.254.13.253, 1d01h
+B        10.16.16.0/24 [20/100] via 169.254.15.221, 1d01h
+                       [20/100] via 169.254.13.253, 1d01h
+      172.16.0.0/24 is subnetted, 4 subnets
+B        172.16.1.0 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+B        172.16.2.0 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+B        172.16.3.0 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+B        172.16.4.0 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+B     172.31.0.0/16 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+CSR100V-01#
+</code></pre></div></div>
+
+<p>As in this example the four subnets for the VPCs, as well as the subnet for the default VPC of 172.31.0.0/16 are part of the aggregate route of 172.16.0.0/12 it might make more sense to announce this single aggregate over the IPSec VPN instead of the individual more specific routes (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/08/TGW_VPC_Routes.png" title="Figure 3: Desired BGP announcements between VPCs, TGW and customer gateway over VPN. " class="image-popup">
+<picture>
+  <source width="521" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/08/TGW_VPC_Routes-320.webp 320w, 
+
+    
+    /content/resized/2019/08/TGW_VPC_Routes-384.webp 384w, 
+
+    
+    /content/resized/2019/08/TGW_VPC_Routes-512.webp 512w, 
+
+ /content/uploads/2019/08/TGW_VPC_Routes.webp 521w" sizes="521px"></source>
+  <source width="521" data-srcset="
+
+    /content/resized/2019/08/TGW_VPC_Routes-320.png 320w, 
+
+    /content/resized/2019/08/TGW_VPC_Routes-384.png 384w, 
+
+    /content/resized/2019/08/TGW_VPC_Routes-512.png 512w, 
+
+ /content/uploads/2019/08/TGW_VPC_Routes.png 521w" sizes="521px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/08/TGW_VPC_Routes.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Desired BGP announcements between VPCs, TGW and customer gateway over VPN. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Desired BGP announcements between VPCs, TGW and customer gateway over VPN.
+</figcaption>
+
+</figure>
+
+<p>Especially as you add further VPCs with a netblock from the 172.16.0.0/12 block, this summarization will keep the routing table on the customer gateway smaller.</p>
+
+<h2 id="static-tgw-route">Static TGW Route</h2>
+
+<p>A common mechanism to crate a BGP route aggregation with physical routers is to create a static discard route on the source router. This means that for an aggregate address - in our case this is 172.16.0.0/12 - a static route pointing to a null interface is created. As a result this aggregate route will be propagated via BGP. Once packets reach this router, the more specific routes will determine how to further route the packet.</p>
+
+<p>While The AWS Transit Gateway supports <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-route-tables.html#tgw-create-static-route" target="_blank" rel="noopener noreferrer">blackhole routes</a>, these routes are not propagated via BGP over the IPSec tunnels. Instead you have to create a regular static route and point it at a random VPC (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/08/TGW_Route_Table_SummaryRoute.jpg" title="Figure 4: Transit Gateway Route Table with summary route. " class="image-popup">
+<picture>
+  <source width="1211" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-320.webp 320w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-384.webp 384w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-512.webp 512w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-683.webp 683w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-800.webp 800w, 
+
+    
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-960.webp 960w, 
+
+ /content/uploads/2019/08/TGW_Route_Table_SummaryRoute.webp 1211w" sizes="1211px"></source>
+  <source width="1211" data-srcset="
+
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-320.jpg 320w, 
+
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-384.jpg 384w, 
+
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-512.jpg 512w, 
+
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-683.jpg 683w, 
+
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-800.jpg 800w, 
+
+    /content/resized/2019/08/TGW_Route_Table_SummaryRoute-960.jpg 960w, 
+
+ /content/uploads/2019/08/TGW_Route_Table_SummaryRoute.jpg 1211w" sizes="1211px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/08/TGW_Route_Table_SummaryRoute.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 4: Transit Gateway Route Table with summary route. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Transit Gateway Route Table with summary route.
+</figcaption>
+
+</figure>
+
+<p>As a result the customer gateway will now receive the aggregate route of 172.16.0.0/12 besides the 5 more specific routes for 172.16.1.0/24, 172.16.2.0/24, 172.16.3.0/24, 172.16.4.0/24, and 172.31.0.0/16.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR100V-01#sh ip route bgp
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.0.1.1 to network 0.0.0.0
+
+      10.0.0.0/8 is variably subnetted, 6 subnets, 2 masks
+B        10.1.16.0/24 [20/100] via 169.254.15.221, 1d01h
+                      [20/100] via 169.254.13.253, 1d01h
+B        10.16.16.0/24 [20/100] via 169.254.15.221, 1d01h
+                       [20/100] via 169.254.13.253, 1d01h
+B     172.16.0.0/12 [20/100] via 169.254.15.221, 00:00:43
+                    [20/100] via 169.254.13.253, 00:00:43
+      172.16.0.0/24 is subnetted, 4 subnets
+B        172.16.1.0 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+B        172.16.2.0 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+B        172.16.3.0 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+B        172.16.4.0 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+B     172.31.0.0/16 [20/100] via 169.254.15.221, 1d01h
+                    [20/100] via 169.254.13.253, 1d01h
+CSR100V-01#
+</code></pre></div></div>
+
+<h2 id="customer-gateway-route-filtering">Customer gateway route filtering</h2>
+
+<p>While this is already a good step in the right direction, still receiving the individual more specific routes on the customer defeats the purpose of route aggregation. While Cisco IOS e.g. has the <a href="https://www.cisco.com/c/m/en_us/techdoc/dc/reference/cli/nxos/commands/bgp/aggregate-address-bgp.html" target="_blank" rel="noopener noreferrer">command</a> <strong>aggregate-address <em>address / length</em> summary-only</strong> for solely announcing the summary route, the AWS Transit Gateway is missing a similar capability.</p>
+
+<p>Here instead we have to filter undesired prefixes as part of the BGP session in the customer gateway. This way we can accept only the aggregate prefixes, preventing and more specific route to be installed into the customer gateway route table.</p>
+
+<p>To do so, we first create an <strong>ip prefix list</strong> with the desired prefixes that we want to receive. Next we create a <strong>route map</strong> matching this prefix list. Last but not least the route map is applied on incoming BGP connections for each configured BGP peer, aka neighbors.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
+ bgp log-neighbor-changes
+ neighbor 169.254.13.253 remote-as 64512
+ neighbor 169.254.13.253 timers 10 30 30
+ neighbor 169.254.15.221 remote-as 64512
+ neighbor 169.254.15.221 timers 10 30 30
+ !
+ address-family ipv4
+  network 10.0.16.0 mask 255.255.255.0
+  neighbor 169.254.13.253 activate
+  neighbor 169.254.13.253 soft-reconfiguration inbound
+  neighbor 169.254.13.253 route-map REJECT in
+  neighbor 169.254.15.221 activate
+  neighbor 169.254.15.221 soft-reconfiguration inbound
+  neighbor 169.254.15.221 route-map REJECT in
+  maximum-paths eibgp 2
+ exit-address-family
+!
+
+ip prefix-list incoming seq 5 permit 10.1.16.0/24
+ip prefix-list incoming seq 10 permit 10.16.16.0/24
+ip prefix-list incoming seq 15 permit 172.16.0.0/12
+!
+route-map REJECT permit 10
+ match ip address prefix-list incoming
+!
+</code></pre></div></div>
+
+<p>As a result our customer gateway will now only receive the aggregate prefix, but none of the more specific routes.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR100V-01#sh ip route bgp
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.0.1.1 to network 0.0.0.0
+
+      10.0.0.0/8 is variably subnetted, 6 subnets, 2 masks
+B        10.1.16.0/24 [20/100] via 169.254.15.221, 1d01h
+                      [20/100] via 169.254.13.253, 1d01h
+B        10.16.16.0/24 [20/100] via 169.254.15.221, 00:00:40
+                       [20/100] via 169.254.13.253, 00:00:40                    
+B     172.16.0.0/12 [20/100] via 169.254.15.221, 00:27:23
+                    [20/100] via 169.254.13.253, 00:27:23
+CSR100V-01#
+</code></pre></div></div>
+
+<h1 id="summary">Summary</h1>
+
+<p>This blog post walked you through configuring BGP route summarization with AWS Transit Gateway for attachments over IPSec VPN. Keep in mind, that with the AWS Transit Gateway and a Direct Connect Gateway attachment, this approach is not applicable as you are effectively specifying the IP prefixes to be announced over Direct Connect manually via <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/allowed-to-prefixes.html" target="_blank" rel="noopener noreferrer">allowed prefixes</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-08-07T00:00:00-07:00">August 07, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=BGP+route+summarization+with+AWS+Transit+Gateway%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F08%2F07%2Fbgp-route-summary-with-tgw%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F08%2F07%2Fbgp-route-summary-with-tgw%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F08%2F07%2Fbgp-route-summary-with-tgw%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F08%2F07%2Fbgp-route-summary-with-tgw%2F&amp;title=BGP+route+summarization+with+AWS+Transit+Gateway" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2019/07/18/aws-site-2-site-vpn-with-strongswan-frrouting/" class="pagination--pager" title="AWS Site-to-Site VPN with IPSec VPN (Strongwan) and BGP (FRRouting)
+">Previous</a>
+    
+    
+      <a href="/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/" class="pagination--pager" title="AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,2321 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>OpenStack with vSphere and NSX - Part 2: Create and configure the VMware NSX cluster - Edge Cloud</title>
+<meta name="description" content="Create and configure the VMware NSX cluster  for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="OpenStack with vSphere and NSX - Part 2: Create and configure the VMware NSX cluster">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/12/27/openstack-with-vsphere-and-nsx-part2/">
+
+
+  <meta property="og:description" content="Create and configure the VMware NSX cluster  for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 2: Create and configure the VMware NSX cluster">
+  <meta name="twitter:description" content="Create and configure the VMware NSX cluster  for a setup including VMware vSphere, VMware NSX and OpenStack.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/12/27/openstack-with-vsphere-and-nsx-part2/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-12-27T00:30:17-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/12/27/openstack-with-vsphere-and-nsx-part2/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="OpenStack with vSphere and NSX - Part 2: Create and configure the VMware NSX cluster">
+    <meta itemprop="description" content="Create and configure the VMware NSX cluster  for a setup including VMware vSphere, VMware NSX and OpenStack.">
+    <meta itemprop="datePublished" content="December 27, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">OpenStack with vSphere and NSX - Part 2: Create and configure the VMware NSX cluster
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#connect-the-nsx-manager-to-the-nsx-cluster">Connect the NSX Manager to the NSX Cluster</a>
+    <ul>
+      <li><a href="#add-a-new-transport-zone">Add a new Transport Zone</a></li>
+    </ul>
+  </li>
+  <li><a href="#add-a-new-gateway-node">Add a new Gateway node</a></li>
+  <li>
+<a href="#add-a-new-service-node">Add a new Service node</a>
+    <ul>
+      <li><a href="#add-a-new-gateway-service">Add a new Gateway Service</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Welcome to part 2 of the <a href="/2013/12/12/openstack-vsphere-nsx/" title="OpenStack with vSphere and NSX">series</a> on installing OpenStack with VMware vSphere and VMware NSX. This series shows the deployment of a OpenStack cloud that leverages VMware vSphere – along with it’s well-known enterprise-class benefits such as VMotion – as the underlying Hypervisor. In addition, network virtualization within OpenStack will be provided via NSX as a Neutron plugin. This allows the creation of virtual networks within OpenStack that consist of L2 segments and can be interconnected via L3 to each other or the outside world.</p>
+
+<p>In <a href="/2013/12/17/openstack-with-vsphere-and-nsx-part1/">Part 1: “OpenStack with vSphere and NSX – Part 1: Install and configure the VMware NSX appliances”</a> we finished the installation and basic configuration of the VMware NSX appliances. In this post you will learn how to use the NSX Manager’s web-based GUI to join these parts together and build the basic functionality of an NSX installation consisting of a NSX Cluster, NSX Gateway and NSX Service Node as transport nodes as well as a Transport Zone and a Gateway Service.</p>
+
+<h1 id="connect-the-nsx-manager-to-the-nsx-cluster">Connect the NSX Manager to the NSX Cluster</h1>
+
+<p>Let’s start by making the NSX Manager aware of the NSX Cluster to be used. This will allow us in subsequent steps to manage this NSX cluster and add further components.</p>
+
+<p>First login to the NSX Manager with the credentials that were set in the previous post (See Figure 1). By default this would be the username “admin” along with the password “admin”.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager01.png" title="Figure 1: Login to NSX Manager " class="image-popup">
+<picture>
+  <source width="1049" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager01-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager01-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager01-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager01-683.webp 683w, 
+
+    
+    /content/resized/2013/12/NSX-Manager01-800.webp 800w, 
+
+    
+    /content/resized/2013/12/NSX-Manager01-960.webp 960w, 
+
+ /content/uploads/2013/12/NSX-Manager01.webp 1049w" sizes="1049px"></source>
+  <source width="1049" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager01-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager01-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager01-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager01-683.png 683w, 
+
+    /content/resized/2013/12/NSX-Manager01-800.png 800w, 
+
+    /content/resized/2013/12/NSX-Manager01-960.png 960w, 
+
+ /content/uploads/2013/12/NSX-Manager01.png 1049w" sizes="1049px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Login to NSX Manager ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Login to NSX Manager
+</figcaption>
+
+</figure>
+
+<p>After the initial login, NSX Manager will indicate that it is currently not connected to any cluster and therefore not much of any use (See Figure 2). Click on <strong>Add Cluster</strong> to add the first NSX cluster to the NSX Manager.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager02.png" title="Figure 2: NSX Manager without a cluster " class="image-popup">
+<picture>
+  <source width="1034" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager02-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager02-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager02-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager02-683.webp 683w, 
+
+    
+    /content/resized/2013/12/NSX-Manager02-800.webp 800w, 
+
+    
+    /content/resized/2013/12/NSX-Manager02-960.webp 960w, 
+
+ /content/uploads/2013/12/NSX-Manager02.webp 1034w" sizes="1034px"></source>
+  <source width="1034" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager02-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager02-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager02-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager02-683.png 683w, 
+
+    /content/resized/2013/12/NSX-Manager02-800.png 800w, 
+
+    /content/resized/2013/12/NSX-Manager02-960.png 960w, 
+
+ /content/uploads/2013/12/NSX-Manager02.png 1034w" sizes="1034px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: NSX Manager without a cluster ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: NSX Manager without a cluster
+</figcaption>
+
+</figure>
+
+<p>Provide the IP address along with the access credentials of any node within the NSX cluster (See Figure 3). Remember that in this case we have only a single NSX controller available.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager03.png" title="Figure 3: Connect to NSX Controller Cluster - Step 1 " class="image-popup">
+<picture>
+  <source width="444" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager03-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager03-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager03.webp 444w" sizes="444px"></source>
+  <source width="444" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager03-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager03-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager03.png 444w" sizes="444px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager03.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Connect to NSX Controller Cluster - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Connect to NSX Controller Cluster - Step 1
+</figcaption>
+
+</figure>
+
+<p>Next, provide a name for this NSX cluster (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager05.png" title="Figure 4: Connect to NSX Controller Cluster - Step 2 " class="image-popup">
+<picture>
+  <source width="857" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager05-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager05-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager05-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager05-683.webp 683w, 
+
+    
+    /content/resized/2013/12/NSX-Manager05-800.webp 800w, 
+
+ /content/uploads/2013/12/NSX-Manager05.webp 857w" sizes="857px"></source>
+  <source width="857" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager05-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager05-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager05-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager05-683.png 683w, 
+
+    /content/resized/2013/12/NSX-Manager05-800.png 800w, 
+
+ /content/uploads/2013/12/NSX-Manager05.png 857w" sizes="857px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager05.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Connect to NSX Controller Cluster - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Connect to NSX Controller Cluster - Step 2
+</figcaption>
+
+</figure>
+
+<p>Click on <strong>Use This NSX Manager</strong>, to specify the NSX Manager as the syslog collector of this NSX cluster. Leave all other settings as is (See Figure 5). In a production environment you would obviously adapt these settings, but for this setup these settings are just fine.</p>
+
+<p>Complete your selection by clicking on <strong>Configure</strong>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager06.png" title="Figure 5: Connect to NSX Controller Cluster - Step 3 " class="image-popup">
+<picture>
+  <source width="659" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager06-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager06-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager06-512.webp 512w, 
+
+ /content/uploads/2013/12/NSX-Manager06.webp 659w" sizes="659px"></source>
+  <source width="659" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager06-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager06-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager06-512.png 512w, 
+
+ /content/uploads/2013/12/NSX-Manager06.png 659w" sizes="659px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager06.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Connect to NSX Controller Cluster - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Connect to NSX Controller Cluster - Step 3
+</figcaption>
+
+</figure>
+
+<p>You should see the NSX controller cluster successfully added with the Connection status as “Up” (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager07.png" title="Figure 6: NSX Controller Cluster successfully added " class="image-popup">
+<picture>
+  <source width="1035" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager07-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager07-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager07-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager07-683.webp 683w, 
+
+    
+    /content/resized/2013/12/NSX-Manager07-800.webp 800w, 
+
+    
+    /content/resized/2013/12/NSX-Manager07-960.webp 960w, 
+
+ /content/uploads/2013/12/NSX-Manager07.webp 1035w" sizes="1035px"></source>
+  <source width="1035" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager07-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager07-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager07-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager07-683.png 683w, 
+
+    /content/resized/2013/12/NSX-Manager07-800.png 800w, 
+
+    /content/resized/2013/12/NSX-Manager07-960.png 960w, 
+
+ /content/uploads/2013/12/NSX-Manager07.png 1035w" sizes="1035px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager07.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: NSX Controller Cluster successfully added ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: NSX Controller Cluster successfully added
+</figcaption>
+
+</figure>
+
+<p>Going to the NSX Manager Dashboard will show you the NSX Controller without any transport nodes added (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager08.png" title="Figure 7: NSX Controller Cluster without any Transport Nodes " class="image-popup">
+<picture>
+  <source width="1033" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager08-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager08-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager08-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager08-683.webp 683w, 
+
+    
+    /content/resized/2013/12/NSX-Manager08-800.webp 800w, 
+
+    
+    /content/resized/2013/12/NSX-Manager08-960.webp 960w, 
+
+ /content/uploads/2013/12/NSX-Manager08.webp 1033w" sizes="1033px"></source>
+  <source width="1033" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager08-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager08-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager08-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager08-683.png 683w, 
+
+    /content/resized/2013/12/NSX-Manager08-800.png 800w, 
+
+    /content/resized/2013/12/NSX-Manager08-960.png 960w, 
+
+ /content/uploads/2013/12/NSX-Manager08.png 1033w" sizes="1033px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager08.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: NSX Controller Cluster without any Transport Nodes ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: NSX Controller Cluster without any Transport Nodes
+</figcaption>
+
+</figure>
+
+<p>Keep in mind that a single NSX Manager can manage multiple NSX controller cluster.</p>
+
+<h2 id="add-a-new-transport-zone">Add a new Transport Zone</h2>
+
+<p>In VMware NSX a transport zone corresponds to the underlying physical network used to interconnect transport nodes (hypervisors, service nodes, gateways). A simple VMware NSX deployment will have a single transport zone that represents the physical network connectivity within the data center. But more complex topologies with multiple networks within and outside the data center are possible via multiple transport zones. Here we will use a single transport zone as all transport nodes connect to the same underlying network.</p>
+
+<p>On the <em>NSX Manager Dashboard</em>, within the <em>Summary of Transport Components</em> section, click on <strong>Add</strong> within the <em>Zones</em> row (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager09.png" title="Figure 8: Add a new Transport Zone " class="image-popup">
+<picture>
+  <source width="422" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager09-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager09-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager09.webp 422w" sizes="422px"></source>
+  <source width="422" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager09-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager09-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager09.png 422w" sizes="422px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager09.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Add a new Transport Zone ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Add a new Transport Zone
+</figcaption>
+
+</figure>
+
+<p>Give the new transport zone a name (See Figure 9). Click on <strong>Save &amp; View</strong> to finish the creation of a new transport zone.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager10.png" title="Figure 9: Create Transport Zone " class="image-popup">
+<picture>
+  <source width="323" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager10-320.webp 320w, 
+
+ /content/uploads/2013/12/NSX-Manager10.webp 323w" sizes="323px"></source>
+  <source width="323" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager10-320.png 320w, 
+
+ /content/uploads/2013/12/NSX-Manager10.png 323w" sizes="323px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager10.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Create Transport Zone ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Create Transport Zone
+</figcaption>
+
+</figure>
+
+<p>Note down the UUID of the newly created transport zone (See Figure 10). We will need this UUID in a later step to configure the <a href="https://communities.vmware.com/community/vmtn/openstack/" target="_blank" rel="noopener noreferrer">vSphere OpenStack Virtual Appliance (VOVA)</a>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager11.png" title="Figure 10: UUID of the new Transport Zone " class="image-popup">
+<picture>
+  <source width="469" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager11-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager11-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager11.webp 469w" sizes="469px"></source>
+  <source width="469" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager11-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager11-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager11.png 469w" sizes="469px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager11.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: UUID of the new Transport Zone ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: UUID of the new Transport Zone
+</figcaption>
+
+</figure>
+
+<h1 id="add-a-new-gateway-node">Add a new Gateway node</h1>
+
+<p>An NSX Gateway connects logical networks to the data center’s physical network or to physical applications. While the NSX gateway appliance was installed and configured in a previous step, it now needs to be added to the NSX cluster.</p>
+
+<p>Return to the <em>NSX Manager Dashboard</em>, within the <em>Summary of Transport Components</em> section, click on <strong>Add</strong> within the <em>Gateways</em> row (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager19.png" title="Figure 11: Add a new Gateway " class="image-popup">
+<picture>
+  <source width="424" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager19-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager19-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager19.webp 424w" sizes="424px"></source>
+  <source width="424" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager19-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager19-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager19.png 424w" sizes="424px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager19.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Add a new Gateway ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Add a new Gateway
+</figcaption>
+
+</figure>
+
+<p>Confirm that the pre-selected transport type is <strong>Gateway</strong> (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager20.png" title="Figure 12: Create Gateway - Step 1 " class="image-popup">
+<picture>
+  <source width="797" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager20-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager20-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager20-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager20-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager20.webp 797w" sizes="797px"></source>
+  <source width="797" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager20-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager20-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager20-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager20-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager20.png 797w" sizes="797px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager20.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Create Gateway - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Create Gateway - Step 1
+</figcaption>
+
+</figure>
+
+<p>Give the gateway node a name (See Figure 13). I usually pick the hostname.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager21.png" title="Figure 13: Create Gateway - Step 2 " class="image-popup">
+<picture>
+  <source width="794" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager21-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager21-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager21-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager21-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager21.webp 794w" sizes="794px"></source>
+  <source width="794" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager21-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager21-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager21-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager21-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager21.png 794w" sizes="794px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager21.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Create Gateway - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: Create Gateway - Step 2
+</figcaption>
+
+</figure>
+
+<p>Here leave the settings as is (See Figure 14). A <em>Management Rendezvous Client</em> would be necessary if NSX Controller and NSX Gateway do not have direct network connectivity, the <em>Tunnel Keep-alive Spray</em> would randomize TCP source ports for STT tunnel keep-alives for packet spray across active network path and <em>VTEP enabled</em> would be for physical NSX gateways as e.g. offered by <a href="https://www.arista.com/en/company/news/press-release/614-pr-20130826-01" target="_blank" rel="noopener noreferrer">Arista EOS</a>. As none of this applies here, we will stick to the default settings.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager22.png" title="Figure 14: Create Gateway - Step 3 " class="image-popup">
+<picture>
+  <source width="795" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager22-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager22-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager22-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager22-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager22.webp 795w" sizes="795px"></source>
+  <source width="795" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager22-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager22-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager22-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager22-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager22.png 795w" sizes="795px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager22.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Create Gateway - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Create Gateway - Step 3
+</figcaption>
+
+</figure>
+
+<p>Before we can complete the next step, we need to extract the SSL certificate from the NSX gateway appliance. To do so, connect via SSH or console to the NSX gateway appliance and login with the previously defined password and the username <code class="highlighter-rouge">admin</code>. Use the command <code class="highlighter-rouge">show switch certificate</code> to display the required certificate (See Figure 15).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager23.png" title="Figure 15: Extract NSX Gateway certificate - Step 1 " class="image-popup">
+<picture>
+  <source width="659" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager23-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager23-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager23-512.webp 512w, 
+
+ /content/uploads/2013/12/NSX-Manager23.webp 659w" sizes="659px"></source>
+  <source width="659" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager23-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager23-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager23-512.png 512w, 
+
+ /content/uploads/2013/12/NSX-Manager23.png 659w" sizes="659px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager23.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Extract NSX Gateway certificate - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: Extract NSX Gateway certificate - Step 1
+</figcaption>
+
+</figure>
+
+<p>Copy the certificate including the lines <code class="highlighter-rouge">----BEGIN CERTIFICATE----</code> and <code class="highlighter-rouge">----END CERTIFICATE----</code> (See Figure 16). We will need this certificate in the next step.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager24.png" title="Figure 16: Extract NSX Gateway certificate - Step 2 " class="image-popup">
+<picture>
+  <source width="668" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager24-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager24-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager24-512.webp 512w, 
+
+ /content/uploads/2013/12/NSX-Manager24.webp 668w" sizes="668px"></source>
+  <source width="668" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager24-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager24-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager24-512.png 512w, 
+
+ /content/uploads/2013/12/NSX-Manager24.png 668w" sizes="668px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager24.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Extract NSX Gateway certificate - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 16: Extract NSX Gateway certificate - Step 2
+</figcaption>
+
+</figure>
+
+<p>Back in the <em>NSX Manager</em> select the <em>Credential Type</em> of <strong>Security Certificate</strong> and paste the previously copied certificate into the <strong>Security Certificate</strong> field (See Figure 17).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager25.png" title="Figure 17: Create Gateway – Step 4 " class="image-popup">
+<picture>
+  <source width="796" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager25-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager25-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager25-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager25-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager25.webp 796w" sizes="796px"></source>
+  <source width="796" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager25-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager25-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager25-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager25-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager25.png 796w" sizes="796px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager25.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Create Gateway – Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 17: Create Gateway – Step 4
+</figcaption>
+
+</figure>
+
+<p>Next, we need to create a transport connector for the NSX Gateway. A transport connector does two things:</p>
+
+<ul>
+  <li>It specifies the transport type or tunnel protocol to be used by the transport node. This transport type has to match for nodes to be able to form an overlay tunnel and communicate.</li>
+  <li>It maps the (physical) interface of a transport node to a transport zone. With this it would be possible to use a single transport node (e.g. gateway) in multiple transport zones.</li>
+</ul>
+
+<p>We will use STT as the transport type in this setup. And remember that we are only using a single transport zone.</p>
+
+<p>Let’s get started by clicking on <strong>Add Connector</strong> (See Figure 18).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager26.png" title="Figure 18: Create Gateway – Step 5 " class="image-popup">
+<picture>
+  <source width="796" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager26-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager26-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager26-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager26-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager26.webp 796w" sizes="796px"></source>
+  <source width="796" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager26-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager26-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager26-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager26-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager26.png 796w" sizes="796px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager26.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Create Gateway – Step 5 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 18: Create Gateway – Step 5
+</figcaption>
+
+</figure>
+
+<p>Select <strong>STT</strong> as the <em>Transport Type</em>, ensure that the <em>Transport Zone UUID</em> matches our single transport zone and enter the IP address of the NSX gateway as the <em>IP address</em> (See Figure 19).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager27.png" title="Figure 19: Create Gateway – Step 6 " class="image-popup">
+<picture>
+  <source width="438" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager27-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager27-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager27.webp 438w" sizes="438px"></source>
+  <source width="438" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager27-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager27-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager27.png 438w" sizes="438px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager27.png" class="blur-up lazyautosizes lazyload" alt="Figure 19: Create Gateway – Step 6 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 19: Create Gateway – Step 6
+</figcaption>
+
+</figure>
+
+<p>This concludes the setup of the NSX Gateway in NSX Manager. Click on <strong>Save</strong> to finish the configuration (See Figure 20).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager28.png" title="Figure 20: Create Gateway – Step 7 " class="image-popup">
+<picture>
+  <source width="796" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager28-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager28-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager28-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager28-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager28.webp 796w" sizes="796px"></source>
+  <source width="796" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager28-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager28-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager28-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager28-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager28.png 796w" sizes="796px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager28.png" class="blur-up lazyautosizes lazyload" alt="Figure 20: Create Gateway – Step 7 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 20: Create Gateway – Step 7
+</figcaption>
+
+</figure>
+
+<p>Return to the <em>NSX Manager Dashboard</em>, where you will see the new Gateway within the <em>Summary of Transport Components</em> section, within the <em>Gateways</em> row. Click on the number for active gateways to see more details (See Figure 21).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager29.png" title="Figure 21: NSX Gateway successfully added " class="image-popup">
+<picture>
+  <source width="428" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager29-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager29-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager29.webp 428w" sizes="428px"></source>
+  <source width="428" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager29-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager29-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager29.png 428w" sizes="428px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager29.png" class="blur-up lazyautosizes lazyload" alt="Figure 21: NSX Gateway successfully added ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 21: NSX Gateway successfully added
+</figcaption>
+
+</figure>
+
+<p>You should see the NSX gateway successfully added with the Connection status as <em>Up</em> (See Figure 22).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager30.png" title="Figure 22: NSX Gateway displaying status of &lt;em&gt;Connected&lt;/em&gt; " class="image-popup">
+<picture>
+  <source width="875" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager30-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager30-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager30-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager30-683.webp 683w, 
+
+    
+    /content/resized/2013/12/NSX-Manager30-800.webp 800w, 
+
+ /content/uploads/2013/12/NSX-Manager30.webp 875w" sizes="875px"></source>
+  <source width="875" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager30-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager30-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager30-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager30-683.png 683w, 
+
+    /content/resized/2013/12/NSX-Manager30-800.png 800w, 
+
+ /content/uploads/2013/12/NSX-Manager30.png 875w" sizes="875px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager30.png" class="blur-up lazyautosizes lazyload" alt="Figure 22: NSX Gateway displaying status of &lt;em&gt;Connected&lt;/em&gt; ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 22: NSX Gateway displaying status of <em>Connected</em>
+</figcaption>
+
+</figure>
+
+<h1 id="add-a-new-service-node">Add a new Service node</h1>
+
+<p>NSX Service Nodes offload network packet processing from hypervisor Open vSwitches, such as broadcast, unknown unicast and multicast (BUM) replication and CPU-intensive cryptographic processing. While the NSX service node appliance was installed and configured in a previous step, it now needs to be added to the NSX cluster.</p>
+
+<p>Return to the <em>NSX Manager Dashboard</em>, within the <em>Summary of Transport Components</em> section, click on <strong>Add</strong> within the <em>Service Nodes</em> row (See Figure 23).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager31.png" title="Figure 23: Add a new Service Node " class="image-popup">
+<picture>
+  <source width="429" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager31-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager31-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager31.webp 429w" sizes="429px"></source>
+  <source width="429" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager31-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager31-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager31.png 429w" sizes="429px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager31.png" class="blur-up lazyautosizes lazyload" alt="Figure 23: Add a new Service Node ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 23: Add a new Service Node
+</figcaption>
+
+</figure>
+
+<p>Confirm that the pre-selected transport type is <strong>Service Node</strong> (See Figure 24).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager32.png" title="Figure 24: Create Service Node - Step 1 " class="image-popup">
+<picture>
+  <source width="796" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager32-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager32-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager32-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager32-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager32.webp 796w" sizes="796px"></source>
+  <source width="796" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager32-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager32-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager32-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager32-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager32.png 796w" sizes="796px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager32.png" class="blur-up lazyautosizes lazyload" alt="Figure 24: Create Service Node - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 24: Create Service Node - Step 1
+</figcaption>
+
+</figure>
+
+<p>The rest of the dialog and workflow for adding the service node is equivalent to what we have already seen while adding the gateway node:</p>
+
+<ul>
+  <li>Specify the <strong>Display Name</strong>
+</li>
+  <li>Extract the SSL certificate from the NSX service node appliance</li>
+  <li>Paste the SSL certificate into the add dialog</li>
+  <li>Specify a transport connector with the type <strong>STT</strong> and the IP address of the service node</li>
+</ul>
+
+<p>We will therefore skip ahead to the result.</p>
+
+<p>Return to the NSX Manager Dashboard, where you will see the new service node within the Summary of Transport Components section, under the Service Nodes row (See Figure 25).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager37.png" title="Figure 25: NSX Service Node successfully added " class="image-popup">
+<picture>
+  <source width="428" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager37-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager37-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager37.webp 428w" sizes="428px"></source>
+  <source width="428" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager37-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager37-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager37.png 428w" sizes="428px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager37.png" class="blur-up lazyautosizes lazyload" alt="Figure 25: NSX Service Node successfully added ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 25: NSX Service Node successfully added
+</figcaption>
+
+</figure>
+
+<h2 id="add-a-new-gateway-service">Add a new Gateway Service</h2>
+
+<p>A Gateway node by itself does not yet offer any functionality. For that we need to configure a gateway service that will leverage the gateway node. Two types of gateway services exist in VMware NSX:</p>
+
+<ul>
+  <li>Layer 2 (L2) Gateway Services - allows VMs to be connected at Layer 2 (L2) to an external network</li>
+  <li>Layer 3 (L3) Gateway Services - lets you connect logical router ports to physical IP networks via network interfaces on NSX Gateway nodes</li>
+</ul>
+
+<p>We will configure a L3 Gateway Service.</p>
+
+<p>Return to the <em>NSX Manager Dashboard</em>, within the <em>Summary of Transport Components</em> section, click on <strong>Add</strong> within the Gateway Services row (See Figure 26).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager41.png" title="Figure 26: Add a new Gateway Service " class="image-popup">
+<picture>
+  <source width="424" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager41-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager41-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager41.webp 424w" sizes="424px"></source>
+  <source width="424" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager41-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager41-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager41.png 424w" sizes="424px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager41.png" class="blur-up lazyautosizes lazyload" alt="Figure 26: Add a new Gateway Service ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 26: Add a new Gateway Service
+</figcaption>
+
+</figure>
+
+<p>Select <strong>L3 Gateway Service</strong> as the <em>Gateway Service Type</em> (See Figure 27).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager42.png" title="Figure 27: Create Gateway Service - Step 1 " class="image-popup">
+<picture>
+  <source width="776" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager42-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager42-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager42-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager42-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager42.webp 776w" sizes="776px"></source>
+  <source width="776" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager42-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager42-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager42-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager42-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager42.png 776w" sizes="776px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager42.png" class="blur-up lazyautosizes lazyload" alt="Figure 27: Create Gateway Service - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 27: Create Gateway Service - Step 1
+</figcaption>
+
+</figure>
+
+<p>Enter a name for the newly created gateway service (See Figure 28).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager43.png" title="Figure 28: Create Gateway Service - Step 2 " class="image-popup">
+<picture>
+  <source width="775" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager43-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager43-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager43-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager43-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager43.webp 775w" sizes="775px"></source>
+  <source width="775" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager43-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager43-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager43-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager43-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager43.png 775w" sizes="775px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager43.png" class="blur-up lazyautosizes lazyload" alt="Figure 28: Create Gateway Service - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 28: Create Gateway Service - Step 2
+</figcaption>
+
+</figure>
+
+<p>Now we need to specify the gateway node that will execute this gateway service. Start by clicking on <strong>Add Gateway</strong> (See Figure 29).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager44.png" title="Figure 29: Create Gateway Service - Step 3 " class="image-popup">
+<picture>
+  <source width="775" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager44-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager44-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager44-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager44-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager44.webp 775w" sizes="775px"></source>
+  <source width="775" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager44-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager44-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager44-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager44-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager44.png 775w" sizes="775px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager44.png" class="blur-up lazyautosizes lazyload" alt="Figure 29: Create Gateway Service - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 29: Create Gateway Service - Step 3
+</figcaption>
+
+</figure>
+
+<p>Select the gateway node that was previously created as well as <strong>breth0</strong> for the <em>Device ID</em>. The device ID is the interface on the NSX gateway node that connects to the external (upstream) network (See Figure 30).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager45.png" title="Figure 30: Create Gateway Service - Step 4 " class="image-popup">
+<picture>
+  <source width="420" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager45-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager45-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager45.webp 420w" sizes="420px"></source>
+  <source width="420" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager45-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager45-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager45.png 420w" sizes="420px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager45.png" class="blur-up lazyautosizes lazyload" alt="Figure 30: Create Gateway Service - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 30: Create Gateway Service - Step 4
+</figcaption>
+
+</figure>
+
+<p>Verify your Gateway node configuration and finish the installation of the gateway service by clicking on <em>Save &amp; View</em> (See Figure 31).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager46.png" title="Figure 31: Create Gateway Service - Step 5 " class="image-popup">
+<picture>
+  <source width="775" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager46-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager46-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager46-512.webp 512w, 
+
+    
+    /content/resized/2013/12/NSX-Manager46-683.webp 683w, 
+
+ /content/uploads/2013/12/NSX-Manager46.webp 775w" sizes="775px"></source>
+  <source width="775" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager46-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager46-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager46-512.png 512w, 
+
+    /content/resized/2013/12/NSX-Manager46-683.png 683w, 
+
+ /content/uploads/2013/12/NSX-Manager46.png 775w" sizes="775px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager46.png" class="blur-up lazyautosizes lazyload" alt="Figure 31: Create Gateway Service - Step 5 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 31: Create Gateway Service - Step 5
+</figcaption>
+
+</figure>
+
+<p>Note down the UUID of the newly created gateway zone (See Figure 32). We will need this UUID along with the UUID of the transport zone in a later step to configure the <a href="https://communities.vmware.com/community/vmtn/openstack/" target="_blank" rel="noopener noreferrer">vSphere OpenStack Virtual Appliance (VOVA)</a>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager46b.png" title="Figure 32: UUID of NSX Gateway Service " class="image-popup">
+<picture>
+  <source width="651" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager46b-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager46b-384.webp 384w, 
+
+    
+    /content/resized/2013/12/NSX-Manager46b-512.webp 512w, 
+
+ /content/uploads/2013/12/NSX-Manager46b.webp 651w" sizes="651px"></source>
+  <source width="651" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager46b-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager46b-384.png 384w, 
+
+    /content/resized/2013/12/NSX-Manager46b-512.png 512w, 
+
+ /content/uploads/2013/12/NSX-Manager46b.png 651w" sizes="651px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager46b.png" class="blur-up lazyautosizes lazyload" alt="Figure 32: UUID of NSX Gateway Service ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 32: UUID of NSX Gateway Service
+</figcaption>
+
+</figure>
+
+<p>Return to the NSX Manager Dashboard, where you will see the new Gateway Zone within the Summary of Transport Components section, within the Gateway Zones row (See Figure 33).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/NSX-Manager47.png" title="Figure 33: NSX Setup with Gateway, Service Node, Transport Zone and Gateway Services " class="image-popup">
+<picture>
+  <source width="427" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/NSX-Manager47-320.webp 320w, 
+
+    
+    /content/resized/2013/12/NSX-Manager47-384.webp 384w, 
+
+ /content/uploads/2013/12/NSX-Manager47.webp 427w" sizes="427px"></source>
+  <source width="427" data-srcset="
+
+    /content/resized/2013/12/NSX-Manager47-320.png 320w, 
+
+    /content/resized/2013/12/NSX-Manager47-384.png 384w, 
+
+ /content/uploads/2013/12/NSX-Manager47.png 427w" sizes="427px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/NSX-Manager47.png" class="blur-up lazyautosizes lazyload" alt="Figure 33: NSX Setup with Gateway, Service Node, Transport Zone and Gateway Services ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 33: NSX Setup with Gateway, Service Node, Transport Zone and Gateway Services
+</figcaption>
+
+</figure>
+
+<p>This completes the basic configuration of the NSX cluster via the NSX Manager. Next in the <a href="/2013/12/12/openstack-vsphere-nsx/" title="OpenStack with vSphere and NSX">series on OpenStack with vSphere and NSX</a> is Part 3 with the <a href="/2014/01/03/openstack-with-vsphere-and-nsx-part3/" title="OpenStack with vSphere and NSX – Part 3: Install and configure the Open vSwitch inside the ESXi hosts">installation and configuration of the Open vSwitch</a> inside the ESXi hosts. While we finished adding the NSX gateway and NSX service node to the NSX cluster in this post, the next post will show how to add the two ESX hypervisor to the NSX cluster. This is done by installation and configuration of the Open vSwitch inside ESX.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#nsx" class="page__taxonomy-item" rel="tag">NSX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#openstack" class="page__taxonomy-item" rel="tag">OpenStack</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-12-27T00:30:17-08:00">December 27, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+2%3A+Create+and+configure+the+VMware+NSX+cluster%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+2%3A+Create+and+configure+the+VMware+NSX+cluster" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/12/20/handling-vmware-vsphere-5-5-active-directory-integration-error/" class="pagination--pager" title="Handling the VMware vSphere 5.5 Active Directory integration error
+">Previous</a>
+    
+    
+      <a href="/2014/01/03/openstack-with-vsphere-and-nsx-part3/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 3: Install and configure the Open vSwitch inside the ESXi hosts
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

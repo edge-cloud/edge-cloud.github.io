@@ -1,0 +1,1770 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Processing Flowroute text messages with AWS Lambda - Edge Cloud</title>
+<meta name="description" content="Flowroute provides a great API for sending and receiving text messages. This blog post shows you how to use AWS Lambda to process these messages.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Processing Flowroute text messages with AWS Lambda">
+<meta property="og:url" content="https://www.edge-cloud.net/2016/05/16/processing-flowroute-text-messages-aws-lambda/">
+
+
+  <meta property="og:description" content="Flowroute provides a great API for sending and receiving text messages. This blog post shows you how to use AWS Lambda to process these messages.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Processing Flowroute text messages with AWS Lambda">
+  <meta name="twitter:description" content="Flowroute provides a great API for sending and receiving text messages. This blog post shows you how to use AWS Lambda to process these messages.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/05/16/processing-flowroute-text-messages-aws-lambda/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2016-05-16T04:23:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2016/05/16/processing-flowroute-text-messages-aws-lambda/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Processing Flowroute text messages with AWS Lambda">
+    <meta itemprop="description" content="Flowroute provides a great API for sending and receiving text messages. This blog post shows you how to use AWS Lambda to process these messages.">
+    <meta itemprop="datePublished" content="May 16, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Processing Flowroute text messages with AWS Lambda
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#flowroute-text-message-api-documentation">Flowroute text message API documentation</a></li>
+  <li>
+<a href="#aws-setup">AWS Setup</a>
+    <ul>
+      <li><a href="#aws-pre-requisites">AWS Pre-Requisites</a></li>
+      <li><a href="#aws-identity-and-access-management-role">AWS Identity and Access Management role</a></li>
+      <li><a href="#create-an-amazon-api-gateway-endpoint">Create an Amazon API Gateway endpoint</a></li>
+      <li><a href="#nodejs-function-in-aws-lambda">Node.js function in AWS Lambda</a></li>
+      <li><a href="#testing-the-aws-lambda-function">Testing the AWS Lambda function</a></li>
+      <li><a href="#looking-up-the-api-endpoint-for-the-aws-lambda-function">Looking up the API endpoint for the AWS Lambda function</a></li>
+    </ul>
+  </li>
+  <li><a href="#configuring-flowroute">Configuring Flowroute</a></li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p><a href="https://www.flowroute.com/" target="_blank" rel="noopener noreferrer">Flowroute</a> is a great SIP communications provider that I’ve been using for a few years now. Especially because they support <a href="https://en.wikipedia.org/wiki/T.38" target="_blank" rel="noopener noreferrer">T.38</a> for sending and receiving fax messages.</p>
+
+<p>Earlier this year Flowroute added the capability for inbound and outbound <a href="https://www.flowroute.com/sms/" target="_blank" rel="noopener noreferrer">text messages</a> (aka. SMS) to their service.</p>
+
+<p>In this post I want to show you how to integrate Flowroute’s inbound text messaging capabilities with <a href="https://aws.amazon.com/lambda/" target="_blank" rel="noopener noreferrer">AWS Lambda</a> - the serverless compute offering from AWS. Instead of keeping servers up and running, but mostly idle, Lambda offers you the ability to only pay for execution of a software function whenever a text message arrives. Such a solution is able to handle various loads ranging from a handful of text messages per month to millions of messages.</p>
+
+<p>In this example incoming text messages are forwarded via E-Mail to a configurable address (See Figure 1). But you could as well implement other functionality, such as text message based voting or alike with this approach.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/cloudcraft-Flowroute-SMS2EMail.png" title="Figure 1: Architecture for processing Flowroute text messages " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-320.webp 320w, 
+
+    
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-384.webp 384w, 
+
+    
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-512.webp 512w, 
+
+    
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-683.webp 683w, 
+
+    
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-800.webp 800w, 
+
+    
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-320.png 320w, 
+
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-384.png 384w, 
+
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-512.png 512w, 
+
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-683.png 683w, 
+
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-800.png 800w, 
+
+    /content/resized/2016/05/cloudcraft-Flowroute-SMS2EMail-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/cloudcraft-Flowroute-SMS2EMail.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Architecture for processing Flowroute text messages ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Architecture for processing Flowroute text messages
+</figcaption>
+
+</figure>
+
+<h1 id="flowroute-text-message-api-documentation">Flowroute text message API documentation</h1>
+
+<p>You can find more details on the Flowroute API documentation for receiving inbound text messages at <a href="https://developer.flowroute.com/" target="_blank" rel="noopener noreferrer">https://developer.flowroute.com/</a>.</p>
+
+<p>Note that you need:</p>
+<ul>
+  <li>A Flowroute phone number added to the Direct Inward Dialing page, which will receive the text message.</li>
+  <li>A web application with a public IP or URL. This article shows you how to use AWS Lambda for creating and hosting this web application.</li>
+</ul>
+
+<h1 id="aws-setup">AWS Setup</h1>
+
+<h2 id="aws-pre-requisites">AWS Pre-Requisites</h2>
+
+<p>This example uses <a href="https://aws.amazon.com/ses/" target="_blank" rel="noopener noreferrer">Amazon Simple Email Service (Amazon SES)</a> to deliver the received text message. You must at least have <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html" target="_blank" rel="noopener noreferrer">configured SES with a verified E-Mail address or domain</a> in order to use it for sending E-Mails via the script below.</p>
+
+<h2 id="aws-identity-and-access-management-role">AWS Identity and Access Management role</h2>
+
+<p><a href="https://aws.amazon.com/iam/" target="_blank" rel="noopener noreferrer">AWS Identity and Access Management</a> roles allow you to delegate access to services. The AWS services can assume a role to obtain temporary security credentials that can be used to make AWS API calls. Consequently, you don’t have to share long-term credentials or define permissions for each entity that requires access to a resource.</p>
+
+<p>This approach allows us to grant AWS Lambda permission to access Amazon SES, without the need to embed credentials within the code executed by Lambda. We can therefore even store the code in a public <a href="https://github.com/chriselsen/AWSLambda_FlowrouteSMS" target="_blank" rel="noopener noreferrer">Github repository</a> without the risk of exposing access keys.</p>
+
+<p>To create an AWS IAM profile navigate to the <strong>Identity &amp; Access Management</strong> service within the <em>Security &amp; Identity</em> section in the AWS Console (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/IAM01.png" title="Figure 2: Navigate to Identity &amp; Access Management " class="image-popup">
+<picture>
+  <source width="520" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/IAM01-320.webp 320w, 
+
+    
+    /content/resized/2016/05/IAM01-384.webp 384w, 
+
+    
+    /content/resized/2016/05/IAM01-512.webp 512w, 
+
+ /content/uploads/2016/05/IAM01.webp 520w" sizes="520px"></source>
+  <source width="520" data-srcset="
+
+    /content/resized/2016/05/IAM01-320.png 320w, 
+
+    /content/resized/2016/05/IAM01-384.png 384w, 
+
+    /content/resized/2016/05/IAM01-512.png 512w, 
+
+ /content/uploads/2016/05/IAM01.png 520w" sizes="520px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/IAM01.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Navigate to Identity &amp; Access Management ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Navigate to Identity &amp; Access Management
+</figcaption>
+
+</figure>
+
+<p>Create a new role and give it a meaningful name, such as <em>Lambda_SES</em> (See Figure 3). We will later select the role under this name.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/IAM02.png" title="Figure 3: Create a new role - Step 1 " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/IAM02-320.webp 320w, 
+
+    
+    /content/resized/2016/05/IAM02-384.webp 384w, 
+
+    
+    /content/resized/2016/05/IAM02-512.webp 512w, 
+
+    
+    /content/resized/2016/05/IAM02-683.webp 683w, 
+
+    
+    /content/resized/2016/05/IAM02-800.webp 800w, 
+
+    
+    /content/resized/2016/05/IAM02-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/IAM02-320.png 320w, 
+
+    /content/resized/2016/05/IAM02-384.png 384w, 
+
+    /content/resized/2016/05/IAM02-512.png 512w, 
+
+    /content/resized/2016/05/IAM02-683.png 683w, 
+
+    /content/resized/2016/05/IAM02-800.png 800w, 
+
+    /content/resized/2016/05/IAM02-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/IAM02.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Create a new role - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Create a new role - Step 1
+</figcaption>
+
+</figure>
+
+<p>As the role type select <em>AWS Lambda</em> (See Figure 4). This type allows AWS Lambda functions to access other AWS services.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/IAM03.png" title="Figure 4: Create a new role - Step 2 " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/IAM03-320.webp 320w, 
+
+    
+    /content/resized/2016/05/IAM03-384.webp 384w, 
+
+    
+    /content/resized/2016/05/IAM03-512.webp 512w, 
+
+    
+    /content/resized/2016/05/IAM03-683.webp 683w, 
+
+    
+    /content/resized/2016/05/IAM03-800.webp 800w, 
+
+    
+    /content/resized/2016/05/IAM03-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/IAM03-320.png 320w, 
+
+    /content/resized/2016/05/IAM03-384.png 384w, 
+
+    /content/resized/2016/05/IAM03-512.png 512w, 
+
+    /content/resized/2016/05/IAM03-683.png 683w, 
+
+    /content/resized/2016/05/IAM03-800.png 800w, 
+
+    /content/resized/2016/05/IAM03-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/IAM03.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Create a new role - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Create a new role - Step 2
+</figcaption>
+
+</figure>
+
+<p>Enter <strong>SES</strong> into the Filter to only show policies that affect the Amazon Simple Email Service. Select the policy <strong>AmazonSESFullAccess</strong> and click on <strong>Next Step</strong> to proceed (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/IAM04.png" title="Figure 5: Create a new role - Step 3 " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/IAM04-320.webp 320w, 
+
+    
+    /content/resized/2016/05/IAM04-384.webp 384w, 
+
+    
+    /content/resized/2016/05/IAM04-512.webp 512w, 
+
+    
+    /content/resized/2016/05/IAM04-683.webp 683w, 
+
+    
+    /content/resized/2016/05/IAM04-800.webp 800w, 
+
+    
+    /content/resized/2016/05/IAM04-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/IAM04-320.png 320w, 
+
+    /content/resized/2016/05/IAM04-384.png 384w, 
+
+    /content/resized/2016/05/IAM04-512.png 512w, 
+
+    /content/resized/2016/05/IAM04-683.png 683w, 
+
+    /content/resized/2016/05/IAM04-800.png 800w, 
+
+    /content/resized/2016/05/IAM04-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/IAM04.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Create a new role - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Create a new role - Step 3
+</figcaption>
+
+</figure>
+
+<p>Review the settings for the role to be created and confirm them by clicking on <strong>Create Role</strong> (Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/IAM05.png" title="Figure 6: Create a new role - Step 4 " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/IAM05-320.webp 320w, 
+
+    
+    /content/resized/2016/05/IAM05-384.webp 384w, 
+
+    
+    /content/resized/2016/05/IAM05-512.webp 512w, 
+
+    
+    /content/resized/2016/05/IAM05-683.webp 683w, 
+
+    
+    /content/resized/2016/05/IAM05-800.webp 800w, 
+
+    
+    /content/resized/2016/05/IAM05-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/IAM05-320.png 320w, 
+
+    /content/resized/2016/05/IAM05-384.png 384w, 
+
+    /content/resized/2016/05/IAM05-512.png 512w, 
+
+    /content/resized/2016/05/IAM05-683.png 683w, 
+
+    /content/resized/2016/05/IAM05-800.png 800w, 
+
+    /content/resized/2016/05/IAM05-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/IAM05.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Create a new role - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Create a new role - Step 4
+</figcaption>
+
+</figure>
+
+<p>This completes creating the AWS IAM role for AWS Lambda. If you decide to use a different AWS service instead of SES, e.g. DynamoDB for storing the text messages, you will need to adapt your IAM role’s policy.</p>
+
+<h2 id="create-an-amazon-api-gateway-endpoint">Create an Amazon API Gateway endpoint</h2>
+
+<p>We need to expose the AWS Lambda function via a REST API endpoint, so that Flowroute can invoke the function. Flowroute will send a POST message to the endpoint. Therefore we will solely allow POST messages to our AWS Lambda function.</p>
+
+<p>Within the AWS Console, head over to the Amazon API Gateway section and create a new API. Give it a meaningful name and description (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/FlowrouteUpdate1.png" title="Figure 7: Create a new API Gateway " class="image-popup">
+<picture>
+  <source width="830" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/FlowrouteUpdate1-320.webp 320w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate1-384.webp 384w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate1-512.webp 512w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate1-683.webp 683w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate1-800.webp 800w, 
+
+ /content/uploads/2016/05/FlowrouteUpdate1.webp 830w" sizes="830px"></source>
+  <source width="830" data-srcset="
+
+    /content/resized/2016/05/FlowrouteUpdate1-320.png 320w, 
+
+    /content/resized/2016/05/FlowrouteUpdate1-384.png 384w, 
+
+    /content/resized/2016/05/FlowrouteUpdate1-512.png 512w, 
+
+    /content/resized/2016/05/FlowrouteUpdate1-683.png 683w, 
+
+    /content/resized/2016/05/FlowrouteUpdate1-800.png 800w, 
+
+ /content/uploads/2016/05/FlowrouteUpdate1.png 830w" sizes="830px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/FlowrouteUpdate1.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Create a new API Gateway ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Create a new API Gateway
+</figcaption>
+
+</figure>
+
+<h2 id="nodejs-function-in-aws-lambda">Node.js function in AWS Lambda</h2>
+
+<p>Next we will create a Node.js function in AWS Lambda that will perform the actual job of re-formatting the incoming text message and sending it out as E-Mail.</p>
+
+<p>For this navigate to the <strong>Lambda</strong> service within the <strong>Compute</strong> section in your console. Create a new function and skip the blueprint selection.</p>
+
+<p>Under <em>Configure Triggers</em> select the API Gateway <strong>API name</strong> that you created in the previous section. Select <strong>prod</strong> for the Deployment Stage and <strong>Open</strong> for Security (See Figure 8). Flowroute will later send a POST message to this endpoint and trigger the Lambda function.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/FlowRouteUpdate5.jpg" title="Figure 8: AWS Lambda - Configure triggers " class="image-popup">
+<picture>
+  <source width="1229" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/FlowRouteUpdate5-320.webp 320w, 
+
+    
+    /content/resized/2016/05/FlowRouteUpdate5-384.webp 384w, 
+
+    
+    /content/resized/2016/05/FlowRouteUpdate5-512.webp 512w, 
+
+    
+    /content/resized/2016/05/FlowRouteUpdate5-683.webp 683w, 
+
+    
+    /content/resized/2016/05/FlowRouteUpdate5-800.webp 800w, 
+
+    
+    /content/resized/2016/05/FlowRouteUpdate5-960.webp 960w, 
+
+ /content/uploads/2016/05/FlowRouteUpdate5.webp 1229w" sizes="1229px"></source>
+  <source width="1229" data-srcset="
+
+    /content/resized/2016/05/FlowRouteUpdate5-320.jpg 320w, 
+
+    /content/resized/2016/05/FlowRouteUpdate5-384.jpg 384w, 
+
+    /content/resized/2016/05/FlowRouteUpdate5-512.jpg 512w, 
+
+    /content/resized/2016/05/FlowRouteUpdate5-683.jpg 683w, 
+
+    /content/resized/2016/05/FlowRouteUpdate5-800.jpg 800w, 
+
+    /content/resized/2016/05/FlowRouteUpdate5-960.jpg 960w, 
+
+ /content/uploads/2016/05/FlowRouteUpdate5.jpg 1229w" sizes="1229px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/FlowRouteUpdate5.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 8: AWS Lambda - Configure triggers ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: AWS Lambda - Configure triggers
+</figcaption>
+
+</figure>
+
+<p>Next, configure the new function, by providing a meaning-full name, e.g. <strong>inboundTextMessage</strong>, entering a description and choosing <strong>Node.js 4.3</strong> as the Runtime (See Figure 9)</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/FlowrouteUpdate6.png" title="Figure 9: Create a Lambda function " class="image-popup">
+<picture>
+  <source width="1249" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/FlowrouteUpdate6-320.webp 320w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate6-384.webp 384w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate6-512.webp 512w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate6-683.webp 683w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate6-800.webp 800w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate6-960.webp 960w, 
+
+ /content/uploads/2016/05/FlowrouteUpdate6.webp 1249w" sizes="1249px"></source>
+  <source width="1249" data-srcset="
+
+    /content/resized/2016/05/FlowrouteUpdate6-320.png 320w, 
+
+    /content/resized/2016/05/FlowrouteUpdate6-384.png 384w, 
+
+    /content/resized/2016/05/FlowrouteUpdate6-512.png 512w, 
+
+    /content/resized/2016/05/FlowrouteUpdate6-683.png 683w, 
+
+    /content/resized/2016/05/FlowrouteUpdate6-800.png 800w, 
+
+    /content/resized/2016/05/FlowrouteUpdate6-960.png 960w, 
+
+ /content/uploads/2016/05/FlowrouteUpdate6.png 1249w" sizes="1249px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/FlowrouteUpdate6.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Create a Lambda function ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Create a Lambda function
+</figcaption>
+
+</figure>
+
+<p>Enter the code below into the inline code window. You can also find the code on <a href="https://github.com/chriselsen/AWSLambda_FlowrouteSMS/blob/master/SMS2EMail.nodejs" target="_blank" rel="noopener noreferrer">Github</a>.</p>
+
+<p>The first section sets up the AWS SDK for interfacing with Amazon SES. The next section extracts text message values out of the posted data from Flowroute. The next section formats the outgoing E-Mail message. The last section sends the E-Mail message via Amazon SES.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exports.handler = function(event, context, callback) {
+    var AWS = require('aws-sdk');
+    AWS.config.region = 'us-west-2';
+    var SES = new AWS.SES();
+
+    var obj = JSON.parse(event.body);
+    var to = (obj.to === undefined ? 'Undefined (to)' : obj.to);
+    var body = (obj.body === undefined ? 'Undefined (body)' : obj.body);
+    var from = (obj.from === undefined ? 'Undefined (from)' : obj.from);
+    var id = (obj.id === undefined ? 'Undefined (id)' : obj.id);
+
+    var emailParams = {
+        Destination: {
+            ToAddresses: ["recipient@edge-cloud.net"]
+        },
+        Message: {
+            Body: {
+                Html: {
+                    Data: "From: " + from + "&lt;br&gt;To: " + to + "&lt;br&gt;Message: " + body + "&lt;p&gt;ID: " + id
+                },
+                Text: {
+                    Data: "From: " + from + "\nTo: " + to + "\nMessage: " + body + "\n\n" + id
+                }
+            },
+            Subject: {
+                Data: "Text message to " + to
+            }
+        },
+        Source: from + "&lt;sms@edge-cloud.net&gt;"
+    };
+
+    var email = SES.sendEmail(emailParams, function(err, data){
+        if(err) {
+            var responseBody = {
+                message: "Message failed"
+            };
+
+            var response = {
+                statusCode: '500',
+                body: JSON.stringify(responseBody)
+            };
+            console.log("response: " + JSON.stringify(response))
+            context.succeed(response);
+        } else {
+            var responseBody = {
+                message: "Message suceeded"
+            };
+
+            var response = {
+                statusCode: '200',
+                body: JSON.stringify(responseBody)
+            };
+            console.log("response: " + JSON.stringify(response))
+            context.succeed(response);    
+        }
+    });
+};
+</code></pre></div></div>
+
+<p>Change the E-Mail addresses to whatever E-Mail addresses you would like to use. You might also want to adapt the AWS region in line 3, in case you use Amazon Simple Email Service in a different region than US-West-2.</p>
+
+<p>Finish the configuration step by selecting the previously created <strong>Lambda_SES</strong> role and increasing the timeout to 15 seconds (See Figure 10).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/Lambda02.png" title="Figure 10: Create a Lambda function - Advanced Settings " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/Lambda02-320.webp 320w, 
+
+    
+    /content/resized/2016/05/Lambda02-384.webp 384w, 
+
+    
+    /content/resized/2016/05/Lambda02-512.webp 512w, 
+
+    
+    /content/resized/2016/05/Lambda02-683.webp 683w, 
+
+    
+    /content/resized/2016/05/Lambda02-800.webp 800w, 
+
+    
+    /content/resized/2016/05/Lambda02-960.webp 960w, 
+
+" sizes="1385px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/Lambda02-320.png 320w, 
+
+    /content/resized/2016/05/Lambda02-384.png 384w, 
+
+    /content/resized/2016/05/Lambda02-512.png 512w, 
+
+    /content/resized/2016/05/Lambda02-683.png 683w, 
+
+    /content/resized/2016/05/Lambda02-800.png 800w, 
+
+    /content/resized/2016/05/Lambda02-960.png 960w, 
+
+" sizes="1385px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/Lambda02.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Create a Lambda function - Advanced Settings ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Create a Lambda function - Advanced Settings
+</figcaption>
+
+</figure>
+
+<p>Review the settings for the function to be created and confirm them by clicking on <strong>Create function</strong> (Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/FlowrouteUpdate7.png" title="Figure 11: Create a Lambda function - Confirm " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/FlowrouteUpdate7-320.webp 320w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate7-384.webp 384w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate7-512.webp 512w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate7-683.webp 683w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate7-800.webp 800w, 
+
+    
+    /content/resized/2016/05/FlowrouteUpdate7-960.webp 960w, 
+
+" sizes="1280px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/FlowrouteUpdate7-320.png 320w, 
+
+    /content/resized/2016/05/FlowrouteUpdate7-384.png 384w, 
+
+    /content/resized/2016/05/FlowrouteUpdate7-512.png 512w, 
+
+    /content/resized/2016/05/FlowrouteUpdate7-683.png 683w, 
+
+    /content/resized/2016/05/FlowrouteUpdate7-800.png 800w, 
+
+    /content/resized/2016/05/FlowrouteUpdate7-960.png 960w, 
+
+" sizes="1280px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/FlowrouteUpdate7.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Create a Lambda function - Confirm ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Create a Lambda function - Confirm
+</figcaption>
+
+</figure>
+
+<p>This completes setting up the AWS Lambda function for processing text messages from Flowroute.</p>
+
+<h2 id="testing-the-aws-lambda-function">Testing the AWS Lambda function</h2>
+
+<p>Next we want to test the functionality of the newly created AWS Lambda function, before proceeding any further.</p>
+
+<p>Click on the <strong>Test</strong> button in the upper left corner (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/Lambda04.png" title="Figure 12: Complete Lambda function " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/Lambda04-320.webp 320w, 
+
+    
+    /content/resized/2016/05/Lambda04-384.webp 384w, 
+
+    
+    /content/resized/2016/05/Lambda04-512.webp 512w, 
+
+    
+    /content/resized/2016/05/Lambda04-683.webp 683w, 
+
+    
+    /content/resized/2016/05/Lambda04-800.webp 800w, 
+
+    
+    /content/resized/2016/05/Lambda04-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/Lambda04-320.png 320w, 
+
+    /content/resized/2016/05/Lambda04-384.png 384w, 
+
+    /content/resized/2016/05/Lambda04-512.png 512w, 
+
+    /content/resized/2016/05/Lambda04-683.png 683w, 
+
+    /content/resized/2016/05/Lambda04-800.png 800w, 
+
+    /content/resized/2016/05/Lambda04-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/Lambda04.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Complete Lambda function ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Complete Lambda function
+</figcaption>
+
+</figure>
+
+<p>Remove the current data in the <em>Input test event</em> window and replace it with this test event data.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "body": "{\"to\": \"12066418000\", \"body\": \"Hello there from Flowroute!\", \"from\": \"18553569768\", \"id\": \"mdr1-febb118b9b034338adfc662a8c02fd88\" }",
+  "resource": "/{proxy+}",
+  "httpMethod": "POST"
+}
+</code></pre></div></div>
+
+<p>This test event data is derived from the <a href="https://developer.flowroute.com/" target="_blank" rel="noopener noreferrer">Flowroute Messaging API documentation</a> and is an example for what Lambda will receive from AWS API Gateway.</p>
+
+<p>Execute the test by selecting <strong>Save and test</strong> (See Figure 13).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/Lambda05.jpg" title="Figure 13: Input test event " class="image-popup">
+<picture>
+  <source width="817" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/Lambda05-320.webp 320w, 
+
+    
+    /content/resized/2016/05/Lambda05-384.webp 384w, 
+
+    
+    /content/resized/2016/05/Lambda05-512.webp 512w, 
+
+    
+    /content/resized/2016/05/Lambda05-683.webp 683w, 
+
+    
+    /content/resized/2016/05/Lambda05-800.webp 800w, 
+
+ /content/uploads/2016/05/Lambda05.webp 817w" sizes="817px"></source>
+  <source width="817" data-srcset="
+
+    /content/resized/2016/05/Lambda05-320.jpg 320w, 
+
+    /content/resized/2016/05/Lambda05-384.jpg 384w, 
+
+    /content/resized/2016/05/Lambda05-512.jpg 512w, 
+
+    /content/resized/2016/05/Lambda05-683.jpg 683w, 
+
+    /content/resized/2016/05/Lambda05-800.jpg 800w, 
+
+ /content/uploads/2016/05/Lambda05.jpg 817w" sizes="817px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/Lambda05.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 13: Input test event ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: Input test event
+</figcaption>
+
+</figure>
+
+<p>If everything was setup correctly, you should see a successful test execution with the status <em>Message delivered</em> (See Figure 14). Also you should receive an E-Mail message.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/Lambda06.png" title="Figure 14: Successful test execution " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/Lambda06-320.webp 320w, 
+
+    
+    /content/resized/2016/05/Lambda06-384.webp 384w, 
+
+    
+    /content/resized/2016/05/Lambda06-512.webp 512w, 
+
+    
+    /content/resized/2016/05/Lambda06-683.webp 683w, 
+
+    
+    /content/resized/2016/05/Lambda06-800.webp 800w, 
+
+    
+    /content/resized/2016/05/Lambda06-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/Lambda06-320.png 320w, 
+
+    /content/resized/2016/05/Lambda06-384.png 384w, 
+
+    /content/resized/2016/05/Lambda06-512.png 512w, 
+
+    /content/resized/2016/05/Lambda06-683.png 683w, 
+
+    /content/resized/2016/05/Lambda06-800.png 800w, 
+
+    /content/resized/2016/05/Lambda06-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/Lambda06.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Successful test execution ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Successful test execution
+</figcaption>
+
+</figure>
+
+<p>If this test failed, you need to fix the issue before proceeding. Most likely the issue was caused by a mis-configuration of Amazon Simple Email Service.</p>
+
+<h2 id="looking-up-the-api-endpoint-for-the-aws-lambda-function">Looking up the API endpoint for the AWS Lambda function</h2>
+
+<p>Note down the API endpoint URL from the Lambda function’s trigger tab for further usage (See Figure 15). As Flowroute doesn’t support any of the authentication mechanism provided by Amazon API gateway yet, you need to treat the entire URL as a secret. Everyone with knowledge of the URL could invoke your Lambda function and pretend to send you a text message.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/Lambda08.png" title="Figure 15: Retrieve API endpoint URL " class="image-popup">
+<picture>
+  <source width="1227" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/Lambda08-320.webp 320w, 
+
+    
+    /content/resized/2016/05/Lambda08-384.webp 384w, 
+
+    
+    /content/resized/2016/05/Lambda08-512.webp 512w, 
+
+    
+    /content/resized/2016/05/Lambda08-683.webp 683w, 
+
+    
+    /content/resized/2016/05/Lambda08-800.webp 800w, 
+
+    
+    /content/resized/2016/05/Lambda08-960.webp 960w, 
+
+ /content/uploads/2016/05/Lambda08.webp 1227w" sizes="1227px"></source>
+  <source width="1227" data-srcset="
+
+    /content/resized/2016/05/Lambda08-320.png 320w, 
+
+    /content/resized/2016/05/Lambda08-384.png 384w, 
+
+    /content/resized/2016/05/Lambda08-512.png 512w, 
+
+    /content/resized/2016/05/Lambda08-683.png 683w, 
+
+    /content/resized/2016/05/Lambda08-800.png 800w, 
+
+    /content/resized/2016/05/Lambda08-960.png 960w, 
+
+ /content/uploads/2016/05/Lambda08.png 1227w" sizes="1227px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/Lambda08.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Retrieve API endpoint URL ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: Retrieve API endpoint URL
+</figcaption>
+
+</figure>
+
+<p>The AWS Lambda API endpoint URL will be used with Flowroute in a subsequent step.</p>
+
+<h1 id="configuring-flowroute">Configuring Flowroute</h1>
+
+<p>As a last step you need to configure Flowroute to use the new web service that we just created. For this head over to the <a href="https://manage.flowroute.com/accounts/preferences/api/" target="_blank" rel="noopener noreferrer">Flowroute web console</a> and open the tab <strong>Preferences -&gt; API Control</strong>.</p>
+
+<p>Enter the URL of your Lambda API endpoint into the <em>SMS Callback</em> field and save the configuration via a click on <strong>+ Enable SMS</strong> (See Figure 16).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/05/FlowRoute01.png" title="Figure 16: Configure Flowroute SMS Callback " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/05/FlowRoute01-320.webp 320w, 
+
+    
+    /content/resized/2016/05/FlowRoute01-384.webp 384w, 
+
+    
+    /content/resized/2016/05/FlowRoute01-512.webp 512w, 
+
+    
+    /content/resized/2016/05/FlowRoute01-683.webp 683w, 
+
+    
+    /content/resized/2016/05/FlowRoute01-800.webp 800w, 
+
+    
+    /content/resized/2016/05/FlowRoute01-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/05/FlowRoute01-320.png 320w, 
+
+    /content/resized/2016/05/FlowRoute01-384.png 384w, 
+
+    /content/resized/2016/05/FlowRoute01-512.png 512w, 
+
+    /content/resized/2016/05/FlowRoute01-683.png 683w, 
+
+    /content/resized/2016/05/FlowRoute01-800.png 800w, 
+
+    /content/resized/2016/05/FlowRoute01-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/05/FlowRoute01.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Configure Flowroute SMS Callback ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 16: Configure Flowroute SMS Callback
+</figcaption>
+
+</figure>
+
+<p>Congratulations! You completed your setup. Now send yourself a text message to your Flowroute DID and see you AWS Lambda turns it into an E-Mail message.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>Flowroute provides a great API for sending and receiving text messages. This blog post showed you how to use AWS Lambda to process these messages and forward them as E-Mail using AWS SES.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-05-16T04:23:00-07:00">May 16, 2016</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Processing+Flowroute+text+messages+with+AWS+Lambda%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F&amp;title=Processing+Flowroute+text+messages+with+AWS+Lambda" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2016/02/17/cloudflare-railgun-on-aws/" class="pagination--pager" title="CloudFlare Railgun on AWS
+">Previous</a>
+    
+    
+      <a href="/2016/10/10/amazon-alexa-skill-san-francisco-muni/" class="pagination--pager" title="Amazon Alexa Skill for San Francisco Muni
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

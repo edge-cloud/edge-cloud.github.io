@@ -1,0 +1,1593 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Building a Cumulus Networks VX cloud lab with Ravello Systems - Edge Cloud</title>
+<meta name="description" content="Build a virtual network lab with Ravello Systems and Cumulus Networks on AWS or Google Compute Engine.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Building a Cumulus Networks VX cloud lab with Ravello Systems">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/08/21/building-a-cumulus-networks-vx-cloud-lab-with-ravello-systems/">
+
+
+  <meta property="og:description" content="Build a virtual network lab with Ravello Systems and Cumulus Networks on AWS or Google Compute Engine.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Building a Cumulus Networks VX cloud lab with Ravello Systems">
+  <meta name="twitter:description" content="Build a virtual network lab with Ravello Systems and Cumulus Networks on AWS or Google Compute Engine.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/08/21/building-a-cumulus-networks-vx-cloud-lab-with-ravello-systems/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-08-21T13:51:38-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/08/21/building-a-cumulus-networks-vx-cloud-lab-with-ravello-systems/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Building a Cumulus Networks VX cloud lab with Ravello Systems">
+    <meta itemprop="description" content="Build a virtual network lab with Ravello Systems and Cumulus Networks on AWS or Google Compute Engine.">
+    <meta itemprop="datePublished" content="August 21, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Building a Cumulus Networks VX cloud lab with Ravello Systems
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#elements-used">Elements used</a></li>
+  <li><a href="#architecture">Architecture</a></li>
+  <li>
+<a href="#getting-started">Getting Started</a>
+    <ul>
+      <li><a href="#uploading-the-cumulus-networks-vx-image-into-ravello-systems">Uploading the Cumulus Networks VX image into Ravello Systems</a></li>
+      <li><a href="#creating-an-application">Creating an application</a></li>
+      <li><a href="#providing-access-via-ssh">Providing access via SSH</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#deploy-the-network-testbed">Deploy the network testbed</a>
+    <ul>
+      <li><a href="#accessing-the-network-testbed">Accessing the network testbed</a></li>
+      <li><a href="#basic-network-testbed-configuration">Basic network testbed configuration</a></li>
+    </ul>
+  </li>
+  <li><a href="#testing-your-network-setup">Testing your network setup</a></li>
+  <li><a href="#save-time-use-a-ravello-systems-blueprint">Save time, use a Ravello Systems Blueprint</a></li>
+  <li><a href="#more-capabilities">More capabilities</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>In a <a href="/2013/06/13/arista-veos-on-vmware-esx/">previous post</a> I’ve already shown how to build a virtual network lab with Arista vEOS and VMware ESX. In this post we want to take this concept even further to the next level. Instead of Arista vEOS we will use the newly released <a href="https://cumulusnetworks.com/" target="_blank" rel="noopener noreferrer">Cumulus Networks</a> Virtual Experience (VX) edition. And instead of VMware ESX we will use <a href="https://www.ravellosystems.com/" target="_blank" rel="noopener noreferrer">Ravello Systems</a>, allowing us to use <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">AWS</a> or <a href="https://cloud.google.com/compute/" target="_blank" rel="noopener noreferrer">Google Compute Engine</a>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Ravello_with_Cumulus.png" title="Ravello with Cumulus" class="image-popup">
+<picture>
+  <source width="360" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Ravello_with_Cumulus-320.webp 320w, 
+
+ /content/uploads/2015/08/Ravello_with_Cumulus.webp 360w" sizes="360px"></source>
+  <source width="360" data-srcset="
+
+    /content/resized/2015/08/Ravello_with_Cumulus-320.png 320w, 
+
+ /content/uploads/2015/08/Ravello_with_Cumulus.png 360w" sizes="360px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Ravello_with_Cumulus.png" class="blur-up lazyautosizes lazyload" alt="Ravello with Cumulus">
+</picture>
+</a>
+
+
+
+</figure>
+
+<h1 id="elements-used">Elements used</h1>
+
+<p>Cumulus Networks provides a standard <a href="https://cumulusnetworks.com/what-we-do/" target="_blank" rel="noopener noreferrer">Linux based operating system for data center switches</a>, thus simplifying dramatically the data center operations. If you are familiar with running and operating Linux on a regular server, managing a Cumulus Network based switch shouldn’t be a big challenge for you. Also you can now finally leverage the hundreds of existing management, automation and monitoring tools that you know and love for Linux. <a href="https://cumulusnetworks.com/cumulus-vx/" target="_blank" rel="noopener noreferrer">Cumulus Networks Virtual Experience (VX)</a> is a community-supported virtual appliance that enables cloud admins and network engineers to preview and test Cumulus Networks technology at zero cost inside a virtual machine or standard X86 server.</p>
+
+<p>Ravello Systems provides a <a href="https://www.ravellosystems.com/solutions/virtual-networking-labs" target="_blank" rel="noopener noreferrer">Smart Labs</a> solution on top of AWS and Google Compute Engine (GCE) based on <a href="https://cloud.oracle.com/ravello/technology/virtualization" target="_blank" rel="noopener noreferrer">nested virtualization</a>. This allows you to run self-contained lab “capsules” with almost any kind of VMware or KVM based virtual machine in them. This approach - proven for years with the VMWorld labs - now allows you to use modern public clouds for test, training and demo purposes at a minimal cost. Specific for networking lab cases Ravello Systems provides <a href="https://cloud.oracle.com/en_US/ravello/technology/overlay-network" target="_blank" rel="noopener noreferrer">virtual L2 networking</a> on top of both AWS and GCE, allowing you to simulate very complex network scenarios.</p>
+
+<h1 id="architecture">Architecture</h1>
+
+<p>For this exercise we want to build a very simple two-leaf/two-spine virtual network architecture (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Architecture2.png" title="Figure 1: Architecture for Cumullus Networks VX lab " class="image-popup">
+<picture>
+  <source width="684" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Architecture2-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Architecture2-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Architecture2-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Architecture2-683.webp 683w, 
+
+ /content/uploads/2015/08/Architecture2.webp 684w" sizes="684px"></source>
+  <source width="684" data-srcset="
+
+    /content/resized/2015/08/Architecture2-320.png 320w, 
+
+    /content/resized/2015/08/Architecture2-384.png 384w, 
+
+    /content/resized/2015/08/Architecture2-512.png 512w, 
+
+    /content/resized/2015/08/Architecture2-683.png 683w, 
+
+ /content/uploads/2015/08/Architecture2.png 684w" sizes="684px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Architecture2.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Architecture for Cumullus Networks VX lab ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Architecture for Cumullus Networks VX lab
+</figcaption>
+
+</figure>
+
+<p>The architecture will include two spine switches (spine1 and spine2) as well as two leaf switches (leaf1 and leaf2), cross connected in a typical <a href="https://en.wikipedia.org/wiki/Clos_network" target="_blank" rel="noopener noreferrer">CLOS network architecture</a>. For the four point-to-point connections between the devices we will use the depicted RFC1918 IP ranges, while making the management interface of the switches available over the internet (not depicted).</p>
+
+<h1 id="getting-started">Getting Started</h1>
+
+<p>Before you can get started you need an account for Ravello Systems. You can conveniently <a href="https://www.ravellosystems.com/" target="_blank" rel="noopener noreferrer">sign-up</a> for a free trial account. This account will allow you to use Ravello for free for 14 days. You do not need a credit card or any existing cloud credentials with AWS or GCE.</p>
+
+<p>Next we need to download the Cumulus Networks VX images in <a href="https://cumulusnetworks.com/cumulus-vx/download/thanks/kvm/" target="_blank" rel="noopener noreferrer">QCOW2 format</a>. This image will later be imported into Ravello Systems.</p>
+
+<p>If you want to save time you can also use my pre-built <a href="https://www.ravellosystems.com/repo/blueprints/62095782" target="_blank" rel="noopener noreferrer">Ravello Systems blueprint for Cumulus Networks VX</a>. See further down for details.</p>
+
+<h2 id="uploading-the-cumulus-networks-vx-image-into-ravello-systems">Uploading the Cumulus Networks VX image into Ravello Systems</h2>
+
+<p>Once you have received your login credentials for your Ravello Systems account, you can start your cloud lab experience by uploading the Cumulus Networks VX images - in QCOW2 format - into Ravello Systems (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture012.png" title="Figure 2: Uploading the QCOW2 Cumulus Networks VX image " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture012-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture012-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture012-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture012-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture012-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture012-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Capture012-320.png 320w, 
+
+    /content/resized/2015/08/Capture012-384.png 384w, 
+
+    /content/resized/2015/08/Capture012-512.png 512w, 
+
+    /content/resized/2015/08/Capture012-683.png 683w, 
+
+    /content/resized/2015/08/Capture012-800.png 800w, 
+
+    /content/resized/2015/08/Capture012-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture012.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Uploading the QCOW2 Cumulus Networks VX image ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Uploading the QCOW2 Cumulus Networks VX image
+</figcaption>
+
+</figure>
+
+<p>You can leave most of the settings as default, when importing the VM. Please note that you will need to add two network interfaces, resulting in a total of three network interfaces. It is recommended to call the first interface “eth0”, the second interface “swp1”, and the third interface “swp2”.</p>
+
+<h2 id="creating-an-application">Creating an application</h2>
+
+<p>Next create an “application” within Ravello Systems that maps to your desired network architecture. Place four instance of the previously imported Cumulus Networks VX image into this application (See Figure 3). It is recommend to position them in a similar fashion to the network diagram in Figure 1. This will provide you a better overview and simplify the configuration.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture03.png" title="Figure 3: Basic application with 4 Cumulus Networks VX devices " class="image-popup">
+<picture>
+  <source width="1004" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture03-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture03-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture03-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture03-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture03-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture03-960.webp 960w, 
+
+ /content/uploads/2015/08/Capture03.webp 1004w" sizes="1004px"></source>
+  <source width="1004" data-srcset="
+
+    /content/resized/2015/08/Capture03-320.png 320w, 
+
+    /content/resized/2015/08/Capture03-384.png 384w, 
+
+    /content/resized/2015/08/Capture03-512.png 512w, 
+
+    /content/resized/2015/08/Capture03-683.png 683w, 
+
+    /content/resized/2015/08/Capture03-800.png 800w, 
+
+    /content/resized/2015/08/Capture03-960.png 960w, 
+
+ /content/uploads/2015/08/Capture03.png 1004w" sizes="1004px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture03.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Basic application with 4 Cumulus Networks VX devices ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Basic application with 4 Cumulus Networks VX devices
+</figcaption>
+
+</figure>
+
+<p>Next choose the first VM in your Ravello Systems application and give it a meaningful name (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture04.png" title="Figure 4: Naming a Cumulus Networks VX instance " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture04-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture04-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture04-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture04-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture04-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture04-960.webp 960w, 
+
+" sizes="1377px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Capture04-320.png 320w, 
+
+    /content/resized/2015/08/Capture04-384.png 384w, 
+
+    /content/resized/2015/08/Capture04-512.png 512w, 
+
+    /content/resized/2015/08/Capture04-683.png 683w, 
+
+    /content/resized/2015/08/Capture04-800.png 800w, 
+
+    /content/resized/2015/08/Capture04-960.png 960w, 
+
+" sizes="1377px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture04.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Naming a Cumulus Networks VX instance ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Naming a Cumulus Networks VX instance
+</figcaption>
+
+</figure>
+
+<p>Also configure the interfaces “swp1” and “swp2” according to the network diagram in Figure 1. For this you have to change the IP configuration for each of the two interfaces from DHCP to static and enter the static IP address as well as network mask (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture05.png" title="Figure 5: Network Configuration for Cumulus Networks devices " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture05-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture05-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture05-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture05-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture05-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture05-960.webp 960w, 
+
+" sizes="1351px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Capture05-320.png 320w, 
+
+    /content/resized/2015/08/Capture05-384.png 384w, 
+
+    /content/resized/2015/08/Capture05-512.png 512w, 
+
+    /content/resized/2015/08/Capture05-683.png 683w, 
+
+    /content/resized/2015/08/Capture05-800.png 800w, 
+
+    /content/resized/2015/08/Capture05-960.png 960w, 
+
+" sizes="1351px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture05.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Network Configuration for Cumulus Networks devices ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Network Configuration for Cumulus Networks devices
+</figcaption>
+
+</figure>
+
+<p>Entering these IP information will not actually configure the interfaces correspondingly inside the Cumulus Networks VX device. Instead it will instruct Ravello Systems to place the interfaces on separate network segments (See Figure 6).</p>
+
+<p>You should be able to see that by default all network interfaces would reside on the same network segment as it is the case for the so far unconfigured devices “Cumulus VX1”, “Cumulus VX2”, and “Cumulus VX3”.</p>
+
+<p>For the configured device “Cumulus VX - Spine 1”, the interfaces “swp1” and “swp2” have already been moved to separate network segments.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture061.png" title="Figure 6: Mix of configured and unconfigured Cumulus Networks VX devices " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture061-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture061-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture061-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture061-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture061-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture061-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Capture061-320.png 320w, 
+
+    /content/resized/2015/08/Capture061-384.png 384w, 
+
+    /content/resized/2015/08/Capture061-512.png 512w, 
+
+    /content/resized/2015/08/Capture061-683.png 683w, 
+
+    /content/resized/2015/08/Capture061-800.png 800w, 
+
+    /content/resized/2015/08/Capture061-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture061.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Mix of configured and unconfigured Cumulus Networks VX devices ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Mix of configured and unconfigured Cumulus Networks VX devices
+</figcaption>
+
+</figure>
+
+<p>The default network segment 10.0.0.0/16 should remain connected to eth0 as it will provide us inbound and outbound Internet connectivity and therefor allow us to connect via SSH later.</p>
+
+<p>Repeat the above steps on all Cumulus Network VX devices and provide each instance with a unique name and the network interface configuration corresponding to the network map in Figure 1.</p>
+
+<p>The resulting network map within Ravello Systems should look like depicted in Figure 7.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture07.png" title="Figure 7: Complete network map for Cumulus Networks VX devices " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture07-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture07-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture07-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture07-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture07-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture07-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Capture07-320.png 320w, 
+
+    /content/resized/2015/08/Capture07-384.png 384w, 
+
+    /content/resized/2015/08/Capture07-512.png 512w, 
+
+    /content/resized/2015/08/Capture07-683.png 683w, 
+
+    /content/resized/2015/08/Capture07-800.png 800w, 
+
+    /content/resized/2015/08/Capture07-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture07.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Complete network map for Cumulus Networks VX devices ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Complete network map for Cumulus Networks VX devices
+</figcaption>
+
+</figure>
+
+<p>You should see the four point-to-point network segments with two connections per segment.</p>
+
+<p>The fifth network segment, connecting to all devices provides external connectivity via the router symbol depicted at the bottom. This network segment connects to the management port “eth0” on the Cumulus Networks VX device.</p>
+
+<h2 id="providing-access-via-ssh">Providing access via SSH</h2>
+
+<p>If you select a single Cumulus Networks VX instance within your Ravello Systems application, you can see that by default this VM only has outbound network connectivity via the eth0 interface (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture08.png" title="Figure 8: Cumulus Networks VX without inbound access " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture08-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture08-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture08-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture08-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture08-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture08-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Capture08-320.png 320w, 
+
+    /content/resized/2015/08/Capture08-384.png 384w, 
+
+    /content/resized/2015/08/Capture08-512.png 512w, 
+
+    /content/resized/2015/08/Capture08-683.png 683w, 
+
+    /content/resized/2015/08/Capture08-800.png 800w, 
+
+    /content/resized/2015/08/Capture08-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture08.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Cumulus Networks VX without inbound access ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Cumulus Networks VX without inbound access
+</figcaption>
+
+</figure>
+
+<p>Once deployed you will be able to access each of the Cumulus Networks VX devices via the build-in Ravello Systems console. While the Ravello Systems console is a great way to interact with virtual machines, we also want to be able to use SSH access for accessing each of the Cumulus Networks VX devices. This will simplify the configuration in subsequent steps and feel more natural.</p>
+
+<p>For doing so, you have to add a “Service” for each of the VMs within your Ravello Systems application and configure it for SSH with port TCP/22 against the interface DHCP. The interface DHCP corresponds to eth0 (See Figure 9).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture09.png" title="Figure 9: Configure an inbound SSH service " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture09-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture09-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture09-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture09-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture09-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture09-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Capture09-320.png 320w, 
+
+    /content/resized/2015/08/Capture09-384.png 384w, 
+
+    /content/resized/2015/08/Capture09-512.png 512w, 
+
+    /content/resized/2015/08/Capture09-683.png 683w, 
+
+    /content/resized/2015/08/Capture09-800.png 800w, 
+
+    /content/resized/2015/08/Capture09-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture09.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Configure an inbound SSH service ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Configure an inbound SSH service
+</figcaption>
+
+</figure>
+
+<p>Returning to the Canvas view within Ravello Systems, you will see the four Cumulus Networks VMs with the SSH service configured (See Figure 10).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture10.png" title="Figure 10: Application with four Cumulus Networks VX devices " class="image-popup">
+<picture>
+  <source width="803" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture10-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture10-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture10-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture10-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture10-800.webp 800w, 
+
+ /content/uploads/2015/08/Capture10.webp 803w" sizes="803px"></source>
+  <source width="803" data-srcset="
+
+    /content/resized/2015/08/Capture10-320.png 320w, 
+
+    /content/resized/2015/08/Capture10-384.png 384w, 
+
+    /content/resized/2015/08/Capture10-512.png 512w, 
+
+    /content/resized/2015/08/Capture10-683.png 683w, 
+
+    /content/resized/2015/08/Capture10-800.png 800w, 
+
+ /content/uploads/2015/08/Capture10.png 803w" sizes="803px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture10.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Application with four Cumulus Networks VX devices ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Application with four Cumulus Networks VX devices
+</figcaption>
+
+</figure>
+
+<h1 id="deploy-the-network-testbed">Deploy the network testbed</h1>
+
+<p>Next we want to deploy - called “Publish” in Ravello Systems terms - the network testbed to either AWS or GCE, so that we can use it. To do so, just hit “Publish” and confirm the default settings to publish the testbed in the most cost effective location (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture11.png" title="Figure 11: Deploy the Ravello Systems application " class="image-popup">
+<picture>
+  <source width="569" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture11-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture11-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture11-512.webp 512w, 
+
+ /content/uploads/2015/08/Capture11.webp 569w" sizes="569px"></source>
+  <source width="569" data-srcset="
+
+    /content/resized/2015/08/Capture11-320.png 320w, 
+
+    /content/resized/2015/08/Capture11-384.png 384w, 
+
+    /content/resized/2015/08/Capture11-512.png 512w, 
+
+ /content/uploads/2015/08/Capture11.png 569w" sizes="569px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture11.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Deploy the Ravello Systems application ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Deploy the Ravello Systems application
+</figcaption>
+
+</figure>
+
+<p>By default the tesbed will only be deployed for 2 hours. After this it will be shut down automatically. If you need your testbed longer, adapt the time accordingly.</p>
+
+<h2 id="accessing-the-network-testbed">Accessing the network testbed</h2>
+
+<p>After a few minutes your testbed should be published to either AWS or GCE and each VM should be up and running. At this point you can connect via SSH to each of the Cumulus Networks VX nodes.</p>
+
+<p>Use the hostname or IP address shown for each VM within the Ravello Systems Console along with the username “cumulus” and the password “CumulusLinux!” (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Capture13.png" title="Figure 12: Accessing Cumulus Networks VX nodes via SSH " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Capture13-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Capture13-384.webp 384w, 
+
+    
+    /content/resized/2015/08/Capture13-512.webp 512w, 
+
+    
+    /content/resized/2015/08/Capture13-683.webp 683w, 
+
+    
+    /content/resized/2015/08/Capture13-800.webp 800w, 
+
+    
+    /content/resized/2015/08/Capture13-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/08/Capture13-320.png 320w, 
+
+    /content/resized/2015/08/Capture13-384.png 384w, 
+
+    /content/resized/2015/08/Capture13-512.png 512w, 
+
+    /content/resized/2015/08/Capture13-683.png 683w, 
+
+    /content/resized/2015/08/Capture13-800.png 800w, 
+
+    /content/resized/2015/08/Capture13-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Capture13.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Accessing Cumulus Networks VX nodes via SSH ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Accessing Cumulus Networks VX nodes via SSH
+</figcaption>
+
+</figure>
+
+<p>Keep in mind, that the Cumulus Network VX nodes are still unconfigured at this point. The IPv4 address configuration for the VMs in Ravello Systems was only for generating the different networks segments within Ravello Systems and does not apply to the network configuration within the Cumulus Networks VX node.</p>
+
+<h2 id="basic-network-testbed-configuration">Basic network testbed configuration</h2>
+
+<p>In this step we want to perform basic network configuration and at least enable the Cumulus Networks VX nodes to communicate with each other. For this we will configure all “swp” interfaces on all devices as a routed port with the IPv4 address depicted in Figure 1.</p>
+
+<p>We will start by connecting to Spine1 via SSH. Next configure the IPv4 addresses via editing the file “/etc/network/interfaces”. You can do so using “sudo” and your favorite browser:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cumulus@cumulus$ sudo vi /etc/network/interfaces
+</code></pre></div></div>
+
+<p>Add the following lines to the end of the file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>auto swp1
+iface swp1
+        address 10.1.0.1
+
+auto swp2
+iface swp2
+        address 10.2.0.1
+</code></pre></div></div>
+
+<p>Next restart the Cumulus Networks VX networking for the configuration to be applied:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cumulus@cumulus$ sudo service networking restart
+</code></pre></div></div>
+
+<p>Repeat the above steps for the other three devices. Remember to adapt the IPv4 addresses in the file “/etc/network/interfaces” for the interfaces “swp1” and “swp2” according to the network diagram in Figure 1.</p>
+
+<h1 id="testing-your-network-setup">Testing your network setup</h1>
+
+<p>Test the functionality of your basic network lab. First look at the available interfaces and their IP addresses via standard Linux commands:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cumulus@spine1$ ifconfig
+eth0      Link encap:Ethernet  HWaddr 2c:c2:60:46:1e:68
+          inet addr:10.0.0.5  Bcast:10.0.255.255  Mask:255.255.0.0
+          inet6 addr: fe80::2ec2:60ff:fe46:1e68/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:181 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:120 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:22332 (21.8 KiB)  TX bytes:15935 (15.5 KiB)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:1 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:1 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:28 (28.0 B)  TX bytes:28 (28.0 B)
+
+swp1      Link encap:Ethernet  HWaddr 2c:c2:60:46:43:f7
+          inet addr:10.1.0.1  Bcast:0.0.0.0  Mask:255.255.255.0
+          inet6 addr: fe80::2ec2:60ff:fe46:43f7/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:7 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:6 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:541 (541.0 B)  TX bytes:652 (652.0 B)
+
+swp2      Link encap:Ethernet  HWaddr 2c:c2:60:32:7b:88
+          inet addr:10.2.0.1  Bcast:0.0.0.0  Mask:255.255.255.0
+          inet6 addr: fe80::2ec2:60ff:fe32:7b88/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:8 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:6 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:662 (662.0 B)  TX bytes:652 (652.0 B)
+
+cumulus@spine1$
+</code></pre></div></div>
+
+<p>For each device within your testbed you should see the following four interfaces:</p>
+
+<ul>
+  <li>
+<strong>eth0:</strong> IPv4 address on the 10.0.0.0/16 network, providing you inbound and outbound network connectivity</li>
+  <li>
+<strong>lo:</strong> Loopback interface with IPv4 address 127.0.0.1/8 and IPv6 address ::1/128</li>
+  <li>
+<strong>swp1:</strong> Switchport interface with IPv4 address, connected to another spine or leaf switch</li>
+  <li>
+<strong>swp2:</strong> Switchport interface with IPv4 address, connected to another spine or leaf switch</li>
+</ul>
+
+<p>Next verify if you can ping the adjacent interface of another connected switch. From the device “Spine1” we can try to ping the interface “swp1” with the IPv4 address 10.1.0.2 on the switch “Leaf1”:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cumulus@spine1$ ping -c 3 10.1.0.2
+PING 10.1.0.2 (10.1.0.2) 56(84) bytes of data.
+64 bytes from 10.1.0.2: icmp_req=1 ttl=64 time=2.67 ms
+64 bytes from 10.1.0.2: icmp_req=2 ttl=64 time=0.892 ms
+64 bytes from 10.1.0.2: icmp_req=3 ttl=64 time=0.769 ms
+
+--- 10.1.0.2 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 0.769/1.445/2.676/0.872 ms
+cumulus@spine1$
+</code></pre></div></div>
+
+<p>The pings should succeed.</p>
+
+<h1 id="save-time-use-a-ravello-systems-blueprint">Save time, use a Ravello Systems Blueprint</h1>
+
+<p>Instead of going through the above steps you can also use my pre-built <a href="https://www.ravellosystems.com/repo/blueprints/62095782" target="_blank" rel="noopener noreferrer">Ravello Systems blueprint for Cumulus Networks VX</a>. Just add this public accessible blueprint to your own Ravello Systems library and deploy the above described network lab in a few minutes.</p>
+
+<h1 id="more-capabilities">More capabilities</h1>
+
+<p>Cumulus Networks VX provides a lot more capabilities than what I was able to showcase in this blog post. With the above described simple testbed you are now empowered to explore these capabilities.</p>
+
+<p>Have a look at the <a href="https://docs.cumulusnetworks.com/display/DOCS/Quick+Start+Guide" target="_blank" rel="noopener noreferrer">Cumulus Network Technical Documentation</a> to get inspired on what you can do.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#cumulus-networks" class="page__taxonomy-item" rel="tag">Cumulus-Networks</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#ravello-systems" class="page__taxonomy-item" rel="tag">Ravello-Systems</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-08-21T13:51:38-07:00">August 21, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Building+a+Cumulus+Networks+VX+cloud+lab+with+Ravello+Systems%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F21%2Fbuilding-a-cumulus-networks-vx-cloud-lab-with-ravello-systems%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F21%2Fbuilding-a-cumulus-networks-vx-cloud-lab-with-ravello-systems%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F21%2Fbuilding-a-cumulus-networks-vx-cloud-lab-with-ravello-systems%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F21%2Fbuilding-a-cumulus-networks-vx-cloud-lab-with-ravello-systems%2F&amp;title=Building+a+Cumulus+Networks+VX+cloud+lab+with+Ravello+Systems" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2015/08/04/sddc-sddc-architecture-basic-design-elements/" class="pagination--pager" title="SDDC Architecture – Basic Design Elements
+">Previous</a>
+    
+    
+      <a href="/2015/08/27/sddc-architecture-what-is-a-vmware-validated-design/" class="pagination--pager" title="SDDC Architecture - What is a VMware validated design?
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

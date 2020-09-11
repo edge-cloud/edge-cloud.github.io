@@ -1,0 +1,1403 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Amazon Alexa Skill for San Francisco Muni - Edge Cloud</title>
+<meta name="description" content="An Amazon Alexa Skill for San Francisco Muni, that can be used with the Amazon Echo or FireTV">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Amazon Alexa Skill for San Francisco Muni">
+<meta property="og:url" content="https://www.edge-cloud.net/2016/10/10/amazon-alexa-skill-san-francisco-muni/">
+
+
+  <meta property="og:description" content="An Amazon Alexa Skill for San Francisco Muni, that can be used with the Amazon Echo or FireTV">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Amazon Alexa Skill for San Francisco Muni">
+  <meta name="twitter:description" content="An Amazon Alexa Skill for San Francisco Muni, that can be used with the Amazon Echo or FireTV">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/10/10/amazon-alexa-skill-san-francisco-muni/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2016-10-10T01:01:51-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2016/10/10/amazon-alexa-skill-san-francisco-muni/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Amazon Alexa Skill for San Francisco Muni">
+    <meta itemprop="description" content="An Amazon Alexa Skill for San Francisco Muni, that can be used with the Amazon Echo or FireTV">
+    <meta itemprop="datePublished" content="October 10, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Amazon Alexa Skill for San Francisco Muni
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#pre-requisites">Pre-Requisites</a></li>
+  <li><a href="#source-code-and-customization">Source code and customization</a></li>
+  <li><a href="#creating-the-aws-lambda-function-for-a-custom-skill">Creating the AWS Lambda Function for a Custom Skill</a></li>
+  <li><a href="#setting-up-the-custom-alexa-skill">Setting up the custom Alexa Skill</a></li>
+  <li><a href="#using-the-alexa-skill">Using the Alexa Skill</a></li>
+  <li><a href="#limitations">Limitations</a></li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Alexa is the voice service that powers the <a href="http://amzn.to/2dY24Fv" target="_blank" rel="noopener noreferrer">Amazon Echo</a> and provides capabilities, or skills, that enable users to interact with the device by using voice. Examples of built-in skills include the ability to play music, answer general questions, set an alarm or timer, and more.</p>
+
+<p>But the real power of Alexa is the <a href="https://developer.amazon.com/alexa-skills-kit" target="_blank" rel="noopener noreferrer">Alexa Skills Kit</a>, which is a collection of self-service APIs, tools, documentation and code samples that make it fast and easy for you to add skills to Alexa.</p>
+
+<p>This post will show you how to use the <a href="https://www.nextbus.com" target="_blank" rel="noopener noreferrer">NextBus</a> <a href="https://www.nextbus.com/xmlFeedDocs/NextBusXMLFeed.pdf" target="_blank" rel="noopener noreferrer">API</a> in an Alexa Skill to provide you information about <a href="https://www.sfmta.com/" target="_blank" rel="noopener noreferrer">SF Muni</a>’s public transit options in San Francisco.</p>
+
+<p>You will be able to use this Alexa skill from a standard <a href="http://amzn.to/2dY24Fv" target="_blank" rel="noopener noreferrer">Amazon Echo</a> and <a href="http://amzn.to/2dZDjfE" target="_blank" rel="noopener noreferrer">Echo Dot</a> device, but also from a <a href="http://amzn.to/2dylDWL" target="_blank" rel="noopener noreferrer">Fire TV</a> device to ask for up to date transit options around you.</p>
+
+<p>Once everything is up and running you will be able to ask your Echo device “Alexa, ask Muni for the next train” for which it will then e.g. reply with “The next metros are N in 6 minutes, KT in 9 minutes, and N in 16 minutes.”</p>
+
+<h1 id="pre-requisites">Pre-Requisites</h1>
+
+<p>Before you get started, here is what you need:</p>
+
+<ul>
+  <li>An <a href="http://amzn.to/2dY24Fv" target="_blank" rel="noopener noreferrer">Amazon Echo</a>, <a href="http://amzn.to/2dZDjfE" target="_blank" rel="noopener noreferrer">Echo Dot</a>, or <a href="http://amzn.to/2dylDWL" target="_blank" rel="noopener noreferrer">Fire TV</a> device to use your custom Alexa skill.</li>
+  <li>An <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon AWS</a> account, where you will use <a href="https://aws.amazon.com/lambda/" target="_blank" rel="noopener noreferrer">AWS Lambda</a> to run the Alexa skill.</li>
+  <li>An <a href="https://developer.amazon.com/login.html" target="_blank" rel="noopener noreferrer">Amazon Developer account</a> for creating your Alexa skill.</li>
+</ul>
+
+<p>It is also highly recommended that you have used Amazon AWS before and that you have basic coding skills.</p>
+
+<h1 id="source-code-and-customization">Source code and customization</h1>
+
+<p>You can find all necessary source code for this custom skill on <a href="https://github.com/chriselsen/Alexa_NextMuni" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+
+<p>The <em>“src”</em> directory includes all necessary files for the AWS Lambda function, while the files in the directory <em>“speechAssets”</em> will be used for the Alexa Skill kit.</p>
+
+<p>Keep in mind that the locations of the Muni stops for which this Alexa Skill provides updates is hard-coded. Before getting started you might therefore want to adapt the location of the Muni information to your specific location as my example uses the <a href="https://en.wikipedia.org/wiki/San_Francisco_4th_and_King_Street_Station" target="_blank" rel="noopener noreferrer">San Francisco Caltrain station</a> at 4th &amp; King as the location.</p>
+
+<p>To do so, have a look at the file <a href="https://github.com/chriselsen/Alexa_NextMuni/blob/master/src/index.js" target="_blank" rel="noopener noreferrer">index.js</a> first, which includes the function <em>“findMuniStop”</em> at the bottom:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function findMuniStop(type,line,direction) {
+	switch(line){
+		case "N":
+			var stopId = "&amp;stops=N|5240";
+			var typeName = "outbound N metros";
+			break;
+		case "KT":
+		case "K":
+			switch(direction){
+				case "outbound":
+					var stopId = "&amp;stops=KT|7166";
+					var typeName = "outbound KT metros";
+					break;
+				default:
+					var stopId = "&amp;stops=KT|7397";
+					var typeName = "inbound KT metros";
+			}
+			break;
+		case "30":
+			var stopId = "&amp;stops=30|7235";
+			var typeName = "outbound 30 buses";
+			break;
+		case "45":
+			var stopId = "&amp;stops=45|7235";
+			var typeName = "outbound 45 buses";
+			break;
+		case "10":
+			var stopId = "&amp;stops=10|6695";
+			var typeName = "inbound 10 buses";
+			break;
+		case "82":
+		case "82X":
+		case "82 express":
+			var stopId = "&amp;stops=82X|3164";
+			var typeName = "inbound 82X buses";
+			break;
+		default:
+			switch(type){
+				case "bus":
+				case "buses":
+					var stopId = "&amp;stops=30|7235&amp;stops=45|7235";
+					var typeName = "buses";
+				break;
+				default:
+					var stopId = "&amp;stops=N|5240&amp;stops=KT|7166";
+					var typeName = "metros";						
+			}
+	}
+
+	return [stopId, typeName];
+}
+</code></pre></div></div>
+
+<p>In my case I’m interested in the metro lines N and KT, as well as the buses 30, 45, 10, and 82X. Also I have a set of stops set as default value, when not specifying a mode of transportation or line. Change the lines and stops according to your needs.</p>
+
+<p>You can lookup the SF Muni stop IDs via the NextBus API, e.g. for the <a href="http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&amp;a=sf-muni&amp;r=KT" target="_blank" rel="noopener noreferrer">K/T line</a>.</p>
+
+<p>Also, you will also need to update the custom slot types for <a href="https://github.com/chriselsen/Alexa_NextMuni/blob/master/speechAssets/customSlotTypes/TRANSIT_LINE" target="_blank" rel="noopener noreferrer">TRANSIT_LINE</a> in the <em>“speechAssets”</em> directory with your Muni lines.</p>
+
+<h1 id="creating-the-aws-lambda-function-for-a-custom-skill">Creating the AWS Lambda Function for a Custom Skill</h1>
+
+<p>First you need to create the AWS Lambda Function for your custom skill in Amazon AWS. Refer to the Alexa documentation <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function" target="_blank" rel="noopener noreferrer">Creating an AWS Lambda Function for a Custom Skill</a> for a detailed walk through of this process.</p>
+
+<p>Below you can find a brief walk through for the necessary steps</p>
+
+<p>Go to the <a href="https://console.aws.amazon.com/lambda/home?region=us-east-1#/" target="_blank" rel="noopener noreferrer">AWS Console</a> and click on the Lambda service link. Ensure you are in US-East (N. Virgina) as Alexa can only use Lambda in this US AWS region.</p>
+
+<p>Click on the Create a Lambda Function or Get Started Now button. When presented with sample blueprints, choose <strong>Skip</strong>.</p>
+
+<p>Under <em>Configure Triggers</em> select the <strong>Alexa Skills Kit</strong> and click on <strong>Next</strong> (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/Muni01.png" title="Figure 1: Alexa Skills Kit as AWS Lambda trigger" class="image-popup">
+<picture>
+  <source width="923" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/Muni01-320.webp 320w, 
+
+    
+    /content/resized/2016/10/Muni01-384.webp 384w, 
+
+    
+    /content/resized/2016/10/Muni01-512.webp 512w, 
+
+    
+    /content/resized/2016/10/Muni01-683.webp 683w, 
+
+    
+    /content/resized/2016/10/Muni01-800.webp 800w, 
+
+ /content/uploads/2016/10/Muni01.webp 923w" sizes="923px"></source>
+  <source width="923" data-srcset="
+
+    /content/resized/2016/10/Muni01-320.png 320w, 
+
+    /content/resized/2016/10/Muni01-384.png 384w, 
+
+    /content/resized/2016/10/Muni01-512.png 512w, 
+
+    /content/resized/2016/10/Muni01-683.png 683w, 
+
+    /content/resized/2016/10/Muni01-800.png 800w, 
+
+ /content/uploads/2016/10/Muni01.png 923w" sizes="923px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/Muni01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Alexa Skills Kit as AWS Lambda trigger">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Alexa Skills Kit as AWS Lambda trigger
+</figcaption>
+
+</figure>
+
+<p>Combine the content of the <a href="https://github.com/chriselsen/Alexa_NextMuni/tree/master/src" target="_blank" rel="noopener noreferrer">src</a> folder into a ZIP file. Make sure that the ZIP file does not contain the <em>“src”</em> directory itself, but instead the files <em>“AlexaSkill.js”</em> and <em>“index.js”</em> need to be at the root level of the ZIP archive.</p>
+
+<p>Name the Lambda Function <em>“Alexa_MuniMetro_Skill”</em> and provide a description if wanted. Keep the Runtime as <em>“Node.js 4.3”</em> and upload the previously created ZIP file.</p>
+
+<p>Keep the Handler as <em>“index.handler”</em>, which refers to the main js file in the ZIP archive (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/Muni02.png" title="Figure 2: Create an AWS Lambda function" class="image-popup">
+<picture>
+  <source width="926" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/Muni02-320.webp 320w, 
+
+    
+    /content/resized/2016/10/Muni02-384.webp 384w, 
+
+    
+    /content/resized/2016/10/Muni02-512.webp 512w, 
+
+    
+    /content/resized/2016/10/Muni02-683.webp 683w, 
+
+    
+    /content/resized/2016/10/Muni02-800.webp 800w, 
+
+ /content/uploads/2016/10/Muni02.webp 926w" sizes="926px"></source>
+  <source width="926" data-srcset="
+
+    /content/resized/2016/10/Muni02-320.png 320w, 
+
+    /content/resized/2016/10/Muni02-384.png 384w, 
+
+    /content/resized/2016/10/Muni02-512.png 512w, 
+
+    /content/resized/2016/10/Muni02-683.png 683w, 
+
+    /content/resized/2016/10/Muni02-800.png 800w, 
+
+ /content/uploads/2016/10/Muni02.png 926w" sizes="926px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/Muni02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Create an AWS Lambda function">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Create an AWS Lambda function
+</figcaption>
+
+</figure>
+
+<p>Create via a <em>“custom role”</em> a <strong>basic execution role</strong> for Lambda, which will have the following policy by default:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*"
+    }
+  ]
+}
+</code></pre></div></div>
+
+<p>Leave all other settings as default, click <strong>Next</strong> and afterwards <strong>Create function</strong> (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/Muni03.png" title="Figure 3: AWS Lambda function for Alexa Skill" class="image-popup">
+<picture>
+  <source width="921" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/Muni03-320.webp 320w, 
+
+    
+    /content/resized/2016/10/Muni03-384.webp 384w, 
+
+    
+    /content/resized/2016/10/Muni03-512.webp 512w, 
+
+    
+    /content/resized/2016/10/Muni03-683.webp 683w, 
+
+    
+    /content/resized/2016/10/Muni03-800.webp 800w, 
+
+ /content/uploads/2016/10/Muni03.webp 921w" sizes="921px"></source>
+  <source width="921" data-srcset="
+
+    /content/resized/2016/10/Muni03-320.png 320w, 
+
+    /content/resized/2016/10/Muni03-384.png 384w, 
+
+    /content/resized/2016/10/Muni03-512.png 512w, 
+
+    /content/resized/2016/10/Muni03-683.png 683w, 
+
+    /content/resized/2016/10/Muni03-800.png 800w, 
+
+ /content/uploads/2016/10/Muni03.png 921w" sizes="921px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/Muni03.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: AWS Lambda function for Alexa Skill">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: AWS Lambda function for Alexa Skill
+</figcaption>
+
+</figure>
+
+<p>After the Lambda function has been created successfully, note down the ARN, which is later needed in the Alexa skill setup (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/Muni04.png" title="Figure 4: ARN of the AWS Lambda function" class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/Muni04-320.webp 320w, 
+
+    
+    /content/resized/2016/10/Muni04-384.webp 384w, 
+
+    
+    /content/resized/2016/10/Muni04-512.webp 512w, 
+
+    
+    /content/resized/2016/10/Muni04-683.webp 683w, 
+
+    
+    /content/resized/2016/10/Muni04-800.webp 800w, 
+
+    
+    /content/resized/2016/10/Muni04-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/10/Muni04-320.png 320w, 
+
+    /content/resized/2016/10/Muni04-384.png 384w, 
+
+    /content/resized/2016/10/Muni04-512.png 512w, 
+
+    /content/resized/2016/10/Muni04-683.png 683w, 
+
+    /content/resized/2016/10/Muni04-800.png 800w, 
+
+    /content/resized/2016/10/Muni04-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/Muni04.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: ARN of the AWS Lambda function">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: ARN of the AWS Lambda function
+</figcaption>
+
+</figure>
+
+<p>This complete the creation of the AWS Lambda function.</p>
+
+<h1 id="setting-up-the-custom-alexa-skill">Setting up the custom Alexa Skill</h1>
+
+<p>Next we will need to setup a custom Alexa Skill that interacts with the AWS Lambda function above. For this login to your <a href="https://developer.amazon.com/edw/home.html#/skills/list" target="_blank" rel="noopener noreferrer">Amazon Developer Account</a> and navigate to the Alexa Skills Kit section.</p>
+
+<p>Add a New Skill. Leave the <em>Language</em> and <em>Skill Type</em> at the default value. Set <strong>Next Muni Bus or Metro</strong> as the skill name and <strong>muni</strong> as the invocation name (See Figure 5).</p>
+
+<p class="notice--info">The <em>Invocation Name</em> is what is used to activate this particular skill. For example you would say: “Alexa, ask Muni when the next bus is coming.”</p>
+
+<p>Click <strong>Next</strong> to go the next screen.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/Muni05.png" title="Figure 5: Create a new Alexa Skill" class="image-popup">
+<picture>
+  <source width="1003" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/Muni05-320.webp 320w, 
+
+    
+    /content/resized/2016/10/Muni05-384.webp 384w, 
+
+    
+    /content/resized/2016/10/Muni05-512.webp 512w, 
+
+    
+    /content/resized/2016/10/Muni05-683.webp 683w, 
+
+    
+    /content/resized/2016/10/Muni05-800.webp 800w, 
+
+    
+    /content/resized/2016/10/Muni05-960.webp 960w, 
+
+ /content/uploads/2016/10/Muni05.webp 1003w" sizes="1003px"></source>
+  <source width="1003" data-srcset="
+
+    /content/resized/2016/10/Muni05-320.png 320w, 
+
+    /content/resized/2016/10/Muni05-384.png 384w, 
+
+    /content/resized/2016/10/Muni05-512.png 512w, 
+
+    /content/resized/2016/10/Muni05-683.png 683w, 
+
+    /content/resized/2016/10/Muni05-800.png 800w, 
+
+    /content/resized/2016/10/Muni05-960.png 960w, 
+
+ /content/uploads/2016/10/Muni05.png 1003w" sizes="1003px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/Muni05.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Create a new Alexa Skill">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Create a new Alexa Skill
+</figcaption>
+
+</figure>
+
+<p>Next you have to provide information for the voice interaction model. You can find all these information within the <a href="https://github.com/chriselsen/Alexa_NextMuni/tree/master/speechAssets" target="_blank" rel="noopener noreferrer"><em>speechAssets</em></a>.</p>
+
+<p>First create the three custom slot types <strong>TRANSIT_DIRECTION</strong>, <strong>TRANSIT_LINE</strong>, and <strong>TRANSIT_TYPE</strong> and fill them with the information from the <a href="https://github.com/chriselsen/Alexa_NextMuni/tree/master/speechAssets/customSlotTypes" target="_blank" rel="noopener noreferrer">customSlotTypes</a> folder.</p>
+
+<p>Next, copy the content of <a href="https://github.com/chriselsen/Alexa_NextMuni/blob/master/speechAssets/IntentSchema.json" target="_blank" rel="noopener noreferrer">IntentSchema.json</a> into the <strong>Intent Schema</strong> and the content of <a href="https://github.com/chriselsen/Alexa_NextMuni/blob/master/speechAssets/SampleUtterances.txt" target="_blank" rel="noopener noreferrer">SampleUtterances.txt</a> into the <strong>Sample Utterances</strong> field.</p>
+
+<p>Click <strong>Next</strong> to go to the next screen (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/Muni06.png" title="Figure 6: Voice interaction model" class="image-popup">
+<picture>
+  <source width="1013" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/Muni06-320.webp 320w, 
+
+    
+    /content/resized/2016/10/Muni06-384.webp 384w, 
+
+    
+    /content/resized/2016/10/Muni06-512.webp 512w, 
+
+    
+    /content/resized/2016/10/Muni06-683.webp 683w, 
+
+    
+    /content/resized/2016/10/Muni06-800.webp 800w, 
+
+    
+    /content/resized/2016/10/Muni06-960.webp 960w, 
+
+ /content/uploads/2016/10/Muni06.webp 1013w" sizes="1013px"></source>
+  <source width="1013" data-srcset="
+
+    /content/resized/2016/10/Muni06-320.png 320w, 
+
+    /content/resized/2016/10/Muni06-384.png 384w, 
+
+    /content/resized/2016/10/Muni06-512.png 512w, 
+
+    /content/resized/2016/10/Muni06-683.png 683w, 
+
+    /content/resized/2016/10/Muni06-800.png 800w, 
+
+    /content/resized/2016/10/Muni06-960.png 960w, 
+
+ /content/uploads/2016/10/Muni06.png 1013w" sizes="1013px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/Muni06.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Voice interaction model">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Voice interaction model
+</figcaption>
+
+</figure>
+
+<p>Chose <strong>Lambda</strong> as the <strong>Service Endpoint Type</strong> and specify the ARN to be in <strong>North America</strong>. Next copy the ARN for the Lambda function that you previously created into the field (See Figure 7).</p>
+
+<p>Leave the <strong>Account Linking</strong> as is and click <em>*Next</em>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/Muni07.png" title="Figure 7: AWS Lambda as service endpoint" class="image-popup">
+<picture>
+  <source width="1018" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/Muni07-320.webp 320w, 
+
+    
+    /content/resized/2016/10/Muni07-384.webp 384w, 
+
+    
+    /content/resized/2016/10/Muni07-512.webp 512w, 
+
+    
+    /content/resized/2016/10/Muni07-683.webp 683w, 
+
+    
+    /content/resized/2016/10/Muni07-800.webp 800w, 
+
+    
+    /content/resized/2016/10/Muni07-960.webp 960w, 
+
+ /content/uploads/2016/10/Muni07.webp 1018w" sizes="1018px"></source>
+  <source width="1018" data-srcset="
+
+    /content/resized/2016/10/Muni07-320.png 320w, 
+
+    /content/resized/2016/10/Muni07-384.png 384w, 
+
+    /content/resized/2016/10/Muni07-512.png 512w, 
+
+    /content/resized/2016/10/Muni07-683.png 683w, 
+
+    /content/resized/2016/10/Muni07-800.png 800w, 
+
+    /content/resized/2016/10/Muni07-960.png 960w, 
+
+ /content/uploads/2016/10/Muni07.png 1018w" sizes="1018px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/Muni07.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: AWS Lambda as service endpoint">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: AWS Lambda as service endpoint
+</figcaption>
+
+</figure>
+
+<p>Make sure that your skill is enabled for testing on your account (See Figure 8). This will allow you to use this skill in your account without having to publish it.</p>
+
+<p>Before invoking your Echo or Fire TV device, you can also use the <em>Service Simulator</em> to test your skill: In the <em>Enter Utterence</em> field enter <strong>for the next train</strong> and click on <strong>Ask Next Muni Bus or Metro</strong>.</p>
+
+<p>You will see the request that is send off to Lambda, as well as the response received from Lambda. If everything is working correctly you should an answer like “The next metros are N in 6 minutes, KT in 9 minutes, and N in 16 minutes.” (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/Muni08.png" title="Figure 8: Test your Alexa Skill" class="image-popup">
+<picture>
+  <source width="1006" type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/Muni08-320.webp 320w, 
+
+    
+    /content/resized/2016/10/Muni08-384.webp 384w, 
+
+    
+    /content/resized/2016/10/Muni08-512.webp 512w, 
+
+    
+    /content/resized/2016/10/Muni08-683.webp 683w, 
+
+    
+    /content/resized/2016/10/Muni08-800.webp 800w, 
+
+    
+    /content/resized/2016/10/Muni08-960.webp 960w, 
+
+ /content/uploads/2016/10/Muni08.webp 1006w" sizes="1006px"></source>
+  <source width="1006" data-srcset="
+
+    /content/resized/2016/10/Muni08-320.png 320w, 
+
+    /content/resized/2016/10/Muni08-384.png 384w, 
+
+    /content/resized/2016/10/Muni08-512.png 512w, 
+
+    /content/resized/2016/10/Muni08-683.png 683w, 
+
+    /content/resized/2016/10/Muni08-800.png 800w, 
+
+    /content/resized/2016/10/Muni08-960.png 960w, 
+
+ /content/uploads/2016/10/Muni08.png 1006w" sizes="1006px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/Muni08.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Test your Alexa Skill">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Test your Alexa Skill
+</figcaption>
+
+</figure>
+
+<p>Don’t fill out the sections <em>Publishing Information</em> and <em>Privacy &amp; Compliance</em>, as you cannot submit this skill for Certification. Instead only you can use it from your account.</p>
+
+<p>You are now able to start using the skill on your device! You can also go to your Echo companion webpage <a href="http://echo.amazon.com/#skills" target="_blank" rel="noopener noreferrer">http://echo.amazon.com/#skills</a> and see the skill enabled.</p>
+
+<h1 id="using-the-alexa-skill">Using the Alexa Skill</h1>
+
+<p>There are two main capabilities that this Alexa Skill will provide you:</p>
+
+<ul>
+  <li>
+<strong>Ask for the next bus or metro.</strong> The Alexa Skill will tell you the next three connections from a pre-configured stop ID. If there is a system notification, it will warn you about it as well.</li>
+  <li>
+<strong>Ask if there is a system notification.</strong> The Alexa Skill will reply with the system messages that are of priority <em>High</em>. These usually refer to service outages or impactes and don’t include “Elevator outages”.</li>
+</ul>
+
+<p>Here are some examples on what you can ask the Alexa Skill about:</p>
+
+<p class="notice--info">Q: “Alexa, ask Muni when the next metros are coming.”;<br>
+A: “The next metros are N in 1 minute, KT in 6 minutes, and N in 9 minutes.”;</p>
+
+<p class="notice--info">Q: “Alexa, ask Muni for the next 45.”<br>
+A: “The next outbound 45 buses are 45 in 5 minutes, 45 in 17 minutes, and 45 in 32 minutes.”</p>
+
+<p class="notice--info">Q: “Alexa, ask Muni for the next inbound 10.”<br>
+A: “The next inbound 10 buses are 10 in 3 minutes, 10 in 21 minutes, and 10 in 34 minutes.”</p>
+
+<p class="notice--info">Q: “Alexa, ask Muni if there is a problem with the 45 bus.”<br>
+A: “There is currently no service message for the outbound 45 buses.”</p>
+
+<h1 id="limitations">Limitations</h1>
+
+<p>Please keep in mind that the prediction data for the next buses and metros, but also the service messages come from <a href="https://www.nextbus.com" target="_blank" rel="noopener noreferrer">NextBus</a> via their <a href="https://www.nextbus.com/xmlFeedDocs/NextBusXMLFeed.pdf" target="_blank" rel="noopener noreferrer">API</a>. The service messages are provided by <a href="https://www.sfmta.com/" target="_blank" rel="noopener noreferrer">SF Muni</a> to NextBus.</p>
+
+<p>Unfortunately providing these service messages to NextBus is a manual step for Muni, which means that it is very frequently forgotten. Therefore the Alexa Skill might happily tell you “There is currently no service message for the metros.”, while reality looks quite different (See Figure 9).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2016/10/2016-03-07-08.53.42.jpg" title="Figure 9: SF Muni Metro service interruption" class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2016/10/2016-03-07-08.53.42-320.webp 320w, 
+
+    
+    /content/resized/2016/10/2016-03-07-08.53.42-384.webp 384w, 
+
+    
+    /content/resized/2016/10/2016-03-07-08.53.42-512.webp 512w, 
+
+    
+    /content/resized/2016/10/2016-03-07-08.53.42-683.webp 683w, 
+
+    
+    /content/resized/2016/10/2016-03-07-08.53.42-800.webp 800w, 
+
+    
+    /content/resized/2016/10/2016-03-07-08.53.42-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2016/10/2016-03-07-08.53.42-320.jpg 320w, 
+
+    /content/resized/2016/10/2016-03-07-08.53.42-384.jpg 384w, 
+
+    /content/resized/2016/10/2016-03-07-08.53.42-512.jpg 512w, 
+
+    /content/resized/2016/10/2016-03-07-08.53.42-683.jpg 683w, 
+
+    /content/resized/2016/10/2016-03-07-08.53.42-800.jpg 800w, 
+
+    /content/resized/2016/10/2016-03-07-08.53.42-960.jpg 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2016/10/2016-03-07-08.53.42.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 9: SF Muni Metro service interruption">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: SF Muni Metro service interruption
+</figcaption>
+
+</figure>
+
+<p>Also predictions for buses and metros at the beginning of a line - which is the case of the N, 30 and 45 in my case - are rather less reliable.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This post showed you how to create your own custom Amazon Alexa Skill to get next bus and next metro information for San Francisco’s Muni. You can use this custom Alexa Skill with an Amazon Echo or Fire TV device.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#alexa" class="page__taxonomy-item" rel="tag">Alexa</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#echo" class="page__taxonomy-item" rel="tag">Echo</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-10T01:01:51-07:00">October 10, 2016</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Amazon+Alexa+Skill+for+San+Francisco+Muni%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F10%2Famazon-alexa-skill-san-francisco-muni%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F10%2Famazon-alexa-skill-san-francisco-muni%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F10%2Famazon-alexa-skill-san-francisco-muni%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F10%2Famazon-alexa-skill-san-francisco-muni%2F&amp;title=Amazon+Alexa+Skill+for+San+Francisco+Muni" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2016/05/16/processing-flowroute-text-messages-aws-lambda/" class="pagination--pager" title="Processing Flowroute text messages with AWS Lambda
+">Previous</a>
+    
+    
+      <a href="/2016/10/24/cloudfront-metadata-google-analytics/" class="pagination--pager" title="AWS CloudFront meta data in Google Analytics
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

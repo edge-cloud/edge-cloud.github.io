@@ -1,0 +1,1080 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Track your CloudFlare PoPs usage in Google Analytics - Edge Cloud</title>
+<meta name="description" content="CloudFlare provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website. This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool Google Analytics. You need to have your website running through CloudFlare for this to work.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Track your CloudFlare PoPs usage in Google Analytics">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">
+
+
+  <meta property="og:description" content="CloudFlare provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website. This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool Google Analytics. You need to have your website running through CloudFlare for this to work.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Track your CloudFlare PoPs usage in Google Analytics">
+  <meta name="twitter:description" content="CloudFlare provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website. This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool Google Analytics. You need to have your website running through CloudFlare for this to work.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-10-04T13:50:53-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Track your CloudFlare PoPs usage in Google Analytics">
+    <meta itemprop="description" content="CloudFlare provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website. This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool Google Analytics. You need to have your website running through CloudFlare for this to work.">
+    <meta itemprop="datePublished" content="October 04, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Track your CloudFlare PoPs usage in Google Analytics
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#about-cloudflares-points-of-presence">About CloudFlare’s Points-of-Presence</a></li>
+  <li>
+<a href="#setup">Setup</a>
+    <ul>
+      <li><a href="#create-a-custom-dimension-in-google-analytics">Create a custom dimension in Google Analytics</a></li>
+      <li><a href="#embed-the-google-analytics-tracking-code">Embed the Google Analytics Tracking Code</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#usage">Usage</a>
+    <ul>
+      <li><a href="#create-a-custom-report-in-google-analytics">Create a custom report in Google Analytics</a></li>
+      <li><a href="#combining-the-new-custom-dimension-with-google-analytics-data">Combining the new custom dimension with Google Analytics Data</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p><a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer">Cloudflare</a> provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website.</p>
+
+<p>This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool <a href="https://www.google.com/analytics/" target="_blank" rel="noopener noreferrer">Google Analytics</a>. You need to have your website running through CloudFlare for this to work.</p>
+
+<p><a href="https://www.cloudflare.com/a/sign-up" target="_blank" rel="noopener noreferrer">Signing up</a> with CloudFlare is easy and free and usually only takes 5 minutes.</p>
+
+<h1 id="about-cloudflares-points-of-presence">About CloudFlare’s Points-of-Presence</h1>
+
+<p>CloudFlare currently uses 63 data centers worldwide as points-of-presence to deliver fast and secure website traffic (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/10/CloudFlare_Network_Map.png" title="Figure 1: Current CloudFlare Network Map " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/10/CloudFlare_Network_Map-320.webp 320w, 
+
+    
+    /content/resized/2015/10/CloudFlare_Network_Map-384.webp 384w, 
+
+    
+    /content/resized/2015/10/CloudFlare_Network_Map-512.webp 512w, 
+
+    
+    /content/resized/2015/10/CloudFlare_Network_Map-683.webp 683w, 
+
+    
+    /content/resized/2015/10/CloudFlare_Network_Map-800.webp 800w, 
+
+    
+    /content/resized/2015/10/CloudFlare_Network_Map-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/10/CloudFlare_Network_Map-320.png 320w, 
+
+    /content/resized/2015/10/CloudFlare_Network_Map-384.png 384w, 
+
+    /content/resized/2015/10/CloudFlare_Network_Map-512.png 512w, 
+
+    /content/resized/2015/10/CloudFlare_Network_Map-683.png 683w, 
+
+    /content/resized/2015/10/CloudFlare_Network_Map-800.png 800w, 
+
+    /content/resized/2015/10/CloudFlare_Network_Map-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/10/CloudFlare_Network_Map.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Current CloudFlare Network Map ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Current CloudFlare Network Map
+</figcaption>
+
+</figure>
+
+<p>This means that as a CloudFlare customer your website is delivered to your audience from all these locations worldwide, reducing the network hops and lowering latency. As a result your website gains a global presence on an affordable budget, while improving performance.</p>
+
+<p>Wouldn’t it be great to get insight into how much these worldwide locations help you with your website? In this post you will learn how to get started by gaining insight into which CloudFlare location delivers your website traffic.</p>
+
+<h1 id="setup">Setup</h1>
+
+<h2 id="create-a-custom-dimension-in-google-analytics">Create a custom dimension in Google Analytics</h2>
+
+<p>First, set up a custom dimensions for the location of the CloudFlare PoP that serves a request in Google Analytics:</p>
+
+<ol>
+  <li>Sign in to <a href="https://www.google.com/analytics/web/#home/" target="_blank" rel="noopener noreferrer">Google Analytics</a>.</li>
+  <li>Select the <strong>Admin</strong> tab and navigate to the <strong>property to which you want to add custom dimensions</strong>.</li>
+  <li>In the <strong>Property</strong> column, click <strong>Custom Definitions</strong>, then click <strong>Custom Dimensions</strong>.</li>
+  <li>Click <strong>New Custom Dimension</strong>.</li>
+  <li>Add a <strong>Name</strong>.
+  This can be any string, but use something unique so it’s not confused with any other dimension or metric in your reports. Only you will see this name in the Google Analytics page.</li>
+  <li>Select the <strong>Scope</strong>.
+  Choose to track at the Hit, Session, User, or Product level. For this scenario I recommend to choose Hit or rather Session.</li>
+  <li>Check the <strong>Active</strong> box to start collecting data and see the dimension in your reports right away. To create the dimension but have it remain inactive, uncheck the box.</li>
+  <li>Click <strong>Create</strong>.</li>
+  <li>Note down the dimension ID from the displayed example codes. In the example for this blog post the dimension ID is “1” (See Figure 2).</li>
+</ol>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/10/Create-Custom-Dimension.png" title="Figure 2: Create a Google Analytics Custom Dimension " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/10/Create-Custom-Dimension-320.webp 320w, 
+
+    
+    /content/resized/2015/10/Create-Custom-Dimension-384.webp 384w, 
+
+    
+    /content/resized/2015/10/Create-Custom-Dimension-512.webp 512w, 
+
+    
+    /content/resized/2015/10/Create-Custom-Dimension-683.webp 683w, 
+
+    
+    /content/resized/2015/10/Create-Custom-Dimension-800.webp 800w, 
+
+    
+    /content/resized/2015/10/Create-Custom-Dimension-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/10/Create-Custom-Dimension-320.png 320w, 
+
+    /content/resized/2015/10/Create-Custom-Dimension-384.png 384w, 
+
+    /content/resized/2015/10/Create-Custom-Dimension-512.png 512w, 
+
+    /content/resized/2015/10/Create-Custom-Dimension-683.png 683w, 
+
+    /content/resized/2015/10/Create-Custom-Dimension-800.png 800w, 
+
+    /content/resized/2015/10/Create-Custom-Dimension-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/10/Create-Custom-Dimension.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Create a Google Analytics Custom Dimension ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Create a Google Analytics Custom Dimension
+</figcaption>
+
+</figure>
+
+<h2 id="embed-the-google-analytics-tracking-code">Embed the Google Analytics Tracking Code</h2>
+
+<p>Next we need to embed the Google Analytics tracking code within the website, in order to fill the newly created custom dimension with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="highlighter-rouge">__gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="highlighter-rouge">__gaTracker('send','pageview');</code>.</p>
+
+<p>If you are using WordPress the easiest way to include the custom tracking code is by using the “<a href="https://wordpress.org/plugins/google-analytics-for-wordpress/" target="_blank" rel="noopener noreferrer">Google Analytics by Yoast</a>” plugin. This plugin allows you under <strong>Advanced &gt; Custom Code</strong> to embed the below code right away and without any coding requirements.</p>
+
+<p>But first we have to actually determine the CloudFlare PoP location that serves a request. For this we can use the HTTP response header “cf-ray”, which is added by CLoudFlare for troubleshooting purposes. It includes a numeric value, as well as the <a href="https://www.cloudflarestatus.com/" target="_blank" rel="noopener noreferrer">location code</a> of the CloudFlare PoP.</p>
+
+<p>The below JavaScript code will read the “cf-ray” response header, extract the location ID and push it into the Google Analytics custom dimension variable. Ensure that the numeric ID of this custom dimension variable matches what you have created in above steps.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function loc(){
+  var req = new XMLHttpRequest();
+  req.open('HEAD', document.location, false);
+  req.send(null);
+  return (req.getResponseHeader("cf-ray").split("-"))[1];
+}
+__gaTracker('set','dimension1',loc());&lt;/pre&gt;
+</code></pre></div></div>
+<p>Embedded in your website along with the standard Google Analytics tracking code, this custom JavaScript code will determine the CloudFlare PoP over which the corresponding site was served and push it into Google Analytics.</p>
+
+<p>A few hours after embedding the code you should see your first custom dimension data in Google Analytics.</p>
+
+<h1 id="usage">Usage</h1>
+
+<h2 id="create-a-custom-report-in-google-analytics">Create a custom report in Google Analytics</h2>
+
+<p>You can now create custom reports with the custom dimension in Google Analytics. A simple example would be to determine which CloudFlare PoP serves how many of your audience’s session.</p>
+
+<ol>
+  <li>Make sure you are still signed in to <a href="https://www.google.com/analytics/web/#home/" target="_blank" rel="noopener noreferrer">Google Analytics</a>.</li>
+  <li>Select the <strong>Customization</strong> tab and click on <strong>New Custom Report</strong>.</li>
+  <li>
+<strong>Name</strong> your Custom Report here.</li>
+  <li>Select a Metric for which you want to see your Custom Dimensions. I recommend the metric “Sessions” within the “Users” Metric Group.</li>
+  <li>Next select the custom dimension that you created as the “Dimension Drilldown” (See Figure 3).</li>
+  <li>Click on the <strong>Save</strong> button.</li>
+</ol>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/10/CloudFlare-PoP-Utilization-Edit-Report.png" title="Figure 3: Create a Custom Report in Google Analytics " class="image-popup">
+<picture>
+  <source width="1184" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-320.webp 320w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-384.webp 384w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-512.webp 512w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-683.webp 683w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-800.webp 800w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-960.webp 960w, 
+
+ /content/uploads/2015/10/CloudFlare-PoP-Utilization-Edit-Report.webp 1184w" sizes="1184px"></source>
+  <source width="1184" data-srcset="
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-320.png 320w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-384.png 384w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-512.png 512w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-683.png 683w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-800.png 800w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-Edit-Report-960.png 960w, 
+
+ /content/uploads/2015/10/CloudFlare-PoP-Utilization-Edit-Report.png 1184w" sizes="1184px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/10/CloudFlare-PoP-Utilization-Edit-Report.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Create a Custom Report in Google Analytics ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Create a Custom Report in Google Analytics
+</figcaption>
+
+</figure>
+
+<p>The resulting Custom Report will show you how many session - in total numbers, but also in percent - were served by which CloudFlare PoP. Using the “Percantage” button you can quickly generate a pie chart with the data (See Figure 4). In the example below you can see that the three most used CloudFlare PoPs for this site are San Jose, Chicago and Frankfurt (Germany).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/10/CloudFlare-PoP-Utilization.png" title="Figure 4: Your CloudFlare PoP utilization " class="image-popup">
+<picture>
+  <source width="1185" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-320.webp 320w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-384.webp 384w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-512.webp 512w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-683.webp 683w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-800.webp 800w, 
+
+    
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-960.webp 960w, 
+
+ /content/uploads/2015/10/CloudFlare-PoP-Utilization.webp 1185w" sizes="1185px"></source>
+  <source width="1185" data-srcset="
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-320.png 320w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-384.png 384w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-512.png 512w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-683.png 683w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-800.png 800w, 
+
+    /content/resized/2015/10/CloudFlare-PoP-Utilization-960.png 960w, 
+
+ /content/uploads/2015/10/CloudFlare-PoP-Utilization.png 1185w" sizes="1185px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/10/CloudFlare-PoP-Utilization.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Your CloudFlare PoP utilization ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Your CloudFlare PoP utilization
+</figcaption>
+
+</figure>
+
+<h2 id="combining-the-new-custom-dimension-with-google-analytics-data">Combining the new custom dimension with Google Analytics Data</h2>
+
+<p>Now that we have the CloudFlare Point-of-Presence that served a web site in Google Analytics, we can leverage this data for many more interesting reports.</p>
+
+<p>One such report could be to map the location from where users connect to the CloudFlare PoPs. Figure 5 shows all 9 CloudFlare PoPs in the United States and the cities from which end-users connect to them, while accessing this blog.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/10/CloudFlare-US-PoPs.png" title="Figure 5: Geographic Reach of CloudFlare PoP for the US " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/10/CloudFlare-US-PoPs-320.webp 320w, 
+
+    
+    /content/resized/2015/10/CloudFlare-US-PoPs-384.webp 384w, 
+
+    
+    /content/resized/2015/10/CloudFlare-US-PoPs-512.webp 512w, 
+
+    
+    /content/resized/2015/10/CloudFlare-US-PoPs-683.webp 683w, 
+
+    
+    /content/resized/2015/10/CloudFlare-US-PoPs-800.webp 800w, 
+
+    
+    /content/resized/2015/10/CloudFlare-US-PoPs-960.webp 960w, 
+
+" sizes="1400px"></source>
+  <source data-srcset="
+
+    /content/resized/2015/10/CloudFlare-US-PoPs-320.png 320w, 
+
+    /content/resized/2015/10/CloudFlare-US-PoPs-384.png 384w, 
+
+    /content/resized/2015/10/CloudFlare-US-PoPs-512.png 512w, 
+
+    /content/resized/2015/10/CloudFlare-US-PoPs-683.png 683w, 
+
+    /content/resized/2015/10/CloudFlare-US-PoPs-800.png 800w, 
+
+    /content/resized/2015/10/CloudFlare-US-PoPs-960.png 960w, 
+
+" sizes="1400px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/10/CloudFlare-US-PoPs.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Geographic Reach of CloudFlare PoP for the US ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Geographic Reach of CloudFlare PoP for the US
+</figcaption>
+
+</figure>
+
+<p>In this report we can see various users not being served by the closest Point of Presence, but one farther away. This is mostly caused by the way that the Internet works and especially by some</p>
+
+<p><a href="https://blog.cloudflare.com/the-relative-cost-of-bandwidth-around-the-world/" target="_blank" rel="noopener noreferrer">ISPs not peering directly</a> with content or CDN networks. Instead these ISP use <a href="https://en.wikipedia.org/wiki/Tier_1_network" target="_blank" rel="noopener noreferrer">Tier 1 network provider</a>, which can cause these inefficiencies.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>Google Analytics Custom dimension provide a simple way to visualize the great benefits of the global presence of your website, thanks to CloudFlare. Leverage it to see the benefits to your website, while using CloudFlare.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#cloudflare" class="page__taxonomy-item" rel="tag">Cloudflare</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#google-analytics" class="page__taxonomy-item" rel="tag">Google-Analytics</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-10-04T13:50:53-07:00">October 04, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Track+your+CloudFlare+PoPs+usage+in+Google+Analytics%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F10%2F04%2Fcloudflare-pops-in-google-analytics%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F10%2F04%2Fcloudflare-pops-in-google-analytics%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F10%2F04%2Fcloudflare-pops-in-google-analytics%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F10%2F04%2Fcloudflare-pops-in-google-analytics%2F&amp;title=Track+your+CloudFlare+PoPs+usage+in+Google+Analytics" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2015/09/11/sddc-architecture-business-continuity-with-multiple-regions/" class="pagination--pager" title="SDDC Architecture - Business Continuity with multiple regions
+">Previous</a>
+    
+    
+      <a href="/2016/01/15/cf-redirect-to-social-media/" class="pagination--pager" title="CloudFlare: Redirect to Social Media on origin failure
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

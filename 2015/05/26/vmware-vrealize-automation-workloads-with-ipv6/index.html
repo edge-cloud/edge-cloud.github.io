@@ -1,0 +1,1076 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>VMware vRealize Automation workloads with IPv6 - Edge Cloud</title>
+<meta name="description" content="Workaround concepts for enabling VM workloads in VMware vRealize Automation for IPv6.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="VMware vRealize Automation workloads with IPv6">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/05/26/vmware-vrealize-automation-workloads-with-ipv6/">
+
+
+  <meta property="og:description" content="Workaround concepts for enabling VM workloads in VMware vRealize Automation for IPv6.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="VMware vRealize Automation workloads with IPv6">
+  <meta name="twitter:description" content="Workaround concepts for enabling VM workloads in VMware vRealize Automation for IPv6.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/05/26/vmware-vrealize-automation-workloads-with-ipv6/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-05-26T02:00:38-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/05/26/vmware-vrealize-automation-workloads-with-ipv6/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="VMware vRealize Automation workloads with IPv6">
+    <meta itemprop="description" content="Workaround concepts for enabling VM workloads in VMware vRealize Automation for IPv6.">
+    <meta itemprop="datePublished" content="May 26, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">VMware vRealize Automation workloads with IPv6
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#vrealize-automation-network-profiles">vRealize Automation Network profiles</a>
+    <ul>
+      <li><a href="#private">Private</a></li>
+      <li><a href="#nat">NAT</a></li>
+      <li><a href="#routed">Routed</a></li>
+      <li><a href="#external">External:</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#possible-workarounds-for-ipv6">Possible workarounds for IPv6</a>
+    <ul>
+      <li><a href="#external-profile-with-external-address-assignment">External profile with external address assignment</a></li>
+      <li><a href="#external-profile-with-3rd-party-software-router">External profile with 3rd party software router</a></li>
+      <li><a href="#route-profile-with-vra-workflow-based-address-assignment">Route profile with vRA workflow based address assignment</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Unfortunately VMware’s primary Cloud Management Platform (CMP) for the Enterprise, VMware vRealize Automation (vRA) does not support IPv6-enabled workloads out of the box. This applies to IPv6-only workloads as well as IPv4/IPv6 Dualstack workloads.</p>
+
+<p>The reason for this shortcoming can partially be found within vRA, which lacks the ability to manage the lifecycle of an IPv6 enabled VM as well as associated networks. But it is also due to the lacking support of automatic IPv6 address assignment towards VMs in VMware NSX, which provides advanced network capabilities in vRA.</p>
+
+<p>With various workarounds it is nevertheless possible to utilize VMware vRealize Automation with IPv6-enabled workloads. In this post I want to present three different approaches of such workarounds. They will focus on the NSX Edge device, as one of the main inhibitors and can be described with the following high-level themes: a) Remove, b) Replace, c) Script on top&lt;/li&gt;</p>
+
+<h1 id="vrealize-automation-network-profiles">vRealize Automation Network profiles</h1>
+
+<p>VMware’s vRealize Automation provides four different kinds of “network profiles”, which become part of a blueprint and therefore determine how the Virtual Machines within such a blueprint are connected to the network.</p>
+
+<p>Let’s have a brief look at each of them, in order to understand where to start with possible workarounds:</p>
+
+<h2 id="private">Private</h2>
+
+<p>Here the VMs of an instantiated blueprint would not have outbound connectivity, but instead all networking would be isolated (contained) within the instantiated blueprint. Such a network can include a virtual router but does not have to. For our IPv6 with VMware vRealize Automation (vRA) use case this profile is irrelevant (see Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/05/vRA_Profile_Private.png" title="Figure 1: vRA Network Profile: Private " class="image-popup">
+<picture>
+  <source width="522" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/05/vRA_Profile_Private-320.webp 320w, 
+
+    
+    /content/resized/2015/05/vRA_Profile_Private-384.webp 384w, 
+
+    
+    /content/resized/2015/05/vRA_Profile_Private-512.webp 512w, 
+
+ /content/uploads/2015/05/vRA_Profile_Private.webp 522w" sizes="522px"></source>
+  <source width="522" data-srcset="
+
+    /content/resized/2015/05/vRA_Profile_Private-320.png 320w, 
+
+    /content/resized/2015/05/vRA_Profile_Private-384.png 384w, 
+
+    /content/resized/2015/05/vRA_Profile_Private-512.png 512w, 
+
+ /content/uploads/2015/05/vRA_Profile_Private.png 522w" sizes="522px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/05/vRA_Profile_Private.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: vRA Network Profile: Private ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: vRA Network Profile: Private
+</figcaption>
+
+</figure>
+
+<h2 id="nat">NAT</h2>
+
+<p>Here the VMs of a blueprint connect to a virtual router – which becomes part of the blueprint. This virtual router connects to a (physical) upstream router. It connects the blueprint internal networks to the outside world via Network Address Translation (NAT).</p>
+
+<p>Important to point out here, that the NAT Gateway will be part of the blueprint, while the upstream router is not.</p>
+
+<p>This profile is also irrelevant for our IPv6 with VMware vRealize Automation (vRA) discussion as we do not want to (and realistically cannot) use NAT with IPv6 (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/05/vRA_Profile_NAT.png" title="Figure 2: vRealize Automation Network Profile: NAT " class="image-popup">
+<picture>
+  <source width="564" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/05/vRA_Profile_NAT-320.webp 320w, 
+
+    
+    /content/resized/2015/05/vRA_Profile_NAT-384.webp 384w, 
+
+    
+    /content/resized/2015/05/vRA_Profile_NAT-512.webp 512w, 
+
+ /content/uploads/2015/05/vRA_Profile_NAT.webp 564w" sizes="564px"></source>
+  <source width="564" data-srcset="
+
+    /content/resized/2015/05/vRA_Profile_NAT-320.png 320w, 
+
+    /content/resized/2015/05/vRA_Profile_NAT-384.png 384w, 
+
+    /content/resized/2015/05/vRA_Profile_NAT-512.png 512w, 
+
+ /content/uploads/2015/05/vRA_Profile_NAT.png 564w" sizes="564px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/05/vRA_Profile_NAT.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: vRealize Automation Network Profile: NAT ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: vRealize Automation Network Profile: NAT
+</figcaption>
+
+</figure>
+
+<h2 id="routed">Routed</h2>
+
+<p>This profile is very similar to the NAT profile, except that the virtual router does not provide NAT gateway capabilities, but instead routes the subnets (In the below figure it’s 3 of them: “Web”, “App”, and “Database”) to the upstream router via static, or better dynamic routing (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/05/vRA_Profile_Routed.png" title="Figure 3: vRealize Automation Network Profile: Routed " class="image-popup">
+<picture>
+  <source width="564" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/05/vRA_Profile_Routed-320.webp 320w, 
+
+    
+    /content/resized/2015/05/vRA_Profile_Routed-384.webp 384w, 
+
+    
+    /content/resized/2015/05/vRA_Profile_Routed-512.webp 512w, 
+
+ /content/uploads/2015/05/vRA_Profile_Routed.webp 564w" sizes="564px"></source>
+  <source width="564" data-srcset="
+
+    /content/resized/2015/05/vRA_Profile_Routed-320.png 320w, 
+
+    /content/resized/2015/05/vRA_Profile_Routed-384.png 384w, 
+
+    /content/resized/2015/05/vRA_Profile_Routed-512.png 512w, 
+
+ /content/uploads/2015/05/vRA_Profile_Routed.png 564w" sizes="564px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/05/vRA_Profile_Routed.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: vRealize Automation Network Profile: Routed ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: vRealize Automation Network Profile: Routed
+</figcaption>
+
+</figure>
+
+<p>When it comes to IPv6, we will have to work with the following limitations of VMware NSX in this scenario:</p>
+
+<ul>
+  <li>
+<strong>Static routing only:</strong> The Logical router above will only be able to use static routing, but no dynamic routing with IPv6.</li>
+  <li>
+<strong>Router address assignment:</strong> The logical router above will not be able to learn an IPv6 address via DHCPv6 or SLAAC for itself. Router interfaces here have to be configured manually.</li>
+  <li>
+<strong>VM address assignment:</strong> The virtual machines above will not be able to learn an IPv6 address via DHCPv6 or SLAAC from the Logical Router as the Logical Router cannot act as a DHCPv6 server or relay.</li>
+</ul>
+
+<p class="notice--info">As a side note: With IPv4, vRA will maintain a pool of IPv4 subnets, assign them to an instantiated blueprint and configure the dynamic IPv4 routing. This is not possible today with IPv6.</p>
+
+<h2 id="external">External:</h2>
+
+<p>Here all VMs in an instantiated blueprint would connect to pre-deployed network segments (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/05/vRA_Profile_External.png" title="Figure 4: vRealize Automation Network Profile: External " class="image-popup">
+<picture>
+  <source width="564" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/05/vRA_Profile_External-320.webp 320w, 
+
+    
+    /content/resized/2015/05/vRA_Profile_External-384.webp 384w, 
+
+    
+    /content/resized/2015/05/vRA_Profile_External-512.webp 512w, 
+
+ /content/uploads/2015/05/vRA_Profile_External.webp 564w" sizes="564px"></source>
+  <source width="564" data-srcset="
+
+    /content/resized/2015/05/vRA_Profile_External-320.png 320w, 
+
+    /content/resized/2015/05/vRA_Profile_External-384.png 384w, 
+
+    /content/resized/2015/05/vRA_Profile_External-512.png 512w, 
+
+ /content/uploads/2015/05/vRA_Profile_External.png 564w" sizes="564px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/05/vRA_Profile_External.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: vRealize Automation Network Profile: External ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: vRealize Automation Network Profile: External
+</figcaption>
+
+</figure>
+
+<p>For this approach various options exist:</p>
+
+<ul>
+  <li>These network segments can either be physical network (VLANs) or virtual networks (VXLANs). What they have in common: They need to be pre-deployed outside of vRA.</li>
+  <li>All VMs in a Blueprint can be attached to the same network or to different networks (see the three network example above).</li>
+  <li>Irrespective of how many networks the VMs are connected to, VMware NSX’ logical firewall can be used to create an experience similar to AWS security groups, where VMs are placed into a security group that enforces a coherent set of security rules.&lt;/ul&gt;</li>
+</ul>
+
+<h1 id="possible-workarounds-for-ipv6">Possible workarounds for IPv6</h1>
+
+<p>Now that we have set the stage with the above network profiles, we can look into possible ways to make this work. The following possibilities should be considered in this specific order due to the associated complexity and gained benefits:</p>
+
+<h2 id="external-profile-with-external-address-assignment">External profile with external address assignment</h2>
+<p>In this option network segments (either VLANs or VXLANs) would need to be setup outside of vRA. These network segments would provide the ability to handout IPv6 addresses via DHCPv6, SLAAC, or a <a href="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">combination of both</a> from a physical router.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/05/vRA_IPv6_External.png" title="Figure 5: Address assignment via DHCPv6 from upstream router " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/05/vRA_IPv6_External-320.webp 320w, 
+
+    
+    /content/resized/2015/05/vRA_IPv6_External-384.webp 384w, 
+
+    
+    /content/resized/2015/05/vRA_IPv6_External-512.webp 512w, 
+
+ /content/uploads/2015/05/vRA_IPv6_External.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/05/vRA_IPv6_External-320.png 320w, 
+
+    /content/resized/2015/05/vRA_IPv6_External-384.png 384w, 
+
+    /content/resized/2015/05/vRA_IPv6_External-512.png 512w, 
+
+ /content/uploads/2015/05/vRA_IPv6_External.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/05/vRA_IPv6_External.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Address assignment via DHCPv6 from upstream router ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Address assignment via DHCPv6 from upstream router
+</figcaption>
+
+</figure>
+
+<p>This approach has various levels of possibilities that could be used:</p>
+
+<ul>
+  <li>Flat network with single L2 segment vs. multiple function-based network segments (see 3 tier example above).</li>
+  <li>Use of NSX Distributed Firewall for Security groups or not. This model would be very similar to the traditional AWS EC2 Networking (the network design that was in place before AWS VPC was introduced).</li>
+</ul>
+
+<p><strong>Pro:</strong> Address Management is completely outside vRA and can be handled by traditional hardware routers and IPAM solutions (e.g. Infoblox)</p>
+
+<p><strong>Con:</strong> Limited possibilities for network design as part of a blueprint / architecture.</p>
+
+<h2 id="external-profile-with-3rd-party-software-router">External profile with 3rd party software router</h2>
+
+<p>In this option you would try to emulate the “Routed” profile with a 3rd party software router (basically a small Linux VM that is pre-configured for IPv6 and/or can accept configuration changes via a self-made API).</p>
+
+<p>In this case you would especially want automate the IPv6 address assignment for the VMs living on the network segments within the blueprint as much as possible (See the example with the 3 segments in the figure below). A very elegant way to do this would be to look at the way how major Service Providers (e.g. AT&amp;T or Comcast) assign IPv6 addresses to their customer gateways (CPE). This address assignment can be done via <a href="https://en.wikipedia.org/wiki/Prefix_delegation" target="_blank" rel="noopener noreferrer">DHCPv6-PD (Prefix Delegation)</a> (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/05/vRA_IPv6_DHCP-PD.png" title="Figure 6: Logical Router acting as DHCPv6-PD CPE device " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/05/vRA_IPv6_DHCP-PD-320.webp 320w, 
+
+    
+    /content/resized/2015/05/vRA_IPv6_DHCP-PD-384.webp 384w, 
+
+    
+    /content/resized/2015/05/vRA_IPv6_DHCP-PD-512.webp 512w, 
+
+ /content/uploads/2015/05/vRA_IPv6_DHCP-PD.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/05/vRA_IPv6_DHCP-PD-320.png 320w, 
+
+    /content/resized/2015/05/vRA_IPv6_DHCP-PD-384.png 384w, 
+
+    /content/resized/2015/05/vRA_IPv6_DHCP-PD-512.png 512w, 
+
+ /content/uploads/2015/05/vRA_IPv6_DHCP-PD.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/05/vRA_IPv6_DHCP-PD.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Logical Router acting as DHCPv6-PD CPE device ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Logical Router acting as DHCPv6-PD CPE device
+</figcaption>
+
+</figure>
+
+<p>Looking at the example above, here is what would happen in this scenario:</p>
+
+<ul>
+  <li>The 3rd party virtual router would request via DHCPv6-PD a /56 prefix for the entire blueprint.</li>
+  <li>Each blueprint internal network segment (“Web”, “App”, and “Database” in the example above), would receive a /64 segment out of the assigned /56 segment.</li>
+  <li>Address assignment to VMs on the blueprint internal network segments could happen via DHPCv6, SLAAC, or a combination of both.</li>
+  <li>Dynamic routing would not be necessary. Each internal network segment uses the 3rd party virtual router as Def. gw. The 3rd party virtual router uses the upstream router as the Def. GW.</li>
+  <li>The physical upstream router has a static route for the /56 network pointing to the 3rd party virtual router (this is done automatically by the route as part of DHCPv6-PD.</li>
+</ul>
+
+<p>If desired it is possible to run additional services (e.g. load balancer, firewall via IPtables) on this 3rd party virtual router and make configuration accessible from vRA workflows via a simple custom API. As an alternative it would be possible to use a specialized Linux router distribution such as <a href="https://en.wikipedia.org/wiki/OpenWrt" target="_blank" rel="noopener noreferrer">OpenWRT</a> and allow configuration of the router from within the Blueprint via a Web GUI.</p>
+
+<p><strong>Pro:</strong> Regain advanced possibilities for network design within a blueprint / architecture, while allowing address assignment to all VMs via DHCPv6 and/or SLAAC. Leverage SP-proven network concepts to treat applications like customer networks.</p>
+
+<p><strong>Con:</strong> Need to engineer and maintain a 3rd party virtual router based on a standard Linux distribution.</p>
+
+<h2 id="route-profile-with-vra-workflow-based-address-assignment">Route profile with vRA workflow based address assignment</h2>
+
+<p>In this option address assignment to the end-user VMs, but also the virtual router would not happen via DHCPv6 or SLAAC, but statically. In the case of the NSX Edge based virtual router this would need to happen via API calls to the NSX Manager and in the case of the end-user VMs this would happen via Guest Customization through the VMware Tools. As none of these assignment capabilities, as well as the capability to manage pools of IPv6 prefixes and sub-prefixes exist in vRA today, this functionality would have to be written via vRA workflows.</p>
+
+<p>On the other hand, this approach would allow to use all of the NSX Edge based network services (load balancer, firewall) for IPv6, although configuration of these would need to happen via vRA workflows as management capabilities of these services doesn’t come out of the box via vRA.</p>
+
+<p><strong>Pro:</strong> Ability to use the NSX based Edge device as router and for network services</p>
+
+<p><strong>Con:</strong> Requirement to manage IPv6 addresses statically and maintain IPv6 prefix pools manually. Need to custom develop missing software capabilities via custom workflows in vRA.</p>
+
+<p class="notice--info">One important thing to keep in mind: Any of the L2 network transport capabilities (vDS, vSS, VXLAN) in vSphere will transport IPv6 traffic. This is different from e.g. AWS, where network segments that look like L2 (e.g. VPC subnet) are not actually L2 and will filter out any kind of IPv6 traffic. The focus of the workaround is therefore almost exclusively on the L3 element.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This post hopefully showcased that albeit not trivial, it is possible to leverage VMware vRealize Automation with IPv6-enabled workloads, through various workarounds.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#nsx" class="page__taxonomy-item" rel="tag">NSX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-05-26T02:00:38-07:00">May 26, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=VMware+vRealize+Automation+workloads+with+IPv6%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F05%2F26%2Fvmware-vrealize-automation-workloads-with-ipv6%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F05%2F26%2Fvmware-vrealize-automation-workloads-with-ipv6%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F05%2F26%2Fvmware-vrealize-automation-workloads-with-ipv6%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F05%2F26%2Fvmware-vrealize-automation-workloads-with-ipv6%2F&amp;title=VMware+vRealize+Automation+workloads+with+IPv6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2015/03/18/ipv6-in-vsphere-6/" class="pagination--pager" title="IPv6 in vSphere 6
+">Previous</a>
+    
+    
+      <a href="/2015/07/20/typo3-with-cloudflare/" class="pagination--pager" title="TYPO3 with Cloudflare
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

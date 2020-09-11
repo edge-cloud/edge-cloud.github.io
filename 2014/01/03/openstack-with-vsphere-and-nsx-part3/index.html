@@ -1,0 +1,1507 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>OpenStack with vSphere and NSX - Part 3: Install and configure the Open vSwitch inside the ESXi hosts - Edge Cloud</title>
+<meta name="description" content="Install and configure the Open vSwitch inside the ESXi hosts for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="OpenStack with vSphere and NSX - Part 3: Install and configure the Open vSwitch inside the ESXi hosts">
+<meta property="og:url" content="https://www.edge-cloud.net/2014/01/03/openstack-with-vsphere-and-nsx-part3/">
+
+
+  <meta property="og:description" content="Install and configure the Open vSwitch inside the ESXi hosts for a setup including VMware vSphere, VMware NSX and OpenStack.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 3: Install and configure the Open vSwitch inside the ESXi hosts">
+  <meta name="twitter:description" content="Install and configure the Open vSwitch inside the ESXi hosts for a setup including VMware vSphere, VMware NSX and OpenStack.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/01/03/openstack-with-vsphere-and-nsx-part3/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2014-01-03T00:32:41-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2014/01/03/openstack-with-vsphere-and-nsx-part3/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="OpenStack with vSphere and NSX - Part 3: Install and configure the Open vSwitch inside the ESXi hosts">
+    <meta itemprop="description" content="Install and configure the Open vSwitch inside the ESXi hosts for a setup including VMware vSphere, VMware NSX and OpenStack.">
+    <meta itemprop="datePublished" content="January 03, 2014">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">OpenStack with vSphere and NSX - Part 3: Install and configure the Open vSwitch inside the ESXi hosts
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#verify-pre-requisites">Verify pre-requisites</a></li>
+  <li><a href="#install-the-nsx-vswitch">Install the NSX vSwitch</a></li>
+  <li><a href="#configure-the-nsx-vswitch">Configure the NSX vSwitch</a></li>
+  <li><a href="#verify-the-setup">Verify the setup</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Welcome to part 3 of the <a href="/2013/12/12/openstack-vsphere-nsx/" title="OpenStack with vSphere and NSX">series</a> on installing OpenStack with VMware vSphere and VMware NSX. This series shows the deployment of an OpenStack cloud that leverages VMware vSphere – along with it’s well-known enterprise-class benefits such as VMotion – as the underlying Hypervisor. In addition, network virtualization within OpenStack will be provided via NSX as a Neutron plugin. This allows the creation of virtual networks within OpenStack that consist of L2 segments and can be interconnected via L3 to each other or the outside world.</p>
+
+<p>In the <a href="/2013/12/27/openstack-with-vsphere-and-nsx-part2/">previous article: “OpenStack with vSphere and NSX – Part 2: Create and configure the VMware NSX cluster”</a> we completed the basic configuration of the NSX cluster via the NSX Manager, by adding the gateway and service node to the NSX cluster. This article will highlight the installation and configuration of the Open vSwitch inside the ESXi hosts.</p>
+
+<h1 id="verify-pre-requisites">Verify pre-requisites</h1>
+
+<p>The NSX vSwitch is a virtual switch for the VMware vSphere platform, similar to its brothers the Standard vSwitch and the Virtual Distributed Switch. As such the NSX vSwitch needs a dedicated physical uplink (vmnic) to connect to the upstream network. Before proceeding to the actual installation, ensure that you have a vmnic interface available on all your ESXi hosts (See Figure 1). In this guide I will be using vmnic1 for all ESXi hosts.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS01.png" title="Figure 1: Ensure a free vmnic is available on ESXi hosts " class="image-popup">
+<picture>
+  <source width="980" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS01-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS01-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS01-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS01-683.webp 683w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS01-800.webp 800w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS01-960.webp 960w, 
+
+ /content/uploads/2013/12/ESXwithOVS01.webp 980w" sizes="980px"></source>
+  <source width="980" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS01-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS01-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS01-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS01-683.png 683w, 
+
+    /content/resized/2013/12/ESXwithOVS01-800.png 800w, 
+
+    /content/resized/2013/12/ESXwithOVS01-960.png 960w, 
+
+ /content/uploads/2013/12/ESXwithOVS01.png 980w" sizes="980px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Ensure a free vmnic is available on ESXi hosts ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Ensure a free vmnic is available on ESXi hosts
+</figcaption>
+
+</figure>
+
+<h1 id="install-the-nsx-vswitch">Install the NSX vSwitch</h1>
+
+<p>The NSX vSwitch is provided as a <a href="http://blogs.vmware.com/vsphere/2011/09/whats-in-a-vib.html" target="_blank" rel="noopener noreferrer">vSphere Installation Bundle (VIB)</a> that needs to be installed on each ESXi hosts that you plan on using. While various methods exist for installing a VIB on an ESXi host, this article will showcase the installation via an SSH connection.</p>
+
+<p>First make the VIB file available to the ESXi hosts via e.g. shared storage (See Figure 2). This will greatly simplify the work associated with copying the VIB file to the ESXi hosts.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS02.png" title="Figure 2: Upload the NSX vSwitch vib to storage accessible by ESXi " class="image-popup">
+<picture>
+  <source width="981" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS02-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS02-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS02-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS02-683.webp 683w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS02-800.webp 800w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS02-960.webp 960w, 
+
+ /content/uploads/2013/12/ESXwithOVS02.webp 981w" sizes="981px"></source>
+  <source width="981" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS02-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS02-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS02-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS02-683.png 683w, 
+
+    /content/resized/2013/12/ESXwithOVS02-800.png 800w, 
+
+    /content/resized/2013/12/ESXwithOVS02-960.png 960w, 
+
+ /content/uploads/2013/12/ESXwithOVS02.png 981w" sizes="981px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Upload the NSX vSwitch vib to storage accessible by ESXi ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Upload the NSX vSwitch vib to storage accessible by ESXi
+</figcaption>
+
+</figure>
+
+<p>Next temporarily enable SSH access to the ESXi hosts (See Figure 3). After we are done with the installation of the VIB file, you can turn off the SSH daemon again.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS04.png" title="Figure 3: Enable SSH access to ESXi hosts " class="image-popup">
+<picture>
+  <source width="727" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS04-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS04-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS04-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS04-683.webp 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS04.webp 727w" sizes="727px"></source>
+  <source width="727" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS04-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS04-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS04-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS04-683.png 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS04.png 727w" sizes="727px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS04.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Enable SSH access to ESXi hosts ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Enable SSH access to ESXi hosts
+</figcaption>
+
+</figure>
+
+<p>After you have enabled SSH access the ESXi hosts, connect to your first ESXi host via SSH. Start the installation of the NSX vSwitch VIB file via the command <code class="highlighter-rouge">esxcli software vib install --no-sig-check -v &lt;path and filename&gt;</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ # esxcli software vib install --no-sig-check -v /vmfs/volumes/SiteA-IPv6-NFS/vmware-nsxvswitch-2.0.1-30494-release.vib
+Installation Result
+   Message: Operation finished successfully.
+   Reboot Required: false
+   VIBs Installed: VMware_bootbank_vmware-nsxvswitch_2.0.1-30494
+   VIBs Removed:
+   VIBs Skipped:
+~ #
+</code></pre></div></div>
+
+<p>Ensure that the VIB is installed successfully.</p>
+
+<h1 id="configure-the-nsx-vswitch">Configure the NSX vSwitch</h1>
+
+<p>While the configuration of the Standard vSwitch and the virtual Distributed Switch is usually done via vCenter, the NSX vSwitch is configured via the CLI. Therefore let’s go ahead and configure the NSX vSwitch for this host.</p>
+
+<p>Start by linking the NSX vSwitch to a physical uplink interface (vmnic). This is done via the command <code class="highlighter-rouge">nsxcli uplink/connect &lt;interface&gt;</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ # nsxcli uplink/connect vmnic1
+~ #
+</code></pre></div></div>
+
+<p>Next we configure the IP address for the transport endpoint. This transport endpoint creates overlay tunnels with other transport endpoints, such as Hypervisors, Gateway nodes and Service Nodes. The NSX vSwitch uses a separate IP stack for this, which means that the VMWare NSX transport endpoint has its own default gateway.</p>
+
+<p>Set the IP address of the transport endpoint with the command <code class="highlighter-rouge">nsxcli uplink/set-ip &lt;interface&gt; &lt;ip address&gt; &lt;netmask&gt;</code>:</p>
+
+<p class="notice--info"><strong>Note:</strong> If the physical switchport that this vmnic connects to is not configured as an access port but as a trunk, you will need to also specify the correct VLAN to be used with the command <code class="highlighter-rouge">nsxcli uplink/set-ip &lt;interface&gt; &lt;ip address&gt; &lt;netmask&gt; vlan=&lt;id&gt;</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ # nsxcli uplink/set-ip vmnic1 192.168.110.121 255.255.255.0
+~ #
+</code></pre></div></div>
+
+<p>Next, set the default gateway with the command <code class="highlighter-rouge">nsxcli gw/set tunneling &lt;ip address of default gateway&gt;</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ # nsxcli gw/set tunneling 192.168.110.2
+~ #
+</code></pre></div></div>
+
+<p>Next is the creation of a Transport-Net Bridge to which Virtual Machines will later connect to. The name of this Bridge needs to be known to our OpenStack installation for the architecture to work. As we will be using <a href="https://communities.vmware.com/community/vmtn/openstack/" target="_blank" rel="noopener noreferrer">vSphere OpenStack Virtual Appliance (VOVA)</a> this uuid and name must be <strong>NSX-Bridge</strong>.</p>
+
+<p>Create the NSX bridge with the command <code class="highlighter-rouge">nsxcli network/add &lt;UUID&gt; &lt;Name&gt;</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ # nsxcli network/add NSX-Bridge NSX-Bridge nsx.network manual
+success
+~ #
+</code></pre></div></div>
+
+<p>Similar to the NSX appliances, the next step registers the NSX vSwitch with the NSX controller. First use the command <code class="highlighter-rouge">nsxcli manager/set ssl:&lt;IP address of a NSX controller node&gt;</code> to point the NSX vSwitch to the NSX controller. In the case of an NSX controller cluster you can specify any IP address of a cluster member.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ # nsxcli manager/set ssl:192.168.110.101
+~ #
+</code></pre></div></div>
+
+<p>Next extract the SSL certificate from the NSX vSwitch with the command <code class="highlighter-rouge">cat /etc/nsxvswitch/nsxvswitch-cert.pem</code>.</p>
+
+<p>Copy the text including the line <code class="highlighter-rouge">----BEGIN CERTIFICATE----</code> and <code class="highlighter-rouge">----END CERTIFICATE----</code> (See Figure 4). You will need this text in the next step.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS06.png" title="Figure 4: NSX OVS SSL certificate displayed for an ESXi host " class="image-popup">
+<picture>
+  <source width="663" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS06-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS06-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS06-512.webp 512w, 
+
+ /content/uploads/2013/12/ESXwithOVS06.webp 663w" sizes="663px"></source>
+  <source width="663" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS06-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS06-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS06-512.png 512w, 
+
+ /content/uploads/2013/12/ESXwithOVS06.png 663w" sizes="663px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS06.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: NSX OVS SSL certificate displayed for an ESXi host ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: NSX OVS SSL certificate displayed for an ESXi host
+</figcaption>
+
+</figure>
+
+<p>Don’t close the SSH session yet. We will need to come back.</p>
+
+<p>Return to the NSX Manager Dashboard. Within the Summary of Transport Components section, click on Add within the Hypervisor row (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS07.png" title="Figure 5: Add a new Hypervisor in NSX Manager " class="image-popup">
+<picture>
+  <source width="423" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS07-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS07-384.webp 384w, 
+
+ /content/uploads/2013/12/ESXwithOVS07.webp 423w" sizes="423px"></source>
+  <source width="423" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS07-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS07-384.png 384w, 
+
+ /content/uploads/2013/12/ESXwithOVS07.png 423w" sizes="423px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS07.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Add a new Hypervisor in NSX Manager ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Add a new Hypervisor in NSX Manager
+</figcaption>
+
+</figure>
+
+<p>Confirm that the pre-selected transport type is <strong>Hypervisor</strong> (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS08.png" title="Figure 6: Create Hypervisor - Step 1 " class="image-popup">
+<picture>
+  <source width="796" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS08-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS08-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS08-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS08-683.webp 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS08.webp 796w" sizes="796px"></source>
+  <source width="796" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS08-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS08-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS08-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS08-683.png 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS08.png 796w" sizes="796px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS08.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Create Hypervisor - Step 1 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Create Hypervisor - Step 1
+</figcaption>
+
+</figure>
+
+<p>Give the gateway node a name (See Figure 7). I usually pick the hostname.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS09.png" title="Figure 7: Create Hypervisor - Step 2 " class="image-popup">
+<picture>
+  <source width="796" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS09-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS09-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS09-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS09-683.webp 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS09.webp 796w" sizes="796px"></source>
+  <source width="796" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS09-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS09-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS09-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS09-683.png 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS09.png 796w" sizes="796px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS09.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Create Hypervisor - Step 2 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Create Hypervisor - Step 2
+</figcaption>
+
+</figure>
+
+<p>As the <em>Integration Bridge Id</em> specify <strong>br-int</strong> (See Figure 8). Leave the other values with the default setting. The Tunnel Keep-alive Spray would randomize TCP source ports for STT tunnel keep-alives for packet spray across active network path.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS10.png" title="Figure 8: Create Hypervisor - Step 3 " class="image-popup">
+<picture>
+  <source width="794" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS10-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS10-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS10-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS10-683.webp 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS10.webp 794w" sizes="794px"></source>
+  <source width="794" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS10-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS10-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS10-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS10-683.png 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS10.png 794w" sizes="794px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS10.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Create Hypervisor - Step 3 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Create Hypervisor - Step 3
+</figcaption>
+
+</figure>
+
+<p>Select the <em>Credential Type</em> of <strong>Security Certificate</strong> and paste the previously copied certificate into the <em>Security Certificate</em> field (See Figure 9).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS11.png" title="Figure 9: Create Hypervisor - Step 4 " class="image-popup">
+<picture>
+  <source width="797" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS11-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS11-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS11-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS11-683.webp 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS11.webp 797w" sizes="797px"></source>
+  <source width="797" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS11-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS11-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS11-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS11-683.png 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS11.png 797w" sizes="797px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS11.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Create Hypervisor - Step 4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Create Hypervisor - Step 4
+</figcaption>
+
+</figure>
+
+<p>Create a transport connector for the NSX vSwitch using <strong>STT</strong> as the <em>transport type</em> and the IP address that you configured a few steps earlier (See Figure 10).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS14.png" title="Figure 10: Create Hypervisor - Step 5 " class="image-popup">
+<picture>
+  <source width="797" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS14-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS14-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS14-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS14-683.webp 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS14.webp 797w" sizes="797px"></source>
+  <source width="797" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS14-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS14-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS14-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS14-683.png 683w, 
+
+ /content/uploads/2013/12/ESXwithOVS14.png 797w" sizes="797px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS14.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Create Hypervisor - Step 5 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Create Hypervisor - Step 5
+</figcaption>
+
+</figure>
+
+<p>Return to the NSX Manager Dashboard, where you will see the new Hypervisor within the Summary of Transport Components section, within the Hypervisors row. Click on the number for active hypervisors to see more details (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS15.png" title="Figure 11: ESXi successfully added as Hypervisor " class="image-popup">
+<picture>
+  <source width="424" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS15-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS15-384.webp 384w, 
+
+ /content/uploads/2013/12/ESXwithOVS15.webp 424w" sizes="424px"></source>
+  <source width="424" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS15-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS15-384.png 384w, 
+
+ /content/uploads/2013/12/ESXwithOVS15.png 424w" sizes="424px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS15.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: ESXi successfully added as Hypervisor ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: ESXi successfully added as Hypervisor
+</figcaption>
+
+</figure>
+
+<p>You should see the ESXi host with the NSX vSwitch successfully added as a hypervisor with the Connection status as “Up” (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS16.png" title="Figure 12: Hypervisor displaying status of “Connected” " class="image-popup">
+<picture>
+  <source width="978" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS16-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS16-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS16-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS16-683.webp 683w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS16-800.webp 800w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS16-960.webp 960w, 
+
+ /content/uploads/2013/12/ESXwithOVS16.webp 978w" sizes="978px"></source>
+  <source width="978" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS16-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS16-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS16-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS16-683.png 683w, 
+
+    /content/resized/2013/12/ESXwithOVS16-800.png 800w, 
+
+    /content/resized/2013/12/ESXwithOVS16-960.png 960w, 
+
+ /content/uploads/2013/12/ESXwithOVS16.png 978w" sizes="978px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS16.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Hypervisor displaying status of “Connected” ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Hypervisor displaying status of “Connected”
+</figcaption>
+
+</figure>
+
+<p>As a last step we need to instruct VMware NSX to export the OpenStack virtual machine virtual interface (vif) UUID as extra information besides the VMware vSphere one. This is necessary as OpenStack uses a different UUID than VMware vSphere does. Without this setting OpenStack wouldn’t “recognize” a VM that it created for further operations via the Neutron API.</p>
+
+<p>Instruct NSX to allow custom vifs with the command <code class="highlighter-rouge">nsxd --allow-custom-vifs</code>. When asked for a username and password, enter the username and password for the ESXi host.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ # nsxd --allow-custom-vifs
+2013-12-18T19:50:15Z|00001|ovs_esxd|INFO|Normal operation
+username : root
+Password:
+WARNING: can't open config file: /etc/pki/tls/openssl.cnf
+nsxd: NSXD will be restarted now.
+Killing nsxd (227588).
+2013-12-18T19:50:21Z|00001|ovs_esxd|INFO|Normal operation
+WARNING: can't open config file: /etc/pki/tls/openssl.cnf
+Starting nsxd.
+~ #
+</code></pre></div></div>
+
+<p>You can safely ignore the warning message about the config file <code class="highlighter-rouge">/etc/pki/tls/openssl.cnf</code>.</p>
+
+<p>Instead verify that the configuration change has been applied with the command <code class="highlighter-rouge">nsxcli custom-vifs/show</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ # nsxcli custom-vifs/show
+Custom-VIFs: Enabled
+~ #
+</code></pre></div></div>
+
+<p>Return to the <em>vSphere Web Client</em> where you can see vmnic1 connected to the NSX vSwitch (See Figure 13).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS17.png" title="Figure 13: NSX vSwitch for ESXi visible in vSphere Web Client " class="image-popup">
+<picture>
+  <source width="978" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS17-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS17-384.webp 384w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS17-512.webp 512w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS17-683.webp 683w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS17-800.webp 800w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS17-960.webp 960w, 
+
+ /content/uploads/2013/12/ESXwithOVS17.webp 978w" sizes="978px"></source>
+  <source width="978" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS17-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS17-384.png 384w, 
+
+    /content/resized/2013/12/ESXwithOVS17-512.png 512w, 
+
+    /content/resized/2013/12/ESXwithOVS17-683.png 683w, 
+
+    /content/resized/2013/12/ESXwithOVS17-800.png 800w, 
+
+    /content/resized/2013/12/ESXwithOVS17-960.png 960w, 
+
+ /content/uploads/2013/12/ESXwithOVS17.png 978w" sizes="978px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS17.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: NSX vSwitch for ESXi visible in vSphere Web Client ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: NSX vSwitch for ESXi visible in vSphere Web Client
+</figcaption>
+
+</figure>
+
+<p>Repeat the above steps for any additional ESX host that you want to use with this setup.</p>
+
+<h1 id="verify-the-setup">Verify the setup</h1>
+
+<p>After you have installed and configured the NSX vSwitch on all Hypervisors, you can see the results in the NSX Manager Dashboard (See Figure 14).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/12/ESXwithOVS18.png" title="Figure 14: Two ESXi hosts added the NSX cluster " class="image-popup">
+<picture>
+  <source width="427" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/12/ESXwithOVS18-320.webp 320w, 
+
+    
+    /content/resized/2013/12/ESXwithOVS18-384.webp 384w, 
+
+ /content/uploads/2013/12/ESXwithOVS18.webp 427w" sizes="427px"></source>
+  <source width="427" data-srcset="
+
+    /content/resized/2013/12/ESXwithOVS18-320.png 320w, 
+
+    /content/resized/2013/12/ESXwithOVS18-384.png 384w, 
+
+ /content/uploads/2013/12/ESXwithOVS18.png 427w" sizes="427px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/12/ESXwithOVS18.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Two ESXi hosts added the NSX cluster ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Two ESXi hosts added the NSX cluster
+</figcaption>
+
+</figure>
+
+<p>This completes the installation of the NSX cluster, including ESXi as Hypervisors. Next in the <a href="/2013/12/12/openstack-vsphere-nsx/" title="OpenStack with vSphere and NSX">series</a> on OpenStack with vSphere and NSX is <a href="/2014/01/08/openstack-vsphere-nsx-part4/">Part 4: “OpenStack with vSphere and NSX – Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)”</a> with the import and configuration of the VMware vSphere OpenStack Virtual Appliance (VOVA). While it would be possible to use vSphere and NSX without OpenStack, it would require either another Cloud Management System (CMS) or manual creation of virtual network and NIC bindings via the ESXi CLI. As this goes beyond the simple setup that I want to showcase here, I will not include it.</p>
+
+<p>Instead the next article highlights the easy to use VMware vSphere OpenStack Virtual Appliance (VOVA), an easy-to-use appliance that was built to simplify OpenStack deployment into a VMware vSphere environment for test, proof-of-concept and education purposes. VOVA runs all of the required OpenStack services (Nova, Glance, Cinder, Neutron, Keystone, and Horizon) in a single Ubuntu Linux appliance. Therefore you need to be a bit more patient before we can reap the fruits of our labor.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#nsx" class="page__taxonomy-item" rel="tag">NSX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#openstack" class="page__taxonomy-item" rel="tag">OpenStack</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vmware" class="page__taxonomy-item" rel="tag">VMware</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-01-03T00:32:41-08:00">January 03, 2014</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+3%3A+Install+and+configure+the+Open+vSwitch+inside+the+ESXi+hosts%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+3%3A+Install+and+configure+the+Open+vSwitch+inside+the+ESXi+hosts" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/12/27/openstack-with-vsphere-and-nsx-part2/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 2: Create and configure the VMware NSX cluster
+">Previous</a>
+    
+    
+      <a href="/2014/01/08/openstack-vsphere-nsx-part4/" class="pagination--pager" title="OpenStack with vSphere and NSX - Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

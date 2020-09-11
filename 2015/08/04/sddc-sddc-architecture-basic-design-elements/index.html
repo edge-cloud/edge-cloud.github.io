@@ -1,0 +1,944 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>SDDC Architecture – Basic Design Elements - Edge Cloud</title>
+<meta name="description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="SDDC Architecture – Basic Design Elements">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/08/04/sddc-sddc-architecture-basic-design-elements/">
+
+
+  <meta property="og:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="SDDC Architecture – Basic Design Elements">
+  <meta name="twitter:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/08/04/sddc-sddc-architecture-basic-design-elements/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-08-04T07:59:10-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/08/04/sddc-sddc-architecture-basic-design-elements/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="SDDC Architecture – Basic Design Elements">
+    <meta itemprop="description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
+    <meta itemprop="datePublished" content="August 04, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">SDDC Architecture – Basic Design Elements
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>This article is part of a <a href="/2015/02/20/sddc-architecture-introduction/">series of articles</a>, focusing on the architecture of an SDDC as well as some of its design elements.</p>
+
+<h1 id="requirements">Requirements</h1>
+
+<p>A Software Defined Data Center promises to be the new underpinning or platform for delivering today’s and tomorrow’s IT services. As such this next generation infrastructure needs to address some shortcomings of today’s infrastructure in order to be successful:</p>
+
+<ul>
+  <li>
+<strong>Highly automated operation at Scale:</strong> Leaner organization that scales sub-linearly with an operating model build around automation. Leverage modular web-scale designs for unhampered scalability.</li>
+  <li>
+<strong>Hardware and Software efficiencies:</strong> Support on-demand scaling for varying capacity needs. Improved resource pooling to drive increased utilization of resources and reduce cost.</li>
+  <li>
+<strong>New and old business needs:</strong> Support legacy applications with traditional business continuity and disaster recovery, besides new cloud-native applications.</li>
+</ul>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The SDDC architecture is based on five basic design elements, which we will cover in this post in more detail (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/07/DesignElements.png" title="Figure 1: Basic SDDC Design Elements " class="image-popup">
+<picture>
+  <source width="534" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/07/DesignElements-320.webp 320w, 
+
+    
+    /content/resized/2015/07/DesignElements-384.webp 384w, 
+
+    
+    /content/resized/2015/07/DesignElements-512.webp 512w, 
+
+ /content/uploads/2015/07/DesignElements.webp 534w" sizes="534px"></source>
+  <source width="534" data-srcset="
+
+    /content/resized/2015/07/DesignElements-320.png 320w, 
+
+    /content/resized/2015/07/DesignElements-384.png 384w, 
+
+    /content/resized/2015/07/DesignElements-512.png 512w, 
+
+ /content/uploads/2015/07/DesignElements.png 534w" sizes="534px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/07/DesignElements.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Basic SDDC Design Elements ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Basic SDDC Design Elements
+</figcaption>
+
+</figure>
+
+<p>These design elements allow us achieve the previously stated design goals for an SDDC and are crucial to its success. They allow us to create a simple, yet powerful design.</p>
+
+<h1 id="layered-logical-model">Layered logical model</h1>
+
+<p>Basing the SDDC on a <a href="/2015/02/20/sddc-architecture-introduction/">layered logical model</a> enables a very high level of modularity (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/02/SDDC_Layers.png" title="Figure 2: Layered Architecture of a Software Defined Data Center " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/02/SDDC_Layers-320.webp 320w, 
+
+    
+    /content/resized/2015/02/SDDC_Layers-384.webp 384w, 
+
+    
+    /content/resized/2015/02/SDDC_Layers-512.webp 512w, 
+
+ /content/uploads/2015/02/SDDC_Layers.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/02/SDDC_Layers-320.png 320w, 
+
+    /content/resized/2015/02/SDDC_Layers-384.png 384w, 
+
+    /content/resized/2015/02/SDDC_Layers-512.png 512w, 
+
+ /content/uploads/2015/02/SDDC_Layers.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/02/SDDC_Layers.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Layered Architecture of a Software Defined Data Center ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Layered Architecture of a Software Defined Data Center
+</figcaption>
+
+</figure>
+
+<p>With this approach it is possible to replace the Cloud Management System (CMS) or even to run multiple CMS at the same time, on top of the same Virtual Infrastructure.</p>
+
+<p>This means that VMware Integrated OpenStack (VIO) could easily replace VMware vRealize Automation as the CMS. As this change solely happens in the Cloud Management Layer, no changes are necessary to the underlying Virtual Infrastructure Layer or any other layer.</p>
+
+<p>Or in another scenario it would be possible to run both VMware vCloud Director (vCD) and VMware Integrated OpenStack in parallel within the Cloud Management Layer on top of the same Virtual Infrastructure Layer.</p>
+
+<p>It’s important to point out that in this case workloads would be exclusively managed by one of the two CMS.</p>
+
+<h1 id="pod--core-concept">POD / Core concept</h1>
+
+<p>The POD and core concept leverages individually designed <a href="https://en.wikipedia.org/wiki/Point_of_delivery_(networking)" target="_blank" rel="noopener noreferrer">point-of-delivery (POD)</a>, which connect to a common routed core layer. The routed core spans multiple PODs of different type and generation, treating them as an atomic building block and providing fast and simple interconnect.</p>
+
+<p>This approach of scaling out in concrete chunks matches the incremental demand of modern data centers: PODs are designed, engineered, installed and retired as a distinct unit. As such an SDDC can comprise multiple generations of a pod, sitting next to each other, attached to the same shared core and allow an iterative approach, where each pod generation improves on the previous one.</p>
+
+<p>Further splitting PODs by functional capability into Storage POD, Management POD, Compute POD and Network Edge POD, you also gain the ability to easily scale your SDDC capacity and capability based on demand, leading to even higher flexibility (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/VMWare_Pod_Design1.png" title="Figure 3: POD / Core concept with L3 Spine / Leaf network " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design1-320.webp 320w, 
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design1-384.webp 384w, 
+
+    
+    /content/resized/2015/08/VMWare_Pod_Design1-512.webp 512w, 
+
+ /content/uploads/2015/08/VMWare_Pod_Design1.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/08/VMWare_Pod_Design1-320.png 320w, 
+
+    /content/resized/2015/08/VMWare_Pod_Design1-384.png 384w, 
+
+    /content/resized/2015/08/VMWare_Pod_Design1-512.png 512w, 
+
+ /content/uploads/2015/08/VMWare_Pod_Design1.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/VMWare_Pod_Design1.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: POD / Core concept with L3 Spine / Leaf network ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: POD / Core concept with L3 Spine / Leaf network
+</figcaption>
+
+</figure>
+
+<h1 id="l3-spine--leaf-network">L3 Spine / Leaf network</h1>
+
+<p>For many years the predominant data center network design was the <a href="http://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Data_Center/DC_Infra2_5/DCInfra_2.html" target="_blank" rel="noopener noreferrer">three-tier approach</a> of a Core (Layer 3), Aggregation (Layer 2 / Layer 3), Access (Layer 2) tiers. This design approach has been very successful over the last 20 years, allowing network architects to design highly reliable and scalable networks, recent industry developments are breaking the underlying assumptions:</p>
+
+<p>The three-tier network assumes a significant price difference between network device capable of Layer 3 routing vs. Layer 2 Switching, which is no longer the case. It further assumes that traffic is primarily exchanged between servers and the outside world (<a href="http://blogs.cisco.com/security/trends-in-data-center-security-part-1-traffic-trends" target="_blank" rel="noopener noreferrer">north-south traffic</a>), while today server-to-server traffic (<a href="http://blogs.cisco.com/security/trends-in-data-center-security-part-1-traffic-trends" target="_blank" rel="noopener noreferrer">east-west traffic</a>) is more common. Last but least it assumes that the interface speed at the Core and Aggregation tier is significantly higher than in the access layer, which also isn’t true anymore thanks to the prevalence of 10 Gigabit Ethernet equipped servers.</p>
+
+<p>At the same time the traditional three-tier design fails to address innovation in modern data centers through its lack of modularity and rigidness. This hampers fast iterations and experimentation, while also preventing to keep up with price/performance improvements in the industry.</p>
+
+<p>Consequently the time has come for a new approach to data center network design, based on <a href="https://code.facebook.com/posts/360346274145943/introducing-data-center-fabric-the-next-generation-facebook-data-center-network/" target="_blank" rel="noopener noreferrer">hyper- or webscale data center center design</a>. Despite their massive scale, hyper- or webscale data centers leverage a network design that starts small and innovates quickly. As such the key differentiator is that a Spine / Leaf network supports you to grow organically in incremental blocks of capacity, starting small each time, while at the same time allowing you to scale almost beyond imagination. Such an approach works very well hand-in-hand with the above mentioned POD / Core concept.</p>
+
+<h1 id="management-applications-network-container">Management Applications Network Container</h1>
+
+<p>With the network containers for management applications we place each management application in a dedicated network container with an NSX Edge acting as firewall, load balancer, and gateway of that container. With the previously presented management applications this means that we have one container for VMware vRealize Automation, another one for vRealize Operations and a third one for vRealize LogInsight.</p>
+
+<p>These network container then connect to a “business network” on which end-user facing services - such as the vRealize Automation Web interface - are presented, as well as a “management network” via which infrastructure admins connect. Nevertheless components within each network container are protected against these two networks, which present two different trust zones, besides the network container as a third trust zone.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/08/Object_oriented_design_object.jpg" title="Figure 4: Object-oriented design: Object " class="image-popup">
+<picture>
+  <source width="510" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/08/Object_oriented_design_object-320.webp 320w, 
+
+    
+    /content/resized/2015/08/Object_oriented_design_object-384.webp 384w, 
+
+ /content/uploads/2015/08/Object_oriented_design_object.webp 510w" sizes="510px"></source>
+  <source width="510" data-srcset="
+
+    /content/resized/2015/08/Object_oriented_design_object-320.jpg 320w, 
+
+    /content/resized/2015/08/Object_oriented_design_object-384.jpg 384w, 
+
+ /content/uploads/2015/08/Object_oriented_design_object.jpg 510w" sizes="510px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/08/Object_oriented_design_object.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 4: Object-oriented design: Object ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Object-oriented design: Object
+</figcaption>
+
+</figure>
+
+<p>To draw an analogy of what this means: Let’s look at the Object Oriented (OO) design approach, well known from software engineering (See Figure 4).</p>
+
+<p>With the SDDC network container, we want to enforce access to services through the front door, via the Load Balancer. In OO this is equivalent to accessing an object via methods.</p>
+
+<p>With the network container we want to prevent access through the “backdoor” or direct node access for end-users. In OO this is equivalent to accessing attributes directly, which would violate the OO concept.</p>
+
+<p>As a result network container provide us with a few benefits:</p>
+
+<ul>
+  <li>
+<strong>Security:</strong> Granular yet simple control who can access what kind of service through the “front door” (load balancer).</li>
+  <li>
+<strong>Modularity:</strong> Replace or upgrade an application without breaking the entire SDDC as dependencies are established via well-know interfaces.</li>
+  <li>
+    <p><strong>Simplicity:</strong> Reduce the number of required IP addresses on the business network, keeping the integration effort low and enabling deployment on the Internet.</p>
+
+    <p>In other words: Keep it simple. No dynamic routing towards the corporate network is necessary. As a result we have less components and less configuration.</p>
+  </li>
+  <li>
+<strong>BC/DR:</strong> Simplifies the Business Continuity/Disaster Recovery story with VMware Site Recovery Manager.</li>
+</ul>
+
+<h1 id="service-level-tiers">Service Level tiers</h1>
+
+<p>Especially with the ambition to address new and old business needs via the support of legacy applications with traditional business continuity and disaster recovery needs, in addition to new cloud-native applications, a one-size fits all approach doesn’t work anymore. Such an approach would either become prohibitively expensive by providing all workloads with the same level of high end treatment or would fall short on the provided business value through capabilities.</p>
+
+<p>Yet at the same time you also want to limit customization in order to be able to maintain self-service capabilities, as each customization adds complexity and cost.</p>
+
+<p>The solution here is to use a small set of distinct service level tiers. Each service tier implements a certain capability along the spectrum of capabilities. As such it would e.g. be possible to workloads different data stores with varying <a href="https://en.wikipedia.org/wiki/IOPS" target="_blank" rel="noopener noreferrer">IOPS</a>.</p>
+
+<p>Another example would be the ability to offer three levels of backup capabilities: The lowest tier, usually called bronze, would offer no backup whatsoever. The next tier, usually called silver, would offer backups within the same region. The most advanced tier, usually called gold, would offer backups within and across regions.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>The ultimate goal of the SDDC is to provide business value through a simple, stable and understandable architecture.</p>
+
+<p>The above presented basic design elements of the SDDC not only allow us to clearly communicate the elements and their benefits of the SDDC, but are crucial for leveraging these benefits in a real-life SDDC installation.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#architecture" class="page__taxonomy-item" rel="tag">Architecture</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#sddc" class="page__taxonomy-item" rel="tag">SDDC</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-08-04T07:59:10-07:00">August 04, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=SDDC+Architecture+%E2%80%93+Basic+Design+Elements%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F&amp;title=SDDC+Architecture+%E2%80%93+Basic+Design+Elements" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2015/07/31/sddc-architecture-regions-and-availability-zones-azs/" class="pagination--pager" title="SDDC Architecture – Regions and Availability Zones (AZs)
+">Previous</a>
+    
+    
+      <a href="/2015/08/21/building-a-cumulus-networks-vx-cloud-lab-with-ravello-systems/" class="pagination--pager" title="Building a Cumulus Networks VX cloud lab with Ravello Systems
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

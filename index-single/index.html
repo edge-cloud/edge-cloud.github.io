@@ -1,0 +1,999 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Multicast with AWS Transit Gateway - Edge Cloud</title>
+<meta name="description" content="Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Multicast with AWS Transit Gateway">
+<meta property="og:url" content="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">
+
+
+  <meta property="og:description" content="Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Multicast with AWS Transit Gateway">
+  <meta name="twitter:description" content="Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-05-01T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Multicast with AWS Transit Gateway">
+    <meta itemprop="description" content="Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)">
+    <meta itemprop="datePublished" content="May 01, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Multicast with AWS Transit Gateway
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#multicast">Multicast</a>
+    <ul>
+      <li><a href="#what-is-ip-multicasting">What is IP Multicasting</a></li>
+      <li><a href="#multicast-and-aws-transit-gateway">Multicast and AWS Transit Gateway</a></li>
+    </ul>
+  </li>
+  <li><a href="#constraints">Constraints</a></li>
+  <li>
+<a href="#setup">Setup</a>
+    <ul>
+      <li><a href="#source-and-receiver-instances">Source and Receiver Instances</a></li>
+      <li><a href="#transit-gateway-tgw">Transit Gateway (TGW)</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#testing">Testing</a>
+    <ul>
+      <li><a href="#multicast-receiver">Multicast Receiver</a></li>
+      <li><a href="#multicast-source">Multicast Source</a></li>
+      <li><a href="#result">Result</a></li>
+    </ul>
+  </li>
+  <li><a href="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>At the beginning of December 2019, AWS released <a href="https://aws.amazon.com/blogs/aws/aws-transit-gateway-adds-multicast-and-inter-regional-peering/" target="_blank" rel="noopener noreferrer">Multicast support</a> within the <a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway</a>. This marked the beginning of being able to use applications that require support for <a href="https://en.wikipedia.org/wiki/IP_multicast" target="_blank" rel="noopener noreferrer">IP Multicast</a> within AWS.</p>
+
+<p>The following article will give you a brief overview of how to use IP Multicast with the AWS Transit Gateway and especially how to validate that your setup is working correctly.</p>
+
+<h1 id="multicast">Multicast</h1>
+
+<p>Let’s have a look at the basics of IP Multicasting and IP Multicast on AWS.</p>
+
+<h2 id="what-is-ip-multicasting">What is IP Multicasting</h2>
+
+<p>With IP Multicasting a source host can send a single packet to hundreds or thousands of hosts at the same time. All this works over a route network - e.g. the Internet. The replication of the source packet along with tracking of destination membership happens inside of the network itself, instead of the application (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/05/Multicast-IPMulticast.png" title="Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver. " class="image-popup">
+<picture>
+  <source width="789" type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/05/Multicast-IPMulticast-320.webp 320w, 
+
+    
+    /content/resized/2020/05/Multicast-IPMulticast-384.webp 384w, 
+
+    
+    /content/resized/2020/05/Multicast-IPMulticast-512.webp 512w, 
+
+    
+    /content/resized/2020/05/Multicast-IPMulticast-683.webp 683w, 
+
+ /content/uploads/2020/05/Multicast-IPMulticast.webp 789w" sizes="789px"></source>
+  <source width="789" data-srcset="
+
+    /content/resized/2020/05/Multicast-IPMulticast-320.png 320w, 
+
+    /content/resized/2020/05/Multicast-IPMulticast-384.png 384w, 
+
+    /content/resized/2020/05/Multicast-IPMulticast-512.png 512w, 
+
+    /content/resized/2020/05/Multicast-IPMulticast-683.png 683w, 
+
+ /content/uploads/2020/05/Multicast-IPMulticast.png 789w" sizes="789px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/05/Multicast-IPMulticast.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver.
+</figcaption>
+
+</figure>
+
+<p>For this to work the source host addresses the packet with a Multicast Address from the range of 224.0.0.0 through 239.255.255.255. Each Multicast Address specifies a Multicast group to which other hosts can subscribe to. Such a group can have between one and an unlimited number of members as neither hosts nor routers maintain a list of all members. Instead the source host send the packet to an initial router, called the rendezvous point (RP), which serves as the root of a tree-like multicast distribution.
+The most common <a href="https://en.wikipedia.org/wiki/Transport_layer" target="_blank" rel="noopener noreferrer">transport layer</a> protocol to use multicast addressing is <a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" target="_blank" rel="noopener noreferrer">User Datagram Protocol (UDP)</a>.</p>
+
+<h2 id="multicast-and-aws-transit-gateway">Multicast and AWS Transit Gateway</h2>
+
+<p>While an AWS VPC by itself does not support Multicast, AWS Transit Gateway can provide this new capability. The Transit Gateway will act as the rendezvous point, receiving the packets from the Multicast source, replicate it and send it to the Multicast Receiver. With the Multicast-enabled Transit Gateway, source and receiver can be in the same VPC or in different VPCs.</p>
+
+<h1 id="constraints">Constraints</h1>
+
+<p>Today Multicast on AWS Transit Gateway comes with a few restrictions that need to be considered:</p>
+<ul>
+  <li>Creation and usage of Multicast-enabled TGW is currently only supported in the AWS Region us-east-1 (N. Virginia).</li>
+  <li>You must create a new TGW to enable Multicast. It is not possible to enable Multicast on an existing Transit Gateway. In case you are already using a Transit Gateway, you can create another instance that will just serve the purpose of distributing Multicast traffic (See Figure 2). As neither VPC nor TGW route tables are used to handle multicast traffic, this deployment model will not interfere with your existing traditional TGW or VPC route tables.</li>
+  <li>Self-Management of Multicast group membership by hosts through the <a href="https://en.wikipedia.org/wiki/Internet_Group_Management_Protocol" target="_blank" rel="noopener noreferrer">Internet Group Management Protocol (IGMP)</a> is not yet supported. Instead Multicast group membership is solely managed using Amazon VPC Console or the AWS CLI.</li>
+  <li>Only <a href="https://aws.amazon.com/ec2/nitro/" target="_blank" rel="noopener noreferrer">AWS Nitro</a> instances can be a Multicast source. If you use a non-Nitro instance as a receiver, you must disable the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#change_source_dest_check" target="_blank" rel="noopener noreferrer">Source/Dest check</a>.</li>
+  <li>While the AWS Transit Gateway has a default limit of only supporting <a href="https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-quotas.html#multicast-quota" target="_blank" rel="noopener noreferrer">1x TGW source per group</a>, this limit can be increased.</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/05/Multicast-Multicast-TGW.png" title="Figure 2: Multicast-enabled TGW besides traditional TGW. " class="image-popup">
+<picture>
+  <source width="1009" type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-320.webp 320w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-384.webp 384w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-512.webp 512w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-683.webp 683w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-800.webp 800w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-960.webp 960w, 
+
+ /content/uploads/2020/05/Multicast-Multicast-TGW.webp 1009w" sizes="1009px"></source>
+  <source width="1009" data-srcset="
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-320.png 320w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-384.png 384w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-512.png 512w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-683.png 683w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-800.png 800w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-960.png 960w, 
+
+ /content/uploads/2020/05/Multicast-Multicast-TGW.png 1009w" sizes="1009px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/05/Multicast-Multicast-TGW.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Multicast-enabled TGW besides traditional TGW. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Multicast-enabled TGW besides traditional TGW.
+</figcaption>
+
+</figure>
+
+<h1 id="setup">Setup</h1>
+
+<p>Before kicking the tires on Multicast, it needs to be setup. At a minimum this requires the network setup within the Transit Gateway, as well as at least one Multicast Source and one Multicast Receiver instance.</p>
+
+<h2 id="source-and-receiver-instances">Source and Receiver Instances</h2>
+
+<p>First setup the EC2 instances that we will use in our testing as the Multicast Source and Multicast Receiver. To better understand how Multicast works, you should create at least one Multicast Source and two Multicast Receiver. Also keep the constraint around usage of AWS Nitro instances in mind and select a Nitro-based EC2 instance for the three EC2 instances.
+This blog post will assume use of Ubuntu Linux instances for the EC2 instances and you should install <a href="https://iperf.fr/" target="_blank" rel="noopener noreferrer">iPerf</a> on these instances. On Ubuntu Linux you will do this via <code class="highlighter-rouge">sudo apt get install iperf</code>.</p>
+
+<p>Last, but not least ensure that port UDP 5001 is opened within the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html" target="_blank" rel="noopener noreferrer">security group</a> associated with the Multicast Receiver instances. The source IP will be the IPv4 address of the ENI associated with the Multicast Source EC2 instance.</p>
+
+<h2 id="transit-gateway-tgw">Transit Gateway (TGW)</h2>
+
+<p>You can follow the <a href="https://docs.aws.amazon.com/vpc/latest/tgw/working-with-multicast.html" target="_blank" rel="noopener noreferrer">AWS instructions</a> for setting up a Multicast-enabled TGW, along with a multicast domain.
+Next associate any of the VPCs and subnets that will include Multicast Sources and Receivers to this TGW. Then associate the individual Multicast Sources and Receiver via their Elastic Network Interface (ENI) with a Multicast Group (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/05/TGW-Multicast-Group.jpg" title="Figure 3: Multicast-Group with single source and multiple receiver. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-320.webp 320w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-384.webp 384w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-512.webp 512w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-683.webp 683w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-800.webp 800w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-960.webp 960w, 
+
+" sizes="1455px"></source>
+  <source data-srcset="
+
+    /content/resized/2020/05/TGW-Multicast-Group-320.jpg 320w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-384.jpg 384w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-512.jpg 512w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-683.jpg 683w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-800.jpg 800w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-960.jpg 960w, 
+
+" sizes="1455px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/05/TGW-Multicast-Group.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 3: Multicast-Group with single source and multiple receiver. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Multicast-Group with single source and multiple receiver.
+</figcaption>
+
+</figure>
+
+<p>The above example shows the Multicast Group 224.1.1.1 with one Multicast Source and two Multicast Receivers.</p>
+
+<h1 id="testing">Testing</h1>
+
+<p>Now that the setup is complete, it’s time to test our setup. We expect that a packet send by the Multicast Source to the Multicast group 224.1.1.1 should be simultaneously received by both Multicast Receivers.</p>
+
+<h2 id="multicast-receiver">Multicast Receiver</h2>
+
+<p>First get the two Multicast Receiver ready by starting iPerf in “Server” mode against the Multicast group IP of “224.1.1.1” and using the protocol UDP. iPerf will use the default port of 5001.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% iperf -s -u -B 224.1.1.1 -i 1
+------------------------------------------------------------
+Server listening on UDP port 5001
+Binding to local address 224.1.1.1
+Joining multicast group  224.1.1.1
+Receiving 1470 byte datagrams
+UDP buffer size:  110 KByte (default)
+------------------------------------------------------------
+</code></pre></div></div>
+
+<p>iPerf will recognize the provided address as an IP Multicast address and join this group. After that iPerf will wait for incoming traffic over UDP port 5001 and display it accordingly.</p>
+
+<h2 id="multicast-source">Multicast Source</h2>
+
+<p>Now that the Multicast Receiver are ready to accept traffic, it’s time to get the Multicast Source ready. On the Multicast Source EC2 instance, we will start iPerf in client mode against the above Multicast group.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% iperf -c 224.1.1.1 -u -T 32 -t 3 -i 1
+------------------------------------------------------------
+Client connecting to 224.1.1.1, UDP port 5001
+Sending 1470 byte datagrams
+Setting multicast TTL to 32
+UDP buffer size:  110 KByte (default)
+------------------------------------------------------------
+[  3] local 192.168.220.20 port 59347 connected with 224.1.1.1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0- 1.0 sec   129 KBytes  1.06 Mbits/sec
+[  3]  1.0- 2.0 sec   128 KBytes  1.05 Mbits/sec
+[  3]  2.0- 3.0 sec   128 KBytes  1.05 Mbits/sec
+[  3]  0.0- 3.0 sec   386 KBytes  1.05 Mbits/sec
+[  3] Sent 269 datagrams
+
+</code></pre></div></div>
+
+<p>This way iPerf will generate traffic and send it to the Multicast group 224.1.1.1 over UDP to port 5001, which is the default setting.</p>
+
+<h2 id="result">Result</h2>
+
+<p>While the Multicast Source is generating traffic, we can head over to the two Multicast Receiver instances. There we should notice that both of the instances are receiving the test traffic at the same time.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+[  3] local 224.1.1.1 port 5001 connected with 192.168.220.20 port 59347
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0- 1.0 sec   128 KBytes  1.05 Mbits/sec   0.035 ms    0/   89 (0%)
+[  3]  1.0- 2.0 sec   128 KBytes  1.05 Mbits/sec   0.015 ms    0/   89 (0%)
+[  3]  2.0- 3.0 sec   128 KBytes  1.05 Mbits/sec   0.025 ms    0/   89 (0%)
+[  3]  0.0- 3.0 sec   386 KBytes  1.05 Mbits/sec   0.068 ms    0/  269 (0%)
+
+</code></pre></div></div>
+
+<p>As expected the underlying network replicated the test traffic from the Multicast Source and delivered it to both Multicast Receiver at the same time.</p>
+
+<h1 id="troubleshooting">Troubleshooting</h1>
+
+<p>Here are a few things to look at in case something is not working</p>
+<ul>
+  <li>
+<strong>Security Groups and Firewalls:</strong> Make sure that the Security Group associated with the Multicast Receiver EC2 instance allows the Multicast test traffic in. We will be using the transport protocol UDP and by default iPerf uses the port 5001. Also, the source IP of the received traffic will be the IPv4 address of the ENI that is the Multicast Source. In case you are using multiple Multicast Sources, this will translate to multiple IPv4 addresses.</li>
+  <li>
+<strong>TGW Multicast Domain groups:</strong> Make sure that the Multicast group IP address that you are using with iPerf matches the setup in TGW. Also make sure that you specified the correct EC2 instances - via their ENI - as the source and receiver.</li>
+</ul>
+
+<p>If things still don’t work, fire up <a href="https://www.tcpdump.org/" target="_blank" rel="noopener noreferrer">tcpdump</a> on the Source and Receiver side and see what packets you’re seeing.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This article walked you through the setup and configuration of a Multicast-enabled Transit Gateway and showed you how to quickly test functionality using iPerf.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-01T00:00:00-07:00">May 01, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Multicast+with+AWS+Transit+Gateway%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F&amp;title=Multicast+with+AWS+Transit+Gateway" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" class="pagination--pager" title="Drawing monitor for network diagrams
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/09/09/troubleshooting-bgp-session-hosted-vif/" rel="permalink">Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Troubleshooting a BGP neighbor issue of “active open failed - tcb is not available” on a Megaport Hosted VIF due to unset BGP MD5 Auth key
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>
+

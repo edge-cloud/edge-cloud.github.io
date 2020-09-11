@@ -1,0 +1,1246 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS - Edge Cloud</title>
+<meta name="description" content="Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/">
+
+
+  <meta property="og:description" content="Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS">
+  <meta name="twitter:description" content="Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-05-31T09:29:57-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS">
+    <meta itemprop="description" content="Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.">
+    <meta itemprop="datePublished" content="May 31, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#inroduction">Inroduction</a></li>
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li>
+<a href="#rancid">RANCID</a>
+    <ul>
+      <li><a href="#installing-rancid">Installing RANCID</a></li>
+      <li><a href="#configuring-rancid">Configuring RANCID</a></li>
+      <li><a href="#configure-e-mail-notification">Configure E-Mail Notification</a></li>
+      <li><a href="#subversion-repository">Subversion Repository</a></li>
+      <li><a href="#specify-devices-in-the-routerdb-files">Specify devices in the router.db Files</a></li>
+      <li><a href="#device-login-credentials-via-cloginrc">Device login credentials via cloginrc</a></li>
+      <li><a href="#testing">Testing</a></li>
+      <li><a href="#automation">Automation</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#trac">Trac</a>
+    <ul>
+      <li><a href="#install-trac">Install Trac</a></li>
+      <li><a href="#enabling-svn-in-trac">Enabling SVN in TRAC</a></li>
+      <li><a href="#final-customizations">Final customizations</a></li>
+    </ul>
+  </li>
+  <li><a href="#results">Results</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h1 id="inroduction">Inroduction</h1>
+
+<p>Today we want to look at the possibility to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.</p>
+
+<p>To do so we will be using <a href="http://www.shrubbery.net/rancid/" target="_blank" rel="noopener noreferrer">RANCID (Really Awesome New Cisco confIg Differ)</a> from Shrubbery Networks as well as <a href="https://trac.edgewall.org/" target="_blank" rel="noopener noreferrer">TRAC</a> (Integrated SCM &amp; Project Management).</p>
+
+<p>RANCID monitors a router’s (or more generally a device’s) configuration, including software and hardware (cards, serial numbers, etc) and uses CVS (Concurrent Version System) or Subversion to maintain history of changes and notify users of these. TRAC is a web-based wiki and issue tracking system for software development projects. It provides an interface to ​Subversion or ​Git, which is the primary reason for using it in this project.</p>
+
+<h1 id="prerequisites">Prerequisites</h1>
+
+<p>This documentation assumes that a healthy Ubuntu 10.04.4 LTS Server, fully functioning, up-to-date system is available. This e.g. includes a combination of sudo apt-get update, sudo apt-get upgrade, sudo apt-get dist-upgrade, and sudo apt-get autoremove being run. Please understand what the commands do before blindly running them as any system update has the potential to render a system inoperable. The server should be deployed with at least the software selection of <em>OpenSSH server</em> and <em>LAMP server</em>.</p>
+
+<p>This documentation is accurate as of May 31, 2013. These steps have been performed on Ubuntu 10.04.4 Server systems and confirmed to work as described here.</p>
+
+<p class="notice--info"><em>Update from June 27, 2014</em>: Trac has added support for Git in never versions. In order to unify configuration of the various version control systems in Trac, the syntax for specifying what system you are using has changed. In Trac 1.0 (trunk, starting from r11082), the components for Subversion support have been moved below tracopt. So you need to explicitly enable them in your Components section within trac.ini. See <a href="https://trac.edgewall.org/wiki/TracSubversion" target="_blank" rel="noopener noreferrer">here</a> fore more details. You will need this information in the “Final Customization” section below.</p>
+
+<h1 id="rancid">RANCID</h1>
+
+<h2 id="installing-rancid">Installing RANCID</h2>
+
+<p>Install RANCID as well as Subversion via the Ubuntu software repository:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install rancid subversion
+</code></pre></div></div>
+
+<h2 id="configuring-rancid">Configuring RANCID</h2>
+
+<p>The installation creates a new user and group named <em>“rancid”</em> with a home directory of /var/lib/rancid. Now, we must create at least one device group in RANCID to logically organize our devices. Groups can be based on any criteria you wish. So if you’ve got one physical location you could create “router”, “firewall”, and “switch” groups, or, in larger environments with multiple physical locations, group names such as “Los Angeles”, “San Francisco”, and “New York” may be a better choice. Or in smaller setups you could chose to use a single group. For this example we’ll create a single group called “network”.</p>
+
+<p>Before editing the sample file, it’s good practice to start by making a backup copy of the original <em>rancid.conf</em> file.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo cp /etc/rancid/rancid.conf /etc/rancid/rancid.conf.ORIGINAL
+</code></pre></div></div>
+
+<p>Open the file “/etc/rancid/rancid.conf” in your favorite text editor, add a line similar to the following, and save and exit.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LIST_OF_GROUPS="network"
+</code></pre></div></div>
+
+<p>By default RANCID uses CVS to store the retrieved device configuration. But we want to use Subversion (SVN) instead, as Trac is build around this source code repository system.</p>
+
+<p>Therefore locate the current CVS configuration within the file <strong>/etc/rancid/rancid.conf</strong> and change it to SVN:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVSROOT=$BASEDIR/CVS; export CVSROOT
+RCSSYS=cvs; export RCSSYS
+</code></pre></div></div>
+
+<p>Change these settings to SVN:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVSROOT=$BASEDIR/SVN; export CVSROOT
+RCSSYS=svn; export RCSSYS
+</code></pre></div></div>
+
+<h2 id="configure-e-mail-notification">Configure E-Mail Notification</h2>
+
+<p>Next we want to configure the system, so that RANCID can send e-mail notifications for changes performed on each group of devices. For this a local MTA should be installed and configured.</p>
+
+<p>For this documentation we will assume that this MTA will be Postfix, configured with as “Internet with smarthost”.</p>
+
+<p>Install Postfix</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install postfix
+</code></pre></div></div>
+
+<p>As the mail configuration type choose “Internet with smarthost”:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/InternetSmartHost.png" title="Figure 1: Postfix mail configuration type " class="image-popup">
+<picture>
+  <source width="721" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/InternetSmartHost-320.webp 320w, 
+
+    
+    /content/resized/2013/05/InternetSmartHost-384.webp 384w, 
+
+    
+    /content/resized/2013/05/InternetSmartHost-512.webp 512w, 
+
+    
+    /content/resized/2013/05/InternetSmartHost-683.webp 683w, 
+
+ /content/uploads/2013/05/InternetSmartHost.webp 721w" sizes="721px"></source>
+  <source width="721" data-srcset="
+
+    /content/resized/2013/05/InternetSmartHost-320.png 320w, 
+
+    /content/resized/2013/05/InternetSmartHost-384.png 384w, 
+
+    /content/resized/2013/05/InternetSmartHost-512.png 512w, 
+
+    /content/resized/2013/05/InternetSmartHost-683.png 683w, 
+
+ /content/uploads/2013/05/InternetSmartHost.png 721w" sizes="721px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/InternetSmartHost.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Postfix mail configuration type ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Postfix mail configuration type
+</figcaption>
+
+</figure>
+
+<p>Next, specify your e-mail domain as the system mail name:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/MailName.png" title="Figure 2: Postfix System Mail Name " class="image-popup">
+<picture>
+  <source width="719" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/MailName-320.webp 320w, 
+
+    
+    /content/resized/2013/05/MailName-384.webp 384w, 
+
+    
+    /content/resized/2013/05/MailName-512.webp 512w, 
+
+    
+    /content/resized/2013/05/MailName-683.webp 683w, 
+
+ /content/uploads/2013/05/MailName.webp 719w" sizes="719px"></source>
+  <source width="719" data-srcset="
+
+    /content/resized/2013/05/MailName-320.png 320w, 
+
+    /content/resized/2013/05/MailName-384.png 384w, 
+
+    /content/resized/2013/05/MailName-512.png 512w, 
+
+    /content/resized/2013/05/MailName-683.png 683w, 
+
+ /content/uploads/2013/05/MailName.png 719w" sizes="719px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/MailName.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Postfix System Mail Name ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Postfix System Mail Name
+</figcaption>
+
+</figure>
+
+<p>Last, specify the hostname or IP address of your SMTP smart relay:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/SmartRelay.png" title="Figure 3: Postfix SMTP smartrelay " class="image-popup">
+<picture>
+  <source width="719" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/SmartRelay-320.webp 320w, 
+
+    
+    /content/resized/2013/05/SmartRelay-384.webp 384w, 
+
+    
+    /content/resized/2013/05/SmartRelay-512.webp 512w, 
+
+    
+    /content/resized/2013/05/SmartRelay-683.webp 683w, 
+
+ /content/uploads/2013/05/SmartRelay.webp 719w" sizes="719px"></source>
+  <source width="719" data-srcset="
+
+    /content/resized/2013/05/SmartRelay-320.png 320w, 
+
+    /content/resized/2013/05/SmartRelay-384.png 384w, 
+
+    /content/resized/2013/05/SmartRelay-512.png 512w, 
+
+    /content/resized/2013/05/SmartRelay-683.png 683w, 
+
+ /content/uploads/2013/05/SmartRelay.png 719w" sizes="719px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/SmartRelay.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Postfix SMTP smartrelay ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Postfix SMTP smartrelay
+</figcaption>
+
+</figure>
+
+<p>Now that the MTA has been configured, we can create e-mail aliases in the MTA’s configuration file for each RANCID device group. By default on Ubuntu this is the “/etc/aliases” file.</p>
+
+<p>For each group that you created, we need to add two aliases to the aliases file named “rancid-<groupname>” and “rancid-admin-<groupname>”. Open up the **/etc/aliases** file in a text editor and add lines similar to the following:</groupname></groupname></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rancid-network:               your_email@address.com
+rancid-admin-network:         your_email@address.com
+</code></pre></div></div>
+
+<p>After saving your changes and exiting, you’ll need to let your MTA know about the changes by running:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo /usr/bin/newaliases
+</code></pre></div></div>
+
+<h2 id="subversion-repository">Subversion Repository</h2>
+
+<p>Your device’s configuration files will be stored in a Subversion (SVN). This provides a way to track changes over time as well as provides you with a bit of disaster recovery. In order to prepare SVN we must create a folder structure based off of the RANCID groups that we created earlier. This command needs to be run as the “rancid” user that was created when the RANCID software was first installed.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su - rancid
+[rancid@netconf ~]$ /var/lib/rancid/bin/rancid-cvs
+
+Committed revision 1.
+Checked out revision 1.
+At revision 1.
+A         configs
+Adding         configs
+
+Committed revision 2.
+A         router.db
+Adding         router.db
+Transmitting file data .
+Committed revision 3.
+</code></pre></div></div>
+
+<p>Assuming that runs without any errors, you should see one or more new directories created under “/var/lib/rancid”, named according to the RANCID groups you defined earlier (e.g. “/var/lib/rancid/network”). Inside each will be a file named “router.db”:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[rancid@netconf ~]$ find /var/lib/rancid -type f -name router.db
+/var/lib/rancid/network/router.db
+</code></pre></div></div>
+
+<p>Make the SVN readable by the www-data group - used by the Apache web server, so it can be accessed by TRAC:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[rancid@netconf ~]$ exit
+[user@netconf ~]$ sudo chgrp -R www-data /var/lib/rancid/SVN/
+[user@netconf ~]$ sudo chmod -R g+r /var/lib/rancid/SVN/
+</code></pre></div></div>
+
+<h2 id="specify-devices-in-the-routerdb-files">Specify devices in the router.db Files</h2>
+
+<p>Inside each of these “router.db” files is where we let RANCID know what devices exist in each location. A single line in each file is used to identify a single device. The format of the definitions is of the format “hostname:type:status”, where “hostname” is the fully-qualified domain name or IP address, “type” defines the type of device (e.g. “cisco”, “hp”, “foundry”, etc.) and “status” is either “up” or “down”. If “status” is set to “down”, RANCID will simply ignore the device.</p>
+
+<p>Sample entries might look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router.edge-cloud.net:cisco:up
+firewall.edge-cloud.net:juniper:down
+switch.edge-cloud.net:arista:down
+</code></pre></div></div>
+
+<p>Refer to <code class="highlighter-rouge">man router.db</code> for more details</p>
+
+<h2 id="device-login-credentials-via-cloginrc">Device login credentials via cloginrc</h2>
+
+<p>Once you have successfully added your devices to the appropriate “router.db” files, we need to let RANCID know how to access the devices (telnet, SSH, etc.) and what credentials to use to login. This is done via the “.cloginrc” file that exists in the rancid user’s home directory (“/var/lib/rancid/.cloginrc”, by default).</p>
+
+<p>It is a good security practice to never connect to devices via telnet, so this guide will only cover the SSH method of connecting to a device. Other connection methods are also supported. The way the .cloginrc file is configured also depends on how the end device is configured to authenticate users. Users can be configured locally or a device can authenticate users agains an enterprise system such as RADIUS, LDAP or Active Directory. It gets complicated quickly so make sure that you take your time and read the documentation all the way through.</p>
+
+<p>Refer to <code class="highlighter-rouge">man cloginrc</code> to see the details of all the available options and keywords available for use.</p>
+
+<p>This guide will assume the simplest setup in which local usernames and passwords are defined on the end devices themselves. Keep in that mind that the file .cloginrc should not be world readable/writable and be owned by the user <em>rancid</em>, created earlier.</p>
+
+<p>Here’s some example information for a .cloginrc file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Firewall
+add method firewall.edge-cloud.net ssh
+add user firewall.edge-cloud.net rancid
+add password firewall.edge-cloud.net user_password enable_password
+</code></pre></div></div>
+
+<h2 id="testing">Testing</h2>
+
+<p>The basic test utilizes the clogin application to verify login into a device:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c "/usr/lib/rancid/bin/clogin -f /var/lib/rancid/.cloginrc firewall.edge-cloud.net" -s /bin/bash -l rancid
+</code></pre></div></div>
+
+<p>The clogin application will use the .clogin configuration file specified by the -f variable and will automatically login to the device named firewall.edge-cloud.net. When it’s all said and done you should end up in enable mode on the firewall device. If there are problems, clogin does an excellent job of providing pointed advice on what is wrong.</p>
+
+<p>With RANCID now configured, it’s time to test it out! Let’s manually invoke “rancid-run” (as the “rancid” user) to see if everything works!</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c /usr/lib/rancid/bin/rancid-run -s /bin/bash -l rancid
+</code></pre></div></div>
+
+<p>This command may take a while to run, depending on how many devices you have configured. Be patient and, when it finishes, review the logfiles created in “/var/log/rancid”.</p>
+
+<p>Assuming all goes well, you should receive e-mails from RANCID sent to the addresses that you defined in earlier in “/etc/aliases”.</p>
+
+<h2 id="automation">Automation</h2>
+
+<p>Once everything is working, it’s time to automate the collection and archiving. The easiest way to do this is to simply create a cronjob under the rancid user that calls “rancid-run” for us on a periodic basis. Here we have RANCID run every 15 minutes to ensure that all network changes are caught quickly.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c "/usr/bin/crontab -e -u rancid"
+</code></pre></div></div>
+
+<p>Modify the contents of the file so that you end up with something like this.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    # m h  dom mon dow   command
+    */15 * * * * /usr/bin/rancid-run
+</code></pre></div></div>
+
+<h1 id="trac">Trac</h1>
+
+<h2 id="install-trac">Install Trac</h2>
+
+<p>Next we will install and configure Trac as a web-based GUI to browse the device configuration stores in SVN.</p>
+
+<p>Install Trac and the necessary Apache modules via the Ubuntu software repository:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install trac libapache2-mod-python
+</code></pre></div></div>
+
+<p>Configure a new Trac project environment:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mkdir -p /var/trac/netconf
+cd /var/trac/netconf
+sudo trac-admin . initenv Netconf sqlite:db/trac.db
+sudo htpasswd -bc .htpasswd adminusername &amp;lt;mypassword&amp;gt;
+sudo trac-admin . permission add adminusername TRAC_ADMIN
+sudo chown -R www-data: .
+sudo chmod -R 775 .
+</code></pre></div></div>
+
+<p>Next, configure your Apache Webserver for Trac. In this example we will replace the default Apache Website and therefore replace the file <code class="highlighter-rouge">/etc/apache2/sites-available/default</code> with the following content:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;VirtualHost *:80&gt;
+            ServerName netconf.edge-cloud.net
+            &lt;Location /&gt;
+               SetHandler mod_python
+               PythonInterpreter main_interpreter
+               PythonHandler trac.web.modpython_frontend
+               PythonOption TracEnv /var/trac/netconf
+               PythonOption TracEnvParentDir /var/trac/netconf
+               PythonOption TracUriRoot /
+                # PythonOption TracEnvIndexTemplate /var/local/trac/templates/index-template.html
+               PythonOption TracLocale en_US.UTF8
+               PythonOption PYTHON_EGG_CACHE /tmp
+               Order allow,deny
+               Allow from all
+            &lt;/Location&gt;
+            &lt;Location /login&gt;
+              AuthType Basic
+              AuthName "Netconf"
+              AuthUserFile /var/trac/netconf/.htpasswd
+              Require valid-user
+            &lt;/Location&gt;
+    &lt;/VirtualHost&gt;
+</code></pre></div></div>
+<p>Restart the Apache service with <code class="highlighter-rouge">sudo service apache2 restart</code>.</p>
+
+<h2 id="enabling-svn-in-trac">Enabling SVN in TRAC</h2>
+
+<p>The TRAC SVN browser is disabled at this stage as the SVN path hasn’t been configured yet. Let’s configure the SVN path in TRAC now.</p>
+
+<p>Edit the TRAC configuration file <code class="highlighter-rouge">/var/trac/netconf/conf/trac.ini</code>.</p>
+
+<p>Add the SVN repository:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repository_dir = /var/lib/rancid/SVN/
+</code></pre></div></div>
+
+<h2 id="final-customizations">Final customizations</h2>
+
+<p>Although your installation should be running at this point, we want to perform some final customization to “pretty it up”. This includes adding a logo to TRAC, enabling the SVN browser and disabling any module not used.</p>
+
+<p>Make the SVN Browser the default module to load when accessing the web interface:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[trac]
+...
+default_handler = BrowserModule
+</code></pre></div></div>
+
+<p>Disable all modules that you don’t need. TRAC’s Wiki and Ticket module could very well be used for network documentation purposes as well as tracking configuration change requests. In this documentation we will focus on solely using the SVN browser.</p>
+
+<p>Add the following block yo your TRAC configuration file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[mainnav]
+wiki = disabled
+timeline = disabled
+roadmap = disabled
+tickets = disabled
+newticket = disabled
+search = disabled
+
+[metanav]
+login = disabled
+logout = disabled
+prefs = disabled
+help = disabled
+</code></pre></div></div>
+
+<p>Place the file of a logo - e.g. <em>netconf.png</em> - for your TRAC website into the folder <code class="highlighter-rouge">/var/trac/netconf/htdocs/</code> and enable it within the TRAC configuration file <code class="highlighter-rouge">/var/trac/netconf/conf/trac.ini</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[header_logo]
+alt = NetConf
+height = 72
+link = /
+src = site/netconf.png
+width = 236
+</code></pre></div></div>
+
+<h1 id="results">Results</h1>
+
+<p>The result of your TRAC website will look like this:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/Overview.png" title="Figure 4: TRAC source code browser " class="image-popup">
+<picture>
+  <source width="815" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/Overview-320.webp 320w, 
+
+    
+    /content/resized/2013/05/Overview-384.webp 384w, 
+
+    
+    /content/resized/2013/05/Overview-512.webp 512w, 
+
+    
+    /content/resized/2013/05/Overview-683.webp 683w, 
+
+    
+    /content/resized/2013/05/Overview-800.webp 800w, 
+
+ /content/uploads/2013/05/Overview.webp 815w" sizes="815px"></source>
+  <source width="815" data-srcset="
+
+    /content/resized/2013/05/Overview-320.png 320w, 
+
+    /content/resized/2013/05/Overview-384.png 384w, 
+
+    /content/resized/2013/05/Overview-512.png 512w, 
+
+    /content/resized/2013/05/Overview-683.png 683w, 
+
+    /content/resized/2013/05/Overview-800.png 800w, 
+
+ /content/uploads/2013/05/Overview.png 815w" sizes="815px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: TRAC source code browser ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: TRAC source code browser
+</figcaption>
+
+</figure>
+
+<p>Drilling down into your device groups and actual device will then reveal the current configuration of a device:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/05/Device.png" title="Figure 5: Current configuration of a device " class="image-popup">
+<picture>
+  <source width="814" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/05/Device-320.webp 320w, 
+
+    
+    /content/resized/2013/05/Device-384.webp 384w, 
+
+    
+    /content/resized/2013/05/Device-512.webp 512w, 
+
+    
+    /content/resized/2013/05/Device-683.webp 683w, 
+
+    
+    /content/resized/2013/05/Device-800.webp 800w, 
+
+ /content/uploads/2013/05/Device.webp 814w" sizes="814px"></source>
+  <source width="814" data-srcset="
+
+    /content/resized/2013/05/Device-320.png 320w, 
+
+    /content/resized/2013/05/Device-384.png 384w, 
+
+    /content/resized/2013/05/Device-512.png 512w, 
+
+    /content/resized/2013/05/Device-683.png 683w, 
+
+    /content/resized/2013/05/Device-800.png 800w, 
+
+ /content/uploads/2013/05/Device.png 814w" sizes="814px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/05/Device.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Current configuration of a device ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Current configuration of a device
+</figcaption>
+
+</figure>
+
+<p>TRAC offers multiple very interesting features for e.g. downloading the current configuration as a text file or comparing differences between revisions. Enjoy your new network device configuration management solution.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#management" class="page__taxonomy-item" rel="tag">Management</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-05-31T09:29:57-07:00">May 31, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Network+device+configuration+management+with+Rancid+and+Trac+on+Ubuntu+12.04+LTS%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F31%2Francidtrac-on-ubuntu-12-04-lts%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F31%2Francidtrac-on-ubuntu-12-04-lts%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F31%2Francidtrac-on-ubuntu-12-04-lts%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F31%2Francidtrac-on-ubuntu-12-04-lts%2F&amp;title=Network+device+configuration+management+with+Rancid+and+Trac+on+Ubuntu+12.04+LTS" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/05/21/infoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere/" class="pagination--pager" title="Infoblox vNIOS HA pair VIP unreachable when deployed on vSphere
+">Previous</a>
+    
+    
+      <a href="/2013/06/07/measuring-network-throughput/" class="pagination--pager" title="Measuring Network Throughput
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

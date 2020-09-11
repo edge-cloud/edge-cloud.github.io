@@ -1,0 +1,1029 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Block access from certain countries with Route 53 Geolocation - Edge Cloud</title>
+<meta name="description" content="Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Block access from certain countries with Route 53 Geolocation">
+<meta property="og:url" content="https://www.edge-cloud.net/2019/12/09/block-countries-with-route53/">
+
+
+  <meta property="og:description" content="Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Block access from certain countries with Route 53 Geolocation">
+  <meta name="twitter:description" content="Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/12/09/block-countries-with-route53/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2019-12-09T00:00:00-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2019/12/09/block-countries-with-route53/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Block access from certain countries with Route 53 Geolocation">
+    <meta itemprop="description" content="Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.">
+    <meta itemprop="datePublished" content="December 09, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Block access from certain countries with Route 53 Geolocation
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#motivation">Motivation</a></li>
+  <li>
+<a href="#configuration-setup">Configuration setup</a>
+    <ul>
+      <li><a href="#route-53-geolocation-routing">Route 53 Geolocation routing</a></li>
+      <li><a href="#error-page-using-cloudfront-and-s3">Error page using CloudFront and S3</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#testing-the-setup">Testing the Setup</a>
+    <ul>
+      <li><a href="#ripe-atlas">RIPE Atlas</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#findings">Findings</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>This article walks you through using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a>, in order to block access to your services from certain countries. In addition <a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> is used in a subsequent step to validate the setup.</p>
+
+<h1 id="motivation">Motivation</h1>
+
+<p>There are multiple reasons why you might want to block access to your website or API from certain countries. If you are a US based company, you are required to comply with <a href="https://www.bis.doc.gov/index.php/policy-guidance/country-guidance/sanctioned-destinations" target="_blank" rel="noopener noreferrer">US regulations regarding sanctions</a> against countries such as Cuba, Iran, North Korea, Sudan, or Syria. This could result in the requirement to block access to your website or API from these countries.</p>
+
+<p>Another motivation could be to prevent illicit traffic from countries that you do not conduct business with. Especially <a href="https://www.zdnet.com/article/china-resurrects-great-cannon-for-ddos-attacks-on-hong-kong-forum/" target="_blank" rel="noopener noreferrer">China</a> and <a href="https://en.wikipedia.org/wiki/Russian_web_brigades" target="_blank" rel="noopener noreferrer">Russia</a> are known to be a prime source of illicit traffic. Therefore blocking access from these traffic might be wanted in your situation.</p>
+
+<h1 id="configuration-setup">Configuration setup</h1>
+
+<p>Here, we are using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a> to direct traffic from China for one or multiple domain names to either an invalid target IP or a static error page.</p>
+
+<p>Using an invalid IP address, such as a Loopback address like 127.0.0.1 would cause traffic destined for web site or API not to even reach your or your provider’s network. Instead it will already be discarded on the client device.</p>
+
+<h2 id="route-53-geolocation-routing">Route 53 Geolocation routing</h2>
+
+<p>In this setup we solely create a DNS test entry to validate functionality of <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a> for our desired purpose. We will do so by creating a DNS entry of the type “TXT”, that will respond with “China”, when queried from within China, and with “Default” when queried from all other countries.</p>
+
+<p>Geolocation works by mapping IP addresses to locations. However, some IP addresses aren’t mapped to geographic locations, so even if you create geolocation records that cover all seven continents, Amazon Route 53 will receive some DNS queries from locations that it can’t identify. These locations are mapped to the default record. This default record handles both queries from IP addresses that aren’t mapped to any location and queries that come from locations that you haven’t created geolocation records for.</p>
+
+<p>First we create a Route 53 record for the hostname “geoblock” of the type “TXT” (See Figure 1). As depicted the routing policy is specified as “Geolocation”, with the location of “China”. The value for this record is “China”.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/12/GeoBlock_China.jpg" title="Figure 1: Create TXT record with a ‘Geolocation’ routing policy for the origin country ‘China’. " class="image-popup">
+<picture>
+  <source width="515" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/12/GeoBlock_China-320.webp 320w, 
+
+    
+    /content/resized/2019/12/GeoBlock_China-384.webp 384w, 
+
+    
+    /content/resized/2019/12/GeoBlock_China-512.webp 512w, 
+
+ /content/uploads/2019/12/GeoBlock_China.webp 515w" sizes="515px"></source>
+  <source width="515" data-srcset="
+
+    /content/resized/2019/12/GeoBlock_China-320.jpg 320w, 
+
+    /content/resized/2019/12/GeoBlock_China-384.jpg 384w, 
+
+    /content/resized/2019/12/GeoBlock_China-512.jpg 512w, 
+
+ /content/uploads/2019/12/GeoBlock_China.jpg 515w" sizes="515px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/12/GeoBlock_China.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 1: Create TXT record with a ‘Geolocation’ routing policy for the origin country ‘China’. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Create TXT record with a ‘Geolocation’ routing policy for the origin country ‘China’.
+</figcaption>
+
+</figure>
+
+<p>Next, we create another Route 53 for the same hostname of “geoblock” and the type “TXT” (See Figure 2). As depicted the routing policy is also specified as “Geolocation”. But this time the location is configured as “Default” with the record value being “Default”.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/12/GeoBlock_Default.jpg" title="Figure 2: Create TXT record with a ‘Geolocation’ routing policy for all other countries. " class="image-popup">
+<picture>
+  <source width="517" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/12/GeoBlock_Default-320.webp 320w, 
+
+    
+    /content/resized/2019/12/GeoBlock_Default-384.webp 384w, 
+
+    
+    /content/resized/2019/12/GeoBlock_Default-512.webp 512w, 
+
+ /content/uploads/2019/12/GeoBlock_Default.webp 517w" sizes="517px"></source>
+  <source width="517" data-srcset="
+
+    /content/resized/2019/12/GeoBlock_Default-320.jpg 320w, 
+
+    /content/resized/2019/12/GeoBlock_Default-384.jpg 384w, 
+
+    /content/resized/2019/12/GeoBlock_Default-512.jpg 512w, 
+
+ /content/uploads/2019/12/GeoBlock_Default.jpg 517w" sizes="517px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/12/GeoBlock_Default.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Create TXT record with a ‘Geolocation’ routing policy for all other countries. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Create TXT record with a ‘Geolocation’ routing policy for all other countries.
+</figcaption>
+
+</figure>
+
+<p>That’s it! In our simple case only two entries are needed. The resulting two Route 53 Geolocation records ar show in Figure 3.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/12/GeoBlock_Result.jpg" title="Figure 3: Resulting TXT record sets for a ‘Geolocation’ routing policy. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/12/GeoBlock_Result-320.webp 320w, 
+
+    
+    /content/resized/2019/12/GeoBlock_Result-384.webp 384w, 
+
+    
+    /content/resized/2019/12/GeoBlock_Result-512.webp 512w, 
+
+    
+    /content/resized/2019/12/GeoBlock_Result-683.webp 683w, 
+
+    
+    /content/resized/2019/12/GeoBlock_Result-800.webp 800w, 
+
+    
+    /content/resized/2019/12/GeoBlock_Result-960.webp 960w, 
+
+" sizes="1411px"></source>
+  <source data-srcset="
+
+    /content/resized/2019/12/GeoBlock_Result-320.jpg 320w, 
+
+    /content/resized/2019/12/GeoBlock_Result-384.jpg 384w, 
+
+    /content/resized/2019/12/GeoBlock_Result-512.jpg 512w, 
+
+    /content/resized/2019/12/GeoBlock_Result-683.jpg 683w, 
+
+    /content/resized/2019/12/GeoBlock_Result-800.jpg 800w, 
+
+    /content/resized/2019/12/GeoBlock_Result-960.jpg 960w, 
+
+" sizes="1411px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/12/GeoBlock_Result.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 3: Resulting TXT record sets for a ‘Geolocation’ routing policy. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Resulting TXT record sets for a ‘Geolocation’ routing policy.
+</figcaption>
+
+</figure>
+
+<p>Once we have used the above “TXT” records to validate the setup, we can setup a corresponding production record of e.g. our website or API endpoint. This setup will look almost the same, but use a Route 53 record type of “A” instead along with the correct IP addresses.</p>
+
+<h2 id="error-page-using-cloudfront-and-s3">Error page using CloudFront and S3</h2>
+
+<p>As mentioned above you can easily blackhole traffic from undesired locations, by responding with the <a href="https://en.wikipedia.org/wiki/Loopback" target="_blank" rel="noopener noreferrer">Loopback</a> IPv4 address of 127.0.0.1. As a result traffic from these clients destined for your endpoint would never leave their system.
+But as mentioned before, geolocation routing works by mapping IP addresses to locations. And this approach comes with <a href="/2019/03/01/limitations-of-geo-dns/">inherent inaccuracies</a>.</p>
+
+<p>Therefore a better approach would be to direct blocked users to a static website, which outlines the reason of the block and also provides an appeal-process. In its simplest form this process could ask users to contact your technical support for help.</p>
+
+<p>You can easily use CloudFront and S3 to <a href="https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/" target="_blank" rel="noopener noreferrer">serve this static error page</a>.</p>
+
+<h1 id="testing-the-setup">Testing the Setup</h1>
+
+<p>Let’s get back to testing our <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a> setup and validate that users in China are indeed served with a separate answer than users outside China. To do so, we will be using RIPE Atlas probes.</p>
+
+<h2 id="ripe-atlas">RIPE Atlas</h2>
+
+<p><a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> is a global network of hardware devices, called probes and anchors, that actively measure Internet connectivity. Anyone can access this data via Internet traffic maps, streaming data visualisations, and an API. RIPE Atlas users can also perform customised measurements to gain valuable data about their own networks.</p>
+
+<p>I highly recommend you to consider <a href="https://atlas.ripe.net/get-involved/become-a-host/" target="_blank" rel="noopener noreferrer">hosting a RIPE Atlas probe</a> yourself. Not only will you benefit from the data that it collects on your Internet connection, but it will also allow you to run customized measurements against various Internet targets. And in the end every additional RIPE Atlas probe will benefit the overall Internet community.</p>
+
+<p>For our purposes we will create a one-off <a href="https://atlas.ripe.net/measurements/" target="_blank" rel="noopener noreferrer">RIPE Atlas measurement</a> of type DNS with the above configured hostname as the target (See Figure 4). Make sure to configure usage of the probe’s resolver and force DNS resolution on the probe. Also we want to select all available RIPE Atlas probes within China, as well as a set of probes outside China.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/12/RIPE_Atlas_GeoBlock.jpg" title="Figure 4: RIPE Atlas measurement setup to test Geoblocking in China. " class="image-popup">
+<picture>
+  <source width="816" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-320.webp 320w, 
+
+    
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-384.webp 384w, 
+
+    
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-512.webp 512w, 
+
+    
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-683.webp 683w, 
+
+    
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-800.webp 800w, 
+
+ /content/uploads/2019/12/RIPE_Atlas_GeoBlock.webp 816w" sizes="816px"></source>
+  <source width="816" data-srcset="
+
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-320.jpg 320w, 
+
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-384.jpg 384w, 
+
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-512.jpg 512w, 
+
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-683.jpg 683w, 
+
+    /content/resized/2019/12/RIPE_Atlas_GeoBlock-800.jpg 800w, 
+
+ /content/uploads/2019/12/RIPE_Atlas_GeoBlock.jpg 816w" sizes="816px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/12/RIPE_Atlas_GeoBlock.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 4: RIPE Atlas measurement setup to test Geoblocking in China. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: RIPE Atlas measurement setup to test Geoblocking in China.
+</figcaption>
+
+</figure>
+
+<p>A few minutes after running the one-off RIPE Atlas measurement you should be able to see and download your results. In order to analyze the results and figure out whether our configuration is working, we need to write a small script.</p>
+
+<h2 id="results">Results</h2>
+
+<p>After downloading your RIPE Atlas measurement results in the nd-json (fragmented) format, the below script will allow you to analyze the results.</p>
+
+<p>This script iterates through the results and for each probe determines:</p>
+<ul>
+  <li>The location country of the probe as specified by the probe’s host.</li>
+  <li>The result of the DNS lookup, which is either “China” or “Default”.</li>
+  <li>Whether probes identified to be</li>
+  <li>in China receive the result “China”</li>
+  <li>outside China receive the result “Default”</li>
+</ul>
+
+<p>Please note that this script uses two custom RIPE Atlas libraries, which you first need to install with <code class="highlighter-rouge">pip install ripe.atlas.sagan --user</code> and <code class="highlighter-rouge">pip install ripe.atlas.cousteau --user</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span>
+<span class="kn">from</span> <span class="nn">ripe.atlas.sagan</span> <span class="kn">import</span> <span class="n">Result</span>
+<span class="kn">from</span> <span class="nn">ripe.atlas.cousteau</span> <span class="kn">import</span> <span class="n">Probe</span>
+
+<span class="n">my_results_file</span> <span class="o">=</span> <span class="s">"./RIPE-Atlas-measurement-fraq.json"</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">my_results_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">results</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">parsed_result</span> <span class="o">=</span> <span class="n">Result</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">probe</span> <span class="o">=</span> <span class="n">Probe</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">parsed_result</span><span class="p">.</span><span class="n">probe_id</span><span class="p">)</span>
+        <span class="n">probe_country</span> <span class="o">=</span> <span class="n">probe</span><span class="p">.</span><span class="n">country_code</span>
+        <span class="n">probe_id</span> <span class="o">=</span> <span class="n">parsed_result</span><span class="p">.</span><span class="n">probe_id</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">probe_result</span> <span class="o">=</span> <span class="n">parsed_result</span><span class="p">.</span><span class="n">responses</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">abuf</span><span class="p">.</span><span class="n">answers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">address</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">probe_result</span> <span class="o">=</span> <span class="s">"None"</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s">"Not OK &lt;===="</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">probe_country</span> <span class="o">==</span> <span class="s">"CN"</span> <span class="ow">and</span> <span class="n">probe_result</span> <span class="o">==</span> <span class="s">"China"</span><span class="p">):</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s">"OK"</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">probe_country</span> <span class="o">!=</span> <span class="s">"CN"</span> <span class="ow">and</span> <span class="n">probe_result</span> <span class="o">==</span> <span class="s">"Default"</span><span class="p">):</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s">"OK"</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">probe_result</span> <span class="o">==</span> <span class="s">"None"</span><span class="p">):</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s">"Unknown"</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">probe_country</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">probe_id</span><span class="p">)</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">probe_result</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">status</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Running the above script will yield the following results:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@host:~$ ./geo-loc-atlas.py
+CN: 1000050: China: OK
+EC: 10032: Default: OK
+CN: 1008: China: OK
+AM: 11623: Default: OK
+RS: 12835: Default: OK
+CN: 14584: None: Unknown
+BA: 14628: Default: OK
+GB: 14775: Default: OK
+CN: 16562: China: OK
+GB: 18321: Default: OK
+HU: 18355: Default: OK
+CZ: 18611: Default: OK
+TR: 20019: Default: OK
+US: 20418: Default: OK
+SK: 20970: Default: OK
+CN: 21744: Default: Not OK &lt;====
+CN: 21832: China: OK
+RS: 22363: Default: OK
+FI: 23163: Default: OK
+FR: 23939: Default: OK
+...
+</code></pre></div></div>
+
+<h2 id="findings">Findings</h2>
+
+<p>Using the above script along with the RIPE Atlas measurement results, you’ll notice that a few probes - identified by their hosts to be located in China - are not receiving a DNS resolution of “China” for the geoblock DNS entry. Instead they are receiving the “Default” entry, as Route 53 does not identify them to be in China.
+Looking closer at these probes we can see that the probes are indeed located in Hong Kong. Keep in mind that Route 53 treats Hong Kong as a separate country and also RIPE Atlas allows specifying Hong Kong as a probe’s country. In this case the probe’s host felt that the probe - even though located in Hong Kong - should be labeled as being in China.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This blog post walked you through using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a>, in order to block access to services from certain countries. Furthermore it showed how <a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> can be used to validate the geoblocking setup.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-12-09T00:00:00-08:00">December 09, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Block+access+from+certain+countries+with+Route+53+Geolocation%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F&amp;title=Block+access+from+certain+countries+with+Route+53+Geolocation" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2019/09/09/troubleshooting-bgp-session-hosted-vif/" class="pagination--pager" title="Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF
+">Previous</a>
+    
+    
+      <a href="/2019/12/27/aws-dx-connect-on-premises/" class="pagination--pager" title="Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/09/09/troubleshooting-bgp-session-hosted-vif/" rel="permalink">Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Troubleshooting a BGP neighbor issue of “active open failed - tcb is not available” on a Megaport Hosted VIF due to unset BGP MD5 Auth key
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1021 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Using F5 Big-IP LTM with IPv6 - Edge Cloud</title>
+<meta name="description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Using F5 Big-IP LTM with IPv6">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/">
+
+
+  <meta property="og:description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Using F5 Big-IP LTM with IPv6">
+  <meta name="twitter:description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-08-12T01:00:22-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Using F5 Big-IP LTM with IPv6">
+    <meta itemprop="description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
+    <meta itemprop="datePublished" content="August 12, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Using F5 Big-IP LTM with IPv6
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#architecture">Architecture</a></li>
+  <li><a href="#f5-big-ip-and-ipv6">F5 Big-IP and IPv6</a></li>
+  <li>
+<a href="#configuration">Configuration</a>
+    <ul>
+      <li><a href="#configure-the-external-interface-for-ipv6">Configure the external interface for IPv6</a></li>
+      <li><a href="#configure-an-ipv6-default-route">Configure an IPv6 Default Route</a></li>
+      <li><a href="#creating-virtual-servers">Creating Virtual Servers</a></li>
+    </ul>
+  </li>
+  <li><a href="#vmware-vcloud-director-via-ipv6">VMware vCloud Director via IPv6?</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer to frontend the application. This is e.g. the <a href="http://techblog.netflix.com/2012/07/enabling-support-for-ipv6.html" target="_blank" rel="noopener noreferrer">approach that Netflix took</a> in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs).</p>
+
+<h1 id="architecture">Architecture</h1>
+
+<p>In this post we will use the <a href="https://f5.com/products/big-ip/local-traffic-manager-ltm" target="_blank" rel="noopener noreferrer">F5 Big-IP Local Traffic Manager (LTM)</a> load balancer to provide this capability. You can either use a physical device or even better the <a href="https://f5.com/products/deployment-methods/virtual-editions" target="_blank" rel="noopener noreferrer">Virtual Edition</a>.</p>
+
+<p>Figure 1 shows how this approach would work: The End-User will connect to the load balancer via IPv6, which means that the load balancer needs to have an IPv6 address reachable by the end-users on its external facing interface. The load balancer then connects to the legacy IPv4 web application via IPv4. This means that no changes are necessary to this legacy web application.</p>
+
+<p>If you are already using a load balancer to frontend your application for IPv4, this same load balancer can also terminate your IPv6 traffic. But you’re also free to use a separate “IPv6-only” load balancer, if your operational need dictates this.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/Overview.png" title="Figure 1: F5 Big-IP LTM brokering IPv6 traffic to legacy IPv4 Web App " class="image-popup">
+<picture>
+  <source width="707" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/08/Overview-320.webp 320w, 
+
+    
+    /content/resized/2013/08/Overview-384.webp 384w, 
+
+    
+    /content/resized/2013/08/Overview-512.webp 512w, 
+
+    
+    /content/resized/2013/08/Overview-683.webp 683w, 
+
+ /content/uploads/2013/08/Overview.webp 707w" sizes="707px"></source>
+  <source width="707" data-srcset="
+
+    /content/resized/2013/08/Overview-320.png 320w, 
+
+    /content/resized/2013/08/Overview-384.png 384w, 
+
+    /content/resized/2013/08/Overview-512.png 512w, 
+
+    /content/resized/2013/08/Overview-683.png 683w, 
+
+ /content/uploads/2013/08/Overview.png 707w" sizes="707px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: F5 Big-IP LTM brokering IPv6 traffic to legacy IPv4 Web App ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: F5 Big-IP LTM brokering IPv6 traffic to legacy IPv4 Web App
+</figcaption>
+
+</figure>
+
+<h1 id="f5-big-ip-and-ipv6">F5 Big-IP and IPv6</h1>
+
+<p>On a first look at the GUI it doesn’t appear that the F5 Big-IP supports IPv6 addresses on its interfaces or for nodes. In the corresponding dialogues there are only fields for “IP Address” and “Netmask”. For IPv6 we would expect a field for a subnet prefix length instead of the netmask. It turns out that these dialogues gladly accept IPv6 addresses in the typical notation of eight groups of four hexadecimal digits separated by colons along with the subnet prefix length translated into a subnet mask following the same notation.</p>
+
+<p>Although this appears to be a bit awkward at first sight, it will turn out to be much less of a hassle quite quickly: <a href="https://tools.ietf.org/html/rfc5375" target="_blank" rel="noopener noreferrer">RFC 5375 (IPv6 Unicast Address Assignment Considerations)</a> strongly recommends that in IPv6 the subnet prefix length should always be /64. With that we only need to convert this subnet prefix length of /64 into the legacy style netmask notation.</p>
+
+<p>Using the <a href="https://en.wikipedia.org/wiki/Subnetwork" target="_blank" rel="noopener noreferrer">mechanism known from IPv4</a>, the IPv6 subnet mask for a /64 network would therefore be <code class="highlighter-rouge">FFFF:FFFF:FFFF:FFFF:0000:0000:0000:0000</code> or in short <code class="highlighter-rouge">FFFF:FFFF:FFFF:FFFF::</code>. Especially the first notation lets us quickly verify that this netmask is correct:</p>
+
+<p>IPv6 addresses are 128 bit long. If we want to mask out a subnet with the length of 64 bit, this would require us to mask out half of the bits. With the previously mentioned notation of eight groups of four hexadecimal digits separated by colons, this translates into the four first groups being FFFF in hex, which translates to all 1s in binary. And the remaining four groups being all zeros.</p>
+
+<p class="notice--info"><strong>Note:</strong> In older versions of Big-IP, F5 has a bug that doesn’t allow you to use address shortening via double-colons (“::”) through the GUI or tmsh. Instead all IPv6 addresses need to be written out. Thus the address <code class="highlighter-rouge">20BA:DD06:F00D:1234::11</code> would need to become <code class="highlighter-rouge">20BA:DD06:F00D:1234:0:0:0:11</code>.</p>
+
+<h1 id="configuration">Configuration</h1>
+
+<h2 id="configure-the-external-interface-for-ipv6">Configure the external interface for IPv6</h2>
+
+<p>In a first step we need to assign an IPv6 address to the external interface of the F5 Big-IP load balancer. In this example we will use the two IPv6 addresses <code class="highlighter-rouge">20BA:DD06:F00D:1234::11/64</code> and <code class="highlighter-rouge">20BA:DD06:F00D:1234::12/64</code> for the actual nodes and <code class="highlighter-rouge">20BA:DD06:F00D:1234::10/64</code> as the floating address.</p>
+
+<p>Let’s start by creating a new Self-IP under the <strong>Network -&gt; Self IPs</strong> tab.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/Self-IPs1_HL.png" title="Figure 2: Create new Self-IP " class="image-popup">
+<picture>
+  <source width="252" type="image/webp" data-srcset="
+
+ /content/uploads/2013/08/Self-IPs1_HL.webp 252w" sizes="252px"></source>
+  <source width="252" data-srcset="
+
+ /content/uploads/2013/08/Self-IPs1_HL.png 252w" sizes="252px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/Self-IPs1_HL.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Create new Self-IP ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Create new Self-IP
+</figcaption>
+
+</figure>
+
+<p>Next enter the IPv6 address for the individual node as the IP address, along with the Netmask of <code class="highlighter-rouge">FFFF:FFFF:FFFF:FFFF::</code>. Repeat the same for the second node in an HA setup.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/Self-IPs2.png" title="Figure 3: Use an IPv4-style subnet mask for the IPv6 address instead of the typical prefix length " class="image-popup">
+<picture>
+  <source width="551" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/08/Self-IPs2-320.webp 320w, 
+
+    
+    /content/resized/2013/08/Self-IPs2-384.webp 384w, 
+
+    
+    /content/resized/2013/08/Self-IPs2-512.webp 512w, 
+
+ /content/uploads/2013/08/Self-IPs2.webp 551w" sizes="551px"></source>
+  <source width="551" data-srcset="
+
+    /content/resized/2013/08/Self-IPs2-320.png 320w, 
+
+    /content/resized/2013/08/Self-IPs2-384.png 384w, 
+
+    /content/resized/2013/08/Self-IPs2-512.png 512w, 
+
+ /content/uploads/2013/08/Self-IPs2.png 551w" sizes="551px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/Self-IPs2.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Use an IPv4-style subnet mask for the IPv6 address instead of the typical prefix length ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Use an IPv4-style subnet mask for the IPv6 address instead of the typical prefix length
+</figcaption>
+
+</figure>
+
+<p>Now we need to configure the floating IPv6 address in a similar way:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/Self-IPs3.png" title="Figure 4: Create a floating IPv6 address in a similar fashion " class="image-popup">
+<picture>
+  <source width="570" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/08/Self-IPs3-320.webp 320w, 
+
+    
+    /content/resized/2013/08/Self-IPs3-384.webp 384w, 
+
+    
+    /content/resized/2013/08/Self-IPs3-512.webp 512w, 
+
+ /content/uploads/2013/08/Self-IPs3.webp 570w" sizes="570px"></source>
+  <source width="570" data-srcset="
+
+    /content/resized/2013/08/Self-IPs3-320.png 320w, 
+
+    /content/resized/2013/08/Self-IPs3-384.png 384w, 
+
+    /content/resized/2013/08/Self-IPs3-512.png 512w, 
+
+ /content/uploads/2013/08/Self-IPs3.png 570w" sizes="570px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/Self-IPs3.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Create a floating IPv6 address in a similar fashion ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Create a floating IPv6 address in a similar fashion
+</figcaption>
+
+</figure>
+
+<h2 id="configure-an-ipv6-default-route">Configure an IPv6 Default Route</h2>
+
+<p>At this point we should be able to ping the previously created IPv6 interfaces from the same IPv6 network. Obviously we want more than this local-only connectivity and therefore need to configure an IPv6 default route on the F5 Big-IP devices. Do so by creating a new route under the <strong>Network -&gt; Routes</strong> tab.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/Route1_HL.png" title="Figure 5: Create a new route for the IPv6 default route " class="image-popup">
+<picture>
+  <source width="253" type="image/webp" data-srcset="
+
+ /content/uploads/2013/08/Route1_HL.webp 253w" sizes="253px"></source>
+  <source width="253" data-srcset="
+
+ /content/uploads/2013/08/Route1_HL.png 253w" sizes="253px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/Route1_HL.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Create a new route for the IPv6 default route ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Create a new route for the IPv6 default route
+</figcaption>
+
+</figure>
+
+<p>While a default route in IPv4 can be written as 0.0.0.0/0, the IPv6 equivalent is even simpler with ::/0. Thus not only the actual IPv6 address is just ::, but so is also the Netmask. Remember to specify the correct IPv6 address for the gateway as shown in Figure 6.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/Route2.png" title="Figure 6: Specify the destination address for the IPv6 default route " class="image-popup">
+<picture>
+  <source width="615" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/08/Route2-320.webp 320w, 
+
+    
+    /content/resized/2013/08/Route2-384.webp 384w, 
+
+    
+    /content/resized/2013/08/Route2-512.webp 512w, 
+
+ /content/uploads/2013/08/Route2.webp 615w" sizes="615px"></source>
+  <source width="615" data-srcset="
+
+    /content/resized/2013/08/Route2-320.png 320w, 
+
+    /content/resized/2013/08/Route2-384.png 384w, 
+
+    /content/resized/2013/08/Route2-512.png 512w, 
+
+ /content/uploads/2013/08/Route2.png 615w" sizes="615px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/Route2.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Specify the destination address for the IPv6 default route ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Specify the destination address for the IPv6 default route
+</figcaption>
+
+</figure>
+
+<h2 id="creating-virtual-servers">Creating Virtual Servers</h2>
+
+<p>The creation of a virtual server for our legacy IPv4 web application differs only slightly in IPv6 from what you might have already configured for the IPv4 equivalent. Only the IP Address has to be specified as an IPv6 address on the previously configured IPv6 subnet. As Figure 7 shows, all other capabilities can be used the same way.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/08/VirtualServer2.png" title="Figure 7: Create the virtual servers similar to their IPv4 correspondent, but with an IPv6 address " class="image-popup">
+<picture>
+  <source width="484" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/08/VirtualServer2-320.webp 320w, 
+
+    
+    /content/resized/2013/08/VirtualServer2-384.webp 384w, 
+
+ /content/uploads/2013/08/VirtualServer2.webp 484w" sizes="484px"></source>
+  <source width="484" data-srcset="
+
+    /content/resized/2013/08/VirtualServer2-320.png 320w, 
+
+    /content/resized/2013/08/VirtualServer2-384.png 384w, 
+
+ /content/uploads/2013/08/VirtualServer2.png 484w" sizes="484px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/08/VirtualServer2.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Create the virtual servers similar to their IPv4 correspondent, but with an IPv6 address ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Create the virtual servers similar to their IPv4 correspondent, but with an IPv6 address
+</figcaption>
+
+</figure>
+
+<h1 id="vmware-vcloud-director-via-ipv6">VMware vCloud Director via IPv6?</h1>
+
+<p>In a <a href="/2013/05/20/configuring-f5-big-ip-with-vcd/">previous post</a> I have shown how to configure the F5 Big-IP LTM with VMware vCloud Director (vCD) in an IPv4 setup. These two posts combined raise the question whether one could use an F5 Big-IP load balancer to quickly and easily enable VMware vCloud director to be accessible via IPv6 without having to change anything within vCD itself.</p>
+
+<p>It is straight forward and easy to apply the above to the mentioned post and indeed make the HTTP Redirect, the HTTPS traffic and even the Console Proxy available under an IPv6 address via the F5 Big-IP. The HTTP Redirect as well as the HTTPS traffic will work without a flaw, making the web interface of vCD available via IPv6.</p>
+
+<p>Unfortunately it is currently not possible to use the VMware Remote Console (VMRC) via the Console Proxy and IPv6, due to the locally installed VMRC tool incorrectly handling the masking of IPv6 addresses. Thus you will only be able to provide the web portion of vCD via IPv6, while still having to rely on IPv4 for the VMRC part.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#f5" class="page__taxonomy-item" rel="tag">F5</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-08-12T01:00:22-07:00">August 12, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Using+F5+Big-IP+LTM+with+IPv6%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F&amp;title=Using+F5+Big-IP+LTM+with+IPv6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/08/07/ipv6-link-local-addresses-as-default-gateway/" class="pagination--pager" title="IPv6 deployment: Using IPv6 link-local addresses as default gateway
+">Previous</a>
+    
+    
+      <a href="/2013/09/04/physical-networks-for-vmware-nsx/" class="pagination--pager" title="Physical networks for VMware NSX
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

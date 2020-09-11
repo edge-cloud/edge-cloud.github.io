@@ -1,0 +1,890 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Terminating a 6in4 tunnel on an Arista switch - Edge Cloud</title>
+<meta name="description" content="Using Arista’s underlying Linux OS to configure a 6in4 tunnel for IPv6 connectivity.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Terminating a 6in4 tunnel on an Arista switch">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/07/18/terminating-a-6in4-tunnel-on-an-arista-switch/">
+
+
+  <meta property="og:description" content="Using Arista’s underlying Linux OS to configure a 6in4 tunnel for IPv6 connectivity.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Terminating a 6in4 tunnel on an Arista switch">
+  <meta name="twitter:description" content="Using Arista’s underlying Linux OS to configure a 6in4 tunnel for IPv6 connectivity.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/07/18/terminating-a-6in4-tunnel-on-an-arista-switch/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-07-18T08:36:14-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/07/18/terminating-a-6in4-tunnel-on-an-arista-switch/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Terminating a 6in4 tunnel on an Arista switch">
+    <meta itemprop="description" content="Using Arista’s underlying Linux OS to configure a 6in4 tunnel for IPv6 connectivity.">
+    <meta itemprop="datePublished" content="July 18, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Terminating a 6in4 tunnel on an Arista switch
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#getting-the-6in4-tunnel">Getting the 6in4 tunnel</a></li>
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li><a href="#installing-necessary-modules">Installing necessary modules</a></li>
+  <li>
+<a href="#testing">Testing</a>
+    <ul>
+      <li><a href="#testing-ipv6-connectivity-from-the-eos-shell">Testing IPv6 connectivity from the EOS shell</a></li>
+      <li><a href="#testing-ipv6-connectivity-from-the-arista-cli">Testing IPv6 connectivity from the Arista CLI</a></li>
+    </ul>
+  </li>
+  <li><a href="#final-remarks">Final remarks</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>In a <a href="https://www.edge-cloud.net/2013/06/24/network-troubleshooting-via-arista-eos-shell/" title="Network troubleshooting via Arista EOS shell">previous post</a> I have shown that <a href="https://www.arista.com/en/" target="_blank" rel="noopener noreferrer">Arista switches</a> feature a full fledged Linux system underneath the CLI that is accessible to network administrators via the EOS shell.</p>
+
+<p>Let’s use this Linux capability to do something out of the box: Terminate a 6in4 tunnel on an Arista switch to provide IPv6 access.</p>
+
+<p>Via the CLI this is not possible as Arista does not support 6in4 tunnel in EOS. Therefore let’s use the Linux-based EOS shell.</p>
+
+<p>Please keep in mind that the tunnel termination will be handled by the control plane in software and not in hardware. Thus don’t expect any miracles with regards to throughput.</p>
+
+<h1 id="getting-the-6in4-tunnel">Getting the 6in4 tunnel</h1>
+
+<p>Next we need a service provider delivering us the termination or such a tunnel. The easiest way to achieve this is via Hurricane Electric’s <a href="https://tunnelbroker.net/" target="_blank" rel="noopener noreferrer">Tunnelbroker service</a>. Within a few minutes you get a 6in4 tunnel this way. Figure 1 shows an example of the details for a 6in4 tunnel provided by Hurricane Electric.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/Capture01.png" title="Figure 1: 6in4 tunnel details from tunnelbroker.net " class="image-popup">
+<picture>
+  <source width="636" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/Capture01-320.webp 320w, 
+
+    
+    /content/resized/2013/06/Capture01-384.webp 384w, 
+
+    
+    /content/resized/2013/06/Capture01-512.webp 512w, 
+
+ /content/uploads/2013/06/Capture01.webp 636w" sizes="636px"></source>
+  <source width="636" data-srcset="
+
+    /content/resized/2013/06/Capture01-320.png 320w, 
+
+    /content/resized/2013/06/Capture01-384.png 384w, 
+
+    /content/resized/2013/06/Capture01-512.png 512w, 
+
+ /content/uploads/2013/06/Capture01.png 636w" sizes="636px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/Capture01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: 6in4 tunnel details from tunnelbroker.net ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: 6in4 tunnel details from tunnelbroker.net
+</figcaption>
+
+</figure>
+
+<h1 id="prerequisites">Prerequisites</h1>
+
+<p>Before starting with the configuration of the 6in4 tunnel from within the Arista EOS shell, let’s make sure that we can actually contact the service provider’s tunnel endpoint via ping from the Arista CLI.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a(config)#ping 216.66.84.46
+PING 216.66.84.46 (216.66.84.46) 72(100) bytes of data.
+80 bytes from 216.66.84.46: icmp_req=1 ttl=61 time=0.674 ms
+80 bytes from 216.66.84.46: icmp_req=2 ttl=61 time=0.642 ms
+80 bytes from 216.66.84.46: icmp_req=3 ttl=61 time=0.653 ms
+80 bytes from 216.66.84.46: icmp_req=4 ttl=61 time=0.638 ms
+80 bytes from 216.66.84.46: icmp_req=5 ttl=61 time=0.656 ms
+
+--- 216.66.84.46 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4ms
+rtt min/avg/max/mdev = 0.638/0.652/0.674/0.030 ms, ipg/ewma 1.039/0.663 ms
+</code></pre></div></div>
+
+<p>Once we confirm connectivity, we can get started with the actual configuration. For this let’s enter into the EOS shell mode and become super user:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#bash
+
+Arista Networks EOS shell
+
+[user@ams-core01a ~]$ sudo -i
+
+Arista Networks EOS shell
+
+-bash-4.1#
+</code></pre></div></div>
+
+<h1 id="installing-necessary-modules">Installing necessary modules</h1>
+
+<p>In order to configure a 6in4 tunnel under Linux the <a href="http://tldp.org/HOWTO/Adv-Routing-HOWTO/lartc.tunnel-ipv6.addressing.html" target="_blank" rel="noopener noreferrer">Simple Internet Transition (SIT)</a> module needs to be loaded. This module is not loaded by default on Arista switches. Let’s do so:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# modprobe sit
+</code></pre></div></div>
+
+<p>Now we can configure the 6in4 tunnel to Hurricane Electric and make it available under the interface name “he-ipv6”, enable IPv6 on this interface and assign the correct IPv6 address:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ip tunnel add he-ipv6 mode sit remote 216.66.84.46 local 212.123.xxx.xxx ttl 255
+-bash-4.1# ip link set he-ipv6 up
+-bash-4.1# echo 0 &gt; /proc/sys/net/ipv6/conf/he-ipv6/disable_ipv6
+-bash-4.1# ip addr add 2001:470:xxxx:xxxx::2/64 dev he-ipv6
+-bash-4.1#
+</code></pre></div></div>
+
+<p>The 6in4 tunnel to Hurricane Electric should now be up and running.</p>
+
+<h1 id="testing">Testing</h1>
+
+<h2 id="testing-ipv6-connectivity-from-the-eos-shell">Testing IPv6 connectivity from the EOS shell</h2>
+
+<p>Before declaring success, let’s ensure that we can actually carry IPv6 traffic across the tunnel. We will start by attempting to ping the IPv6 address of the tunnel’s remote interface at Hurricane Electric.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ping6 2001:470:xxxx:xxxx::1
+PING 2001:470:xxxx:xxxx::1(2001:470:xxxx:xxxx::1) 56 data bytes
+64 bytes from 2001:470:xxxx:xxxx::1: icmp_seq=1 ttl=64 time=0.742 ms
+64 bytes from 2001:470:xxxx:xxxx::1: icmp_seq=2 ttl=64 time=0.739 ms
+64 bytes from 2001:470:xxxx:xxxx::1: icmp_seq=3 ttl=64 time=0.715 ms
+64 bytes from 2001:470:xxxx:xxxx::1: icmp_seq=4 ttl=64 time=0.693 ms
+64 bytes from 2001:470:xxxx:xxxx::1: icmp_seq=5 ttl=64 time=0.720 ms
+64 bytes from 2001:470:xxxx:xxxx::1: icmp_seq=6 ttl=64 time=0.732 ms
+^C
+--- 2001:470:xxxx:xxxx::1 ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5000ms
+rtt min/avg/max/mdev = 0.693/0.723/0.742/0.031 ms
+</code></pre></div></div>
+
+<p>Once this works successfully, let’s configure routing beyond this first hop via a default route:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ip route add ::/0 dev he-ipv6
+</code></pre></div></div>
+
+<p>Let’s test if this works and ping <a href="https://developers.google.com/speed/public-dns/" target="_blank" rel="noopener noreferrer">Google’s public DNS resolver</a>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ping6 2001:4860:4860::8888
+PING 2001:4860:4860::8888(2001:4860:4860::8888) 56 data bytes
+64 bytes from 2001:4860:4860::8888: icmp_seq=1 ttl=58 time=4.51 ms
+64 bytes from 2001:4860:4860::8888: icmp_seq=2 ttl=58 time=4.62 ms
+64 bytes from 2001:4860:4860::8888: icmp_seq=3 ttl=58 time=4.57 ms
+64 bytes from 2001:4860:4860::8888: icmp_seq=4 ttl=58 time=4.59 ms
+64 bytes from 2001:4860:4860::8888: icmp_seq=5 ttl=58 time=4.54 ms
+^C
+--- 2001:4860:4860::8888 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 4.519/4.571/4.626/0.071 ms
+-bash-4.1#
+</code></pre></div></div>
+
+<p>It does, which means that we have successfully enabled IPv6 connectivity via a 6in4 tunnel.</p>
+
+<h2 id="testing-ipv6-connectivity-from-the-arista-cli">Testing IPv6 connectivity from the Arista CLI</h2>
+
+<p>So far we have configured the 6in4 tunnel and tested its functionality from the Arista EOS shell. But does that mean that the changes we performed will actually be available to traffic that traverses the switch? In other words: Can we actually connect machines to my Arista switch that will gain IPv6 connectivity this way? Let’s try it out by testing network connectivity from the Arista CLI.</p>
+
+<p>First exit the Arista EOS shell into the CLI.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# exit
+logout
+[user@ams-core01a ~]$ exit
+logout
+</code></pre></div></div>
+
+<p>Let’s ping the Google DNS resolver again and see what happens:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#ping ipv6 2001:4860:4860::8888
+PING 2001:4860:4860::8888(2001:4860:4860::8888) 72 data bytes
+72 bytes from 2001:4860:4860::8888: icmp_seq=1 ttl=58 (truncated)
+72 bytes from 2001:4860:4860::8888: icmp_seq=2 ttl=58 (truncated)
+72 bytes from 2001:4860:4860::8888: icmp_seq=3 ttl=58 (truncated)
+72 bytes from 2001:4860:4860::8888: icmp_seq=4 ttl=58 (truncated)
+72 bytes from 2001:4860:4860::8888: icmp_seq=5 ttl=58 (truncated)
+
+--- 2001:4860:4860::8888 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 20ms
+rtt min/avg/max/mdev = 4.516/4.554/4.623/0.093 ms, ipg/ewma 5.005/4.535 ms
+ams-core01a#
+</code></pre></div></div>
+
+<p>That works like a charm.</p>
+
+<p>Of course there must be some drawback to all of this: As the interface “he-ipv6” is not known to the Arista CLI, it will not be displayed from within the CLI. Thus it appears like hidden from the network administrator and is only accessible via the EOS shell. This makes troubleshooting a bit more challenging as e.g. the IPv6 routing table will appear to be empty even though we just verified that we have IPv6 connectivity to the Internet.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#sh ipv6 route ::/0
+IPv6 Routing Table - 35 entries
+Codes: C - connected, S - static, K - kernel, O - OSPF, B - BGP, R - RIP, A - Aggregate
+
+
+ams-core01a#
+</code></pre></div></div>
+
+<h1 id="final-remarks">Final remarks</h1>
+
+<p>Please keep in mind that due to the operational challenges around troubleshooting the above setup as well as the rather mediocre throughput of the 6in4 tunnel, this configuration is not recommended for production usage. Also keep in mind that the above changes would not survive a reboot of the switch.</p>
+
+<p>Instead this article showed you how powerful Arista’s underlying Linux OS really is.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#arista" class="page__taxonomy-item" rel="tag">Arista</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-07-18T08:36:14-07:00">July 18, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Terminating+a+6in4+tunnel+on+an+Arista+switch%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F07%2F18%2Fterminating-a-6in4-tunnel-on-an-arista-switch%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F07%2F18%2Fterminating-a-6in4-tunnel-on-an-arista-switch%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F07%2F18%2Fterminating-a-6in4-tunnel-on-an-arista-switch%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F07%2F18%2Fterminating-a-6in4-tunnel-on-an-arista-switch%2F&amp;title=Terminating+a+6in4+tunnel+on+an+Arista+switch" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/06/28/tcp-throughput-amazon-aws-regions/" class="pagination--pager" title="TCP Throughput tests between Amazon AWS regions
+">Previous</a>
+    
+    
+      <a href="/2013/08/07/ipv6-link-local-addresses-as-default-gateway/" class="pagination--pager" title="IPv6 deployment: Using IPv6 link-local addresses as default gateway
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1511 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Monitoring IPv6 websites and SaaS apps via ThousandEyes - Edge Cloud</title>
+<meta name="description" content="ThousandEyes is a SaaS offering for monitoring SaaS application and website performance and provides deep insight into the underlying network including IPv6.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Monitoring IPv6 websites and SaaS apps via ThousandEyes">
+<meta property="og:url" content="https://www.edge-cloud.net/2014/06/02/monitoring-ipv6-websites-via-thousandeyes/">
+
+
+  <meta property="og:description" content="ThousandEyes is a SaaS offering for monitoring SaaS application and website performance and provides deep insight into the underlying network including IPv6.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Monitoring IPv6 websites and SaaS apps via ThousandEyes">
+  <meta name="twitter:description" content="ThousandEyes is a SaaS offering for monitoring SaaS application and website performance and provides deep insight into the underlying network including IPv6.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/06/02/monitoring-ipv6-websites-via-thousandeyes/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2014-06-02T01:22:23-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2014/06/02/monitoring-ipv6-websites-via-thousandeyes/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Monitoring IPv6 websites and SaaS apps via ThousandEyes">
+    <meta itemprop="description" content="ThousandEyes is a SaaS offering for monitoring SaaS application and website performance and provides deep insight into the underlying network including IPv6.">
+    <meta itemprop="datePublished" content="June 02, 2014">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Monitoring IPv6 websites and SaaS apps via ThousandEyes
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#getting-started">Getting started</a>
+    <ul>
+      <li><a href="#deploying-agents">Deploying Agents</a></li>
+      <li><a href="#defining-tests">Defining Tests</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#dashboard">Dashboard</a>
+    <ul>
+      <li><a href="#web-http-server-test">Web-HTTP Server Test</a></li>
+      <li><a href="#network-end-to-end-metrics">Network End-to-End Metrics</a></li>
+      <li><a href="#network-path-visualization">Network Path Visualization</a></li>
+      <li><a href="#network---bgp-route-visualization---ipv6">Network - BGP Route Visualization - IPv6</a></li>
+      <li><a href="#network---bgp-route-visualization---ipv4">Network - BGP Route Visualization - IPv4</a></li>
+    </ul>
+  </li>
+  <li><a href="#discovering-issues-with-your-isp-ipv6-vs-ipv4">Discovering Issues with your ISP: IPv6 vs IPv4</a></li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>Recently I stumbled over a small startup in San Francisco called <a href="https://www.thousandeyes.com/" target="_blank" rel="noopener noreferrer">ThousandEyes</a>. They provide a service for complete, end-to-end visibility of cloud applications and infrastructure telling you where and why services are breaking or under-performing. This allows SaaS providers to ensure that their application can be leveraged by customers at various locations throughout the world with an optimal or at least acceptable performance. But it also allows Enterprise customers to ensure that the SaaS applications used by the company are available from all campuses and branch offices at the desired performance, taking into consideration all elements of the delivery chain (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/TE2.png" title="Figure 1: End-to-end visibility of cloud applications and infrastructure telling you where and why services are breaking " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/TE2-320.webp 320w, 
+
+    
+    /content/resized/2014/05/TE2-384.webp 384w, 
+
+    
+    /content/resized/2014/05/TE2-512.webp 512w, 
+
+ /content/uploads/2014/05/TE2.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/TE2-320.png 320w, 
+
+    /content/resized/2014/05/TE2-384.png 384w, 
+
+    /content/resized/2014/05/TE2-512.png 512w, 
+
+ /content/uploads/2014/05/TE2.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/TE2.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: End-to-end visibility of cloud applications and infrastructure telling you where and why services are breaking ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: End-to-end visibility of cloud applications and infrastructure telling you where and why services are breaking
+</figcaption>
+
+</figure>
+
+<h1 id="getting-started">Getting started</h1>
+
+<h2 id="deploying-agents">Deploying Agents</h2>
+
+<p>ThousandEyes leverages so-called agents that probe a target via various tests which can be individually defined. These agents can either be deployed at the network edge or even better deep inside the network, close to the actual end-user of the monitored service. Agents are offered as either a virtual appliance or as a Linux package for various distributions (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Intro1.png" title="Figure 2: Setting up local monitoring agents " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Intro1-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Intro1-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Intro1-512.webp 512w, 
+
+ /content/uploads/2014/05/Intro1.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Intro1-320.png 320w, 
+
+    /content/resized/2014/05/Intro1-384.png 384w, 
+
+    /content/resized/2014/05/Intro1-512.png 512w, 
+
+ /content/uploads/2014/05/Intro1.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Intro1.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Setting up local monitoring agents ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Setting up local monitoring agents
+</figcaption>
+
+</figure>
+
+<p>While it’s great to see that ThousandEyes supports IPv6 at all, there are some limitations. On an IPv4/IPv6 dualstack host you unfortunately have to choose between running the agent either against an IPv4 or IPv6 address. Right now it is not possible to chose both at the same time. It would make more sense if this was possible along with specifying via the test which protocol to use. This way ThousandEyes doesn’t provide the capability to easily compare IPv4 vs. IPv6 traffic out of the box.</p>
+
+<p>Instead I had to simulate such a setup by using two agents, one for IPv4 and one for IPv6. Adding more agents would break this model and makes things hard to read and understand.</p>
+
+<p>Also it is currently not possible to install more than one agent on a Linux host requiring separate hosts for the IPv4 and IPv6 agents. But thanks to <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">Docker</a> I was able to deploy one agent against the IPv6 address and one agent inside a Docker container against an IPv4 address on the same host. The two agents that you therefore see in Figure 2 are actually both running on the same host. With this I could go on with my initially intended use case.</p>
+
+<p>I’m confident that these minor shortcomings will be fixed over time as more and more Enterprise and SaaS provider customers adopt this tool.</p>
+
+<h2 id="defining-tests">Defining Tests</h2>
+
+<p>You can define four kinds of tests within ThousandEyes. Depending on which test you select, sub-tests are either automatically created or can be created on demand. The example in Figure 3 shows a “HTTP Server Only” test which probes the URL of this blog site with a given interval. This test will provide you with web site specific metrics around Availability, Response Time and Fetch Time. More advanced Web tests are possible, but I will not cover them here.</p>
+
+<p>With the tick box “Enable network measurements” you activate a so-called network test against the same hostname and port that gives insight into end-to-end metrics like Latency, Packet Loss or Jitter. Also tests for providing information around Bandwidth and MTU - important for discovering problematic tunnels - can be added. A network test can also be configured manually.</p>
+
+<p>A network test will also automatically create a BGP test against the IPv4 and/or IPv6 prefix that the hostname resolves to. More about this later on.</p>
+
+<p>Unfortunately, it is currently not very intuitive which tests are created and what hierarchy exists between them while you create them. Your best indicator is to look at the Alert Rules field. For each kind of test that will be created, a separate Alert Rule is created. In this example you see the three rules corresponding to the three tests I just mentioned.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Intro2.png" title="Figure 3: Setting up tests against applications and websites " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Intro2-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Intro2-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Intro2-512.webp 512w, 
+
+ /content/uploads/2014/05/Intro2.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Intro2-320.png 320w, 
+
+    /content/resized/2014/05/Intro2-384.png 384w, 
+
+    /content/resized/2014/05/Intro2-512.png 512w, 
+
+ /content/uploads/2014/05/Intro2.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Intro2.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Setting up tests against applications and websites ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Setting up tests against applications and websites
+</figcaption>
+
+</figure>
+
+<h1 id="dashboard">Dashboard</h1>
+
+<p>Once you’ve setup the agents and tests, you can move to the Dashboard and wait for some initial data to come in. The Dashboard provides you key metric information about the tests you defined. In the case of a “HTTP Server Only” test you will see the average Availability and Response time across all agents (See Figure 4). Clicking on one of the tests will then provide you additional deeper information.</p>
+
+<p>The Dashboard will also show you alarms and the status of your agents.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Intro3.png" title="Figure 4: Keeping an eye on important metrics " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Intro3-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Intro3-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Intro3-512.webp 512w, 
+
+ /content/uploads/2014/05/Intro3.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Intro3-320.png 320w, 
+
+    /content/resized/2014/05/Intro3-384.png 384w, 
+
+    /content/resized/2014/05/Intro3-512.png 512w, 
+
+ /content/uploads/2014/05/Intro3.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Intro3.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Keeping an eye on important metrics ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Keeping an eye on important metrics
+</figcaption>
+
+</figure>
+
+<h2 id="web-http-server-test">Web-HTTP Server Test</h2>
+
+<p>At the Web-HTTP Server level for a test we can see additional information around Availability, Response Time and Fetch time for the configured URL. These are nicely visible across a select-able time axis as well as across the different select-able agents.</p>
+
+<p>In this example we notice that the Connect Time for the same URL differs quite dramatically between a connection over IPv4 and IPv6. The Connect Time over IPv4 being 5 ms and the Connect Time over IPv6 being more than twice of that with 13 ms (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner1.png" title="Figure 5: Website performing better over IPv4 than IPv6 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner1-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Hetzner1-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Hetzner1-512.webp 512w, 
+
+ /content/uploads/2014/05/Hetzner1.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Hetzner1-320.png 320w, 
+
+    /content/resized/2014/05/Hetzner1-384.png 384w, 
+
+    /content/resized/2014/05/Hetzner1-512.png 512w, 
+
+ /content/uploads/2014/05/Hetzner1.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner1.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Website performing better over IPv4 than IPv6 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Website performing better over IPv4 than IPv6
+</figcaption>
+
+</figure>
+
+<p>Let’s try to use ThousandEyes and figure out why our users will get a worse experience of our sample website via IPv6 than they would get over IPv4.</p>
+
+<p>For this we drill down into the next layer of information, into the End-to-End metrics via the “Jump to…” function (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner1a.png" title="Figure 6: Drill down via &lt;em&gt;Jump to…&lt;/em&gt; " class="image-popup">
+<picture>
+  <source width="384" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner1a-320.webp 320w, 
+
+ /content/uploads/2014/05/Hetzner1a.webp 384w" sizes="384px"></source>
+  <source width="384" data-srcset="
+
+    /content/resized/2014/05/Hetzner1a-320.png 320w, 
+
+ /content/uploads/2014/05/Hetzner1a.png 384w" sizes="384px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner1a.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Drill down via &lt;em&gt;Jump to…&lt;/em&gt; ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Drill down via <em>Jump to…</em>
+</figcaption>
+
+</figure>
+
+<h2 id="network-end-to-end-metrics">Network End-to-End Metrics</h2>
+
+<p>Within the Network End-to-End Metrics we will find information about Loss, Latency, Jitter and Bandwidth of the connection. Again, these are nicely visible across a select-able time axis as well as across the different select-able agents. With this we can quickly determine that our IPv4 agent has a lower latency towards the destination then the IPv6 agent. As both agents are basically the same machine, this should not be the case (See Figure 7). Let’s drill down even more into the next layer of information.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner2.png" title="Figure 7: Cause: Latency higher over IPv6 than IPv4 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner2-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Hetzner2-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Hetzner2-512.webp 512w, 
+
+ /content/uploads/2014/05/Hetzner2.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Hetzner2-320.png 320w, 
+
+    /content/resized/2014/05/Hetzner2-384.png 384w, 
+
+    /content/resized/2014/05/Hetzner2-512.png 512w, 
+
+ /content/uploads/2014/05/Hetzner2.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner2.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Cause: Latency higher over IPv6 than IPv4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Cause: Latency higher over IPv6 than IPv4
+</figcaption>
+
+</figure>
+
+<h2 id="network-path-visualization">Network Path Visualization</h2>
+
+<p>The Network Path Visualization is a graphical Traceroute on steroids. Using TCP instead of ICMP - which might be filtered or take a different path - it shows all detected path between an agent and target along with valuable information. Hovering the mouse over the hops of the IPv6 connection will show information about each of the hops. The same applies for the link between two hops (See Figure 8).</p>
+
+<p>This way we can quickly determine that the IPv6 agent reaches the webserver for the configured URL via the Vienna Internet Exchange in Vienna, Austria. The agent itself is located in Nuremberg, Germany about 300 miles / 480 km away from Vienna.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner3.png" title="Figure 8: IPv6 route goes from Nuremberg to Vienna " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner3-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Hetzner3-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Hetzner3-512.webp 512w, 
+
+ /content/uploads/2014/05/Hetzner3.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Hetzner3-320.png 320w, 
+
+    /content/resized/2014/05/Hetzner3-384.png 384w, 
+
+    /content/resized/2014/05/Hetzner3-512.png 512w, 
+
+ /content/uploads/2014/05/Hetzner3.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner3.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: IPv6 route goes from Nuremberg to Vienna ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: IPv6 route goes from Nuremberg to Vienna
+</figcaption>
+
+</figure>
+
+<p>Looking at the IPv4 agent we can see that this in this case the webserver is located in Frankfurt, Germany about 100 miles / 160 km away (See Figure 9).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner4.png" title="Figure 9: IPv4 route goes from Nuremberg to Frankfurt " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner4-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Hetzner4-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Hetzner4-512.webp 512w, 
+
+ /content/uploads/2014/05/Hetzner4.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Hetzner4-320.png 320w, 
+
+    /content/resized/2014/05/Hetzner4-384.png 384w, 
+
+    /content/resized/2014/05/Hetzner4-512.png 512w, 
+
+ /content/uploads/2014/05/Hetzner4.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner4.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: IPv4 route goes from Nuremberg to Frankfurt ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: IPv4 route goes from Nuremberg to Frankfurt
+</figcaption>
+
+</figure>
+
+<p>This discrepancy in path chosen for IPv4 and IPv6 traffic as well as the distance between the locations explain the performance difference.</p>
+
+<p>I need to point out that the URL in this example is served by <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer">CloudFlare</a>, a content delivery network and distributed domain name server service which uses <a href="https://en.wikipedia.org/wiki/Anycast" target="_blank" rel="noopener noreferrer">Anycast</a> for improving website performance and speed, and to protect websites from online threats. As CloudFlare has <a href="https://www.cloudflare.com/network/" target="_blank" rel="noopener noreferrer">Points-of-Presence (POPs)</a> in both Vienna and Frankfurt, traffic can be served by either of these locations, both in IPv4 and IPv6.</p>
+
+<p>The problem in this case appears to be on the side of the provider in Nuremberg as they prefer a path towards Frankfurt for connecting to AS13335 (CloudFlare) via IPv4 while preferring a path towards Vienna for the same AS via IPv6. Here another nice feature of ThousandEyes comes into play: Share This Screen. This allows me to share the current screen with either live data or “canned” data around the time I have currently selected with someone who is not a customer of ThousandEyes. I can therefore easily share what I just discovered with the Service Provider in Nuremberg, allowing them to reproduce and better understand the issue. A great feature that saves a lot of time (See Figure 10).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner4_.png" title="Figure 10: The &lt;em&gt;Share This Screen&lt;/em&gt; feature allows others to see what I see " class="image-popup">
+<picture>
+  <source width="471" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner4_-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Hetzner4_-384.webp 384w, 
+
+ /content/uploads/2014/05/Hetzner4_.webp 471w" sizes="471px"></source>
+  <source width="471" data-srcset="
+
+    /content/resized/2014/05/Hetzner4_-320.png 320w, 
+
+    /content/resized/2014/05/Hetzner4_-384.png 384w, 
+
+ /content/uploads/2014/05/Hetzner4_.png 471w" sizes="471px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner4_.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: The &lt;em&gt;Share This Screen&lt;/em&gt; feature allows others to see what I see ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: The <em>Share This Screen</em> feature allows others to see what I see
+</figcaption>
+
+</figure>
+
+<h2 id="network---bgp-route-visualization---ipv6">Network - BGP Route Visualization - IPv6</h2>
+
+<p>Let’s drill down even further into the BGP Route Visualization. We will start with IPv6. Here we see the BGP connectivity between ThousandEyes public agents and the target AS. Unfortunately the number of IPv6 capable public agents is very limited. Nevertheless we can see CloudFlare (AS13335) connecting to large transit providers such as Telia Sonera (AS1299) (See Figure 11).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner5.png" title="Figure 11: IPv6 Peering of CloudFlare (AS13335; blue-green circle) observed from agents (green circle) " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner5-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Hetzner5-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Hetzner5-512.webp 512w, 
+
+ /content/uploads/2014/05/Hetzner5.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Hetzner5-320.png 320w, 
+
+    /content/resized/2014/05/Hetzner5-384.png 384w, 
+
+    /content/resized/2014/05/Hetzner5-512.png 512w, 
+
+ /content/uploads/2014/05/Hetzner5.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner5.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: IPv6 Peering of CloudFlare (AS13335; blue-green circle) observed from agents (green circle) ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: IPv6 Peering of CloudFlare (AS13335; blue-green circle) observed from agents (green circle)
+</figcaption>
+
+</figure>
+
+<h2 id="network---bgp-route-visualization---ipv4">Network - BGP Route Visualization - IPv4</h2>
+
+<p>Next we will look at the BGP routes for IPv4. Before we can do so, we will notice something interesting. ThousandEyes has discovered three applicable prefixes for the URL that was provided. There is a /21 and two more specific /24 prefixes (See Figure 12). Note that the URLs hostname actually resolves via DNS to two IPv4 addresses, one in each of the /24 prefixes.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner6.png" title="Figure 12: CloudFlare announces three IPv4 prefixes " class="image-popup">
+<picture>
+  <source width="301" type="image/webp" data-srcset="
+
+ /content/uploads/2014/05/Hetzner6.webp 301w" sizes="301px"></source>
+  <source width="301" data-srcset="
+
+ /content/uploads/2014/05/Hetzner6.png 301w" sizes="301px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner6.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: CloudFlare announces three IPv4 prefixes ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: CloudFlare announces three IPv4 prefixes
+</figcaption>
+
+</figure>
+
+<p>An interesting feature of ThousandEyes is the ability to discover and show path changes for the case that a BGP peer was lost. Such path changes often result in brief moments of lost reachability while the path change propagates upstream. Or even worse it might cause route flapping, which can cause excessive activity in all the other directly connected routers.</p>
+
+<p>Let’s look at the /21 prefix first. With a much larger number of IPv4 public agents we get a pretty nice picture of CloudFlares route graph (See Figure 13). We can see direct connections to Transit providers such as nLayer (aka GTT; AS4436) or Telia Sonera (AS1299), but also to smaller peering partners such as SoftLayer (AS36351).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner7.png" title="Figure 13: IPv4 Peering of CloudFlare (AS13335) " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner7-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Hetzner7-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Hetzner7-512.webp 512w, 
+
+ /content/uploads/2014/05/Hetzner7.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Hetzner7-320.png 320w, 
+
+    /content/resized/2014/05/Hetzner7-384.png 384w, 
+
+    /content/resized/2014/05/Hetzner7-512.png 512w, 
+
+ /content/uploads/2014/05/Hetzner7.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner7.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: IPv4 Peering of CloudFlare (AS13335) ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: IPv4 Peering of CloudFlare (AS13335)
+</figcaption>
+
+</figure>
+
+<p>Now let’s see what happens when we look at one of the more specific /24 prefixes. Well, we are seeing a surprise (See Figure 14). The more specific /24 prefix is actually not visible from the majority of other Autonomous Systems. It appears to be only visible via especially smaller providers that peer directly with CloudFlare.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/Hetzner8.png" title="Figure 14: More specific prefix is not visible in all peers, depicted as red border " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/Hetzner8-320.webp 320w, 
+
+    
+    /content/resized/2014/05/Hetzner8-384.webp 384w, 
+
+    
+    /content/resized/2014/05/Hetzner8-512.webp 512w, 
+
+ /content/uploads/2014/05/Hetzner8.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/Hetzner8-320.png 320w, 
+
+    /content/resized/2014/05/Hetzner8-384.png 384w, 
+
+    /content/resized/2014/05/Hetzner8-512.png 512w, 
+
+ /content/uploads/2014/05/Hetzner8.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/Hetzner8.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: More specific prefix is not visible in all peers, depicted as red border ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: More specific prefix is not visible in all peers, depicted as red border
+</figcaption>
+
+</figure>
+
+<p>CloudFlare uses a capability of BGP where a more specific route beats a less specific one, in order to perform clever traffic engineering. This approach allows CloudFlare to force end-user traffic via these direct peers to a more local POP, instead of preferring a transit provider and thus potentially terminating traffic farther away with a higher latency.</p>
+
+<p>I wonder if CloudFlare has a tool as nice as ThousandEyes available to monitor and optimize their BGP traffic engineering.</p>
+
+<p>ThousandEyes raises this anomaly as an alert, which you might have seen in Figure 4, even though it is not actually an issue but a desired behavior. Unfortunately there is no way to specify this as the desired behavior and disable the alarm for this.</p>
+
+<h1 id="discovering-issues-with-your-isp-ipv6-vs-ipv4">Discovering Issues with your ISP: IPv6 vs IPv4</h1>
+
+<p>Let’s look at another interesting use case for ThousandEyes: IPv4 vs. IPv6 path performance. In this case we will have a look at an IPv4/IPv6 Dualstack target in the same physical location. Thus no Anycast this time.</p>
+
+<p>One path leverages IPv6, the other one IPv4 (See Figure 15). Here we can clearly see issues with the IPv6 path - depicted in red - within the provider network that hosts the target.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/AboveNet01.png" title="Figure 15: IPv4 vs IPv6 path with issues in IPv6 path " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/AboveNet01-320.webp 320w, 
+
+    
+    /content/resized/2014/05/AboveNet01-384.webp 384w, 
+
+    
+    /content/resized/2014/05/AboveNet01-512.webp 512w, 
+
+ /content/uploads/2014/05/AboveNet01.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/AboveNet01-320.png 320w, 
+
+    /content/resized/2014/05/AboveNet01-384.png 384w, 
+
+    /content/resized/2014/05/AboveNet01-512.png 512w, 
+
+ /content/uploads/2014/05/AboveNet01.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/AboveNet01.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: IPv4 vs IPv6 path with issues in IPv6 path ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: IPv4 vs IPv6 path with issues in IPv6 path
+</figcaption>
+
+</figure>
+
+<p>Looking at one of the problematic links (highlighted in yellow) via the IPv6 path, we can see a high delay and loss rate (See Figure 16). We also see that this link is part of an MPLS tunnel.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/AboveNet03.png" title="Figure 16: High Delay and Loss via IPv6 on a segment within an MPLS tunnel " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/AboveNet03-320.webp 320w, 
+
+    
+    /content/resized/2014/05/AboveNet03-384.webp 384w, 
+
+    
+    /content/resized/2014/05/AboveNet03-512.webp 512w, 
+
+ /content/uploads/2014/05/AboveNet03.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/AboveNet03-320.png 320w, 
+
+    /content/resized/2014/05/AboveNet03-384.png 384w, 
+
+    /content/resized/2014/05/AboveNet03-512.png 512w, 
+
+ /content/uploads/2014/05/AboveNet03.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/AboveNet03.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: High Delay and Loss via IPv6 on a segment within an MPLS tunnel ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 16: High Delay and Loss via IPv6 on a segment within an MPLS tunnel
+</figcaption>
+
+</figure>
+
+<p>Looking at the same link via IPv4 (again highlighted in yellow), we don’t see any loss and a reasonable delay (See Figure 17). It appears that the depicted provider has performance problems with its IPv6 traffic.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2014/05/AboveNet02.png" title="Figure 17: No issues on same segment via IPv4 " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2014/05/AboveNet02-320.webp 320w, 
+
+    
+    /content/resized/2014/05/AboveNet02-384.webp 384w, 
+
+    
+    /content/resized/2014/05/AboveNet02-512.webp 512w, 
+
+ /content/uploads/2014/05/AboveNet02.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2014/05/AboveNet02-320.png 320w, 
+
+    /content/resized/2014/05/AboveNet02-384.png 384w, 
+
+    /content/resized/2014/05/AboveNet02-512.png 512w, 
+
+ /content/uploads/2014/05/AboveNet02.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2014/05/AboveNet02.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: No issues on same segment via IPv4 ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 17: No issues on same segment via IPv4
+</figcaption>
+
+</figure>
+
+<p>It is no secret that older network equipment provides inferior performance for processing IPv6 traffic over IPv4 traffic. In extreme cases this can even mean that processing for IPv6 is done in software using the supervisor, while processing IPv4 is done in ASIC. Such an outdated network will obviously create massive issues as IPv6 vs. IPv4 traffic ratios pick up.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>ThousandEyes is a very interesting tool for gaining insight into SaaS application performance and your overall network infrastructure. If you are an enterprise relying on SaaS applications such as <a href="https://products.office.com/en-us/" target="_blank" rel="noopener noreferrer">Microsoft Office 365</a> or <a href="https://gsuite.google.com/" target="_blank" rel="noopener noreferrer">Google Apps</a>, this is a great way to ensure that your employees get the performance they expect. It will help you identify issues and let you troubleshoot and resolve them quickly.</p>
+
+<p>If you are a service provider offering a SaaS application, ThousandEyes is equally valuable as you are now not only able to monitor your service from various locations worldwide, but also drill down deep into any issues in the Internet that might degrade your customer’s experience. In the end the customer cares about the end-to-end experience, where a SaaS provider has limited direct control over the delivery chain.</p>
+
+<p>Let’s hope that the existing rudimentary IPv6 support gets better over time as well.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#management" class="page__taxonomy-item" rel="tag">Management</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-06-02T01:22:23-07:00">June 02, 2014</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Monitoring+IPv6+websites+and+SaaS+apps+via+ThousandEyes%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F&amp;title=Monitoring+IPv6+websites+and+SaaS+apps+via+ThousandEyes" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2014/03/11/architecture-design-vsphere-ipv6/" class="pagination--pager" title="Architecture Design: vSphere with IPv6
+">Previous</a>
+    
+    
+      <a href="/2014/06/16/practical-guide-dns-based-authentication-named-entities-dane/" class="pagination--pager" title="Protecting your website with DNS-Based Authentication of Named Entities (DANE)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

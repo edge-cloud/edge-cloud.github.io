@@ -1,0 +1,872 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Network troubleshooting via Arista EOS shell - Edge Cloud</title>
+<meta name="description" content="Arista EOS is based on a Linux kernel and provides full and open access to a Linux shell, allowing installation and use of Linux based management and troubleshooting tools. In this short post I want to show you two use cases where this capability comes in extremely handy in the daily network management work.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Network troubleshooting via Arista EOS shell">
+<meta property="og:url" content="https://www.edge-cloud.net/2013/06/24/network-troubleshooting-via-arista-eos-shell/">
+
+
+  <meta property="og:description" content="Arista EOS is based on a Linux kernel and provides full and open access to a Linux shell, allowing installation and use of Linux based management and troubleshooting tools. In this short post I want to show you two use cases where this capability comes in extremely handy in the daily network management work.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Network troubleshooting via Arista EOS shell">
+  <meta name="twitter:description" content="Arista EOS is based on a Linux kernel and provides full and open access to a Linux shell, allowing installation and use of Linux based management and troubleshooting tools. In this short post I want to show you two use cases where this capability comes in extremely handy in the daily network management work.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/06/24/network-troubleshooting-via-arista-eos-shell/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2013-06-24T15:03:02-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2013/06/24/network-troubleshooting-via-arista-eos-shell/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Network troubleshooting via Arista EOS shell">
+    <meta itemprop="description" content="Arista EOS is based on a Linux kernel and provides full and open access to a Linux shell, allowing installation and use of Linux based management and troubleshooting tools. In this short post I want to show you two use cases where this capability comes in extremely handy in the daily network management work.">
+    <meta itemprop="datePublished" content="June 24, 2013">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Network troubleshooting via Arista EOS shell
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#tcpdump-to-pcap">TCPDump to PCAP</a></li>
+  <li>
+<a href="#throughput-testing-with-iperf">Throughput testing with iperf</a>
+    <ul>
+      <li><a href="#iperf-server-mode">iperf Server mode</a></li>
+      <li><a href="#iperf-client-mode">iperf Client Mode</a></li>
+    </ul>
+  </li>
+  <li><a href="#outlook">Outlook</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>A few days ago the startup <a href="https://www.cumulusnetworks.com/" target="_blank" rel="noopener noreferrer">Cumulus Networks</a> emerged from the clouds with their Cumulus Linux OS for original design manufacturer (ODM) switches based on Broadcom silicon. While the average customer will have to wait a while to get their hands on a Cumulus Networks based device, users of Arista switches can already today use the benefits of a full Linux distribution running on a data center switch.</p>
+
+<p>Arista EOS is based on a Linux kernel and provides full and open access to a Linux shell, allowing installation and use of Linux based management and troubleshooting tools.</p>
+
+<p>In this short post I want to show you two use cases where this capability comes in extremely handy in the daily network management work: Network Troubleshooting.</p>
+
+<h1 id="tcpdump-to-pcap">TCPDump to PCAP</h1>
+
+<p>Quite frequently it happens that network devices aren’t behaving the way they should be. Let’s take the example of a virtual router that doesn’t want to form OSPFv3 adjacency with the core switch. What usually helps quite a bit are packet captures of the traffic between the involved network devices. In the past it could be quite challenging acquiring these packet captures, requiring the setup of a <a href="https://en.wikipedia.org/wiki/Port_mirroring" target="_blank" rel="noopener noreferrer">Switched Port Analyzer (SPAN)</a> Remote Switched Port Analyzer (RSPAN) or even <a href="http://packetpushers.net/erspan-new-favorite-packet-capturing-trick/" target="_blank" rel="noopener noreferrer">Encapsulated Remote Switched Port Analyzer (ERSPAN)</a>.</p>
+
+<p>With Arista EOS it becomes much easier, as you can run TCPDump directly on the switch to capture a PCAP file for Wireshark:</p>
+
+<p>First, change into the EOS shell from the priviliged CLI mode:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#bash
+
+Arista Networks EOS shell
+
+[user@ams-core01a ~]$
+</code></pre></div></div>
+
+<p>Next, start the pre-installed tcpdump in PCAP capturing mode on the desired interface. Here I run it on the VLAN interface <em>vlan51</em> and capture the file into the flash. Once you’re done with the packet capture, press Ctrl + C to abort tcpdump:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@ams-core01a ~]$ tcpdump -i vlan51 -s 65535 -w /mnt/flash/int-vlan51.pcap
+tcpdump: listening on vlan51, link-type EN10MB (Ethernet), capture size 65535 bytes
+^C10 packets captured
+10 packets received by filter
+0 packets dropped by kernel
+[user@ams-core01a ~]$
+</code></pre></div></div>
+
+<p>Next we copy the files to another host - here a NOC jumpbox - to open it in Wireshark. That can easily be done via the installed SSH SCP client:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@ams-core01a ~]$ scp /mnt/flash/int-vlan51.pcap root@noc01.edge-cloud.net:/tmp
+The authenticity of host 'noc01.edge-cloud.net (2a01:4f8:d12:11c4::2)' can't be established.
+RSA key fingerprint is df:6c:9d:dd:8f:45:f8:61:96:0f:e4:54:c9:2d:d3:94.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'noc01.edge-cloud.net,2a01:4f8:d12:11c4::2' (RSA) to the list of known hosts.
+Yubikey for 'root':
+int-vlan51.pcap                               100%  910     0.9KB/s   00:00
+[user@ams-core01a ~]$
+</code></pre></div></div>
+
+<p>The capture PCAP file can be opened directly in Wireshark as shown in Figure 1:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2013/06/Capture03.png" title="Figure 1: PCAP file captured via Arista EOS shell in Wireshark " class="image-popup">
+<picture>
+  <source width="999" type="image/webp" data-srcset="
+
+    
+    /content/resized/2013/06/Capture03-320.webp 320w, 
+
+    
+    /content/resized/2013/06/Capture03-384.webp 384w, 
+
+    
+    /content/resized/2013/06/Capture03-512.webp 512w, 
+
+    
+    /content/resized/2013/06/Capture03-683.webp 683w, 
+
+    
+    /content/resized/2013/06/Capture03-800.webp 800w, 
+
+    
+    /content/resized/2013/06/Capture03-960.webp 960w, 
+
+ /content/uploads/2013/06/Capture03.webp 999w" sizes="999px"></source>
+  <source width="999" data-srcset="
+
+    /content/resized/2013/06/Capture03-320.png 320w, 
+
+    /content/resized/2013/06/Capture03-384.png 384w, 
+
+    /content/resized/2013/06/Capture03-512.png 512w, 
+
+    /content/resized/2013/06/Capture03-683.png 683w, 
+
+    /content/resized/2013/06/Capture03-800.png 800w, 
+
+    /content/resized/2013/06/Capture03-960.png 960w, 
+
+ /content/uploads/2013/06/Capture03.png 999w" sizes="999px"></source>
+  <img src="//:0" data-src="/content/uploads/2013/06/Capture03.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: PCAP file captured via Arista EOS shell in Wireshark ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: PCAP file captured via Arista EOS shell in Wireshark
+</figcaption>
+
+</figure>
+
+<h1 id="throughput-testing-with-iperf">Throughput testing with iperf</h1>
+
+<p>In the previous blog post <a href="https://www.edge-cloud.net/2013/06/07/measuring-network-throughput/"><em>Measuring Network Throughput</em></a>, I already showcased how to use iperf to measure the TCP throughput between two hosts. The good news: Arista EOS has iperf pre-installed. You can therefore use an Arista device to perform network throughput tests for TCP and UDP.</p>
+
+<p>Let’s have a look: If you are not yet in the EOS shell mode, change into it from the priviliged CLI mode:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#bash
+
+Arista Networks EOS shell
+
+[user@ams-core01a ~]$
+</code></pre></div></div>
+
+<p>By default iperf uses the port TCP/5001 in server mode for inbound connections. But Arista blocks this port by default. Therefore you have to temporarily add an iptables rule in the EOS shell to allow access to port TCP/5001. This is done with the command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@ams-core01a ~]$ sudo iptables -I INPUT -p tcp -m tcp --dport 5001 -j ACCEPT
+</code></pre></div></div>
+
+<p>It can later be undone via:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@ams-core01a ~]$ sudo iptables -D INPUT -p tcp -m tcp --dport 5001 -j ACCEPT
+</code></pre></div></div>
+
+<p>Also keep in mind, that this command will not survive a reboot of the switch.
+Next you have the option to run iperf either in server or client mode.</p>
+
+<h2 id="iperf-server-mode">iperf Server mode</h2>
+
+<p>Press Ctrl + C to exit the server mode.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@las-core01a ~]$ iperf -s
+------------------------------------------------------------
+Server listening on TCP port 5001
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+[  4] local 172.31.3.4 port 5001 connected with 172.31.1.2 port 44589
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.3 sec  89.6 MBytes  72.9 Mbits/sec
+^C[user@las-core01a ~]$
+</code></pre></div></div>
+
+<h2 id="iperf-client-mode">iperf Client Mode</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@ams-core01a ~]$ iperf -c las-core01a.edge-cloud.net
+------------------------------------------------------------
+Client connecting to las-core01a.edge-cloud.net, TCP port 5001
+TCP window size: 16.0 KByte (default)
+------------------------------------------------------------
+[  3] local 172.31.3.4 port 60088 connected with 172.31.1.2 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-10.0 sec  63.0 MBytes  52.7 Mbits/sec
+[user@ams-core01a ~]$
+</code></pre></div></div>
+
+<p>If you read the blog post <a href="/2013/06/07/measuring-network-throughput/">Measuring Network Throughput</a>, you will remember that TCP throughput depends on the link latency and the TCP window size.</p>
+
+<p>In the above example we didn’t specify the TCP window size, but used the standard Linux auto-tuning TCP buffer limit. Here Arista has already done some tuning for us and set this auto-tuning TCP buffer limit to 4096 KByte.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@ams-core01a ~]$ cat /proc/sys/net/ipv4/tcp_rmem
+4096    87380   4194304
+[user@ams-core01a ~]$
+</code></pre></div></div>
+
+<p>That should be more than sufficient for most TCP performance test, even across WANs.</p>
+
+<h1 id="outlook">Outlook</h1>
+
+<p>This was just a simple example on how to use the Arista EOS shell in daily network operations. In the end the Linux powered EOS shell gives almost endless opportunities for usage. What would you use it for?</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#arista" class="page__taxonomy-item" rel="tag">Arista</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#performance" class="page__taxonomy-item" rel="tag">Performance</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-06-24T15:03:02-07:00">June 24, 2013</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Network+troubleshooting+via+Arista+EOS+shell%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F&amp;title=Network+troubleshooting+via+Arista+EOS+shell" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2013/06/21/breaking-amazon-aws-s3/" class="pagination--pager" title="“Breaking” Amazon AWS S3
+">Previous</a>
+    
+    
+      <a href="/2013/06/28/tcp-throughput-amazon-aws-regions/" class="pagination--pager" title="TCP Throughput tests between Amazon AWS regions
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>

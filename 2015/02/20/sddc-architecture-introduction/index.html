@@ -1,0 +1,843 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Software Defined Data Center (SDDC) Architecture - Introduction - Edge Cloud</title>
+<meta name="description" content="A Software Defined Data Center (SDDC) is a vision for a new IT infrastructure that applies virtualization concepts such as abstraction, pooling, and automation to all resources of a data center. It promises to improve the delivery, operation, and recovery of Business Applications through increased agility and performance, while reducing service delivery times.">
+
+
+  <meta name="author" content="Christian Elsen">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Software Defined Data Center (SDDC) Architecture - Introduction">
+<meta property="og:url" content="https://www.edge-cloud.net/2015/02/20/sddc-architecture-introduction/">
+
+
+  <meta property="og:description" content="A Software Defined Data Center (SDDC) is a vision for a new IT infrastructure that applies virtualization concepts such as abstraction, pooling, and automation to all resources of a data center. It promises to improve the delivery, operation, and recovery of Business Applications through increased agility and performance, while reducing service delivery times.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+<meta property="og:image:width" content="198">
+<meta property="og:image:height" content="297">
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Software Defined Data Center (SDDC) Architecture - Introduction">
+  <meta name="twitter:description" content="A Software Defined Data Center (SDDC) is a vision for a new IT infrastructure that applies virtualization concepts such as abstraction, pooling, and automation to all resources of a data center. It promises to improve the delivery, operation, and recovery of Business Applications through increased agility and performance, while reducing service delivery times.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/02/20/sddc-architecture-introduction/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-02-20T09:05:15-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2015/02/20/sddc-architecture-introduction/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.edge-cloud.net",
+      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net",
+      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+        
+        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Technology Generalist
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Software Defined Data Center (SDDC) Architecture - Introduction">
+    <meta itemprop="description" content="A Software Defined Data Center (SDDC) is a vision for a new IT infrastructure that applies virtualization concepts such as abstraction, pooling, and automation to all resources of a data center. It promises to improve the delivery, operation, and recovery of Business Applications through increased agility and performance, while reducing service delivery times.">
+    <meta itemprop="datePublished" content="February 20, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Software Defined Data Center (SDDC) Architecture - Introduction
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#requirements">Requirements</a>
+    <ul>
+      <li><a href="#highly-automated-operation-at-scale">Highly automated operation at Scale</a></li>
+      <li><a href="#hardware-and-software-efficiencies">Hardware and Software efficiencies</a></li>
+      <li><a href="#new-and-old-business-needs">New and old business needs</a></li>
+    </ul>
+  </li>
+  <li><a href="#high-level-architecture-for-a-software-defined-data-center-sddc">High-level Architecture for a Software Defined Data Center (SDDC)</a></li>
+  <li><a href="#summary">Summary</a></li>
+  <li><a href="#posts-in-this-series">Posts in this series</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>A Software Defined Data Center (SDDC) is a vision for a new IT infrastructure that applies virtualization concepts such as abstraction, pooling, and automation to all resources of a data center. It promises to improve the delivery, operation, and recovery of Business Applications through increased agility and performance, while reducing service delivery times.</p>
+
+<p>Creating and executing a strategy to realize this vision is a journey that needs to include not only new technology, but also changed processes as well as people with new training and mindsets.</p>
+
+<p>In a series of articles I want to focus on the architecture and some of its design elements for a SDDC. This first article will focus on the requirements of an SDDC, before attempting to break up the problem into manageable “chunks” and address them in a divide-and-conquer fashion in subsequent posts.</p>
+
+<p>Although the presented problem statement, architecture and design could apply to a wide variety of products, I will mostly focus on products from VMware and its eco-system partners. Also while the presented architecture and design might not necessarily exist in its entire form at a customer site today, individual elements presented have certainly proven it’s success as part of numerous customer projects.</p>
+
+<h1 id="requirements">Requirements</h1>
+
+<p>A Software Defined Data Center promises to be the new underpinning or platform for delivering today’s and tomorrow’s IT services. As such this next generation infrastructure needs to address some shortcomings of today’s infrastructure in order to be successful:</p>
+
+<ul>
+  <li>
+<strong>Highly automated operation at Scale:</strong> Leaner organization that scales sub-linearly with an operating model build around automation. Leverage modular web-scale designs for unhampered scalability.</li>
+  <li>
+<strong>Hardware and Software efficiencies:</strong> Support on-demand scaling for varying capacity needs. Improved resource pooling to drive increased utilization of resources and reduce cost.</li>
+  <li>
+<strong>New and old business needs:</strong> Support legacy applications with traditional business continuity and disaster recovery, besides new cloud-native applications.</li>
+</ul>
+
+<p>Throughout the architecture and design discussion I will attempt to provide traceability between the design decisions and these requirements. Therefore let’s look into each of these requirements in more detail:</p>
+
+<h2 id="highly-automated-operation-at-scale">Highly automated operation at Scale</h2>
+
+<p>Today’s IT departments are pressed to do more with less and provide IT services at a high quality and a lower cost. Doing so, IT departments often have to compete with outside services ranging from public clouds such as <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon Web Services (AWS)</a> for Infrastructure services, all the way to <a href="https://products.office.com/en-us/business/" target="_blank" rel="noopener noreferrer">Office 365</a> for SaaS based offerings. And if IT departments are successful with their internal offerings, they need to ensure that they can scale up in a reasonable time-frame to meet the new demand.</p>
+
+<p>To deliver on this requirement one will quickly discover that it is necessary to use a strong foundation of automation to provide a swift and reliable infrastructure that can easily scale up and provide offered services. Adding more headcount to accomplish this task is not an option as it would not only lead to increased cost, but also to largely unpredictable outcomes due to human errors in the scaled operations.</p>
+
+<p>Last but not least, in order to compete with the abilities and the price of web-scale services such as AWS, IT departments need to leverage some of their design elements to achieve similar unhampered scale at a reasonable price point.</p>
+
+<h2 id="hardware-and-software-efficiencies">Hardware and Software efficiencies</h2>
+
+<p>The traditional approach to data centers was often a combination of one-size fits all - for simplifying operations - as well as best-is-just-good-enough - due to the requirement of running mission critical workloads. While the requirement for reliability doesn’t go away, new and old business needs (see next section) have more differentiated requirements for business continuity and disaster recovery. This offers the possibility to shift certain capabilities around availability from hardware to software or even give up on them altogether within the infrastructure. Let the application itself deal with failures.</p>
+
+<p>One of the corner stones of a Software Defined Data Center is the introduction of virtualization for not only compute, but also networking - known as Software Defined Networking (SDN), and storage - known as Software Defined Storage (SDS). This allows the tear-down of resource silos, allow resource pooling and thereby the reduction of costs.</p>
+
+<h2 id="new-and-old-business-needs">New and old business needs</h2>
+
+<p>An IaaS cloud such as AWS is geared towards a cloud application model, with cloud native applications. These applications implement mechanism to cope with environment-induced failures within the application itself instead of leveraging hardware or platform redundancy. While we want to also support these cloud native applications in an SDDC, the vast majority of enterprise applications are still traditional applications that are not optimized for such a cloud model. The SDDC shall therefore especially provide a home for these legacy applications, while at the same time offering some of the benefits of cloud computing, such as automation and self-service.</p>
+
+<h1 id="high-level-architecture-for-a-software-defined-data-center-sddc">High-level Architecture for a Software Defined Data Center (SDDC)</h1>
+
+<p>Next we will break up the design of a Software Defined Data Center (SDDC) into manageable “chunks” and address them in a divide-and-conquer fashion in subsequent posts. To do so, the SDDC is split into three main layers, along with capabilities spanning all three layers (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2015/02/SDDC_Layers.png" title="Figure 1: Architecture Overview of a Software Defined Data Center " class="image-popup">
+<picture>
+  <source width="600" type="image/webp" data-srcset="
+
+    
+    /content/resized/2015/02/SDDC_Layers-320.webp 320w, 
+
+    
+    /content/resized/2015/02/SDDC_Layers-384.webp 384w, 
+
+    
+    /content/resized/2015/02/SDDC_Layers-512.webp 512w, 
+
+ /content/uploads/2015/02/SDDC_Layers.webp 600w" sizes="600px"></source>
+  <source width="600" data-srcset="
+
+    /content/resized/2015/02/SDDC_Layers-320.png 320w, 
+
+    /content/resized/2015/02/SDDC_Layers-384.png 384w, 
+
+    /content/resized/2015/02/SDDC_Layers-512.png 512w, 
+
+ /content/uploads/2015/02/SDDC_Layers.png 600w" sizes="600px"></source>
+  <img src="//:0" data-src="/content/uploads/2015/02/SDDC_Layers.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Architecture Overview of a Software Defined Data Center ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Architecture Overview of a Software Defined Data Center
+</figcaption>
+
+</figure>
+
+<p>The main layers are:</p>
+
+<ul>
+  <li>
+<strong>Physical Layer:</strong> This includes the physical compute, network and storage components.</li>
+  <li>
+<strong>Virtual Infrastructure Layer:</strong> This layer includes the traditional virtualization platform with the hypervisor, resource pooling and virtualization control. VMware products falling in this category are <a href="http://www.vmware.com/products/vsphere.html" target="_blank" rel="noopener noreferrer">vSphere</a> and <a href="http://www.vmware.com/products/nsx.html" target="_blank" rel="noopener noreferrer">NSX</a>.</li>
+  <li>
+<strong>Cloud Management Layer:</strong> This layer adds capabilities to the Virtual Infrastructure Layer, bringing capabilities known from IaaS clouds to the SDDC. These capabilities include service catalogs, self-service portals and an orchestration engine. VMware products in this layer are <a href="http://www.vmware.com/products/vrealize-automation.html" target="_blank" rel="noopener noreferrer">vRealize Automation</a>&lt;/a&gt; (formerly vCloud Automation Center), <a href="http://www.vmware.com/products/vcloud-director.html" target="_blank" rel="noopener noreferrer">vCloud Director</a> or VMware Integrated OpenStack (VIO)(http://www.vmware.com/products/openstack.html), along with <a href="http://www.vmware.com/products/vrealize-orchestrator.html" target="_blank" rel="noopener noreferrer">vRealize Orchestrator</a> (formerly vCenter Orchestrator).</li>
+</ul>
+
+<p>Additional capabilities that span across these main layers are:</p>
+
+<ul>
+  <li>
+<strong>Service Management:</strong> The ability to manage the entire SDDC via a single pane of glass, including operations management and portfolio management for offered services. VMware products in this layer are <a href="http://www.vmware.com/ap/products/vrealize-operations.html" target="_blank" rel="noopener noreferrer">vRealize Operations</a> (Formerly vCenter Operations Management Suite).</li>
+  <li>
+<strong>Business Continuity:</strong> The ability to provide business continuity for the SDDC itself, but especially the hosted workloads. This includes the fault tolerance of SDDC components, backup &amp; recovery of data and services as well as data replication. Products from the VMware eco-system are <a href="https://www.veeam.com/vmware-esx-backup.html" target="_blank" rel="noopener noreferrer">Veeam Backup &amp; Replication</a> or <a href="http://www.zerto.com/" target="_blank" rel="noopener noreferrer">Zerto Business Continuity &amp; Disaster Recovery</a>.</li>
+  <li>
+<strong>Security:</strong> Provide security mechanism for governance, risk mitigation and compliance. Products from the VMware eco-system are <a href="http://www.hytrust.com/" target="_blank" rel="noopener noreferrer">HyTrust</a> Cloudcontrol and Datacontrol</li>
+</ul>
+
+<p>We will need to address these capabilities in each of the layers.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This article is the foundation for a series of further articles in which we will together embark the journey to let the vision of a software defined data center come true through an architecture with specific design elements. After outlining the requirements to be fulfilled by this architecture, the above outlined high-level SDDC architecture also provides an outline for future articles.</p>
+
+<p>By reducing the complexity of the SDDC, we can also reduce the risk of the entire project and thereby increase the likelihood of achieving the desired return on investment.</p>
+
+<h1 id="posts-in-this-series">Posts in this series</h1>
+
+<p>Within the Physical Layer we want to look at these design artifacts:</p>
+
+<ul>
+  <li>
+<a href="http://www.vmware.com/solutions/software-defined-datacenter/validated-designs.html" target="_blank" rel="noopener noreferrer"><strong>What is a validated design?:</strong></a> Explains what the VMware Validated Design is and why it is useful.</li>
+  <li>
+<a href="/2015/08/04/sddc-sddc-architecture-basic-design-elements/"><strong>Basic Design Elements:</strong></a> Introduces the 5 basic design elements of the SDDC with Layered logical model, POD / Core concept, L3 Spine / Leaf network, Management Applications Network Container, and Service Level tiers.</li>
+  <li>
+<a href="/2015/03/10/sddc-architecture-core-pod/"><strong>Core and POD Design:</strong></a> POD (Point-of-Delivery) as an atomic building block of Data Center resources, connected to a CLOS network for increased scale, agility, flexibility and resilience.</li>
+  <li>
+<a href="/2015/07/31/sddc-architecture-regions-and-availability-zones-azs/"><strong>Availability Zones and Regions:</strong></a> Provide continuous availability of the SDDC, minimize unavailability of services and improve SLAs via Availability Zones, while using Regions to improve locality of SDDC resources towards end-users.</li>
+  <li>
+<a href="/2015/08/31/sddc-architecture-vpods-for-management-applications/"><strong>Virtual PODs for Management applications:</strong></a> The Virtual POD network container is a very powerful, yet simple concept to provide the management applications of the SDDC with security, modularity, simplicity, improved BC/DR capabilities and IPv6 support. All this with a minimum of integration effort.</li>
+  <li>
+<a href="/2015/09/09/sddc-architecture-mapping-of-logical-components-to-physical-location/"><strong>Mapping of Logical Components to Physical Location:</strong></a> Mapping of the logical components of the Software Defined Data Center to the underlying physical components. Mapping of vCenter Server to Platform Service Controllers.</li>
+  <li>
+<a href="/2015/09/11/sddc-architecture-business-continuity-with-multiple-regions/"><strong>Business Continuity with multiple regions:</strong></a> Providing Business Continuity and Disaster Recovery (BC/DR) capabilities to the SDDC itself across multiple regions.</li>
+  <li>
+<a href="/2015/07/31/sddc-architecture-regions-and-availability-zones-azs/"><strong>Disaster Avoidance with multiple Availability Zones (AZs):</strong></a> Using multiple Availability Zones (AZs) to prevent downtime and exercise Disaster Avoidance.</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#architecture" class="page__taxonomy-item" rel="tag">Architecture</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#sddc" class="page__taxonomy-item" rel="tag">SDDC</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-02-20T09:05:15-08:00">February 20, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Software+Defined+Data+Center+%28SDDC%29+Architecture+-+Introduction%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F02%2F20%2Fsddc-architecture-introduction%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F02%2F20%2Fsddc-architecture-introduction%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F02%2F20%2Fsddc-architecture-introduction%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F02%2F20%2Fsddc-architecture-introduction%2F&amp;title=Software+Defined+Data+Center+%28SDDC%29+Architecture+-+Introduction" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2015/01/13/cisco-wlc-with-cloudtrax-captive-portal/" class="pagination--pager" title="Use a Cisco WLC based Wifi with the CloudTrax captive portal
+">Previous</a>
+    
+    
+      <a href="/2015/03/10/sddc-architecture-core-pod/" class="pagination--pager" title="SDDC Architecture – Core and POD design
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/05/01/tgw-multicast-intro/" rel="permalink">Multicast with AWS Transit Gateway
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+    <div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2020 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+  </body>
+</html>
