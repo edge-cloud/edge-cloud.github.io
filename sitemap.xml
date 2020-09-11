@@ -4,9 +4,6 @@
 <loc>https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/</loc>
 </url>
 <url>
-<loc>https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/</loc>
-</url>
-<url>
 <loc>https://www.edge-cloud.net/2019/12/13/dx-deep-dive/</loc>
 </url>
 <url>
@@ -257,6 +254,10 @@
 <url>
 <loc>https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/</loc>
 <lastmod>2020-05-01T00:00:00-07:00</lastmod>
+</url>
+<url>
+<loc>https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/</loc>
+<lastmod>2020-09-11T00:00:00-07:00</lastmod>
 </url>
 <url>
 <loc>https://www.edge-cloud.net/about/</loc>
