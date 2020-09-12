@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Title goes here - Edge Cloud</title>
-<meta name="description" content="Brief description goes here">
+<!-- begin _includes/seo.html --><title>Understanding Routing and BGP - Edge Cloud</title>
+<meta name="description" content="Primer to better understanding IP routing and BGP">
 
 
   <meta name="author" content="Christian Elsen">
@@ -19,11 +19,11 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Edge Cloud">
-<meta property="og:title" content="Title goes here">
-<meta property="og:url" content="https://www.edge-cloud.net/2020/01/01/template/">
+<meta property="og:title" content="Understanding Routing and BGP">
+<meta property="og:url" content="https://www.edge-cloud.net/2020/09/21/understanding-routing-and-bgp/">
 
 
-  <meta property="og:description" content="Brief description goes here">
+  <meta property="og:description" content="Primer to better understanding IP routing and BGP">
 
 
 
@@ -34,9 +34,9 @@
 
 
   <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Title goes here">
-  <meta name="twitter:description" content="Brief description goes here">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/01/01/template/">
+  <meta name="twitter:title" content="Understanding Routing and BGP">
+  <meta name="twitter:description" content="Primer to better understanding IP routing and BGP">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/21/understanding-routing-and-bgp/">
 
   
     <meta name="twitter:card" content="summary">
@@ -58,7 +58,7 @@
   
 
 
-<link rel="canonical" href="https://www.edge-cloud.net/2020/01/01/template/">
+<link rel="canonical" href="https://www.edge-cloud.net/2020/09/21/understanding-routing-and-bgp/">
 
 
 
@@ -344,15 +344,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Title goes here">
-    <meta itemprop="description" content="Brief description goes here">
+    <meta itemprop="headline" content="Understanding Routing and BGP">
+    <meta itemprop="description" content="Primer to better understanding IP routing and BGP">
     
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Title goes here
+          <h1 id="page-title" class="page__title" itemprop="headline">Understanding Routing and BGP
 </h1>
           
         </header>
@@ -366,9 +366,33 @@
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
   <li>
-<a href="#heading-1">Heading 1</a>
+<a href="#routing">Routing</a>
     <ul>
-      <li><a href="#heading-11">Heading 1.1</a></li>
+      <li>
+<a href="#directional">Directional</a>
+        <ul>
+          <li><a href="#asymmetric-routing">Asymmetric Routing</a></li>
+        </ul>
+      </li>
+      <li><a href="#hop-by-hop-routing">Hop-by-Hop Routing</a></li>
+      <li><a href="#route-table">Route Table</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#routing-protocols">Routing Protocols</a>
+    <ul>
+      <li>
+<a href="#bgp">bgp</a>
+        <ul>
+          <li>
+<a href="#bgp-best-path-selection-algorithm">BGP Best Path Selection Algorithm</a>
+            <ul>
+              <li><a href="#local_pref">Local_Pref</a></li>
+              <li><a href="#multi-exit-discriminator-med">Multi-Exit Discriminator (MED)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -377,9 +401,25 @@
         
         <p>Intro of what to accomplish</p>
 
-<h1 id="heading-1">Heading 1</h1>
+<h1 id="routing">Routing</h1>
 
-<h2 id="heading-11">Heading 1.1</h2>
+<h2 id="directional">Directional</h2>
+
+<h3 id="asymmetric-routing">Asymmetric Routing</h3>
+
+<h2 id="hop-by-hop-routing">Hop-by-Hop Routing</h2>
+
+<h2 id="route-table">Route Table</h2>
+
+<h1 id="routing-protocols">Routing Protocols</h1>
+
+<h2 id="bgp">bgp</h2>
+
+<h3 id="bgp-best-path-selection-algorithm">BGP Best Path Selection Algorithm</h3>
+
+<h4 id="local_pref">Local_Pref</h4>
+
+<h4 id="multi-exit-discriminator-med">Multi-Exit Discriminator (MED)</h4>
 
 <p><strong>Bold</strong></p>
 
@@ -449,32 +489,7 @@
 
 </figure>
 
-<script type="math/tex; mode=display">Price_{NGW}=( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})</script>
-
-<script type="math/tex; mode=display">Price_{TGW+NGW}=
-  ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
-  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
-  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic}))</script>
-
-<script type="math/tex; mode=display">Price_{TGW+NGW} \leq Price_{NGW}</script>
-
-<script type="math/tex; mode=display">( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
-  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
-  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic})) \\
-  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})</script>
-
-<script type="math/tex; mode=display">traffic \cdot Cost_{TGW-Traffic} +  traffic \cdot Cost_{NGW-Traffic} - traffic \cdot Cost_{NGW-Traffic} \\
-  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) - \\
-  ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) - \\
-  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} )</script>
-
-<script type="math/tex; mode=display">traffic \cdot Cost_{TGW-Traffic} \\
-  \leq 720 hr / month \cdot (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) \\
-  - ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))</script>
-
-<script type="math/tex; mode=display">traffic \leq \frac{720 hr / month}{Cost_{TGW-Traffic}} \cdot \\
-  (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) - \\
-  ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))</script>
+<script type="math/tex; mode=display">Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)</script>
 
         
       </section>
@@ -495,7 +510,7 @@
     
       
       
-      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+      <a href="/tags/#bgp" class="page__taxonomy-item" rel="tag">BGP</a><span class="sep">, </span>
     
       
       
@@ -515,13 +530,13 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Title+goes+here%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Understanding+Routing+and+BGP%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F21%2Funderstanding-routing-and-bgp%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F21%2Funderstanding-routing-and-bgp%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F21%2Funderstanding-routing-and-bgp%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
   
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F&amp;title=Title+goes+here" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F21%2Funderstanding-routing-and-bgp%2F&amp;title=Understanding+Routing+and+BGP" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 </section>
 
 
@@ -532,7 +547,7 @@
 ">Previous</a>
     
     
-      <a href="/2020/09/21/understanding-routing-and-bgp/" class="pagination--pager" title="Understanding Routing and BGP
+      <a href="/2013/05/20/configuring-f5-big-ip-with-vcd/" class="pagination--pager" title="Configuring F5 Big-IP LTM with VMware vCloud Director [Updated]
 ">Next</a>
     
   </nav>
@@ -698,8 +713,6 @@
 
   <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
 
-
-  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 
