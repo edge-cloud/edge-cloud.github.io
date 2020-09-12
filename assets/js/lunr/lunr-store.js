@@ -25,7 +25,7 @@ var store = [{
         "url": "https://www.edge-cloud.net/2020/01/01/template/",
         "teaser":null},{
         "title": "Understanding Routing and BGP",
-        "excerpt":"Intro of what to accomplish   Routing   Directional   Asymmetric Routing   Hop-by-Hop Routing   Route Table   Routing Protocols   bgp   BGP Best Path Selection Algorithm   Local_Pref   Multi-Exit Discriminator (MED)   Bold   Note: This is a notice box   # # Code #                               Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS      ","categories": ["EdgeCloud"],
+        "excerpt":"Intro of what to accomplish   Routing   Directional   Asymmetric Routing                              Figure 1: Asymmetric routing is like a hiking-trail loop.     Hop-by-Hop Routing                              Figure 2: IP Hop-by-Hop routing is like a boardgame.     Route Table   Routing Protocols   BGP   BGP Best Path Selection Algorithm   Local_Pref                              Figure 3: Local_Pref dictates how traffic leaves a local ASN.     Multi-Exit Discriminator (MED)                              Figure 4: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN.     Bold   Note: This is a notice box   # # Code #                               Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS      ","categories": ["EdgeCloud"],
         "tags": ["BGP","Network"],
         "url": "https://www.edge-cloud.net/2020/09/21/understanding-routing-and-bgp/",
         "teaser":null},{
