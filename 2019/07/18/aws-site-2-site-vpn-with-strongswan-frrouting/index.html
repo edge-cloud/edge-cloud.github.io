@@ -591,7 +591,7 @@ eth1      Link encap:Ethernet  HWaddr 02:7b:35:90:92:ae
 
 <p>In AWS the Source or Destination checking attribute on an interface determines whether an instance can handle network traffic that isn’t specifically destined for the instance.</p>
 
-<p>Before installing Strongswan on your EC2 instance <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html#EIP_Disable_SrcDestCheck" target="_blank" rel="noopener noreferrer">disable Source/Destination Checks</a> for this instance. 
+<p>Before installing Strongswan on your EC2 instance <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html#EIP_Disable_SrcDestCheck" target="_blank" rel="noopener noreferrer">disable Source/Destination Checks</a> for this instance.
 Keep in mind that this needs to be done for both interfaces (ENIs) separately.</p>
 
 <h2 id="strongswan-setup">Strongswan setup</h2>
@@ -735,6 +735,13 @@ sysctl <span class="nt">-w</span> net.ipv4.conf.eth0.disable_policy<span class="
 <p>As this is a bash script, don’t forget to make the file executable:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x /etc/ipsec-vti.sh
 </code></pre></div></div>
+
+<p>Afterwards restart the Strongwan daemon to load the configuration changes and establish the tunnels:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl restart strongswan
+</code></pre></div></div>
+
+<p>You can validate that the two tunnel interfaces vti1 and vti2 are up and running with the commands <code class="highlighter-rouge">ip -s tunnel show</code> or
+<code class="highlighter-rouge">ifconfig vti01</code>. You should see the IP address of the tunnels displayed within the 169.254.0.0/16 range.</p>
 
 <h2 id="frrouting-setup">FRRouting Setup</h2>
 
