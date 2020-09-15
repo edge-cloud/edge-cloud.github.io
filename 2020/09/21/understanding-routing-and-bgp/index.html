@@ -368,6 +368,7 @@
   <li>
 <a href="#routing">Routing</a>
     <ul>
+      <li><a href="#route-tables">Route Tables</a></li>
       <li><a href="#hop-by-hop-routing">Hop-by-Hop Routing</a></li>
       <li>
 <a href="#directional">Directional</a>
@@ -375,7 +376,6 @@
           <li><a href="#asymmetric-routing">Asymmetric Routing</a></li>
         </ul>
       </li>
-      <li><a href="#route-table">Route Table</a></li>
     </ul>
   </li>
   <li>
@@ -400,11 +400,22 @@
             </nav>
           </aside>
         
-        <p>Intro of what to accomplish</p>
+        <p>Today we will look at some of the fundamental principles of IP routing, along with some related BGP Routing protocol concepts. While these principles and concepts are generic, we will use examples based on AWS networking.
+I’ve seen numerous people confused by these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to point them out explicitly.</p>
+
+<p class="notice--info">Please keep in mind that we will be using AWS VPCs and TGWs to illustrate routing principles. The AWS networking designs presented are rather not suited or recommended for production deployments.</p>
 
 <h1 id="routing">Routing</h1>
 
+<p><a href="https://en.wikipedia.org/wiki/Routing" target="_blank" rel="noopener noreferrer">Routing</a> and more specifically here, <a href="https://en.wikipedia.org/wiki/IP_routing" target="_blank" rel="noopener noreferrer">IP routing</a>, deals with selecting a path for traffic in an IP network. Routing directs the forwarding of IP packets based on a <a href="https://en.wikipedia.org/wiki/Routing_table" target="_blank" rel="noopener noreferrer">routing table</a>.</p>
+
+<h2 id="route-tables">Route Tables</h2>
+
+<p>As we will see later, routing tables maintain information on how to reach various network destinations. Typically they are either configured manually (also known as “Static Routing”) or with the help of a routing protocol.</p>
+
 <h2 id="hop-by-hop-routing">Hop-by-Hop Routing</h2>
+
+<p>One of the most fundamental concepts to understand in IP routing is that the actual forwarding decision is made on a hop-by-hop basis. This means that within each hop of the network path, a router makes a forwarding decision based on the local route table. Image this to be like a boardgame, where at each step in the game it is decided where to go next. Neither the previous nor the next step have any influence on the local decission (See Figure 1).</p>
 
 <figure class="">
 
@@ -459,6 +470,8 @@
 
 </figure>
 
+<p>Taking AWS VPCs and <a href="https://aws.amazon.com/transit-gateway/?aws-transit-gateway-wn.sort-by=item.additionalFields.postDateTime&amp;aws-transit-gateway-wn.sort-order=desc" target="_blank" rel="noopener noreferrer">Transit Gateways (TGWs)</a> as an example, we can quickly understand how this hop-by-hop decision making plays out while looking at the routing tables of the VPCs and TGWs (See Figure 2).</p>
+
 <figure class="">
 
 
@@ -512,9 +525,36 @@
 
 </figure>
 
+<p>Traffic from an EC2 instance in VPC 1 wanting to reach another EC2 instance in VPC 2 will have to follow this hop-by-hop process through the five routing tables involved here. What do you think? Will traffic from VPC 1 reach VPC 2? Or is there a mistake in the route tables?</p>
+
+<p>Let’s look at each hop, step-by-step:</p>
+<ul>
+  <li>
+<strong>VPC 1:</strong> Traffic for destinations within VPC 2’s CIDR of 10.2.0.0/16 are send to the TGW 1 over the VPC attachment.</li>
+  <li>
+<strong>TGW 1:</strong> Inspecting the route table of TGW 1, we can see that traffic for 10.2.0.0/16 is send via a TGW peering to TGW 2.</li>
+  <li>
+<strong>TGW 2:</strong> Looking at the route table of TGW 2, we can also find an entry for the destination of 10.2.0.0/16. It specifies that traffic should be send via another TGW peering to TGW 3.</li>
+  <li>
+<strong>TGW 3:</strong> At this point our traffic has already made it into the correct AWS regions. Let’s see what happens next: The route table of TGW 3 indicates that traffic for 10.2.0.0/16 will be forwarded to VPC 2.</li>
+  <li>
+<strong>VPC 2:</strong> Last but not least, the route table of VPC 2 shows that traffic for the locally used CIDR 10.2.0.0/16 remains within the VPC and is delivered to the corresponding EC2 instance.</li>
+</ul>
+
+<p>But what about the return traffic from VPC 2 to VPC 1? Read on to see how another important principle of IP routing plays a role here.</p>
+
 <h2 id="directional">Directional</h2>
 
+<p>Another important principle of IP routing, effectively caused by the hop-by-hop decision making behavior is that path determination is directional. Looking back at the provided example in the previous section (See Figure 2) only showed us that traffic from VPC 1 can reach VPC 2. But it did not provide any information on whether traffic from VPC 2 can reach VPC 1.</p>
+
+<p>I leave it up to you as an exercise to determine if the route tables across the VPCs and TGWs are setup correctly to allow return traffic and thereby enable bidirectional communication.</p>
+
+<p>When designing route tables or troubleshooting network connectivity it’s always important that you look at traffic flows in both directions and plan or check route table independently for both directions.
+Also when talking with co-workers, customer, support staff, or anyone alike it is also important that you indicate the direction of the traffic flow that you are referring to.</p>
+
 <h3 id="asymmetric-routing">Asymmetric Routing</h3>
+
+<p>What’s even more interesting is that the directional nature of IP forwarding can lead to asymmetric traffic flows. But there is nothing wrong like this. In fact an asymmetric IP traffic flow is like a hiking trail loop (See Figure 3). Such hiking trails are often more fascinating as you get to see a different set of landscape, plants and animals on the way back as compared to the way out.</p>
 
 <figure class="">
 
@@ -563,6 +603,10 @@
 </figcaption>
 
 </figure>
+
+<p>And as long as you make the correct decision at your “routing hops” - aka. a trail fork - you will return to your trail head as well.</p>
+
+<p>Let’s extend the above example using AWS VPCs and TGWs to showcase asymmetric routing. For this we add another TGW and two more TGW peering connections along with changes to the route table (See Figure 4).</p>
 
 <figure class="">
 
@@ -617,7 +661,10 @@
 
 </figure>
 
-<h2 id="route-table">Route Table</h2>
+<p>Now, if you follow the path of traffic from VPC 1 to VPC 2, you’ll notice that nothing has changed. Traffic still traverses TGW 1, TGW 2, and TGW 3 on the way to VPC 2. But now look at traffic from VPC 2 to VPC 1. What do you notice?
+Looking at the route tables of the TGWs you should notice that traffic  on the return path from VPC 2 to VPC 1 will traverse TGW 3, TGW 4, and TGW 1, thereby creating and asymmetric path.</p>
+
+<p>This asymmetric traffic flow is depicted with the green arrows.</p>
 
 <h1 id="routing-protocols">Routing Protocols</h1>
 
