@@ -368,12 +368,18 @@
   <li>
 <a href="#routing">Routing</a>
     <ul>
-      <li><a href="#route-tables">Route Tables</a></li>
       <li><a href="#hop-by-hop-routing">Hop-by-Hop Routing</a></li>
       <li>
 <a href="#directional">Directional</a>
         <ul>
           <li><a href="#asymmetric-routing">Asymmetric Routing</a></li>
+        </ul>
+      </li>
+      <li>
+<a href="#route-tables">Route Tables</a>
+        <ul>
+          <li><a href="#longest-prefix-match">Longest prefix match</a></li>
+          <li><a href="#equal-cost-multipath-ecmp">Equal Cost Multipath (ECMP)</a></li>
         </ul>
       </li>
     </ul>
@@ -408,8 +414,6 @@ I’ve seen numerous people confused by these principles and concepts while eith
 <h1 id="routing">Routing</h1>
 
 <p><a href="https://en.wikipedia.org/wiki/Routing" target="_blank" rel="noopener noreferrer">Routing</a> and more specifically here, <a href="https://en.wikipedia.org/wiki/IP_routing" target="_blank" rel="noopener noreferrer">IP routing</a>, deals with selecting a path for traffic in an IP network. Routing directs the forwarding of IP packets based on a <a href="https://en.wikipedia.org/wiki/Routing_table" target="_blank" rel="noopener noreferrer">routing table</a>.</p>
-
-<h2 id="route-tables">Route Tables</h2>
 
 <p>As we will see later, routing tables maintain information on how to reach various network destinations. Typically they are either configured manually (also known as “Static Routing”) or with the help of a routing protocol.</p>
 
@@ -666,6 +670,85 @@ Looking at the route tables of the TGWs you should notice that traffic  on the r
 
 <p>This asymmetric traffic flow is depicted with the green arrows.</p>
 
+<h2 id="route-tables">Route Tables</h2>
+
+<p>Next we will look at route tables in a bit more detail. Being able to read and understand route tables, will help understand the routing decision of the hops within each path.</p>
+
+<p>The most simple route tables have already been depicted in Figure 2 and Figure 4. These routes show a simple mapping between the destination CIDR - also called prefix or network - and the next hop.</p>
+
+<p>Translated into a route table on a Cisco device this might look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *&gt;   10.1.0.0/16      169.254.15.221         100             0 64512 i
+</code></pre></div></div>
+
+<p>Focus on the last line, which effectively translates into: Packets for the prefix “10.1.0.0/16” should be send to the next hop with the IP address of “169.254.15.221”.</p>
+
+<h3 id="longest-prefix-match">Longest prefix match</h3>
+
+<p>Next let’s look at <a href="https://en.wikipedia.org/wiki/Longest_prefix_match" target="_blank" rel="noopener noreferrer">longest prefix match</a>, sometimes also referred to as “more specific routing”. This algorithm specifies which entry to be chosen from the IP routing table in case of destination addresses matching more than one entry. For IP routing the most specific of the matching table entries — the one with the longest subnet mask — is called the longest prefix match and is the one chosen.</p>
+
+<p>Let’s have a look at an example. Consider the below routing table on a Cisco device and especially focus on the last five lines:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *&gt;   10.1.0.0/16      169.254.15.221         100             0 64512 i
+ *&gt;   10.1.1.0/24      169.254.16.222         100             0 64513 i
+ *&gt;   10.1.2.0/24      169.254.17.223         100             0 64514 i
+ *&gt;   10.1.3.0/24      169.254.18.224         100             0 64515 i
+ *&gt;   10.1.4.0/24      169.254.19.225         100             0 64516 i
+</code></pre></div></div>
+
+<p>Here we can see that the destination IP address of “10.1.1.1” would match both the entry for “10.1.0.0/16”, as well as the entry for “10.1.1.0/24”. As the entry for “10.1.1.0/24” has a longer subnet mask - it is more specific - and therefore the chosen entry. With that this entry would be chosen and traffic send to 169.254.16.222 as the next hop.</p>
+
+<h3 id="equal-cost-multipath-ecmp">Equal Cost Multipath (ECMP)</h3>
+
+<p>Usually with IP forwarding there is one engress path per hop for a given destination IP. This rule can be softened via a routing strategy called <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" target="_blank" rel="noopener noreferrer">Equal-cost multi-path routing (ECMP)</a>. With ECMP packet forwarding to a single destination IP can occur over multiple “best path”.</p>
+
+<p>Again, let’s have a look at an example and consider the below routing table on a Cisco router, especially the last two lines:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *m   10.0.255.0/24    169.254.13.253         100             0 64512 i
+ *&gt;                    169.254.15.221         100             0 64512 i
+</code></pre></div></div>
+
+<p>In this case we can see that we have a multipath route for the destination prefix of “10.0.255.0/24”, where both “169.254.13.253” and “169.254.15.221” are considered as the next best hop. In this case the router device will randomly send out traffic for this destination network over both next hops, while using a 5-tuple hash. A 5-tuple hash refers to a set of five different values that comprise a Transmission Control Protocol/Internet Protocol (TCP/IP) connection. It includes a source IP address/port number, destination IP address/port number and the protocol in use. This means that packets belonging to the same 5-tuple travel to the same next hop, while packets from different 5-tuple may be send to another next hop.</p>
+
 <h1 id="routing-protocols">Routing Protocols</h1>
 
 <h2 id="bgp">BGP</h2>
@@ -727,6 +810,202 @@ Looking at the route tables of the TGWs you should notice that traffic  on the r
 
 </figure>
 
+<table>
+  <thead>
+    <tr>
+      <th>BGP Session</th>
+      <th>Local_Pref</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Private Peering</strong></td>
+      <td>500</td>
+    </tr>
+    <tr>
+      <td><strong>Direct Peering via IXP</strong></td>
+      <td>400</td>
+    </tr>
+    <tr>
+      <td><strong>Peering via IXP Route Server</strong></td>
+      <td>300</td>
+    </tr>
+    <tr>
+      <td><strong>Transit</strong></td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/12/DX-VIFs-Overview.png" title="Figure 1: Direct Connect Overview " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-320.webp 320w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-384.webp 384w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-512.webp 512w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-683.webp 683w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-800.webp 800w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-960.webp 960w, 
+
+" sizes="4925px"></source>
+  <source data-srcset="
+
+    /content/resized/2019/12/DX-VIFs-Overview-320.png 320w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-384.png 384w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-512.png 512w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-683.png 683w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-800.png 800w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-960.png 960w, 
+
+" sizes="4925px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/12/DX-VIFs-Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Direct Connect Overview ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Direct Connect Overview
+</figcaption>
+
+</figure>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/12/DX-Cross-Connect.png" title="Figure 2: Direct Connect Cross Connect " class="image-popup">
+<picture>
+  <source width="922" type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-320.webp 320w, 
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-384.webp 384w, 
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-512.webp 512w, 
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-683.webp 683w, 
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-800.webp 800w, 
+
+ /content/uploads/2019/12/DX-Cross-Connect.webp 922w" sizes="922px"></source>
+  <source width="922" data-srcset="
+
+    /content/resized/2019/12/DX-Cross-Connect-320.png 320w, 
+
+    /content/resized/2019/12/DX-Cross-Connect-384.png 384w, 
+
+    /content/resized/2019/12/DX-Cross-Connect-512.png 512w, 
+
+    /content/resized/2019/12/DX-Cross-Connect-683.png 683w, 
+
+    /content/resized/2019/12/DX-Cross-Connect-800.png 800w, 
+
+ /content/uploads/2019/12/DX-Cross-Connect.png 922w" sizes="922px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/12/DX-Cross-Connect.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Direct Connect Cross Connect ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Direct Connect Cross Connect
+</figcaption>
+
+</figure>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/12/DX-Connectivity.png" title="Figure 3: Direct Connect Connectivity Options " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
+
+    
+    /content/resized/2019/12/DX-Connectivity-320.webp 320w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-384.webp 384w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-512.webp 512w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-683.webp 683w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-800.webp 800w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-960.webp 960w, 
+
+" sizes="3080px"></source>
+  <source data-srcset="
+
+    /content/resized/2019/12/DX-Connectivity-320.png 320w, 
+
+    /content/resized/2019/12/DX-Connectivity-384.png 384w, 
+
+    /content/resized/2019/12/DX-Connectivity-512.png 512w, 
+
+    /content/resized/2019/12/DX-Connectivity-683.png 683w, 
+
+    /content/resized/2019/12/DX-Connectivity-800.png 800w, 
+
+    /content/resized/2019/12/DX-Connectivity-960.png 960w, 
+
+" sizes="3080px"></source>
+  <img src="//:0" data-src="/content/uploads/2019/12/DX-Connectivity.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Direct Connect Connectivity Options ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Direct Connect Connectivity Options
+</figcaption>
+
+</figure>
+
 <h4 id="multi-exit-discriminator-med">Multi-Exit Discriminator (MED)</h4>
 
 <figure class="">
@@ -781,6 +1060,23 @@ Looking at the route tables of the TGWs you should notice that traffic  on the r
 </figcaption>
 
 </figure>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V#sh ip bgp
+BGP table version is 292, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *&gt;   172.16.0.0/24    169.254.63.25          100             0 64512 i
+ *                     169.254.39.225         200             0 64512 i
+</code></pre></div></div>
 
 <h1 id="summary">Summary</h1>
 
