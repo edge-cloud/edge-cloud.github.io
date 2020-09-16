@@ -406,20 +406,23 @@
             </nav>
           </aside>
         
-        <p>Today we will look at some of the fundamental principles of IP routing, along with some related BGP Routing protocol concepts. While these principles and concepts are generic, we will use examples based on AWS networking.
-I’ve seen numerous people confused by these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to point them out explicitly.</p>
+        <p>Today we will look at some of the fundamental principles of IP routing, along with some related BGP Routing protocol concepts. While these principles and concepts are generic, we will use examples based on AWS networking.</p>
+
+<p>This blog post is not intended to be an all encompassing primer on IP routing or BGP. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to select and explain them explicitly.</p>
 
 <p class="notice--info">Please keep in mind that we will be using AWS VPCs and TGWs to illustrate routing principles. The AWS networking designs presented are rather not suited or recommended for production deployments.</p>
 
 <h1 id="routing">Routing</h1>
 
-<p><a href="https://en.wikipedia.org/wiki/Routing" target="_blank" rel="noopener noreferrer">Routing</a> and more specifically here, <a href="https://en.wikipedia.org/wiki/IP_routing" target="_blank" rel="noopener noreferrer">IP routing</a>, deals with selecting a path for traffic in an IP network. Routing directs the forwarding of IP packets based on a <a href="https://en.wikipedia.org/wiki/Routing_table" target="_blank" rel="noopener noreferrer">routing table</a>.</p>
+<p><a href="https://en.wikipedia.org/wiki/Routing" target="_blank" rel="noopener noreferrer">Routing</a> and more specifically here, <a href="https://en.wikipedia.org/wiki/IP_routing" target="_blank" rel="noopener noreferrer">IP routing</a>, deals with selecting a path for traffic in an IP network. Routing directs the forwarding of IP packets based on a <a href="https://en.wikipedia.org/wiki/Routing_table" target="_blank" rel="noopener noreferrer">routing table</a> and the destination IP address within a packet.</p>
 
-<p>As we will see later, routing tables maintain information on how to reach various network destinations. Typically they are either configured manually (also known as “Static Routing”) or with the help of a routing protocol.</p>
+<p>As we will see later, routing tables maintain information on how to reach various network destinations. Typically they are either configured manually (also known as “Static Routing”) or with the help of a routing protocol (e.g. BGP).</p>
 
 <h2 id="hop-by-hop-routing">Hop-by-Hop Routing</h2>
 
-<p>One of the most fundamental concepts to understand in IP routing is that the actual forwarding decision is made on a hop-by-hop basis. This means that within each hop of the network path, a router makes a forwarding decision based on the local route table. Image this to be like a boardgame, where at each step in the game it is decided where to go next. Neither the previous nor the next step have any influence on the local decission (See Figure 1).</p>
+<p>One of the most fundamental concepts to understand in IP routing is that the actual forwarding decision is made on a hop-by-hop basis. This means that within each hop of the network path, a router makes a forwarding decision based on the local route table. Image this to be like a board game, where at each step in the game it is decided where to go next. Neither the previous nor the next step have any influence on the local decision.</p>
+
+<p>Taking AWS VPCs and <a href="https://aws.amazon.com/transit-gateway/?aws-transit-gateway-wn.sort-by=item.additionalFields.postDateTime&amp;aws-transit-gateway-wn.sort-order=desc" target="_blank" rel="noopener noreferrer">Transit Gateways (TGWs)</a> as an example, we can quickly understand how this hop-by-hop decision making plays out while looking at the routing tables of the VPCs and TGWs (See Figure 1).</p>
 
 <figure class="">
 
@@ -430,62 +433,7 @@ I’ve seen numerous people confused by these principles and concepts while eith
 
 
 
-<a href="/content/uploads/2020/09/understanding-routing-and-bgp-boardgame.jpg" title="Figure 1: IP Hop-by-Hop routing is like a boardgame. " class="image-popup">
-<picture>
-  <source width="950" type="image/webp" data-srcset="
-
-    
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-320.webp 320w, 
-
-    
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-384.webp 384w, 
-
-    
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-512.webp 512w, 
-
-    
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-683.webp 683w, 
-
-    
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-800.webp 800w, 
-
- /content/uploads/2020/09/understanding-routing-and-bgp-boardgame.webp 950w" sizes="950px"></source>
-  <source width="950" data-srcset="
-
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-320.jpg 320w, 
-
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-384.jpg 384w, 
-
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-512.jpg 512w, 
-
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-683.jpg 683w, 
-
-    /content/resized/2020/09/understanding-routing-and-bgp-boardgame-800.jpg 800w, 
-
- /content/uploads/2020/09/understanding-routing-and-bgp-boardgame.jpg 950w" sizes="950px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-boardgame.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 1: IP Hop-by-Hop routing is like a boardgame. ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 1: IP Hop-by-Hop routing is like a boardgame.
-</figcaption>
-
-</figure>
-
-<p>Taking AWS VPCs and <a href="https://aws.amazon.com/transit-gateway/?aws-transit-gateway-wn.sort-by=item.additionalFields.postDateTime&amp;aws-transit-gateway-wn.sort-order=desc" target="_blank" rel="noopener noreferrer">Transit Gateways (TGWs)</a> as an example, we can quickly understand how this hop-by-hop decision making plays out while looking at the routing tables of the VPCs and TGWs (See Figure 2).</p>
-
-<figure class="">
-
-
-
-
-
-
-
-
-<a href="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" title="Figure 2: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) " class="image-popup">
+<a href="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" title="Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) " class="image-popup">
 <picture>
   <source width="871" type="image/webp" data-srcset="
 
@@ -518,13 +466,13 @@ I’ve seen numerous people confused by these principles and concepts while eith
     /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-800.png 800w, 
 
  /content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png 871w" sizes="871px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) ">
+  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 2: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW)
+  <figcaption>Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW)
 </figcaption>
 
 </figure>
@@ -549,7 +497,7 @@ I’ve seen numerous people confused by these principles and concepts while eith
 
 <h2 id="directional">Directional</h2>
 
-<p>Another important principle of IP routing, effectively caused by the hop-by-hop decision making behavior is that path determination is directional. Looking back at the provided example in the previous section (See Figure 2) only showed us that traffic from VPC 1 can reach VPC 2. But it did not provide any information on whether traffic from VPC 2 can reach VPC 1.</p>
+<p>Another important principle of IP routing, effectively caused by the hop-by-hop decision making behavior is that path determination is directional. Looking back at the provided example in the previous section (See Figure 1) only showed us that traffic from VPC 1 can reach VPC 2. But it did not provide any information on whether traffic from VPC 2 can reach VPC 1.</p>
 
 <p>I leave it up to you as an exercise to determine if the route tables across the VPCs and TGWs are setup correctly to allow return traffic and thereby enable bidirectional communication.</p>
 
@@ -558,7 +506,7 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
 
 <h3 id="asymmetric-routing">Asymmetric Routing</h3>
 
-<p>What’s even more interesting is that the directional nature of IP forwarding can lead to asymmetric traffic flows. But there is nothing wrong like this. In fact an asymmetric IP traffic flow is like a hiking trail loop (See Figure 3). Such hiking trails are often more fascinating as you get to see a different set of landscape, plants and animals on the way back as compared to the way out.</p>
+<p>What’s even more interesting is that the directional nature of IP forwarding can lead to asymmetric traffic flows. But there is nothing wrong like this. In fact an asymmetric IP traffic flow is like a hiking trail loop (See Figure 2). Such hiking trails are often more fascinating as you get to see a different set of landscape, plants and animals on the way back as compared to the way out.</p>
 
 <figure class="">
 
@@ -569,7 +517,7 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
 
 
 
-<a href="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" title="Figure 3: Asymmetric routing is like a hiking-trail loop. " class="image-popup">
+<a href="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" title="Figure 2: Asymmetric routing is like a hiking-trail loop. " class="image-popup">
 <picture>
   <source width="800" type="image/webp" data-srcset="
 
@@ -597,20 +545,20 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
     /content/resized/2020/09/understanding-routing-and-bgp-trail-map-683.jpg 683w, 
 
  /content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg 800w" sizes="800px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 3: Asymmetric routing is like a hiking-trail loop. ">
+  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Asymmetric routing is like a hiking-trail loop. ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 3: Asymmetric routing is like a hiking-trail loop.
+  <figcaption>Figure 2: Asymmetric routing is like a hiking-trail loop.
 </figcaption>
 
 </figure>
 
 <p>And as long as you make the correct decision at your “routing hops” - aka. a trail fork - you will return to your trail head as well.</p>
 
-<p>Let’s extend the above example using AWS VPCs and TGWs to showcase asymmetric routing. For this we add another TGW and two more TGW peering connections along with changes to the route table (See Figure 4).</p>
+<p>Let’s extend the above example using AWS VPCs and TGWs to showcase asymmetric routing. For this we add another TGW and two more TGW peering connections along with changes to the route table (See Figure 3).</p>
 
 <figure class="">
 
@@ -621,7 +569,7 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
 
 
 
-<a href="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" title="Figure 4: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) " class="image-popup">
+<a href="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" title="Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) " class="image-popup">
 <picture>
   <source width="871" type="image/webp" data-srcset="
 
@@ -654,13 +602,13 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
     /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-800.png 800w, 
 
  /content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png 871w" sizes="871px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) ">
+  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 4: Asymmetric routing with VPCs and multiple Transit Gateways (TGW)
+  <figcaption>Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW)
 </figcaption>
 
 </figure>
@@ -674,7 +622,7 @@ Looking at the route tables of the TGWs you should notice that traffic  on the r
 
 <p>Next we will look at route tables in a bit more detail. Being able to read and understand route tables, will help understand the routing decision of the hops within each path.</p>
 
-<p>The most simple route tables have already been depicted in Figure 2 and Figure 4. These routes show a simple mapping between the destination CIDR - also called prefix or network - and the next hop.</p>
+<p>The most simple route tables have already been depicted in Figure 1 and Figure 3. These routes show a simple mapping between the destination CIDR - also called prefix or network - and the next hop.</p>
 
 <p>Translated into a route table on a Cisco device this might look like this:</p>
 
@@ -766,7 +714,7 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 
 
-<a href="/content/uploads/2020/09/understanding-routing-and-bgp-exit.jpg" title="Figure 5: Local_Pref dictates how traffic leaves a local ASN. " class="image-popup">
+<a href="/content/uploads/2020/09/understanding-routing-and-bgp-exit.jpg" title="Figure 4: Local_Pref dictates how traffic leaves a local ASN. " class="image-popup">
 <picture>
   <source width="910" type="image/webp" data-srcset="
 
@@ -799,13 +747,13 @@ RPKI validation codes: V valid, I invalid, N Not found
     /content/resized/2020/09/understanding-routing-and-bgp-exit-800.jpg 800w, 
 
  /content/uploads/2020/09/understanding-routing-and-bgp-exit.jpg 910w" sizes="910px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-exit.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 5: Local_Pref dictates how traffic leaves a local ASN. ">
+  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-exit.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 4: Local_Pref dictates how traffic leaves a local ASN. ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 5: Local_Pref dictates how traffic leaves a local ASN.
+  <figcaption>Figure 4: Local_Pref dictates how traffic leaves a local ASN.
 </figcaption>
 
 </figure>
@@ -837,175 +785,6 @@ RPKI validation codes: V valid, I invalid, N Not found
   </tbody>
 </table>
 
-<figure class="">
-
-
-
-
-
-
-
-
-<a href="/content/uploads/2019/12/DX-VIFs-Overview.png" title="Figure 1: Direct Connect Overview " class="image-popup">
-<picture>
-  <source type="image/webp" data-srcset="
-
-    
-    /content/resized/2019/12/DX-VIFs-Overview-320.webp 320w, 
-
-    
-    /content/resized/2019/12/DX-VIFs-Overview-384.webp 384w, 
-
-    
-    /content/resized/2019/12/DX-VIFs-Overview-512.webp 512w, 
-
-    
-    /content/resized/2019/12/DX-VIFs-Overview-683.webp 683w, 
-
-    
-    /content/resized/2019/12/DX-VIFs-Overview-800.webp 800w, 
-
-    
-    /content/resized/2019/12/DX-VIFs-Overview-960.webp 960w, 
-
-" sizes="4925px"></source>
-  <source data-srcset="
-
-    /content/resized/2019/12/DX-VIFs-Overview-320.png 320w, 
-
-    /content/resized/2019/12/DX-VIFs-Overview-384.png 384w, 
-
-    /content/resized/2019/12/DX-VIFs-Overview-512.png 512w, 
-
-    /content/resized/2019/12/DX-VIFs-Overview-683.png 683w, 
-
-    /content/resized/2019/12/DX-VIFs-Overview-800.png 800w, 
-
-    /content/resized/2019/12/DX-VIFs-Overview-960.png 960w, 
-
-" sizes="4925px"></source>
-  <img src="//:0" data-src="/content/uploads/2019/12/DX-VIFs-Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Direct Connect Overview ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 1: Direct Connect Overview
-</figcaption>
-
-</figure>
-
-<figure class="">
-
-
-
-
-
-
-
-
-<a href="/content/uploads/2019/12/DX-Cross-Connect.png" title="Figure 2: Direct Connect Cross Connect " class="image-popup">
-<picture>
-  <source width="922" type="image/webp" data-srcset="
-
-    
-    /content/resized/2019/12/DX-Cross-Connect-320.webp 320w, 
-
-    
-    /content/resized/2019/12/DX-Cross-Connect-384.webp 384w, 
-
-    
-    /content/resized/2019/12/DX-Cross-Connect-512.webp 512w, 
-
-    
-    /content/resized/2019/12/DX-Cross-Connect-683.webp 683w, 
-
-    
-    /content/resized/2019/12/DX-Cross-Connect-800.webp 800w, 
-
- /content/uploads/2019/12/DX-Cross-Connect.webp 922w" sizes="922px"></source>
-  <source width="922" data-srcset="
-
-    /content/resized/2019/12/DX-Cross-Connect-320.png 320w, 
-
-    /content/resized/2019/12/DX-Cross-Connect-384.png 384w, 
-
-    /content/resized/2019/12/DX-Cross-Connect-512.png 512w, 
-
-    /content/resized/2019/12/DX-Cross-Connect-683.png 683w, 
-
-    /content/resized/2019/12/DX-Cross-Connect-800.png 800w, 
-
- /content/uploads/2019/12/DX-Cross-Connect.png 922w" sizes="922px"></source>
-  <img src="//:0" data-src="/content/uploads/2019/12/DX-Cross-Connect.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Direct Connect Cross Connect ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 2: Direct Connect Cross Connect
-</figcaption>
-
-</figure>
-
-<figure class="">
-
-
-
-
-
-
-
-
-<a href="/content/uploads/2019/12/DX-Connectivity.png" title="Figure 3: Direct Connect Connectivity Options " class="image-popup">
-<picture>
-  <source type="image/webp" data-srcset="
-
-    
-    /content/resized/2019/12/DX-Connectivity-320.webp 320w, 
-
-    
-    /content/resized/2019/12/DX-Connectivity-384.webp 384w, 
-
-    
-    /content/resized/2019/12/DX-Connectivity-512.webp 512w, 
-
-    
-    /content/resized/2019/12/DX-Connectivity-683.webp 683w, 
-
-    
-    /content/resized/2019/12/DX-Connectivity-800.webp 800w, 
-
-    
-    /content/resized/2019/12/DX-Connectivity-960.webp 960w, 
-
-" sizes="3080px"></source>
-  <source data-srcset="
-
-    /content/resized/2019/12/DX-Connectivity-320.png 320w, 
-
-    /content/resized/2019/12/DX-Connectivity-384.png 384w, 
-
-    /content/resized/2019/12/DX-Connectivity-512.png 512w, 
-
-    /content/resized/2019/12/DX-Connectivity-683.png 683w, 
-
-    /content/resized/2019/12/DX-Connectivity-800.png 800w, 
-
-    /content/resized/2019/12/DX-Connectivity-960.png 960w, 
-
-" sizes="3080px"></source>
-  <img src="//:0" data-src="/content/uploads/2019/12/DX-Connectivity.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Direct Connect Connectivity Options ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 3: Direct Connect Connectivity Options
-</figcaption>
-
-</figure>
-
 <h4 id="multi-exit-discriminator-med">Multi-Exit Discriminator (MED)</h4>
 
 <figure class="">
@@ -1017,7 +796,7 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 
 
-<a href="/content/uploads/2020/09/understanding-routing-and-bgp-main-entrance.jpg" title="Figure 6: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. " class="image-popup">
+<a href="/content/uploads/2020/09/understanding-routing-and-bgp-main-entrance.jpg" title="Figure 5: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. " class="image-popup">
 <picture>
   <source width="910" type="image/webp" data-srcset="
 
@@ -1050,13 +829,13 @@ RPKI validation codes: V valid, I invalid, N Not found
     /content/resized/2020/09/understanding-routing-and-bgp-main-entrance-800.jpg 800w, 
 
  /content/uploads/2020/09/understanding-routing-and-bgp-main-entrance.jpg 910w" sizes="910px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-main-entrance.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 6: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. ">
+  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-main-entrance.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 5: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 6: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN.
+  <figcaption>Figure 5: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN.
 </figcaption>
 
 </figure>
