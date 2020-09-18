@@ -19,9 +19,6 @@
 <loc>https://www.edge-cloud.net/2020/09/25/understanding-bgp/</loc>
 </url>
 <url>
-<loc>https://www.edge-cloud.net/2020/09/18/understanding-routing/</loc>
-</url>
-<url>
 <loc>https://www.edge-cloud.net/2013/05/20/configuring-f5-big-ip-with-vcd/</loc>
 <lastmod>2013-05-20T13:30:00-07:00</lastmod>
 </url>
@@ -264,6 +261,10 @@
 <url>
 <loc>https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/</loc>
 <lastmod>2020-09-11T00:00:00-07:00</lastmod>
+</url>
+<url>
+<loc>https://www.edge-cloud.net/2020/09/18/understanding-routing/</loc>
+<lastmod>2020-09-18T00:00:00-07:00</lastmod>
 </url>
 <url>
 <loc>https://www.edge-cloud.net/about/</loc>

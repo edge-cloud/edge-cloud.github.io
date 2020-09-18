@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>AWS Site-to-Site VPN (IPSec) with IPv6 - Edge Cloud</title>
-<meta name="description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
+<!-- begin _includes/seo.html --><title>Better understanding IP Routing - Edge Cloud</title>
+<meta name="description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
 
 
   <meta name="author" content="Christian Elsen">
@@ -19,11 +19,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Edge Cloud">
-<meta property="og:title" content="AWS Site-to-Site VPN (IPSec) with IPv6">
-<meta property="og:url" content="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
+<meta property="og:title" content="Better understanding IP Routing">
+<meta property="og:url" content="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
 
 
-  <meta property="og:description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
+  <meta property="og:description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
 
 
 
@@ -34,9 +34,9 @@
 
 
   <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="AWS Site-to-Site VPN (IPSec) with IPv6">
-  <meta name="twitter:description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
+  <meta name="twitter:title" content="Better understanding IP Routing">
+  <meta name="twitter:description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
 
   
     <meta name="twitter:card" content="summary">
@@ -49,7 +49,7 @@
 
 
 
-  <meta property="article:published_time" content="2020-09-11T00:00:00-07:00">
+  <meta property="article:published_time" content="2020-09-18T00:00:00-07:00">
 
 
 
@@ -60,7 +60,7 @@
   
 
 
-<link rel="canonical" href="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
+<link rel="canonical" href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
 
 
 
@@ -346,15 +346,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="AWS Site-to-Site VPN (IPSec) with IPv6">
-    <meta itemprop="description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
-    <meta itemprop="datePublished" content="September 11, 2020">
+    <meta itemprop="headline" content="Better understanding IP Routing">
+    <meta itemprop="description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
+    <meta itemprop="datePublished" content="September 18, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">AWS Site-to-Site VPN (IPSec) with IPv6
+          <h1 id="page-title" class="page__title" itemprop="headline">Better understanding IP Routing
 </h1>
           
         </header>
@@ -367,102 +367,49 @@
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#constraints">Constraints</a></li>
   <li>
-<a href="#configuration">Configuration</a>
+<a href="#routing">Routing</a>
     <ul>
-      <li><a href="#aws-setup">AWS Setup</a></li>
+      <li><a href="#hop-by-hop-routing">Hop-by-Hop Routing</a></li>
       <li>
-<a href="#customer-side-configuration">Customer-side Configuration</a>
+<a href="#directional">Directional</a>
         <ul>
-          <li><a href="#basic-configuration-information">Basic configuration information</a></li>
-          <li><a href="#configuration-download">Configuration download</a></li>
-          <li><a href="#tunnel-interface-configuration">Tunnel Interface Configuration</a></li>
-          <li><a href="#border-gateway-protocol-bgp-configuration">Border Gateway Protocol (BGP) Configuration</a></li>
+          <li><a href="#asymmetric-routing">Asymmetric Routing</a></li>
+        </ul>
+      </li>
+      <li>
+<a href="#route-tables">Route Tables</a>
+        <ul>
+          <li><a href="#longest-prefix-match">Longest prefix match</a></li>
+          <li><a href="#equal-cost-multipath-ecmp">Equal Cost Multipath (ECMP)</a></li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#validation">Validation</a></li>
   <li><a href="#summary">Summary</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p>Recently AWS <a href="https://aws.amazon.com/about-aws/whats-new/2020/08/aws-site-to-site-vpn-supports-ipv6-traffic/" target="_blank" rel="noopener noreferrer">released support for IPv6 traffic over the AWS Site-to-Site VPN (IPSec)</a>. The <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html" target="_blank" rel="noopener noreferrer">setup of the AWS Site-to-Site VPN</a> has always been quite straight forward and thanks to the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config" target="_blank" rel="noopener noreferrer">downloadable configuration files</a> at times even trivial.
-With the introduction of IPv6 support this is unfortunately no longer the case. Therefore this blog post will guide you around some of the pitfalls of setting up an AWS Site-to-Site VPN with IPv6 support, hoping that they will eventually be removed and this post become unnecessary.</p>
+        <p>Today we will look at some of the fundamental principles of IP routing. While these principles and concepts are generic, we will use examples based on AWS networking.</p>
 
-<h1 id="constraints">Constraints</h1>
+<p>This blog post is not intended to be an all encompassing primer on IP routing. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to highlight and explain them explicitly.</p>
 
-<p>A few <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" target="_blank" rel="noopener noreferrer">constraints apply</a> when using AWS Site-to-Site VPN (IPSec) with IPv6:</p>
-<ul>
-  <li>The outside tunnel IP addresses - which are the public non-RFC1918 addresses - still only support IPv4. You can only use IPv6 on the inside of the tunnel, in order to carry IPv6 traffic between your on-premises network and AWS.</li>
-  <li>You have to use an <a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway (TGW)</a> as the AWS termination of your VPN. Site-to-Site VPNs to a Virtual Private Gateways (VGW) do not support IPv6.</li>
-  <li>You cannot retrofit existing Site-to-Site connections with IPv6, but need to create a new connection.</li>
-  <li>A Site-to-Site VPN connection can only support IPv4, or IPv6. This means that if you need to carry both IPv4 and IPv6 traffic between AWS and on-premises you need to create two separate connections, one for IPv4 and one for IPv6 (See Figure 1).</li>
-</ul>
+<p>In a future related blog post we will look at BGP routing in more detail.</p>
 
-<figure class="">
+<p class="notice--info">Please keep in mind that we will be using AWS VPCs and TGWs to illustrate routing principles. The resulting AWS networking designs are therefore used for illustration purposes and are not suited or recommended for production deployments.</p>
 
+<h1 id="routing">Routing</h1>
 
+<p><a href="https://en.wikipedia.org/wiki/Routing" target="_blank" rel="noopener noreferrer">Routing</a> and more specifically here, <a href="https://en.wikipedia.org/wiki/IP_routing" target="_blank" rel="noopener noreferrer">IP routing</a>, deals with selecting a path for traffic in an IP network. Routing directs a “hop” within a network on how to  forward IP packets based on a <a href="https://en.wikipedia.org/wiki/Routing_table" target="_blank" rel="noopener noreferrer">routing tables</a> and the destination IP address within the packet.</p>
 
+<p>As we will see later, routing tables maintain information on how to reach various network destinations. Typically they are either configured manually (also known as “Static Routing”) or with the help of a routing protocol (e.g. BGP).</p>
 
+<h2 id="hop-by-hop-routing">Hop-by-Hop Routing</h2>
 
+<p>One of the most fundamental concepts to understand in IP routing is that the actual forwarding decision is made on a hop-by-hop basis. This means that within each hop of the network path, a router makes a forwarding decision based on the local route table. Image this to be like a board game, where at each step in the game it is decided where to go next. Neither the previous nor the next step have any influence on the local decision.</p>
 
-
-
-<a href="/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png" title="Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support. " class="image-popup">
-<picture>
-  <source width="901" type="image/webp" data-srcset="
-
-    
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-320.webp 320w, 
-
-    
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-384.webp 384w, 
-
-    
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-512.webp 512w, 
-
-    
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-683.webp 683w, 
-
-    
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-800.webp 800w, 
-
- /content/uploads/2020/09/S2S-VPN-with-IPv6-1.webp 901w" sizes="901px"></source>
-  <source width="901" data-srcset="
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-320.png 320w, 
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-384.png 384w, 
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-512.png 512w, 
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-683.png 683w, 
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-1-800.png 800w, 
-
- /content/uploads/2020/09/S2S-VPN-with-IPv6-1.png 901w" sizes="901px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support. ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support.
-</figcaption>
-
-</figure>
-
-<p>As each AWS Site-to-Site VPN connection consist of two tunnels, in the case of supporting IPv4/IPv6 Dualstack traffic you will therefore end up with a total of four tunnels, two for IPv4 traffic and two for IPv6 traffic.
-Also note that this means you’ll be paying separately for the tunnel carrying the IPv4 traffic as well as for the tunnel carrying the IPv6 traffic.</p>
-
-<h1 id="configuration">Configuration</h1>
-
-<h2 id="aws-setup">AWS Setup</h2>
-
-<p>The <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-create-vpn-connection" target="_blank" rel="noopener noreferrer">creation of a Site-to-Site VPN connection</a> is straight forward and only differs from its IPv4 counterpart by setting the “Tunnel Inside IP version” to IPv6 instead of IPv4 (See Figure 2).</p>
+<p>Taking AWS VPCs and <a href="https://aws.amazon.com/transit-gateway/?aws-transit-gateway-wn.sort-by=item.additionalFields.postDateTime&amp;aws-transit-gateway-wn.sort-order=desc" target="_blank" rel="noopener noreferrer">Transit Gateways (TGWs)</a> as an example, we can quickly understand how this hop-by-hop decision making plays out, while looking at the routing tables of the VPCs and TGWs (See Figure 1).</p>
 
 <figure class="">
 
@@ -473,62 +420,80 @@ Also note that this means you’ll be paying separately for the tunnel carrying 
 
 
 
-<a href="/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png" title="Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support. " class="image-popup">
+<a href="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" title="Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) " class="image-popup">
 <picture>
-  <source width="1061" type="image/webp" data-srcset="
+  <source width="871" type="image/webp" data-srcset="
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-320.webp 320w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-320.webp 320w, 
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-384.webp 384w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-384.webp 384w, 
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-512.webp 512w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-512.webp 512w, 
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-683.webp 683w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-683.webp 683w, 
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-800.webp 800w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-800.webp 800w, 
 
-    
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-960.webp 960w, 
+ /content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.webp 871w" sizes="871px"></source>
+  <source width="871" data-srcset="
 
- /content/uploads/2020/09/S2S-VPN-with-IPv6-2.webp 1061w" sizes="1061px"></source>
-  <source width="1061" data-srcset="
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-320.png 320w, 
 
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-320.png 320w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-384.png 384w, 
 
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-384.png 384w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-512.png 512w, 
 
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-512.png 512w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-683.png 683w, 
 
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-683.png 683w, 
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-800.png 800w, 
 
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-800.png 800w, 
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-2-960.png 960w, 
-
- /content/uploads/2020/09/S2S-VPN-with-IPv6-2.png 1061w" sizes="1061px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support. ">
+ /content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png 871w" sizes="871px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support.
+  <figcaption>Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW)
 </figcaption>
 
 </figure>
 
-<p>The IPv6 enabled Site-to-Site VPN connection also supports defining the IPv6 addresses used within the tunnel yourself. If you want to make use of this capability you have to select a /126 IPv6 subent out of the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">Unique local address</a> address range. This is useful to prevent IP address collisions across multiple tunnels. Although with IPv6 addresses, such a collision is much less likely than with IPv4.</p>
+<p>Traffic from an EC2 instance in VPC 1 wanting to reach another EC2 instance in VPC 2 will have to follow this hop-by-hop process through the five routing tables involved here. What do you think? Will traffic from VPC 1 reach VPC 2? Or is there a mistake in the route tables?</p>
 
-<h2 id="customer-side-configuration">Customer-side Configuration</h2>
+<p>Let’s look at each hop, step-by-step:</p>
+<ul>
+  <li>
+<strong>VPC 1:</strong> Traffic for destinations within VPC 2’s CIDR of 10.2.0.0/16 are send to the TGW 1 over the VPC attachment.</li>
+  <li>
+<strong>TGW 1:</strong> Inspecting the route table of TGW 1, we can see that traffic for 10.2.0.0/16 is send via a TGW peering to TGW 2.</li>
+  <li>
+<strong>TGW 2:</strong> Looking at the route table of TGW 2, we can also find an entry for the destination of 10.2.0.0/16. It specifies that traffic should be send via another TGW peering to TGW 3.</li>
+  <li>
+<strong>TGW 3:</strong> At this point our traffic has already made it into the correct AWS regions. Let’s see what happens next: The route table of TGW 3 indicates that traffic for 10.2.0.0/16 will be forwarded to VPC 2.</li>
+  <li>
+<strong>VPC 2:</strong> Last but not least, the route table of VPC 2 shows that traffic for the locally used CIDR 10.2.0.0/16 remains within the VPC and is delivered to the corresponding EC2 instance.</li>
+</ul>
 
-<h3 id="basic-configuration-information">Basic configuration information</h3>
+<p>But what about the return traffic from VPC 2 to VPC 1? Read on to see how another important principle of IP routing plays a role here.</p>
 
-<p>When configuring the costumer-side of the solution, the challenges will start. Having a look at the Tunnel details for a newly created AWS Site-to-Site VPN with IPv6 support will yield some surprising results (See Figure 3).</p>
+<h2 id="directional">Directional</h2>
+
+<p>Another important principle of IP routing, effectively caused by the hop-by-hop decision making behavior is that path determination is directional. Looking back at the provided example in the previous section (See Figure 1), we only validated that traffic from VPC 1 can reach VPC 2. But we did not validate any information on whether traffic from VPC 2 can reach VPC 1.</p>
+
+<p>I leave it up to you as an exercise to determine if the route tables across the VPCs and TGWs are setup correctly to allow return traffic and thereby enable bidirectional communication. Comment below in case you find a mistake.</p>
+
+<p>When designing route tables or troubleshooting network connectivity it’s always important that you look at traffic flows in both directions and plan or check route table independently for both directions.
+Also when talking with co-workers, customer, support staff, or anyone alike it is also important that you indicate the direction of the traffic flow that you are referring to.</p>
+
+<h3 id="asymmetric-routing">Asymmetric Routing</h3>
+
+<p>What’s even more interesting is that the directional nature of IP forwarding can lead to asymmetric traffic flows. But there is nothing wrong about asymmetric traffic flows and the majority of the Internet relies on it while exchanging traffic between <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">ASNs</a> via Peering or Transit. Think of asymmetric IP traffic flow as a hiking trail loop (See Figure 2). Such hiking trails are often more fascinating than an out-and-return path as you get to see a different set of landscape, plants and animals on the way back as compared to the way out.</p>
 
 <figure class="">
 
@@ -539,187 +504,189 @@ Also note that this means you’ll be paying separately for the tunnel carrying 
 
 
 
-<a href="/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png" title="Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support. " class="image-popup">
+<a href="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" title="Figure 2: Asymmetric routing is like a hiking-trail loop. " class="image-popup">
 <picture>
-  <source type="image/webp" data-srcset="
+  <source width="800" type="image/webp" data-srcset="
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-320.webp 320w, 
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-320.webp 320w, 
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-384.webp 384w, 
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-384.webp 384w, 
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-512.webp 512w, 
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-512.webp 512w, 
 
     
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-683.webp 683w, 
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-683.webp 683w, 
 
-    
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-800.webp 800w, 
+ /content/uploads/2020/09/understanding-routing-and-bgp-trail-map.webp 800w" sizes="800px"></source>
+  <source width="800" data-srcset="
 
-    
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-960.webp 960w, 
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-320.jpg 320w, 
 
-" sizes="1438px"></source>
-  <source data-srcset="
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-384.jpg 384w, 
 
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-320.png 320w, 
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-512.jpg 512w, 
 
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-384.png 384w, 
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-683.jpg 683w, 
 
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-512.png 512w, 
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-683.png 683w, 
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-800.png 800w, 
-
-    /content/resized/2020/09/S2S-VPN-with-IPv6-3-960.png 960w, 
-
-" sizes="1438px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support. ">
+ /content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg 800w" sizes="800px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Asymmetric routing is like a hiking-trail loop. ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support.
+  <figcaption>Figure 2: Asymmetric routing is like a hiking-trail loop.
 </figcaption>
 
 </figure>
 
-<p>You’ll see that for both tunnels “Inside IPv4 CIDRs” from the 169.254.0.0/16 <a href="https://en.wikipedia.org/wiki/Link-local_address" target="_blank" rel="noopener noreferrer">Link-local address</a> range will be shown. As mentioned previously an AWS Site-to-Site connection - and thereby its tunnels - only supports either IPv4 or IPv6. As this is an IPv6 enabled tunnel, the displayed Inner IPv4 CIDRs are irrelevant and cannot be used for anything. Therefore it’s best to completely ignore this particular column here.</p>
+<p>And as long as you make the correct decision at your “routing hops” - aka. a trail fork - you will return to your trail head as well.</p>
 
-<p>Next you will notice that for the “Inside IPv6 CIDRs” the addresses are provided with a /128 netmask - which is the IPv6 equivalent of /32 and therefore a “host-only” netmask. This netmask therefore only contains a single IP address. Yet the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" target="_blank" rel="noopener noreferrer">documentation clearly calls out</a> that these “Inside IPv6 CIDRs” should be a /126 IPv6 CIDR block, which includes 4 IPv6 addresses. A /126 IPv6 CIDR is the equivalent of a /30 IPv4 CIDR.
-Also the provided IPv6 address from the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">Unique local address</a> address range ends in an odd number and is therefore not a network address, which always end in even numbers.
-Turns out that the displayed IPv6 address is actually the AWS side of the inner connection.</p>
+<p>Let’s extend the above example using AWS VPCs and TGWs to showcase asymmetric routing. For this we add another TGW and two more TGW peering connections along with changes to the route table (See Figure 3).</p>
 
-<p>So with the value of “fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>5</strong>/128” displayed in the provided example, the relevant IPv6 information would be:</p>
-<ul>
-  <li>Subnet (aka CIDR): fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>4</strong>/12<strong>6</strong>
-</li>
-  <li>AWS-side interface address: fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>5</strong>/12<strong>6</strong>
-</li>
-  <li>Customer-side address: fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>6</strong>/12<strong>6</strong>
-</li>
-</ul>
+<figure class="">
 
-<p>You should notice the pattern for constructing the unnecessary IPv6 information:</p>
-<ul>
-  <li>Subnet (aka CIDR): Provided IPv6 address - 1</li>
-  <li>AWS-side interface address: Provided IPv6 address</li>
-  <li>Customer-side address: Provided IPv6 address + 1</li>
-</ul>
 
-<p>Just keep in mind that IPv6 addresses use hex digits, which start with 0,1,2,.. then continue with ..,8,9,A,B,.. and end with ..,E,F.</p>
 
-<p>You can double check your conversion math knowing that the used netmask is a /128, allowing IPv6 subnets with 4 addresses. Therefore 4 different combinations of trailing IPv6 digits exist:</p>
-<ul>
-  <li>Subnet (aka CIDR): Must always end in 0,4,8,C</li>
-  <li>AWS-side interface address: Must always end in 1,5,9,D</li>
-  <li>Customer-side address: Must always end in 2,6,A,E</li>
-</ul>
 
-<h3 id="configuration-download">Configuration download</h3>
 
-<p>The next challenge you will notice is that when downloading the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config" target="_blank" rel="noopener noreferrer">downloadable configuration files</a> from the AWS Console, it does not include any IPv6 address information. Instead for the inner address it includes IPv4 address information that are irrelevant as already pointed out.</p>
 
-<p>Nevertheless you can leverage the downloadable configuration file for the Internet Key Exchange (IKE) and IPSec Configuration of your tunnels. These two sections within the file can be used without any changes, unless you diverted with your IKE or IPSec settings from the default values. Because these downloadable configuration files are only baseline examples that assume default values.</p>
 
-<h3 id="tunnel-interface-configuration">Tunnel Interface Configuration</h3>
 
-<p>With that the Tunnel Interface Configuration has to be adapted from IPv4 to IPv6. Using a Cisco IOS configuration as an example, the downloadable configuration file will provide the following Interface Configuration.</p>
+<a href="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" title="Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) " class="image-popup">
+<picture>
+  <source width="871" type="image/webp" data-srcset="
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Tunnel1
-  ip address 169.254.123.90 255.255.255.252
-  ip virtual-reassembly
-  tunnel source 198.51.100.123
-  tunnel destination 54.68.62.136
-  tunnel mode ipsec ipv4
-  tunnel protection ipsec profile ipsec-vpn-0b1561f60da62e5eb-0
-  ip tcp adjust-mss 1379
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-320.webp 320w, 
 
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-384.webp 384w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-512.webp 512w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-683.webp 683w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-800.webp 800w, 
+
+ /content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.webp 871w" sizes="871px"></source>
+  <source width="871" data-srcset="
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-320.png 320w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-384.png 384w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-512.png 512w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-683.png 683w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-800.png 800w, 
+
+ /content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png 871w" sizes="871px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW)
+</figcaption>
+
+</figure>
+
+<p>Now, if you follow the path of traffic from VPC 1 to VPC 2, you’ll notice that nothing has changed. Traffic still traverses TGW 1, TGW 2, and TGW 3 on the way to VPC 2. But at the same time look at traffic from VPC 2 to VPC 1. What do you notice?
+Looking at the route tables of the TGWs you should notice that traffic  on the return path from VPC 2 to VPC 1 will traverse TGW 3, TGW 4, and TGW 1, thereby creating and asymmetric path.</p>
+
+<p>This asymmetric traffic flow is depicted with the green arrows.</p>
+
+<h2 id="route-tables">Route Tables</h2>
+
+<p>Next we will look at route tables in a bit more detail. Being able to read and understand route tables, will help you understand the routing decision of the hops within each path.</p>
+
+<p>The most simple route tables have already been depicted in Figure 1 and Figure 3. These routes show a simple mapping between the destination CIDR - also called prefix or network - and the next hop.</p>
+
+<p>Translated into a route table on a Cisco device this might look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *&gt;   10.1.0.0/16      169.254.15.221         100             0 64512 i
 </code></pre></div></div>
 
-<p>Within this configuration we have to replace the inner IPv4 address with an IPv6 address and also specify that IPv6 should be used within the inside of the tunnel. The outer IP address remains to be an IPv4 address. The resulting corrected configuration using the IPv6 address as outlined in the previous section becomes as follows.</p>
+<p>Focus on the last line, which effectively translates into: Packets for the prefix “10.1.0.0/16” should be send to the next hop with the IP address of “169.254.15.221”.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Tunnel1
- no ip address
- ip virtual-reassembly
- ipv6 address FDBE:1A26:45B0:4631:CA60:3307:371B:6316/126
- tunnel source 198.51.100.123
- tunnel destination 54.68.62.136
- tunnel mode ipsec ipv4 v6-overlay
- tunnel protection ipsec profile ipsec-vpn-0b1561f60da62e5eb-0
- ip tcp adjust-mss 1379
+<h3 id="longest-prefix-match">Longest prefix match</h3>
 
+<p>After this let’s look at <a href="https://en.wikipedia.org/wiki/Longest_prefix_match" target="_blank" rel="noopener noreferrer">longest prefix match</a>, sometimes also referred to as “more specific routing”. This algorithm specifies which entry to be chosen from the IP routing table in case of destination addresses matching more than one entry. For IP routing the most specific of the matching table entries — the one with the longest subnet mask — is called the longest prefix match and is the one chosen.</p>
+
+<p>Consider the below routing table on a Cisco device as an example and especially focus on the last five lines:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *&gt;   10.1.0.0/16      169.254.15.221         100             0 64512 i
+ *&gt;   10.1.1.0/24      169.254.16.222         100             0 64513 i
+ *&gt;   10.1.2.0/24      169.254.17.223         100             0 64514 i
+ *&gt;   10.1.3.0/24      169.254.18.224         100             0 64515 i
+ *&gt;   10.1.4.0/24      169.254.19.225         100             0 64516 i
 </code></pre></div></div>
 
-<h3 id="border-gateway-protocol-bgp-configuration">Border Gateway Protocol (BGP) Configuration</h3>
+<p>Here we can see that the destination IP address of “10.1.1.1” would match both the entry for “10.1.0.0/16”, as well as the entry for “10.1.1.0/24”. As the entry for “10.1.1.0/24” has a longer subnet mask - it is more specific - and therefore the chosen entry. With that this entry would be chosen and matching traffic send to 169.254.16.222 as the next hop.</p>
 
-<p>Next the Border Gateway Protocol (BGP) Configuration also needs to be adapted, replacing the IPv4 configuration with a corresponding IPv6 configuration.</p>
+<h3 id="equal-cost-multipath-ecmp">Equal Cost Multipath (ECMP)</h3>
 
-<p>The downloadable configuration will provide the following BGP configuration.</p>
+<p>Usually with IP forwarding there is one egress or outbound path per hop for a given destination IP. This rule can be softened via a routing strategy called <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" target="_blank" rel="noopener noreferrer">Equal-cost multi-path routing (ECMP)</a>. With ECMP, packet forwarding to a single destination IP can occur over multiple “best path”.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
-  neighbor 169.254.123.89 remote-as 64512
-  neighbor 169.254.123.89 activate
-  neighbor 169.254.123.89 timers 10 30 30
-  address-family ipv4 unicast
-    neighbor 169.254.123.89 remote-as 64512
-    neighbor 169.254.123.89 timers 10 30 30
-    neighbor 169.254.123.89 activate
-    neighbor 169.254.123.89 soft-reconfiguration inbound
+<p>Again, let’s have a look at an example and consider the below routing table on a Cisco router, especially the last two lines:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *m   10.0.255.0/24    169.254.13.253         100             0 64512 i
+ *&gt;                    169.254.15.221         100             0 64512 i
 </code></pre></div></div>
 
-<p>As we want to run BGP over the inner IPv6 connection, we again have to replace all IPv4 configuration items with the corresponding IPv6 addresses.
-The result will look as follows.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
-  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 remote-as 64512
-  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 activate
-  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 timers 10 30 30
-  address-family ipv6 unicast
-    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 remote-as 64512
-    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 timers 10 30 30
-    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 activate
-    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 soft-reconfiguration inbound
-</code></pre></div></div>
-
-<p>Here you effectively have to replace the unusable IPv4 address for the neighbor with the correct IPv6 address of that neighbor and change the address-family section from IPv4 to IPv6.</p>
-
-<h1 id="validation">Validation</h1>
-
-<p>As a final step, we can validate that IPv6 routes are being learned from the TGW via the Site-to-Site VPN.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ipv6 route bgp
-IPv6 Routing Table - default - 13 entries
-Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
-       B - BGP, R - RIP, H - NHRP, I1 - ISIS L1
-       I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary, D - EIGRP
-       EX - EIGRP external, ND - ND Default, NDp - ND Prefix, DCE - Destination
-       NDr - Redirect, RL - RPL, O - OSPF Intra, OI - OSPF Inter
-       OE1 - OSPF ext 1, OE2 - OSPF ext 2, ON1 - OSPF NSSA ext 1
-       ON2 - OSPF NSSA ext 2, la - LISP alt, lr - LISP site-registrations
-       ld - LISP dyn-eid, lA - LISP away, le - LISP extranet-policy
-       lp - LISP publications, a - Application, m - OMP
-B   2600:1234::/64 [20/100]
-     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
-     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
-B   2600:1A14:5DE:DB00::/56 [20/100]
-     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
-     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
-B   2600:1A16:807:3A00::/56 [20/100]
-     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
-     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
-
-</code></pre></div></div>
-
-<p>In this case we can see that a total of three prefixes is learned, whereas the first prefix is originated on the TGW via a <a href="https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/">summary route</a>, while the other two prefixes correspond to VPCs.</p>
+<p>In this case we can see that we have a multipath route for the destination prefix of “10.0.255.0/24”, where both “169.254.13.253” and “169.254.15.221” are considered as the next best hop. In this case the router device will randomly send out traffic for this destination network over either next hop, while using a 5-tuple hash. A 5-tuple hash refers to a set of five different values that comprise a Transmission Control Protocol/Internet Protocol (TCP/IP) connection. It includes a source IP address/port number, destination IP address/port number and the protocol in use. Here with ECMP and 5-tuple hashing, packets belonging to the same 5-tuple travel to the same next hop, while packets from different 5-tuple may be send to another next hop.</p>
 
 <h1 id="summary">Summary</h1>
 
-<p>This blog post guided you around some of the pitfalls when setting up an IPv6 capable AWS Site-to-Site VPN connection. It covered some of the rather cosmetic imperfections within the AWS Console around unusable IPv4 addresses, as well as generating a working Customer Gateway (CGW) configuration based on the downloadable configuration files.</p>
+<p>In today’s post we took a look at some of the fundamental principles of IP routing. A future post will look in more detail at  BGP Routing protocol concepts. Neither of these blog posts is intended to be an all encompassing primer on IP routing or BGP. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Hopefully after reading through this post you feel a bit more confident to design, troubleshoot or just talk about IP networks.</p>
 
         
       </section>
@@ -740,11 +707,7 @@ B   2600:1A16:807:3A00::/56 [20/100]
     
       
       
-      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a><span class="sep">, </span>
+      <a href="/tags/#bgp" class="page__taxonomy-item" rel="tag">BGP</a><span class="sep">, </span>
     
       
       
@@ -757,7 +720,7 @@ B   2600:1A16:807:3A00::/56 [20/100]
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-09-18T00:00:00-07:00">September 18, 2020</time></p>
         
       </footer>
 
@@ -766,20 +729,20 @@ B   2600:1A16:807:3A00::/56 [20/100]
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Better+understanding+IP+Routing%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F18%2Funderstanding-routing%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F18%2Funderstanding-routing%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F18%2Funderstanding-routing%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
   
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F&amp;title=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F18%2Funderstanding-routing%2F&amp;title=Better+understanding+IP+Routing" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/2020/05/01/tgw-multicast-intro/" class="pagination--pager" title="Multicast with AWS Transit Gateway
+      <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" class="pagination--pager" title="AWS Site-to-Site VPN (IPSec) with IPv6
 ">Previous</a>
     
     
@@ -797,6 +760,26 @@ B   2600:1A16:807:3A00::/56 [20/100]
     <div class="page__related">
       <h4 class="page__related-title">You may also enjoy</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
+</p>
+  </article>
+</div>
+
         
           
 
@@ -853,26 +836,6 @@ B   2600:1A16:807:3A00::/56 [20/100]
     </h2>
     
     <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/2019/12/09/block-countries-with-route53/" rel="permalink">Block access from certain countries with Route 53 Geolocation
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.
 </p>
   </article>
 </div>
