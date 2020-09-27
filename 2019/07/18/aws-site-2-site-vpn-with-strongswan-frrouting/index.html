@@ -380,9 +380,15 @@
 <a href="#interface-setup">Interface Setup</a>
         <ul>
           <li><a href="#source-or-destination-checking">Source or Destination checking</a></li>
+          <li><a href="#security-group-setup">Security Group setup</a></li>
         </ul>
       </li>
-      <li><a href="#strongswan-setup">Strongswan setup</a></li>
+      <li>
+<a href="#strongswan-setup">Strongswan setup</a>
+        <ul>
+          <li><a href="#strongswan-validation">Strongswan validation</a></li>
+        </ul>
+      </li>
       <li><a href="#frrouting-setup">FRRouting Setup</a></li>
     </ul>
   </li>
@@ -594,6 +600,12 @@ eth1      Link encap:Ethernet  HWaddr 02:7b:35:90:92:ae
 <p>Before installing Strongswan on your EC2 instance <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html#EIP_Disable_SrcDestCheck" target="_blank" rel="noopener noreferrer">disable Source/Destination Checks</a> for this instance.
 Keep in mind that this needs to be done for both interfaces (ENIs) separately.</p>
 
+<h3 id="security-group-setup">Security Group setup</h3>
+
+<p>Within the security group for the external interface: Make sure to allow inbound traffic using UDP port 500 (ISAKMP) and 4500 (IPsec NAT-Traversal) from both of the AWS Virtual Private Gateways.</p>
+
+<p>For the security group on the internal interface: Here you want to allow any traffic that you want to be transported inside of the AWS Site-to-Site VPN tunnels.</p>
+
 <h2 id="strongswan-setup">Strongswan setup</h2>
 
 <p>Next use <em>apt-get update &amp;&amp; apt-get install -y strongswan</em> to install Strongswan on the Ubuntu Linux 16.04 instance.</p>
@@ -740,8 +752,43 @@ sysctl <span class="nt">-w</span> net.ipv4.conf.eth0.disable_policy<span class="
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl restart strongswan
 </code></pre></div></div>
 
+<h3 id="strongswan-validation">Strongswan validation</h3>
+
 <p>You can validate that the two tunnel interfaces vti1 and vti2 are up and running with the commands <code class="highlighter-rouge">ip -s tunnel show</code> or
 <code class="highlighter-rouge">ifconfig vti1</code>. You should see the IP address of the tunnels displayed within the 169.254.0.0/16 range.</p>
+
+<p>Looing at the tunnel status you should see bytes being send (TX) and received (RX) for both tunnels.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@host:~$ ip -s tunnel show
+vti1: ip/ip remote 35.98.76.54 local 18.123.45.67 ttl inherit nopmtudisc key 100
+RX: Packets    Bytes        Errors CsumErrs OutOfSeq Mcasts
+    12         792          0      0        0        0
+TX: Packets    Bytes        Errors DeadLoop NoRoute  NoBufs
+    12         714          7      0        7        0
+vti2: ip/ip remote 54.98.76.54 local 18.123.45.67 ttl inherit nopmtudisc key 200
+RX: Packets    Bytes        Errors CsumErrs OutOfSeq Mcasts
+    4          240          0      0        0        0
+TX: Packets    Bytes        Errors DeadLoop NoRoute  NoBufs
+    4          160          7      0        7        0
+ip_vti0: ip/ip remote any local any ttl inherit nopmtudisc key 0
+RX: Packets    Bytes        Errors CsumErrs OutOfSeq Mcasts
+    0          0            0      0        0        0
+TX: Packets    Bytes        Errors DeadLoop NoRoute  NoBufs
+    0          0            0      0        0        0
+</code></pre></div></div>
+
+<p>Similarly you should see the interface in an “UP” state.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@host:~$ ifconfig vti1
+vti1: flags=209&lt;UP,POINTOPOINT,RUNNING,NOARP&gt;  mtu 1436
+        inet 169.254.12.38  netmask 255.255.255.252  destination 169.254.12.37
+        inet6 fe80::5efe:ac1f:27e0  prefixlen 64  scopeid 0x20&lt;link&gt;
+        tunnel   txqueuelen 1000  (IPIP Tunnel)
+        RX packets 12  bytes 792 (792.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 12  bytes 714 (714.0 B)
+        TX errors 7  dropped 0 overruns 0  carrier 7  collisions 0
+</code></pre></div></div>
 
 <h2 id="frrouting-setup">FRRouting Setup</h2>
 
@@ -762,9 +809,12 @@ Copyright 1996-2005 Kunihiro Ishiguro, et al.
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>host# conf t
 host(config)# router bgp 65016
+host(config-router)# bgp ebgp-requires-policy
 host(config-router)# neighbor 169.254.12.229 remote-as 64512
 host(config-router)# neighbor 169.254.14.37 remote-as 64512
 host(config-router)# address-family ipv4 unicast
+host(config-router-af)# neighbor 169.254.12.229 soft-reconfiguration inbound
+host(config-router-af)# neighbor 169.254.14.37 soft-reconfiguration inbound
 host(config-router-af)# network 10.16.16.0/24
 host(config-router-af)# end
 host# wr
