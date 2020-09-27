@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2020-09-27T10:53:42-07:00</updated>
+  <updated>2020-09-27T11:20:33-07:00</updated>
   <id>https://www.edge-cloud.net/feed.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -20,7 +20,7 @@
       <published>2020-09-28T00:00:00-07:00</published>
       <link href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/" />
       <summary type="html">Primer to better understanding BGP</summary>
-      <content type="html">In a previous post we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking. This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve seen numerous people confused by some of these principles and concepts...</content>
+      <content type="html">In a previous post we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking, along with examples from running an Autonomous System on the Internet. This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve...</content>
       
       <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
       <category term="BGP" />
