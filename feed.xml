@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2020-09-26T17:47:45-07:00</updated>
+  <updated>2020-09-26T17:53:17-07:00</updated>
   <id>https://www.edge-cloud.net/feed.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -12,6 +12,26 @@
   <logo>https://www.edge-cloud.net/assets/images/square-image.jpg</logo>
   <icon>https://www.edge-cloud.net/assets/images/square-image.jpg</icon>
 
+  
+    <entry>
+      <title>Better understanding BGP</title>
+      <id>https://www.edge-cloud.net/2020/09/28/understanding-bgp/</id>
+      <updated>2020-09-28T00:00:00-07:00</updated>
+      <published>2020-09-28T00:00:00-07:00</published>
+      <link href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/" />
+      <summary type="html">Primer to better understanding BGP</summary>
+      <content type="html">In a previous post we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking. This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve seen numerous people confused by some of these principles and concepts...</content>
+      
+      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
+      <category term="BGP" />
+      
+      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
+      <category term="Network" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
   
     <entry>
       <title>Better understanding IP Routing</title>
@@ -184,26 +204,6 @@
       <link href="https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/" />
       <summary type="html">This article shows you how to setup a primary active Direct Connect connection between an AWS Transit Gateway and on-premises networks via Direct Connect Gateway, while leveraging a Site-to-Site (IPSec) VPN as backup.</summary>
       <content type="html">A very common network architecture pattern on AWS is to deploy an AWS Site-to-Site (IPSec) VPN connection as the backup for an AWS Direct Connect (DX) connection between on-premises networks and AWS VPCs. With the introduction of AWS Transit Gateway and AWS Direct Connect Gateway, this architecture pattern is no longer a trivial task. This blog post highlights the associated challenges and offers a solution using BGP route summarization and BGP prefix filtering to manage...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>BGP route summarization with AWS Transit Gateway</title>
-      <id>https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/</id>
-      <updated>2019-08-07T00:00:00-07:00</updated>
-      <published>2019-08-07T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/" />
-      <summary type="html">Step-by-step guide to summarize BGP routes with AWS Transit Gateway and Cisco IOS</summary>
-      <content type="html">This blog post will look at using BGP Route Aggregation from the AWS Transit Gateway via IPSec VPN to a customer gateway. While the example configuration and output provided for the customer gateway are using a Cisco CSR1000V with IOS-XE, you can replicate the same with e.g. Ubuntu Linux, StrongSwan and FFRouting. Have a look at the previous post “AWS Site-to-Site VPN with IPSec VPN (Strongwan) and BGP (FRRouting)”, which describes how to setup such...</content>
       
       <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
       <category term="AWS" />

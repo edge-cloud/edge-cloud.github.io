@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Better understanding IP Routing - Edge Cloud</title>
-<meta name="description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
+<!-- begin _includes/seo.html --><title>Better understanding BGP - Edge Cloud</title>
+<meta name="description" content="Primer to better understanding BGP">
 
 
   <meta name="author" content="Christian Elsen">
@@ -19,11 +19,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Edge Cloud">
-<meta property="og:title" content="Better understanding IP Routing">
-<meta property="og:url" content="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
+<meta property="og:title" content="Better understanding BGP">
+<meta property="og:url" content="https://www.edge-cloud.net/2020/09/28/understanding-bgp/">
 
 
-  <meta property="og:description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
+  <meta property="og:description" content="Primer to better understanding BGP">
 
 
 
@@ -34,9 +34,9 @@
 
 
   <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Better understanding IP Routing">
-  <meta name="twitter:description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
+  <meta name="twitter:title" content="Better understanding BGP">
+  <meta name="twitter:description" content="Primer to better understanding BGP">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/28/understanding-bgp/">
 
   
     <meta name="twitter:card" content="summary">
@@ -49,7 +49,7 @@
 
 
 
-  <meta property="article:published_time" content="2020-09-18T00:00:00-07:00">
+  <meta property="article:published_time" content="2020-09-28T00:00:00-07:00">
 
 
 
@@ -60,7 +60,7 @@
   
 
 
-<link rel="canonical" href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
+<link rel="canonical" href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/">
 
 
 
@@ -346,15 +346,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Better understanding IP Routing">
-    <meta itemprop="description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
-    <meta itemprop="datePublished" content="September 18, 2020">
+    <meta itemprop="headline" content="Better understanding BGP">
+    <meta itemprop="description" content="Primer to better understanding BGP">
+    <meta itemprop="datePublished" content="September 28, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Better understanding IP Routing
+          <h1 id="page-title" class="page__title" itemprop="headline">Better understanding BGP
 </h1>
           
         </header>
@@ -367,23 +367,15 @@
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
+  <li><a href="#routing-protocols">Routing Protocols</a></li>
+  <li><a href="#bgp">BGP</a></li>
   <li>
-<a href="#routing">Routing</a>
+<a href="#bgp-best-path-selection-algorithm">BGP Best Path Selection Algorithm</a>
     <ul>
-      <li><a href="#hop-by-hop-routing">Hop-by-Hop Routing</a></li>
-      <li>
-<a href="#directional">Directional</a>
-        <ul>
-          <li><a href="#asymmetric-routing">Asymmetric Routing</a></li>
-        </ul>
-      </li>
-      <li>
-<a href="#route-tables">Route Tables</a>
-        <ul>
-          <li><a href="#longest-prefix-match">Longest prefix match</a></li>
-          <li><a href="#equal-cost-multipath-ecmp">Equal Cost Multipath (ECMP)</a></li>
-        </ul>
-      </li>
+      <li><a href="#local_pref">Local_Pref</a></li>
+      <li><a href="#as_path-length">AS_PATH length</a></li>
+      <li><a href="#multi-exit-discriminator-med">Multi-Exit Discriminator (MED)</a></li>
+      <li><a href="#traffic-engineering-example">Traffic engineering example</a></li>
     </ul>
   </li>
   <li><a href="#summary">Summary</a></li>
@@ -391,109 +383,40 @@
             </nav>
           </aside>
         
-        <p>Today we will look at some of the fundamental principles of IP routing. While these principles and concepts are generic, we will use examples based on AWS networking.</p>
+        <p>In a <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">previous post</a> we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking.</p>
 
-<p>This blog post is not intended to be an all encompassing primer on IP routing. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to highlight and explain them explicitly.</p>
+<p>This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to select and explain them explicitly.</p>
 
-<p>In a future related blog post we will look at BGP routing in more detail.</p>
+<h1 id="routing-protocols">Routing Protocols</h1>
 
-<p class="notice--info">Please keep in mind that we will be using AWS VPCs and TGWs to illustrate routing principles. The resulting AWS networking designs are therefore used for illustration purposes and are not suited or recommended for production deployments.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Routing_protocol" target="_blank" rel="noopener noreferrer">Routing Protocol</a> specifies how routers communicate with each other to exchange information about the network and as a result populate and update the local route tables. While there are many different routing protocols, they all fall into the categories of either Interior gateway protocols or Exterior gateway protocols. <a href="https://en.wikipedia.org/wiki/Interior_gateway_protocol" target="_blank" rel="noopener noreferrer">Interior gateway protocols (IGPs)</a>, such as e.g. <a href="https://en.wikipedia.org/wiki/Open_Shortest_Path_First" target="_blank" rel="noopener noreferrer">OSPF</a>, <a href="https://en.wikipedia.org/wiki/Routing_Information_Protocol" target="_blank" rel="noopener noreferrer">RIP</a>, or <a href="https://en.wikipedia.org/wiki/IS-IS" target="_blank" rel="noopener noreferrer">IS-IS</a>, exchange routing information within a single routing domain, thereby under the control of a single administration. <a href="https://en.wikipedia.org/wiki/Exterior_gateway_protocol" target="_blank" rel="noopener noreferrer">Exterior gateway protocols (EGP)</a>, such as e.g. <a href="https://en.wikipedia.org/wiki/Border_Gateway_Protocol" target="_blank" rel="noopener noreferrer">BGP</a> exchange routing information between autonomous systems.</p>
 
-<h1 id="routing">Routing</h1>
+<h1 id="bgp">BGP</h1>
 
-<p><a href="https://en.wikipedia.org/wiki/Routing" target="_blank" rel="noopener noreferrer">Routing</a> and more specifically here, <a href="https://en.wikipedia.org/wiki/IP_routing" target="_blank" rel="noopener noreferrer">IP routing</a>, deals with selecting a path for traffic in an IP network. Routing directs a “hop” within a network on how to  forward IP packets based on a <a href="https://en.wikipedia.org/wiki/Routing_table" target="_blank" rel="noopener noreferrer">routing tables</a> and the destination IP address within the packet.</p>
+<p>Border Gateway Protocol (BGP) is an <a href="https://en.wikipedia.org/wiki/Exterior_gateway_protocol" target="_blank" rel="noopener noreferrer">Exterior gateway protocols (EGP)</a> designed to exchange routing and reachability information across Autonomous Systems (AS) on an Internet scale. It can be used for routing within an autonomous system, which is called Interior Border Gateway Protocol /  Internal BGP (iBGP). Or it can be used - as on the Internet - to route between AS, which is called Exterior Border Gateway Protocol / External BGP (eBGP). Here we will focus on the eBGP use case.</p>
 
-<p>As we will see later, routing tables maintain information on how to reach various network destinations. Typically they are either configured manually (also known as “Static Routing”) or with the help of a routing protocol (e.g. BGP).</p>
+<h1 id="bgp-best-path-selection-algorithm">BGP Best Path Selection Algorithm</h1>
 
-<h2 id="hop-by-hop-routing">Hop-by-Hop Routing</h2>
+<p>Within BGP the <a href="https://www.noction.com/blog/bgp-best-path-selection-algorithm" target="_blank" rel="noopener noreferrer">Best Path Selection Algorithm</a> is used to select the best route, which is then installed into the local route table. As the Internet route table - used in the <a href="https://en.wikipedia.org/wiki/Default-free_zone" target="_blank" rel="noopener noreferrer">Default Free Zone</a> - holds approximately 850,000 IPv4 and 95,000 IPv6 routes as of today and because some of these routes might be received from multiple peer - e.g. Transit Provider and direct peering, this selection is no easy task.
+Unless the default settings within a BGP enabled router are changed, the Best Path Selection Algorithm selects the shortest path as the best path, where shortest path means the least amount of AS in the path.</p>
 
-<p>One of the most fundamental concepts to understand in IP routing is that the actual forwarding decision is made on a hop-by-hop basis. This means that within each hop of the network path, a router makes a forwarding decision based on the local route table. Image this to be like a board game, where at each step in the game it is decided where to go next. Neither the previous nor the next step have any influence on the local decision.</p>
-
-<p>Taking AWS VPCs and <a href="https://aws.amazon.com/transit-gateway/?aws-transit-gateway-wn.sort-by=item.additionalFields.postDateTime&amp;aws-transit-gateway-wn.sort-order=desc" target="_blank" rel="noopener noreferrer">Transit Gateways (TGWs)</a> as an example, we can quickly understand how this hop-by-hop decision making plays out, while looking at the routing tables of the VPCs and TGWs (See Figure 1).</p>
-
-<figure class="">
-
-
-
-
-
-
-
-
-<a href="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" title="Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) " class="image-popup">
-<picture>
-  <source width="871" type="image/webp" data-srcset="
-
-    
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-320.webp 320w, 
-
-    
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-384.webp 384w, 
-
-    
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-512.webp 512w, 
-
-    
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-683.webp 683w, 
-
-    
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-800.webp 800w, 
-
- /content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.webp 871w" sizes="871px"></source>
-  <source width="871" data-srcset="
-
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-320.png 320w, 
-
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-384.png 384w, 
-
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-512.png 512w, 
-
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-683.png 683w, 
-
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-800.png 800w, 
-
- /content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png 871w" sizes="871px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW)
-</figcaption>
-
-</figure>
-
-<p>Traffic from an EC2 instance in VPC 1 wanting to reach another EC2 instance in VPC 2 will have to follow this hop-by-hop process through the five routing tables involved here. What do you think? Will traffic from VPC 1 reach VPC 2? Or is there a mistake in the route tables?</p>
-
-<p>Let’s look at each hop, step-by-step:</p>
+<p>In the following we want to look in more detail at the three most important selection criteria within the BGP Best Path Selection Algorithm:</p>
 <ul>
   <li>
-<strong>VPC 1:</strong> Traffic for destinations within VPC 2’s CIDR of 10.2.0.0/16 are send to the TGW 1 over the VPC attachment.</li>
+<strong>Local Preference</strong> or often “Local_Pref” for short is the second criteria that is considered. The default Local_Pref is 100 and routes with a higher local preference are preferred.</li>
   <li>
-<strong>TGW 1:</strong> Inspecting the route table of TGW 1, we can see that traffic for 10.2.0.0/16 is send via a TGW peering to TGW 2.</li>
+<strong>AS_PATH</strong> is the fourth criteria considered. Routes with the shortest AS_PATH attribute are preferred.</li>
   <li>
-<strong>TGW 2:</strong> Looking at the route table of TGW 2, we can also find an entry for the destination of 10.2.0.0/16. It specifies that traffic should be send via another TGW peering to TGW 3.</li>
-  <li>
-<strong>TGW 3:</strong> At this point our traffic has already made it into the correct AWS regions. Let’s see what happens next: The route table of TGW 3 indicates that traffic for 10.2.0.0/16 will be forwarded to VPC 2.</li>
-  <li>
-<strong>VPC 2:</strong> Last but not least, the route table of VPC 2 shows that traffic for the locally used CIDR 10.2.0.0/16 remains within the VPC and is delivered to the corresponding EC2 instance.</li>
+<strong>Multi-exit discriminator (MED)</strong> is the sixth selection criteria considered. Here routes with a lower MED value are preferred with 0 being the default value.</li>
 </ul>
 
-<p>But what about the return traffic from VPC 2 to VPC 1? Read on to see how another important principle of IP routing plays a role here.</p>
+<p>With regards to what we learned in the <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">previous post</a> about route tables, it is important to understand that only the best path is installed in the route table. Only if the BGP best path selection algorithm results in a “tie”, more than one route can be installed into the route table. Therefore if we want to use <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" target="_blank" rel="noopener noreferrer">Equal-cost multi-path routing (ECMP)</a> with prefixes learned over BGP, we have to enforce such a “tie”.</p>
 
-<h2 id="directional">Directional</h2>
+<h2 id="local_pref">Local_Pref</h2>
 
-<p>Another important principle of IP routing, effectively caused by the hop-by-hop decision making behavior is that path determination is directional. Looking back at the provided example in the previous section (See Figure 1), we only validated that traffic from VPC 1 can reach VPC 2. But we did not validate any information on whether traffic from VPC 2 can reach VPC 1.</p>
+<p>As previously seen, Local_Pref is one of the first Best Path Selection Algorithm criteria that a router looks at. It is evaluated before the AS path length. While the default value of Local_Pref is 100, routes that have a higher Local_Pref value are preferred. An important characteristic to consider is that Local_Pref is local in the sense that the attribute is only propagated over iBGP sessions (within your AS) and not over eBGP sessions (to external ASes). Therefore you might see BGP route tables with empty entries for Local_Pref for a given route, sometimes along with other routes that do have an explicit entry. In this case the empty entries just mean that the deafult value of 100 applies.</p>
 
-<p>I leave it up to you as an exercise to determine if the route tables across the VPCs and TGWs are setup correctly to allow return traffic and thereby enable bidirectional communication. Comment below in case you find a mistake.</p>
-
-<p>When designing route tables or troubleshooting network connectivity it’s always important that you look at traffic flows in both directions and plan or check route table independently for both directions.
-Also when talking with co-workers, customer, support staff, or anyone alike it is also important that you indicate the direction of the traffic flow that you are referring to.</p>
-
-<h3 id="asymmetric-routing">Asymmetric Routing</h3>
-
-<p>What’s even more interesting is that the directional nature of IP forwarding can lead to asymmetric traffic flows. But there is nothing wrong about asymmetric traffic flows and the majority of the Internet relies on it while exchanging traffic between <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">ASNs</a> via Peering or Transit. Think of asymmetric IP traffic flow as a hiking trail loop (See Figure 2). Such hiking trails are often more fascinating than an out-and-return path as you get to see a different set of landscape, plants and animals on the way back as compared to the way out.</p>
+<p>In practice Local_Pref can be used to specify how traffic should leave our AS, therefore it can guide the exit path (See Figure 1).</p>
 
 <figure class="">
 
@@ -504,48 +427,78 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
 
 
 
-<a href="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" title="Figure 2: Asymmetric routing is like a hiking-trail loop. " class="image-popup">
+<a href="/content/uploads/2020/09/Understanding-BGP-Local_Pref.png" title="Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred. " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="
+  <source width="521" type="image/webp" data-srcset="
 
     
-    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-320.webp 320w, 
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-320.webp 320w, 
 
     
-    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-384.webp 384w, 
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-384.webp 384w, 
 
     
-    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-512.webp 512w, 
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-512.webp 512w, 
 
-    
-    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-683.webp 683w, 
+ /content/uploads/2020/09/Understanding-BGP-Local_Pref.webp 521w" sizes="521px"></source>
+  <source width="521" data-srcset="
 
- /content/uploads/2020/09/understanding-routing-and-bgp-trail-map.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-320.png 320w, 
 
-    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-320.jpg 320w, 
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-384.png 384w, 
 
-    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-384.jpg 384w, 
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-512.png 512w, 
 
-    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-512.jpg 512w, 
-
-    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-683.jpg 683w, 
-
- /content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg 800w" sizes="800px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Asymmetric routing is like a hiking-trail loop. ">
+ /content/uploads/2020/09/Understanding-BGP-Local_Pref.png 521w" sizes="521px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-Local_Pref.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred. ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 2: Asymmetric routing is like a hiking-trail loop.
+  <figcaption>Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred.
 </figcaption>
 
 </figure>
 
-<p>And as long as you make the correct decision at your “routing hops” - aka. a trail fork - you will return to your trail head as well.</p>
+<p>This is typically used for traffic engineering purposes, where an ASN wants to prefer a certain kind of peer over another. Usually this is done for financial reasons, as traffic exchanged over e.g. a Transit peering might incur cost, while traffic exchanged over a direct peering might be settlement free.</p>
 
-<p>Let’s extend the above example using AWS VPCs and TGWs to showcase asymmetric routing. For this we add another TGW and two more TGW peering connections along with changes to the route table (See Figure 3).</p>
+<p>As a result a typical mapping of BGP session types to Local_Pref values could look like this:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>BGP Session</th>
+      <th>Local_Pref</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Private Peering</strong></td>
+      <td>500</td>
+    </tr>
+    <tr>
+      <td><strong>Direct Peering via IXP</strong></td>
+      <td>400</td>
+    </tr>
+    <tr>
+      <td><strong>Peering via IXP Route Server</strong></td>
+      <td>300</td>
+    </tr>
+    <tr>
+      <td><strong>Transit</strong></td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here we generally prefer settlement-free peering with higher Local_Pref over paid transit with lower Local_Pref.</p>
+
+<h2 id="as_path-length">AS_PATH length</h2>
+
+<p>A common mechanism to manage traffic across AS with BGP is to make a BGP AS_PATH longer via <a href="https://www.noction.com/blog/as-path-and-as-path-prepending" target="_blank" rel="noopener noreferrer">AS path prepending</a>. Prepending means adding one or more AS numbers to the left side of the AS path. Normally this is done using one’s own AS number, while announcing routes to another AS.</p>
+
+<p>With that we can influence how traffic will reach our ASN. Similar to what I described before we might not only have a commercial interest in reducing the cost that we pay for Transit for traffic leaving our ASN, but also for traffic entering our ASN. We have seen that we can perform traffic engineering for egress traffic via Local_Pref, using AS path prepending can be used for traffic engineering on ingress traffic (See Figure 2).</p>
 
 <figure class="">
 
@@ -556,117 +509,114 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
 
 
 
-<a href="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" title="Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) " class="image-popup">
+<a href="/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png" title="Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN. " class="image-popup">
 <picture>
-  <source width="871" type="image/webp" data-srcset="
+  <source width="521" type="image/webp" data-srcset="
 
     
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-320.webp 320w, 
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-320.webp 320w, 
 
     
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-384.webp 384w, 
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-384.webp 384w, 
 
     
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-512.webp 512w, 
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-512.webp 512w, 
 
-    
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-683.webp 683w, 
+ /content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.webp 521w" sizes="521px"></source>
+  <source width="521" data-srcset="
 
-    
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-800.webp 800w, 
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-320.png 320w, 
 
- /content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.webp 871w" sizes="871px"></source>
-  <source width="871" data-srcset="
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-384.png 384w, 
 
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-320.png 320w, 
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-512.png 512w, 
 
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-384.png 384w, 
-
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-512.png 512w, 
-
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-683.png 683w, 
-
-    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-800.png 800w, 
-
- /content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png 871w" sizes="871px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) ">
+ /content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png 521w" sizes="521px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN. ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW)
+  <figcaption>Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN.
 </figcaption>
 
 </figure>
 
-<p>Now, if you follow the path of traffic from VPC 1 to VPC 2, you’ll notice that nothing has changed. Traffic still traverses TGW 1, TGW 2, and TGW 3 on the way to VPC 2. But at the same time look at traffic from VPC 2 to VPC 1. What do you notice?
-Looking at the route tables of the TGWs you should notice that traffic  on the return path from VPC 2 to VPC 1 will traverse TGW 3, TGW 4, and TGW 1, thereby creating and asymmetric path.</p>
+<p>With this we could use AS path prepending for IP prefixes originated or announced by our ASN over various types of BGP session types like this to optimize for cost:</p>
 
-<p>This asymmetric traffic flow is depicted with the green arrows.</p>
+<table>
+  <thead>
+    <tr>
+      <th>BGP Session</th>
+      <th>AS path prepending</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Private Peering</strong></td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td><strong>Direct Peering via IXP</strong></td>
+      <td>1x</td>
+    </tr>
+    <tr>
+      <td><strong>Peering via IXP Route Server</strong></td>
+      <td>2x</td>
+    </tr>
+    <tr>
+      <td><strong>Transit</strong></td>
+      <td>3x</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="route-tables">Route Tables</h2>
+<p>In this case we tell other ASNs to prefer path via our settlement-free peering through lower AS_PATH length over paid transit through longer AS_PATH length.</p>
 
-<p>Next we will look at route tables in a bit more detail. Being able to read and understand route tables, will help you understand the routing decision of the hops within each path.</p>
+<h2 id="multi-exit-discriminator-med">Multi-Exit Discriminator (MED)</h2>
 
-<p>The most simple route tables have already been depicted in Figure 1 and Figure 3. These routes show a simple mapping between the destination CIDR - also called prefix or network - and the next hop.</p>
+<p>Multi-Exit Discriminator (MED) is used for the case that more than one link between two ASN exists. I can be used to influence which of these links is then used (See Figure 3). It is important to point out that the MED value is not transitive. Therefore it is not passed on by the receiving AS and therefore can solely be used to influence traffic between directly neighboring AS.</p>
 
-<p>Translated into a route table on a Cisco device this might look like this:</p>
+<figure class="">
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
-BGP table version is 297, local router ID is 1.1.1.1
-Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
-              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
-              x best-external, a additional-path, c RIB-compressed,
-              t secondary path, L long-lived-stale,
-Origin codes: i - IGP, e - EGP, ? - incomplete
-RPKI validation codes: V valid, I invalid, N Not found
 
-     Network          Next Hop            Metric LocPrf Weight Path
-      0.0.0.0          0.0.0.0                                0 i
- *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
- *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
- *&gt;   10.1.0.0/16      169.254.15.221         100             0 64512 i
-</code></pre></div></div>
 
-<p>Focus on the last line, which effectively translates into: Packets for the prefix “10.1.0.0/16” should be send to the next hop with the IP address of “169.254.15.221”.</p>
 
-<h3 id="longest-prefix-match">Longest prefix match</h3>
 
-<p>After this let’s look at <a href="https://en.wikipedia.org/wiki/Longest_prefix_match" target="_blank" rel="noopener noreferrer">longest prefix match</a>, sometimes also referred to as “more specific routing”. This algorithm specifies which entry to be chosen from the IP routing table in case of destination addresses matching more than one entry. For IP routing the most specific of the matching table entries — the one with the longest subnet mask — is called the longest prefix match and is the one chosen.</p>
 
-<p>Consider the below routing table on a Cisco device as an example and especially focus on the last five lines:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
-BGP table version is 297, local router ID is 1.1.1.1
-Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
-              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
-              x best-external, a additional-path, c RIB-compressed,
-              t secondary path, L long-lived-stale,
-Origin codes: i - IGP, e - EGP, ? - incomplete
-RPKI validation codes: V valid, I invalid, N Not found
 
-     Network          Next Hop            Metric LocPrf Weight Path
-      0.0.0.0          0.0.0.0                                0 i
- *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
- *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
- *&gt;   10.1.0.0/16      169.254.15.221         100             0 64512 i
- *&gt;   10.1.1.0/24      169.254.16.222         100             0 64513 i
- *&gt;   10.1.2.0/24      169.254.17.223         100             0 64514 i
- *&gt;   10.1.3.0/24      169.254.18.224         100             0 64515 i
- *&gt;   10.1.4.0/24      169.254.19.225         100             0 64516 i
-</code></pre></div></div>
+<a href="/content/uploads/2020/09/Understanding-BGP-MED.png" title="Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred. " class="image-popup">
+<picture>
+  <source width="381" type="image/webp" data-srcset="
 
-<p>Here we can see that the destination IP address of “10.1.1.1” would match both the entry for “10.1.0.0/16”, as well as the entry for “10.1.1.0/24”. As the entry for “10.1.1.0/24” has a longer subnet mask - it is more specific - and therefore the chosen entry. With that this entry would be chosen and matching traffic send to 169.254.16.222 as the next hop.</p>
+    
+    /content/resized/2020/09/Understanding-BGP-MED-320.webp 320w, 
 
-<h3 id="equal-cost-multipath-ecmp">Equal Cost Multipath (ECMP)</h3>
+ /content/uploads/2020/09/Understanding-BGP-MED.webp 381w" sizes="381px"></source>
+  <source width="381" data-srcset="
 
-<p>Usually with IP forwarding there is one egress or outbound path per hop for a given destination IP. This rule can be softened via a routing strategy called <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" target="_blank" rel="noopener noreferrer">Equal-cost multi-path routing (ECMP)</a>. With ECMP, packet forwarding to a single destination IP can occur over multiple “best path”.</p>
+    /content/resized/2020/09/Understanding-BGP-MED-320.png 320w, 
 
-<p>Again, let’s have a look at an example and consider the below routing table on a Cisco router, especially the last two lines:</p>
+ /content/uploads/2020/09/Understanding-BGP-MED.png 381w" sizes="381px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-MED.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred.
+</figcaption>
+
+</figure>
+
+<p>When using AWS you will encounter MED when using a BGP-based Site-to-Site (IPSec) VPN connection while using a Virtual Private Gateway (VGW). In this case only one of the two tunnels is used by AWS to actively send traffic from the VPC to the Customer Gateway (CGW). As AWS customers very frequently leverage Firewall devices as Customer Gateway (CGW) devices and not L3 routers, asymmetric traffic might cause issues with stateful firewall rules. To prevent these issues, AWS indicates the active VPN tunnel through MED, thereby encouraging customers to use that same tunnel for return traffic.</p>
+
+<p>You can see below that the IPSec tunnel with the next hop address <em>169.254.63.25</em> has a lower MED - displayed as Metric. Therefore this is the active tunnel within the connection.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V#sh ip bgp
-BGP table version is 297, local router ID is 1.1.1.1
+BGP table version is 292, local router ID is 1.1.1.1
 Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
               r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
               x best-external, a additional-path, c RIB-compressed,
@@ -678,15 +628,18 @@ RPKI validation codes: V valid, I invalid, N Not found
       0.0.0.0          0.0.0.0                                0 i
  *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
  *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
- *m   10.0.255.0/24    169.254.13.253         100             0 64512 i
- *&gt;                    169.254.15.221         100             0 64512 i
+ *&gt;   172.16.0.0/24    169.254.63.25          100             0 64512 i
+ *                     169.254.39.225         200             0 64512 i
 </code></pre></div></div>
 
-<p>In this case we can see that we have a multipath route for the destination prefix of “10.0.255.0/24”, where both “169.254.13.253” and “169.254.15.221” are considered as the next best hop. In this case the router device will randomly send out traffic for this destination network over either next hop, while using a 5-tuple hash. A 5-tuple hash refers to a set of five different values that comprise a Transmission Control Protocol/Internet Protocol (TCP/IP) connection. It includes a source IP address/port number, destination IP address/port number and the protocol in use. Here with ECMP and 5-tuple hashing, packets belonging to the same 5-tuple travel to the same next hop, while packets from different 5-tuple may be send to another next hop.</p>
+<h2 id="traffic-engineering-example">Traffic engineering example</h2>
+
+<p>In this case, while not using stateful rules on your CGW, you might be tempted to override the MED value with a Local_Pref to force return traffic through the standby tunnel and thereby increasing the overall throughput. While doing this you might hope that now one tunnel - serving traffic from AWS VPC to on-premises - will provide you a throughput of ~ 1.25 Gbps, while the other tunnel - serving traffic from on-premises to the AWS VPC - will provide you an additional throughput of ~1.25 Gbps.
+This train of thought shows that you understood the fundamental principles of BGP and how to use them to influence traffic. Congratulation! Unfortunately the AWS Site-to-Site (IPSec) VPN specific throughput limitation of ~ 1.25 Gbps is per connection and not per tunnel as the VGW is the forcing element. Therefore this approach will not yield the desired results.</p>
 
 <h1 id="summary">Summary</h1>
 
-<p>In today’s post we took a look at some of the fundamental principles of IP routing. A future post will look in more detail at  BGP Routing protocol concepts. Neither of these blog posts is intended to be an all encompassing primer on IP routing or BGP. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Hopefully after reading through this post you feel a bit more confident to design, troubleshoot or just talk about IP networks.</p>
+<p>Today’s blog post builds on what you’ve learned in the previous blog post on <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">Better understanding IP Routing</a>. It provides an introduction into the BGP Best Path Selection Algorithm and how to use some of the valued to influence traffic flowing into (ingress) and out of (egress) your ASN.</p>
 
         
       </section>
@@ -720,7 +673,7 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-09-18T00:00:00-07:00">September 18, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-09-28T00:00:00-07:00">September 28, 2020</time></p>
         
       </footer>
 
@@ -729,20 +682,20 @@ RPKI validation codes: V valid, I invalid, N Not found
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Better+understanding+IP+Routing%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F18%2Funderstanding-routing%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Better+understanding+BGP%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F18%2Funderstanding-routing%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F18%2Funderstanding-routing%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
   
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F18%2Funderstanding-routing%2F&amp;title=Better+understanding+IP+Routing" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F&amp;title=Better+understanding+BGP" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" class="pagination--pager" title="AWS Site-to-Site VPN (IPSec) with IPv6
+      <a href="/2020/09/18/understanding-routing/" class="pagination--pager" title="Better understanding IP Routing
 ">Previous</a>
     
     
@@ -760,6 +713,26 @@ RPKI validation codes: V valid, I invalid, N Not found
     <div class="page__related">
       <h4 class="page__related-title">You may also enjoy</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/09/18/understanding-routing/" rel="permalink">Better understanding IP Routing
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Look at fundamental principles of IP routing to better design and troubleshoot networks
+</p>
+  </article>
+</div>
+
         
           
 
@@ -816,26 +789,6 @@ RPKI validation codes: V valid, I invalid, N Not found
     </h2>
     
     <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/2019/12/27/aws-dx-connect-on-premises/" rel="permalink">Enabling connectivity between on-premises locations connected to AWS through Direct Connect
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway
 </p>
   </article>
 </div>
