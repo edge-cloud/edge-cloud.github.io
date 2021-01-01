@@ -16,46 +16,36 @@
   <meta name="author" content="Christian Elsen">
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Edge Cloud">
 <meta property="og:title" content="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup">
 <meta property="og:url" content="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/">
 
-
-  <meta property="og:description" content="Step-by-step guid to setup Freeradius 3.0 with Let’s Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.">
-
+<meta property="og:description" content="Step-by-step guid to setup Freeradius 3.0 with Let’s Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup">
-  <meta name="twitter:description" content="Step-by-step guid to setup Freeradius 3.0 with Let’s Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/">
 
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup">
+<meta name="twitter:description" content="Step-by-step guid to setup Freeradius 3.0 with Let’s Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/">
+<meta name="twitter:card" content="summary">
 
-  
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2020-12-31T22:13:14-08:00">
 
 
 
 
 
-
-
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/">
@@ -156,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -176,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -346,7 +336,7 @@
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup">
     <meta itemprop="description" content="Step-by-step guid to setup Freeradius 3.0 with Let’s Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.">
-    
+    <meta itemprop="datePublished" content="December 31, 2020">
     
 
     <div class="page__inner-wrap">
@@ -387,7 +377,7 @@
 <h2 id="kerberos">Kerberos</h2>
 
 <p><strong>/etc/krb5.conf</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
 # /etc/krb5.conf
 #
 
@@ -400,7 +390,7 @@
 <h2 id="samba">Samba</h2>
 
 <p><strong>/etc/samba/smb.conf</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
 # /etc/samba/smb.conf
 #
 
@@ -423,7 +413,7 @@ security = ADS
 </code></pre></div></div>
 
 <p><strong>/etc/hosts</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1    radius1.domain.local radius1 localhost.localdomain localhost
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1    radius1.domain.local radius1 localhost.localdomain localhost
 </code></pre></div></div>
 
 <h1 id="join-the-domain">Join the domain</h1>
@@ -465,6 +455,8 @@ security = ADS
 
 
 
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-12-31T22:13:14-08:00">December 31, 2020</time></p>
         
       </footer>
 

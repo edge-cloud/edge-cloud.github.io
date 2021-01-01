@@ -22,42 +22,30 @@
 <meta property="og:title" content="AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup">
 <meta property="og:url" content="https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/">
 
-
-  <meta property="og:description" content="This article shows you how to setup a primary active Direct Connect connection between an AWS Transit Gateway and on-premises networks via Direct Connect Gateway, while leveraging a Site-to-Site (IPSec) VPN as backup.">
-
+<meta property="og:description" content="This article shows you how to setup a primary active Direct Connect connection between an AWS Transit Gateway and on-premises networks via Direct Connect Gateway, while leveraging a Site-to-Site (IPSec) VPN as backup.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup">
-  <meta name="twitter:description" content="This article shows you how to setup a primary active Direct Connect connection between an AWS Transit Gateway and on-premises networks via Direct Connect Gateway, while leveraging a Site-to-Site (IPSec) VPN as backup.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2019-08-16T00:00:00-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup">
+<meta name="twitter:description" content="This article shows you how to setup a primary active Direct Connect connection between an AWS Transit Gateway and on-premises networks via Direct Connect Gateway, while leveraging a Site-to-Site (IPSec) VPN as backup.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2019-08-16T00:00:00-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -622,7 +610,7 @@ In this example we assume that VPCs 1 - 4 are using the CIDRs 10.1.1.0/24, 10.1.
 
 <p>The below example shows how to implement this under Cisco IOS with route-maps.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65100
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65100
  bgp log-neighbor-changes
  neighbor 169.254.254.1 remote-as 64512
  neighbor 169.254.254.1 description Direct Connect
@@ -657,7 +645,7 @@ route-map SUM_FILTER permit 10
 <p>At this point we are done and have succeeded: The customer gateway will see the same summary route announced with the same AS path length over Direct Connect and VPN link, except that the route over VPN will have an MED of 100. Therefore the DX route - having an MED of 0 - will be chosen instead.</p>
 
 <p>With this we can look at the routes that are received from the BGP peer over DX (here: 169.254.254.1) and the BGP peer over VPN (here: 169.254.15.221)</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#sh ip bgp neighbors 169.254.254.1 received-routes | beg Network
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#sh ip bgp neighbors 169.254.254.1 received-routes | beg Network
       Network          Next Hop            Metric LocPrf Weight Path
   *    10.1.0.0/16     169.254.254.1                          0 65001 i
 
@@ -673,7 +661,7 @@ route-map SUM_FILTER permit 10
 
 <p>With this the route installed into the RIB by BGP will solely be the one traversing DX.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#sh ip bgp | beg Network
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#sh ip bgp | beg Network
       Network          Next Hop            Metric LocPrf Weight Path
   *    10.1.0.0/16     169.254.15.221         100             0 64512 i
   *&gt;                   169.254.254.1            0             0 65001 i

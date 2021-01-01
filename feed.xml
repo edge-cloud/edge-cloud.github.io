@@ -1,219 +1,2413 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title type="text">Edge Cloud</title>
-  <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2020-09-27T11:20:33-07:00</updated>
-  <id>https://www.edge-cloud.net/feed.xml</id>
-  <author>
-    <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
-  </author>
-  <link rel="self" type="application/atom+xml" href="https://www.edge-cloud.net/feed.xml" />
-  <link rel="alternate" type="text/html" href="https://www.edge-cloud.net" />
-  <logo>https://www.edge-cloud.net/assets/images/square-image.jpg</logo>
-  <icon>https://www.edge-cloud.net/assets/images/square-image.jpg</icon>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" /><updated>2020-12-31T22:16:38-08:00</updated><id>https://www.edge-cloud.net/feed.xml</id><title type="html">Edge Cloud</title><subtitle>On the edge of cloud computing</subtitle><author><name>Christian Elsen</name></author><entry><title type="html">Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title><link href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" rel="alternate" type="text/html" title="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup" /><published>2020-12-31T22:13:14-08:00</published><updated>2020-12-31T22:13:14-08:00</updated><id>https://www.edge-cloud.net/2019/04/30/Freeradius-with-LetsEncrypt-for-WPA-Enterprise</id><content type="html" xml:base="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
 
-  
-    <entry>
-      <title>Better understanding BGP</title>
-      <id>https://www.edge-cloud.net/2020/09/28/understanding-bgp/</id>
-      <updated>2020-09-28T00:00:00-07:00</updated>
-      <published>2020-09-28T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/" />
-      <summary type="html">Primer to better understanding BGP</summary>
-      <content type="html">In a previous post we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking, along with examples from running an Autonomous System on the Internet. This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="BGP" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Better understanding IP Routing</title>
-      <id>https://www.edge-cloud.net/2020/09/18/understanding-routing/</id>
-      <updated>2020-09-18T00:00:00-07:00</updated>
-      <published>2020-09-18T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2020/09/18/understanding-routing/" />
-      <summary type="html">Look at fundamental principles of IP routing to better design and troubleshoot networks</summary>
-      <content type="html">Today we will look at some of the fundamental principles of IP routing. While these principles and concepts are generic, we will use examples based on AWS networking. This blog post is not intended to be an all encompassing primer on IP routing. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to highlight and explain...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="BGP" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>AWS Site-to-Site VPN (IPSec) with IPv6</title>
-      <id>https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/</id>
-      <updated>2020-09-11T00:00:00-07:00</updated>
-      <published>2020-09-11T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/" />
-      <summary type="html">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6</summary>
-      <content type="html">Recently AWS released support for IPv6 traffic over the AWS Site-to-Site VPN (IPSec). The setup of the AWS Site-to-Site VPN has always been quite straight forward and thanks to the downloadable configuration files at times even trivial. With the introduction of IPv6 support this is unfortunately no longer the case. Therefore this blog post will guide you around some of the pitfalls of setting up an AWS Site-to-Site VPN with IPv6 support, hoping that they...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="IPv6" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Multicast with AWS Transit Gateway</title>
-      <id>https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/</id>
-      <updated>2020-05-01T00:00:00-07:00</updated>
-      <published>2020-05-01T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/" />
-      <summary type="html">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)</summary>
-      <content type="html">At the beginning of December 2019, AWS released Multicast support within the AWS Transit Gateway. This marked the beginning of being able to use applications that require support for IP Multicast within AWS. The following article will give you a brief overview of how to use IP Multicast with the AWS Transit Gateway and especially how to validate that your setup is working correctly. Multicast Let’s have a look at the basics of IP Multicasting...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Drawing monitor for network diagrams</title>
-      <id>https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/</id>
-      <updated>2020-04-19T00:00:00-07:00</updated>
-      <published>2020-04-19T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/" />
-      <summary type="html">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams</summary>
-      <content type="html">As a Senior Solutions Architect Specialist for Networking at AWS, I spent a lot of time in online meetings with customers, helping them design networks or understand AWS networking better. Part of these meetings usually involves whiteboarding network diagrams. While visualizing ideas or concepts is something very common and straight forward on a physical whiteboard, it is not trivial in an online meeting. As I often get asked about my setup during or after calls,...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Enabling connectivity between on-premises locations connected to AWS through Direct Connect</title>
-      <id>https://www.edge-cloud.net/2019/12/27/aws-dx-connect-on-premises/</id>
-      <updated>2019-12-27T00:00:00-08:00</updated>
-      <published>2019-12-27T00:00:00-08:00</published>
-      <link href="https://www.edge-cloud.net/2019/12/27/aws-dx-connect-on-premises/" />
-      <summary type="html">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway</summary>
-      <content type="html">This post covers the caveats of data flow between on-premises locations that are each connected to AWS via AWS Direct Connect. In case you have multiple on-premise locations connected to AWS via Direct Connect, enabling the data flow between these locations is not always trivial. Therefore this blog post highlights some of the pitfalls and outlines possible solutions. Introduction This blog post assumes the fundamental design as depicted in Figure 1. One or more on-premises...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Block access from certain countries with Route 53 Geolocation</title>
-      <id>https://www.edge-cloud.net/2019/12/09/block-countries-with-route53/</id>
-      <updated>2019-12-09T00:00:00-08:00</updated>
-      <published>2019-12-09T00:00:00-08:00</published>
-      <link href="https://www.edge-cloud.net/2019/12/09/block-countries-with-route53/" />
-      <summary type="html">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.</summary>
-      <content type="html">This article walks you through using Amazon Route 53 Geolocation Routing, in order to block access to your services from certain countries. In addition RIPE Atlas is used in a subsequent step to validate the setup. Motivation There are multiple reasons why you might want to block access to your website or API from certain countries. If you are a US based company, you are required to comply with US regulations regarding sanctions against countries...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF</title>
-      <id>https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/</id>
-      <updated>2019-09-10T00:00:00-07:00</updated>
-      <published>2019-09-10T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/" />
-      <summary type="html">Troubleshooting a BGP neighbor issue of &quot;active open failed - tcb is not available&quot; on a Megaport Hosted VIF due to unset BGP MD5 Auth key</summary>
-      <content type="html">Here is a quick look at an issue with a BGP session between a customer router (customer-premises equipment; CPE) and an AWS Direct Connect peer. Problem While it was possible to ping the AWS Direct Connect peer interface from the customer peer interface the BGP remained in the Idle state. Local and remote ASNs matched up and IP addresses also matched up. Turning on “debug ip bgp” gave the following insight, which solely showed that...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>AWS Direct Connect Gateway Deep Dive</title>
-      <id>https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/</id>
-      <updated>2019-09-06T00:00:00-07:00</updated>
-      <published>2019-09-06T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/" />
-      <summary type="html">A deep dive look into the AWS Direct Connect Gateway</summary>
-      <content type="html">In November 2017 AWS released AWS Direct Connect Gateway, which is probably one of the biggest innovations within the AWS Direct Connect product in recent years. At the same time Direct Connect Gateway is often overlooked or not well understood. Therefore this blog post will dive deeper at the ins and outs of this extremely helpful AWS network capability. Use Cases AWS Direct Connect Gateway allows you establish connectivity that spans Virtual Private Clouds (VPCs)...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup</title>
-      <id>https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/</id>
-      <updated>2019-08-16T00:00:00-07:00</updated>
-      <published>2019-08-16T00:00:00-07:00</published>
-      <link href="https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/" />
-      <summary type="html">This article shows you how to setup a primary active Direct Connect connection between an AWS Transit Gateway and on-premises networks via Direct Connect Gateway, while leveraging a Site-to-Site (IPSec) VPN as backup.</summary>
-      <content type="html">A very common network architecture pattern on AWS is to deploy an AWS Site-to-Site (IPSec) VPN connection as the backup for an AWS Direct Connect (DX) connection between on-premises networks and AWS VPCs. With the introduction of AWS Transit Gateway and AWS Direct Connect Gateway, this architecture pattern is no longer a trivial task. This blog post highlights the associated challenges and offers a solution using BGP route summarization and BGP prefix filtering to manage...</content>
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="AWS" />
-      
-      <image>https://www.edge-cloud.net/assets/images/square-image.jpg</image>
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-</feed>
+&lt;h1 id=&quot;setup&quot;&gt;Setup&lt;/h1&gt;
+
+&lt;h2 id=&quot;kerberos&quot;&gt;Kerberos&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;/etc/krb5.conf&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#
+# /etc/krb5.conf
+#
+
+[libdefaults]
+ default_realm = DOMAIN.LOCAL
+
+# EoF
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;samba&quot;&gt;Samba&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;/etc/samba/smb.conf&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#
+# /etc/samba/smb.conf
+#
+
+# start of global variables
+[global]
+
+# server information, this is the domain/workgroup
+workgroup = DOMAIN
+
+# Kerberos / authentication information
+realm = DOMAIN.LOCAL
+
+# system hostname
+netbios name = RADIUS1
+
+# security used (Active Directory)
+security = ADS
+
+# EoF
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;/etc/hosts&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;127.0.0.1    radius1.domain.local radius1 localhost.localdomain localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;join-the-domain&quot;&gt;Join the domain&lt;/h1&gt;
+
+&lt;h1 id=&quot;lets-encrypt&quot;&gt;Let’s Encrypt&lt;/h1&gt;
+
+&lt;h1 id=&quot;freeradius&quot;&gt;Freeradius&lt;/h1&gt;
+
+&lt;h1 id=&quot;testing&quot;&gt;Testing&lt;/h1&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Step-by-step guid to setup Freeradius 3.0 with Let's Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.</summary></entry><entry><title type="html">AWS Direct Connect deep dive</title><link href="https://www.edge-cloud.net/2019/12/13/dx-deep-dive/" rel="alternate" type="text/html" title="AWS Direct Connect deep dive" /><published>2020-12-31T22:13:14-08:00</published><updated>2020-12-31T22:13:14-08:00</updated><id>https://www.edge-cloud.net/2019/12/13/dx-deep-dive</id><content type="html" xml:base="https://www.edge-cloud.net/2019/12/13/dx-deep-dive/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+
+&lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;heading-11&quot;&gt;Heading 1.1&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; This is a notice box&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#
+# Code
+#
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Dedicated Connections&lt;/th&gt;
+      &lt;th&gt;Hosted Connections&lt;/th&gt;
+      &lt;th&gt;Hosted Virtual Interfaces&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;AWS asigned capacity&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;1 Gbps or 10 Gbps&lt;/td&gt;
+      &lt;td&gt;50 Mbps to 10 Gbps&lt;/td&gt;
+      &lt;td&gt;None&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Private or Public Virtual Interfaces (VIFs)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;50&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Transit Virtual Interface (VIF)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1 (if assigned capacity &amp;gt;= 1 Gbps)&lt;/td&gt;
+      &lt;td&gt;None&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2019/12/DX-VIFs-Overview.png&quot; title=&quot;Figure 1: Direct Connect Overview &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-320.webp 320w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-384.webp 384w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-512.webp 512w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-683.webp 683w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-800.webp 800w, 
+
+    
+    /content/resized/2019/12/DX-VIFs-Overview-960.webp 960w, 
+
+&quot; sizes=&quot;4925px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2019/12/DX-VIFs-Overview-320.png 320w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-384.png 384w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-512.png 512w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-683.png 683w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-800.png 800w, 
+
+    /content/resized/2019/12/DX-VIFs-Overview-960.png 960w, 
+
+&quot; sizes=&quot;4925px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2019/12/DX-VIFs-Overview.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: Direct Connect Overview &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: Direct Connect Overview
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2019/12/DX-Cross-Connect.png&quot; title=&quot;Figure 2: Direct Connect Cross Connect &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;922&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-320.webp 320w, 
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-384.webp 384w, 
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-512.webp 512w, 
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-683.webp 683w, 
+
+    
+    /content/resized/2019/12/DX-Cross-Connect-800.webp 800w, 
+
+ /content/uploads/2019/12/DX-Cross-Connect.webp 922w&quot; sizes=&quot;922px&quot; /&gt;
+  &lt;source width=&quot;922&quot; data-srcset=&quot;
+
+    /content/resized/2019/12/DX-Cross-Connect-320.png 320w, 
+
+    /content/resized/2019/12/DX-Cross-Connect-384.png 384w, 
+
+    /content/resized/2019/12/DX-Cross-Connect-512.png 512w, 
+
+    /content/resized/2019/12/DX-Cross-Connect-683.png 683w, 
+
+    /content/resized/2019/12/DX-Cross-Connect-800.png 800w, 
+
+ /content/uploads/2019/12/DX-Cross-Connect.png 922w&quot; sizes=&quot;922px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2019/12/DX-Cross-Connect.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: Direct Connect Cross Connect &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 2: Direct Connect Cross Connect
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2019/12/DX-Connectivity.png&quot; title=&quot;Figure 3: Direct Connect Connectivity Options &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2019/12/DX-Connectivity-320.webp 320w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-384.webp 384w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-512.webp 512w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-683.webp 683w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-800.webp 800w, 
+
+    
+    /content/resized/2019/12/DX-Connectivity-960.webp 960w, 
+
+&quot; sizes=&quot;3080px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2019/12/DX-Connectivity-320.png 320w, 
+
+    /content/resized/2019/12/DX-Connectivity-384.png 384w, 
+
+    /content/resized/2019/12/DX-Connectivity-512.png 512w, 
+
+    /content/resized/2019/12/DX-Connectivity-683.png 683w, 
+
+    /content/resized/2019/12/DX-Connectivity-800.png 800w, 
+
+    /content/resized/2019/12/DX-Connectivity-960.png 960w, 
+
+&quot; sizes=&quot;3080px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2019/12/DX-Connectivity.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Direct Connect Connectivity Options &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 3: Direct Connect Connectivity Options
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Deep dive look at AWS Direct Connect</summary></entry><entry><title type="html">Securing your AWS networks</title><link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" /><published>2020-12-31T22:13:14-08:00</published><updated>2020-12-31T22:13:14-08:00</updated><id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+
+&lt;h1 id=&quot;scope&quot;&gt;Scope&lt;/h1&gt;
+
+&lt;h2 id=&quot;aws-well-architected---security-pillar&quot;&gt;AWS Well Architected - Security Pillar&lt;/h2&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetwork.png&quot; title=&quot;Figure 1: Protecting network and host-level boundaries &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.webp 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetwork.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: Protecting network and host-level boundaries &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: Protecting network and host-level boundaries
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h1 id=&quot;toolbox-for-securing-aws-networks&quot;&gt;Toolbox for securing AWS networks&lt;/h1&gt;
+
+&lt;h2 id=&quot;amazon-vpc-security-groups&quot;&gt;Amazon VPC Security Groups&lt;/h2&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-SecurityGroups.png&quot; title=&quot;Figure 2: Security Groups &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-960.webp 960w, 
+
+&quot; sizes=&quot;3225px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-960.png 960w, 
+
+&quot; sizes=&quot;3225px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-SecurityGroups.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: Security Groups &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 2: Security Groups
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;amazon-vpc-network-acls-access-control-lists&quot;&gt;Amazon VPC Network ACLs (Access Control Lists)&lt;/h2&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-NetworkACLs.png&quot; title=&quot;Figure 3: Network Access Control Lists (ACLs) &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-960.webp 960w, 
+
+&quot; sizes=&quot;3025px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-960.png 960w, 
+
+&quot; sizes=&quot;3025px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-NetworkACLs.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Network Access Control Lists (ACLs) &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 3: Network Access Control Lists (ACLs)
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;aws-waf-web-application-firewall&quot;&gt;AWS WAF (Web Application Firewall)&lt;/h2&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-WAF.png&quot; title=&quot;Figure 4: Web Application Firewalls (WAF) &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-960.webp 960w, 
+
+&quot; sizes=&quot;3560px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-WAF-960.png 960w, 
+
+&quot; sizes=&quot;3560px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-WAF.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 4: Web Application Firewalls (WAF) &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 4: Web Application Firewalls (WAF)
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;aws-firewall-manager&quot;&gt;AWS Firewall Manager&lt;/h2&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-FirewallManager.png&quot; title=&quot;Figure 5: Firewall Manager &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-960.webp 960w, 
+
+&quot; sizes=&quot;2400px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-960.png 960w, 
+
+&quot; sizes=&quot;2400px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-FirewallManager.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 5: Firewall Manager &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 5: Firewall Manager
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;aws-shield&quot;&gt;AWS Shield&lt;/h2&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-Shield.png&quot; title=&quot;Figure 6: AWS Shield &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-960.webp 960w, 
+
+&quot; sizes=&quot;2635px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-Shield-960.png 960w, 
+
+&quot; sizes=&quot;2635px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-Shield.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 6: AWS Shield &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 6: AWS Shield
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;aws-transit-gateway-with-3rd-party-firewall-solutions&quot;&gt;AWS Transit Gateway with 3rd party firewall solutions&lt;/h2&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-TGW.png&quot; title=&quot;Figure 7: Transit Gateway &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-960.webp 960w, 
+
+&quot; sizes=&quot;3469px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-TGW-960.png 960w, 
+
+&quot; sizes=&quot;3469px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-TGW.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 7: Transit Gateway &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 7: Transit Gateway
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-PAN.png&quot; title=&quot;Figure 7: Transit Gateway with Palo Alto Networks Integration &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-960.webp 960w, 
+
+&quot; sizes=&quot;2466px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetworks-PAN-960.png 960w, 
+
+&quot; sizes=&quot;2466px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetworks-PAN.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 7: Transit Gateway with Palo Alto Networks Integration &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 7: Transit Gateway with Palo Alto Networks Integration
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;aws-ingress-routing-with-3rd-party-firewall-solutions&quot;&gt;AWS Ingress Routing with 3rd party firewall solutions&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; This is a notice box&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#
+# Code
+#
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Brief description goes here</summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2020/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2020-12-31T22:13:14-08:00</published><updated>2020-12-31T22:13:14-08:00</updated><id>https://www.edge-cloud.net/2020/01/01/template</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/01/template/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+
+&lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;heading-11&quot;&gt;Heading 1.1&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; This is a notice box&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#
+# Code
+#
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetwork.png&quot; title=&quot;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.webp 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetwork.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Brief description goes here</summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2020/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2020-12-31T22:13:14-08:00</published><updated>2020-12-31T22:13:14-08:00</updated><id>https://www.edge-cloud.net/2020/01/01/tgw-ngw-cost-breakeven</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/01/template/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+
+&lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;heading-11&quot;&gt;Heading 1.1&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; This is a notice box&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#
+# Code
+#
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetwork.png&quot; title=&quot;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.webp 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetwork.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+\[Price_{NGW}=( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\]
+
+\[Price_{TGW+NGW}=
+  ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
+  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
+  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic}))\]
+
+\[Price_{TGW+NGW} \leq Price_{NGW}\]
+
+\[( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
+  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
+  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic})) \\
+  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\]
+
+\[traffic \cdot Cost_{TGW-Traffic} +  traffic \cdot Cost_{NGW-Traffic} - traffic \cdot Cost_{NGW-Traffic} \\
+  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) - \\
+  ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) - \\
+  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} )\]
+
+\[traffic \cdot Cost_{TGW-Traffic} \\
+  \leq 720 hr / month \cdot (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) \\
+  - ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))\]
+
+\[traffic \leq \frac{720 hr / month}{Cost_{TGW-Traffic}} \cdot \\
+  (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) - \\
+  ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))\]</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Brief description goes here</summary></entry><entry><title type="html">Better understanding BGP</title><link href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/" rel="alternate" type="text/html" title="Better understanding BGP" /><published>2020-09-28T00:00:00-07:00</published><updated>2020-09-28T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2020/09/28/understanding-bgp</id><content type="html" xml:base="https://www.edge-cloud.net/2020/09/28/understanding-bgp/">&lt;p&gt;In a &lt;a href=&quot;https://www.edge-cloud.net/2020/09/18/understanding-routing/&quot;&gt;previous post&lt;/a&gt; we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking, along with examples from running an &lt;a href=&quot;https://en.wikipedia.org/wiki/Autonomous_system_(Internet)&quot;&gt;Autonomous System&lt;/a&gt; on the Internet.&lt;/p&gt;
+
+&lt;p&gt;This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to select and explain them explicitly.&lt;/p&gt;
+
+&lt;h1 id=&quot;routing-protocols&quot;&gt;Routing Protocols&lt;/h1&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://en.wikipedia.org/wiki/Routing_protocol&quot;&gt;Routing Protocol&lt;/a&gt; specifies how routers communicate with each other to exchange information about the network and as a result populate and update the local route tables. While there are many different routing protocols, they all fall into the categories of either Interior gateway protocols or Exterior gateway protocols. &lt;a href=&quot;https://en.wikipedia.org/wiki/Interior_gateway_protocol&quot;&gt;Interior gateway protocols (IGPs)&lt;/a&gt;, such as e.g. &lt;a href=&quot;https://en.wikipedia.org/wiki/Open_Shortest_Path_First&quot;&gt;OSPF&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Routing_Information_Protocol&quot;&gt;RIP&lt;/a&gt;, or &lt;a href=&quot;https://en.wikipedia.org/wiki/IS-IS&quot;&gt;IS-IS&lt;/a&gt;, exchange routing information within a single routing domain, thereby under the control of a single administration. &lt;a href=&quot;https://en.wikipedia.org/wiki/Exterior_gateway_protocol&quot;&gt;Exterior gateway protocols (EGP)&lt;/a&gt;, such as e.g. &lt;a href=&quot;https://en.wikipedia.org/wiki/Border_Gateway_Protocol&quot;&gt;BGP&lt;/a&gt; exchange routing information between autonomous systems.&lt;/p&gt;
+
+&lt;h1 id=&quot;bgp&quot;&gt;BGP&lt;/h1&gt;
+
+&lt;p&gt;Border Gateway Protocol (BGP) is an &lt;a href=&quot;https://en.wikipedia.org/wiki/Exterior_gateway_protocol&quot;&gt;Exterior gateway protocols (EGP)&lt;/a&gt; designed to exchange routing and reachability information across Autonomous Systems (AS) on an Internet scale. It can be used for routing within an autonomous system, which is called Interior Border Gateway Protocol /  Internal BGP (iBGP). Or it can be used - as on the Internet - to route between AS, which is called Exterior Border Gateway Protocol / External BGP (eBGP). Here we will focus on the eBGP use case.&lt;/p&gt;
+
+&lt;h1 id=&quot;bgp-best-path-selection-algorithm&quot;&gt;BGP Best Path Selection Algorithm&lt;/h1&gt;
+
+&lt;p&gt;Within BGP the &lt;a href=&quot;https://www.noction.com/blog/bgp-best-path-selection-algorithm&quot;&gt;Best Path Selection Algorithm&lt;/a&gt; is used to select the best route, which is then installed into the local route table. As the Internet route table - used in the &lt;a href=&quot;https://en.wikipedia.org/wiki/Default-free_zone&quot;&gt;Default Free Zone&lt;/a&gt; - holds approximately 850,000 IPv4 and 95,000 IPv6 routes as of today and because some of these routes might be received from multiple peer - e.g. Transit Provider and direct peering, this selection is no easy task.
+Unless the default settings within a BGP enabled router are changed, the Best Path Selection Algorithm selects the shortest path as the best path, where shortest path means the least amount of AS in the path.&lt;/p&gt;
+
+&lt;p&gt;In the following we want to look in more detail at the three most important selection criteria within the BGP Best Path Selection Algorithm:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Local Preference&lt;/strong&gt; or often “Local_Pref” for short is the second criteria that is considered. The default Local_Pref is 100 and routes with a higher local preference are preferred.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AS_PATH&lt;/strong&gt; is the fourth criteria considered. Routes with the shortest AS_PATH attribute are preferred.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Multi-exit discriminator (MED)&lt;/strong&gt; is the sixth selection criteria considered. Here routes with a lower MED value are preferred with 0 being the default value.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;local_pref&quot;&gt;Local_Pref&lt;/h2&gt;
+
+&lt;p&gt;As previously seen, Local_Pref is one of the first Best Path Selection Algorithm criteria that a router looks at. It is evaluated before the AS path length. While the default value of Local_Pref is 100, routes that have a higher Local_Pref value are preferred. An important characteristic to consider is that Local_Pref is local in the sense that the attribute is only propagated over iBGP sessions (within your AS) and not over eBGP sessions (to external ASes). You might see BGP route tables with empty entries for Local_Pref for a given route, sometimes along with other routes that do have an explicit entry. In this case the empty entries just mean that the deafult value of 100 applies.&lt;/p&gt;
+
+&lt;p&gt;In practice Local_Pref can be used to specify how traffic should leave our AS, therefore it can guide the exit path (See Figure 1). Here ASN 1 prefers the path to ASN2, as the Local_Pref on the corresponding interface has a higher value.&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/Understanding-BGP-Local_Pref.png&quot; title=&quot;Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;521&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-320.webp 320w, 
+
+    
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-384.webp 384w, 
+
+    
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-512.webp 512w, 
+
+ /content/uploads/2020/09/Understanding-BGP-Local_Pref.webp 521w&quot; sizes=&quot;521px&quot; /&gt;
+  &lt;source width=&quot;521&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-320.png 320w, 
+
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-384.png 384w, 
+
+    /content/resized/2020/09/Understanding-BGP-Local_Pref-512.png 512w, 
+
+ /content/uploads/2020/09/Understanding-BGP-Local_Pref.png 521w&quot; sizes=&quot;521px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/Understanding-BGP-Local_Pref.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;This is typically used for traffic engineering purposes, where an ASN wants to prefer a certain kind of peer over another. Usually this is done for financial reasons, as traffic exchanged over e.g. a Transit peering might incur cost, while traffic exchanged over a direct peering might be settlement free.&lt;/p&gt;
+
+&lt;p&gt;As a result a typical mapping of BGP session types to Local_Pref values could look like this:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;BGP Session&lt;/th&gt;
+      &lt;th&gt;Local_Pref&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Private Peering&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;500&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Direct Peering via IXP&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;400&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Peering via IXP Route Server&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;300&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Transit&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;200&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here we generally prefer settlement-free peering with higher Local_Pref over paid transit with lower Local_Pref.&lt;/p&gt;
+
+&lt;h2 id=&quot;as_path-length&quot;&gt;AS_PATH length&lt;/h2&gt;
+
+&lt;p&gt;A common mechanism to manage traffic across AS with BGP is to make a BGP AS_PATH longer via &lt;a href=&quot;https://www.noction.com/blog/as-path-and-as-path-prepending&quot;&gt;AS path prepending&lt;/a&gt;. Prepending means adding one or more AS numbers to the left side of the AS path. Normally this is done using one’s own AS number, while announcing routes to another AS.&lt;/p&gt;
+
+&lt;p&gt;With that we can influence how traffic will reach our ASN. Similar to what I described before we might not only have a commercial interest in reducing the cost that we pay for Transit for traffic leaving our ASN, but also for traffic entering our ASN. We have seen that we can perform traffic engineering for egress traffic via Local_Pref, using AS path prepending can be used for traffic engineering on ingress traffic (See Figure 2). Here ASN 1 makes its path artificially longer towards ASN 3 by prepending its own ASN once.&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png&quot; title=&quot;Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;521&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-320.webp 320w, 
+
+    
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-384.webp 384w, 
+
+    
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-512.webp 512w, 
+
+ /content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.webp 521w&quot; sizes=&quot;521px&quot; /&gt;
+  &lt;source width=&quot;521&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-320.png 320w, 
+
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-384.png 384w, 
+
+    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-512.png 512w, 
+
+ /content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png 521w&quot; sizes=&quot;521px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;With this we could use AS path prepending for IP prefixes originated or announced by our ASN over various types of BGP session types like this to optimize for cost:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;BGP Session&lt;/th&gt;
+      &lt;th&gt;AS path prepending&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Private Peering&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;None&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Direct Peering via IXP&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;1x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Peering via IXP Route Server&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;2x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Transit&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;3x&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;In this case we tell other ASNs to prefer path via our settlement-free peering through lower AS_PATH length over paid transit through longer AS_PATH length.&lt;/p&gt;
+
+&lt;h2 id=&quot;multi-exit-discriminator-med&quot;&gt;Multi-Exit Discriminator (MED)&lt;/h2&gt;
+
+&lt;p&gt;Multi-Exit Discriminator (MED) is used for the case that more than one link between two ASN exists. I can be used to influence which of these links is then used (See Figure 3). It is important to point out that the MED value is not transitive. Therefore it is not passed on by the receiving AS and therefore can solely be used to influence traffic between directly neighboring AS.&lt;/p&gt;
+
+&lt;p&gt;In this case traffic from the neighboring ASN 2 will ingress via device R1 as the MED on the corresponding link is lower.&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/Understanding-BGP-MED.png&quot; title=&quot;Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;381&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/Understanding-BGP-MED-320.webp 320w, 
+
+ /content/uploads/2020/09/Understanding-BGP-MED.webp 381w&quot; sizes=&quot;381px&quot; /&gt;
+  &lt;source width=&quot;381&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/Understanding-BGP-MED-320.png 320w, 
+
+ /content/uploads/2020/09/Understanding-BGP-MED.png 381w&quot; sizes=&quot;381px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/Understanding-BGP-MED.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;When using AWS you will encounter MED when using a BGP-based Site-to-Site (IPSec) VPN connection while using a Virtual Private Gateway (VGW). In this case only one of the two tunnels is used by AWS to actively send traffic from the VPC to the Customer Gateway (CGW). As AWS customers very frequently leverage Firewall devices as Customer Gateway (CGW) devices and not L3 routers, asymmetric traffic might cause issues with stateful firewall rules. To prevent these issues, AWS indicates the active VPN tunnel through MED, thereby encouraging customers to use that same tunnel for return traffic.&lt;/p&gt;
+
+&lt;p&gt;You can see below that the IPSec tunnel with the next hop address &lt;em&gt;169.254.63.25&lt;/em&gt; has a lower MED - displayed as Metric. Therefore this is the active tunnel within the connection.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CSR1000V#sh ip bgp
+BGP table version is 292, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &amp;gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&amp;gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&amp;gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *&amp;gt;   172.16.0.0/24    169.254.63.25          100             0 64512 i
+ *                     169.254.39.225         200             0 64512 i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;traffic-engineering-example&quot;&gt;Traffic engineering example&lt;/h2&gt;
+
+&lt;p&gt;If you’re not using stateful rules on your CGW, you might be tempted to override the MED value with a Local_Pref to force return traffic through the standby tunnel and thereby increasing the overall throughput. While doing this you might hope that now one tunnel - serving traffic from AWS VPC to on-premises - will provide you a throughput of ~ 1.25 Gbps, while the other tunnel - serving traffic from on-premises to the AWS VPC - will provide you an additional throughput of ~1.25 Gbps. The result should be an increased thoughput at ~ 2.5 Gbps.&lt;/p&gt;
+
+&lt;p&gt;This train of thought shows that you understood the fundamental principles of BGP and how to use them to influence traffic. Congratulation!&lt;/p&gt;
+
+&lt;p&gt;Unfortunately the AWS Site-to-Site (IPSec) VPN specific throughput limitation of ~ 1.25 Gbps is per connection and not per tunnel as the VGW is the forcing element. Therefore this approach will not yield the desired results.&lt;/p&gt;
+
+&lt;h1 id=&quot;best-path-selectiom-algorithm-relaxation&quot;&gt;Best Path selectiom algorithm relaxation&lt;/h1&gt;
+
+&lt;p&gt;Various router platforms offer different sets if capabilities to relax the rules around the BGP best path selection algorithm. While by default e.g. MED are only considered across path with the same neighboring ASN, the Cisco IOS command &lt;em&gt;bgp always-compare-med&lt;/em&gt; ignores the ASN when considering MEDs. We saw in the previous blog post &lt;a href=&quot;https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/#multi-exit-discriminator-med&quot;&gt;AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup&lt;/a&gt; how this can used in the case of AWS.&lt;/p&gt;
+
+&lt;h1 id=&quot;bgp-multipath&quot;&gt;BGP Multipath&lt;/h1&gt;
+
+&lt;p&gt;With regards to what we learned in the &lt;a href=&quot;https://www.edge-cloud.net/2020/09/18/understanding-routing/&quot;&gt;previous post&lt;/a&gt; about route tables, it is important to understand that only the best path is installed in the route table. Only if the BGP best path selection algorithm results in a “tie”, more than one route can be installed into the route table.&lt;/p&gt;
+
+&lt;p&gt;This is called BGP Multipath and it is independent of whether the underlying route table has &lt;a href=&quot;https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing&quot;&gt;Equal-cost multi-path routing (ECMP)&lt;/a&gt; capabilities. In other words: To have full ECMP capability on a BGP enabled router, BGP needs to deliver parallel path to the routing table and the router needs to make use of them.&lt;/p&gt;
+
+&lt;p&gt;Therefore if we want to use ECMP with prefixes learned over BGP, we have to enforce such a “tie”. This means we need to ensure the following BGP attributes are kept same on each paths:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Weight&lt;/li&gt;
+  &lt;li&gt;Local Preference&lt;/li&gt;
+  &lt;li&gt;AS Path (both AS number and AS path length)&lt;/li&gt;
+  &lt;li&gt;Origin code&lt;/li&gt;
+  &lt;li&gt;MED&lt;/li&gt;
+  &lt;li&gt;IGP metric&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Various routing platforms offer ways to relax some of the attributes as tie breaker. As an example, the Cisco IOS command &lt;em&gt;bgp bestpath as-path multipath-relax&lt;/em&gt; will ignore the actual AS numbers and only consider the AS path length. This allows ECMP across multiple upstream provider.&lt;/p&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;Today’s blog post builds on what you’ve learned in the previous blog post on &lt;a href=&quot;https://www.edge-cloud.net/2020/09/18/understanding-routing/&quot;&gt;Better understanding IP Routing&lt;/a&gt;. It provides an introduction into the BGP Best Path Selection Algorithm and how to use some of the valued to influence traffic flowing into (ingress) and out of (egress) your ASN.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="BGP" /><category term="Network" /><summary type="html">Primer to better understanding BGP</summary></entry><entry><title type="html">Better understanding IP Routing</title><link href="https://www.edge-cloud.net/2020/09/18/understanding-routing/" rel="alternate" type="text/html" title="Better understanding IP Routing" /><published>2020-09-18T00:00:00-07:00</published><updated>2020-09-18T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2020/09/18/understanding-routing</id><content type="html" xml:base="https://www.edge-cloud.net/2020/09/18/understanding-routing/">&lt;p&gt;Today we will look at some of the fundamental principles of IP routing. While these principles and concepts are generic, we will use examples based on AWS networking.&lt;/p&gt;
+
+&lt;p&gt;This blog post is not intended to be an all encompassing primer on IP routing. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to highlight and explain them explicitly.&lt;/p&gt;
+
+&lt;p&gt;In a future related blog post we will look at BGP routing in more detail.&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;Please keep in mind that we will be using AWS VPCs and TGWs to illustrate routing principles. The resulting AWS networking designs are therefore used for illustration purposes and are not suited or recommended for production deployments.&lt;/p&gt;
+
+&lt;h1 id=&quot;routing&quot;&gt;Routing&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Routing&quot;&gt;Routing&lt;/a&gt; and more specifically here, &lt;a href=&quot;https://en.wikipedia.org/wiki/IP_routing&quot;&gt;IP routing&lt;/a&gt;, deals with selecting a path for traffic in an IP network. Routing directs a “hop” within a network on how to  forward IP packets based on a &lt;a href=&quot;https://en.wikipedia.org/wiki/Routing_table&quot;&gt;routing tables&lt;/a&gt; and the destination IP address within the packet.&lt;/p&gt;
+
+&lt;p&gt;As we will see later, routing tables maintain information on how to reach various network destinations. Typically they are either configured manually (also known as “Static Routing”) or with the help of a routing protocol (e.g. BGP).&lt;/p&gt;
+
+&lt;h2 id=&quot;hop-by-hop-routing&quot;&gt;Hop-by-Hop Routing&lt;/h2&gt;
+
+&lt;p&gt;One of the most fundamental concepts to understand in IP routing is that the actual forwarding decision is made on a hop-by-hop basis. This means that within each hop of the network path, a router makes a forwarding decision based on the local route table. Image this to be like a board game, where at each step in the game it is decided where to go next. Neither the previous nor the next step have any influence on the local decision.&lt;/p&gt;
+
+&lt;p&gt;Taking AWS VPCs and &lt;a href=&quot;https://aws.amazon.com/transit-gateway/?aws-transit-gateway-wn.sort-by=item.additionalFields.postDateTime&amp;amp;aws-transit-gateway-wn.sort-order=desc&quot;&gt;Transit Gateways (TGWs)&lt;/a&gt; as an example, we can quickly understand how this hop-by-hop decision making plays out, while looking at the routing tables of the VPCs and TGWs (See Figure 1).&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png&quot; title=&quot;Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;871&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-320.webp 320w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-384.webp 384w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-512.webp 512w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-683.webp 683w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-800.webp 800w, 
+
+ /content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.webp 871w&quot; sizes=&quot;871px&quot; /&gt;
+  &lt;source width=&quot;871&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-320.png 320w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-384.png 384w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-512.png 512w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-683.png 683w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-800.png 800w, 
+
+ /content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png 871w&quot; sizes=&quot;871px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW)
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;Traffic from an EC2 instance in VPC 1 wanting to reach another EC2 instance in VPC 2 will have to follow this hop-by-hop process through the five routing tables involved here. What do you think? Will traffic from VPC 1 reach VPC 2? Or is there a mistake in the route tables?&lt;/p&gt;
+
+&lt;p&gt;Let’s look at each hop, step-by-step:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;VPC 1:&lt;/strong&gt; Traffic for destinations within VPC 2’s CIDR of 10.2.0.0/16 are send to the TGW 1 over the VPC attachment.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;TGW 1:&lt;/strong&gt; Inspecting the route table of TGW 1, we can see that traffic for 10.2.0.0/16 is send via a TGW peering to TGW 2.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;TGW 2:&lt;/strong&gt; Looking at the route table of TGW 2, we can also find an entry for the destination of 10.2.0.0/16. It specifies that traffic should be send via another TGW peering to TGW 3.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;TGW 3:&lt;/strong&gt; At this point our traffic has already made it into the correct AWS regions. Let’s see what happens next: The route table of TGW 3 indicates that traffic for 10.2.0.0/16 will be forwarded to VPC 2.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;VPC 2:&lt;/strong&gt; Last but not least, the route table of VPC 2 shows that traffic for the locally used CIDR 10.2.0.0/16 remains within the VPC and is delivered to the corresponding EC2 instance.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But what about the return traffic from VPC 2 to VPC 1? Read on to see how another important principle of IP routing plays a role here.&lt;/p&gt;
+
+&lt;h2 id=&quot;directional&quot;&gt;Directional&lt;/h2&gt;
+
+&lt;p&gt;Another important principle of IP routing, effectively caused by the hop-by-hop decision making behavior is that path determination is directional. Looking back at the provided example in the previous section (See Figure 1), we only validated that traffic from VPC 1 can reach VPC 2. But we did not validate any information on whether traffic from VPC 2 can reach VPC 1.&lt;/p&gt;
+
+&lt;p&gt;I leave it up to you as an exercise to determine if the route tables across the VPCs and TGWs are setup correctly to allow return traffic and thereby enable bidirectional communication. Comment below in case you find a mistake.&lt;/p&gt;
+
+&lt;p&gt;When designing route tables or troubleshooting network connectivity it’s always important that you look at traffic flows in both directions and plan or check route table independently for both directions.
+Also when talking with co-workers, customer, support staff, or anyone alike it is also important that you indicate the direction of the traffic flow that you are referring to.&lt;/p&gt;
+
+&lt;h3 id=&quot;asymmetric-routing&quot;&gt;Asymmetric Routing&lt;/h3&gt;
+
+&lt;p&gt;What’s even more interesting is that the directional nature of IP forwarding can lead to asymmetric traffic flows. But there is nothing wrong about asymmetric traffic flows and the majority of the Internet relies on it while exchanging traffic between &lt;a href=&quot;https://en.wikipedia.org/wiki/Autonomous_system_(Internet)&quot;&gt;ASNs&lt;/a&gt; via Peering or Transit. Think of asymmetric IP traffic flow as a hiking trail loop (See Figure 2). Such hiking trails are often more fascinating than an out-and-return path as you get to see a different set of landscape, plants and animals on the way back as compared to the way out.&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg&quot; title=&quot;Figure 2: Asymmetric routing is like a hiking-trail loop. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;800&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-320.webp 320w, 
+
+    
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-384.webp 384w, 
+
+    
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-512.webp 512w, 
+
+    
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-683.webp 683w, 
+
+ /content/uploads/2020/09/understanding-routing-and-bgp-trail-map.webp 800w&quot; sizes=&quot;800px&quot; /&gt;
+  &lt;source width=&quot;800&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-320.jpg 320w, 
+
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-384.jpg 384w, 
+
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-512.jpg 512w, 
+
+    /content/resized/2020/09/understanding-routing-and-bgp-trail-map-683.jpg 683w, 
+
+ /content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg 800w&quot; sizes=&quot;800px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: Asymmetric routing is like a hiking-trail loop. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 2: Asymmetric routing is like a hiking-trail loop.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;And as long as you make the correct decision at your “routing hops” - aka. a trail fork - you will return to your trail head as well.&lt;/p&gt;
+
+&lt;p&gt;Let’s extend the above example using AWS VPCs and TGWs to showcase asymmetric routing. For this we add another TGW and two more TGW peering connections along with changes to the route table (See Figure 3).&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png&quot; title=&quot;Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;871&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-320.webp 320w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-384.webp 384w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-512.webp 512w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-683.webp 683w, 
+
+    
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-800.webp 800w, 
+
+ /content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.webp 871w&quot; sizes=&quot;871px&quot; /&gt;
+  &lt;source width=&quot;871&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-320.png 320w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-384.png 384w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-512.png 512w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-683.png 683w, 
+
+    /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-800.png 800w, 
+
+ /content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png 871w&quot; sizes=&quot;871px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW)
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;Now, if you follow the path of traffic from VPC 1 to VPC 2, you’ll notice that nothing has changed. Traffic still traverses TGW 1, TGW 2, and TGW 3 on the way to VPC 2. But at the same time look at traffic from VPC 2 to VPC 1. What do you notice?
+Looking at the route tables of the TGWs you should notice that traffic  on the return path from VPC 2 to VPC 1 will traverse TGW 3, TGW 4, and TGW 1, thereby creating and asymmetric path.&lt;/p&gt;
+
+&lt;p&gt;This asymmetric traffic flow is depicted with the green arrows.&lt;/p&gt;
+
+&lt;h2 id=&quot;route-tables&quot;&gt;Route Tables&lt;/h2&gt;
+
+&lt;p&gt;Next we will look at route tables in a bit more detail. Being able to read and understand route tables, will help you understand the routing decision of the hops within each path.&lt;/p&gt;
+
+&lt;p&gt;The most simple route tables have already been depicted in Figure 1 and Figure 3. These routes show a simple mapping between the destination CIDR - also called prefix or network - and the next hop.&lt;/p&gt;
+
+&lt;p&gt;Translated into a route table on a Cisco device this might look like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CSR1000V-01#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &amp;gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&amp;gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&amp;gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *&amp;gt;   10.1.0.0/16      169.254.15.221         100             0 64512 i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Focus on the last line, which effectively translates into: Packets for the prefix “10.1.0.0/16” should be send to the next hop with the IP address of “169.254.15.221”.&lt;/p&gt;
+
+&lt;h3 id=&quot;longest-prefix-match&quot;&gt;Longest prefix match&lt;/h3&gt;
+
+&lt;p&gt;After this let’s look at &lt;a href=&quot;https://en.wikipedia.org/wiki/Longest_prefix_match&quot;&gt;longest prefix match&lt;/a&gt;, sometimes also referred to as “more specific routing”. This algorithm specifies which entry to be chosen from the IP routing table in case of destination addresses matching more than one entry. For IP routing the most specific of the matching table entries — the one with the longest subnet mask — is called the longest prefix match and is the one chosen.&lt;/p&gt;
+
+&lt;p&gt;Consider the below routing table on a Cisco device as an example and especially focus on the last five lines:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CSR1000V-01#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &amp;gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&amp;gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&amp;gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *&amp;gt;   10.1.0.0/16      169.254.15.221         100             0 64512 i
+ *&amp;gt;   10.1.1.0/24      169.254.16.222         100             0 64513 i
+ *&amp;gt;   10.1.2.0/24      169.254.17.223         100             0 64514 i
+ *&amp;gt;   10.1.3.0/24      169.254.18.224         100             0 64515 i
+ *&amp;gt;   10.1.4.0/24      169.254.19.225         100             0 64516 i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we can see that the destination IP address of “10.1.1.1” would match both the entry for “10.1.0.0/16”, as well as the entry for “10.1.1.0/24”. As the entry for “10.1.1.0/24” has a longer subnet mask - it is more specific - and therefore the chosen entry. With that this entry would be chosen and matching traffic send to 169.254.16.222 as the next hop.&lt;/p&gt;
+
+&lt;h3 id=&quot;equal-cost-multipath-ecmp&quot;&gt;Equal Cost Multipath (ECMP)&lt;/h3&gt;
+
+&lt;p&gt;Usually with IP forwarding there is one egress or outbound path per hop for a given destination IP. This rule can be softened via a routing strategy called &lt;a href=&quot;https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing&quot;&gt;Equal-cost multi-path routing (ECMP)&lt;/a&gt;. With ECMP, packet forwarding to a single destination IP can occur over multiple “best path”.&lt;/p&gt;
+
+&lt;p&gt;Again, let’s have a look at an example and consider the below routing table on a Cisco router, especially the last two lines:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CSR1000V#sh ip bgp
+BGP table version is 297, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &amp;gt; best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+      0.0.0.0          0.0.0.0                                0 i
+ *&amp;gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
+ *&amp;gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
+ *m   10.0.255.0/24    169.254.13.253         100             0 64512 i
+ *&amp;gt;                    169.254.15.221         100             0 64512 i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this case we can see that we have a multipath route for the destination prefix of “10.0.255.0/24”, where both “169.254.13.253” and “169.254.15.221” are considered as the next best hop. In this case the router device will randomly send out traffic for this destination network over either next hop, while using a 5-tuple hash. A 5-tuple hash refers to a set of five different values that comprise a Transmission Control Protocol/Internet Protocol (TCP/IP) connection. It includes a source IP address/port number, destination IP address/port number and the protocol in use. Here with ECMP and 5-tuple hashing, packets belonging to the same 5-tuple travel to the same next hop, while packets from different 5-tuple may be send to another next hop.&lt;/p&gt;
+
+&lt;h1 id=&quot;analogy&quot;&gt;Analogy&lt;/h1&gt;
+
+&lt;p&gt;IP routing is actually very simple, once you realize that it is similar to hiking without a map:&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/bear-tree.jpg&quot; title=&quot;Figure 4: IP routing is similar to hiking without a map. Here: Packet loss. (Photo courtesy of USDA Forest Service) &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;400&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/bear-tree-320.webp 320w, 
+
+    
+    /content/resized/2020/09/bear-tree-384.webp 384w, 
+
+ /content/uploads/2020/09/bear-tree.webp 400w&quot; sizes=&quot;400px&quot; /&gt;
+  &lt;source width=&quot;400&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/bear-tree-320.jpg 320w, 
+
+    /content/resized/2020/09/bear-tree-384.jpg 384w, 
+
+ /content/uploads/2020/09/bear-tree.jpg 400w&quot; sizes=&quot;400px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/bear-tree.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 4: IP routing is similar to hiking without a map. Here: Packet loss. (Photo courtesy of USDA Forest Service) &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 4: IP routing is similar to hiking without a map. Here: Packet loss. (Photo courtesy of USDA Forest Service)
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You start at the trailhead (source) and want to reach some target (destination).&lt;/li&gt;
+  &lt;li&gt;Move along the hiking trail to the next fork (router) and look at the signs (route table). Decide which trail (next hop) to chose, in order to reach your destination.
+If the sign at the fork lacks an entry to the desired destination, you’re stuck forever and will eventually get eaten by a bear (dropped packet; See Figure 4).
+    &lt;ul&gt;
+      &lt;li&gt;If you pass the same fork more than once, you’re lost (packet looping) and will eventually run out of food (see below).&lt;/li&gt;
+      &lt;li&gt;If you pass by more than 64 forks you run out of food, starve and get eaten by a bear (TTL expired).&lt;/li&gt;
+      &lt;li&gt;If you made it to your desired target (destination), you succeeded. Good job!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Like IP routing, hiking is bidirectional: You want to get home again, don’t you? Therefore consider the return path as well and follow the above steps.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;In today’s post we took a look at some of the fundamental principles of IP routing. A future post will look in more detail at  BGP Routing protocol concepts. Neither of these blog posts is intended to be an all encompassing primer on IP routing or BGP. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Hopefully after reading through this post you feel a bit more confident to design, troubleshoot or just talk about IP networks.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="BGP" /><category term="Network" /><summary type="html">Look at fundamental principles of IP routing to better design and troubleshoot networks</summary></entry><entry><title type="html">AWS Site-to-Site VPN (IPSec) with IPv6</title><link href="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/" rel="alternate" type="text/html" title="AWS Site-to-Site VPN (IPSec) with IPv6" /><published>2020-09-11T00:00:00-07:00</published><updated>2020-09-11T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6</id><content type="html" xml:base="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">&lt;p&gt;Recently AWS &lt;a href=&quot;https://aws.amazon.com/about-aws/whats-new/2020/08/aws-site-to-site-vpn-supports-ipv6-traffic/&quot;&gt;released support for IPv6 traffic over the AWS Site-to-Site VPN (IPSec)&lt;/a&gt;. The &lt;a href=&quot;https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html&quot;&gt;setup of the AWS Site-to-Site VPN&lt;/a&gt; has always been quite straight forward and thanks to the &lt;a href=&quot;https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config&quot;&gt;downloadable configuration files&lt;/a&gt; at times even trivial.
+With the introduction of IPv6 support this is unfortunately no longer the case. Therefore this blog post will guide you around some of the pitfalls of setting up an AWS Site-to-Site VPN with IPv6 support, hoping that they will eventually be removed and this post become unnecessary.&lt;/p&gt;
+
+&lt;h1 id=&quot;constraints&quot;&gt;Constraints&lt;/h1&gt;
+
+&lt;p&gt;A few &lt;a href=&quot;https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html&quot;&gt;constraints apply&lt;/a&gt; when using AWS Site-to-Site VPN (IPSec) with IPv6:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The outside tunnel IP addresses - which are the public non-RFC1918 addresses - still only support IPv4. You can only use IPv6 on the inside of the tunnel, in order to carry IPv6 traffic between your on-premises network and AWS.&lt;/li&gt;
+  &lt;li&gt;You have to use an &lt;a href=&quot;https://aws.amazon.com/transit-gateway/&quot;&gt;AWS Transit Gateway (TGW)&lt;/a&gt; as the AWS termination of your VPN. Site-to-Site VPNs to a Virtual Private Gateways (VGW) do not support IPv6.&lt;/li&gt;
+  &lt;li&gt;You cannot retrofit existing Site-to-Site connections with IPv6, but need to create a new connection.&lt;/li&gt;
+  &lt;li&gt;A Site-to-Site VPN connection can only support IPv4, or IPv6. This means that if you need to carry both IPv4 and IPv6 traffic between AWS and on-premises you need to create two separate connections, one for IPv4 and one for IPv6 (See Figure 1).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png&quot; title=&quot;Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;901&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-320.webp 320w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-384.webp 384w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-512.webp 512w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-683.webp 683w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-800.webp 800w, 
+
+ /content/uploads/2020/09/S2S-VPN-with-IPv6-1.webp 901w&quot; sizes=&quot;901px&quot; /&gt;
+  &lt;source width=&quot;901&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-320.png 320w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-384.png 384w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-512.png 512w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-683.png 683w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-1-800.png 800w, 
+
+ /content/uploads/2020/09/S2S-VPN-with-IPv6-1.png 901w&quot; sizes=&quot;901px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;As each AWS Site-to-Site VPN connection consist of two tunnels, in the case of supporting IPv4/IPv6 Dualstack traffic you will therefore end up with a total of four tunnels, two for IPv4 traffic and two for IPv6 traffic.
+Also note that this means you’ll be paying separately for the tunnel carrying the IPv4 traffic as well as for the tunnel carrying the IPv6 traffic.&lt;/p&gt;
+
+&lt;h1 id=&quot;configuration&quot;&gt;Configuration&lt;/h1&gt;
+
+&lt;h2 id=&quot;aws-setup&quot;&gt;AWS Setup&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-create-vpn-connection&quot;&gt;creation of a Site-to-Site VPN connection&lt;/a&gt; is straight forward and only differs from its IPv4 counterpart by setting the “Tunnel Inside IP version” to IPv6 instead of IPv4 (See Figure 2).&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png&quot; title=&quot;Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;1061&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-320.webp 320w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-384.webp 384w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-512.webp 512w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-683.webp 683w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-800.webp 800w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-960.webp 960w, 
+
+ /content/uploads/2020/09/S2S-VPN-with-IPv6-2.webp 1061w&quot; sizes=&quot;1061px&quot; /&gt;
+  &lt;source width=&quot;1061&quot; data-srcset=&quot;
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-320.png 320w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-384.png 384w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-512.png 512w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-683.png 683w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-800.png 800w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-2-960.png 960w, 
+
+ /content/uploads/2020/09/S2S-VPN-with-IPv6-2.png 1061w&quot; sizes=&quot;1061px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;The IPv6 enabled Site-to-Site VPN connection also supports defining the IPv6 addresses used within the tunnel yourself. If you want to make use of this capability you have to select a /126 IPv6 subent out of the fd00::/8 &lt;a href=&quot;https://en.wikipedia.org/wiki/Unique_local_address&quot;&gt;Unique local address&lt;/a&gt; address range. This is useful to prevent IP address collisions across multiple tunnels. Although with IPv6 addresses, such a collision is much less likely than with IPv4.&lt;/p&gt;
+
+&lt;h2 id=&quot;customer-side-configuration&quot;&gt;Customer-side Configuration&lt;/h2&gt;
+
+&lt;h3 id=&quot;basic-configuration-information&quot;&gt;Basic configuration information&lt;/h3&gt;
+
+&lt;p&gt;When configuring the costumer-side of the solution, the challenges will start. Having a look at the Tunnel details for a newly created AWS Site-to-Site VPN with IPv6 support will yield some surprising results (See Figure 3).&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png&quot; title=&quot;Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-320.webp 320w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-384.webp 384w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-512.webp 512w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-683.webp 683w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-800.webp 800w, 
+
+    
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-960.webp 960w, 
+
+&quot; sizes=&quot;1438px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-320.png 320w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-384.png 384w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-512.png 512w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-683.png 683w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-800.png 800w, 
+
+    /content/resized/2020/09/S2S-VPN-with-IPv6-3-960.png 960w, 
+
+&quot; sizes=&quot;1438px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;You’ll see that for both tunnels “Inside IPv4 CIDRs” from the 169.254.0.0/16 &lt;a href=&quot;https://en.wikipedia.org/wiki/Link-local_address&quot;&gt;Link-local address&lt;/a&gt; range will be shown. As mentioned previously an AWS Site-to-Site connection - and thereby its tunnels - only supports either IPv4 or IPv6. As this is an IPv6 enabled tunnel, the displayed Inner IPv4 CIDRs are irrelevant from a tunnel transport perspective. You can completely ignore them when configuring the tunnel itself.
+The provided information does come in handy with regards to the BGP router ID. In the above case, with Tunnel 1 the AWS side of the BGP session uses the BGP router ID of 169.254.123.&lt;strong&gt;89&lt;/strong&gt;. To prevent collisions you should therefore not use the same BGP router ID on your side.&lt;/p&gt;
+
+&lt;p&gt;Next you will notice that for the “Inside IPv6 CIDRs” the addresses are provided with a /128 netmask - which is the IPv6 equivalent of /32 and therefore a “host-only” netmask. This netmask therefore only contains a single IP address. Yet the &lt;a href=&quot;https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html&quot;&gt;documentation clearly calls out&lt;/a&gt; that these “Inside IPv6 CIDRs” should be a /126 IPv6 CIDR block, which includes 4 IPv6 addresses. A /126 IPv6 CIDR is the equivalent of a /30 IPv4 CIDR.
+Also the provided IPv6 address from the fd00::/8 &lt;a href=&quot;https://en.wikipedia.org/wiki/Unique_local_address&quot;&gt;Unique local address&lt;/a&gt; address range ends in an odd number and is therefore not a network address, which always end in even numbers.
+Turns out that the displayed IPv6 address is actually the AWS side of the inner connection.&lt;/p&gt;
+
+&lt;p&gt;So with the value of “fdbe:1a26:45b0:4631:ca60:3307:371b:631&lt;strong&gt;5&lt;/strong&gt;/128” displayed in the provided example, the relevant IPv6 information would be:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Subnet (aka CIDR): fdbe:1a26:45b0:4631:ca60:3307:371b:631&lt;strong&gt;4&lt;/strong&gt;/12&lt;strong&gt;6&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;AWS-side interface address: fdbe:1a26:45b0:4631:ca60:3307:371b:631&lt;strong&gt;5&lt;/strong&gt;/12&lt;strong&gt;6&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Customer-side address: fdbe:1a26:45b0:4631:ca60:3307:371b:631&lt;strong&gt;6&lt;/strong&gt;/12&lt;strong&gt;6&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You should notice the pattern for constructing the necessary IPv6 information:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Subnet (aka CIDR): Provided IPv6 address - 1&lt;/li&gt;
+  &lt;li&gt;AWS-side interface address: Provided IPv6 address&lt;/li&gt;
+  &lt;li&gt;Customer-side address: Provided IPv6 address + 1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Just keep in mind that IPv6 addresses use hex digits, which start with 0,1,2,.. then continue with ..,8,9,A,B,.. and end with ..,E,F.&lt;/p&gt;
+
+&lt;p&gt;You can double check your conversion math knowing that the used netmask is a /128, allowing IPv6 subnets with 4 addresses. Therefore 4 different combinations of trailing IPv6 digits exist:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Subnet (aka CIDR): Must always end in 0,4,8,C&lt;/li&gt;
+  &lt;li&gt;AWS-side interface address: Must always end in 1,5,9,D&lt;/li&gt;
+  &lt;li&gt;Customer-side address: Must always end in 2,6,A,E&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;configuration-download&quot;&gt;Configuration download&lt;/h3&gt;
+
+&lt;p&gt;The next challenge you will notice is that when downloading the &lt;a href=&quot;https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config&quot;&gt;downloadable configuration files&lt;/a&gt; from the AWS Console, it does not include any IPv6 address information. Instead for the inner address it includes IPv4 address information that are irrelevant as already pointed out.&lt;/p&gt;
+
+&lt;p&gt;Nevertheless you can leverage the downloadable configuration file for the Internet Key Exchange (IKE) and IPSec Configuration of your tunnels. These two sections within the file can be used without any changes, unless you diverted with your IKE or IPSec settings from the default values. Because these downloadable configuration files are only baseline examples that assume default values.&lt;/p&gt;
+
+&lt;h3 id=&quot;tunnel-interface-configuration&quot;&gt;Tunnel Interface Configuration&lt;/h3&gt;
+
+&lt;p&gt;With that the Tunnel Interface Configuration has to be adapted from IPv4 to IPv6. Using a Cisco IOS configuration as an example, the downloadable configuration file will provide the following Interface Configuration.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;interface Tunnel1
+  ip address 169.254.123.90 255.255.255.252
+  ip virtual-reassembly
+  tunnel source 198.51.100.123
+  tunnel destination 54.68.62.136
+  tunnel mode ipsec ipv4
+  tunnel protection ipsec profile ipsec-vpn-0b1561f60da62e5eb-0
+  ip tcp adjust-mss 1379
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Within this configuration we have to replace the inner IPv4 address with an IPv6 address and also specify that IPv6 should be used within the inside of the tunnel. The outer IP address remains to be an IPv4 address. The resulting corrected configuration using the IPv6 address as outlined in the previous section becomes as follows.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;interface Tunnel1
+ no ip address
+ ip virtual-reassembly
+ ipv6 address FDBE:1A26:45B0:4631:CA60:3307:371B:6316/126
+ tunnel source 198.51.100.123
+ tunnel destination 54.68.62.136
+ tunnel mode ipsec ipv4 v6-overlay
+ tunnel protection ipsec profile ipsec-vpn-0b1561f60da62e5eb-0
+ ip tcp adjust-mss 1379
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;border-gateway-protocol-bgp-configuration&quot;&gt;Border Gateway Protocol (BGP) Configuration&lt;/h3&gt;
+
+&lt;p&gt;Next the Border Gateway Protocol (BGP) Configuration also needs to be adapted, replacing the IPv4 configuration with a corresponding IPv6 configuration.&lt;/p&gt;
+
+&lt;p&gt;The downloadable configuration will provide the following BGP configuration.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;router bgp 65000
+  neighbor 169.254.123.89 remote-as 64512
+  neighbor 169.254.123.89 activate
+  neighbor 169.254.123.89 timers 10 30 30
+  address-family ipv4 unicast
+    neighbor 169.254.123.89 remote-as 64512
+    neighbor 169.254.123.89 timers 10 30 30
+    neighbor 169.254.123.89 activate
+    neighbor 169.254.123.89 soft-reconfiguration inbound
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As we want to run BGP over the inner IPv6 connection, we again have to replace all IPv4 configuration items with the corresponding IPv6 addresses.
+The result will look as follows.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;router bgp 65000
+  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 remote-as 64512
+  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 activate
+  neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 timers 10 30 30
+  address-family ipv6 unicast
+    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 remote-as 64512
+    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 timers 10 30 30
+    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 activate
+    neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 soft-reconfiguration inbound
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here you effectively have to replace the unusable IPv4 address for the neighbor with the correct IPv6 address of that neighbor and change the address-family section from IPv4 to IPv6.&lt;/p&gt;
+
+&lt;h1 id=&quot;validation&quot;&gt;Validation&lt;/h1&gt;
+
+&lt;p&gt;As a final step, we can validate that IPv6 routes are being learned from the TGW via the Site-to-Site VPN.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CSR1000V-01#sh ipv6 route bgp
+IPv6 Routing Table - default - 13 entries
+Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
+       B - BGP, R - RIP, H - NHRP, I1 - ISIS L1
+       I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary, D - EIGRP
+       EX - EIGRP external, ND - ND Default, NDp - ND Prefix, DCE - Destination
+       NDr - Redirect, RL - RPL, O - OSPF Intra, OI - OSPF Inter
+       OE1 - OSPF ext 1, OE2 - OSPF ext 2, ON1 - OSPF NSSA ext 1
+       ON2 - OSPF NSSA ext 2, la - LISP alt, lr - LISP site-registrations
+       ld - LISP dyn-eid, lA - LISP away, le - LISP extranet-policy
+       lp - LISP publications, a - Application, m - OMP
+B   2600:1234::/64 [20/100]
+     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
+     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
+B   2600:1A14:5DE:DB00::/56 [20/100]
+     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
+     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
+B   2600:1A16:807:3A00::/56 [20/100]
+     via FDBE:1A26:45B0:4631:CA60:3307:371B:6315
+     via FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this case we can see that a total of three prefixes is learned, whereas the first prefix is originated on the TGW via a &lt;a href=&quot;https://www.edge-cloud.net/2019/08/07/bgp-route-summary-with-tgw/&quot;&gt;summary route&lt;/a&gt;, while the other two prefixes correspond to VPCs.&lt;/p&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;This blog post guided you around some of the pitfalls when setting up an IPv6 capable AWS Site-to-Site VPN connection. It covered some of the rather cosmetic imperfections within the AWS Console around unusable IPv4 addresses, as well as generating a working Customer Gateway (CGW) configuration based on the downloadable configuration files.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6</summary></entry><entry><title type="html">Multicast with AWS Transit Gateway</title><link href="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/" rel="alternate" type="text/html" title="Multicast with AWS Transit Gateway" /><published>2020-05-01T00:00:00-07:00</published><updated>2020-05-01T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro</id><content type="html" xml:base="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">&lt;p&gt;At the beginning of December 2019, AWS released &lt;a href=&quot;https://aws.amazon.com/blogs/aws/aws-transit-gateway-adds-multicast-and-inter-regional-peering/&quot;&gt;Multicast support&lt;/a&gt; within the &lt;a href=&quot;https://aws.amazon.com/transit-gateway/&quot;&gt;AWS Transit Gateway&lt;/a&gt;. This marked the beginning of being able to use applications that require support for &lt;a href=&quot;https://en.wikipedia.org/wiki/IP_multicast&quot;&gt;IP Multicast&lt;/a&gt; within AWS.&lt;/p&gt;
+
+&lt;p&gt;The following article will give you a brief overview of how to use IP Multicast with the AWS Transit Gateway and especially how to validate that your setup is working correctly.&lt;/p&gt;
+
+&lt;h1 id=&quot;multicast&quot;&gt;Multicast&lt;/h1&gt;
+
+&lt;p&gt;Let’s have a look at the basics of IP Multicasting and IP Multicast on AWS.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-ip-multicasting&quot;&gt;What is IP Multicasting&lt;/h2&gt;
+
+&lt;p&gt;With IP Multicasting a source host can send a single packet to hundreds or thousands of hosts at the same time. All this works over a route network - e.g. the Internet. The replication of the source packet along with tracking of destination membership happens inside of the network itself, instead of the application (See Figure 1).&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/05/Multicast-IPMulticast.png&quot; title=&quot;Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;789&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/05/Multicast-IPMulticast-320.webp 320w, 
+
+    
+    /content/resized/2020/05/Multicast-IPMulticast-384.webp 384w, 
+
+    
+    /content/resized/2020/05/Multicast-IPMulticast-512.webp 512w, 
+
+    
+    /content/resized/2020/05/Multicast-IPMulticast-683.webp 683w, 
+
+ /content/uploads/2020/05/Multicast-IPMulticast.webp 789w&quot; sizes=&quot;789px&quot; /&gt;
+  &lt;source width=&quot;789&quot; data-srcset=&quot;
+
+    /content/resized/2020/05/Multicast-IPMulticast-320.png 320w, 
+
+    /content/resized/2020/05/Multicast-IPMulticast-384.png 384w, 
+
+    /content/resized/2020/05/Multicast-IPMulticast-512.png 512w, 
+
+    /content/resized/2020/05/Multicast-IPMulticast-683.png 683w, 
+
+ /content/uploads/2020/05/Multicast-IPMulticast.png 789w&quot; sizes=&quot;789px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/05/Multicast-IPMulticast.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;For this to work the source host addresses the packet with a Multicast Address from the range of 224.0.0.0 through 239.255.255.255. Each Multicast Address specifies a Multicast group to which other hosts can subscribe to. Such a group can have between one and an unlimited number of members as neither hosts nor routers maintain a list of all members. Instead the source host send the packet to an initial router, called the rendezvous point (RP), which serves as the root of a tree-like multicast distribution.
+The most common &lt;a href=&quot;https://en.wikipedia.org/wiki/Transport_layer&quot;&gt;transport layer&lt;/a&gt; protocol to use multicast addressing is &lt;a href=&quot;https://en.wikipedia.org/wiki/User_Datagram_Protocol&quot;&gt;User Datagram Protocol (UDP)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;multicast-and-aws-transit-gateway&quot;&gt;Multicast and AWS Transit Gateway&lt;/h2&gt;
+
+&lt;p&gt;While an AWS VPC by itself does not support Multicast, AWS Transit Gateway can provide this new capability. The Transit Gateway will act as the rendezvous point, receiving the packets from the Multicast source, replicate it and send it to the Multicast Receiver. With the Multicast-enabled Transit Gateway, source and receiver can be in the same VPC or in different VPCs.&lt;/p&gt;
+
+&lt;h1 id=&quot;constraints&quot;&gt;Constraints&lt;/h1&gt;
+
+&lt;p&gt;Today Multicast on AWS Transit Gateway comes with a few restrictions that need to be considered:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Creation and usage of Multicast-enabled TGW is currently only supported in the AWS Region us-east-1 (N. Virginia).&lt;/li&gt;
+  &lt;li&gt;You must create a new TGW to enable Multicast. It is not possible to enable Multicast on an existing Transit Gateway. In case you are already using a Transit Gateway, you can create another instance that will just serve the purpose of distributing Multicast traffic (See Figure 2). As neither VPC nor TGW route tables are used to handle multicast traffic, this deployment model will not interfere with your existing traditional TGW or VPC route tables.&lt;/li&gt;
+  &lt;li&gt;Self-Management of Multicast group membership by hosts through the &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Group_Management_Protocol&quot;&gt;Internet Group Management Protocol (IGMP)&lt;/a&gt; is not yet supported. Instead Multicast group membership is solely managed using Amazon VPC Console or the AWS CLI.&lt;/li&gt;
+  &lt;li&gt;Only &lt;a href=&quot;https://aws.amazon.com/ec2/nitro/&quot;&gt;AWS Nitro&lt;/a&gt; instances can be a Multicast source. If you use a non-Nitro instance as a receiver, you must disable the &lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#change_source_dest_check&quot;&gt;Source/Dest check&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;While the AWS Transit Gateway has a default limit of only supporting &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-quotas.html#multicast-quota&quot;&gt;1x TGW source per group&lt;/a&gt;, this limit can be increased.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/05/Multicast-Multicast-TGW.png&quot; title=&quot;Figure 2: Multicast-enabled TGW besides traditional TGW. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;1009&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-320.webp 320w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-384.webp 384w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-512.webp 512w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-683.webp 683w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-800.webp 800w, 
+
+    
+    /content/resized/2020/05/Multicast-Multicast-TGW-960.webp 960w, 
+
+ /content/uploads/2020/05/Multicast-Multicast-TGW.webp 1009w&quot; sizes=&quot;1009px&quot; /&gt;
+  &lt;source width=&quot;1009&quot; data-srcset=&quot;
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-320.png 320w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-384.png 384w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-512.png 512w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-683.png 683w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-800.png 800w, 
+
+    /content/resized/2020/05/Multicast-Multicast-TGW-960.png 960w, 
+
+ /content/uploads/2020/05/Multicast-Multicast-TGW.png 1009w&quot; sizes=&quot;1009px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/05/Multicast-Multicast-TGW.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: Multicast-enabled TGW besides traditional TGW. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 2: Multicast-enabled TGW besides traditional TGW.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h1 id=&quot;setup&quot;&gt;Setup&lt;/h1&gt;
+
+&lt;p&gt;Before kicking the tires on Multicast, it needs to be setup. At a minimum this requires the network setup within the Transit Gateway, as well as at least one Multicast Source and one Multicast Receiver instance.&lt;/p&gt;
+
+&lt;h2 id=&quot;source-and-receiver-instances&quot;&gt;Source and Receiver Instances&lt;/h2&gt;
+
+&lt;p&gt;First setup the EC2 instances that we will use in our testing as the Multicast Source and Multicast Receiver. To better understand how Multicast works, you should create at least one Multicast Source and two Multicast Receiver. Also keep the constraint around usage of AWS Nitro instances in mind and select a Nitro-based EC2 instance for the three EC2 instances.
+This blog post will assume use of Ubuntu Linux instances for the EC2 instances and you should install &lt;a href=&quot;https://iperf.fr/&quot;&gt;iPerf&lt;/a&gt; on these instances. On Ubuntu Linux you will do this via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt get install iperf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Last, but not least ensure that port UDP 5001 is opened within the &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html&quot;&gt;security group&lt;/a&gt; associated with the Multicast Receiver instances. The source IP will be the IPv4 address of the ENI associated with the Multicast Source EC2 instance.&lt;/p&gt;
+
+&lt;h2 id=&quot;transit-gateway-tgw&quot;&gt;Transit Gateway (TGW)&lt;/h2&gt;
+
+&lt;p&gt;You can follow the &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/tgw/working-with-multicast.html&quot;&gt;AWS instructions&lt;/a&gt; for setting up a Multicast-enabled TGW, along with a multicast domain.
+Next associate any of the VPCs and subnets that will include Multicast Sources and Receivers to this TGW. Multicast Source and Receiver can either be in the same VPC, or in different VPCs. Then associate the individual Multicast Sources and Receiver via their Elastic Network Interface (ENI) with a Multicast Group (See Figure 3).&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/05/TGW-Multicast-Group.jpg&quot; title=&quot;Figure 3: Multicast-Group with single source and multiple receiver. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-320.webp 320w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-384.webp 384w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-512.webp 512w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-683.webp 683w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-800.webp 800w, 
+
+    
+    /content/resized/2020/05/TGW-Multicast-Group-960.webp 960w, 
+
+&quot; sizes=&quot;1455px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/05/TGW-Multicast-Group-320.jpg 320w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-384.jpg 384w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-512.jpg 512w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-683.jpg 683w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-800.jpg 800w, 
+
+    /content/resized/2020/05/TGW-Multicast-Group-960.jpg 960w, 
+
+&quot; sizes=&quot;1455px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/05/TGW-Multicast-Group.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Multicast-Group with single source and multiple receiver. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 3: Multicast-Group with single source and multiple receiver.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;The above example shows the Multicast Group 224.1.1.1 with one Multicast Source and two Multicast Receivers.&lt;/p&gt;
+
+&lt;h1 id=&quot;testing&quot;&gt;Testing&lt;/h1&gt;
+
+&lt;p&gt;Now that the setup is complete, it’s time to test our setup. We expect that a packet send by the Multicast Source to the Multicast group 224.1.1.1 should be simultaneously received by both Multicast Receivers.&lt;/p&gt;
+
+&lt;h2 id=&quot;multicast-receiver&quot;&gt;Multicast Receiver&lt;/h2&gt;
+
+&lt;p&gt;First get the two Multicast Receiver ready by starting iPerf in “Server” mode against the Multicast group IP of “224.1.1.1” and using the protocol UDP. iPerf will use the default port of 5001.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;% iperf -s -u -B 224.1.1.1 -i 1
+------------------------------------------------------------
+Server listening on UDP port 5001
+Binding to local address 224.1.1.1
+Joining multicast group  224.1.1.1
+Receiving 1470 byte datagrams
+UDP buffer size:  110 KByte (default)
+------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;iPerf will recognize the provided address as an IP Multicast address and join this group. After that iPerf will wait for incoming traffic over UDP port 5001 and display it accordingly.&lt;/p&gt;
+
+&lt;h2 id=&quot;multicast-source&quot;&gt;Multicast Source&lt;/h2&gt;
+
+&lt;p&gt;Now that the Multicast Receiver are ready to accept traffic, it’s time to get the Multicast Source ready. On the Multicast Source EC2 instance, we will start iPerf in client mode against the above Multicast group.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;% iperf -c 224.1.1.1 -u -T 32 -t 3 -i 1
+------------------------------------------------------------
+Client connecting to 224.1.1.1, UDP port 5001
+Sending 1470 byte datagrams
+Setting multicast TTL to 32
+UDP buffer size:  110 KByte (default)
+------------------------------------------------------------
+[  3] local 192.168.220.20 port 59347 connected with 224.1.1.1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0- 1.0 sec   129 KBytes  1.06 Mbits/sec
+[  3]  1.0- 2.0 sec   128 KBytes  1.05 Mbits/sec
+[  3]  2.0- 3.0 sec   128 KBytes  1.05 Mbits/sec
+[  3]  0.0- 3.0 sec   386 KBytes  1.05 Mbits/sec
+[  3] Sent 269 datagrams
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This way iPerf will generate traffic and send it to the Multicast group 224.1.1.1 over UDP to port 5001, which is the default setting.&lt;/p&gt;
+
+&lt;h2 id=&quot;result&quot;&gt;Result&lt;/h2&gt;
+
+&lt;p&gt;While the Multicast Source is generating traffic, we can head over to the two Multicast Receiver instances. There we should notice that both of the instances are receiving the test traffic at the same time.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...
+[  3] local 224.1.1.1 port 5001 connected with 192.168.220.20 port 59347
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0- 1.0 sec   128 KBytes  1.05 Mbits/sec   0.035 ms    0/   89 (0%)
+[  3]  1.0- 2.0 sec   128 KBytes  1.05 Mbits/sec   0.015 ms    0/   89 (0%)
+[  3]  2.0- 3.0 sec   128 KBytes  1.05 Mbits/sec   0.025 ms    0/   89 (0%)
+[  3]  0.0- 3.0 sec   386 KBytes  1.05 Mbits/sec   0.068 ms    0/  269 (0%)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As expected the underlying network replicated the test traffic from the Multicast Source and delivered it to both Multicast Receiver at the same time.&lt;/p&gt;
+
+&lt;h1 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;/h1&gt;
+
+&lt;p&gt;Here are a few things to look at in case something is not working&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Security Groups and Firewalls:&lt;/strong&gt; Make sure that the Security Group associated with the Multicast Receiver EC2 instance allows the Multicast test traffic in. We will be using the transport protocol UDP and by default iPerf uses the port 5001. Also, the source IP of the received traffic will be the IPv4 address of the ENI that is the Multicast Source. In case you are using multiple Multicast Sources, this will translate to multiple IPv4 addresses.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;TGW Multicast Domain groups:&lt;/strong&gt; Make sure that the Multicast group IP address that you are using with iPerf matches the setup in TGW. Also make sure that you specified the correct EC2 instances - via their ENI - as the source and receiver.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If things still don’t work, fire up &lt;a href=&quot;https://www.tcpdump.org/&quot;&gt;tcpdump&lt;/a&gt; on the Source and Receiver side and see what packets you’re seeing.&lt;/p&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;This article walked you through the setup and configuration of a Multicast-enabled Transit Gateway and showed you how to quickly test functionality using iPerf.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)</summary></entry><entry><title type="html">Drawing monitor for network diagrams</title><link href="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/" rel="alternate" type="text/html" title="Drawing monitor for network diagrams" /><published>2020-04-19T00:00:00-07:00</published><updated>2020-04-19T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams</id><content type="html" xml:base="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/">&lt;p&gt;As a Senior Solutions Architect Specialist for Networking at &lt;a href=&quot;https://aws.amazon.com/&quot;&gt;AWS&lt;/a&gt;, I spent a lot of time in online meetings with customers, helping them design networks or understand AWS networking better. Part of these meetings usually involves whiteboarding network diagrams. While visualizing ideas or concepts is something very common and straight forward on a physical whiteboard, it is not trivial in an online meeting.&lt;/p&gt;
+
+&lt;p&gt;As I often get asked about my setup during or after calls, I want to shed some light on what I’m using and what’s working for me.&lt;/p&gt;
+
+&lt;h1 id=&quot;home-office-setup&quot;&gt;Home office setup&lt;/h1&gt;
+
+&lt;p&gt;As I primarily work from home, my home office setup (See Figure 1) provides everything I need to get through the day.&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/04/HomeOffice1.jpg&quot; title=&quot;Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/04/HomeOffice1-320.webp 320w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-384.webp 384w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-512.webp 512w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-683.webp 683w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-800.webp 800w, 
+
+    
+    /content/resized/2020/04/HomeOffice1-960.webp 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/04/HomeOffice1-320.jpg 320w, 
+
+    /content/resized/2020/04/HomeOffice1-384.jpg 384w, 
+
+    /content/resized/2020/04/HomeOffice1-512.jpg 512w, 
+
+    /content/resized/2020/04/HomeOffice1-683.jpg 683w, 
+
+    /content/resized/2020/04/HomeOffice1-800.jpg 800w, 
+
+    /content/resized/2020/04/HomeOffice1-960.jpg 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/04/HomeOffice1.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;This article will focus on the Drawing monitor, visible in the lower left.&lt;/p&gt;
+
+&lt;h2 id=&quot;hardware&quot;&gt;Hardware&lt;/h2&gt;
+
+&lt;p&gt;The key component of my home office setup is a &lt;a href=&quot;https://amzn.to/3afaZhe&quot;&gt;Huion Kamvas Pro 12 Drawing Monitor&lt;/a&gt;, connected via HDMI and USB to the docking station of my notebook. On my PC it shows up as a secondary screen in addition to my primary &lt;a href=&quot;https://amzn.to/2RQheSq&quot;&gt;Dell U3419 Ultrasharp monitor&lt;/a&gt;. Pen input on the Huion monitor is translated into standard mouse input.&lt;/p&gt;
+
+&lt;p&gt;It’s important to point out that in contrary to touch enabled notebooks, this monitor does not provide touch input. It only reacts to the provided pen. Therefore you can touch it with the balm of your hand while drawing (See Figure 2). Although that does leave smudges and you’ll have to clean the screen with a good &lt;a href=&quot;https://amzn.to/2KjB3xe&quot;&gt;microfiber clearning cloth&lt;/a&gt; from time to time.&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/04/HomeOffice3.jpg&quot; title=&quot;Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/04/HomeOffice3-320.webp 320w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-384.webp 384w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-512.webp 512w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-683.webp 683w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-800.webp 800w, 
+
+    
+    /content/resized/2020/04/HomeOffice3-960.webp 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/04/HomeOffice3-320.jpg 320w, 
+
+    /content/resized/2020/04/HomeOffice3-384.jpg 384w, 
+
+    /content/resized/2020/04/HomeOffice3-512.jpg 512w, 
+
+    /content/resized/2020/04/HomeOffice3-683.jpg 683w, 
+
+    /content/resized/2020/04/HomeOffice3-800.jpg 800w, 
+
+    /content/resized/2020/04/HomeOffice3-960.jpg 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/04/HomeOffice3.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;software&quot;&gt;Software&lt;/h2&gt;
+
+&lt;p&gt;As mentioned before the pen input on the drawing monitor is translated to standard mouse input. You can therefore use any software that allows drawing with a mouse, ranging from common software such as Acrobat Reader to Microsoft PowerPoint.&lt;/p&gt;
+
+&lt;p&gt;For my particular use case the software &lt;a href=&quot;https://openboard.ch/index.en.html&quot;&gt;OpenBoard&lt;/a&gt; has proven to be most effective. OpenBoard is an open source teaching software for interactive whiteboards designed primarily for use in schools and universities. It is maintained by the Education Department (DIP) of the canton of Geneva, in Switzerland.&lt;/p&gt;
+
+&lt;p&gt;OpenBoard not only allows free-hand drawing, but you can also quickly and easily import existing customer design documents or pull up pre-made diagrams to draw over (See Figure 3).&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/04/HomeOffice2.jpg&quot; title=&quot;Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/04/HomeOffice2-320.webp 320w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-384.webp 384w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-512.webp 512w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-683.webp 683w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-800.webp 800w, 
+
+    
+    /content/resized/2020/04/HomeOffice2-960.webp 960w, 
+
+&quot; sizes=&quot;3853px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/04/HomeOffice2-320.jpg 320w, 
+
+    /content/resized/2020/04/HomeOffice2-384.jpg 384w, 
+
+    /content/resized/2020/04/HomeOffice2-512.jpg 512w, 
+
+    /content/resized/2020/04/HomeOffice2-683.jpg 683w, 
+
+    /content/resized/2020/04/HomeOffice2-800.jpg 800w, 
+
+    /content/resized/2020/04/HomeOffice2-960.jpg 960w, 
+
+&quot; sizes=&quot;3853px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/04/HomeOffice2.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;Effectively having two mice as input along with two monitors can cause unwanted situations in the form of not finding the mouse pointer. Under Windows 10 you can enable the setting “Show location of pointer when I press the CTRL key” under the mouse properties to mitigate this challenge (See Figure 4).&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/04/HomeOffice4.jpg&quot; title=&quot;Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;552&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/04/HomeOffice4-320.webp 320w, 
+
+    
+    /content/resized/2020/04/HomeOffice4-384.webp 384w, 
+
+    
+    /content/resized/2020/04/HomeOffice4-512.webp 512w, 
+
+ /content/uploads/2020/04/HomeOffice4.webp 552w&quot; sizes=&quot;552px&quot; /&gt;
+  &lt;source width=&quot;552&quot; data-srcset=&quot;
+
+    /content/resized/2020/04/HomeOffice4-320.jpg 320w, 
+
+    /content/resized/2020/04/HomeOffice4-384.jpg 384w, 
+
+    /content/resized/2020/04/HomeOffice4-512.jpg 512w, 
+
+ /content/uploads/2020/04/HomeOffice4.jpg 552w&quot; sizes=&quot;552px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/04/HomeOffice4.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;This article showed you my home office setup for visualizing ideas and concepts during customer calls with a drawing monitor and interactive whiteboard software. If you wonder who these birds on the pictures are. That’s &lt;a href=&quot;https://www.rainbowsprings.co.nz/&quot;&gt;Jenny the Kea&lt;/a&gt; and &lt;a href=&quot;https://www.youtube.com/watch?v=dykrPi9P_Ak&quot;&gt;Pete the Pukeko&lt;/a&gt;.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams</summary></entry></feed>

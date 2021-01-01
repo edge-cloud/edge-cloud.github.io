@@ -22,42 +22,30 @@
 <meta property="og:title" content="Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS">
 <meta property="og:url" content="https://www.edge-cloud.net/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/">
 
-
-  <meta property="og:description" content="Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.">
-
+<meta property="og:description" content="Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS">
-  <meta name="twitter:description" content="Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2013-05-31T09:29:57-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS">
+<meta name="twitter:description" content="Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based interface. The solution will also discover configuration changes and notify the network operations team of these changes.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2013-05-31T09:29:57-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -417,7 +405,7 @@
 
 <p>Install RANCID as well as Subversion via the Ubuntu software repository:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install rancid subversion
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install rancid subversion
 </code></pre></div></div>
 
 <h2 id="configuring-rancid">Configuring RANCID</h2>
@@ -426,25 +414,25 @@
 
 <p>Before editing the sample file, it’s good practice to start by making a backup copy of the original <em>rancid.conf</em> file.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo cp /etc/rancid/rancid.conf /etc/rancid/rancid.conf.ORIGINAL
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo cp /etc/rancid/rancid.conf /etc/rancid/rancid.conf.ORIGINAL
 </code></pre></div></div>
 
 <p>Open the file “/etc/rancid/rancid.conf” in your favorite text editor, add a line similar to the following, and save and exit.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LIST_OF_GROUPS="network"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LIST_OF_GROUPS="network"
 </code></pre></div></div>
 
 <p>By default RANCID uses CVS to store the retrieved device configuration. But we want to use Subversion (SVN) instead, as Trac is build around this source code repository system.</p>
 
 <p>Therefore locate the current CVS configuration within the file <strong>/etc/rancid/rancid.conf</strong> and change it to SVN:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVSROOT=$BASEDIR/CVS; export CVSROOT
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVSROOT=$BASEDIR/CVS; export CVSROOT
 RCSSYS=cvs; export RCSSYS
 </code></pre></div></div>
 
 <p>Change these settings to SVN:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVSROOT=$BASEDIR/SVN; export CVSROOT
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVSROOT=$BASEDIR/SVN; export CVSROOT
 RCSSYS=svn; export RCSSYS
 </code></pre></div></div>
 
@@ -456,7 +444,7 @@ RCSSYS=svn; export RCSSYS
 
 <p>Install Postfix</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install postfix
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install postfix
 </code></pre></div></div>
 
 <p>As the mail configuration type choose “Internet with smarthost”:</p>
@@ -613,20 +601,20 @@ RCSSYS=svn; export RCSSYS
 
 <p>For each group that you created, we need to add two aliases to the aliases file named “rancid-<groupname>” and “rancid-admin-<groupname>”. Open up the **/etc/aliases** file in a text editor and add lines similar to the following:</groupname></groupname></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rancid-network:               your_email@address.com
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rancid-network:               your_email@address.com
 rancid-admin-network:         your_email@address.com
 </code></pre></div></div>
 
 <p>After saving your changes and exiting, you’ll need to let your MTA know about the changes by running:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo /usr/bin/newaliases
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo /usr/bin/newaliases
 </code></pre></div></div>
 
 <h2 id="subversion-repository">Subversion Repository</h2>
 
 <p>Your device’s configuration files will be stored in a Subversion (SVN). This provides a way to track changes over time as well as provides you with a bit of disaster recovery. In order to prepare SVN we must create a folder structure based off of the RANCID groups that we created earlier. This command needs to be run as the “rancid” user that was created when the RANCID software was first installed.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su - rancid
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su - rancid
 [rancid@netconf ~]$ /var/lib/rancid/bin/rancid-cvs
 
 Committed revision 1.
@@ -644,13 +632,13 @@ Committed revision 3.
 
 <p>Assuming that runs without any errors, you should see one or more new directories created under “/var/lib/rancid”, named according to the RANCID groups you defined earlier (e.g. “/var/lib/rancid/network”). Inside each will be a file named “router.db”:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[rancid@netconf ~]$ find /var/lib/rancid -type f -name router.db
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[rancid@netconf ~]$ find /var/lib/rancid -type f -name router.db
 /var/lib/rancid/network/router.db
 </code></pre></div></div>
 
 <p>Make the SVN readable by the www-data group - used by the Apache web server, so it can be accessed by TRAC:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[rancid@netconf ~]$ exit
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[rancid@netconf ~]$ exit
 [user@netconf ~]$ sudo chgrp -R www-data /var/lib/rancid/SVN/
 [user@netconf ~]$ sudo chmod -R g+r /var/lib/rancid/SVN/
 </code></pre></div></div>
@@ -661,12 +649,12 @@ Committed revision 3.
 
 <p>Sample entries might look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router.edge-cloud.net:cisco:up
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router.edge-cloud.net:cisco:up
 firewall.edge-cloud.net:juniper:down
 switch.edge-cloud.net:arista:down
 </code></pre></div></div>
 
-<p>Refer to <code class="highlighter-rouge">man router.db</code> for more details</p>
+<p>Refer to <code class="language-plaintext highlighter-rouge">man router.db</code> for more details</p>
 
 <h2 id="device-login-credentials-via-cloginrc">Device login credentials via cloginrc</h2>
 
@@ -674,13 +662,13 @@ switch.edge-cloud.net:arista:down
 
 <p>It is a good security practice to never connect to devices via telnet, so this guide will only cover the SSH method of connecting to a device. Other connection methods are also supported. The way the .cloginrc file is configured also depends on how the end device is configured to authenticate users. Users can be configured locally or a device can authenticate users agains an enterprise system such as RADIUS, LDAP or Active Directory. It gets complicated quickly so make sure that you take your time and read the documentation all the way through.</p>
 
-<p>Refer to <code class="highlighter-rouge">man cloginrc</code> to see the details of all the available options and keywords available for use.</p>
+<p>Refer to <code class="language-plaintext highlighter-rouge">man cloginrc</code> to see the details of all the available options and keywords available for use.</p>
 
 <p>This guide will assume the simplest setup in which local usernames and passwords are defined on the end devices themselves. Keep in that mind that the file .cloginrc should not be world readable/writable and be owned by the user <em>rancid</em>, created earlier.</p>
 
 <p>Here’s some example information for a .cloginrc file:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Firewall
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Firewall
 add method firewall.edge-cloud.net ssh
 add user firewall.edge-cloud.net rancid
 add password firewall.edge-cloud.net user_password enable_password
@@ -690,14 +678,14 @@ add password firewall.edge-cloud.net user_password enable_password
 
 <p>The basic test utilizes the clogin application to verify login into a device:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c "/usr/lib/rancid/bin/clogin -f /var/lib/rancid/.cloginrc firewall.edge-cloud.net" -s /bin/bash -l rancid
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c "/usr/lib/rancid/bin/clogin -f /var/lib/rancid/.cloginrc firewall.edge-cloud.net" -s /bin/bash -l rancid
 </code></pre></div></div>
 
 <p>The clogin application will use the .clogin configuration file specified by the -f variable and will automatically login to the device named firewall.edge-cloud.net. When it’s all said and done you should end up in enable mode on the firewall device. If there are problems, clogin does an excellent job of providing pointed advice on what is wrong.</p>
 
 <p>With RANCID now configured, it’s time to test it out! Let’s manually invoke “rancid-run” (as the “rancid” user) to see if everything works!</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c /usr/lib/rancid/bin/rancid-run -s /bin/bash -l rancid
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c /usr/lib/rancid/bin/rancid-run -s /bin/bash -l rancid
 </code></pre></div></div>
 
 <p>This command may take a while to run, depending on how many devices you have configured. Be patient and, when it finishes, review the logfiles created in “/var/log/rancid”.</p>
@@ -708,11 +696,11 @@ add password firewall.edge-cloud.net user_password enable_password
 
 <p>Once everything is working, it’s time to automate the collection and archiving. The easiest way to do this is to simply create a cronjob under the rancid user that calls “rancid-run” for us on a periodic basis. Here we have RANCID run every 15 minutes to ensure that all network changes are caught quickly.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c "/usr/bin/crontab -e -u rancid"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[user@netconf ~]$ sudo su -c "/usr/bin/crontab -e -u rancid"
 </code></pre></div></div>
 
 <p>Modify the contents of the file so that you end up with something like this.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    # m h  dom mon dow   command
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    # m h  dom mon dow   command
     */15 * * * * /usr/bin/rancid-run
 </code></pre></div></div>
 
@@ -724,12 +712,12 @@ add password firewall.edge-cloud.net user_password enable_password
 
 <p>Install Trac and the necessary Apache modules via the Ubuntu software repository:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install trac libapache2-mod-python
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install trac libapache2-mod-python
 </code></pre></div></div>
 
 <p>Configure a new Trac project environment:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mkdir -p /var/trac/netconf
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mkdir -p /var/trac/netconf
 cd /var/trac/netconf
 sudo trac-admin . initenv Netconf sqlite:db/trac.db
 sudo htpasswd -bc .htpasswd adminusername &amp;lt;mypassword&amp;gt;
@@ -738,9 +726,9 @@ sudo chown -R www-data: .
 sudo chmod -R 775 .
 </code></pre></div></div>
 
-<p>Next, configure your Apache Webserver for Trac. In this example we will replace the default Apache Website and therefore replace the file <code class="highlighter-rouge">/etc/apache2/sites-available/default</code> with the following content:</p>
+<p>Next, configure your Apache Webserver for Trac. In this example we will replace the default Apache Website and therefore replace the file <code class="language-plaintext highlighter-rouge">/etc/apache2/sites-available/default</code> with the following content:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;VirtualHost *:80&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;VirtualHost *:80&gt;
             ServerName netconf.edge-cloud.net
             &lt;Location /&gt;
                SetHandler mod_python
@@ -763,17 +751,17 @@ sudo chmod -R 775 .
             &lt;/Location&gt;
     &lt;/VirtualHost&gt;
 </code></pre></div></div>
-<p>Restart the Apache service with <code class="highlighter-rouge">sudo service apache2 restart</code>.</p>
+<p>Restart the Apache service with <code class="language-plaintext highlighter-rouge">sudo service apache2 restart</code>.</p>
 
 <h2 id="enabling-svn-in-trac">Enabling SVN in TRAC</h2>
 
 <p>The TRAC SVN browser is disabled at this stage as the SVN path hasn’t been configured yet. Let’s configure the SVN path in TRAC now.</p>
 
-<p>Edit the TRAC configuration file <code class="highlighter-rouge">/var/trac/netconf/conf/trac.ini</code>.</p>
+<p>Edit the TRAC configuration file <code class="language-plaintext highlighter-rouge">/var/trac/netconf/conf/trac.ini</code>.</p>
 
 <p>Add the SVN repository:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repository_dir = /var/lib/rancid/SVN/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repository_dir = /var/lib/rancid/SVN/
 </code></pre></div></div>
 
 <h2 id="final-customizations">Final customizations</h2>
@@ -782,7 +770,7 @@ sudo chmod -R 775 .
 
 <p>Make the SVN Browser the default module to load when accessing the web interface:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[trac]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[trac]
 ...
 default_handler = BrowserModule
 </code></pre></div></div>
@@ -791,7 +779,7 @@ default_handler = BrowserModule
 
 <p>Add the following block yo your TRAC configuration file:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[mainnav]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[mainnav]
 wiki = disabled
 timeline = disabled
 roadmap = disabled
@@ -806,9 +794,9 @@ prefs = disabled
 help = disabled
 </code></pre></div></div>
 
-<p>Place the file of a logo - e.g. <em>netconf.png</em> - for your TRAC website into the folder <code class="highlighter-rouge">/var/trac/netconf/htdocs/</code> and enable it within the TRAC configuration file <code class="highlighter-rouge">/var/trac/netconf/conf/trac.ini</code>:</p>
+<p>Place the file of a logo - e.g. <em>netconf.png</em> - for your TRAC website into the folder <code class="language-plaintext highlighter-rouge">/var/trac/netconf/htdocs/</code> and enable it within the TRAC configuration file <code class="language-plaintext highlighter-rouge">/var/trac/netconf/conf/trac.ini</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[header_logo]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[header_logo]
 alt = NetConf
 height = 72
 link = /

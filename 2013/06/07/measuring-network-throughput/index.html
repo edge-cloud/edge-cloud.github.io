@@ -22,42 +22,30 @@
 <meta property="og:title" content="Measuring Network Throughput">
 <meta property="og:url" content="https://www.edge-cloud.net/2013/06/07/measuring-network-throughput/">
 
-
-  <meta property="og:description" content="The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps or being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.Let’s have a look behind the scenes of network throughput measurement and understand why users are actually measuring something completely different, but also how to get more “performance” out of these connections.">
-
+<meta property="og:description" content="The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps or being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.Let’s have a look behind the scenes of network throughput measurement and understand why users are actually measuring something completely different, but also how to get more “performance” out of these connections.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Measuring Network Throughput">
-  <meta name="twitter:description" content="The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps or being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.Let’s have a look behind the scenes of network throughput measurement and understand why users are actually measuring something completely different, but also how to get more “performance” out of these connections.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/06/07/measuring-network-throughput/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2013-06-07T02:45:03-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Measuring Network Throughput">
+<meta name="twitter:description" content="The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 Mbps Internet uplink in reality is only 10 Mbps or being surprised why they can’t transfer that multi-gigabyte file via FTP faster between data center locations.Let’s have a look behind the scenes of network throughput measurement and understand why users are actually measuring something completely different, but also how to get more “performance” out of these connections.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2013/06/07/measuring-network-throughput/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2013-06-07T02:45:03-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2013/06/07/measuring-network-throughput/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -481,7 +469,7 @@
 
 <p>An important formula is the one for the <a href="https://en.wikipedia.org/wiki/Bandwidth-delay_product" target="_blank" rel="noopener noreferrer">Bandwidth-delay product (BDP)</a>, which is the product of a data link’s capacity (in bits per second) and its end-to-end delay (in seconds). The result, an amount of data measured in bits (or bytes), is equivalent to the maximum amount of data on the network circuit at any given time, e.g. data that has been transmitted but not yet acknowledged.</p>
 
-<script type="math/tex; mode=display">Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)</script>
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]
 
 <p>The result of the BDP can also be interpreted as the required receiver TCP window size to maximize the performance on the data link.</p>
 
@@ -490,20 +478,20 @@
 <p>Round-Trip-Time between the US west coast (Las Vegas) and Europe (Germany): 173 ms
 Available bandwidth between the two sites: 100 Mbit/s</p>
 
-<script type="math/tex; mode=display">173 ms × 100 Mbit/s = 0.173s × ( 100 × 1024 × 1024 bit/s) \\ = 18140365 bit = 2.1625 MByte</script>
+\[173 ms × 100 Mbit/s = 0.173s × ( 100 × 1024 × 1024 bit/s) \\ = 18140365 bit = 2.1625 MByte\]
 
 <p>This means that we would need a TCP Window Size of at least 2.1625 MByte to fully utilize the 100 Mbit/s link.</p>
 
 <p>We have seen, that in reality both the delay between sender and receiver as well as the TCP window size within the receiver are given. As we cannot change the laws of physics, the only value we can change is the TCP window size. Let’s shuffle the formula, to calculate the maximum bandwidth that can be achieved with a given RTT and TCP window size instead:</p>
 
-<script type="math/tex; mode=display">bandwidth (Mbit/s) = { Buffer (Mbit) \over delay (s) }</script>
+\[bandwidth (Mbit/s) = { Buffer (Mbit) \over delay (s) }\]
 
 <p>Let’s use another example:</p>
 
 <p>Round-Trip-Time between the US west coast (Las Vegas) and Europe (Germany): 173 ms
 Standard TCP windows size on a Linux (Ubuntu) host: 64 KByte</p>
 
-<script type="math/tex; mode=display">{ 64 KByte \over 173 ms } = { (64 × 1024 × 8 bit) \over 0.173 s } = { 524288 bit \over 0.173s } \\ = 3030566.47 bit/s = 2.89 Mbit/s</script>
+\[{ 64 KByte \over 173 ms } = { (64 × 1024 × 8 bit) \over 0.173 s } = { 524288 bit \over 0.173s } \\ = 3030566.47 bit/s = 2.89 Mbit/s\]
 
 <p>Irrelevant of the actual link speed between the two sites above we will not be able to transfer more than 2.89 Mbit/s with a single TCP stream. Keep in mind that this is the theoretical maximum. In reality the value will be even lower due to packet loss and packet header overhead.</p>
 
@@ -572,18 +560,18 @@ Standard TCP windows size on a Linux (Ubuntu) host: 64 KByte</p>
 
 <h1 id="hands-on-tests">Hands-On Tests</h1>
 
-<p>Now it’s time to verify above’s theory in practice: For this we will use the tool <a href="https://iperf.fr/" target="_blank" rel="noopener noreferrer">Iperf</a>, which is widely available on Linux. On Ubuntu you can e.g. install Iperf with <code class="highlighter-rouge">sudo apt-get install iperf</code>.</p>
+<p>Now it’s time to verify above’s theory in practice: For this we will use the tool <a href="https://iperf.fr/" target="_blank" rel="noopener noreferrer">Iperf</a>, which is widely available on Linux. On Ubuntu you can e.g. install Iperf with <code class="language-plaintext highlighter-rouge">sudo apt-get install iperf</code>.</p>
 
 <p>In this case the sender host is an Ubuntu machine located in a data center in Frankfurt, Germany and the receiver host is an Ubuntu machine located in a data center in Las Vegas, USA. The latency between the two machines is 173 ms with both machines being connected via an 100 Mbit/s uplink to the internet.</p>
 
 <p>On the receiver host we will start iperf as a server and advice it to use the standard TCP window size of 64K:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 65536
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 65536
 </code></pre></div></div>
 
 <p>From the sender side we start the test:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net
 ------------------------------------------------------------
 Client connecting to receiver.edge-cloud.net, TCP port 5001
 TCP window size: 64 KByte (default)
@@ -603,7 +591,7 @@ As a first step it’s advisable to have a look at the current TCP Window settin
 
 <p>The maximum TCP windows size (receiving) in bit from the TCP autotuning settings:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ cat /proc/sys/net/ipv4/tcp_rmem
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ cat /proc/sys/net/ipv4/tcp_rmem
 4096    65536   65536
 </code></pre></div></div>
 
@@ -615,7 +603,7 @@ As a first step it’s advisable to have a look at the current TCP Window settin
 
 <p>The maximum TCP windows size (sending) in bit from the TCP autotuning settings:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ cat /proc/sys/net/ipv4/tcp_wmem
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ cat /proc/sys/net/ipv4/tcp_wmem
 4096    65536   65536
 </code></pre></div></div>
 
@@ -625,7 +613,7 @@ As a first step it’s advisable to have a look at the current TCP Window settin
 
 <p>First, change the maximum TCP windows size (receiving) on the receiver:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ sysctl -w net.ipv4.tcp_rmem="4096 65536 131072"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ sysctl -w net.ipv4.tcp_rmem="4096 65536 131072"
 net.ipv4.tcp_wmem = 4096 65536 131072
 user@receiver:~$ sysctl -w net.core.rmem_max=131072
 net.core.rmem_max = 131072
@@ -633,7 +621,7 @@ net.core.rmem_max = 131072
 
 <p>Next, change the default TCP windows size (sending) on the sender:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ sysctl -w net.ipv4.tcp_wmem="4096 65536 131072"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ sysctl -w net.ipv4.tcp_wmem="4096 65536 131072"
 net.ipv4.tcp_wmem = 4096 65536 131072
 user@sender:~$ sysctl -w net.core.wmem_max=131072
 net.core.rmem_max = 131072
@@ -641,12 +629,12 @@ net.core.rmem_max = 131072
 
 <p>On the receiver host we will start iperf as a server and advice it to use the TCP window size of 128K:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 131072
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 131072
 </code></pre></div></div>
 
 <p>Now we run the test again:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -w 131072
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -w 131072
 ------------------------------------------------------------
 Client connecting to receiver.edge-cloud.net, TCP port 5001
 TCP window size:  256 KByte (WARNING: requested  128 KByte)
@@ -670,12 +658,12 @@ TCP window size:  256 KByte (WARNING: requested  128 KByte)
 
 <p>On the receiver host we again start Iperf as a server and advice it to use the TCP window size of 128K:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 131072
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -w 131072
 </code></pre></div></div>
 
 <p>But on the server side we will advise Iperf to start 10 parallel test:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -P 10 -w 131072
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -P 10 -w 131072
 ------------------------------------------------------------
 Client connecting to receiver.edge-cloud.net, TCP port 5001
 TCP window size:  256 KByte (WARNING: requested  128 KByte)
@@ -716,12 +704,12 @@ TCP window size:  256 KByte (WARNING: requested  128 KByte)
 
 <p>On the receiver host we again start Iperf as a server. But this time we start it in UDP mode:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -u
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -u
 </code></pre></div></div>
 
 <p>On the sender side we also start Iperf in UDP mode and ask it to attempt to sent 110 Mbit/s of traffic. We will attempt to send a bit more than the expected maximum bandwidth, to understand when the links max out:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -u -b 110m
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -u -b 110m
 ------------------------------------------------------------
 Client connecting to receiver.edge-cloud.net, TCP port 5001
 Sending 1470 byte datagrams
@@ -744,7 +732,7 @@ UDP buffer size:  224 KByte (default)
 
 <p>On the receiver host we start one instance of Iperf as a UDP server and one instance as a TCP server with TCP window size of 128K. They will both spawn to the background.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -u &amp;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@receiver:~$ iperf -s -u &amp;
 user@receiver:~$ iperf -s -w 131072 &amp;
 </code></pre></div></div>
 
@@ -754,7 +742,7 @@ user@receiver:~$ iperf -s -w 131072 &amp;
 
 <h2 id="udp-test">UDP Test</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -u -b 110m -P 10
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c receiver.edge-cloud.net -u -b 110m -P 10
 ------------------------------------------------------------
 Client connecting to las-mgmt-ubu01.vmwcs.com, UDP port 5001
 Sending 1470 byte datagrams
@@ -827,7 +815,7 @@ UDP buffer size:  224 KByte (default)
 
 <h2 id="tcp-test">TCP Test</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c las-mgmt-ubu01.vmwcs.com
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@sender:~$ iperf -c las-mgmt-ubu01.vmwcs.com
 ------------------------------------------------------------
 Client connecting to las-mgmt-ubu01.vmwcs.com, TCP port 5001
 TCP window size: 23.5 KByte (default)

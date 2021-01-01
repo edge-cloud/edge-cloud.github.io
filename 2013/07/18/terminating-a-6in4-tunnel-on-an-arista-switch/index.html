@@ -22,42 +22,30 @@
 <meta property="og:title" content="Terminating a 6in4 tunnel on an Arista switch">
 <meta property="og:url" content="https://www.edge-cloud.net/2013/07/18/terminating-a-6in4-tunnel-on-an-arista-switch/">
 
-
-  <meta property="og:description" content="Using Arista’s underlying Linux OS to configure a 6in4 tunnel for IPv6 connectivity.">
-
+<meta property="og:description" content="Using Arista’s underlying Linux OS to configure a 6in4 tunnel for IPv6 connectivity.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Terminating a 6in4 tunnel on an Arista switch">
-  <meta name="twitter:description" content="Using Arista’s underlying Linux OS to configure a 6in4 tunnel for IPv6 connectivity.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/07/18/terminating-a-6in4-tunnel-on-an-arista-switch/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2013-07-18T08:36:14-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Terminating a 6in4 tunnel on an Arista switch">
+<meta name="twitter:description" content="Using Arista’s underlying Linux OS to configure a 6in4 tunnel for IPv6 connectivity.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2013/07/18/terminating-a-6in4-tunnel-on-an-arista-switch/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2013-07-18T08:36:14-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2013/07/18/terminating-a-6in4-tunnel-on-an-arista-switch/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -441,7 +429,7 @@
 
 <p>Before starting with the configuration of the 6in4 tunnel from within the Arista EOS shell, let’s make sure that we can actually contact the service provider’s tunnel endpoint via ping from the Arista CLI.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a(config)#ping 216.66.84.46
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a(config)#ping 216.66.84.46
 PING 216.66.84.46 (216.66.84.46) 72(100) bytes of data.
 80 bytes from 216.66.84.46: icmp_req=1 ttl=61 time=0.674 ms
 80 bytes from 216.66.84.46: icmp_req=2 ttl=61 time=0.642 ms
@@ -456,7 +444,7 @@ rtt min/avg/max/mdev = 0.638/0.652/0.674/0.030 ms, ipg/ewma 1.039/0.663 ms
 
 <p>Once we confirm connectivity, we can get started with the actual configuration. For this let’s enter into the EOS shell mode and become super user:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#bash
 
 Arista Networks EOS shell
 
@@ -471,12 +459,12 @@ Arista Networks EOS shell
 
 <p>In order to configure a 6in4 tunnel under Linux the <a href="http://tldp.org/HOWTO/Adv-Routing-HOWTO/lartc.tunnel-ipv6.addressing.html" target="_blank" rel="noopener noreferrer">Simple Internet Transition (SIT)</a> module needs to be loaded. This module is not loaded by default on Arista switches. Let’s do so:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# modprobe sit
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# modprobe sit
 </code></pre></div></div>
 
 <p>Now we can configure the 6in4 tunnel to Hurricane Electric and make it available under the interface name “he-ipv6”, enable IPv6 on this interface and assign the correct IPv6 address:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ip tunnel add he-ipv6 mode sit remote 216.66.84.46 local 212.123.xxx.xxx ttl 255
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ip tunnel add he-ipv6 mode sit remote 216.66.84.46 local 212.123.xxx.xxx ttl 255
 -bash-4.1# ip link set he-ipv6 up
 -bash-4.1# echo 0 &gt; /proc/sys/net/ipv6/conf/he-ipv6/disable_ipv6
 -bash-4.1# ip addr add 2001:470:xxxx:xxxx::2/64 dev he-ipv6
@@ -491,7 +479,7 @@ Arista Networks EOS shell
 
 <p>Before declaring success, let’s ensure that we can actually carry IPv6 traffic across the tunnel. We will start by attempting to ping the IPv6 address of the tunnel’s remote interface at Hurricane Electric.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ping6 2001:470:xxxx:xxxx::1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ping6 2001:470:xxxx:xxxx::1
 PING 2001:470:xxxx:xxxx::1(2001:470:xxxx:xxxx::1) 56 data bytes
 64 bytes from 2001:470:xxxx:xxxx::1: icmp_seq=1 ttl=64 time=0.742 ms
 64 bytes from 2001:470:xxxx:xxxx::1: icmp_seq=2 ttl=64 time=0.739 ms
@@ -507,12 +495,12 @@ rtt min/avg/max/mdev = 0.693/0.723/0.742/0.031 ms
 
 <p>Once this works successfully, let’s configure routing beyond this first hop via a default route:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ip route add ::/0 dev he-ipv6
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ip route add ::/0 dev he-ipv6
 </code></pre></div></div>
 
 <p>Let’s test if this works and ping <a href="https://developers.google.com/speed/public-dns/" target="_blank" rel="noopener noreferrer">Google’s public DNS resolver</a>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ping6 2001:4860:4860::8888
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# ping6 2001:4860:4860::8888
 PING 2001:4860:4860::8888(2001:4860:4860::8888) 56 data bytes
 64 bytes from 2001:4860:4860::8888: icmp_seq=1 ttl=58 time=4.51 ms
 64 bytes from 2001:4860:4860::8888: icmp_seq=2 ttl=58 time=4.62 ms
@@ -534,7 +522,7 @@ rtt min/avg/max/mdev = 4.519/4.571/4.626/0.071 ms
 
 <p>First exit the Arista EOS shell into the CLI.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# exit
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.1# exit
 logout
 [user@ams-core01a ~]$ exit
 logout
@@ -542,7 +530,7 @@ logout
 
 <p>Let’s ping the Google DNS resolver again and see what happens:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#ping ipv6 2001:4860:4860::8888
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#ping ipv6 2001:4860:4860::8888
 PING 2001:4860:4860::8888(2001:4860:4860::8888) 72 data bytes
 72 bytes from 2001:4860:4860::8888: icmp_seq=1 ttl=58 (truncated)
 72 bytes from 2001:4860:4860::8888: icmp_seq=2 ttl=58 (truncated)
@@ -560,7 +548,7 @@ ams-core01a#
 
 <p>Of course there must be some drawback to all of this: As the interface “he-ipv6” is not known to the Arista CLI, it will not be displayed from within the CLI. Thus it appears like hidden from the network administrator and is only accessible via the EOS shell. This makes troubleshooting a bit more challenging as e.g. the IPv6 routing table will appear to be empty even though we just verified that we have IPv6 connectivity to the Internet.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#sh ipv6 route ::/0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ams-core01a#sh ipv6 route ::/0
 IPv6 Routing Table - 35 entries
 Codes: C - connected, S - static, K - kernel, O - OSPF, B - BGP, R - RIP, A - Aggregate
 

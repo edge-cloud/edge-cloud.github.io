@@ -22,42 +22,30 @@
 <meta property="og:title" content="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes">
 <meta property="og:url" content="https://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/">
 
-
-  <meta property="og:description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
-
+<meta property="og:description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes">
-  <meta name="twitter:description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2014-02-08T02:44:46-08:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes">
+<meta name="twitter:description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2014-02-08T02:44:46-08:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -508,9 +496,9 @@
 
 </figure>
 
-<p>Configure the <em>vCenter</em> Endpoint first, providing the URL <code class="highlighter-rouge">https://vcenter_ip_or_fqdn/sdk</code> and the required credentials.</p>
+<p>Configure the <em>vCenter</em> Endpoint first, providing the URL <code class="language-plaintext highlighter-rouge">https://vcenter_ip_or_fqdn/sdk</code> and the required credentials.</p>
 
-<p>Next configure the <em>OpenStack</em> Keystone Endpoint. Click on the <strong>+</strong> button on the top of the grid, select Keystone and provide the URL - that you have looked up in the previous step - and the required credentials. The URL should look like <code class="highlighter-rouge">http://vova_ip_or_fqdn:5000/v2.0</code>. In my case the Endpoint configuration proved to be very finicky and random. I had to repeat these steps multiple time until both endpoint showed as Active with a green checkmark (See Figure 4).</p>
+<p>Next configure the <em>OpenStack</em> Keystone Endpoint. Click on the <strong>+</strong> button on the top of the grid, select Keystone and provide the URL - that you have looked up in the previous step - and the required credentials. The URL should look like <code class="language-plaintext highlighter-rouge">http://vova_ip_or_fqdn:5000/v2.0</code>. In my case the Endpoint configuration proved to be very finicky and random. I had to repeat these steps multiple time until both endpoint showed as Active with a green checkmark (See Figure 4).</p>
 
 <figure class="">
 
@@ -1295,7 +1283,7 @@
 
 <p>Below is a simple Python script, which will connect to your OpenStack cloud, create a new VM and start it.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import novaclient.v1_1.client as nclient
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import novaclient.v1_1.client as nclient
 import time
 creds = {"username":"admin",
          "api_key":"VMware1!",
@@ -1330,7 +1318,7 @@ print "VM booted to status '%s'" % instance.status
   <li>network: The name of the network to which this VM should get connected to.</li>
 </ul>
 
-<p>You can run this script directly from VOVA. As VOVA is based on <a href="https://www.ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a> you can use the command <code class="highlighter-rouge">sudo apt-get install python-novaclient</code> to install the required SDK.</p>
+<p>You can run this script directly from VOVA. As VOVA is based on <a href="https://www.ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a> you can use the command <code class="language-plaintext highlighter-rouge">sudo apt-get install python-novaclient</code> to install the required SDK.</p>
 
 <h1 id="wrap-up">Wrap-Up</h1>
 

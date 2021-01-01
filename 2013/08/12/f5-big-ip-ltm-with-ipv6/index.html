@@ -22,42 +22,30 @@
 <meta property="og:title" content="Using F5 Big-IP LTM with IPv6">
 <meta property="og:url" content="https://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/">
 
-
-  <meta property="og:description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
-
+<meta property="og:description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Using F5 Big-IP LTM with IPv6">
-  <meta name="twitter:description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2013-08-12T01:00:22-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Using F5 Big-IP LTM with IPv6">
+<meta name="twitter:description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2013-08-12T01:00:22-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -446,17 +434,17 @@
 
 <p>Although this appears to be a bit awkward at first sight, it will turn out to be much less of a hassle quite quickly: <a href="https://tools.ietf.org/html/rfc5375" target="_blank" rel="noopener noreferrer">RFC 5375 (IPv6 Unicast Address Assignment Considerations)</a> strongly recommends that in IPv6 the subnet prefix length should always be /64. With that we only need to convert this subnet prefix length of /64 into the legacy style netmask notation.</p>
 
-<p>Using the <a href="https://en.wikipedia.org/wiki/Subnetwork" target="_blank" rel="noopener noreferrer">mechanism known from IPv4</a>, the IPv6 subnet mask for a /64 network would therefore be <code class="highlighter-rouge">FFFF:FFFF:FFFF:FFFF:0000:0000:0000:0000</code> or in short <code class="highlighter-rouge">FFFF:FFFF:FFFF:FFFF::</code>. Especially the first notation lets us quickly verify that this netmask is correct:</p>
+<p>Using the <a href="https://en.wikipedia.org/wiki/Subnetwork" target="_blank" rel="noopener noreferrer">mechanism known from IPv4</a>, the IPv6 subnet mask for a /64 network would therefore be <code class="language-plaintext highlighter-rouge">FFFF:FFFF:FFFF:FFFF:0000:0000:0000:0000</code> or in short <code class="language-plaintext highlighter-rouge">FFFF:FFFF:FFFF:FFFF::</code>. Especially the first notation lets us quickly verify that this netmask is correct:</p>
 
 <p>IPv6 addresses are 128 bit long. If we want to mask out a subnet with the length of 64 bit, this would require us to mask out half of the bits. With the previously mentioned notation of eight groups of four hexadecimal digits separated by colons, this translates into the four first groups being FFFF in hex, which translates to all 1s in binary. And the remaining four groups being all zeros.</p>
 
-<p class="notice--info"><strong>Note:</strong> In older versions of Big-IP, F5 has a bug that doesn’t allow you to use address shortening via double-colons (“::”) through the GUI or tmsh. Instead all IPv6 addresses need to be written out. Thus the address <code class="highlighter-rouge">20BA:DD06:F00D:1234::11</code> would need to become <code class="highlighter-rouge">20BA:DD06:F00D:1234:0:0:0:11</code>.</p>
+<p class="notice--info"><strong>Note:</strong> In older versions of Big-IP, F5 has a bug that doesn’t allow you to use address shortening via double-colons (“::”) through the GUI or tmsh. Instead all IPv6 addresses need to be written out. Thus the address <code class="language-plaintext highlighter-rouge">20BA:DD06:F00D:1234::11</code> would need to become <code class="language-plaintext highlighter-rouge">20BA:DD06:F00D:1234:0:0:0:11</code>.</p>
 
 <h1 id="configuration">Configuration</h1>
 
 <h2 id="configure-the-external-interface-for-ipv6">Configure the external interface for IPv6</h2>
 
-<p>In a first step we need to assign an IPv6 address to the external interface of the F5 Big-IP load balancer. In this example we will use the two IPv6 addresses <code class="highlighter-rouge">20BA:DD06:F00D:1234::11/64</code> and <code class="highlighter-rouge">20BA:DD06:F00D:1234::12/64</code> for the actual nodes and <code class="highlighter-rouge">20BA:DD06:F00D:1234::10/64</code> as the floating address.</p>
+<p>In a first step we need to assign an IPv6 address to the external interface of the F5 Big-IP load balancer. In this example we will use the two IPv6 addresses <code class="language-plaintext highlighter-rouge">20BA:DD06:F00D:1234::11/64</code> and <code class="language-plaintext highlighter-rouge">20BA:DD06:F00D:1234::12/64</code> for the actual nodes and <code class="language-plaintext highlighter-rouge">20BA:DD06:F00D:1234::10/64</code> as the floating address.</p>
 
 <p>Let’s start by creating a new Self-IP under the <strong>Network -&gt; Self IPs</strong> tab.</p>
 
@@ -488,7 +476,7 @@
 
 </figure>
 
-<p>Next enter the IPv6 address for the individual node as the IP address, along with the Netmask of <code class="highlighter-rouge">FFFF:FFFF:FFFF:FFFF::</code>. Repeat the same for the second node in an HA setup.</p>
+<p>Next enter the IPv6 address for the individual node as the IP address, along with the Netmask of <code class="language-plaintext highlighter-rouge">FFFF:FFFF:FFFF:FFFF::</code>. Repeat the same for the second node in an HA setup.</p>
 
 <figure class="">
 

@@ -16,46 +16,36 @@
   <meta name="author" content="Christian Elsen">
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Edge Cloud">
 <meta property="og:title" content="Title goes here">
 <meta property="og:url" content="https://www.edge-cloud.net/2020/01/01/template/">
 
-
-  <meta property="og:description" content="Brief description goes here">
-
+<meta property="og:description" content="Brief description goes here">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Title goes here">
-  <meta name="twitter:description" content="Brief description goes here">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/01/01/template/">
 
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Title goes here">
+<meta name="twitter:description" content="Brief description goes here">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2020/01/01/template/">
+<meta name="twitter:card" content="summary">
 
-  
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2020-12-31T22:13:14-08:00">
 
 
 
 
 
-
-
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2020/01/01/template/">
@@ -156,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -176,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -346,7 +336,7 @@
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Title goes here">
     <meta itemprop="description" content="Brief description goes here">
-    
+    <meta itemprop="datePublished" content="December 31, 2020">
     
 
     <div class="page__inner-wrap">
@@ -385,7 +375,7 @@
 
 <p class="notice--info"><strong>Note:</strong> This is a notice box</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
 # Code
 #
 
@@ -449,32 +439,32 @@
 
 </figure>
 
-<script type="math/tex; mode=display">Price_{NGW}=( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})</script>
+\[Price_{NGW}=( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\]
 
-<script type="math/tex; mode=display">Price_{TGW+NGW}=
+\[Price_{TGW+NGW}=
   ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
   ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
-  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic}))</script>
+  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic}))\]
 
-<script type="math/tex; mode=display">Price_{TGW+NGW} \leq Price_{NGW}</script>
+\[Price_{TGW+NGW} \leq Price_{NGW}\]
 
-<script type="math/tex; mode=display">( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
+\[( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
   ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
   (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic})) \\
-  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})</script>
+  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\]
 
-<script type="math/tex; mode=display">traffic \cdot Cost_{TGW-Traffic} +  traffic \cdot Cost_{NGW-Traffic} - traffic \cdot Cost_{NGW-Traffic} \\
+\[traffic \cdot Cost_{TGW-Traffic} +  traffic \cdot Cost_{NGW-Traffic} - traffic \cdot Cost_{NGW-Traffic} \\
   \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) - \\
   ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) - \\
-  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} )</script>
+  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} )\]
 
-<script type="math/tex; mode=display">traffic \cdot Cost_{TGW-Traffic} \\
+\[traffic \cdot Cost_{TGW-Traffic} \\
   \leq 720 hr / month \cdot (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) \\
-  - ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))</script>
+  - ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))\]
 
-<script type="math/tex; mode=display">traffic \leq \frac{720 hr / month}{Cost_{TGW-Traffic}} \cdot \\
+\[traffic \leq \frac{720 hr / month}{Cost_{TGW-Traffic}} \cdot \\
   (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) - \\
-  ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))</script>
+  ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))\]
 
         
       </section>
@@ -508,6 +498,8 @@
 
 
         
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-12-31T22:13:14-08:00">December 31, 2020</time></p>
+        
       </footer>
 
       <section class="page__share">
@@ -532,7 +524,7 @@
 ">Previous</a>
     
     
-      <a href="/2013/05/20/configuring-f5-big-ip-with-vcd/" class="pagination--pager" title="Configuring F5 Big-IP LTM with VMware vCloud Director [Updated]
+      <a href="/2013/05/20/configuring-f5-big-ip-with-vcd/" class="pagination--pager" title="Configuring F5 Big-IP LTM with VMware vCloud Director
 ">Next</a>
     
   </nav>

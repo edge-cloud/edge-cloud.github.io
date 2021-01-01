@@ -22,42 +22,30 @@
 <meta property="og:title" content="Limitations of DNS-based geographic routing">
 <meta property="og:url" content="https://www.edge-cloud.net/2019/03/01/limitations-of-geo-dns/">
 
-
-  <meta property="og:description" content="Exploring the limitations of DNS-based geographic routing using AWS Route 53 and RIPE Atlas, through visualizing the real life results.">
-
+<meta property="og:description" content="Exploring the limitations of DNS-based geographic routing using AWS Route 53 and RIPE Atlas, through visualizing the real life results.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Limitations of DNS-based geographic routing">
-  <meta name="twitter:description" content="Exploring the limitations of DNS-based geographic routing using AWS Route 53 and RIPE Atlas, through visualizing the real life results.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/03/01/limitations-of-geo-dns/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2019-03-01T00:00:00-08:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Limitations of DNS-based geographic routing">
+<meta name="twitter:description" content="Exploring the limitations of DNS-based geographic routing using AWS Route 53 and RIPE Atlas, through visualizing the real life results.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2019/03/01/limitations-of-geo-dns/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2019-03-01T00:00:00-08:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2019/03/01/limitations-of-geo-dns/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -448,7 +436,7 @@
 
 <p>For geographic routing the “magic” happens during this interaction of the DNS Resolver and the Authoritative Nameserver: The Authoritative Nameserver will respond with a record set that depends on the querying DNS Resolver, ideally its location. In order to accomplish this, the Authoritative Nameserver must be able to calculate the desired mapping based on the location information of the DNS Resolver and the desired mapping of a certain location to an origins record set.</p>
 
-<p>With this the Authoritative Nameserver would e.g. respond to the querry for <code class="highlighter-rouge">www.example.com</code> with <code class="highlighter-rouge">us-west-2.www.example.com</code> (and its subsequent resolution to an actual IPv4 or IPv6 address), while the DNS Resolver’s IP address is believed to be closer to the AWS Oregon region and with <code class="highlighter-rouge">us-east-2.www.example.com</code>, in case the Resolver is closer to the AWS Ohio region.</p>
+<p>With this the Authoritative Nameserver would e.g. respond to the querry for <code class="language-plaintext highlighter-rouge">www.example.com</code> with <code class="language-plaintext highlighter-rouge">us-west-2.www.example.com</code> (and its subsequent resolution to an actual IPv4 or IPv6 address), while the DNS Resolver’s IP address is believed to be closer to the AWS Oregon region and with <code class="language-plaintext highlighter-rouge">us-east-2.www.example.com</code>, in case the Resolver is closer to the AWS Ohio region.</p>
 
 <p>To do so, the Authoritative Nameserver will use the IP address information for the DNS Resolver to calculate the geographic location. A common service provider for IP Address to location mapping data is <a href="https://www.maxmind.com/" target="_blank" rel="noopener noreferrer">Maxmind</a>, which is frequently used for this purpose. An example is the Howto Guide for <a href="https://geoip.site/" target="_blank" rel="noopener noreferrer">implementing geographical routing with BIND</a>, which incorporates this GeoIP database.</p>
 
@@ -467,11 +455,11 @@ The EDNS0-Client-Subnet (ECS) extension allows a recursive DNS Resolver to speci
 
 <p>Unfortunately not all DNS Resolvers support EDNS0-Client-Subnet. You can find support in frequently used public resolvers, such as <a href="https://developers.google.com/speed/public-dns/docs/ecs" target="_blank" rel="noopener noreferrer">Google’s Public DNS</a> Resolver, <a href="http://www.afasterinternet.com/" target="_blank" rel="noopener noreferrer">OpenDNS</a>, and <a href="https://www.quad9.net/faq/" target="_blank" rel="noopener noreferrer">Quad9</a>. Other public resolvers such as <a href="https://developers.cloudflare.com/1.1.1.1/nitty-gritty-details/" target="_blank" rel="noopener noreferrer">CloudFlare</a> do not support it.</p>
 
-<p>If you want to check if your Resolver supports EDNS0-Client-Subnet (ECS), you can use a special Google debugging hostname as outlined in the AWS Support article <a href="https://aws.amazon.com/premiumsupport/knowledge-center/troubleshoot-latency-based-records/" target="_blank" rel="noopener noreferrer">“How do I troubleshoot issues with latency-based resource records and Route 53?”</a>. With this hostname the command <code class="highlighter-rouge">dig +nocl TXT o-o.myaddr.l.google.com @&lt;DNS Resolver&gt;</code> will not only show you the IPv4 or IPv6 address of the DNS Resolver that is seen by Google’s Authoritative Nameserver. If supported it will also show the client subnet as provided via EDNS0-Client-Subnet (ECS).</p>
+<p>If you want to check if your Resolver supports EDNS0-Client-Subnet (ECS), you can use a special Google debugging hostname as outlined in the AWS Support article <a href="https://aws.amazon.com/premiumsupport/knowledge-center/troubleshoot-latency-based-records/" target="_blank" rel="noopener noreferrer">“How do I troubleshoot issues with latency-based resource records and Route 53?”</a>. With this hostname the command <code class="language-plaintext highlighter-rouge">dig +nocl TXT o-o.myaddr.l.google.com @&lt;DNS Resolver&gt;</code> will not only show you the IPv4 or IPv6 address of the DNS Resolver that is seen by Google’s Authoritative Nameserver. If supported it will also show the client subnet as provided via EDNS0-Client-Subnet (ECS).</p>
 
 <p>Below is an example run from an Amazon EC2 instance within the US-West-2 (Oregon) region against the <a href="https://developers.google.com/speed/public-dns/docs/intro" target="_blank" rel="noopener noreferrer">Google Public DNS resolver</a>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ dig +nocl +short TXT o-o.myaddr.l.google.com @8.8.8.8
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ dig +nocl +short TXT o-o.myaddr.l.google.com @8.8.8.8
 "2607:f8b0:400e:c09::10f"
 "edns0-client-subnet 54.186.33.212/32"
 </code></pre></div></div>
@@ -569,7 +557,7 @@ Breaking these clients out separately in the test setup will allow us to visuali
 
 <p>Next we create a <a href="https://atlas.ripe.net/about/customised-measurements/" target="_blank" rel="noopener noreferrer">RIPE Atlas customized measurement</a> that will leverage up to 500 randomly selected probes within the US against the DNS hostname that was setup for geographic routing with Route 53 above. We expect each probe to report back a result of either “US-West-2”, “US-East-2”, or “Unknown”.</p>
 
-<p>Similar the same set of up to 500 US-based RIPE Atlas probes will be used in a second customized DNS measurement. This measurement will resolve the above introduced TXT-based record for thr special hostname of <code class="highlighter-rouge">TXT o-o.myaddr.l.google.com</code>. With this RIPE Atlas measurement we can find out for each probe whether EDNS0-Client-Subnet (ECS) is supported and what the provided subnet is.
+<p>Similar the same set of up to 500 US-based RIPE Atlas probes will be used in a second customized DNS measurement. This measurement will resolve the above introduced TXT-based record for thr special hostname of <code class="language-plaintext highlighter-rouge">TXT o-o.myaddr.l.google.com</code>. With this RIPE Atlas measurement we can find out for each probe whether EDNS0-Client-Subnet (ECS) is supported and what the provided subnet is.
 Also we can find out the IP address of the DNS Resolver for each probe as seen by the Authoritative Nameserver. This information is especially of interest for the case where the DNS Resolver does not support EDNS0-Client-Subnet (ECS).</p>
 
 <h1 id="test-results">Test Results</h1>

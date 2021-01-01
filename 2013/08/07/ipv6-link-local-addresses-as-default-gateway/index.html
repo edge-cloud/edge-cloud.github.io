@@ -22,42 +22,30 @@
 <meta property="og:title" content="IPv6 deployment: Using IPv6 link-local addresses as default gateway">
 <meta property="og:url" content="https://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/">
 
-
-  <meta property="og:description" content="Using the simple to remember IPv6 link-local address fe80::1 as the default gateway.">
-
+<meta property="og:description" content="Using the simple to remember IPv6 link-local address fe80::1 as the default gateway.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="IPv6 deployment: Using IPv6 link-local addresses as default gateway">
-  <meta name="twitter:description" content="Using the simple to remember IPv6 link-local address fe80::1 as the default gateway.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2013-08-07T09:24:26-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="IPv6 deployment: Using IPv6 link-local addresses as default gateway">
+<meta name="twitter:description" content="Using the simple to remember IPv6 link-local address fe80::1 as the default gateway.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2013-08-07T09:24:26-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -394,7 +382,7 @@
 
 <p>In IPv6 Link-Local addresses are mandatory addresses according to <a href="https://tools.ietf.org/html/rfc4291" target="_blank" rel="noopener noreferrer">RFC 4291</a>. This means that all interfaces are required to have at least one Link-Local unicast address from the address block fe80::/10, which has been reserved for link-local unicast addressing. The actual link-local addresses are though assigned with the prefix fe80::/64.</p>
 
-<p>Combining what many of us are used to from the IPv4 world with this new feature particular to IPv6, the link-local address fe80::1 appears to be the perfect candidate for a generic default gateway within a data center or campus network. This address is for sure easier to remember and especially type in as e.g. <code class="highlighter-rouge">20ba:dd0g:f00d:1234::1</code>.</p>
+<p>Combining what many of us are used to from the IPv4 world with this new feature particular to IPv6, the link-local address fe80::1 appears to be the perfect candidate for a generic default gateway within a data center or campus network. This address is for sure easier to remember and especially type in as e.g. <code class="language-plaintext highlighter-rouge">20ba:dd0g:f00d:1234::1</code>.</p>
 
 <p>As each IPv6-enabled router interface will already have a link-local address generated based on the <a href="https://en.wikipedia.org/wiki/IPv6_address#Modified_EUI-64" target="_blank" rel="noopener noreferrer">modified EUI-64</a> scheme, the address fe80::1 will either replace or augment this automatically generated address. At the same time an existing global unicast address on the interface will not be affected.</p>
 
@@ -408,7 +396,7 @@
 
 <p>With a Cisco IOS device, the configuration would look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cisco(config)# interface gigabitEthernet3/1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cisco(config)# interface gigabitEthernet3/1
 Cisco(config-if)# ipv6 address fe80::1 link-local
 Cisco(config-if)# end
 Cisco# show ipv6 interface gigabitEthernet3/1
@@ -493,7 +481,7 @@ gigabitEthernet 3/1 is up, line protocol is up
 
 <p>This would look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cisco# ping fe80::1%gigabitEthernet3/1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cisco# ping fe80::1%gigabitEthernet3/1
 Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to FE80::1, timeout is 2 seconds:
 Packet sent with a source address of FE80::1%gigabitEthernet3/1
@@ -585,7 +573,7 @@ Cisco#
 
 <p>Another example is Arista, which doesn’t support manually configuring link-local addresses yet:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Arista(s2)(config-if-Vl51)#ipv6 address fe80::1/64
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Arista(s2)(config-if-Vl51)#ipv6 address fe80::1/64
 % Configuring Link local addresses not yet supported
 </code></pre></div></div>
 

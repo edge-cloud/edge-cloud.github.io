@@ -22,42 +22,30 @@
 <meta property="og:title" content="IPv6 Address management of hosts">
 <meta property="og:url" content="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">
 
-
-  <meta property="og:description" content="This article explores the address management concepts available with IPv6: None, Manual, Stateless Address Auto Configuration (SLLAC), Statefull with DHCPv6">
-
+<meta property="og:description" content="This article explores the address management concepts available with IPv6: None, Manual, Stateless Address Auto Configuration (SLLAC), Statefull with DHCPv6">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="IPv6 Address management of hosts">
-  <meta name="twitter:description" content="This article explores the address management concepts available with IPv6: None, Manual, Stateless Address Auto Configuration (SLLAC), Statefull with DHCPv6">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2013-11-18T00:04:50-08:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="IPv6 Address management of hosts">
+<meta name="twitter:description" content="This article explores the address management concepts available with IPv6: None, Manual, Stateless Address Auto Configuration (SLLAC), Statefull with DHCPv6">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2013-11-18T00:04:50-08:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -443,7 +431,7 @@
 
 <p>Here is an example for configuring an interface for static IPv6 addressing mode on an <a href="https://www.arista.com/en/" target="_blank" rel="noopener noreferrer">Arista Networks</a> device.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
    description IPv6-Only (Manual)
    ipv6 address fdd2:3a59:6db7:3340::1/64
    ipv6 nd ra suppress all
@@ -580,7 +568,7 @@
 
 </figure>
 
-<p>Configuration of a manual IPv6 address is done in Ubuntu 13.10 via the file <code class="highlighter-rouge">/etc/network/interfaces</code> as shown in Figure 4.</p>
+<p>Configuration of a manual IPv6 address is done in Ubuntu 13.10 via the file <code class="language-plaintext highlighter-rouge">/etc/network/interfaces</code> as shown in Figure 4.</p>
 
 <figure class="">
 
@@ -691,7 +679,7 @@
 
 <p>Before we can dive into the configuration of SLAAC, we need to understand that SLAAC by itself only provides a mechanism for assigning a host an IPv6 address as well as a default gateway. It does not provide information for a nameserver to be used as a resolver. To provide this information we need to combine SLAAC with either RDNSS or DHCPv6.</p>
 
-<p>For Linux to pick up IPv6 via SLAAC, the interface has to be configured in <code class="highlighter-rouge">/etc/network/interfaces</code> via <code class="highlighter-rouge">iface eth0 inet6 auto</code>.</p>
+<p>For Linux to pick up IPv6 via SLAAC, the interface has to be configured in <code class="language-plaintext highlighter-rouge">/etc/network/interfaces</code> via <code class="language-plaintext highlighter-rouge">iface eth0 inet6 auto</code>.</p>
 
 <h3 id="31-stateless---nameserver-configured-manually">3.1 Stateless - Nameserver configured manually</h3>
 
@@ -699,7 +687,7 @@
 
 <p>An example router configuration for an Arista Networks device would look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
    description IPv6-Only (Stateless with manual DNS)
    ipv6 address fdd2:3a59:6db7:3340::1/64
    ipv6 ospf 1 area 0.0.0.0
@@ -750,7 +738,7 @@
 
 </figure>
 
-<p>The manual configuration under Ubuntu 13.10 is quite simple: Just add the line <code class="highlighter-rouge">dns-nameservers fd80::10 fd80::11</code> to the corresponding interface section within the file <code class="highlighter-rouge">/etc/network/interfaces</code>.</p>
+<p>The manual configuration under Ubuntu 13.10 is quite simple: Just add the line <code class="language-plaintext highlighter-rouge">dns-nameservers fd80::10 fd80::11</code> to the corresponding interface section within the file <code class="language-plaintext highlighter-rouge">/etc/network/interfaces</code>.</p>
 
 <h3 id="32-stateless---nameserver-via-rdnss">3.2 Stateless - Nameserver via RDNSS</h3>
 
@@ -818,7 +806,7 @@
 
 <p>Configuration of RDNSS is straight forward on an Arista Networks device as the example below highlights.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
    description IPv6-Only (Stateless with RDNSS)
    ipv6 address fdd2:3a59:6db7:3340::1/64
    ipv6 nd ra dns-server fd80::10
@@ -831,7 +819,7 @@
 
 <p>And also with Ubuntu 13.10 you are out of luck in an out-of-the-box installation. But with Linux you can at least easily retrofit the RDNSS and DNSSL capability. Here is how:</p>
 
-<p>Install the RDNSS package via <code class="highlighter-rouge">sudo apt-get install rdnssd</code> and add the line <code class="highlighter-rouge">*.rdnssd</code> at the top of the file <code class="highlighter-rouge">/etc/resolvconf/interface-order</code>. After restarting the network with <code class="highlighter-rouge">sudo service networking restart</code>, your Ubuntu machine will acquire the nameserver information along with the IP address information as shown in Figure 8.</p>
+<p>Install the RDNSS package via <code class="language-plaintext highlighter-rouge">sudo apt-get install rdnssd</code> and add the line <code class="language-plaintext highlighter-rouge">*.rdnssd</code> at the top of the file <code class="language-plaintext highlighter-rouge">/etc/resolvconf/interface-order</code>. After restarting the network with <code class="language-plaintext highlighter-rouge">sudo service networking restart</code>, your Ubuntu machine will acquire the nameserver information along with the IP address information as shown in Figure 8.</p>
 
 <figure class="">
 
@@ -984,7 +972,7 @@
 
 <p>Besides setting the “Other” flag within RA, we now also need to configure a DHCP relay on our router’s interface.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
    description IPv6-Only (Stateless with DHCPv6)
    ipv6 address fdd2:3a59:6db7:3340::1/64
    ipv6 nd other-config-flag
@@ -1107,7 +1095,7 @@
 
 <p>Below is an example for configuring this with an Arista Networks device:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
    description IPv6-Only (Stateful with DHCPv6)
    ipv6 address fdd2:3a59:6db7:3340::1/64
    ipv6 nd managed-config-flag
@@ -1122,7 +1110,7 @@
 
 <p>This would change the configuration into:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Vlan5
    description IPv6-Only (Stateful with DHCPv6)
    ipv6 address fdd2:3a59:6db7:3340::1/64
    ipv6 nd prefix fdd2:3a59:6db7:3340::/64 no-autoconfig
@@ -1167,7 +1155,7 @@
 
 </figure>
 
-<p>For Linux to pick up IPv6 via DHCPv6, the interface has to be configured in <code class="highlighter-rouge">/etc/network/interfaces</code> via <code class="highlighter-rouge">iface eth0 inet6 dhcp</code>. Once this is done, it will also acquire a single IPv6 address via DHCPv6 along with the nameserver information (See Figure 14).</p>
+<p>For Linux to pick up IPv6 via DHCPv6, the interface has to be configured in <code class="language-plaintext highlighter-rouge">/etc/network/interfaces</code> via <code class="language-plaintext highlighter-rouge">iface eth0 inet6 dhcp</code>. Once this is done, it will also acquire a single IPv6 address via DHCPv6 along with the nameserver information (See Figure 14).</p>
 
 <figure class="">
 

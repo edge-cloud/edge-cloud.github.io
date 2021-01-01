@@ -22,42 +22,30 @@
 <meta property="og:title" content="CloudFlare: Redirect to Social Media on origin failure">
 <meta property="og:url" content="https://www.edge-cloud.net/2016/01/15/cf-redirect-to-social-media/">
 
-
-  <meta property="og:description" content="How to redirect your CloudFlare powered website to your Social Media site, when the origin has failed.">
-
+<meta property="og:description" content="How to redirect your CloudFlare powered website to your Social Media site, when the origin has failed.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="CloudFlare: Redirect to Social Media on origin failure">
-  <meta name="twitter:description" content="How to redirect your CloudFlare powered website to your Social Media site, when the origin has failed.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/01/15/cf-redirect-to-social-media/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2016-01-15T00:00:41-08:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="CloudFlare: Redirect to Social Media on origin failure">
+<meta name="twitter:description" content="How to redirect your CloudFlare powered website to your Social Media site, when the origin has failed.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2016/01/15/cf-redirect-to-social-media/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2016-01-15T00:00:41-08:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2016/01/15/cf-redirect-to-social-media/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -449,15 +437,15 @@
 
 <p>In this example I place the below custom error page at <strong>https://www.edge-cloud.net/redirect.html</strong>.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"refresh"</span> <span class="na">content=</span><span class="s">"0; url=https://twitter.com/ChristianElsen"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"robots"</span> <span class="na">content=</span><span class="s">"noindex, nofollow"</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">bgcolor=</span><span class="s">"#000000"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;center&gt;</span>::CLOUDFLARE_ERROR_500S_BOX::<span class="nt">&lt;/center&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta http-equiv="refresh" content="0; url=https://twitter.com/ChristianElsen" /&gt;
+    &lt;meta name="robots" content="noindex, nofollow" /&gt;
+  &lt;/head&gt;
+  &lt;body bgcolor="#000000"&gt;
+    &lt;center&gt;::CLOUDFLARE_ERROR_500S_BOX::&lt;/center&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </code></pre></div></div>
 
 <p>You can see in the third row the actual redirect, which in this case points to my Twitter home page. We also don’t want Robots to index this temporary redirect page and certainly not to follow the redirect link. That’s what the next line is for.</p>

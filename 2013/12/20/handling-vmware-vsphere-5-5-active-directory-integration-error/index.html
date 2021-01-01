@@ -22,42 +22,30 @@
 <meta property="og:title" content="Handling the VMware vSphere 5.5 Active Directory integration error">
 <meta property="og:url" content="https://www.edge-cloud.net/2013/12/20/handling-vmware-vsphere-5-5-active-directory-integration-error/">
 
-
-  <meta property="og:description" content="While attempting to integrate the VMware vSphere 5.5 vCenter Server Appliance (vCSA) with Microsoft Active Directory you might have stumbled over the error message “Error: Idm client exception: Failed to establish server connection”. This article will show you how to work around this issue and still use Active Directory with your vCSA.">
-
+<meta property="og:description" content="While attempting to integrate the VMware vSphere 5.5 vCenter Server Appliance (vCSA) with Microsoft Active Directory you might have stumbled over the error message “Error: Idm client exception: Failed to establish server connection”. This article will show you how to work around this issue and still use Active Directory with your vCSA.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Handling the VMware vSphere 5.5 Active Directory integration error">
-  <meta name="twitter:description" content="While attempting to integrate the VMware vSphere 5.5 vCenter Server Appliance (vCSA) with Microsoft Active Directory you might have stumbled over the error message “Error: Idm client exception: Failed to establish server connection”. This article will show you how to work around this issue and still use Active Directory with your vCSA.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/12/20/handling-vmware-vsphere-5-5-active-directory-integration-error/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2013-12-20T07:28:24-08:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Handling the VMware vSphere 5.5 Active Directory integration error">
+<meta name="twitter:description" content="While attempting to integrate the VMware vSphere 5.5 vCenter Server Appliance (vCSA) with Microsoft Active Directory you might have stumbled over the error message “Error: Idm client exception: Failed to establish server connection”. This article will show you how to work around this issue and still use Active Directory with your vCSA.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2013/12/20/handling-vmware-vsphere-5-5-active-directory-integration-error/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2013-12-20T07:28:24-08:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2013/12/20/handling-vmware-vsphere-5-5-active-directory-integration-error/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -371,7 +359,7 @@
   <li><a href="#the-workaround">The Workaround</a></li>
   <li>
 <a href="#windows-session-authentication">Windows Session Authentication</a>
-     -  <a href="#final-remarks">Final remarks</a>
+      - {:.} <a href="#final-remarks">Final remarks</a>
 </li>
 </ul>
             </nav>
@@ -423,7 +411,7 @@
 
 </figure>
 
-<p>Login with the vCSA SSO credentials <code class="highlighter-rouge">Administrator@vsphere.local</code>. It has a default password of <code class="highlighter-rouge">vmware</code> (See Figure 2). Note that this account is different from the user <em>root</em>.</p>
+<p>Login with the vCSA SSO credentials <code class="language-plaintext highlighter-rouge">Administrator@vsphere.local</code>. It has a default password of <code class="language-plaintext highlighter-rouge">vmware</code> (See Figure 2). Note that this account is different from the user <em>root</em>.</p>
 
 <figure class="">
 

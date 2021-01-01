@@ -22,42 +22,30 @@
 <meta property="og:title" content="Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF">
 <meta property="og:url" content="https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/">
 
-
-  <meta property="og:description" content="Troubleshooting a BGP neighbor issue of “active open failed - tcb is not available” on a Megaport Hosted VIF due to unset BGP MD5 Auth key">
-
+<meta property="og:description" content="Troubleshooting a BGP neighbor issue of “active open failed - tcb is not available” on a Megaport Hosted VIF due to unset BGP MD5 Auth key">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF">
-  <meta name="twitter:description" content="Troubleshooting a BGP neighbor issue of “active open failed - tcb is not available” on a Megaport Hosted VIF due to unset BGP MD5 Auth key">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2019-09-10T00:00:00-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF">
+<meta name="twitter:description" content="Troubleshooting a BGP neighbor issue of “active open failed - tcb is not available” on a Megaport Hosted VIF due to unset BGP MD5 Auth key">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2019-09-10T00:00:00-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -384,7 +372,7 @@
 
 <p>Turning on <em>“debug ip bgp”</em> gave the following insight, which solely showed that the BGP peer connection was timing out.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10.1.103.34 active went from Idle to Active
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10.1.103.34 active went from Idle to Active
 10.1.103.34 open active, local address 10.1.103.33
 10.1.103.34 open failed: Connection timed out; remote host not responding
 10.1.103.34 Active open failed - tcb is not available, open active delayed 12288ms (35000ms max, 60% jitter)
@@ -459,14 +447,14 @@ ses global 10.1.103.34 act Reset (Active open failed).
 
 <p>With this the corresponding BGP setup on the Cisco-based customer router should be quite trivial.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 64970
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 64970
 neighbor 10.1.103.34 remote-as AWS_ASN
 </code></pre></div></div>
 
 <h1 id="troubleshooting">Troubleshooting</h1>
 
 <p>As mentioned before it was possible to ping the AWS Direct Connect peer interface successfully:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#ping 10.1.103.34
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#ping 10.1.103.34
 Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to 10.1.103.34, timeout is 2 seconds:
 !!!!!
@@ -475,20 +463,20 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 12/12/13 ms
 
 <p>Next, came checking via Telnet whether the BGP daemon was accessible on port TCP/179 on the AWS Direct Connect peer side.
 A successful connection would eventually be closed by the remote side and therefore look like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#telnet 10.1.103.34 179
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#telnet 10.1.103.34 179
 Trying 10.1.103.34, 179 ... Open
 
 [Connection to 10.1.103.34 closed by foreign host]
 </code></pre></div></div>
 
 <p>Just as a reference: In case the remote host was not accessible due to lack of Layer 3 connectivity, the result would like like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#telnet 10.1.103.34 179
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#telnet 10.1.103.34 179
 Trying 10.1.103.34, 179 ...
 % Connection timed out; remote host not responding
 </code></pre></div></div>
 
 <p>And if connectivity to port TCP/179 was blocked by e.g. an access control list (ACL), the result would look like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#telnet 10.1.103.34 179
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#telnet 10.1.103.34 179
 Trying 10.1.103.34, 179 ...
 % Connection refused by remote host
 </code></pre></div></div>
@@ -499,7 +487,7 @@ Trying 10.1.103.34, 179 ...
 
 <p>Using some more advanced Cisco IOS troubleshooting commands then confirmed that the AWS Direct Connect peer router was indeed setting an BGP Auth MD5, which the local router was not accepting.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#debug ip tcp transactions address 10.1.103.34
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Router1#debug ip tcp transactions address 10.1.103.34
 MD5 received, but NOT expected from 10.1.103.34:24834 to 10.1.103.33:179
 
 </code></pre></div></div>
@@ -508,7 +496,7 @@ MD5 received, but NOT expected from 10.1.103.34:24834 to 10.1.103.33:179
 
 <p>After adding the MD5 Auth key to the customer’s BGP config, the BGP peer session came up right away.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 64970
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 64970
 neighbor 10.1.103.34 remote-as AWS_ASN
 neighbor 10.1.103.34 password My5UpeR5eCRetPA55W0rD
 </code></pre></div></div>

@@ -22,42 +22,30 @@
 <meta property="og:title" content="AWS Site-to-Site VPN (IPSec) with IPv6">
 <meta property="og:url" content="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
 
-
-  <meta property="og:description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
-
+<meta property="og:description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="AWS Site-to-Site VPN (IPSec) with IPv6">
-  <meta name="twitter:description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2020-09-11T00:00:00-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="AWS Site-to-Site VPN (IPSec) with IPv6">
+<meta name="twitter:description" content="How to setup the AWS Site-to-Site VPN (IPSec) with IPv6">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2020-09-11T00:00:00-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -588,7 +576,8 @@ Also note that this means you’ll be paying separately for the tunnel carrying 
 
 </figure>
 
-<p>You’ll see that for both tunnels “Inside IPv4 CIDRs” from the 169.254.0.0/16 <a href="https://en.wikipedia.org/wiki/Link-local_address" target="_blank" rel="noopener noreferrer">Link-local address</a> range will be shown. As mentioned previously an AWS Site-to-Site connection - and thereby its tunnels - only supports either IPv4 or IPv6. As this is an IPv6 enabled tunnel, the displayed Inner IPv4 CIDRs are irrelevant and cannot be used for anything. Therefore it’s best to completely ignore this particular column here.</p>
+<p>You’ll see that for both tunnels “Inside IPv4 CIDRs” from the 169.254.0.0/16 <a href="https://en.wikipedia.org/wiki/Link-local_address" target="_blank" rel="noopener noreferrer">Link-local address</a> range will be shown. As mentioned previously an AWS Site-to-Site connection - and thereby its tunnels - only supports either IPv4 or IPv6. As this is an IPv6 enabled tunnel, the displayed Inner IPv4 CIDRs are irrelevant from a tunnel transport perspective. You can completely ignore them when configuring the tunnel itself.
+The provided information does come in handy with regards to the BGP router ID. In the above case, with Tunnel 1 the AWS side of the BGP session uses the BGP router ID of 169.254.123.<strong>89</strong>. To prevent collisions you should therefore not use the same BGP router ID on your side.</p>
 
 <p>Next you will notice that for the “Inside IPv6 CIDRs” the addresses are provided with a /128 netmask - which is the IPv6 equivalent of /32 and therefore a “host-only” netmask. This netmask therefore only contains a single IP address. Yet the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" target="_blank" rel="noopener noreferrer">documentation clearly calls out</a> that these “Inside IPv6 CIDRs” should be a /126 IPv6 CIDR block, which includes 4 IPv6 addresses. A /126 IPv6 CIDR is the equivalent of a /30 IPv4 CIDR.
 Also the provided IPv6 address from the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">Unique local address</a> address range ends in an odd number and is therefore not a network address, which always end in even numbers.
@@ -604,7 +593,7 @@ Turns out that the displayed IPv6 address is actually the AWS side of the inner 
 </li>
 </ul>
 
-<p>You should notice the pattern for constructing the unnecessary IPv6 information:</p>
+<p>You should notice the pattern for constructing the necessary IPv6 information:</p>
 <ul>
   <li>Subnet (aka CIDR): Provided IPv6 address - 1</li>
   <li>AWS-side interface address: Provided IPv6 address</li>
@@ -630,7 +619,7 @@ Turns out that the displayed IPv6 address is actually the AWS side of the inner 
 
 <p>With that the Tunnel Interface Configuration has to be adapted from IPv4 to IPv6. Using a Cisco IOS configuration as an example, the downloadable configuration file will provide the following Interface Configuration.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Tunnel1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Tunnel1
   ip address 169.254.123.90 255.255.255.252
   ip virtual-reassembly
   tunnel source 198.51.100.123
@@ -643,7 +632,7 @@ Turns out that the displayed IPv6 address is actually the AWS side of the inner 
 
 <p>Within this configuration we have to replace the inner IPv4 address with an IPv6 address and also specify that IPv6 should be used within the inside of the tunnel. The outer IP address remains to be an IPv4 address. The resulting corrected configuration using the IPv6 address as outlined in the previous section becomes as follows.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Tunnel1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Tunnel1
  no ip address
  ip virtual-reassembly
  ipv6 address FDBE:1A26:45B0:4631:CA60:3307:371B:6316/126
@@ -661,7 +650,7 @@ Turns out that the displayed IPv6 address is actually the AWS side of the inner 
 
 <p>The downloadable configuration will provide the following BGP configuration.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
   neighbor 169.254.123.89 remote-as 64512
   neighbor 169.254.123.89 activate
   neighbor 169.254.123.89 timers 10 30 30
@@ -675,7 +664,7 @@ Turns out that the displayed IPv6 address is actually the AWS side of the inner 
 <p>As we want to run BGP over the inner IPv6 connection, we again have to replace all IPv4 configuration items with the corresponding IPv6 addresses.
 The result will look as follows.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router bgp 65000
   neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 remote-as 64512
   neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 activate
   neighbor FDB0:C9AB:9EC7:3934:EE0:9873:54BC:C8F1 timers 10 30 30
@@ -692,7 +681,7 @@ The result will look as follows.</p>
 
 <p>As a final step, we can validate that IPv6 routes are being learned from the TGW via the Site-to-Site VPN.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ipv6 route bgp
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ipv6 route bgp
 IPv6 Routing Table - default - 13 entries
 Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
        B - BGP, R - RIP, H - NHRP, I1 - ISIS L1

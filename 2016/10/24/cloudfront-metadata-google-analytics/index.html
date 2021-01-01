@@ -22,42 +22,30 @@
 <meta property="og:title" content="AWS CloudFront meta data in Google Analytics">
 <meta property="og:url" content="https://www.edge-cloud.net/2016/10/24/cloudfront-metadata-google-analytics/">
 
-
-  <meta property="og:description" content="How to use AWS Lambda and API Gateway to push visitor IP version, HTTP version and edge location information into Google Analytics.">
-
+<meta property="og:description" content="How to use AWS Lambda and API Gateway to push visitor IP version, HTTP version and edge location information into Google Analytics.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="AWS CloudFront meta data in Google Analytics">
-  <meta name="twitter:description" content="How to use AWS Lambda and API Gateway to push visitor IP version, HTTP version and edge location information into Google Analytics.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/10/24/cloudfront-metadata-google-analytics/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2016-10-24T01:26:37-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="AWS CloudFront meta data in Google Analytics">
+<meta name="twitter:description" content="How to use AWS Lambda and API Gateway to push visitor IP version, HTTP version and edge location information into Google Analytics.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2016/10/24/cloudfront-metadata-google-analytics/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2016-10-24T01:26:37-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2016/10/24/cloudfront-metadata-google-analytics/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -753,7 +741,7 @@
 
 </figure>
 
-<p>Under “Behavior” of the distribution create a path pattern for a path that your are not using, e.g. <code class="highlighter-rouge">/cdn-cgi/edge-info</code>, while specifying the API Gateway origin.</p>
+<p>Under “Behavior” of the distribution create a path pattern for a path that your are not using, e.g. <code class="language-plaintext highlighter-rouge">/cdn-cgi/edge-info</code>, while specifying the API Gateway origin.</p>
 
 <p>Disable caching on this path by setting Minimum TTL, Maximum TTL, and Default TTL to 0 (See Figure 6).</p>
 
@@ -815,22 +803,22 @@
 
 </figure>
 
-<p>After the update to the CloudFront distribution has been completed you should find the following text information under the <code class="highlighter-rouge">/cdn-cgi/edge-info</code> URL:</p>
+<p>After the update to the CloudFront distribution has been completed you should find the following text information under the <code class="language-plaintext highlighter-rouge">/cdn-cgi/edge-info</code> URL:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipver=IPv6
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipver=IPv6
 httpver=2.0
 edgeloc=sfo
 </code></pre></div></div>
 
 <h2 id="embed-the-google-analytics-tracking-code">Embed the Google Analytics Tracking Code</h2>
 
-<p>Next we need to update the Google Analytics tracking code within the website, in order to fill the newly created custom dimensions with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="highlighter-rouge">gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="highlighter-rouge">gaTracker('send','pageview');</code>.</p>
+<p>Next we need to update the Google Analytics tracking code within the website, in order to fill the newly created custom dimensions with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="language-plaintext highlighter-rouge">gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="language-plaintext highlighter-rouge">gaTracker('send','pageview');</code>.</p>
 
 <p>If you are using WordPress the easiest way to include the custom tracking code is by using the <a href="https://wordpress.org/plugins/google-analytics-for-wordpress/" target="_blank" rel="noopener noreferrer">Google Analytics by Yoast</a> plugin. This plugin allows you under <strong>Advanced &gt; Custom Code</strong> to embed the below code right away and without any coding requirements.</p>
 
-<p>The below JavaScript code will read the values from <code class="highlighter-rouge">/cdn-cgi/edge-info</code>, extract the information we are interested it and push it into the Google Analytics custom dimension variables. Ensure that the numeric IDs of these custom dimension variables matches what you have created in above steps.</p>
+<p>The below JavaScript code will read the values from <code class="language-plaintext highlighter-rouge">/cdn-cgi/edge-info</code>, extract the information we are interested it and push it into the Google Analytics custom dimension variables. Ensure that the numeric IDs of these custom dimension variables matches what you have created in above steps.</p>
 
-<p>Embedded the code from <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData/blob/master/GoogleAnalyticsCode.js" target="_blank" rel="noopener noreferrer">here</a> into your website along with the standard Google Analytics tracking code. This custom JavaScript code will be executed by a visitor, collect metrics data from <code class="highlighter-rouge">/cdn-cgi/edge-info</code> and push it into Google Analytics.</p>
+<p>Embedded the code from <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData/blob/master/GoogleAnalyticsCode.js" target="_blank" rel="noopener noreferrer">here</a> into your website along with the standard Google Analytics tracking code. This custom JavaScript code will be executed by a visitor, collect metrics data from <code class="language-plaintext highlighter-rouge">/cdn-cgi/edge-info</code> and push it into Google Analytics.</p>
 
 <p>A few hours after embedding the code you should see your first custom dimension data in Google Analytics.</p>
 

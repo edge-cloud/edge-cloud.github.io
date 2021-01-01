@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Better understanding BGP - Edge Cloud</title>
-<meta name="description" content="Primer to better understanding BGP">
+<!-- begin _includes/seo.html --><title>Title goes here - Edge Cloud</title>
+<meta name="description" content="Brief description goes here">
 
 
   <meta name="author" content="Christian Elsen">
@@ -19,48 +19,36 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Edge Cloud">
-<meta property="og:title" content="Better understanding BGP">
-<meta property="og:url" content="https://www.edge-cloud.net/2020/09/28/understanding-bgp/">
+<meta property="og:title" content="Title goes here">
+<meta property="og:url" content="https://www.edge-cloud.net/2020/01/01/template/">
+
+<meta property="og:description" content="Brief description goes here">
 
 
-  <meta property="og:description" content="Primer to better understanding BGP">
-
-
-
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Better understanding BGP">
-  <meta name="twitter:description" content="Primer to better understanding BGP">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/28/understanding-bgp/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2020-09-28T00:00:00-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Title goes here">
+<meta name="twitter:description" content="Brief description goes here">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2020/01/01/template/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2020-12-31T22:13:14-08:00">
 
 
 
 
 
-  
-
-  
 
 
-<link rel="canonical" href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/">
+<link rel="canonical" href="https://www.edge-cloud.net/2020/01/01/template/">
 
 
 
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -346,15 +334,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Better understanding BGP">
-    <meta itemprop="description" content="Primer to better understanding BGP">
-    <meta itemprop="datePublished" content="September 28, 2020">
+    <meta itemprop="headline" content="Title goes here">
+    <meta itemprop="description" content="Brief description goes here">
+    <meta itemprop="datePublished" content="December 31, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Better understanding BGP
+          <h1 id="page-title" class="page__title" itemprop="headline">Title goes here
 </h1>
           
         </header>
@@ -367,306 +355,116 @@
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#routing-protocols">Routing Protocols</a></li>
-  <li><a href="#bgp">BGP</a></li>
   <li>
-<a href="#bgp-best-path-selection-algorithm">BGP Best Path Selection Algorithm</a>
+<a href="#heading-1">Heading 1</a>
     <ul>
-      <li><a href="#local_pref">Local_Pref</a></li>
-      <li><a href="#as_path-length">AS_PATH length</a></li>
-      <li><a href="#multi-exit-discriminator-med">Multi-Exit Discriminator (MED)</a></li>
-      <li><a href="#traffic-engineering-example">Traffic engineering example</a></li>
+      <li><a href="#heading-11">Heading 1.1</a></li>
     </ul>
   </li>
-  <li><a href="#best-path-selectiom-algorithm-relaxation">Best Path selectiom algorithm relaxation</a></li>
-  <li><a href="#bgp-multipath">BGP Multipath</a></li>
-  <li><a href="#summary">Summary</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p>In a <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">previous post</a> we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking, along with examples from running an <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">Autonomous System</a> on the Internet.</p>
+        <p>Intro of what to accomplish</p>
 
-<p>This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to select and explain them explicitly.</p>
+<h1 id="heading-1">Heading 1</h1>
 
-<h1 id="routing-protocols">Routing Protocols</h1>
+<h2 id="heading-11">Heading 1.1</h2>
 
-<p>A <a href="https://en.wikipedia.org/wiki/Routing_protocol" target="_blank" rel="noopener noreferrer">Routing Protocol</a> specifies how routers communicate with each other to exchange information about the network and as a result populate and update the local route tables. While there are many different routing protocols, they all fall into the categories of either Interior gateway protocols or Exterior gateway protocols. <a href="https://en.wikipedia.org/wiki/Interior_gateway_protocol" target="_blank" rel="noopener noreferrer">Interior gateway protocols (IGPs)</a>, such as e.g. <a href="https://en.wikipedia.org/wiki/Open_Shortest_Path_First" target="_blank" rel="noopener noreferrer">OSPF</a>, <a href="https://en.wikipedia.org/wiki/Routing_Information_Protocol" target="_blank" rel="noopener noreferrer">RIP</a>, or <a href="https://en.wikipedia.org/wiki/IS-IS" target="_blank" rel="noopener noreferrer">IS-IS</a>, exchange routing information within a single routing domain, thereby under the control of a single administration. <a href="https://en.wikipedia.org/wiki/Exterior_gateway_protocol" target="_blank" rel="noopener noreferrer">Exterior gateway protocols (EGP)</a>, such as e.g. <a href="https://en.wikipedia.org/wiki/Border_Gateway_Protocol" target="_blank" rel="noopener noreferrer">BGP</a> exchange routing information between autonomous systems.</p>
+<p><strong>Bold</strong></p>
 
-<h1 id="bgp">BGP</h1>
+<p class="notice--info"><strong>Note:</strong> This is a notice box</p>
 
-<p>Border Gateway Protocol (BGP) is an <a href="https://en.wikipedia.org/wiki/Exterior_gateway_protocol" target="_blank" rel="noopener noreferrer">Exterior gateway protocols (EGP)</a> designed to exchange routing and reachability information across Autonomous Systems (AS) on an Internet scale. It can be used for routing within an autonomous system, which is called Interior Border Gateway Protocol /  Internal BGP (iBGP). Or it can be used - as on the Internet - to route between AS, which is called Exterior Border Gateway Protocol / External BGP (eBGP). Here we will focus on the eBGP use case.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
+# Code
+#
 
-<h1 id="bgp-best-path-selection-algorithm">BGP Best Path Selection Algorithm</h1>
-
-<p>Within BGP the <a href="https://www.noction.com/blog/bgp-best-path-selection-algorithm" target="_blank" rel="noopener noreferrer">Best Path Selection Algorithm</a> is used to select the best route, which is then installed into the local route table. As the Internet route table - used in the <a href="https://en.wikipedia.org/wiki/Default-free_zone" target="_blank" rel="noopener noreferrer">Default Free Zone</a> - holds approximately 850,000 IPv4 and 95,000 IPv6 routes as of today and because some of these routes might be received from multiple peer - e.g. Transit Provider and direct peering, this selection is no easy task.
-Unless the default settings within a BGP enabled router are changed, the Best Path Selection Algorithm selects the shortest path as the best path, where shortest path means the least amount of AS in the path.</p>
-
-<p>In the following we want to look in more detail at the three most important selection criteria within the BGP Best Path Selection Algorithm:</p>
-<ul>
-  <li>
-<strong>Local Preference</strong> or often “Local_Pref” for short is the second criteria that is considered. The default Local_Pref is 100 and routes with a higher local preference are preferred.</li>
-  <li>
-<strong>AS_PATH</strong> is the fourth criteria considered. Routes with the shortest AS_PATH attribute are preferred.</li>
-  <li>
-<strong>Multi-exit discriminator (MED)</strong> is the sixth selection criteria considered. Here routes with a lower MED value are preferred with 0 being the default value.</li>
-</ul>
-
-<h2 id="local_pref">Local_Pref</h2>
-
-<p>As previously seen, Local_Pref is one of the first Best Path Selection Algorithm criteria that a router looks at. It is evaluated before the AS path length. While the default value of Local_Pref is 100, routes that have a higher Local_Pref value are preferred. An important characteristic to consider is that Local_Pref is local in the sense that the attribute is only propagated over iBGP sessions (within your AS) and not over eBGP sessions (to external ASes). You might see BGP route tables with empty entries for Local_Pref for a given route, sometimes along with other routes that do have an explicit entry. In this case the empty entries just mean that the deafult value of 100 applies.</p>
-
-<p>In practice Local_Pref can be used to specify how traffic should leave our AS, therefore it can guide the exit path (See Figure 1). Here ASN 1 prefers the path to ASN2, as the Local_Pref on the corresponding interface has a higher value.</p>
-
-<figure class="">
-
-
-
-
-
-
-
-
-<a href="/content/uploads/2020/09/Understanding-BGP-Local_Pref.png" title="Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred. " class="image-popup">
-<picture>
-  <source width="521" type="image/webp" data-srcset="
-
-    
-    /content/resized/2020/09/Understanding-BGP-Local_Pref-320.webp 320w, 
-
-    
-    /content/resized/2020/09/Understanding-BGP-Local_Pref-384.webp 384w, 
-
-    
-    /content/resized/2020/09/Understanding-BGP-Local_Pref-512.webp 512w, 
-
- /content/uploads/2020/09/Understanding-BGP-Local_Pref.webp 521w" sizes="521px"></source>
-  <source width="521" data-srcset="
-
-    /content/resized/2020/09/Understanding-BGP-Local_Pref-320.png 320w, 
-
-    /content/resized/2020/09/Understanding-BGP-Local_Pref-384.png 384w, 
-
-    /content/resized/2020/09/Understanding-BGP-Local_Pref-512.png 512w, 
-
- /content/uploads/2020/09/Understanding-BGP-Local_Pref.png 521w" sizes="521px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-Local_Pref.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred. ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred.
-</figcaption>
-
-</figure>
-
-<p>This is typically used for traffic engineering purposes, where an ASN wants to prefer a certain kind of peer over another. Usually this is done for financial reasons, as traffic exchanged over e.g. a Transit peering might incur cost, while traffic exchanged over a direct peering might be settlement free.</p>
-
-<p>As a result a typical mapping of BGP session types to Local_Pref values could look like this:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>BGP Session</th>
-      <th>Local_Pref</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Private Peering</strong></td>
-      <td>500</td>
-    </tr>
-    <tr>
-      <td><strong>Direct Peering via IXP</strong></td>
-      <td>400</td>
-    </tr>
-    <tr>
-      <td><strong>Peering via IXP Route Server</strong></td>
-      <td>300</td>
-    </tr>
-    <tr>
-      <td><strong>Transit</strong></td>
-      <td>200</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Here we generally prefer settlement-free peering with higher Local_Pref over paid transit with lower Local_Pref.</p>
-
-<h2 id="as_path-length">AS_PATH length</h2>
-
-<p>A common mechanism to manage traffic across AS with BGP is to make a BGP AS_PATH longer via <a href="https://www.noction.com/blog/as-path-and-as-path-prepending" target="_blank" rel="noopener noreferrer">AS path prepending</a>. Prepending means adding one or more AS numbers to the left side of the AS path. Normally this is done using one’s own AS number, while announcing routes to another AS.</p>
-
-<p>With that we can influence how traffic will reach our ASN. Similar to what I described before we might not only have a commercial interest in reducing the cost that we pay for Transit for traffic leaving our ASN, but also for traffic entering our ASN. We have seen that we can perform traffic engineering for egress traffic via Local_Pref, using AS path prepending can be used for traffic engineering on ingress traffic (See Figure 2). Here ASN 1 makes its path artificially longer towards ASN 3 by prepending its own ASN once.</p>
-
-<figure class="">
-
-
-
-
-
-
-
-
-<a href="/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png" title="Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN. " class="image-popup">
-<picture>
-  <source width="521" type="image/webp" data-srcset="
-
-    
-    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-320.webp 320w, 
-
-    
-    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-384.webp 384w, 
-
-    
-    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-512.webp 512w, 
-
- /content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.webp 521w" sizes="521px"></source>
-  <source width="521" data-srcset="
-
-    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-320.png 320w, 
-
-    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-384.png 384w, 
-
-    /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-512.png 512w, 
-
- /content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png 521w" sizes="521px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN. ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN.
-</figcaption>
-
-</figure>
-
-<p>With this we could use AS path prepending for IP prefixes originated or announced by our ASN over various types of BGP session types like this to optimize for cost:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>BGP Session</th>
-      <th>AS path prepending</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Private Peering</strong></td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td><strong>Direct Peering via IXP</strong></td>
-      <td>1x</td>
-    </tr>
-    <tr>
-      <td><strong>Peering via IXP Route Server</strong></td>
-      <td>2x</td>
-    </tr>
-    <tr>
-      <td><strong>Transit</strong></td>
-      <td>3x</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>In this case we tell other ASNs to prefer path via our settlement-free peering through lower AS_PATH length over paid transit through longer AS_PATH length.</p>
-
-<h2 id="multi-exit-discriminator-med">Multi-Exit Discriminator (MED)</h2>
-
-<p>Multi-Exit Discriminator (MED) is used for the case that more than one link between two ASN exists. I can be used to influence which of these links is then used (See Figure 3). It is important to point out that the MED value is not transitive. Therefore it is not passed on by the receiving AS and therefore can solely be used to influence traffic between directly neighboring AS.</p>
-
-<p>In this case traffic from the neighboring ASN 2 will ingress via device R1 as the MED on the corresponding link is lower.</p>
-
-<figure class="">
-
-
-
-
-
-
-
-
-<a href="/content/uploads/2020/09/Understanding-BGP-MED.png" title="Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred. " class="image-popup">
-<picture>
-  <source width="381" type="image/webp" data-srcset="
-
-    
-    /content/resized/2020/09/Understanding-BGP-MED-320.webp 320w, 
-
- /content/uploads/2020/09/Understanding-BGP-MED.webp 381w" sizes="381px"></source>
-  <source width="381" data-srcset="
-
-    /content/resized/2020/09/Understanding-BGP-MED-320.png 320w, 
-
- /content/uploads/2020/09/Understanding-BGP-MED.png 381w" sizes="381px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-MED.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred. ">
-</picture>
-</a>
-
-
-
-  <figcaption>Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred.
-</figcaption>
-
-</figure>
-
-<p>When using AWS you will encounter MED when using a BGP-based Site-to-Site (IPSec) VPN connection while using a Virtual Private Gateway (VGW). In this case only one of the two tunnels is used by AWS to actively send traffic from the VPC to the Customer Gateway (CGW). As AWS customers very frequently leverage Firewall devices as Customer Gateway (CGW) devices and not L3 routers, asymmetric traffic might cause issues with stateful firewall rules. To prevent these issues, AWS indicates the active VPN tunnel through MED, thereby encouraging customers to use that same tunnel for return traffic.</p>
-
-<p>You can see below that the IPSec tunnel with the next hop address <em>169.254.63.25</em> has a lower MED - displayed as Metric. Therefore this is the active tunnel within the connection.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V#sh ip bgp
-BGP table version is 292, local router ID is 1.1.1.1
-Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
-              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
-              x best-external, a additional-path, c RIB-compressed,
-              t secondary path, L long-lived-stale,
-Origin codes: i - IGP, e - EGP, ? - incomplete
-RPKI validation codes: V valid, I invalid, N Not found
-
-     Network          Next Hop            Metric LocPrf Weight Path
-      0.0.0.0          0.0.0.0                                0 i
- *&gt;   10.0.1.0/24      0.0.0.0                  0         32768 i
- *&gt;   10.0.16.0/24     0.0.0.0                  0         32768 i
- *&gt;   172.16.0.0/24    169.254.63.25          100             0 64512 i
- *                     169.254.39.225         200             0 64512 i
 </code></pre></div></div>
 
-<h2 id="traffic-engineering-example">Traffic engineering example</h2>
+<figure class="">
 
-<p>If you’re not using stateful rules on your CGW, you might be tempted to override the MED value with a Local_Pref to force return traffic through the standby tunnel and thereby increasing the overall throughput. While doing this you might hope that now one tunnel - serving traffic from AWS VPC to on-premises - will provide you a throughput of ~ 1.25 Gbps, while the other tunnel - serving traffic from on-premises to the AWS VPC - will provide you an additional throughput of ~1.25 Gbps. The result should be an increased thoughput at ~ 2.5 Gbps.</p>
 
-<p>This train of thought shows that you understood the fundamental principles of BGP and how to use them to influence traffic. Congratulation!</p>
 
-<p>Unfortunately the AWS Site-to-Site (IPSec) VPN specific throughput limitation of ~ 1.25 Gbps is per connection and not per tunnel as the VGW is the forcing element. Therefore this approach will not yield the desired results.</p>
 
-<h1 id="best-path-selectiom-algorithm-relaxation">Best Path selectiom algorithm relaxation</h1>
 
-<p>Various router platforms offer different sets if capabilities to relax the rules around the BGP best path selection algorithm. While by default e.g. MED are only considered across path with the same neighboring ASN, the Cisco IOS command <em>bgp always-compare-med</em> ignores the ASN when considering MEDs. We saw in the previous blog post <a href="https://www.edge-cloud.net/2019/08/16/aws-dxgw-with-ipsec-vpn-backup/#multi-exit-discriminator-med">AWS Transit Gateway with Direct Connect Gateway and Site-to-Site (IPSec) VPN Backup</a> how this can used in the case of AWS.</p>
 
-<h1 id="bgp-multipath">BGP Multipath</h1>
 
-<p>With regards to what we learned in the <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">previous post</a> about route tables, it is important to understand that only the best path is installed in the route table. Only if the BGP best path selection algorithm results in a “tie”, more than one route can be installed into the route table.</p>
 
-<p>This is called BGP Multipath and it is independent of whether the underlying route table has <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" target="_blank" rel="noopener noreferrer">Equal-cost multi-path routing (ECMP)</a> capabilities. In other words: To have full ECMP capability on a BGP enabled router, BGP needs to deliver parallel path to the routing table and the router needs to make use of them.</p>
+<a href="/content/uploads/2020/01/SecuringYourAWSNetwork.png" title="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="
 
-<p>Therefore if we want to use ECMP with prefixes learned over BGP, we have to enforce such a “tie”. This means we need to ensure the following BGP attributes are kept same on each paths:</p>
-<ul>
-  <li>Weight</li>
-  <li>Local Preference</li>
-  <li>AS Path (both AS number and AS path length)</li>
-  <li>Origin code</li>
-  <li>MED</li>
-  <li>IGP metric</li>
-</ul>
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.webp 320w, 
 
-<p>Various routing platforms offer ways to relax some of the attributes as tie breaker. As an example, the Cisco IOS command <em>bgp bestpath as-path multipath-relax</em> will ignore the actual AS numbers and only consider the AS path length. This allows ECMP across multiple upstream provider.</p>
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.webp 384w, 
 
-<h1 id="summary">Summary</h1>
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.webp 512w, 
 
-<p>Today’s blog post builds on what you’ve learned in the previous blog post on <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">Better understanding IP Routing</a>. It provides an introduction into the BGP Best Path Selection Algorithm and how to use some of the valued to influence traffic flowing into (ingress) and out of (egress) your ASN.</p>
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.webp 960w, 
+
+" sizes="4032px"></source>
+  <source data-srcset="
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
+
+" sizes="4032px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS
+</figcaption>
+
+</figure>
+
+\[Price_{NGW}=( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\]
+
+\[Price_{TGW+NGW}=
+  ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
+  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
+  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic}))\]
+
+\[Price_{TGW+NGW} \leq Price_{NGW}\]
+
+\[( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
+  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
+  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic})) \\
+  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\]
+
+\[traffic \cdot Cost_{TGW-Traffic} +  traffic \cdot Cost_{NGW-Traffic} - traffic \cdot Cost_{NGW-Traffic} \\
+  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) - \\
+  ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) - \\
+  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} )\]
+
+\[traffic \cdot Cost_{TGW-Traffic} \\
+  \leq 720 hr / month \cdot (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) \\
+  - ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))\]
+
+\[traffic \leq \frac{720 hr / month}{Cost_{TGW-Traffic}} \cdot \\
+  (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) - \\
+  ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))\]
 
         
       </section>
@@ -687,7 +485,7 @@ RPKI validation codes: V valid, I invalid, N Not found
     
       
       
-      <a href="/tags/#bgp" class="page__taxonomy-item" rel="tag">BGP</a><span class="sep">, </span>
+      <a href="/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
     
       
       
@@ -700,7 +498,7 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-09-28T00:00:00-07:00">September 28, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-12-31T22:13:14-08:00">December 31, 2020</time></p>
         
       </footer>
 
@@ -709,24 +507,25 @@ RPKI validation codes: V valid, I invalid, N Not found
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Better+understanding+BGP%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Title+goes+here%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
   
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F&amp;title=Better+understanding+BGP" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F&amp;title=Title+goes+here" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/2020/09/18/understanding-routing/" class="pagination--pager" title="Better understanding IP Routing
+      <a href="/2020/01/01/template/" class="pagination--pager" title="Title goes here
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/2013/05/20/configuring-f5-big-ip-with-vcd/" class="pagination--pager" title="Configuring F5 Big-IP LTM with VMware vCloud Director
+">Next</a>
     
   </nav>
 
@@ -740,6 +539,26 @@ RPKI validation codes: V valid, I invalid, N Not found
     <div class="page__related">
       <h4 class="page__related-title">You may also enjoy</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/09/28/understanding-bgp/" rel="permalink">Better understanding BGP
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Primer to better understanding BGP
+</p>
+  </article>
+</div>
+
         
           
 
@@ -796,26 +615,6 @@ RPKI validation codes: V valid, I invalid, N Not found
     </h2>
     
     <p class="archive__item-excerpt" itemprop="description">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/2020/04/19/drawing-monitor-for-network-diagrams/" rel="permalink">Drawing monitor for network diagrams
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams
 </p>
   </article>
 </div>
@@ -891,6 +690,8 @@ RPKI validation codes: V valid, I invalid, N Not found
 
   <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
 
+
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 

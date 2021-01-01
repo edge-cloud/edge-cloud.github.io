@@ -22,42 +22,30 @@
 <meta property="og:title" content="Better understanding IP Routing">
 <meta property="og:url" content="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
 
-
-  <meta property="og:description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
-
+<meta property="og:description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Better understanding IP Routing">
-  <meta name="twitter:description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2020-09-18T00:00:00-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Better understanding IP Routing">
+<meta name="twitter:description" content="Look at fundamental principles of IP routing to better design and troubleshoot networks">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2020-09-18T00:00:00-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -386,6 +374,7 @@
       </li>
     </ul>
   </li>
+  <li><a href="#analogy">Analogy</a></li>
   <li><a href="#summary">Summary</a></li>
 </ul>
             </nav>
@@ -613,7 +602,7 @@ Looking at the route tables of the TGWs you should notice that traffic  on the r
 
 <p>Translated into a route table on a Cisco device this might look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
 BGP table version is 297, local router ID is 1.1.1.1
 Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
               r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
@@ -637,7 +626,7 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 <p>Consider the below routing table on a Cisco device as an example and especially focus on the last five lines:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V-01#sh ip bgp
 BGP table version is 297, local router ID is 1.1.1.1
 Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
               r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
@@ -665,7 +654,7 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 <p>Again, let’s have a look at an example and consider the below routing table on a Cisco router, especially the last two lines:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V#sh ip bgp
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSR1000V#sh ip bgp
 BGP table version is 297, local router ID is 1.1.1.1
 Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
               r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
@@ -683,6 +672,61 @@ RPKI validation codes: V valid, I invalid, N Not found
 </code></pre></div></div>
 
 <p>In this case we can see that we have a multipath route for the destination prefix of “10.0.255.0/24”, where both “169.254.13.253” and “169.254.15.221” are considered as the next best hop. In this case the router device will randomly send out traffic for this destination network over either next hop, while using a 5-tuple hash. A 5-tuple hash refers to a set of five different values that comprise a Transmission Control Protocol/Internet Protocol (TCP/IP) connection. It includes a source IP address/port number, destination IP address/port number and the protocol in use. Here with ECMP and 5-tuple hashing, packets belonging to the same 5-tuple travel to the same next hop, while packets from different 5-tuple may be send to another next hop.</p>
+
+<h1 id="analogy">Analogy</h1>
+
+<p>IP routing is actually very simple, once you realize that it is similar to hiking without a map:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2020/09/bear-tree.jpg" title="Figure 4: IP routing is similar to hiking without a map. Here: Packet loss. (Photo courtesy of USDA Forest Service) " class="image-popup">
+<picture>
+  <source width="400" type="image/webp" data-srcset="
+
+    
+    /content/resized/2020/09/bear-tree-320.webp 320w, 
+
+    
+    /content/resized/2020/09/bear-tree-384.webp 384w, 
+
+ /content/uploads/2020/09/bear-tree.webp 400w" sizes="400px"></source>
+  <source width="400" data-srcset="
+
+    /content/resized/2020/09/bear-tree-320.jpg 320w, 
+
+    /content/resized/2020/09/bear-tree-384.jpg 384w, 
+
+ /content/uploads/2020/09/bear-tree.jpg 400w" sizes="400px"></source>
+  <img src="//:0" data-src="/content/uploads/2020/09/bear-tree.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 4: IP routing is similar to hiking without a map. Here: Packet loss. (Photo courtesy of USDA Forest Service) ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: IP routing is similar to hiking without a map. Here: Packet loss. (Photo courtesy of USDA Forest Service)
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>You start at the trailhead (source) and want to reach some target (destination).</li>
+  <li>Move along the hiking trail to the next fork (router) and look at the signs (route table). Decide which trail (next hop) to chose, in order to reach your destination.
+If the sign at the fork lacks an entry to the desired destination, you’re stuck forever and will eventually get eaten by a bear (dropped packet; See Figure 4).
+    <ul>
+      <li>If you pass the same fork more than once, you’re lost (packet looping) and will eventually run out of food (see below).</li>
+      <li>If you pass by more than 64 forks you run out of food, starve and get eaten by a bear (TTL expired).</li>
+      <li>If you made it to your desired target (destination), you succeeded. Good job!</li>
+    </ul>
+  </li>
+  <li>Like IP routing, hiking is bidirectional: You want to get home again, don’t you? Therefore consider the return path as well and follow the above steps.</li>
+</ul>
 
 <h1 id="summary">Summary</h1>
 

@@ -22,42 +22,30 @@
 <meta property="og:title" content="Protecting your website with DNS-Based Authentication of Named Entities (DANE)">
 <meta property="og:url" content="https://www.edge-cloud.net/2014/06/16/practical-guide-dns-based-authentication-named-entities-dane/">
 
-
-  <meta property="og:description" content="DNS-based Authentication of Named Entities (DANE, RFC6698) allow X.509 certificates, commonly used for Transport Layer Security (TLS), to be bound to DNS names using Domain Name System Security Extensions (DNSSEC). DNSSEC assures users that the information they obtain from DNS - in this case the fingerprint of the X.509 certificate came from the correct source, was complete and its integrity was not compromised during the transfer.">
-
+<meta property="og:description" content="DNS-based Authentication of Named Entities (DANE, RFC6698) allow X.509 certificates, commonly used for Transport Layer Security (TLS), to be bound to DNS names using Domain Name System Security Extensions (DNSSEC). DNSSEC assures users that the information they obtain from DNS - in this case the fingerprint of the X.509 certificate came from the correct source, was complete and its integrity was not compromised during the transfer.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Protecting your website with DNS-Based Authentication of Named Entities (DANE)">
-  <meta name="twitter:description" content="DNS-based Authentication of Named Entities (DANE, RFC6698) allow X.509 certificates, commonly used for Transport Layer Security (TLS), to be bound to DNS names using Domain Name System Security Extensions (DNSSEC). DNSSEC assures users that the information they obtain from DNS - in this case the fingerprint of the X.509 certificate came from the correct source, was complete and its integrity was not compromised during the transfer.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/06/16/practical-guide-dns-based-authentication-named-entities-dane/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2014-06-16T06:57:45-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Protecting your website with DNS-Based Authentication of Named Entities (DANE)">
+<meta name="twitter:description" content="DNS-based Authentication of Named Entities (DANE, RFC6698) allow X.509 certificates, commonly used for Transport Layer Security (TLS), to be bound to DNS names using Domain Name System Security Extensions (DNSSEC). DNSSEC assures users that the information they obtain from DNS - in this case the fingerprint of the X.509 certificate came from the correct source, was complete and its integrity was not compromised during the transfer.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2014/06/16/practical-guide-dns-based-authentication-named-entities-dane/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2014-06-16T06:57:45-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2014/06/16/practical-guide-dns-based-authentication-named-entities-dane/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -1102,7 +1090,7 @@
 
 <p>Verify the success of your API call by querying the DNS system for the created entry. This will either be <em>_443._tcp.www.examples.com</em> or <em>_443._tcp.examples.com</em>. Use the command dig along with type52 for the TLSA record type:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@srv01 ~ # dig type52 \_443.\_tcp.examples.com
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@srv01 ~ # dig type52 \_443.\_tcp.examples.com
 
 ; &lt;&lt;&gt;&gt; DiG 9.9.5-3-Ubuntu &lt;&lt;&gt;&gt; type52 \_443.\_tcp.examples.com
 ;; global options: +cmd
@@ -1118,7 +1106,7 @@
 
 <p>Using OpenSSL it is also possible to extract the fingerprint of the X.509 certificate use by a HTTPS server:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@srv01 ~ # echo -n | openssl s_client -connect www.examples.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' &gt; /tmp/dane.txt
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@srv01 ~ # echo -n | openssl s_client -connect www.examples.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' &gt; /tmp/dane.txt
 depth=0 C = US, CN = www.examples.com, emailAddress = info@examples.com
 verify error:num=20:unable to get local issuer certificate
 DONE

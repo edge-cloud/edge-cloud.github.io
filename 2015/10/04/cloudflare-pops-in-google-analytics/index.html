@@ -22,42 +22,30 @@
 <meta property="og:title" content="Track your CloudFlare PoPs usage in Google Analytics">
 <meta property="og:url" content="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">
 
-
-  <meta property="og:description" content="CloudFlare provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website. This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool Google Analytics. You need to have your website running through CloudFlare for this to work.">
-
+<meta property="og:description" content="CloudFlare provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website. This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool Google Analytics. You need to have your website running through CloudFlare for this to work.">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Track your CloudFlare PoPs usage in Google Analytics">
-  <meta name="twitter:description" content="CloudFlare provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website. This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool Google Analytics. You need to have your website running through CloudFlare for this to work.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2015-10-04T13:50:53-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Track your CloudFlare PoPs usage in Google Analytics">
+<meta name="twitter:description" content="CloudFlare provides a content delivery network and distributed domain name server services to help secure and accelerate websites. This cloud-based service sits between the visitor and the CloudFlare user’s hosting provider, acting as a reverse proxy for the website. This article will help you visualize the global presence of your website, when using CloudFlare, with the well-known tool Google Analytics. You need to have your website running through CloudFlare for this to work.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2015-10-04T13:50:53-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2015/10/04/cloudflare-pops-in-google-analytics/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -539,14 +527,14 @@
 
 <h2 id="embed-the-google-analytics-tracking-code">Embed the Google Analytics Tracking Code</h2>
 
-<p>Next we need to embed the Google Analytics tracking code within the website, in order to fill the newly created custom dimension with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="highlighter-rouge">__gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="highlighter-rouge">__gaTracker('send','pageview');</code>.</p>
+<p>Next we need to embed the Google Analytics tracking code within the website, in order to fill the newly created custom dimension with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="language-plaintext highlighter-rouge">__gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="language-plaintext highlighter-rouge">__gaTracker('send','pageview');</code>.</p>
 
 <p>If you are using WordPress the easiest way to include the custom tracking code is by using the “<a href="https://wordpress.org/plugins/google-analytics-for-wordpress/" target="_blank" rel="noopener noreferrer">Google Analytics by Yoast</a>” plugin. This plugin allows you under <strong>Advanced &gt; Custom Code</strong> to embed the below code right away and without any coding requirements.</p>
 
 <p>But first we have to actually determine the CloudFlare PoP location that serves a request. For this we can use the HTTP response header “cf-ray”, which is added by CLoudFlare for troubleshooting purposes. It includes a numeric value, as well as the <a href="https://www.cloudflarestatus.com/" target="_blank" rel="noopener noreferrer">location code</a> of the CloudFlare PoP.</p>
 
 <p>The below JavaScript code will read the “cf-ray” response header, extract the location ID and push it into the Google Analytics custom dimension variable. Ensure that the numeric ID of this custom dimension variable matches what you have created in above steps.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function loc(){
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function loc(){
   var req = new XMLHttpRequest();
   req.open('HEAD', document.location, false);
   req.send(null);

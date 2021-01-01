@@ -22,42 +22,30 @@
 <meta property="og:title" content="RUM “Light” with CloudFlare and Google Analytics">
 <meta property="og:url" content="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">
 
-
-  <meta property="og:description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
-
+<meta property="og:description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="RUM “Light” with CloudFlare and Google Analytics">
-  <meta name="twitter:description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2016-02-05T00:00:31-08:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="RUM “Light” with CloudFlare and Google Analytics">
+<meta name="twitter:description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2016-02-05T00:00:31-08:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -372,7 +360,7 @@
   <li><a href="#create-custom-dimensiosn-in-google-analytics">Create custom dimensiosn in Google Analytics</a></li>
   <li>
 <a href="#embed-the-google-analytics-tracking-code">Embed the Google Analytics Tracking Code</a>
-     -  <a href="#create-custom-reports-in-google-analytics">Create custom reports in Google Analytics</a>
+      - {:.} <a href="#create-custom-reports-in-google-analytics">Create custom reports in Google Analytics</a>
 </li>
   <li><a href="#summary">Summary</a></li>
 </ul>
@@ -393,7 +381,7 @@
 
 <p>The result will look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fl=4f96
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fl=4f96
 h=www.cloudflare.com
 ip=2606:4700:1000:8200:7847:642:dc8e:b176
 ts=1454615047.969
@@ -583,12 +571,12 @@ It would make more sense to have the field “http” available with ”http=h2
 
 <h1 id="embed-the-google-analytics-tracking-code">Embed the Google Analytics Tracking Code</h1>
 
-<p>Next we need to embed the Google Analytics tracking code within the website, in order to fill the newly created custom dimensions with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="highlighter-rouge">__gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="highlighter-rouge">__gaTracker('send','pageview');</code>.</p>
+<p>Next we need to embed the Google Analytics tracking code within the website, in order to fill the newly created custom dimensions with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="language-plaintext highlighter-rouge">__gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="language-plaintext highlighter-rouge">__gaTracker('send','pageview');</code>.</p>
 
 <p>If you are using WordPress the easiest way to include the custom tracking code is by using the “<a href="https://wordpress.org/plugins/google-analytics-for-wordpress/" target="_blank" rel="noopener noreferrer">Google Analytics by Yoast</a>” plugin. This plugin allows you under <em>Advanced &gt; Custom Code</em> to embed the below code right away and without any coding requirements.</p>
 
 <p>The below JavaScript code will read the values from <em>/cdn-cgi/trace</em>, extract the information we are interested it and push it into the Google Analytics custom dimension variables. Ensure that the numeric IDs of these custom dimension variables matches what you have created in above steps.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    function processData(x) {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    function processData(x) {
       var y = {};
       for (var i = 0; i &lt; x.length-1; i++) {
         var split = x[i].split('=');

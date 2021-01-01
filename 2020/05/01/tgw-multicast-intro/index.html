@@ -22,42 +22,30 @@
 <meta property="og:title" content="Multicast with AWS Transit Gateway">
 <meta property="og:url" content="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">
 
-
-  <meta property="og:description" content="Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)">
-
+<meta property="og:description" content="Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)">
 
 
-  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-
-<meta property="og:image:width" content="198">
-<meta property="og:image:height" content="297">
-
-
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Multicast with AWS Transit Gateway">
-  <meta name="twitter:description" content="Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
+<meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
-  <meta property="article:published_time" content="2020-05-01T00:00:00-07:00">
+<meta name="twitter:site" content="@ChristianElsen">
+<meta name="twitter:title" content="Multicast with AWS Transit Gateway">
+<meta name="twitter:description" content="Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+
+
+
+
+<meta property="article:published_time" content="2020-05-01T00:00:00-07:00">
 
 
 
 
 
-  
-
-  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">
@@ -158,7 +146,7 @@
 <link rel="preconnnect" href="https://googleads.g.doubleclick.net">
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
-<link rel="preconnnect" href="http://5xvqigedj8-dsn.algolia.net">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
 
 <!-- end custom head snippets -->
@@ -178,7 +166,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
         
         <a class="site-title" href="/"> On the edge of cloud computing</a>
         <ul class="visible-links">
@@ -539,14 +527,14 @@ The most common <a href="https://en.wikipedia.org/wiki/Transport_layer" target="
 <h2 id="source-and-receiver-instances">Source and Receiver Instances</h2>
 
 <p>First setup the EC2 instances that we will use in our testing as the Multicast Source and Multicast Receiver. To better understand how Multicast works, you should create at least one Multicast Source and two Multicast Receiver. Also keep the constraint around usage of AWS Nitro instances in mind and select a Nitro-based EC2 instance for the three EC2 instances.
-This blog post will assume use of Ubuntu Linux instances for the EC2 instances and you should install <a href="https://iperf.fr/" target="_blank" rel="noopener noreferrer">iPerf</a> on these instances. On Ubuntu Linux you will do this via <code class="highlighter-rouge">sudo apt get install iperf</code>.</p>
+This blog post will assume use of Ubuntu Linux instances for the EC2 instances and you should install <a href="https://iperf.fr/" target="_blank" rel="noopener noreferrer">iPerf</a> on these instances. On Ubuntu Linux you will do this via <code class="language-plaintext highlighter-rouge">sudo apt get install iperf</code>.</p>
 
 <p>Last, but not least ensure that port UDP 5001 is opened within the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html" target="_blank" rel="noopener noreferrer">security group</a> associated with the Multicast Receiver instances. The source IP will be the IPv4 address of the ENI associated with the Multicast Source EC2 instance.</p>
 
 <h2 id="transit-gateway-tgw">Transit Gateway (TGW)</h2>
 
 <p>You can follow the <a href="https://docs.aws.amazon.com/vpc/latest/tgw/working-with-multicast.html" target="_blank" rel="noopener noreferrer">AWS instructions</a> for setting up a Multicast-enabled TGW, along with a multicast domain.
-Next associate any of the VPCs and subnets that will include Multicast Sources and Receivers to this TGW. Then associate the individual Multicast Sources and Receiver via their Elastic Network Interface (ENI) with a Multicast Group (See Figure 3).</p>
+Next associate any of the VPCs and subnets that will include Multicast Sources and Receivers to this TGW. Multicast Source and Receiver can either be in the same VPC, or in different VPCs. Then associate the individual Multicast Sources and Receiver via their Elastic Network Interface (ENI) with a Multicast Group (See Figure 3).</p>
 
 <figure class="">
 
@@ -616,7 +604,7 @@ Next associate any of the VPCs and subnets that will include Multicast Sources a
 
 <p>First get the two Multicast Receiver ready by starting iPerf in “Server” mode against the Multicast group IP of “224.1.1.1” and using the protocol UDP. iPerf will use the default port of 5001.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% iperf -s -u -B 224.1.1.1 -i 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% iperf -s -u -B 224.1.1.1 -i 1
 ------------------------------------------------------------
 Server listening on UDP port 5001
 Binding to local address 224.1.1.1
@@ -632,7 +620,7 @@ UDP buffer size:  110 KByte (default)
 
 <p>Now that the Multicast Receiver are ready to accept traffic, it’s time to get the Multicast Source ready. On the Multicast Source EC2 instance, we will start iPerf in client mode against the above Multicast group.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% iperf -c 224.1.1.1 -u -T 32 -t 3 -i 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% iperf -c 224.1.1.1 -u -T 32 -t 3 -i 1
 ------------------------------------------------------------
 Client connecting to 224.1.1.1, UDP port 5001
 Sending 1470 byte datagrams
@@ -655,7 +643,7 @@ UDP buffer size:  110 KByte (default)
 
 <p>While the Multicast Source is generating traffic, we can head over to the two Multicast Receiver instances. There we should notice that both of the instances are receiving the test traffic at the same time.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 [  3] local 224.1.1.1 port 5001 connected with 192.168.220.20 port 59347
 [ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
 [  3]  0.0- 1.0 sec   128 KBytes  1.05 Mbits/sec   0.035 ms    0/   89 (0%)
