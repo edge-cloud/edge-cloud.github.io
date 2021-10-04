@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Title goes here - Edge Cloud</title>
-<meta name="description" content="Brief description goes here">
+<!-- begin _includes/seo.html --><title>Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2 - Edge Cloud</title>
+<meta name="description" content="Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.">
 
 
   <meta name="author" content="Christian Elsen">
@@ -19,10 +19,10 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Edge Cloud">
-<meta property="og:title" content="Title goes here">
-<meta property="og:url" content="https://www.edge-cloud.net/2020/01/01/template/">
+<meta property="og:title" content="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2">
+<meta property="og:url" content="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/">
 
-<meta property="og:description" content="Brief description goes here">
+<meta property="og:description" content="Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.">
 
 
 <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
@@ -30,9 +30,9 @@
 
 
 <meta name="twitter:site" content="@ChristianElsen">
-<meta name="twitter:title" content="Title goes here">
-<meta name="twitter:description" content="Brief description goes here">
-<meta name="twitter:url" content="https://www.edge-cloud.net/2020/01/01/template/">
+<meta name="twitter:title" content="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2">
+<meta name="twitter:description" content="Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.">
+<meta name="twitter:url" content="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/">
 <meta name="twitter:card" content="summary">
 
 <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
@@ -40,7 +40,7 @@
 
 
 
-<meta property="article:published_time" content="2021-01-01T07:19:58-08:00">
+<meta property="article:published_time" content="2021-10-04T15:04:18-07:00">
 
 
 
@@ -48,7 +48,7 @@
 
 
 
-<link rel="canonical" href="https://www.edge-cloud.net/2020/01/01/template/">
+<link rel="canonical" href="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/">
 
 
 
@@ -147,7 +147,6 @@
 <link rel="preconnnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnnect" href="https://adservice.google.com">
 <link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
-
 
 <!-- end custom head snippets -->
 
@@ -334,15 +333,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Title goes here">
-    <meta itemprop="description" content="Brief description goes here">
-    <meta itemprop="datePublished" content="January 01, 2021">
+    <meta itemprop="headline" content="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2">
+    <meta itemprop="description" content="Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.">
+    <meta itemprop="datePublished" content="October 04, 2021">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Title goes here
+          <h1 id="page-title" class="page__title" itemprop="headline">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
 </h1>
           
         </header>
@@ -355,21 +354,116 @@
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
+  <li><a href="#benefits">Benefits</a></li>
+  <li><a href="#requirements">Requirements</a></li>
+  <li><a href="#overall-process">Overall process</a></li>
   <li>
-<a href="#heading-1">Heading 1</a>
+<a href="#rirlir-configuration">RIR/LIR Configuration</a>
     <ul>
-      <li><a href="#heading-11">Heading 1.1</a></li>
+      <li><a href="#assignment">Assignment</a></li>
+      <li><a href="#resource-public-key-infrastructure-rpki">Resource Public Key Infrastructure (RPKI)</a></li>
     </ul>
   </li>
+  <li><a href="#aws-preparation">AWS Preparation</a></li>
+  <li><a href="#aws-configuration">AWS Configuration</a></li>
+  <li><a href="#validation">Validation</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p>Intro of what to accomplish</p>
+        <p>This blog post will walk you through the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html" target="_blank" rel="noopener noreferrer">Bring your own IP addresses (BYOIP) for Amazon EC2</a>, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">Autonomous System Numbers (ASNs)</a>. Within your AWS account, these BYOIP address ranges appear as an <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html" target="_blank" rel="noopener noreferrer">address pool</a>.</p>
 
-<h1 id="heading-1">Heading 1</h1>
+<p>While <a href="https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-bring-your-own-ip-byoip-for-amazon-vpc/" target="_blank" rel="noopener noreferrer">other blog posts on AWS BYOIP</a> exist, they are usually completely theoretical and thereby hard to follow. In this blog post instead I will use real IPv6 address space, allowing you to validate the various steps through various publicly available databases and systems.</p>
 
-<h2 id="heading-11">Heading 1.1</h2>
+<h1 id="benefits">Benefits</h1>
+
+<p>You might wonder what the benefits of using BYOIP for Amazon EC2 is. They include among others:</p>
+
+<ul>
+  <li>
+<strong>Trusted IP space:</strong> You might be using trusted IP space for your service, such as a transactional e-Mail service that requires a high reputation of IP space, or a VPN service.</li>
+  <li><strong>Avoid blocking of IP space:</strong></li>
+</ul>
+
+<h1 id="requirements">Requirements</h1>
+
+<p>While the AWS documentation lists various <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-requirements" target="_blank" rel="noopener noreferrer">requirements</a>, the statements on IP address “ownership” can be ignored. This is due to IP address “ownership” being a quite fuzzy term and “control” being a better term.</p>
+
+<p>It’s widely recognized within the Internet community that you can demonstrate sufficient control over IP address space for the purpose of announcement from another ASN, by being able to create the corresponding Route Origin Authorization (ROA) record.</p>
+
+<p>While you will later see how</p>
+
+<h1 id="overall-process">Overall process</h1>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2021/10/BYOIP-AWS-Process.png" title="Figure 1: AWS Process to prepare and provison VPC BYOIP. " class="image-popup">
+<picture>
+  <source width="1030" type="image/webp" data-srcset="
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-320.webp 320w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-384.webp 384w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-512.webp 512w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-683.webp 683w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-800.webp 800w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-960.webp 960w, 
+
+ /content/uploads/2021/10/BYOIP-AWS-Process.webp 1030w" sizes="1030px"></source>
+  <source width="1030" data-srcset="
+
+    /content/resized/2021/10/BYOIP-AWS-Process-320.png 320w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-384.png 384w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-512.png 512w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-683.png 683w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-800.png 800w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-960.png 960w, 
+
+ /content/uploads/2021/10/BYOIP-AWS-Process.png 1030w" sizes="1030px"></source>
+  <img src="//:0" data-src="/content/uploads/2021/10/BYOIP-AWS-Process.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: AWS Process to prepare and provison VPC BYOIP. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: AWS Process to prepare and provison VPC BYOIP.
+</figcaption>
+
+</figure>
+
+<h1 id="rirlir-configuration">RIR/LIR Configuration</h1>
+
+<h2 id="assignment">Assignment</h2>
+
+<h2 id="resource-public-key-infrastructure-rpki">Resource Public Key Infrastructure (RPKI)</h2>
+
+<h1 id="aws-preparation">AWS Preparation</h1>
+
+<h1 id="aws-configuration">AWS Configuration</h1>
+
+<h1 id="validation">Validation</h1>
 
 <p><strong>Bold</strong></p>
 
@@ -390,81 +484,99 @@
 
 
 
-<a href="/content/uploads/2020/01/SecuringYourAWSNetwork.png" title="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS " class="image-popup">
+<a href="/content/uploads/2021/10/BYOIP-RIPE-Assignment.png" title="Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red. " class="image-popup">
 <picture>
-  <source type="image/webp" data-srcset="
+  <source width="1131" type="image/webp" data-srcset="
 
     
-    /content/resized/2020/01/SecuringYourAWSNetwork-320.webp 320w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-320.webp 320w, 
 
     
-    /content/resized/2020/01/SecuringYourAWSNetwork-384.webp 384w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-384.webp 384w, 
 
     
-    /content/resized/2020/01/SecuringYourAWSNetwork-512.webp 512w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-512.webp 512w, 
 
     
-    /content/resized/2020/01/SecuringYourAWSNetwork-683.webp 683w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-683.webp 683w, 
 
     
-    /content/resized/2020/01/SecuringYourAWSNetwork-800.webp 800w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-800.webp 800w, 
 
     
-    /content/resized/2020/01/SecuringYourAWSNetwork-960.webp 960w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-960.webp 960w, 
 
-" sizes="4032px"></source>
-  <source data-srcset="
+ /content/uploads/2021/10/BYOIP-RIPE-Assignment.webp 1131w" sizes="1131px"></source>
+  <source width="1131" data-srcset="
 
-    /content/resized/2020/01/SecuringYourAWSNetwork-320.png 320w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-320.png 320w, 
 
-    /content/resized/2020/01/SecuringYourAWSNetwork-384.png 384w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-384.png 384w, 
 
-    /content/resized/2020/01/SecuringYourAWSNetwork-512.png 512w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-512.png 512w, 
 
-    /content/resized/2020/01/SecuringYourAWSNetwork-683.png 683w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-683.png 683w, 
 
-    /content/resized/2020/01/SecuringYourAWSNetwork-800.png 800w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-800.png 800w, 
 
-    /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-960.png 960w, 
 
-" sizes="4032px"></source>
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS ">
+ /content/uploads/2021/10/BYOIP-RIPE-Assignment.png 1131w" sizes="1131px"></source>
+  <img src="//:0" data-src="/content/uploads/2021/10/BYOIP-RIPE-Assignment.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red. ">
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS
+  <figcaption>Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red.
 </figcaption>
 
 </figure>
 
-\[Price_{NGW}=( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\]
+<figure class="">
 
-\[Price_{TGW+NGW}=
-  ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
-  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
-  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic}))\]
 
-\[Price_{TGW+NGW} \leq Price_{NGW}\]
 
-\[( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\
-  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\
-  (traffic \cdot ( Cost_{TGW-Traffic} + Cost_{NGW-Traffic})) \\
-  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\]
 
-\[traffic \cdot Cost_{TGW-Traffic} +  traffic \cdot Cost_{NGW-Traffic} - traffic \cdot Cost_{NGW-Traffic} \\
-  \leq ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) - \\
-  ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) - \\
-  ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} )\]
 
-\[traffic \cdot Cost_{TGW-Traffic} \\
-  \leq 720 hr / month \cdot (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) \\
-  - ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))\]
 
-\[traffic \leq \frac{720 hr / month}{Cost_{TGW-Traffic}} \cdot \\
-  (( Num_{VPC} \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) - \\
-  ( Num_{VPC} \cdot Cost_{TGW-Attachment} ) - ( Num_{AZ} \cdot Cost_{NGW-Attachment} ))\]
+
+
+<a href="/content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png" title="Figure 3: Resulting IPv6 pool within a VPC. " class="image-popup">
+<picture>
+  <source width="603" type="image/webp" data-srcset="
+
+    
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-320.webp 320w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-384.webp 384w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-512.webp 512w, 
+
+ /content/uploads/2021/10/BYOIP-AWS-VPC-Pool.webp 603w" sizes="603px"></source>
+  <source width="603" data-srcset="
+
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-320.png 320w, 
+
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-384.png 384w, 
+
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-512.png 512w, 
+
+ /content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png 603w" sizes="603px"></source>
+  <img src="//:0" data-src="/content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Resulting IPv6 pool within a VPC. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Resulting IPv6 pool within a VPC.
+</figcaption>
+
+</figure>
+
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]
 
         
       </section>
@@ -489,6 +601,10 @@
     
       
       
+      <a href="/tags/#ipv6" class="page__taxonomy-item" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      
+      
       <a href="/tags/#network" class="page__taxonomy-item" rel="tag">Network</a>
     
     </span>
@@ -498,7 +614,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-01-01T07:19:58-08:00">January 01, 2021</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-10-04T15:04:18-07:00">October 04, 2021</time></p>
         
       </footer>
 
@@ -507,24 +623,24 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Title+goes+here%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Hands-on+with+AWS+Bring+your+own+IP+addresses+%28BYOIP%29+in+Amazon+EC2%20https%3A%2F%2Fwww.edge-cloud.net%2F2021%2F10%2F01%2Fhands-on-with-aws-byoip%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2021%2F10%2F01%2Fhands-on-with-aws-byoip%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2021%2F10%2F01%2Fhands-on-with-aws-byoip%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
   
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F01%2F01%2Ftemplate%2F&amp;title=Title+goes+here" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2021%2F10%2F01%2Fhands-on-with-aws-byoip%2F&amp;title=Hands-on+with+AWS+Bring+your+own+IP+addresses+%28BYOIP%29+in+Amazon+EC2" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/2020/01/01/template/" class="pagination--pager" title="Title goes here
+      <a href="/2019/12/13/dx-deep-dive/" class="pagination--pager" title="AWS Direct Connect deep dive
 ">Previous</a>
     
     
-      <a href="/2013/05/20/configuring-f5-big-ip-with-vcd/" class="pagination--pager" title="Configuring F5 Big-IP LTM with VMware vCloud Director
+      <a href="/2020/01/03/securing-your-aws-network/" class="pagination--pager" title="Securing your AWS networks
 ">Next</a>
     
   </nav>
@@ -690,8 +806,6 @@
 
   <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
 
-
-  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" /><updated>2021-01-01T07:23:20-08:00</updated><id>https://www.edge-cloud.net/feed.xml</id><title type="html">Edge Cloud</title><subtitle>On the edge of cloud computing</subtitle><author><name>Christian Elsen</name></author><entry><title type="html">Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title><link href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" rel="alternate" type="text/html" title="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup" /><published>2021-01-01T07:19:58-08:00</published><updated>2021-01-01T07:19:58-08:00</updated><id>https://www.edge-cloud.net/2019/04/30/Freeradius-with-LetsEncrypt-for-WPA-Enterprise</id><content type="html" xml:base="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" /><updated>2021-10-04T15:07:52-07:00</updated><id>https://www.edge-cloud.net/feed.xml</id><title type="html">Edge Cloud</title><subtitle>On the edge of cloud computing</subtitle><author><name>Christian Elsen</name></author><entry><title type="html">Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title><link href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" rel="alternate" type="text/html" title="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup" /><published>2021-10-04T15:04:18-07:00</published><updated>2021-10-04T15:04:18-07:00</updated><id>https://www.edge-cloud.net/2019/04/30/Freeradius-with-LetsEncrypt-for-WPA-Enterprise</id><content type="html" xml:base="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
 
 &lt;h1 id=&quot;setup&quot;&gt;Setup&lt;/h1&gt;
 
@@ -50,7 +50,81 @@ security = ADS
 
 &lt;h1 id=&quot;freeradius&quot;&gt;Freeradius&lt;/h1&gt;
 
-&lt;h1 id=&quot;testing&quot;&gt;Testing&lt;/h1&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Step-by-step guid to setup Freeradius 3.0 with Let's Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.</summary></entry><entry><title type="html">AWS Direct Connect deep dive</title><link href="https://www.edge-cloud.net/2019/12/13/dx-deep-dive/" rel="alternate" type="text/html" title="AWS Direct Connect deep dive" /><published>2021-01-01T07:19:58-08:00</published><updated>2021-01-01T07:19:58-08:00</updated><id>https://www.edge-cloud.net/2019/12/13/dx-deep-dive</id><content type="html" xml:base="https://www.edge-cloud.net/2019/12/13/dx-deep-dive/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+&lt;h1 id=&quot;testing&quot;&gt;Testing&lt;/h1&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Step-by-step guid to setup Freeradius 3.0 with Let's Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.</summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2021-10-04T15:04:18-07:00</published><updated>2021-10-04T15:04:18-07:00</updated><id>https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+
+&lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;heading-11&quot;&gt;Heading 1.1&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; This is a notice box&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#
+# Code
+#
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2020/01/SecuringYourAWSNetwork.png&quot; title=&quot;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.webp 320w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.webp 384w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.webp 512w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.webp 683w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.webp 800w, 
+
+    
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.webp 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;source data-srcset=&quot;
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-320.png 320w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-384.png 384w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-512.png 512w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-683.png 683w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-800.png 800w, 
+
+    /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
+
+&quot; sizes=&quot;4032px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/01/SecuringYourAWSNetwork.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.</summary></entry><entry><title type="html">AWS Direct Connect deep dive</title><link href="https://www.edge-cloud.net/2019/12/13/dx-deep-dive/" rel="alternate" type="text/html" title="AWS Direct Connect deep dive" /><published>2021-10-04T15:04:18-07:00</published><updated>2021-10-04T15:04:18-07:00</updated><id>https://www.edge-cloud.net/2019/12/13/dx-deep-dive</id><content type="html" xml:base="https://www.edge-cloud.net/2019/12/13/dx-deep-dive/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
 
 &lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
 
@@ -264,7 +338,211 @@ security = ADS
   &lt;figcaption&gt;Figure 3: Direct Connect Connectivity Options
 &lt;/figcaption&gt;
 
-&lt;/figure&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Deep dive look at AWS Direct Connect</summary></entry><entry><title type="html">Securing your AWS networks</title><link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" /><published>2021-01-01T07:19:58-08:00</published><updated>2021-01-01T07:19:58-08:00</updated><id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+&lt;/figure&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Deep dive look at AWS Direct Connect</summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2021-10-04T15:04:18-07:00</published><updated>2021-10-04T15:04:18-07:00</updated><id>https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/">&lt;p&gt;This blog post will walk you through the &lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html&quot;&gt;Bring your own IP addresses (BYOIP) for Amazon EC2&lt;/a&gt;, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon &lt;a href=&quot;https://en.wikipedia.org/wiki/Autonomous_system_(Internet)&quot;&gt;Autonomous System Numbers (ASNs)&lt;/a&gt;. Within your AWS account, these BYOIP address ranges appear as an &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html&quot;&gt;address pool&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;While &lt;a href=&quot;https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-bring-your-own-ip-byoip-for-amazon-vpc/&quot;&gt;other blog posts on AWS BYOIP&lt;/a&gt; exist, they are usually completely theoretical and thereby hard to follow. In this blog post instead I will use real IPv6 address space, allowing you to validate the various steps through various publicly available databases and systems.&lt;/p&gt;
+
+&lt;h1 id=&quot;benefits&quot;&gt;Benefits&lt;/h1&gt;
+
+&lt;p&gt;You might wonder what the benefits of using BYOIP for Amazon EC2 is. They include among others:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Trusted IP space:&lt;/strong&gt; You might be using trusted IP space for your service, such as a transactional e-Mail service that requires a high reputation of IP space, or a VPN service.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Avoid blocking of IP space:&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;requirements&quot;&gt;Requirements&lt;/h1&gt;
+
+&lt;p&gt;While the AWS documentation lists various &lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-requirements&quot;&gt;requirements&lt;/a&gt;, the statements on IP address “ownership” can be ignored. This is due to IP address “ownership” being a quite fuzzy term and “control” being a better term.&lt;/p&gt;
+
+&lt;p&gt;It’s widely recognized within the Internet community that you can demonstrate sufficient control over IP address space for the purpose of announcement from another ASN, by being able to create the corresponding Route Origin Authorization (ROA) record.&lt;/p&gt;
+
+&lt;p&gt;While you will later see how&lt;/p&gt;
+
+&lt;h1 id=&quot;overall-process&quot;&gt;Overall process&lt;/h1&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2021/10/BYOIP-AWS-Process.png&quot; title=&quot;Figure 1: AWS Process to prepare and provison VPC BYOIP. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;1030&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-320.webp 320w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-384.webp 384w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-512.webp 512w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-683.webp 683w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-800.webp 800w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-Process-960.webp 960w, 
+
+ /content/uploads/2021/10/BYOIP-AWS-Process.webp 1030w&quot; sizes=&quot;1030px&quot; /&gt;
+  &lt;source width=&quot;1030&quot; data-srcset=&quot;
+
+    /content/resized/2021/10/BYOIP-AWS-Process-320.png 320w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-384.png 384w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-512.png 512w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-683.png 683w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-800.png 800w, 
+
+    /content/resized/2021/10/BYOIP-AWS-Process-960.png 960w, 
+
+ /content/uploads/2021/10/BYOIP-AWS-Process.png 1030w&quot; sizes=&quot;1030px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2021/10/BYOIP-AWS-Process.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: AWS Process to prepare and provison VPC BYOIP. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 1: AWS Process to prepare and provison VPC BYOIP.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;h1 id=&quot;rirlir-configuration&quot;&gt;RIR/LIR Configuration&lt;/h1&gt;
+
+&lt;h2 id=&quot;assignment&quot;&gt;Assignment&lt;/h2&gt;
+
+&lt;h2 id=&quot;resource-public-key-infrastructure-rpki&quot;&gt;Resource Public Key Infrastructure (RPKI)&lt;/h2&gt;
+
+&lt;h1 id=&quot;aws-preparation&quot;&gt;AWS Preparation&lt;/h1&gt;
+
+&lt;h1 id=&quot;aws-configuration&quot;&gt;AWS Configuration&lt;/h1&gt;
+
+&lt;h1 id=&quot;validation&quot;&gt;Validation&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; This is a notice box&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#
+# Code
+#
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2021/10/BYOIP-RIPE-Assignment.png&quot; title=&quot;Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;1131&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-320.webp 320w, 
+
+    
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-384.webp 384w, 
+
+    
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-512.webp 512w, 
+
+    
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-683.webp 683w, 
+
+    
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-800.webp 800w, 
+
+    
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-960.webp 960w, 
+
+ /content/uploads/2021/10/BYOIP-RIPE-Assignment.webp 1131w&quot; sizes=&quot;1131px&quot; /&gt;
+  &lt;source width=&quot;1131&quot; data-srcset=&quot;
+
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-320.png 320w, 
+
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-384.png 384w, 
+
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-512.png 512w, 
+
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-683.png 683w, 
+
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-800.png 800w, 
+
+    /content/resized/2021/10/BYOIP-RIPE-Assignment-960.png 960w, 
+
+ /content/uploads/2021/10/BYOIP-RIPE-Assignment.png 1131w&quot; sizes=&quot;1131px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2021/10/BYOIP-RIPE-Assignment.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+
+
+
+
+
+
+
+
+&lt;a href=&quot;/content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png&quot; title=&quot;Figure 3: Resulting IPv6 pool within a VPC. &quot; class=&quot;image-popup&quot;&gt;
+&lt;picture&gt;
+  &lt;source width=&quot;603&quot; type=&quot;image/webp&quot; data-srcset=&quot;
+
+    
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-320.webp 320w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-384.webp 384w, 
+
+    
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-512.webp 512w, 
+
+ /content/uploads/2021/10/BYOIP-AWS-VPC-Pool.webp 603w&quot; sizes=&quot;603px&quot; /&gt;
+  &lt;source width=&quot;603&quot; data-srcset=&quot;
+
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-320.png 320w, 
+
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-384.png 384w, 
+
+    /content/resized/2021/10/BYOIP-AWS-VPC-Pool-512.png 512w, 
+
+ /content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png 603w&quot; sizes=&quot;603px&quot; /&gt;
+  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Resulting IPv6 pool within a VPC. &quot; /&gt;
+&lt;/picture&gt;
+&lt;/a&gt;
+
+
+
+  &lt;figcaption&gt;Figure 3: Resulting IPv6 pool within a VPC.
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.</summary></entry><entry><title type="html">Securing your AWS networks</title><link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" /><published>2021-10-04T15:04:18-07:00</published><updated>2021-10-04T15:04:18-07:00</updated><id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
 
 &lt;h1 id=&quot;scope&quot;&gt;Scope&lt;/h1&gt;
 
@@ -758,7 +1036,7 @@ security = ADS
 # Code
 #
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Brief description goes here</summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2020/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2021-01-01T07:19:58-08:00</published><updated>2021-01-01T07:19:58-08:00</updated><id>https://www.edge-cloud.net/2020/01/01/template</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/01/template/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Brief description goes here</summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2021-10-04T15:04:18-07:00</published><updated>2021-10-04T15:04:18-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/template</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/template/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
 
 &lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
 
@@ -832,7 +1110,7 @@ security = ADS
 
 &lt;/figure&gt;
 
-\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Brief description goes here</summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2020/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2021-01-01T07:19:58-08:00</published><updated>2021-01-01T07:19:58-08:00</updated><id>https://www.edge-cloud.net/2020/01/01/tgw-ngw-cost-breakeven</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/01/template/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Brief description goes here</summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/" rel="alternate" type="text/html" title="Title goes here" /><published>2021-10-04T15:04:18-07:00</published><updated>2021-10-04T15:04:18-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/">&lt;p&gt;Intro of what to accomplish&lt;/p&gt;
 
 &lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
 
@@ -1882,532 +2160,4 @@ B   2600:1A16:807:3A00::/56 [20/100]
 
 &lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
 
-&lt;p&gt;This blog post guided you around some of the pitfalls when setting up an IPv6 capable AWS Site-to-Site VPN connection. It covered some of the rather cosmetic imperfections within the AWS Console around unusable IPv4 addresses, as well as generating a working Customer Gateway (CGW) configuration based on the downloadable configuration files.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6</summary></entry><entry><title type="html">Multicast with AWS Transit Gateway</title><link href="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/" rel="alternate" type="text/html" title="Multicast with AWS Transit Gateway" /><published>2020-05-01T00:00:00-07:00</published><updated>2020-05-01T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro</id><content type="html" xml:base="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/">&lt;p&gt;At the beginning of December 2019, AWS released &lt;a href=&quot;https://aws.amazon.com/blogs/aws/aws-transit-gateway-adds-multicast-and-inter-regional-peering/&quot;&gt;Multicast support&lt;/a&gt; within the &lt;a href=&quot;https://aws.amazon.com/transit-gateway/&quot;&gt;AWS Transit Gateway&lt;/a&gt;. This marked the beginning of being able to use applications that require support for &lt;a href=&quot;https://en.wikipedia.org/wiki/IP_multicast&quot;&gt;IP Multicast&lt;/a&gt; within AWS.&lt;/p&gt;
-
-&lt;p&gt;The following article will give you a brief overview of how to use IP Multicast with the AWS Transit Gateway and especially how to validate that your setup is working correctly.&lt;/p&gt;
-
-&lt;h1 id=&quot;multicast&quot;&gt;Multicast&lt;/h1&gt;
-
-&lt;p&gt;Let’s have a look at the basics of IP Multicasting and IP Multicast on AWS.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-is-ip-multicasting&quot;&gt;What is IP Multicasting&lt;/h2&gt;
-
-&lt;p&gt;With IP Multicasting a source host can send a single packet to hundreds or thousands of hosts at the same time. All this works over a route network - e.g. the Internet. The replication of the source packet along with tracking of destination membership happens inside of the network itself, instead of the application (See Figure 1).&lt;/p&gt;
-
-&lt;figure class=&quot;&quot;&gt;
-
-
-
-
-
-
-
-
-&lt;a href=&quot;/content/uploads/2020/05/Multicast-IPMulticast.png&quot; title=&quot;Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver. &quot; class=&quot;image-popup&quot;&gt;
-&lt;picture&gt;
-  &lt;source width=&quot;789&quot; type=&quot;image/webp&quot; data-srcset=&quot;
-
-    
-    /content/resized/2020/05/Multicast-IPMulticast-320.webp 320w, 
-
-    
-    /content/resized/2020/05/Multicast-IPMulticast-384.webp 384w, 
-
-    
-    /content/resized/2020/05/Multicast-IPMulticast-512.webp 512w, 
-
-    
-    /content/resized/2020/05/Multicast-IPMulticast-683.webp 683w, 
-
- /content/uploads/2020/05/Multicast-IPMulticast.webp 789w&quot; sizes=&quot;789px&quot; /&gt;
-  &lt;source width=&quot;789&quot; data-srcset=&quot;
-
-    /content/resized/2020/05/Multicast-IPMulticast-320.png 320w, 
-
-    /content/resized/2020/05/Multicast-IPMulticast-384.png 384w, 
-
-    /content/resized/2020/05/Multicast-IPMulticast-512.png 512w, 
-
-    /content/resized/2020/05/Multicast-IPMulticast-683.png 683w, 
-
- /content/uploads/2020/05/Multicast-IPMulticast.png 789w&quot; sizes=&quot;789px&quot; /&gt;
-  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/05/Multicast-IPMulticast.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver. &quot; /&gt;
-&lt;/picture&gt;
-&lt;/a&gt;
-
-
-
-  &lt;figcaption&gt;Figure 1: IP Multicasting with source host, rendezvous point and multicast receiver.
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;For this to work the source host addresses the packet with a Multicast Address from the range of 224.0.0.0 through 239.255.255.255. Each Multicast Address specifies a Multicast group to which other hosts can subscribe to. Such a group can have between one and an unlimited number of members as neither hosts nor routers maintain a list of all members. Instead the source host send the packet to an initial router, called the rendezvous point (RP), which serves as the root of a tree-like multicast distribution.
-The most common &lt;a href=&quot;https://en.wikipedia.org/wiki/Transport_layer&quot;&gt;transport layer&lt;/a&gt; protocol to use multicast addressing is &lt;a href=&quot;https://en.wikipedia.org/wiki/User_Datagram_Protocol&quot;&gt;User Datagram Protocol (UDP)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;multicast-and-aws-transit-gateway&quot;&gt;Multicast and AWS Transit Gateway&lt;/h2&gt;
-
-&lt;p&gt;While an AWS VPC by itself does not support Multicast, AWS Transit Gateway can provide this new capability. The Transit Gateway will act as the rendezvous point, receiving the packets from the Multicast source, replicate it and send it to the Multicast Receiver. With the Multicast-enabled Transit Gateway, source and receiver can be in the same VPC or in different VPCs.&lt;/p&gt;
-
-&lt;h1 id=&quot;constraints&quot;&gt;Constraints&lt;/h1&gt;
-
-&lt;p&gt;Today Multicast on AWS Transit Gateway comes with a few restrictions that need to be considered:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Creation and usage of Multicast-enabled TGW is currently only supported in the AWS Region us-east-1 (N. Virginia).&lt;/li&gt;
-  &lt;li&gt;You must create a new TGW to enable Multicast. It is not possible to enable Multicast on an existing Transit Gateway. In case you are already using a Transit Gateway, you can create another instance that will just serve the purpose of distributing Multicast traffic (See Figure 2). As neither VPC nor TGW route tables are used to handle multicast traffic, this deployment model will not interfere with your existing traditional TGW or VPC route tables.&lt;/li&gt;
-  &lt;li&gt;Self-Management of Multicast group membership by hosts through the &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Group_Management_Protocol&quot;&gt;Internet Group Management Protocol (IGMP)&lt;/a&gt; is not yet supported. Instead Multicast group membership is solely managed using Amazon VPC Console or the AWS CLI.&lt;/li&gt;
-  &lt;li&gt;Only &lt;a href=&quot;https://aws.amazon.com/ec2/nitro/&quot;&gt;AWS Nitro&lt;/a&gt; instances can be a Multicast source. If you use a non-Nitro instance as a receiver, you must disable the &lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#change_source_dest_check&quot;&gt;Source/Dest check&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;While the AWS Transit Gateway has a default limit of only supporting &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-quotas.html#multicast-quota&quot;&gt;1x TGW source per group&lt;/a&gt;, this limit can be increased.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;&quot;&gt;
-
-
-
-
-
-
-
-
-&lt;a href=&quot;/content/uploads/2020/05/Multicast-Multicast-TGW.png&quot; title=&quot;Figure 2: Multicast-enabled TGW besides traditional TGW. &quot; class=&quot;image-popup&quot;&gt;
-&lt;picture&gt;
-  &lt;source width=&quot;1009&quot; type=&quot;image/webp&quot; data-srcset=&quot;
-
-    
-    /content/resized/2020/05/Multicast-Multicast-TGW-320.webp 320w, 
-
-    
-    /content/resized/2020/05/Multicast-Multicast-TGW-384.webp 384w, 
-
-    
-    /content/resized/2020/05/Multicast-Multicast-TGW-512.webp 512w, 
-
-    
-    /content/resized/2020/05/Multicast-Multicast-TGW-683.webp 683w, 
-
-    
-    /content/resized/2020/05/Multicast-Multicast-TGW-800.webp 800w, 
-
-    
-    /content/resized/2020/05/Multicast-Multicast-TGW-960.webp 960w, 
-
- /content/uploads/2020/05/Multicast-Multicast-TGW.webp 1009w&quot; sizes=&quot;1009px&quot; /&gt;
-  &lt;source width=&quot;1009&quot; data-srcset=&quot;
-
-    /content/resized/2020/05/Multicast-Multicast-TGW-320.png 320w, 
-
-    /content/resized/2020/05/Multicast-Multicast-TGW-384.png 384w, 
-
-    /content/resized/2020/05/Multicast-Multicast-TGW-512.png 512w, 
-
-    /content/resized/2020/05/Multicast-Multicast-TGW-683.png 683w, 
-
-    /content/resized/2020/05/Multicast-Multicast-TGW-800.png 800w, 
-
-    /content/resized/2020/05/Multicast-Multicast-TGW-960.png 960w, 
-
- /content/uploads/2020/05/Multicast-Multicast-TGW.png 1009w&quot; sizes=&quot;1009px&quot; /&gt;
-  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/05/Multicast-Multicast-TGW.png&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: Multicast-enabled TGW besides traditional TGW. &quot; /&gt;
-&lt;/picture&gt;
-&lt;/a&gt;
-
-
-
-  &lt;figcaption&gt;Figure 2: Multicast-enabled TGW besides traditional TGW.
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;h1 id=&quot;setup&quot;&gt;Setup&lt;/h1&gt;
-
-&lt;p&gt;Before kicking the tires on Multicast, it needs to be setup. At a minimum this requires the network setup within the Transit Gateway, as well as at least one Multicast Source and one Multicast Receiver instance.&lt;/p&gt;
-
-&lt;h2 id=&quot;source-and-receiver-instances&quot;&gt;Source and Receiver Instances&lt;/h2&gt;
-
-&lt;p&gt;First setup the EC2 instances that we will use in our testing as the Multicast Source and Multicast Receiver. To better understand how Multicast works, you should create at least one Multicast Source and two Multicast Receiver. Also keep the constraint around usage of AWS Nitro instances in mind and select a Nitro-based EC2 instance for the three EC2 instances.
-This blog post will assume use of Ubuntu Linux instances for the EC2 instances and you should install &lt;a href=&quot;https://iperf.fr/&quot;&gt;iPerf&lt;/a&gt; on these instances. On Ubuntu Linux you will do this via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt get install iperf&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Last, but not least ensure that port UDP 5001 is opened within the &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html&quot;&gt;security group&lt;/a&gt; associated with the Multicast Receiver instances. The source IP will be the IPv4 address of the ENI associated with the Multicast Source EC2 instance.&lt;/p&gt;
-
-&lt;h2 id=&quot;transit-gateway-tgw&quot;&gt;Transit Gateway (TGW)&lt;/h2&gt;
-
-&lt;p&gt;You can follow the &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/tgw/working-with-multicast.html&quot;&gt;AWS instructions&lt;/a&gt; for setting up a Multicast-enabled TGW, along with a multicast domain.
-Next associate any of the VPCs and subnets that will include Multicast Sources and Receivers to this TGW. Multicast Source and Receiver can either be in the same VPC, or in different VPCs. Then associate the individual Multicast Sources and Receiver via their Elastic Network Interface (ENI) with a Multicast Group (See Figure 3).&lt;/p&gt;
-
-&lt;figure class=&quot;&quot;&gt;
-
-
-
-
-
-
-
-
-&lt;a href=&quot;/content/uploads/2020/05/TGW-Multicast-Group.jpg&quot; title=&quot;Figure 3: Multicast-Group with single source and multiple receiver. &quot; class=&quot;image-popup&quot;&gt;
-&lt;picture&gt;
-  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
-
-    
-    /content/resized/2020/05/TGW-Multicast-Group-320.webp 320w, 
-
-    
-    /content/resized/2020/05/TGW-Multicast-Group-384.webp 384w, 
-
-    
-    /content/resized/2020/05/TGW-Multicast-Group-512.webp 512w, 
-
-    
-    /content/resized/2020/05/TGW-Multicast-Group-683.webp 683w, 
-
-    
-    /content/resized/2020/05/TGW-Multicast-Group-800.webp 800w, 
-
-    
-    /content/resized/2020/05/TGW-Multicast-Group-960.webp 960w, 
-
-&quot; sizes=&quot;1455px&quot; /&gt;
-  &lt;source data-srcset=&quot;
-
-    /content/resized/2020/05/TGW-Multicast-Group-320.jpg 320w, 
-
-    /content/resized/2020/05/TGW-Multicast-Group-384.jpg 384w, 
-
-    /content/resized/2020/05/TGW-Multicast-Group-512.jpg 512w, 
-
-    /content/resized/2020/05/TGW-Multicast-Group-683.jpg 683w, 
-
-    /content/resized/2020/05/TGW-Multicast-Group-800.jpg 800w, 
-
-    /content/resized/2020/05/TGW-Multicast-Group-960.jpg 960w, 
-
-&quot; sizes=&quot;1455px&quot; /&gt;
-  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/05/TGW-Multicast-Group.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Multicast-Group with single source and multiple receiver. &quot; /&gt;
-&lt;/picture&gt;
-&lt;/a&gt;
-
-
-
-  &lt;figcaption&gt;Figure 3: Multicast-Group with single source and multiple receiver.
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;The above example shows the Multicast Group 224.1.1.1 with one Multicast Source and two Multicast Receivers.&lt;/p&gt;
-
-&lt;h1 id=&quot;testing&quot;&gt;Testing&lt;/h1&gt;
-
-&lt;p&gt;Now that the setup is complete, it’s time to test our setup. We expect that a packet send by the Multicast Source to the Multicast group 224.1.1.1 should be simultaneously received by both Multicast Receivers.&lt;/p&gt;
-
-&lt;h2 id=&quot;multicast-receiver&quot;&gt;Multicast Receiver&lt;/h2&gt;
-
-&lt;p&gt;First get the two Multicast Receiver ready by starting iPerf in “Server” mode against the Multicast group IP of “224.1.1.1” and using the protocol UDP. iPerf will use the default port of 5001.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;% iperf -s -u -B 224.1.1.1 -i 1
-------------------------------------------------------------
-Server listening on UDP port 5001
-Binding to local address 224.1.1.1
-Joining multicast group  224.1.1.1
-Receiving 1470 byte datagrams
-UDP buffer size:  110 KByte (default)
-------------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;iPerf will recognize the provided address as an IP Multicast address and join this group. After that iPerf will wait for incoming traffic over UDP port 5001 and display it accordingly.&lt;/p&gt;
-
-&lt;h2 id=&quot;multicast-source&quot;&gt;Multicast Source&lt;/h2&gt;
-
-&lt;p&gt;Now that the Multicast Receiver are ready to accept traffic, it’s time to get the Multicast Source ready. On the Multicast Source EC2 instance, we will start iPerf in client mode against the above Multicast group.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;% iperf -c 224.1.1.1 -u -T 32 -t 3 -i 1
-------------------------------------------------------------
-Client connecting to 224.1.1.1, UDP port 5001
-Sending 1470 byte datagrams
-Setting multicast TTL to 32
-UDP buffer size:  110 KByte (default)
-------------------------------------------------------------
-[  3] local 192.168.220.20 port 59347 connected with 224.1.1.1 port 5001
-[ ID] Interval       Transfer     Bandwidth
-[  3]  0.0- 1.0 sec   129 KBytes  1.06 Mbits/sec
-[  3]  1.0- 2.0 sec   128 KBytes  1.05 Mbits/sec
-[  3]  2.0- 3.0 sec   128 KBytes  1.05 Mbits/sec
-[  3]  0.0- 3.0 sec   386 KBytes  1.05 Mbits/sec
-[  3] Sent 269 datagrams
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This way iPerf will generate traffic and send it to the Multicast group 224.1.1.1 over UDP to port 5001, which is the default setting.&lt;/p&gt;
-
-&lt;h2 id=&quot;result&quot;&gt;Result&lt;/h2&gt;
-
-&lt;p&gt;While the Multicast Source is generating traffic, we can head over to the two Multicast Receiver instances. There we should notice that both of the instances are receiving the test traffic at the same time.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...
-[  3] local 224.1.1.1 port 5001 connected with 192.168.220.20 port 59347
-[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
-[  3]  0.0- 1.0 sec   128 KBytes  1.05 Mbits/sec   0.035 ms    0/   89 (0%)
-[  3]  1.0- 2.0 sec   128 KBytes  1.05 Mbits/sec   0.015 ms    0/   89 (0%)
-[  3]  2.0- 3.0 sec   128 KBytes  1.05 Mbits/sec   0.025 ms    0/   89 (0%)
-[  3]  0.0- 3.0 sec   386 KBytes  1.05 Mbits/sec   0.068 ms    0/  269 (0%)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As expected the underlying network replicated the test traffic from the Multicast Source and delivered it to both Multicast Receiver at the same time.&lt;/p&gt;
-
-&lt;h1 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;/h1&gt;
-
-&lt;p&gt;Here are a few things to look at in case something is not working&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Security Groups and Firewalls:&lt;/strong&gt; Make sure that the Security Group associated with the Multicast Receiver EC2 instance allows the Multicast test traffic in. We will be using the transport protocol UDP and by default iPerf uses the port 5001. Also, the source IP of the received traffic will be the IPv4 address of the ENI that is the Multicast Source. In case you are using multiple Multicast Sources, this will translate to multiple IPv4 addresses.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;TGW Multicast Domain groups:&lt;/strong&gt; Make sure that the Multicast group IP address that you are using with iPerf matches the setup in TGW. Also make sure that you specified the correct EC2 instances - via their ENI - as the source and receiver.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If things still don’t work, fire up &lt;a href=&quot;https://www.tcpdump.org/&quot;&gt;tcpdump&lt;/a&gt; on the Source and Receiver side and see what packets you’re seeing.&lt;/p&gt;
-
-&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
-
-&lt;p&gt;This article walked you through the setup and configuration of a Multicast-enabled Transit Gateway and showed you how to quickly test functionality using iPerf.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)</summary></entry><entry><title type="html">Drawing monitor for network diagrams</title><link href="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/" rel="alternate" type="text/html" title="Drawing monitor for network diagrams" /><published>2020-04-19T00:00:00-07:00</published><updated>2020-04-19T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams</id><content type="html" xml:base="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/">&lt;p&gt;As a Senior Solutions Architect Specialist for Networking at &lt;a href=&quot;https://aws.amazon.com/&quot;&gt;AWS&lt;/a&gt;, I spent a lot of time in online meetings with customers, helping them design networks or understand AWS networking better. Part of these meetings usually involves whiteboarding network diagrams. While visualizing ideas or concepts is something very common and straight forward on a physical whiteboard, it is not trivial in an online meeting.&lt;/p&gt;
-
-&lt;p&gt;As I often get asked about my setup during or after calls, I want to shed some light on what I’m using and what’s working for me.&lt;/p&gt;
-
-&lt;h1 id=&quot;home-office-setup&quot;&gt;Home office setup&lt;/h1&gt;
-
-&lt;p&gt;As I primarily work from home, my home office setup (See Figure 1) provides everything I need to get through the day.&lt;/p&gt;
-
-&lt;figure class=&quot;&quot;&gt;
-
-
-
-
-
-
-
-
-&lt;a href=&quot;/content/uploads/2020/04/HomeOffice1.jpg&quot; title=&quot;Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor. &quot; class=&quot;image-popup&quot;&gt;
-&lt;picture&gt;
-  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
-
-    
-    /content/resized/2020/04/HomeOffice1-320.webp 320w, 
-
-    
-    /content/resized/2020/04/HomeOffice1-384.webp 384w, 
-
-    
-    /content/resized/2020/04/HomeOffice1-512.webp 512w, 
-
-    
-    /content/resized/2020/04/HomeOffice1-683.webp 683w, 
-
-    
-    /content/resized/2020/04/HomeOffice1-800.webp 800w, 
-
-    
-    /content/resized/2020/04/HomeOffice1-960.webp 960w, 
-
-&quot; sizes=&quot;4032px&quot; /&gt;
-  &lt;source data-srcset=&quot;
-
-    /content/resized/2020/04/HomeOffice1-320.jpg 320w, 
-
-    /content/resized/2020/04/HomeOffice1-384.jpg 384w, 
-
-    /content/resized/2020/04/HomeOffice1-512.jpg 512w, 
-
-    /content/resized/2020/04/HomeOffice1-683.jpg 683w, 
-
-    /content/resized/2020/04/HomeOffice1-800.jpg 800w, 
-
-    /content/resized/2020/04/HomeOffice1-960.jpg 960w, 
-
-&quot; sizes=&quot;4032px&quot; /&gt;
-  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/04/HomeOffice1.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor. &quot; /&gt;
-&lt;/picture&gt;
-&lt;/a&gt;
-
-
-
-  &lt;figcaption&gt;Figure 1: Home office setup with Huion Kamvas Pro 12 Drawing Monitor.
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;This article will focus on the Drawing monitor, visible in the lower left.&lt;/p&gt;
-
-&lt;h2 id=&quot;hardware&quot;&gt;Hardware&lt;/h2&gt;
-
-&lt;p&gt;The key component of my home office setup is a &lt;a href=&quot;https://amzn.to/3afaZhe&quot;&gt;Huion Kamvas Pro 12 Drawing Monitor&lt;/a&gt;, connected via HDMI and USB to the docking station of my notebook. On my PC it shows up as a secondary screen in addition to my primary &lt;a href=&quot;https://amzn.to/2RQheSq&quot;&gt;Dell U3419 Ultrasharp monitor&lt;/a&gt;. Pen input on the Huion monitor is translated into standard mouse input.&lt;/p&gt;
-
-&lt;p&gt;It’s important to point out that in contrary to touch enabled notebooks, this monitor does not provide touch input. It only reacts to the provided pen. Therefore you can touch it with the balm of your hand while drawing (See Figure 2). Although that does leave smudges and you’ll have to clean the screen with a good &lt;a href=&quot;https://amzn.to/2KjB3xe&quot;&gt;microfiber clearning cloth&lt;/a&gt; from time to time.&lt;/p&gt;
-
-&lt;figure class=&quot;&quot;&gt;
-
-
-
-
-
-
-
-
-&lt;a href=&quot;/content/uploads/2020/04/HomeOffice3.jpg&quot; title=&quot;Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen. &quot; class=&quot;image-popup&quot;&gt;
-&lt;picture&gt;
-  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
-
-    
-    /content/resized/2020/04/HomeOffice3-320.webp 320w, 
-
-    
-    /content/resized/2020/04/HomeOffice3-384.webp 384w, 
-
-    
-    /content/resized/2020/04/HomeOffice3-512.webp 512w, 
-
-    
-    /content/resized/2020/04/HomeOffice3-683.webp 683w, 
-
-    
-    /content/resized/2020/04/HomeOffice3-800.webp 800w, 
-
-    
-    /content/resized/2020/04/HomeOffice3-960.webp 960w, 
-
-&quot; sizes=&quot;4032px&quot; /&gt;
-  &lt;source data-srcset=&quot;
-
-    /content/resized/2020/04/HomeOffice3-320.jpg 320w, 
-
-    /content/resized/2020/04/HomeOffice3-384.jpg 384w, 
-
-    /content/resized/2020/04/HomeOffice3-512.jpg 512w, 
-
-    /content/resized/2020/04/HomeOffice3-683.jpg 683w, 
-
-    /content/resized/2020/04/HomeOffice3-800.jpg 800w, 
-
-    /content/resized/2020/04/HomeOffice3-960.jpg 960w, 
-
-&quot; sizes=&quot;4032px&quot; /&gt;
-  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/04/HomeOffice3.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen. &quot; /&gt;
-&lt;/picture&gt;
-&lt;/a&gt;
-
-
-
-  &lt;figcaption&gt;Figure 2: Drawing on Huion Kamvas Pro 12 Drawing Monitor with balm on screen.
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;h2 id=&quot;software&quot;&gt;Software&lt;/h2&gt;
-
-&lt;p&gt;As mentioned before the pen input on the drawing monitor is translated to standard mouse input. You can therefore use any software that allows drawing with a mouse, ranging from common software such as Acrobat Reader to Microsoft PowerPoint.&lt;/p&gt;
-
-&lt;p&gt;For my particular use case the software &lt;a href=&quot;https://openboard.ch/index.en.html&quot;&gt;OpenBoard&lt;/a&gt; has proven to be most effective. OpenBoard is an open source teaching software for interactive whiteboards designed primarily for use in schools and universities. It is maintained by the Education Department (DIP) of the canton of Geneva, in Switzerland.&lt;/p&gt;
-
-&lt;p&gt;OpenBoard not only allows free-hand drawing, but you can also quickly and easily import existing customer design documents or pull up pre-made diagrams to draw over (See Figure 3).&lt;/p&gt;
-
-&lt;figure class=&quot;&quot;&gt;
-
-
-
-
-
-
-
-
-&lt;a href=&quot;/content/uploads/2020/04/HomeOffice2.jpg&quot; title=&quot;Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings. &quot; class=&quot;image-popup&quot;&gt;
-&lt;picture&gt;
-  &lt;source type=&quot;image/webp&quot; data-srcset=&quot;
-
-    
-    /content/resized/2020/04/HomeOffice2-320.webp 320w, 
-
-    
-    /content/resized/2020/04/HomeOffice2-384.webp 384w, 
-
-    
-    /content/resized/2020/04/HomeOffice2-512.webp 512w, 
-
-    
-    /content/resized/2020/04/HomeOffice2-683.webp 683w, 
-
-    
-    /content/resized/2020/04/HomeOffice2-800.webp 800w, 
-
-    
-    /content/resized/2020/04/HomeOffice2-960.webp 960w, 
-
-&quot; sizes=&quot;3853px&quot; /&gt;
-  &lt;source data-srcset=&quot;
-
-    /content/resized/2020/04/HomeOffice2-320.jpg 320w, 
-
-    /content/resized/2020/04/HomeOffice2-384.jpg 384w, 
-
-    /content/resized/2020/04/HomeOffice2-512.jpg 512w, 
-
-    /content/resized/2020/04/HomeOffice2-683.jpg 683w, 
-
-    /content/resized/2020/04/HomeOffice2-800.jpg 800w, 
-
-    /content/resized/2020/04/HomeOffice2-960.jpg 960w, 
-
-&quot; sizes=&quot;3853px&quot; /&gt;
-  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/04/HomeOffice2.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings. &quot; /&gt;
-&lt;/picture&gt;
-&lt;/a&gt;
-
-
-
-  &lt;figcaption&gt;Figure 3: Huion Kamvas Pro 12 Drawing Monitor with pre-made diagrams and free-hand drawings.
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;Effectively having two mice as input along with two monitors can cause unwanted situations in the form of not finding the mouse pointer. Under Windows 10 you can enable the setting “Show location of pointer when I press the CTRL key” under the mouse properties to mitigate this challenge (See Figure 4).&lt;/p&gt;
-
-&lt;figure class=&quot;&quot;&gt;
-
-
-
-
-
-
-
-
-&lt;a href=&quot;/content/uploads/2020/04/HomeOffice4.jpg&quot; title=&quot;Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’. &quot; class=&quot;image-popup&quot;&gt;
-&lt;picture&gt;
-  &lt;source width=&quot;552&quot; type=&quot;image/webp&quot; data-srcset=&quot;
-
-    
-    /content/resized/2020/04/HomeOffice4-320.webp 320w, 
-
-    
-    /content/resized/2020/04/HomeOffice4-384.webp 384w, 
-
-    
-    /content/resized/2020/04/HomeOffice4-512.webp 512w, 
-
- /content/uploads/2020/04/HomeOffice4.webp 552w&quot; sizes=&quot;552px&quot; /&gt;
-  &lt;source width=&quot;552&quot; data-srcset=&quot;
-
-    /content/resized/2020/04/HomeOffice4-320.jpg 320w, 
-
-    /content/resized/2020/04/HomeOffice4-384.jpg 384w, 
-
-    /content/resized/2020/04/HomeOffice4-512.jpg 512w, 
-
- /content/uploads/2020/04/HomeOffice4.jpg 552w&quot; sizes=&quot;552px&quot; /&gt;
-  &lt;img src=&quot;//:0&quot; data-src=&quot;/content/uploads/2020/04/HomeOffice4.jpg&quot; class=&quot;blur-up lazyautosizes lazyload&quot; alt=&quot;Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’. &quot; /&gt;
-&lt;/picture&gt;
-&lt;/a&gt;
-
-
-
-  &lt;figcaption&gt;Figure 4: Windows 10 setting for ‘Show location of pointer when I press the CTRL key’.
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
-
-&lt;p&gt;This article showed you my home office setup for visualizing ideas and concepts during customer calls with a drawing monitor and interactive whiteboard software. If you wonder who these birds on the pictures are. That’s &lt;a href=&quot;https://www.rainbowsprings.co.nz/&quot;&gt;Jenny the Kea&lt;/a&gt; and &lt;a href=&quot;https://www.youtube.com/watch?v=dykrPi9P_Ak&quot;&gt;Pete the Pukeko&lt;/a&gt;.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams</summary></entry></feed>
+&lt;p&gt;This blog post guided you around some of the pitfalls when setting up an IPv6 capable AWS Site-to-Site VPN connection. It covered some of the rather cosmetic imperfections within the AWS Console around unusable IPv4 addresses, as well as generating a working Customer Gateway (CGW) configuration based on the downloadable configuration files.&lt;/p&gt;</content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6</summary></entry></feed>
