@@ -40,7 +40,7 @@
 
 
 
-<meta property="article:published_time" content="2021-10-05T09:00:41-07:00">
+<meta property="article:published_time" content="2022-02-02T18:19:48-08:00">
 
 
 
@@ -335,7 +335,7 @@
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2">
     <meta itemprop="description" content="Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.">
-    <meta itemprop="datePublished" content="October 05, 2021">
+    <meta itemprop="datePublished" content="February 02, 2022">
     
 
     <div class="page__inner-wrap">
@@ -382,18 +382,23 @@
 <ul>
   <li>
 <strong>Trusted IP space:</strong> You might be using trusted IP space for your service, such as a transactional e-Mail service that requires a high reputation of IP space, or a VPN service.</li>
-  <li><strong>Avoid blocking of IP space:</strong></li>
+  <li>
+<strong>Avoid blocking of IP space:</strong> <a href="https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html" target="_blank" rel="noopener noreferrer">AWS publishes its current IP address ranges in JSON format</a>, which makes it very easy for various content or service provider to block all of this address space. This often happens for unknown or unclear reasons. Address space used for BYOIP is not published via this JSON file.</li>
+  <li>
+<strong>Hard-coded IP addresses:</strong> There is a wide set of devices in the field that might be using hard-coded IP addresses to contact a service instead of relying on <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer">DNS</a>. Therefore when moving such a service to AWS, it is often necessary to move the corresponding IP address and its IP block along to AWS. Most frequently this proves easier than updating hundreds if not thousands of devices in the field.</li>
 </ul>
 
 <h1 id="requirements">Requirements</h1>
 
-<p>While the AWS documentation lists various <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-requirements" target="_blank" rel="noopener noreferrer">requirements</a>, the statements on IP address “ownership” can be ignored. This is due to IP address “ownership” being a quite fuzzy term and “control” being a better term.</p>
+<p>While the AWS documentation lists various <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-requirements" target="_blank" rel="noopener noreferrer">requirements</a>, the statements on IP address “ownership” can be ignored. This is due  “ownership” being a quite fuzzy term when it comes to IP address space. A better term would be “control”, which we will use instead.</p>
 
 <p>It’s widely recognized within the Internet community that you can demonstrate sufficient control over IP address space for the purpose of announcement from another ASN, by being able to create the corresponding Route Origin Authorization (ROA) record.</p>
 
-<p>While you will later see how</p>
+<p>Later within the process you will see how you can demonstrate control over your IP space by creating the necessary ROA record. As of the writing of this article, doing so appears to be sufficient with the listed network types and allocation status being unverified.</p>
 
 <h1 id="overall-process">Overall process</h1>
+
+<p>The overall process to bring IPv4 or IPv6 address space to AWS via the BYOIP process consists of multiple steps and is outlined in figure 1.</p>
 
 <figure class="">
 
@@ -453,27 +458,31 @@
 
 </figure>
 
+<ul>
+  <li>
+    <p><strong>Step 1: Configuration of IP address space via your RIR/LIR</strong> - This includes creating appropriate RIR Resource DB records (aka. “Allocation” in the case of RIPE), as well as a Route Origin Authorization (ROA) record. While this step is necessary for BYOIP, it also represents good hygiene when using IP address space in general.</p>
+  </li>
+  <li>
+    <p><strong>Step 2: Preparation of Self-signed X.509 certificates</strong> - While ROA is used to demonstrate control over the IP address space, it cannot be used to match a particular IP space to a certain AWS account ID. This is done via steps 2 - 5, whereas Step 2 generates a self-signed X.509 certificate pair for later usage.</p>
+  </li>
+  <li>
+    <p><strong>Step 3: Uploading the public key to the RIR Resource DB (RDAP record)</strong> - Placing the public key portion of the self-signed X.509 certificate into the description field of the IP address space’s RDAP record allows AWS to validate the mapping of the corresponding address space to an AWS account. This approach assumes that only someone with control over the IP address space can make changes to the corresponding RIR Resource DB record.</p>
+  </li>
+  <li>
+    <p><strong>Step 4: Creating a signed message</strong> - In this step you tie the IP address space to a certain AWS account ID. This is done by creating a signed message that by itself creates information about the IP address space and the AWS account ID and is signed using the above mentioned self-signed X.509 certificates.</p>
+  </li>
+  <li>
+    <p><strong>Step 5: Provision address</strong> - The signed message from step 4 is used to request the provisioning of the IP address space within AWS VPC. AWS validates the request against the RIR Resources DB and the RPKI publication point to ensure that you have sufficient control over the space.</p>
+  </li>
+</ul>
+
 <h1 id="rirlir-configuration">RIR/LIR Configuration</h1>
 
-<h2 id="assignment">Assignment</h2>
+<p>In this blog post I will use IPv6 space allocated by my LIR <a href="https://snapserv.net/" target="_blank" rel="noopener noreferrer">SnapServ</a> from the Regional Internet Registry (RIR) <a href="https://www.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE NCC</a>.</p>
 
-<h2 id="resource-public-key-infrastructure-rpki">Resource Public Key Infrastructure (RPKI)</h2>
+<p>RIPE policy ((IPv4)[https://www.ripe.net/publications/docs/ripe-733], (IPv6)[https://www.ripe.net/publications/docs/ripe-738]) states that any IP address sub-block that is used in a different network must be sub-allocated by the RIR or assigned by the end-user within the RIPE database.</p>
 
-<h1 id="aws-preparation">AWS Preparation</h1>
-
-<h1 id="aws-configuration">AWS Configuration</h1>
-
-<h1 id="validation">Validation</h1>
-
-<p><strong>Bold</strong></p>
-
-<p class="notice--info"><strong>Note:</strong> This is a notice box</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
-# Code
-#
-
-</code></pre></div></div>
+<p>For this particular example we will focus on the red circle in Figure 2: As</p>
 
 <figure class="">
 
@@ -532,6 +541,34 @@
 </figcaption>
 
 </figure>
+
+<p>https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:7300::%2F40&amp;type=inet6num</p>
+
+<p>https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:73ff::%2F48&amp;type=inet6num</p>
+
+<h2 id="assignment">Assignment</h2>
+
+<h2 id="resource-public-key-infrastructure-rpki">Resource Public Key Infrastructure (RPKI)</h2>
+
+<h1 id="aws-preparation">AWS Preparation</h1>
+
+<h1 id="aws-configuration">AWS Configuration</h1>
+
+<h1 id="validation">Validation</h1>
+
+<p>https://rpki.cloudflare.com/?view=explorer&amp;prefix=2a06%3Ae881%3A7300%3A%3A%2F40&amp;prefixMatch=lspec</p>
+
+<p>https://rpki.cloudflare.com/?view=explorer&amp;prefix=2a06%3Ae881%3A73ff%3A%3A%2F48&amp;prefixMatch=mspec</p>
+
+<p><strong>Bold</strong></p>
+
+<p class="notice--info"><strong>Note:</strong> This is a notice box</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
+# Code
+#
+
+</code></pre></div></div>
 
 <figure class="">
 
@@ -614,7 +651,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-10-05T09:00:41-07:00">October 05, 2021</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-02-02T18:19:48-08:00">February 02, 2022</time></p>
         
       </footer>
 
@@ -795,7 +832,7 @@
   </ul>
 </div>
 
-<div align="center" class="page__footer-copyright">© 2013 - 2021 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+<div align="center" class="page__footer-copyright">© 2013 - 2022 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
 
       </footer>
     </div>
