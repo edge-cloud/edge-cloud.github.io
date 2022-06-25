@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" /><updated>2022-02-02T19:13:09-08:00</updated><id>https://www.edge-cloud.net/feed.xml</id><title type="html">Edge Cloud</title><subtitle>On the edge of cloud computing</subtitle><author><name>Christian Elsen</name></author><entry><title type="html">Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title><link href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" rel="alternate" type="text/html" title="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup" /><published>2022-02-02T19:12:32-08:00</published><updated>2022-02-02T19:12:32-08:00</updated><id>https://www.edge-cloud.net/2019/04/30/Freeradius-with-LetsEncrypt-for-WPA-Enterprise</id><content type="html" xml:base="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/"><![CDATA[<p>Intro of what to accomplish</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" /><updated>2022-06-25T16:51:43-07:00</updated><id>https://www.edge-cloud.net/feed.xml</id><title type="html">Edge Cloud</title><subtitle>On the edge of cloud computing</subtitle><author><name>Christian Elsen</name></author><entry><title type="html">Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title><link href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" rel="alternate" type="text/html" title="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup" /><published>2022-06-25T16:51:14-07:00</published><updated>2022-06-25T16:51:14-07:00</updated><id>https://www.edge-cloud.net/2019/04/30/Freeradius-with-LetsEncrypt-for-WPA-Enterprise</id><content type="html" xml:base="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="setup">Setup</h1>
 
@@ -50,7 +50,7 @@ security = ADS
 
 <h1 id="freeradius">Freeradius</h1>
 
-<h1 id="testing">Testing</h1>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Step-by-step guid to setup Freeradius 3.0 with Let's Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.]]></summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-02-02T19:12:32-08:00</published><updated>2022-02-02T19:12:32-08:00</updated><id>https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/"><![CDATA[<p>Intro of what to accomplish</p>
+<h1 id="testing">Testing</h1>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Step-by-step guid to setup Freeradius 3.0 with Let's Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.]]></summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-06-25T16:51:14-07:00</published><updated>2022-06-25T16:51:14-07:00</updated><id>https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="heading-1">Heading 1</h1>
 
@@ -124,21 +124,97 @@ security = ADS
 
 </figure>
 
-\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary></entry><entry><title type="html">AWS Direct Connect deep dive</title><link href="https://www.edge-cloud.net/2019/12/13/dx-deep-dive/" rel="alternate" type="text/html" title="AWS Direct Connect deep dive" /><published>2022-02-02T19:12:32-08:00</published><updated>2022-02-02T19:12:32-08:00</updated><id>https://www.edge-cloud.net/2019/12/13/dx-deep-dive</id><content type="html" xml:base="https://www.edge-cloud.net/2019/12/13/dx-deep-dive/"><![CDATA[<p>Intro of what to accomplish</p>
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary></entry><entry><title type="html">AWS Direct Connect overview</title><link href="https://www.edge-cloud.net/2022/07/13/dx-overview/" rel="alternate" type="text/html" title="AWS Direct Connect overview" /><published>2022-06-25T16:51:14-07:00</published><updated>2022-06-25T16:51:14-07:00</updated><id>https://www.edge-cloud.net/2022/07/13/dx-overview</id><content type="html" xml:base="https://www.edge-cloud.net/2022/07/13/dx-overview/"><![CDATA[<p><a href="https://aws.amazon.com/directconnect/">AWS Direct Connect</a> (DX) makes it easy to establish a dedicated connection from an on-premises network to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your data center, office, factory or collocated environment. A DX connection can reduce network costs, increase bandwidth throughput, and provide a more consistent network experience than internet-based connections.</p>
 
-<h1 id="heading-1">Heading 1</h1>
+<p>This article will provide an overview of AWS Direct Connect, outlining the various elements, touch upon resiliency recommendations, connectivity options to on-premises and demystify the commercial workflow and associated costs.</p>
 
-<h2 id="heading-11">Heading 1.1</h2>
+<h1 id="overview">Overview</h1>
 
-<p><strong>Bold</strong></p>
+<p>AWS Direct Connect provides direct physical connectivity to the AWS Network via 3rd party <a href="https://aws.amazon.com/directconnect/locations/">colocation facilities (DX locations)</a>, using a cross-connect between an AWS-owned device and either a customer or partner owned device (See figure 1).</p>
 
-<p class="notice--info"><strong>Note:</strong> This is a notice box</p>
+<figure class="">
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
-# Code
-#
 
-</code></pre></div></div>
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/DX-Physical.png" title="Figure 1: Direct Connect Overview " class="image-popup">
+<picture>
+  <source width="1128" type="image/webp" data-srcset="
+
+    
+    /content/resized/2022/07/DX-Physical-320.webp 320w, 
+
+    
+    /content/resized/2022/07/DX-Physical-384.webp 384w, 
+
+    
+    /content/resized/2022/07/DX-Physical-512.webp 512w, 
+
+    
+    /content/resized/2022/07/DX-Physical-683.webp 683w, 
+
+    
+    /content/resized/2022/07/DX-Physical-800.webp 800w, 
+
+    
+    /content/resized/2022/07/DX-Physical-960.webp 960w, 
+
+ /content/uploads/2022/07/DX-Physical.webp 1128w" sizes="1128px" />
+  <source width="1128" data-srcset="
+
+    /content/resized/2022/07/DX-Physical-320.png 320w, 
+
+    /content/resized/2022/07/DX-Physical-384.png 384w, 
+
+    /content/resized/2022/07/DX-Physical-512.png 512w, 
+
+    /content/resized/2022/07/DX-Physical-683.png 683w, 
+
+    /content/resized/2022/07/DX-Physical-800.png 800w, 
+
+    /content/resized/2022/07/DX-Physical-960.png 960w, 
+
+ /content/uploads/2022/07/DX-Physical.png 1128w" sizes="1128px" />
+  <img src="//:0" data-src="/content/uploads/2022/07/DX-Physical.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Direct Connect Overview " />
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Direct Connect Overview
+</figcaption>
+
+</figure>
+
+<p>These colocation facilities are not AWS data centers, but rather colocation facilities operated by 3rd part providers such as <a href="https://www.equinix.com/">Equinix</a>, <a href="https://www.coresite.com/">CoreSite</a>, <a href="https://cologix.com/">Cologix</a>, <a href="https://www.digitalrealty.com/">Digital Realty</a>, and others. A colocation data center, often referred to as a “colo”, is a large datacenter facility that rents out rack space to third parties for their servers or other network equipment. This is a very popular service that is used by businesses that may not have the resources needed to maintain their own data center, but still want to enjoy all the benefits. Or it is used by Network Service Providers to interconnect with partners - such as cloud providers - or customers.</p>
+
+<h1 id="benefits">Benefits</h1>
+
+<p>The benefits of using AWS Direct Connect over the open Internet can be categorized into:</p>
+
+<ul>
+  <li>
+    <p><strong>Improved Performance and Reliability:</strong> Improve application performance by connecting directly to AWS and bypassing the public internet. Using DX typically reduces the number of network hops and therefore reduced latency.</p>
+  </li>
+  <li>
+    <p><strong>Reduced costs:</strong> Reduced networking costs with low data transfer rates out of AWS compared to data egress fees over the Internet.</p>
+  </li>
+  <li>
+    <p><strong>Increased security:</strong> Secure data as it moves between on-premises networks and AWS with multiple encryption options, such as MACsec (IEEE 802.1ae).</p>
+  </li>
+</ul>
+
+<h1 id="elements">Elements</h1>
+
+<p>An AWS Direct Connect consists of two elements: The physical connection and the logical virtual interfaces:</p>
+
+<h2 id="physical-elements-connection">Physical Elements: Connection</h2>
+
+<p>Three different connection options exist with “Dedicated Connections”, “Hosted Connections” and the legacy model of “Hosted Virtual Interfaces” - which is no longer available for new connections.</p>
 
 <table>
   <thead>
@@ -146,13 +222,13 @@ security = ADS
       <th> </th>
       <th>Dedicated Connections</th>
       <th>Hosted Connections</th>
-      <th>Hosted Virtual Interfaces</th>
+      <th>Hosted Virtual Interfaces (Legacy)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><strong>AWS asigned capacity</strong></td>
-      <td>1 Gbps or 10 Gbps</td>
+      <td>1 Gbps, 10 Gbps or 100 Gbps</td>
       <td>50 Mbps to 10 Gbps</td>
       <td>None</td>
     </tr>
@@ -168,8 +244,33 @@ security = ADS
       <td>1 (if assigned capacity &gt;= 1 Gbps)</td>
       <td>None</td>
     </tr>
+    <tr>
+      <td><strong>Partner-only offering</strong></td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Covered under SLA</strong></td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Supports MACsec (802.1ae)</strong></td>
+      <td>Yes (10 Gbps or 100 Gbps at select locations)</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
   </tbody>
 </table>
+
+<h3 id="dedicated-connection">Dedicated Connection</h3>
+
+<p>In the case of a “Dedicated Connection”, the customer or partner is provided with a dedicated Ethernet over single-mode fiber, providing an 802.1q trunk (VLANs) via a cross-connect within a DX location. 
+Customers can request a dedicated connection through the AWS Direct Connect console, the CLI, or the API. Each dedicated connection can provide 50 Private or Public Virtual Interfaces, as well as 1 Transit Virtual Interface.</p>
+
+<p>As depicted in figure 1, the customer or partner will order the colo operator to create a cross-connect from a meet-me room to the customer’s or partner’s space - also somethimes called cage.</p>
 
 <figure class="">
 
@@ -180,54 +281,58 @@ security = ADS
 
 
 
-<a href="/content/uploads/2019/12/DX-VIFs-Overview.png" title="Figure 1: Direct Connect Overview " class="image-popup">
+<a href="/content/uploads/2022/07/meet-me-room.jpg" title="Figure 2: Meet-me room in a colocation facility " class="image-popup">
 <picture>
   <source type="image/webp" data-srcset="
 
     
-    /content/resized/2019/12/DX-VIFs-Overview-320.webp 320w, 
+    /content/resized/2022/07/meet-me-room-320.webp 320w, 
 
     
-    /content/resized/2019/12/DX-VIFs-Overview-384.webp 384w, 
+    /content/resized/2022/07/meet-me-room-384.webp 384w, 
 
     
-    /content/resized/2019/12/DX-VIFs-Overview-512.webp 512w, 
+    /content/resized/2022/07/meet-me-room-512.webp 512w, 
 
     
-    /content/resized/2019/12/DX-VIFs-Overview-683.webp 683w, 
+    /content/resized/2022/07/meet-me-room-683.webp 683w, 
 
     
-    /content/resized/2019/12/DX-VIFs-Overview-800.webp 800w, 
+    /content/resized/2022/07/meet-me-room-800.webp 800w, 
 
     
-    /content/resized/2019/12/DX-VIFs-Overview-960.webp 960w, 
+    /content/resized/2022/07/meet-me-room-960.webp 960w, 
 
-" sizes="4925px" />
+" sizes="1920px" />
   <source data-srcset="
 
-    /content/resized/2019/12/DX-VIFs-Overview-320.png 320w, 
+    /content/resized/2022/07/meet-me-room-320.jpg 320w, 
 
-    /content/resized/2019/12/DX-VIFs-Overview-384.png 384w, 
+    /content/resized/2022/07/meet-me-room-384.jpg 384w, 
 
-    /content/resized/2019/12/DX-VIFs-Overview-512.png 512w, 
+    /content/resized/2022/07/meet-me-room-512.jpg 512w, 
 
-    /content/resized/2019/12/DX-VIFs-Overview-683.png 683w, 
+    /content/resized/2022/07/meet-me-room-683.jpg 683w, 
 
-    /content/resized/2019/12/DX-VIFs-Overview-800.png 800w, 
+    /content/resized/2022/07/meet-me-room-800.jpg 800w, 
 
-    /content/resized/2019/12/DX-VIFs-Overview-960.png 960w, 
+    /content/resized/2022/07/meet-me-room-960.jpg 960w, 
 
-" sizes="4925px" />
-  <img src="//:0" data-src="/content/uploads/2019/12/DX-VIFs-Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Direct Connect Overview " />
+" sizes="1920px" />
+  <img src="//:0" data-src="/content/uploads/2022/07/meet-me-room.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Meet-me room in a colocation facility " />
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 1: Direct Connect Overview
+  <figcaption>Figure 2: Meet-me room in a colocation facility
 </figcaption>
 
 </figure>
+
+<p>A meet-me room is part of a colo that you will most likely never get to see in real life (See figure 2). It is a room where only authorized personell of the colo operator is allowed access to and where data connections are established between customers of the colo. To do so, one customer has to obtain a Letter of Authorization - Connecting Facility Assignment (LOA-CFA) from the other customer - in this case AWS - and provide it to the colo operator. This LOA-CFA document specifies which pre-cabled connection is to be used for this particular customer.</p>
+
+<p>The colo operator will then typically terminate the cross connect within the customer or partner space at the top of a particular rack in form of a patch panel (See Figure 3).</p>
 
 <figure class="">
 
@@ -238,49 +343,80 @@ security = ADS
 
 
 
-<a href="/content/uploads/2019/12/DX-Cross-Connect.png" title="Figure 2: Direct Connect Cross Connect " class="image-popup">
+<a href="/content/uploads/2022/07/DX-Cross-Connect.png" title="Figure 3: Direct Connect Cross Connect within a customer’s rack " class="image-popup">
 <picture>
   <source width="922" type="image/webp" data-srcset="
 
     
-    /content/resized/2019/12/DX-Cross-Connect-320.webp 320w, 
+    /content/resized/2022/07/DX-Cross-Connect-320.webp 320w, 
 
     
-    /content/resized/2019/12/DX-Cross-Connect-384.webp 384w, 
+    /content/resized/2022/07/DX-Cross-Connect-384.webp 384w, 
 
     
-    /content/resized/2019/12/DX-Cross-Connect-512.webp 512w, 
+    /content/resized/2022/07/DX-Cross-Connect-512.webp 512w, 
 
     
-    /content/resized/2019/12/DX-Cross-Connect-683.webp 683w, 
+    /content/resized/2022/07/DX-Cross-Connect-683.webp 683w, 
 
     
-    /content/resized/2019/12/DX-Cross-Connect-800.webp 800w, 
+    /content/resized/2022/07/DX-Cross-Connect-800.webp 800w, 
 
- /content/uploads/2019/12/DX-Cross-Connect.webp 922w" sizes="922px" />
+ /content/uploads/2022/07/DX-Cross-Connect.webp 922w" sizes="922px" />
   <source width="922" data-srcset="
 
-    /content/resized/2019/12/DX-Cross-Connect-320.png 320w, 
+    /content/resized/2022/07/DX-Cross-Connect-320.png 320w, 
 
-    /content/resized/2019/12/DX-Cross-Connect-384.png 384w, 
+    /content/resized/2022/07/DX-Cross-Connect-384.png 384w, 
 
-    /content/resized/2019/12/DX-Cross-Connect-512.png 512w, 
+    /content/resized/2022/07/DX-Cross-Connect-512.png 512w, 
 
-    /content/resized/2019/12/DX-Cross-Connect-683.png 683w, 
+    /content/resized/2022/07/DX-Cross-Connect-683.png 683w, 
 
-    /content/resized/2019/12/DX-Cross-Connect-800.png 800w, 
+    /content/resized/2022/07/DX-Cross-Connect-800.png 800w, 
 
- /content/uploads/2019/12/DX-Cross-Connect.png 922w" sizes="922px" />
-  <img src="//:0" data-src="/content/uploads/2019/12/DX-Cross-Connect.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Direct Connect Cross Connect " />
+ /content/uploads/2022/07/DX-Cross-Connect.png 922w" sizes="922px" />
+  <img src="//:0" data-src="/content/uploads/2022/07/DX-Cross-Connect.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Direct Connect Cross Connect within a customer’s rack " />
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 2: Direct Connect Cross Connect
+  <figcaption>Figure 3: Direct Connect Cross Connect within a customer’s rack
 </figcaption>
 
 </figure>
+
+<p>Depending on the chosen speed of the DX connection, different <a href="https://en.wikipedia.org/wiki/Optical_module">optical transceiver</a> are then used on the customer or partner side to terminate the DX connection on network equipment:</p>
+
+<ul>
+  <li>1 Gigabit Ethernet: 1000BASE-LX (1310 nm) transceiver</li>
+  <li>10 Gigabit Ethernet: 10GBASE-LR (1310 nm) transceiver</li>
+  <li>100 gigabit Ethernet: 100GBASE-LR4 transceiver</li>
+</ul>
+
+<p>Multiple Connectivity options between the cross connect termination point and the customer’s routers and workloads exist. Refer to the <a href="#connectivity">Connectivity</a> section below to find out more about these options</p>
+
+<h3 id="hosted-connection">Hosted Connection</h3>
+
+<p>A physical Ethernet connection that an AWS Direct Connect Partner provisions on behalf of a customer.  This connection type is not covered under the <a href="https://aws.amazon.com/directconnect/sla/">Direct Connect Service Level Agreement (SLA)</a>.</p>
+
+<p>In the case of a Hosted Connection, the above described Dedicated Connection is operated by an <a href="https://aws.amazon.com/directconnect/partners/">AWS Direct Connect Delivery Partner</a> - often a Network Service Provider - which then maps multiple virtual connections to a single physical connection. 
+Customers request a Hosted Connection by contacting the AWS Direct Connect Delivery Partner directly. A hosted connection can provide 1 Private Virtual Interface or 1 Public Virtual Interface or 1 Transit Virtual Interface (If the connection speed is 1 Gbps or higher).</p>
+
+<p>These AWS Direct Connect Delivery Partners can also often offer network connectivity from an AWS Direct Connect location to an off-site location, such as an office building, factory or other data center. Therefore in such a scenario all equipment within the AWS Direct Connect location would be owned and operated by the AWS Direct Connect Delivery Partner and shared among multiple customers, usually resulting in lower operational cost and quicker initial implementation times.</p>
+
+<p>In this case also multiple Connectivity options between the cross connect termination point on the partner’s equipment and the customer’s routers and workloads exist. Refer to the <a href="#connectivity">Connectivity</a> section below to find out more about these options</p>
+
+<p>Note that this connection type is not covered under the AWS <a href="https://aws.amazon.com/directconnect/sla/">Direct Connect Service Level Agreement (SLA)</a>.</p>
+
+<h3 id="hosted-virtual-interface-legacy">Hosted Virtual Interface (Legacy)</h3>
+
+<p>This is a legacy offering which is no longer available for new provisioning by AWS Direct Connect Delivery Partners, but might still be found in use among existing customers. This connection type does not provide a dedicated bandwidth allocation on AWS side and is therefore at risk of oversubscription. It only provides 1 Private Virtual Interface or 1 Public Virtual Interface. No Transit Virtual Interface can be provided. This connection type is not covered under the <a href="https://aws.amazon.com/directconnect/sla/">Direct Connect Service Level Agreement (SLA)</a>.</p>
+
+<h2 id="logical-elements-virtual-interfaces-vif">Logical Elements: Virtual Interfaces (VIF)</h2>
+
+<p>A Direct Connect connection supports one or multiple Virtual Interfaces (VIF) as logical component. Refer to the above table to understand which DX connection type offers what kind and how many virtual interfaces.</p>
 
 <figure class="">
 
@@ -291,54 +427,205 @@ security = ADS
 
 
 
-<a href="/content/uploads/2019/12/DX-Connectivity.png" title="Figure 3: Direct Connect Connectivity Options " class="image-popup">
+<a href="/content/uploads/2022/07/DX-VIFs-Overview.png" title="Figure 4: Direct Connect Logical Overview " class="image-popup">
 <picture>
-  <source type="image/webp" data-srcset="
+  <source width="1060" type="image/webp" data-srcset="
 
     
-    /content/resized/2019/12/DX-Connectivity-320.webp 320w, 
+    /content/resized/2022/07/DX-VIFs-Overview-320.webp 320w, 
 
     
-    /content/resized/2019/12/DX-Connectivity-384.webp 384w, 
+    /content/resized/2022/07/DX-VIFs-Overview-384.webp 384w, 
 
     
-    /content/resized/2019/12/DX-Connectivity-512.webp 512w, 
+    /content/resized/2022/07/DX-VIFs-Overview-512.webp 512w, 
 
     
-    /content/resized/2019/12/DX-Connectivity-683.webp 683w, 
+    /content/resized/2022/07/DX-VIFs-Overview-683.webp 683w, 
 
     
-    /content/resized/2019/12/DX-Connectivity-800.webp 800w, 
+    /content/resized/2022/07/DX-VIFs-Overview-800.webp 800w, 
 
     
-    /content/resized/2019/12/DX-Connectivity-960.webp 960w, 
+    /content/resized/2022/07/DX-VIFs-Overview-960.webp 960w, 
 
-" sizes="3080px" />
-  <source data-srcset="
+ /content/uploads/2022/07/DX-VIFs-Overview.webp 1060w" sizes="1060px" />
+  <source width="1060" data-srcset="
 
-    /content/resized/2019/12/DX-Connectivity-320.png 320w, 
+    /content/resized/2022/07/DX-VIFs-Overview-320.png 320w, 
 
-    /content/resized/2019/12/DX-Connectivity-384.png 384w, 
+    /content/resized/2022/07/DX-VIFs-Overview-384.png 384w, 
 
-    /content/resized/2019/12/DX-Connectivity-512.png 512w, 
+    /content/resized/2022/07/DX-VIFs-Overview-512.png 512w, 
 
-    /content/resized/2019/12/DX-Connectivity-683.png 683w, 
+    /content/resized/2022/07/DX-VIFs-Overview-683.png 683w, 
 
-    /content/resized/2019/12/DX-Connectivity-800.png 800w, 
+    /content/resized/2022/07/DX-VIFs-Overview-800.png 800w, 
 
-    /content/resized/2019/12/DX-Connectivity-960.png 960w, 
+    /content/resized/2022/07/DX-VIFs-Overview-960.png 960w, 
 
-" sizes="3080px" />
-  <img src="//:0" data-src="/content/uploads/2019/12/DX-Connectivity.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Direct Connect Connectivity Options " />
+ /content/uploads/2022/07/DX-VIFs-Overview.png 1060w" sizes="1060px" />
+  <img src="//:0" data-src="/content/uploads/2022/07/DX-VIFs-Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Direct Connect Logical Overview " />
 </picture>
 </a>
 
 
 
-  <figcaption>Figure 3: Direct Connect Connectivity Options
+  <figcaption>Figure 4: Direct Connect Logical Overview
 </figcaption>
 
-</figure>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Deep dive look at AWS Direct Connect]]></summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-02-02T19:12:32-08:00</published><updated>2022-02-02T19:12:32-08:00</updated><id>https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/"><![CDATA[<p>This blog post will walk you through the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring your own IP addresses (BYOIP) for Amazon EC2</a>, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">Autonomous System Numbers (ASNs)</a>. Within your AWS account, these BYOIP address ranges appear as an <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html">address pool</a>.</p>
+</figure>
+
+<p>While each Virtual Interface serves a different purpose, they are all provided as an IEEE 802.1q VLAN over a trunk and require use of BGP via IPv4 and/or IPv6 (See Figure 4):</p>
+
+<ul>
+  <li><strong>Private virtual interface:</strong> Access an Amazon VPC using private IP addresses. Can be combined with a <a href="https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/">Direct Connect Gateway</a> to access VPCs outside the associated AWS region.</li>
+  <li><strong>Public virtual interface:</strong> Access AWS services from your on-premises data center. Allow AWS services, or AWS customers access your public networks over the interface instead of traversing the internet. Does not leverage Direct Connect Gateways (DX-GW) or Virtual Private Gateways (VGW).</li>
+  <li><strong>Transit virtual interface:</strong> Access one or more Amazon VPC Transit Gateways associated with Direct Connect Gateways (DX-GW). You can use transit virtual interfaces with 1/2/5/10/100 Gbps AWS Direct Connect connections. Use of a <a href="https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/">Direct Connect Gateway</a> is mandatory.</li>
+</ul>
+
+<h1 id="resiliency">Resiliency</h1>
+
+<p>In order to achieve high resiliency, AWS recommends customers to follow the <a href="https://aws.amazon.com/directconnect/resiliency-recommendation/">AWS Direct Connect Resiliency Recommendations</a>. These recommendations outline three different topoly types that are mapped to the coresponding AWS <a href="https://aws.amazon.com/directconnect/sla/">Direct Connect Service Level Agreement (SLA)</a>:</p>
+
+<ul>
+  <li><strong>High Resiliency for Critical Workloads:</strong> 2x Direct Connect connections across 2x different Direct Connect locations</li>
+  <li><strong>Maximum Resiliency for Critical Workloads:</strong> 4x Direct Connect connections across 2x different Direct Connect locations with 2x connections in each location.</li>
+  <li><strong>Non-Critical Production Workloads or Development Workloads:</strong> 2x Direct Connect connections across a single Direct Connect locations</li>
+</ul>
+
+<p>Redundant Direct Connect connections are highly recommended as AWS need to perform regular <a href="https://aws.amazon.com/premiumsupport/knowledge-center/prepare-direct-connect-maintenance/">maintenance</a> on individual connections.</p>
+
+<h1 id="connectivity">Connectivity</h1>
+
+<p>Customers have multiple options to connect their own network equipment via a Direct Connect location (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/DX-Connectivity.png" title="Figure 5: Direct Connect Connectivity Options " class="image-popup">
+<picture>
+  <source width="821" type="image/webp" data-srcset="
+
+    
+    /content/resized/2022/07/DX-Connectivity-320.webp 320w, 
+
+    
+    /content/resized/2022/07/DX-Connectivity-384.webp 384w, 
+
+    
+    /content/resized/2022/07/DX-Connectivity-512.webp 512w, 
+
+    
+    /content/resized/2022/07/DX-Connectivity-683.webp 683w, 
+
+    
+    /content/resized/2022/07/DX-Connectivity-800.webp 800w, 
+
+ /content/uploads/2022/07/DX-Connectivity.webp 821w" sizes="821px" />
+  <source width="821" data-srcset="
+
+    /content/resized/2022/07/DX-Connectivity-320.png 320w, 
+
+    /content/resized/2022/07/DX-Connectivity-384.png 384w, 
+
+    /content/resized/2022/07/DX-Connectivity-512.png 512w, 
+
+    /content/resized/2022/07/DX-Connectivity-683.png 683w, 
+
+    /content/resized/2022/07/DX-Connectivity-800.png 800w, 
+
+ /content/uploads/2022/07/DX-Connectivity.png 821w" sizes="821px" />
+  <img src="//:0" data-src="/content/uploads/2022/07/DX-Connectivity.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Direct Connect Connectivity Options " />
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Direct Connect Connectivity Options
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>
+    <p><strong>In-location cross connect (Option 1):</strong> If the customer has resources deployed in the same colo facility as the DX location, the colo facility can provide a cross-connect between the AWS DX equipment and the customer resources. The customer has to provide a <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html">Letter of Authorization and Connecting Facility Assignment (LOA-CFA)</a> to the facility for this. This option is only available for Dedicated Connections.</p>
+  </li>
+  <li>
+    <p><strong>Layer 2 circuit (Option 2):</strong> Customers can work with <a href="https://aws.amazon.com/directconnect/partners/">AWS Direct Connect Delivery Partners</a> to extend the AWS DX connection at Layer 2 (Data link layer) via a “circuit” from the DX location to the customer location. The router installed at the customer location will directly form a BGP session with the AWS equipment. Example technologies used are <a href="https://en.wikipedia.org/wiki/Metro_Ethernet">Metro Ethernet</a>, <a href="https://en.wikipedia.org/wiki/Dark_fibre">Dark fibre</a>, or <a href="https://en.wikipedia.org/wiki/Wavelength-division_multiplexing">Wavelength</a>. This option can be used with Dedicated Connections as well as Hosted Connections.</p>
+  </li>
+  <li>
+    <p><strong>Layer 3 network (Option 3):</strong> Customers can work with <a href="https://aws.amazon.com/directconnect/partners/">AWS Direct Connect Delivery Partners</a> to extend the AWS DX connection at Layer 3 (Network layer) from the DX location to the customer location. In this case the the AWS Direct Connect Partner provides a router within the DX location that will form a BGP session with the AWS equipment. The DX partner then establishes another BGP with the customer, e.g. over an <a href="https://en.wikipedia.org/wiki/Multiprotocol_Label_Switching">MPLS</a>. This option can be used with Dedicated Connections as well as Hosted Connections.</p>
+  </li>
+</ul>
+
+<p>If the customer is in a data center or colo facility that is not a DX location, it is best to check with that data center or colo facility for a list of preferred <a href="https://aws.amazon.com/directconnect/partners/">AWS Direct Connect Delivery Partners</a> that can provide DX connectivity into this particular data center or colo facility. Such “on-net” partners can typically provide connectivity faster.</p>
+
+<h1 id="commercial-workflow">Commercial Workflow</h1>
+
+<p>End-customers have a direct business relationship with AWS and are charged directly for all consumed <a href="https://aws.amazon.com/directconnect/pricing/">AWS services</a>. AWS Direct Connect is priced by AWS based on two criteria:</p>
+
+<ul>
+  <li><strong>Port hours:</strong> This is determined based on the capacity and the type of connection (It could be dedicated or hosted connection).</li>
+  <li><strong>Outbound data transfer:</strong> The outbound charges are calculated for private virtual interfaces and transit virtual interfaces. This refers to the data which is transferred over the AWS Direct Connect in terms of GB. No additional charges are inferred when a multi-account Direct Connect gateway is used.</li>
+</ul>
+
+<p>In addition end-customers will need to engage with <a href="https://aws.amazon.com/directconnect/partners/">Direct Connect Delivery Partners</a> such as carriers, network service providers (NSP), or colocation providers to provide them with network connectivity to AWS. For this they will have a separate contract with this partner and the partner will invoice end-customers for the connectivity services they provide.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/Direct-Connect-Commercial-Workflow.png" title="Figure 6: Commercial Workflow " class="image-popup">
+<picture>
+  <source width="637" type="image/webp" data-srcset="
+
+    
+    /content/resized/2022/07/Direct-Connect-Commercial-Workflow-320.webp 320w, 
+
+    
+    /content/resized/2022/07/Direct-Connect-Commercial-Workflow-384.webp 384w, 
+
+    
+    /content/resized/2022/07/Direct-Connect-Commercial-Workflow-512.webp 512w, 
+
+ /content/uploads/2022/07/Direct-Connect-Commercial-Workflow.webp 637w" sizes="637px" />
+  <source width="637" data-srcset="
+
+    /content/resized/2022/07/Direct-Connect-Commercial-Workflow-320.png 320w, 
+
+    /content/resized/2022/07/Direct-Connect-Commercial-Workflow-384.png 384w, 
+
+    /content/resized/2022/07/Direct-Connect-Commercial-Workflow-512.png 512w, 
+
+ /content/uploads/2022/07/Direct-Connect-Commercial-Workflow.png 637w" sizes="637px" />
+  <img src="//:0" data-src="/content/uploads/2022/07/Direct-Connect-Commercial-Workflow.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Commercial Workflow " />
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Commercial Workflow
+</figcaption>
+
+</figure>
+
+<h1 id="summary">Summary</h1>
+
+<p>This article provided an overview of <a href="https://aws.amazon.com/directconnect/">AWS Direct Connect</a> (DX), including the physical element of Dedicated and Hosted Connections as well as the logical elements of Virtual Interfaces (VIF). It touched upoen resiliency recommendations, connectivity options between AWS Direct Connect locations and on-premises locations as well as demystified the commercial workflow and associated costs.</p>
+
+<p>You should now be in a position to understand how AWS DX makes it easy to establish a dedicated connection from an on-premises network to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your data center, office, factory or collocated environment. A DX connection can reduce network costs, increase bandwidth throughput, and provide a more consistent network experience than internet-based connections.</p>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Overview of AWS Direct Connect]]></summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-06-25T16:51:14-07:00</published><updated>2022-06-25T16:51:14-07:00</updated><id>https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/"><![CDATA[<p>This blog post will walk you through the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring your own IP addresses (BYOIP) for Amazon EC2</a>, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">Autonomous System Numbers (ASNs)</a>. Within your AWS account, these BYOIP address ranges appear as an <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html">address pool</a>.</p>
 
 <p>While <a href="https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-bring-your-own-ip-byoip-for-amazon-vpc/">other blog posts on AWS BYOIP</a> exist, they are usually completely theoretical and thereby hard to follow. In this blog post instead I will use real IPv6 address space, allowing you to validate the various steps through various publicly available databases and systems.</p>
 
@@ -577,7 +864,7 @@ security = ADS
 
 </figure>
 
-\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary></entry><entry><title type="html">Securing your AWS networks</title><link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" /><published>2022-02-02T19:12:32-08:00</published><updated>2022-02-02T19:12:32-08:00</updated><id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/"><![CDATA[<p>Intro of what to accomplish</p>
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary></entry><entry><title type="html">Securing your AWS networks</title><link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" /><published>2022-06-25T16:51:14-07:00</published><updated>2022-06-25T16:51:14-07:00</updated><id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="scope">Scope</h1>
 
@@ -1071,7 +1358,7 @@ security = ADS
 # Code
 #
 
-</code></pre></div></div>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2022-02-02T19:12:32-08:00</published><updated>2022-02-02T19:12:32-08:00</updated><id>https://www.edge-cloud.net/2021/01/01/template</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/template/"><![CDATA[<p>Intro of what to accomplish</p>
+</code></pre></div></div>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2022-06-25T16:51:14-07:00</published><updated>2022-06-25T16:51:14-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/template</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/template/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="heading-1">Heading 1</h1>
 
@@ -1145,7 +1432,7 @@ security = ADS
 
 </figure>
 
-\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/" rel="alternate" type="text/html" title="Title goes here" /><published>2022-02-02T19:12:32-08:00</published><updated>2022-02-02T19:12:32-08:00</updated><id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/"><![CDATA[<p>Intro of what to accomplish</p>
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/" rel="alternate" type="text/html" title="Title goes here" /><published>2022-06-25T16:51:14-07:00</published><updated>2022-06-25T16:51:14-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="heading-1">Heading 1</h1>
 
