@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2022-06-25T17:01:40-07:00</updated>
+  <updated>2022-06-26T17:37:04-07:00</updated>
   <id>https://www.edge-cloud.net/feed.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -22,8 +22,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</id>
-      <updated>2022-06-25T17:01:17-07:00</updated>
-      <published>2022-06-25T17:01:17-07:00</published>
+      <updated>2022-06-26T17:36:19-07:00</updated>
+      <published>2022-06-26T17:36:19-07:00</published>
       <link href="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/" />
       <summary type="html">Brief description goes here</summary>
       <content type="html">Intro of what to accomplish Heading 1 Heading 1.1 Bold Note: This is a notice box # # Code # Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS \[Price_{NGW}=( 720 hr / month \cdot Num_{VPC} \cdot Cost_{NGW-Attachment} ) + (traffic \cdot Cost_{NGW-Traffic})\] \[Price_{TGW+NGW}= ( 720 hr / month \cdot Num_{VPC} \cdot Cost_{TGW-Attachment} ) + \\ ( 720 hr / month \cdot Num_{AZ} \cdot Cost_{NGW-Attachment} ) + \\ (traffic \cdot (...</content>
@@ -40,8 +40,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2021/01/01/template/</id>
-      <updated>2022-06-25T17:01:17-07:00</updated>
-      <published>2022-06-25T17:01:17-07:00</published>
+      <updated>2022-06-26T17:36:19-07:00</updated>
+      <published>2022-06-26T17:36:19-07:00</published>
       <link href="https://www.edge-cloud.net/2021/01/01/template/" />
       <summary type="html">Brief description goes here</summary>
       <content type="html">Intro of what to accomplish
@@ -99,8 +99,8 @@ Note: This is a notice box
     <entry>
       <title>Securing your AWS networks</title>
       <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</id>
-      <updated>2022-06-25T17:01:17-07:00</updated>
-      <published>2022-06-25T17:01:17-07:00</published>
+      <updated>2022-06-26T17:36:19-07:00</updated>
+      <published>2022-06-26T17:36:19-07:00</published>
       <link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" />
       <summary type="html">Brief description goes here</summary>
       <content type="html">Intro of what to accomplish Scope AWS Well Architected - Security Pillar Figure 1: Protecting network and host-level boundaries Toolbox for securing AWS networks Amazon VPC Security Groups Figure 2: Security Groups Amazon VPC Network ACLs (Access Control Lists) Figure 3: Network Access Control Lists (ACLs) AWS WAF (Web Application Firewall) Figure 4: Web Application Firewalls (WAF) AWS Firewall Manager Figure 5: Firewall Manager AWS Shield Figure 6: AWS Shield AWS Transit Gateway with 3rd...</content>
@@ -117,8 +117,8 @@ Note: This is a notice box
     <entry>
       <title>Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title>
       <id>https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/</id>
-      <updated>2022-06-25T17:01:17-07:00</updated>
-      <published>2022-06-25T17:01:17-07:00</published>
+      <updated>2022-06-26T17:36:19-07:00</updated>
+      <published>2022-06-26T17:36:19-07:00</published>
       <link href="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/" />
       <summary type="html">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.</summary>
       <content type="html">This blog post will walk you through the Bring your own IP addresses (BYOIP) for Amazon EC2, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon Autonomous System Numbers (ASNs). Within your AWS account, these BYOIP address ranges appear as...</content>
@@ -137,8 +137,8 @@ Note: This is a notice box
     <entry>
       <title>AWS Direct Connect overview</title>
       <id>https://www.edge-cloud.net/2022/07/13/dx-overview/</id>
-      <updated>2022-06-25T17:01:17-07:00</updated>
-      <published>2022-06-25T17:01:17-07:00</published>
+      <updated>2022-06-26T17:36:19-07:00</updated>
+      <published>2022-06-26T17:36:19-07:00</published>
       <link href="https://www.edge-cloud.net/2022/07/13/dx-overview/" />
       <summary type="html">Overview of AWS Direct Connect</summary>
       <content type="html">AWS Direct Connect (DX) makes it easy to establish a dedicated connection from an on-premises network to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your data center, office, factory or collocated environment. A DX connection can reduce network costs, increase bandwidth throughput, and provide a more consistent network experience than internet-based connections. This article will provide an overview of AWS Direct Connect, outlining the various elements, touch upon resiliency...</content>
@@ -155,8 +155,8 @@ Note: This is a notice box
     <entry>
       <title>Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title>
       <id>https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/</id>
-      <updated>2022-06-25T17:01:17-07:00</updated>
-      <published>2022-06-25T17:01:17-07:00</published>
+      <updated>2022-06-26T17:36:19-07:00</updated>
+      <published>2022-06-26T17:36:19-07:00</published>
       <link href="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/" />
       <summary type="html">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.</summary>
       <content type="html">Intro of what to accomplish
@@ -216,8 +216,8 @@ Note: This is a notice box
     <entry>
       <title>Freeradius with Let's Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title>
       <id>https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/</id>
-      <updated>2022-06-25T17:01:17-07:00</updated>
-      <published>2022-06-25T17:01:17-07:00</published>
+      <updated>2022-06-26T17:36:19-07:00</updated>
+      <published>2022-06-26T17:36:19-07:00</published>
       <link href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" />
       <summary type="html">Step-by-step guid to setup Freeradius 3.0 with Let's Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.</summary>
       <content type="html">Intro of what to accomplish Setup Kerberos /etc/krb5.conf # # /etc/krb5.conf # [libdefaults] default_realm = DOMAIN.LOCAL # EoF Samba /etc/samba/smb.conf # # /etc/samba/smb.conf # # start of global variables [global] # server information, this is the domain/workgroup workgroup = DOMAIN # Kerberos / authentication information realm = DOMAIN.LOCAL # system hostname netbios name = RADIUS1 # security used (Active Directory) security = ADS # EoF /etc/hosts 127.0.0.1 radius1.domain.local radius1 localhost.localdomain localhost Join the domain Let’s...</content>
