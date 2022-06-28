@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" /><updated>2022-06-28T16:13:09-07:00</updated><id>https://www.edge-cloud.net/feed.xml</id><title type="html">Edge Cloud</title><subtitle>On the edge of cloud computing</subtitle><author><name>Christian Elsen</name></author><entry><title type="html">Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title><link href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" rel="alternate" type="text/html" title="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup" /><published>2022-06-28T16:12:39-07:00</published><updated>2022-06-28T16:12:39-07:00</updated><id>https://www.edge-cloud.net/2019/04/30/Freeradius-with-LetsEncrypt-for-WPA-Enterprise</id><content type="html" xml:base="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/"><![CDATA[<p>Intro of what to accomplish</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" /><updated>2022-06-28T16:30:02-07:00</updated><id>https://www.edge-cloud.net/feed.xml</id><title type="html">Edge Cloud</title><subtitle>On the edge of cloud computing</subtitle><author><name>Christian Elsen</name></author><entry><title type="html">Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title><link href="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/" rel="alternate" type="text/html" title="Freeradius with Let’s Encrypt certificate for WPA Enterprise (802.1x) WiFi setup" /><published>2022-06-28T16:29:37-07:00</published><updated>2022-06-28T16:29:37-07:00</updated><id>https://www.edge-cloud.net/2019/04/30/Freeradius-with-LetsEncrypt-for-WPA-Enterprise</id><content type="html" xml:base="https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="setup">Setup</h1>
 
@@ -50,7 +50,7 @@ security = ADS
 
 <h1 id="freeradius">Freeradius</h1>
 
-<h1 id="testing">Testing</h1>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Step-by-step guid to setup Freeradius 3.0 with Let's Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.]]></summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-06-28T16:12:39-07:00</published><updated>2022-06-28T16:12:39-07:00</updated><id>https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/"><![CDATA[<p>Intro of what to accomplish</p>
+<h1 id="testing">Testing</h1>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Step-by-step guid to setup Freeradius 3.0 with Let's Encrypt certificates to implement a WPA Enterprise (802.1x) Wifi setup with EAP-TTLS for BYOD.]]></summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-06-28T16:29:37-07:00</published><updated>2022-06-28T16:29:37-07:00</updated><id>https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="heading-1">Heading 1</h1>
 
@@ -113,7 +113,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
 
 " sizes="4032px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS " />
 </picture>
 </a>
 
@@ -124,7 +124,7 @@ security = ADS
 
 </figure>
 
-\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-06-28T16:12:39-07:00</published><updated>2022-06-28T16:12:39-07:00</updated><id>https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/"><![CDATA[<p>This blog post will walk you through the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring your own IP addresses (BYOIP) for Amazon EC2</a>, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">Autonomous System Numbers (ASNs)</a>. Within your AWS account, these BYOIP address ranges appear as an <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html">address pool</a>.</p>
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-06-28T16:29:37-07:00</published><updated>2022-06-28T16:29:37-07:00</updated><id>https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip</id><content type="html" xml:base="https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/"><![CDATA[<p>This blog post will walk you through the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring your own IP addresses (BYOIP) for Amazon EC2</a>, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">Autonomous System Numbers (ASNs)</a>. Within your AWS account, these BYOIP address ranges appear as an <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html">address pool</a>.</p>
 
 <p>While <a href="https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-bring-your-own-ip-byoip-for-amazon-vpc/">other blog posts on AWS BYOIP</a> exist, they are usually completely theoretical and thereby hard to follow. In this blog post instead I will use real IPv6 address space, allowing you to validate the various steps through various publicly available databases and systems.</p>
 
@@ -197,7 +197,7 @@ security = ADS
     /content/resized/2021/10/BYOIP-AWS-Process-960.png 960w, 
 
  /content/uploads/2021/10/BYOIP-AWS-Process.png 1030w" sizes="1030px" />
-  <img src="//:0" data-src="/content/uploads/2021/10/BYOIP-AWS-Process.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: AWS Process to prepare and provison VPC BYOIP. " />
+  <img src="/content/uploads/2021/10/BYOIP-AWS-Process.png" data-src="/content/uploads/2021/10/BYOIP-AWS-Process.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: AWS Process to prepare and provison VPC BYOIP. " />
 </picture>
 </a>
 
@@ -281,7 +281,7 @@ security = ADS
     /content/resized/2021/10/BYOIP-RIPE-Assignment-960.png 960w, 
 
  /content/uploads/2021/10/BYOIP-RIPE-Assignment.png 1131w" sizes="1131px" />
-  <img src="//:0" data-src="/content/uploads/2021/10/BYOIP-RIPE-Assignment.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red. " />
+  <img src="/content/uploads/2021/10/BYOIP-RIPE-Assignment.png" data-src="/content/uploads/2021/10/BYOIP-RIPE-Assignment.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red. " />
 </picture>
 </a>
 
@@ -352,7 +352,7 @@ security = ADS
     /content/resized/2021/10/BYOIP-AWS-VPC-Pool-512.png 512w, 
 
  /content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png 603w" sizes="603px" />
-  <img src="//:0" data-src="/content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Resulting IPv6 pool within a VPC. " />
+  <img src="/content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png" data-src="/content/uploads/2021/10/BYOIP-AWS-VPC-Pool.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Resulting IPv6 pool within a VPC. " />
 </picture>
 </a>
 
@@ -363,7 +363,7 @@ security = ADS
 
 </figure>
 
-\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary></entry><entry><title type="html">Securing your AWS networks</title><link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" /><published>2022-06-28T16:12:39-07:00</published><updated>2022-06-28T16:12:39-07:00</updated><id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/"><![CDATA[<p>Intro of what to accomplish</p>
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary></entry><entry><title type="html">Securing your AWS networks</title><link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" /><published>2022-06-28T16:29:37-07:00</published><updated>2022-06-28T16:29:37-07:00</updated><id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id><content type="html" xml:base="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="scope">Scope</h1>
 
@@ -416,7 +416,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
 
 " sizes="4032px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Protecting network and host-level boundaries " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Protecting network and host-level boundaries " />
 </picture>
 </a>
 
@@ -478,7 +478,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetworks-SecurityGroups-960.png 960w, 
 
 " sizes="3225px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-SecurityGroups.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Security Groups " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetworks-SecurityGroups.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-SecurityGroups.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Security Groups " />
 </picture>
 </a>
 
@@ -538,7 +538,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetworks-NetworkACLs-960.png 960w, 
 
 " sizes="3025px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-NetworkACLs.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Network Access Control Lists (ACLs) " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetworks-NetworkACLs.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-NetworkACLs.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Network Access Control Lists (ACLs) " />
 </picture>
 </a>
 
@@ -598,7 +598,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetworks-WAF-960.png 960w, 
 
 " sizes="3560px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-WAF.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Web Application Firewalls (WAF) " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetworks-WAF.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-WAF.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Web Application Firewalls (WAF) " />
 </picture>
 </a>
 
@@ -658,7 +658,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetworks-FirewallManager-960.png 960w, 
 
 " sizes="2400px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-FirewallManager.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Firewall Manager " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetworks-FirewallManager.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-FirewallManager.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Firewall Manager " />
 </picture>
 </a>
 
@@ -718,7 +718,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetworks-Shield-960.png 960w, 
 
 " sizes="2635px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-Shield.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: AWS Shield " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetworks-Shield.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-Shield.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: AWS Shield " />
 </picture>
 </a>
 
@@ -778,7 +778,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetworks-TGW-960.png 960w, 
 
 " sizes="3469px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-TGW.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Transit Gateway " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetworks-TGW.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-TGW.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Transit Gateway " />
 </picture>
 </a>
 
@@ -836,7 +836,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetworks-PAN-960.png 960w, 
 
 " sizes="2466px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-PAN.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Transit Gateway with Palo Alto Networks Integration " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetworks-PAN.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetworks-PAN.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Transit Gateway with Palo Alto Networks Integration " />
 </picture>
 </a>
 
@@ -857,7 +857,7 @@ security = ADS
 # Code
 #
 
-</code></pre></div></div>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2022-06-28T16:12:39-07:00</published><updated>2022-06-28T16:12:39-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/template</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/template/"><![CDATA[<p>Intro of what to accomplish</p>
+</code></pre></div></div>]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2022-06-28T16:29:37-07:00</published><updated>2022-06-28T16:29:37-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/template</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/template/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="heading-1">Heading 1</h1>
 
@@ -920,7 +920,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
 
 " sizes="4032px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS " />
 </picture>
 </a>
 
@@ -931,7 +931,7 @@ security = ADS
 
 </figure>
 
-\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/" rel="alternate" type="text/html" title="Title goes here" /><published>2022-06-28T16:12:39-07:00</published><updated>2022-06-28T16:12:39-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/"><![CDATA[<p>Intro of what to accomplish</p>
+\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]]]></content><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/" rel="alternate" type="text/html" title="Title goes here" /><published>2022-06-28T16:29:37-07:00</published><updated>2022-06-28T16:29:37-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven</id><content type="html" xml:base="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/"><![CDATA[<p>Intro of what to accomplish</p>
 
 <h1 id="heading-1">Heading 1</h1>
 
@@ -994,7 +994,7 @@ security = ADS
     /content/resized/2020/01/SecuringYourAWSNetwork-960.png 960w, 
 
 " sizes="4032px" />
-  <img src="//:0" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS " />
+  <img src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" data-src="/content/uploads/2020/01/SecuringYourAWSNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS " />
 </picture>
 </a>
 
@@ -1085,7 +1085,7 @@ security = ADS
     /content/resized/2022/06/DX-Physical-960.png 960w, 
 
  /content/uploads/2022/06/DX-Physical.png 1128w" sizes="1128px" />
-  <img src="//:0" data-src="/content/uploads/2022/06/DX-Physical.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Direct Connect Overview " />
+  <img src="/content/uploads/2022/06/DX-Physical.png" data-src="/content/uploads/2022/06/DX-Physical.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Direct Connect Overview " />
 </picture>
 </a>
 
@@ -1225,7 +1225,7 @@ Customers can request a dedicated connection through the AWS Direct Connect cons
     /content/resized/2022/06/meet-me-room-960.jpg 960w, 
 
 " sizes="1920px" />
-  <img src="//:0" data-src="/content/uploads/2022/06/meet-me-room.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Meet-me room in a colocation facility " />
+  <img src="/content/uploads/2022/06/meet-me-room.jpg" data-src="/content/uploads/2022/06/meet-me-room.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Meet-me room in a colocation facility " />
 </picture>
 </a>
 
@@ -1282,7 +1282,7 @@ Customers can request a dedicated connection through the AWS Direct Connect cons
     /content/resized/2022/06/DX-Cross-Connect-800.png 800w, 
 
  /content/uploads/2022/06/DX-Cross-Connect.png 922w" sizes="922px" />
-  <img src="//:0" data-src="/content/uploads/2022/06/DX-Cross-Connect.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Direct Connect Cross Connect within a customer’s rack " />
+  <img src="/content/uploads/2022/06/DX-Cross-Connect.png" data-src="/content/uploads/2022/06/DX-Cross-Connect.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Direct Connect Cross Connect within a customer’s rack " />
 </picture>
 </a>
 
@@ -1369,7 +1369,7 @@ Customers request a Hosted Connection by contacting the AWS Direct Connect Deliv
     /content/resized/2022/06/DX-VIFs-Overview-960.png 960w, 
 
  /content/uploads/2022/06/DX-VIFs-Overview.png 1060w" sizes="1060px" />
-  <img src="//:0" data-src="/content/uploads/2022/06/DX-VIFs-Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Direct Connect Logical Overview " />
+  <img src="/content/uploads/2022/06/DX-VIFs-Overview.png" data-src="/content/uploads/2022/06/DX-VIFs-Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Direct Connect Logical Overview " />
 </picture>
 </a>
 
@@ -1446,7 +1446,7 @@ Customers request a Hosted Connection by contacting the AWS Direct Connect Deliv
     /content/resized/2022/06/DX-Connectivity-800.png 800w, 
 
  /content/uploads/2022/06/DX-Connectivity.png 821w" sizes="821px" />
-  <img src="//:0" data-src="/content/uploads/2022/06/DX-Connectivity.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Direct Connect Connectivity Options " />
+  <img src="/content/uploads/2022/06/DX-Connectivity.png" data-src="/content/uploads/2022/06/DX-Connectivity.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Direct Connect Connectivity Options " />
 </picture>
 </a>
 
@@ -1514,7 +1514,7 @@ Customers request a Hosted Connection by contacting the AWS Direct Connect Deliv
     /content/resized/2022/06/Direct-Connect-Commercial-Workflow-512.png 512w, 
 
  /content/uploads/2022/06/Direct-Connect-Commercial-Workflow.png 637w" sizes="637px" />
-  <img src="//:0" data-src="/content/uploads/2022/06/Direct-Connect-Commercial-Workflow.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Commercial Workflow " />
+  <img src="/content/uploads/2022/06/Direct-Connect-Commercial-Workflow.png" data-src="/content/uploads/2022/06/Direct-Connect-Commercial-Workflow.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Commercial Workflow " />
 </picture>
 </a>
 
@@ -1591,7 +1591,7 @@ Unless the default settings within a BGP enabled router are changed, the Best Pa
     /content/resized/2020/09/Understanding-BGP-Local_Pref-512.png 512w, 
 
  /content/uploads/2020/09/Understanding-BGP-Local_Pref.png 521w" sizes="521px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-Local_Pref.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred. " />
+  <img src="/content/uploads/2020/09/Understanding-BGP-Local_Pref.png" data-src="/content/uploads/2020/09/Understanding-BGP-Local_Pref.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Local_Pref dictates how traffic leaves a local ASN, where path with a higher Local_Pref value being preferred. " />
 </picture>
 </a>
 
@@ -1673,7 +1673,7 @@ Unless the default settings within a BGP enabled router are changed, the Best Pa
     /content/resized/2020/09/Understanding-BGP-AS-Path-Prepending-512.png 512w, 
 
  /content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png 521w" sizes="521px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN. " />
+  <img src="/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png" data-src="/content/uploads/2020/09/Understanding-BGP-AS-Path-Prepending.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: AS_PATH prepending makes the AS path length artificially longer, therefore influencing inbound traffic to an ASN. " />
 </picture>
 </a>
 
@@ -1743,7 +1743,7 @@ Unless the default settings within a BGP enabled router are changed, the Best Pa
     /content/resized/2020/09/Understanding-BGP-MED-320.png 320w, 
 
  /content/uploads/2020/09/Understanding-BGP-MED.png 381w" sizes="381px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-BGP-MED.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred. " />
+  <img src="/content/uploads/2020/09/Understanding-BGP-MED.png" data-src="/content/uploads/2020/09/Understanding-BGP-MED.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Multi-Exit Discriminator (MED) suggests how traffic should enter an ASN. Path with lower MED value are preferred. " />
 </picture>
 </a>
 
@@ -1869,7 +1869,7 @@ RPKI validation codes: V valid, I invalid, N Not found
     /content/resized/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop-800.png 800w, 
 
  /content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png 871w" sizes="871px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) " />
+  <img src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Hop-by-Hop.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: IP Hop-by-Hop routing with VPCs and multiple Transit Gateways (TGW) " />
 </picture>
 </a>
 
@@ -1943,7 +1943,7 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
     /content/resized/2020/09/understanding-routing-and-bgp-trail-map-683.jpg 683w, 
 
  /content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg 800w" sizes="800px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Asymmetric routing is like a hiking-trail loop. " />
+  <img src="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" data-src="/content/uploads/2020/09/understanding-routing-and-bgp-trail-map.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 2: Asymmetric routing is like a hiking-trail loop. " />
 </picture>
 </a>
 
@@ -2000,7 +2000,7 @@ Also when talking with co-workers, customer, support staff, or anyone alike it i
     /content/resized/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing-800.png 800w, 
 
  /content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png 871w" sizes="871px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) " />
+  <img src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" data-src="/content/uploads/2020/09/Understanding-Routing-and-BGP-Asymmetric-Routing.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Asymmetric routing with VPCs and multiple Transit Gateways (TGW) " />
 </picture>
 </a>
 
@@ -2126,7 +2126,7 @@ RPKI validation codes: V valid, I invalid, N Not found
     /content/resized/2020/09/bear-tree-384.jpg 384w, 
 
  /content/uploads/2020/09/bear-tree.jpg 400w" sizes="400px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/bear-tree.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 4: IP routing is similar to hiking without a map. Here: Packet loss. (Photo courtesy of USDA Forest Service) " />
+  <img src="/content/uploads/2020/09/bear-tree.jpg" data-src="/content/uploads/2020/09/bear-tree.jpg" class="blur-up lazyautosizes lazyload" alt="Figure 4: IP routing is similar to hiking without a map. Here: Packet loss. (Photo courtesy of USDA Forest Service) " />
 </picture>
 </a>
 
@@ -2207,7 +2207,7 @@ With the introduction of IPv6 support this is unfortunately no longer the case. 
     /content/resized/2020/09/S2S-VPN-with-IPv6-1-800.png 800w, 
 
  /content/uploads/2020/09/S2S-VPN-with-IPv6-1.png 901w" sizes="901px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support. " />
+  <img src="/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-1.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: AWS Site-to-Site VPN setup with IPv4 and IPv6 support. " />
 </picture>
 </a>
 
@@ -2274,7 +2274,7 @@ Also note that this means you’ll be paying separately for the tunnel carrying 
     /content/resized/2020/09/S2S-VPN-with-IPv6-2-960.png 960w, 
 
  /content/uploads/2020/09/S2S-VPN-with-IPv6-2.png 1061w" sizes="1061px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support. " />
+  <img src="/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-2.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Creating a new AWS Site-to-Site VPN with IPv6 support. " />
 </picture>
 </a>
 
@@ -2340,7 +2340,7 @@ Also note that this means you’ll be paying separately for the tunnel carrying 
     /content/resized/2020/09/S2S-VPN-with-IPv6-3-960.png 960w, 
 
 " sizes="1438px" />
-  <img src="//:0" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support. " />
+  <img src="/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png" data-src="/content/uploads/2020/09/S2S-VPN-with-IPv6-3.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Tunnel details for AWS Site-to-Site VPN with IPv6 support. " />
 </picture>
 </a>
 

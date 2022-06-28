@@ -3,7 +3,7 @@
   <channel>
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2022-06-28T16:13:09-07:00</updated>
+  <updated>2022-06-28T16:30:02-07:00</updated>
   <id>https://www.edge-cloud.net/atom.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -25,8 +25,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</id>
-      <updated>2022-06-28T16:12:39-07:00</updated>
-      <published>2022-06-28T16:12:39-07:00</published>
+      <updated>2022-06-28T16:29:37-07:00</updated>
+      <published>2022-06-28T16:29:37-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -46,8 +46,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2021/01/01/template/</id>
-      <updated>2022-06-28T16:12:39-07:00</updated>
-      <published>2022-06-28T16:12:39-07:00</published>
+      <updated>2022-06-28T16:29:37-07:00</updated>
+      <published>2022-06-28T16:29:37-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -108,8 +108,8 @@ Note: This is a notice box
     <entry>
       <title>Securing your AWS networks</title>
       <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</id>
-      <updated>2022-06-28T16:12:39-07:00</updated>
-      <published>2022-06-28T16:12:39-07:00</published>
+      <updated>2022-06-28T16:29:37-07:00</updated>
+      <published>2022-06-28T16:29:37-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -129,8 +129,8 @@ Note: This is a notice box
     <entry>
       <title>Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title>
       <id>https://www.edge-cloud.net/2021/10/01/hands-on-with-aws-byoip/</id>
-      <updated>2022-06-28T16:12:39-07:00</updated>
-      <published>2022-06-28T16:12:39-07:00</published>
+      <updated>2022-06-28T16:29:37-07:00</updated>
+      <published>2022-06-28T16:29:37-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -152,8 +152,8 @@ Note: This is a notice box
     <entry>
       <title>Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title>
       <id>https://www.edge-cloud.net/2021/10/15/aws-dx-public-vid-for-s3-only/</id>
-      <updated>2022-06-28T16:12:39-07:00</updated>
-      <published>2022-06-28T16:12:39-07:00</published>
+      <updated>2022-06-28T16:29:37-07:00</updated>
+      <published>2022-06-28T16:29:37-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -216,8 +216,8 @@ Note: This is a notice box
     <entry>
       <title>Freeradius with Let's Encrypt certificate for WPA Enterprise (802.1x) WiFi setup</title>
       <id>https://www.edge-cloud.net/2019/04/30/freeradius-with-letsencrypt-for-wpa-enterprise/</id>
-      <updated>2022-06-28T16:12:39-07:00</updated>
-      <published>2022-06-28T16:12:39-07:00</published>
+      <updated>2022-06-28T16:29:37-07:00</updated>
+      <published>2022-06-28T16:29:37-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
