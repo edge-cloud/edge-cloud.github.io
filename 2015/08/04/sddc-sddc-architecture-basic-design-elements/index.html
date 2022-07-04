@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
-  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
@@ -14,6 +14,9 @@
 
 
   <meta name="author" content="Christian Elsen">
+  
+  <meta property="article:author" content="Christian Elsen">
+  
 
 
 <meta property="og:type" content="article">
@@ -22,30 +25,40 @@
 <meta property="og:title" content="SDDC Architecture – Basic Design Elements">
 <meta property="og:url" content="https://www.edge-cloud.net/2015/08/04/sddc-sddc-architecture-basic-design-elements/">
 
-<meta property="og:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
 
-
-<meta property="og:image" content="https://www.edge-cloud.net/wp-content/uploads/2015/07/DesignElements.png">
-
-
-
-<meta name="twitter:site" content="@ChristianElsen">
-<meta name="twitter:title" content="SDDC Architecture – Basic Design Elements">
-<meta name="twitter:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
-<meta name="twitter:url" content="https://www.edge-cloud.net/2015/08/04/sddc-sddc-architecture-basic-design-elements/">
-<meta name="twitter:card" content="summary">
-
-<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+  <meta property="og:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
 
 
 
-
-<meta property="article:published_time" content="2015-08-04T07:59:10-07:00">
-
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
 
 
 
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="SDDC Architecture – Basic Design Elements">
+  <meta name="twitter:description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/2015/08/04/sddc-sddc-architecture-basic-design-elements/">
 
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2015-08-04T07:59:10-07:00">
+
+
+
+
+
+  
+
+  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/2015/08/04/sddc-sddc-architecture-basic-design-elements/">
@@ -53,28 +66,17 @@
 
 
 
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "https://www.edge-cloud.net",
-      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
-    }
-  </script>
-
-
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
       "@type": "Person",
       "name": "Christian Elsen",
-      "url": "https://www.edge-cloud.net",
+      "url": "https://www.edge-cloud.net/",
       "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
-    }
-  </script>
-
+    
+  }
+</script>
 
 
   <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
@@ -83,10 +85,13 @@
 
 
 
+
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,21 +102,8 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
-
-<!--[if IE ]>
-  <style>
-    /* old IE unsupported flexbox fixes */
-    .greedy-nav .site-title {
-      padding-right: 3em;
-    }
-    .greedy-nav button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
-    }
-  </style>
-<![endif]-->
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
 
 
 
@@ -153,10 +145,13 @@
   </head>
 
   <body class="layout--single">
-
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
 
     
 
@@ -165,9 +160,12 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt=" On the edge of cloud computing"></a>
         
-        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <a class="site-title" href="/">
+           On the edge of cloud computing
+          
+        </a>
         <ul class="visible-links">
 <li class="masthead__menu-item">
               <a href="/">Home</a>
@@ -188,9 +186,7 @@
         
         <button class="search__toggle" type="button">
           <span class="visually-hidden">Toggle search</span>
-          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
-            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
-          </svg>
+          <i class="fas fa-search"></i>
         </button>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -209,32 +205,33 @@
 
 
 
+
+
 <div id="main" role="main">
   
   <div class="sidebar sticky">
   
 
 
-<div itemscope itemtype="https://schema.org/Person">
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
 
   
     <div class="author__avatar">
-      
-
-      
-        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
-      
+      <a href="https://www.edge-cloud.net/">
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image" class="u-photo">
+      </a>
     </div>
   
 
   <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://www.edge-cloud.net/" itemprop="url">Christian Elsen</a>
+    </h3>
     
-      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
-    
-    
-      <p class="author__bio" itemprop="description">
-        Technology Generalist
-      </p>
+      <div class="author__bio p-note" itemprop="description">
+        <p>Technology Generalist</p>
+
+      </div>
     
   </div>
 
@@ -243,34 +240,32 @@
     <ul class="author__urls social-icons">
       
         <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">San Francisco, CA</span>
         </li>
       
 
       
         
           
-            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i> AS213151</a></li>
+            <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
-      
-
       
 
       
@@ -323,7 +318,7 @@
 
       <!--
   <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
       <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
     </a>
   </li>
@@ -336,30 +331,62 @@
   </div>
 
 
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="SDDC Architecture – Basic Design Elements">
     <meta itemprop="description" content="This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.">
-    <meta itemprop="datePublished" content="August 04, 2015">
+    <meta itemprop="datePublished" content="2015-08-04T07:59:10-07:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">SDDC Architecture – Basic Design Elements
-</h1>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://www.edge-cloud.net/2015/08/04/sddc-sddc-architecture-basic-design-elements/" class="u-url" itemprop="url">SDDC Architecture – Basic Design Elements
+</a>
+          </h1>
           
-            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2015-08-04T07:59:10-07:00">August 4, 2015</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #Architecture, #Cloud, #SDDC
+    
+    
+    
+  </p>
 
 
-
-
-  6 minute read
-</p>
-          
         </header>
       
 
-      <section class="page__content" itemprop="text">
+      <section class="page__content e-content" itemprop="text">
         
         <p>This article is part of a <a href="/2015/02/20/sddc-architecture-introduction/">series of articles</a>, focusing on the architecture of an SDDC as well as some of its design elements.</p>
 
@@ -562,24 +589,16 @@
 
 
   
-  
-  
 
   <p class="page__taxonomy">
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      
-      
-      <a href="/tags/#architecture" class="page__taxonomy-item" rel="tag">Architecture</a><span class="sep">, </span>
+      <a href="/tags/#architecture" class="page__taxonomy-item p-category" rel="tag">Architecture</a><span class="sep">, </span>
     
-      
-      
-      <a href="/tags/#cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
+      <a href="/tags/#cloud" class="page__taxonomy-item p-category" rel="tag">Cloud</a><span class="sep">, </span>
     
-      
-      
-      <a href="/tags/#sddc" class="page__taxonomy-item" rel="tag">SDDC</a>
+      <a href="/tags/#sddc" class="page__taxonomy-item p-category" rel="tag">SDDC</a>
     
     </span>
   </p>
@@ -588,8 +607,9 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-08-04T07:59:10-07:00">August 04, 2015</time></p>
-        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2015-08-04T07:59:10-07:00">August 4, 2015</time></p>
+
       </footer>
 
       <section class="page__share">
@@ -597,12 +617,12 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=SDDC+Architecture+%E2%80%93+Basic+Design+Elements%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn share-button btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=SDDC+Architecture+%E2%80%93+Basic+Design+Elements%20https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn share-button btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn share-button btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-  
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
   <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2015%2F08%2F04%2Fsddc-sddc-architecture-basic-design-elements%2F&amp;title=SDDC+Architecture+%E2%80%93+Basic+Design+Elements" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 </section>
 
@@ -627,7 +647,7 @@
   
   
     <div class="page__related">
-      <h4 class="page__related-title">You may also enjoy</h4>
+      <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
         
           
@@ -637,28 +657,50 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="2015-08-04T07:59:10-07:00">June 28, 2022</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  10 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #AWS, #Network
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
 </p>
   </article>
@@ -672,28 +714,50 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2020/09/28/understanding-bgp/" rel="permalink">Better understanding BGP
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="2015-08-04T07:59:10-07:00">September 28, 2020</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  9 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #BGP, #Network
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-28T00:00:00-07:00">September 28, 2020</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #BGP, #Network
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Primer to better understanding BGP
 </p>
   </article>
@@ -707,28 +771,50 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2020/09/18/understanding-routing/" rel="permalink">Better understanding IP Routing
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="2015-08-04T07:59:10-07:00">September 18, 2020</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  10 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #BGP, #Network
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-18T00:00:00-07:00">September 18, 2020</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #BGP, #Network
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Look at fundamental principles of IP routing to better design and troubleshoot networks
 </p>
   </article>
@@ -742,28 +828,50 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="2015-08-04T07:59:10-07:00">September 11, 2020</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  7 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #AWS, #Network, #IPv6
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
 </p>
   </article>
@@ -774,15 +882,7 @@
     </div>
   
   
-  
-  
-  
 </div>
-
-
-
-
-
 
     </div>
 
@@ -790,14 +890,14 @@
       <div class="search-content">
         <div class="search-content__inner-wrap">
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
-    <div class="search-searchbar"></div>
-    <div class="search-hits"></div>
+  <div class="search-searchbar"></div>
+  <div class="search-hits"></div>
 </div>
 
       </div>
     
-    
-    <div class="page__footer">
+
+    <div id="footer" class="page__footer">
       <footer>
         <!-- start custom footer snippets -->
 
@@ -812,7 +912,7 @@
     
       
         
-          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
         
       
         
@@ -825,7 +925,9 @@
       
     
 
-    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
   </ul>
 </div>
 
@@ -838,9 +940,7 @@
   <script src="/assets/js/main.min.js"></script>
   <script src="/assets/js/lazysizes.min.js"></script>
 
-  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
-
-
+  
 
 
 
@@ -865,8 +965,9 @@ const search = instantsearch({
 
 const hitTemplate = function(hit) {
   const url = hit.url;
-  const title = hit._highlightResult.title.value;
-  const content = hit._highlightResult.html.value;
+  const hightlight = hit._highlightResult;
+  const title = hightlight.title && hightlight.title.value  || "";
+  const content = hightlight.html && hightlight.html.value  || "";
 
   return `
     <div class="list__item">
@@ -890,13 +991,20 @@ search.addWidget(
   instantsearch.widgets.hits({
     container: '.search-hits',
     templates: {
-      item: hitTemplate
+      item: hitTemplate,
+      empty: 'No results',
     }
   })
 );
 
-// Starting the search
-search.start();
+// Starting the search only when toggle is clicked
+$(document).ready(function () {
+  $(".search__toggle").on("click", function() {
+    if(!search.started) {
+      search.start();
+    }
+  });
+});
 </script>
 
 
@@ -917,6 +1025,7 @@ search.start();
     script.setAttribute('src', 'https://utteranc.es/client.js');
     script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
     script.setAttribute('issue-term', 'pathname');
+    
     script.setAttribute('theme', 'github-light');
     script.setAttribute('crossorigin', 'anonymous');
 
@@ -925,6 +1034,8 @@ search.start();
 </script>
 
   
+
+
 
 
 

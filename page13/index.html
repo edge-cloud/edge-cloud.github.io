@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
-  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
@@ -13,6 +13,9 @@
 <meta name="description" content="Edge Cloud is a personal blog about various technical subjects, especially data centers, virtualization, networking and cloud computing.">
 
 
+  <meta name="author" content="Christian Elsen">
+  
+
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
@@ -20,28 +23,36 @@
 <meta property="og:title" content="Edge Cloud">
 <meta property="og:url" content="https://www.edge-cloud.net/page13/">
 
-<meta property="og:description" content="Edge Cloud is a personal blog about various technical subjects, especially data centers, virtualization, networking and cloud computing.">
 
-
-<meta property="og:image" content="https://www.edge-cloud.net/assets/images/cloud-image-1.webp">
-
-
-
-<meta name="twitter:site" content="@ChristianElsen">
-<meta name="twitter:title" content="Edge Cloud">
-<meta name="twitter:description" content="Edge Cloud is a personal blog about various technical subjects, especially data centers, virtualization, networking and cloud computing.">
-<meta name="twitter:url" content="https://www.edge-cloud.net/page13/">
-<meta name="twitter:card" content="summary">
-
-<meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
+  <meta property="og:description" content="Edge Cloud is a personal blog about various technical subjects, especially data centers, virtualization, networking and cloud computing.">
 
 
 
+  <meta property="og:image" content="https://www.edge-cloud.net/assets/images/cloud-image-1.webp">
+
+
+
+  <meta name="twitter:site" content="@ChristianElsen">
+  <meta name="twitter:title" content="Edge Cloud">
+  <meta name="twitter:description" content="Edge Cloud is a personal blog about various technical subjects, especially data centers, virtualization, networking and cloud computing.">
+  <meta name="twitter:url" content="https://www.edge-cloud.net/page13/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/cloud-image-1.webp">
+  
+
+  
 
 
 
 
 
+
+
+  
+
+  
 
 
 <link rel="canonical" href="https://www.edge-cloud.net/page13/">
@@ -53,28 +64,17 @@
   <link rel="next" href="https://www.edge-cloud.net/page14/">
 
 
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "https://www.edge-cloud.net",
-      "logo": "https://www.edge-cloud.net/assets/images/og-image.jpg"
-    }
-  </script>
-
-
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
       "@type": "Person",
       "name": "Christian Elsen",
-      "url": "https://www.edge-cloud.net",
+      "url": "https://www.edge-cloud.net/",
       "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
-    }
-  </script>
-
+    
+  }
+</script>
 
 
   <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
@@ -83,10 +83,13 @@
 
 
 
+
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,21 +100,8 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
-
-<!--[if IE ]>
-  <style>
-    /* old IE unsupported flexbox fixes */
-    .greedy-nav .site-title {
-      padding-right: 3em;
-    }
-    .greedy-nav button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
-    }
-  </style>
-<![endif]-->
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
 
 
 
@@ -153,10 +143,13 @@
   </head>
 
   <body class="layout--home wide">
-
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
 
     
 
@@ -165,9 +158,12 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo webfeedsFeaturedVisual" href="/"><img src="/assets/images/edgecloud.png" alt="Edge Cloud"></a>
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt=" On the edge of cloud computing"></a>
         
-        <a class="site-title" href="/"> On the edge of cloud computing</a>
+        <a class="site-title" href="/">
+           On the edge of cloud computing
+          
+        </a>
         <ul class="visible-links">
 <li class="masthead__menu-item">
               <a href="/">Home</a>
@@ -188,9 +184,7 @@
         
         <button class="search__toggle" type="button">
           <span class="visually-hidden">Toggle search</span>
-          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
-            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
-          </svg>
+          <i class="fas fa-search"></i>
         </button>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -214,10 +208,6 @@
 
 
 
-
-
-
-
 <div class="page__hero--overlay" style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/cloud-image-1.webp');">
   
     <div class="wrapper">
@@ -232,6 +222,8 @@
 </p>
       
       
+
+
       
       
     </div>
@@ -249,26 +241,25 @@
   
 
 
-<div itemscope itemtype="https://schema.org/Person">
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
 
   
     <div class="author__avatar">
-      
-
-      
-        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image">
-      
+      <a href="https://www.edge-cloud.net/">
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image" class="u-photo">
+      </a>
     </div>
   
 
   <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://www.edge-cloud.net/" itemprop="url">Christian Elsen</a>
+    </h3>
     
-      <h3 class="author__name" itemprop="name">Christian Elsen</h3>
-    
-    
-      <p class="author__bio" itemprop="description">
-        Technology Generalist
-      </p>
+      <div class="author__bio p-note" itemprop="description">
+        <p>Technology Generalist</p>
+
+      </div>
     
   </div>
 
@@ -277,34 +268,32 @@
     <ul class="author__urls social-icons">
       
         <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">San Francisco, CA</span>
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">San Francisco, CA</span>
         </li>
       
 
       
         
           
-            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Website</a></li>
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i> AS213151</a></li>
+            <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
-      
-
       
 
       
@@ -357,7 +346,7 @@
 
       <!--
   <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
       <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
     </a>
   </li>
@@ -370,6 +359,7 @@
   </div>
 
 
+
   <div class="archive">
     
     
@@ -377,178 +367,293 @@
 <h3 class="archive__subtitle">Recent posts</h3>
 
 
+
+
+<div class="entries-list">
   
+    
 
 
 
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2013/06/07/measuring-network-throughput/" rel="permalink">Measuring Network Throughput
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="">June 07, 2013</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  19 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #Network, #Performance
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2013-06-07T02:45:03-07:00">June 7, 2013</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          19 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #Network, #Performance
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">The topic of measuring network throughput between network devices comes up quite frequently: It ranges from users claiming (and often blaming) that the 100 M...</p>
   </article>
 </div>
 
-
   
+    
 
 
 
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2013/05/31/rancidtrac-on-ubuntu-12-04-lts/" rel="permalink">Network device configuration management with Rancid and Trac on Ubuntu 12.04 LTS
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="">May 31, 2013</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  9 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #Management, #Network
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2013-05-31T09:29:57-07:00">May 31, 2013</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #Management, #Network
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Walk-through instructions for a project to automatically save the text-based configuration of network devices and make them browse-able via a web-based inter...</p>
   </article>
 </div>
 
-
   
+    
 
 
 
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2013/05/21/infoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere/" rel="permalink">Infoblox vNIOS HA pair VIP unreachable when deployed on vSphere
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="">May 21, 2013</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  1 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #Infoblox, #VMware, #DNS
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2013-05-21T15:04:08-07:00">May 21, 2013</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #Infoblox, #VMware, #DNS
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Yesterday I stumbled over an interesting networking problem while deploying an Infoblox vNIOS IPAM HA pair on a fresh installation of VMware vSphere: After s...</p>
   </article>
 </div>
 
-
   
+    
 
 
 
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2013/05/20/configuring-f5-big-ip-with-vcd/" rel="permalink">Configuring F5 Big-IP LTM with VMware vCloud Director
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="">May 20, 2013</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  10 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #F5, #VMware
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2013-05-20T13:30:00-07:00">May 20, 2013</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #F5, #VMware
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Complete and comprehensive walk through guide for the load balancing configuration of an F5 Big-IP LTM with VMware vCloud Director (vCD).
 </p>
   </article>
 </div>
 
-
   
+    
 
 
 
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2021/01/01/tgw-ngw-cost-breakeven/" rel="permalink">Title goes here
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> <time datetime="">July 02, 2022</time> ·
-    
-    
-      <i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  1 minute read
- ·      
+  <p class="page__meta">
     
       
-      <i class="fas fa-tags" aria-hidden="true"></i> #AWS, #Network
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-04T14:11:49-07:00">July 4, 2022</time>
+      </span>
     
-    </p>
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network
+    
+    
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Brief description goes here
 </p>
   </article>
 </div>
 
-
+  
+</div>
 
 
 <nav class="pagination">
@@ -621,14 +726,14 @@
       <div class="search-content">
         <div class="search-content__inner-wrap">
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
-    <div class="search-searchbar"></div>
-    <div class="search-hits"></div>
+  <div class="search-searchbar"></div>
+  <div class="search-hits"></div>
 </div>
 
       </div>
     
-    
-    <div class="page__footer">
+
+    <div id="footer" class="page__footer">
       <footer>
         <!-- start custom footer snippets -->
 
@@ -643,7 +748,7 @@
     
       
         
-          <li><a href="http://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
         
       
         
@@ -656,7 +761,9 @@
       
     
 
-    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
   </ul>
 </div>
 
@@ -669,9 +776,7 @@
   <script src="/assets/js/main.min.js"></script>
   <script src="/assets/js/lazysizes.min.js"></script>
 
-  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
-
-
+  
 
 
 
@@ -696,8 +801,9 @@ const search = instantsearch({
 
 const hitTemplate = function(hit) {
   const url = hit.url;
-  const title = hit._highlightResult.title.value;
-  const content = hit._highlightResult.html.value;
+  const hightlight = hit._highlightResult;
+  const title = hightlight.title && hightlight.title.value  || "";
+  const content = hightlight.html && hightlight.html.value  || "";
 
   return `
     <div class="list__item">
@@ -721,14 +827,23 @@ search.addWidget(
   instantsearch.widgets.hits({
     container: '.search-hits',
     templates: {
-      item: hitTemplate
+      item: hitTemplate,
+      empty: 'No results',
     }
   })
 );
 
-// Starting the search
-search.start();
+// Starting the search only when toggle is clicked
+$(document).ready(function () {
+  $(".search__toggle").on("click", function() {
+    if(!search.started) {
+      search.start();
+    }
+  });
+});
 </script>
+
+
 
 
 
