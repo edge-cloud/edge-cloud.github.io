@@ -1,0 +1,1547 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2 - Edge Cloud</title>
+<meta name="description" content="Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.">
+
+
+  <meta name="author" content="Christian Elsen">
+  
+  <meta property="article:author" content="Christian Elsen">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2">
+<meta property="og:url" content="https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip/">
+
+
+  <meta property="og:description" content="Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/content/uploads/2022/07/title-hands-on-with-aws-byoip.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2022-07-19T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net/",
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt=" On the edge of cloud computing"></a>
+        
+        <a class="site-title" href="/">
+           On the edge of cloud computing
+          
+        </a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://www.edge-cloud.net/">
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://www.edge-cloud.net/" itemprop="url">Christian Elsen</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Technology Generalist</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">San Francisco, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2">
+    <meta itemprop="description" content="Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.">
+    <meta itemprop="datePublished" content="2022-07-19T00:00:00-07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip/" class="u-url" itemprop="url">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          19 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+<li><a href="#benefits">Benefits</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#overall-process">Overall process</a></li>
+<li>
+<a href="#onboarding-your-byoip-space">Onboarding your BYOIP space</a><ul>
+<li>
+<a href="#step-1-configuration-of-ip-address-space-via-your-rirlir">Step 1: Configuration of IP address space via your RIR/LIR</a><ul>
+<li><a href="#rir-assignment">RIR Assignment</a></li>
+<li><a href="#resource-public-key-infrastructure-rpki">Resource Public Key Infrastructure (RPKI)</a></li>
+</ul>
+</li>
+<li><a href="#step-2-preparation-of-self-signed-x509-certificates">Step 2: Preparation of Self-signed X.509 certificates</a></li>
+<li><a href="#step-3-uploading-the-public-key-to-the-rir-resource-db-rdap-record">Step 3: Uploading the public key to the RIR Resource DB (RDAP record)</a></li>
+<li><a href="#step-4-creating-a-signed-message">Step 4: Creating a signed message</a></li>
+<li>
+<a href="#step-5-provision-and-advertise-address-space">Step 5: Provision and advertise address space</a><ul>
+<li><a href="#provision-the-cidr-with-an-aws-region">Provision the CIDR with an AWS region</a></li>
+<li><a href="#advertise-the-address-space">Advertise the address space</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#validation">Validation</a><ul>
+<li><a href="#roa-object-for-rpki">ROA object for RPKI</a></li>
+<li><a href="#public-certificate-in-rir-resource-database">Public certificate in RIR resource database</a></li>
+<li><a href="#aws-provisioning-outcome">AWS Provisioning outcome</a></li>
+<li><a href="#bgp-advertisement">BGP advertisement</a></li>
+</ul>
+</li>
+<li>
+<a href="#using-byoip-address-space">Using BYOIP address space</a><ul><li><a href="#aws-console-view-of-byoip-cidr">AWS Console view of BYOIP CIDR</a></li></ul>
+</li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>This blog post will walk you through the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html" target="_blank" rel="noopener noreferrer">Bring your own IP addresses (BYOIP) for Amazon EC2</a> feature, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">Autonomous System Numbers (ASNs)</a>. Within your AWS account, these BYOIP address ranges appear as an <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html" target="_blank" rel="noopener noreferrer">address pool</a>.</p>
+
+<p>While <a href="https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-bring-your-own-ip-byoip-for-amazon-vpc/" target="_blank" rel="noopener noreferrer">other blog posts on AWS BYOIP</a> exist, they are usually completely theoretical, using Documentation IP ranges and thereby hard to follow. In this blog post I will use real IPv6 address space instead, allowing you to validate most of the steps through various publicly available databases and systems yourself.</p>
+
+<h1 id="benefits">Benefits</h1>
+
+<p>You might wonder what the benefits of using BYOIP for Amazon EC2 is. They include among others:</p>
+
+<ul>
+  <li>
+<strong>Trusted IP space:</strong> You might be using trusted IP space for your service, such as a transactional e-Mail service that requires a high reputation of IP space, or a VPN service.</li>
+  <li>
+<strong>Avoid blocking of IP space:</strong> <a href="https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html" target="_blank" rel="noopener noreferrer">AWS publishes its current IP address ranges in JSON format</a>, which makes it very easy for various content or service provider to block all of this address space. This often happens for unknown or unclear reasons. Address space used for BYOIP is not published via this JSON file.</li>
+  <li>
+<strong>Hard-coded IP addresses:</strong> There is a wide set of devices in the field that might be using hard-coded IP addresses to contact a service instead of relying on <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer">DNS</a>. Therefore when moving such a service to AWS, it is often necessary to move the corresponding IP address and its IP block along to AWS. Most frequently this proves easier than updating hundreds if not thousands of devices in the field.</li>
+</ul>
+
+<h1 id="requirements">Requirements</h1>
+
+<p>The AWS documentation lists various <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-requirements" target="_blank" rel="noopener noreferrer">requirements</a> for using BYOIP. One key requirement is to be able to demonstrate “control” over the IP space in question.</p>
+
+<p>It’s widely recognized within the Internet community that you can demonstrate sufficient control over IP address space for the purpose of announcement from another ASN, by being able to create the corresponding Route Origin Authorization (ROA) record. Later within the process you will see how you can demonstrate control over your IP space by creating the necessary ROA record.</p>
+
+<h1 id="overall-process">Overall process</h1>
+
+<p>The overall process to bring IPv4 or IPv6 address space to AWS via the BYOIP process consists of multiple steps and is outlined in figure 1.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/BYOIP-AWS-Process.png" title="Figure 1: AWS Process to prepare and provision VPC BYOIP. " class="image-popup">
+<picture>
+  <source width="1055" height="901" type="image/webp" data-srcset="        /content/resized/2022/07/BYOIP-AWS-Process-320.webp 320w,         /content/resized/2022/07/BYOIP-AWS-Process-384.webp 384w,         /content/resized/2022/07/BYOIP-AWS-Process-512.webp 512w,         /content/resized/2022/07/BYOIP-AWS-Process-683.webp 683w,         /content/resized/2022/07/BYOIP-AWS-Process-800.webp 800w,         /content/resized/2022/07/BYOIP-AWS-Process-960.webp 960w,  /content/uploads/2022/07/BYOIP-AWS-Process.webp 1055w" sizes="1055px"></source>
+  <source width="1055" height="901" data-srcset="    /content/resized/2022/07/BYOIP-AWS-Process-320.png 320w,     /content/resized/2022/07/BYOIP-AWS-Process-384.png 384w,     /content/resized/2022/07/BYOIP-AWS-Process-512.png 512w,     /content/resized/2022/07/BYOIP-AWS-Process-683.png 683w,     /content/resized/2022/07/BYOIP-AWS-Process-800.png 800w,     /content/resized/2022/07/BYOIP-AWS-Process-960.png 960w,  /content/uploads/2022/07/BYOIP-AWS-Process.png 1055w" sizes="1055px"></source>
+  <img src="/content/resized/2022/07/BYOIP-AWS-Process-320.png" data-src="/content/uploads/2022/07/BYOIP-AWS-Process.png" class="blur-up lazyautosizes lazyload" width="1055" height="901" alt="Figure 1: AWS Process to prepare and provision VPC BYOIP. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: AWS Process to prepare and provision VPC BYOIP.
+</figcaption>
+
+</figure>
+
+<ul>
+  <li>
+    <p><strong>Step 1: Configuration of IP address space via your RIR/LIR</strong> - This includes creating appropriate RIR Resource DB records (aka. “Allocation” in the case of RIPE), as well as a Route Origin Authorization (ROA) record. This step represents good hygiene when using IP address space in general. Creation of a ROA record is only necessary for IPv4 address space and publicly advertised IPv6 address space.</p>
+  </li>
+  <li>
+    <p><strong>Step 2: Preparation of Self-signed X.509 certificates</strong> - While ROA is used to demonstrate control over the IP address space, it cannot be used to match a particular IP space to a certain AWS account ID. This is done via steps 2 - 5, whereas Step 2 generates a self-signed X.509 certificate pair for later usage.</p>
+  </li>
+  <li>
+    <p><strong>Step 3: Uploading the public key to the RIR Resource DB (RDAP record)</strong> - Placing the public key portion of the self-signed X.509 certificate into the description field of the IP address space’s RDAP record allows AWS to validate the mapping of the corresponding address space to an AWS account. This approach assumes that only someone with control over the IP address space can make changes to the corresponding RIR Resource DB record.</p>
+  </li>
+  <li>
+    <p><strong>Step 4: Creating a signed message</strong> - In this step you tie the IP address space to a certain AWS account ID. This is done by creating a signed message that by itself creates information about the IP address space and the AWS account ID and is signed using the above mentioned self-signed X.509 certificates.</p>
+  </li>
+  <li>
+    <p><strong>Step 5: Provision and adverstise address space</strong> - The signed message from step 4 is used to request the provisioning of the IP address space within the AWS Virtual Private Cloud (VPC) services. AWS validates the request against the RIR Resources DB and the RPKI publication point to ensure that you have sufficient control over the space. As a last item - which is only necessary for IPv4 address space and publicly advertised IPv6 address space - the IP address space is advertised via BGP to the Internet from the selected AWS region.</p>
+  </li>
+</ul>
+
+<h1 id="onboarding-your-byoip-space">Onboarding your BYOIP space</h1>
+
+<h2 id="step-1-configuration-of-ip-address-space-via-your-rirlir">Step 1: Configuration of IP address space via your RIR/LIR</h2>
+
+<p>In this blog post I will use IPv6 space allocated by my Local Internet Registry (LIR) <a href="https://snapserv.net/" target="_blank" rel="noopener noreferrer">SnapServ</a> from the Regional Internet Registry (RIR) <a href="https://www.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE NCC</a>.</p>
+
+<p>RIPE policy (<a href="https://www.ripe.net/publications/docs/ripe-733" target="_blank" rel="noopener noreferrer">IPv4</a>, <a href="https://www.ripe.net/publications/docs/ripe-738" target="_blank" rel="noopener noreferrer">IPv6</a>) states that any IP address sub-block that is used in a different network must be sub-allocated by the RIR or assigned by the end-user within the RIPE database.</p>
+
+<p>For this particular example we will focus on the red circle in Figure 2:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/BYOIP-RIPE-Assignment.png" title="Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red. " class="image-popup">
+<picture>
+  <source width="1131" height="465" type="image/webp" data-srcset="        /content/resized/2022/07/BYOIP-RIPE-Assignment-320.webp 320w,         /content/resized/2022/07/BYOIP-RIPE-Assignment-384.webp 384w,         /content/resized/2022/07/BYOIP-RIPE-Assignment-512.webp 512w,         /content/resized/2022/07/BYOIP-RIPE-Assignment-683.webp 683w,         /content/resized/2022/07/BYOIP-RIPE-Assignment-800.webp 800w,         /content/resized/2022/07/BYOIP-RIPE-Assignment-960.webp 960w,  /content/uploads/2022/07/BYOIP-RIPE-Assignment.webp 1131w" sizes="1131px"></source>
+  <source width="1131" height="465" data-srcset="    /content/resized/2022/07/BYOIP-RIPE-Assignment-320.png 320w,     /content/resized/2022/07/BYOIP-RIPE-Assignment-384.png 384w,     /content/resized/2022/07/BYOIP-RIPE-Assignment-512.png 512w,     /content/resized/2022/07/BYOIP-RIPE-Assignment-683.png 683w,     /content/resized/2022/07/BYOIP-RIPE-Assignment-800.png 800w,     /content/resized/2022/07/BYOIP-RIPE-Assignment-960.png 960w,  /content/uploads/2022/07/BYOIP-RIPE-Assignment.png 1131w" sizes="1131px"></source>
+  <img src="/content/resized/2022/07/BYOIP-RIPE-Assignment-320.png" data-src="/content/uploads/2022/07/BYOIP-RIPE-Assignment.png" class="blur-up lazyautosizes lazyload" width="1131" height="465" alt="Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: RIPE Assignment for IPv4 and IPv6 address space with example highlighted in red.
+</figcaption>
+
+</figure>
+
+<p>As mentioned before all these IPv6 prefixes are real and you can follow along the process by checking yourself what is published via the RIPE DB.</p>
+
+<h3 id="rir-assignment">RIR Assignment</h3>
+
+<p>While the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:7300::%2F40&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/40 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:7300::/40</code> with the status “Allocated-By-LIR” already exists at this point, I need to create a new assignment for the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:73ff::%2F48&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/48 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:73ff::/48</code> with the status “Assigned” to fulfill the RIPE policy.</p>
+
+<p>Without going into full details of how to <a href="https://www.ripe.net/manage-ips-and-asns/db/support/documentation/documenting-ipv6-assignments-in-the-ripe-database" target="_blank" rel="noopener noreferrer">document IPv6 assignments in the RIPE database</a>, or what attributes the <a href="https://www.ripe.net/manage-ips-and-asns/db/support/documentation/ripe-database-documentation/rpsl-object-types/4-2-descriptions-of-primary-objects/4-2-3-description-of-the-inet6num-object" target="_blank" rel="noopener noreferrer">inet6num object</a> can include, the resulting inet6num object in RPSL format will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inet6num:       2a06:e881:73ff::/48
+netname:        EU-CHRISTIANELSEN-AWS
+country:        EU
+admin-c:        CE2932-RIPE
+tech-c:         CE2932-RIPE
+status:         ASSIGNED
+mnt-by:         Christian_Elsen-MNT
+source:         RIPE
+
+</code></pre></div></div>
+
+<p>For now we have merely created this inet6num object in the RIPE database for documentation purposes and to fulfill the RIPE policy. Later on you’ll see that we will come back to this object and update it with the self-signed X.509 certificate.</p>
+
+<h3 id="resource-public-key-infrastructure-rpki">Resource Public Key Infrastructure (RPKI)</h3>
+
+<p>Next we need to create a Route Origin Authorization (ROA), a cryptographically signed object that states which Autonomous System (AS) is authorized to originate a particular IP address prefix.</p>
+
+<p>For address objects with the status of “Assigned PI” for Provider Independent (See Figure 2), one would accomplish this via the Regional Internet Registry (RIR). In my case that would be the <a href="https://my.ripe.net/#/rpki" target="_blank" rel="noopener noreferrer">RIPE RPKI Dashboard</a> and look like depicted in Figure 3.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/BYOIP-RIPE-RPKI.png" title="Figure 3: RIPE RPKI dashboard for managing Provider Independent (PI) resources. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2022/07/BYOIP-RIPE-RPKI-320.webp 320w,         /content/resized/2022/07/BYOIP-RIPE-RPKI-384.webp 384w,         /content/resized/2022/07/BYOIP-RIPE-RPKI-512.webp 512w,         /content/resized/2022/07/BYOIP-RIPE-RPKI-683.webp 683w,         /content/resized/2022/07/BYOIP-RIPE-RPKI-800.webp 800w,         /content/resized/2022/07/BYOIP-RIPE-RPKI-960.webp 960w, " sizes="1320px"></source>
+  <source data-srcset="    /content/resized/2022/07/BYOIP-RIPE-RPKI-320.png 320w,     /content/resized/2022/07/BYOIP-RIPE-RPKI-384.png 384w,     /content/resized/2022/07/BYOIP-RIPE-RPKI-512.png 512w,     /content/resized/2022/07/BYOIP-RIPE-RPKI-683.png 683w,     /content/resized/2022/07/BYOIP-RIPE-RPKI-800.png 800w,     /content/resized/2022/07/BYOIP-RIPE-RPKI-960.png 960w, " sizes="1320px"></source>
+  <img src="/content/resized/2022/07/BYOIP-RIPE-RPKI-320.png" data-src="/content/uploads/2022/07/BYOIP-RIPE-RPKI.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: RIPE RPKI dashboard for managing Provider Independent (PI) resources. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: RIPE RPKI dashboard for managing Provider Independent (PI) resources.
+</figcaption>
+
+</figure>
+
+<p>But you’ll remember from above that for this post I’m not using a Provider Independent IP block, but rather an IPv6 block in the “Assigned” state. Therefore I have to turn to my LIR in order to create the ROA. Luckily my LIR provides a web interface to accomplish this task (See Figure 4).</p>
+
+<p>This allows me to create two ROA entries to map the /48 prefix in question to both the origin ASN of AS14618 and AS16509. As the prefix is a /48 , selecting a “Maximum Length” of 48 for the ROA object is the only choice.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/BYOIP-LIR-RPKI.png" title="Figure 4: LIR RPKI dashboard for managing Assigned resources. " class="image-popup">
+<picture>
+  <source width="841" height="404" type="image/webp" data-srcset="        /content/resized/2022/07/BYOIP-LIR-RPKI-320.webp 320w,         /content/resized/2022/07/BYOIP-LIR-RPKI-384.webp 384w,         /content/resized/2022/07/BYOIP-LIR-RPKI-512.webp 512w,         /content/resized/2022/07/BYOIP-LIR-RPKI-683.webp 683w,         /content/resized/2022/07/BYOIP-LIR-RPKI-800.webp 800w,  /content/uploads/2022/07/BYOIP-LIR-RPKI.webp 841w" sizes="841px"></source>
+  <source width="841" height="404" data-srcset="    /content/resized/2022/07/BYOIP-LIR-RPKI-320.png 320w,     /content/resized/2022/07/BYOIP-LIR-RPKI-384.png 384w,     /content/resized/2022/07/BYOIP-LIR-RPKI-512.png 512w,     /content/resized/2022/07/BYOIP-LIR-RPKI-683.png 683w,     /content/resized/2022/07/BYOIP-LIR-RPKI-800.png 800w,  /content/uploads/2022/07/BYOIP-LIR-RPKI.png 841w" sizes="841px"></source>
+  <img src="/content/resized/2022/07/BYOIP-LIR-RPKI-320.png" data-src="/content/uploads/2022/07/BYOIP-LIR-RPKI.png" class="blur-up lazyautosizes lazyload" width="841" height="404" alt="Figure 4: LIR RPKI dashboard for managing Assigned resources. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: LIR RPKI dashboard for managing Assigned resources.
+</figcaption>
+
+</figure>
+
+<p>AWS recommends to create a ROA object for both AS14618 - which is used for the US-East-1 (N.Virginia) region - as well as AS16509 - which is used for all other commercial AWS regions. If you want to use BYOIP with GovCloud (US) select AS8987 in your ROA object instead.</p>
+
+<p class="notice--info"><strong>Notice:</strong> In this example, where I only want to bring the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:73ff::%2F48&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/48 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:73ff::/48</code> to AWS via BYOIP, The ROA entry is created for this particular /48 only along with the only possible “Maximum Length” size of 48. If I were to bring multiple /48 blocks over to AWS via BYOIP - e.g. for additional AWS regions - I could also create a single ROA entry for the “parent block” - which would be the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:7300::%2F40&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/40 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:7300::/40</code> - instead of each individual /48 block. In this case the “Maximum Length” still needs to be set to 48 as each individual block would be a /48.</p>
+
+<h2 id="step-2-preparation-of-self-signed-x509-certificates">Step 2: Preparation of Self-signed X.509 certificates</h2>
+
+<p>Next we need to create a self-signed X.509 certificate, for which the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-certificate" target="_blank" rel="noopener noreferrer">AWS documentation</a> provides the necessary steps using OpenSSL on a Linux based system. A quick and easy way to get access to such a Linux based system is to use <a href="https://aws.amazon.com/cloudshell/" target="_blank" rel="noopener noreferrer">AWS CloudShell</a> in one of the supported AWS Regions. In this demo I’ll be using the EU-Central-1 (Frankfurt) region (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/BYOIP-CloudShell.png" title="Figure 5: Using AWS CloudShell. " class="image-popup">
+<picture>
+  <source width="276" height="56" type="image/webp" data-srcset=" /content/uploads/2022/07/BYOIP-CloudShell.webp 276w" sizes="276px"></source>
+  <source width="276" height="56" data-srcset=" /content/uploads/2022/07/BYOIP-CloudShell.png 276w" sizes="276px"></source>
+  <img src="/" data-src="/content/uploads/2022/07/BYOIP-CloudShell.png" class="blur-up lazyautosizes lazyload" width="276" height="56" alt="Figure 5: Using AWS CloudShell. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Using AWS CloudShell.
+</figcaption>
+
+</figure>
+
+<p>While AWS CloudShell does not provide OpenSSL out of the box, it can be installed quickly and easily via <code class="language-plaintext highlighter-rouge">sudo yum -y install openssl</code>.</p>
+
+<p>The result will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ sudo yum -y install openssl
+Loaded plugins: ovl, priorities
+Resolving Dependencies
+--&gt; Running transaction check
+---&gt; Package openssl.x86_64 1:1.0.2k-24.amzn2.0.3 will be installed
+--&gt; Finished Dependency Resolution
+
+Dependencies Resolved
+
+==================================================================================================================================================================================================================================================
+ Package                                               Arch                                                 Version                                                                Repository                                                Size
+==================================================================================================================================================================================================================================================
+Installing:
+ openssl                                               x86_64                                               1:1.0.2k-24.amzn2.0.3                                                  amzn2-core                                               496 k
+
+Transaction Summary
+==================================================================================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 496 k
+Installed size: 830 k
+Downloading packages:
+openssl-1.0.2k-24.amzn2.0.3.x86_64.rpm                                                                                                                                                                                     | 496 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : 1:openssl-1.0.2k-24.amzn2.0.3.x86_64                                                                                                                                                                                           1/1 
+  Verifying  : 1:openssl-1.0.2k-24.amzn2.0.3.x86_64                                                                                                                                                                                           1/1 
+
+Installed:
+  openssl.x86_64 1:1.0.2k-24.amzn2.0.3                                                                                                                                                                                                            
+
+Complete!
+</code></pre></div></div>
+<p>Next we can generate the private key via <code class="language-plaintext highlighter-rouge">openssl genpkey -aes256 -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out private-key.pem</code>, which will then look like this as a result.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ openssl genpkey -aes256 -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out private-key.pem
+...................+++
+..........................................+++
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+[cloudshell-user@ip-10-1-2-3 ~]$ ls
+private-key.pem
+[cloudshell-user@ip-10-1-2-3 ~]$
+</code></pre></div></div>
+
+<p>Next we have to create the corresponding public certificate with <code class="language-plaintext highlighter-rouge">openssl req -new -x509 -key private-key.pem -days 365 | tr -d "\n" &gt; certificate.pem</code>. None of the values asked for “Country Name” through “Common Name” or “Email Address” matter and can be randomly chosen.</p>
+
+<p>The result will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ openssl req -new -x509 -key private-key.pem -days 365 | tr -d "\n" &gt; certificate.pem
+Enter pass phrase for private-key.pem:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [XX]:NZ
+State or Province Name (full name) []:
+Locality Name (eg, city) [Default City]:Auckland
+Organization Name (eg, company) [Default Company Ltd]:Edge-Cloud
+Organizational Unit Name (eg, section) []:
+Common Name (eg, your name or your server's hostname) []:AWS-BYOIP
+Email Address []:
+[cloudshell-user@ip-10-1-2-3 ~]$
+</code></pre></div></div>
+<p class="notice--info"><strong>Notice:</strong> Due to the parameter <code class="language-plaintext highlighter-rouge">-days 365</code> the public certificate will have a validity of 365 days. The certificate will only be used during the initial provisioning steps for an IP range. You might want to place the certificate into the parent block of an IP range - e.g. the the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:7300::%2F40&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/40 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:7300::/40</code> in my case - in order to later bring additional IP ranges to AWS, e.g. for additional regions. In this case make sure you don’t loose the corresponding private key within your AWS CloudShell and keep an eye on the expiration date of the certificate. The ROA on the other hand has to remain in place!</p>
+
+<h2 id="step-3-uploading-the-public-key-to-the-rir-resource-db-rdap-record">Step 3: Uploading the public key to the RIR Resource DB (RDAP record)</h2>
+
+<p>Next we need to upload the resulting public certificate from above into the RIR resource data base as an RDAP record. In the case of RIPE - which is the RIR that we are using for this example - the public certificate has to be placed into the “descr” field of the address range.</p>
+
+<p class="notice--info"><strong>Notice:</strong> In this example, where I only want to bring the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:73ff::%2F48&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/48 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:73ff::/48</code> to AWS via BYOIP, I will place it within this address ranges RIR record. If I were to bring multiple /48 blocks over to AWS via BYOIP - e.g. for additional AWS regions - I could also place the public certificate into the “parent block” which would be the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:7300::%2F40&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/40 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:7300::/40</code> in this case.</p>
+
+<p>First we will grab the content of the public certificate via the command <code class="language-plaintext highlighter-rouge">cat certificate.pem</code>.</p>
+
+<p>The result will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-0-76-195 ~]$ cat certificate.pem
+-----BEGIN CERTIFICATE-----MIIDyTCCArGgAwIBAgIUR2P0aLZtfm2L9QZI5muMqtCQcM0wDQYJKoZIhvcNAQELBQAwdDELMAkGA1UEBhMCREUxCzAJBgNVBAgMAkhFMRIwEAYDVQQHDAlGcmFua2Z1cnQxFTATBgNVBAoMDEFTMjEzMTUxIExMQzEMMAoGA1UECwwDTk9DMR8wHQYJKoZIhvcNAQkBFhBub2NAYXMyMTMxNTEubmV0MB4XDTIxMDgzMTIxNTg1MFoXDTIyMDgzMTIxNTg1MFowdDELMAkGA1UEBhMCREUxCzAJBgNVBAgMAkhFMRIwEAYDVQQHDAlGcmFua2Z1cnQxFTATBgNVBAoMDEFTMjEzMTUxIExMQzEMMAoGA1UECwwDTk9DMR8wHQYJKoZIhvcNAQkBFhBub2NAYXMyMTMxNTEubmV0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuVeZfmkEPM2Oh5K9vISgoBFJP/xuCrZE81VTErGjrPAeXfQaKXJzTf4xL4QZPBJmAbtSD91d4ubGEwVv8FIH8vg712opgLefMDYwv1SoAV0YUG0C23Zadm31MHOWtYX/KgEXOtUkAUuL8QEUH2fgU/6F+0PEBWC985zKTCMxEu2GmyEdjPT0dcun2F/eLFaEjtkZ5Il+ruhoN9grhBWWqau4DG0EyBnkARSmB8zpqSFte6IO+XypSpEglc3792xnLQFVUc1N7jynIMXXIf9fnPKP87jTcxmyDszFfguC9nsdmSDB9VMe3rnnJmDN13nkGWWgtve0grM8yULBb93IwIDAQABo1MwUTAdBgNVHQ4EFgQUaLbwp0B6sJR9bhlQOAFE9Ts/BKkwHwYDVR0jBBgwFoAUaLbwp0B6sJR9bhlQOAFE9Ts/BKkwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAIbvgfqQgCDkKi35Gj0St0aOk1+h8iOdqrW3/JXvNUsIRJJcPpwJyA/kBOuy64YWc9kk7lod+TxFXdMZiUKUFKJtC5FDY2RaR5YpstLNG/+T19ydNLjPQ2WBrUqUyCL9T195/TmZ437k/Rg1VMGisHPlLrOON8IPFg/G3Xy/9fTEQIIZczWlWAprtxacgCMHgZvr31vDEgSNbJux6s+P8YZA7j8M2GclAX13gtim9IeTGgQTjRX9YtlGSP8hHj9vVIxktyyJFF9PphMjlEKuNvlj5rG9YWjjqXUUPrhihlC53MmH7p1dtDKL63f3XAqJPTjJYvj7joBXz4evVVohjEg==-----END CERTIFICATE-----[cloudshell-user@ip-10-0-76-195 ~]$
+</code></pre></div></div>
+
+<p>Next we update the inet6num object for the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:73ff::%2F48&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/48 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:73ff::/48</code> with this certificate. Ensure to also include the <code class="language-plaintext highlighter-rouge">----BEGIN CERTIFICATE-----</code> and <code class="language-plaintext highlighter-rouge">-----END CERTIFICATE-----</code> portions and not to include any newlines.</p>
+
+<p>The resulting inet6num object in RPSL format will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inet6num:       2a06:e881:73ff::/48
+netname:        EU-CHRISTIANELSEN-AWS
+country:        EU
+admin-c:        CE2932-RIPE
+tech-c:         CE2932-RIPE
+status:         ASSIGNED
+descr:          -----BEGIN CERTIFICATE-----MIIDyTCCArGgAwIBAgIUR2P0aLZtfm2L9QZI5muMqtCQcM0wDQYJKoZIhvcNAQELBQAwdDELMAkGA1UEBhMCREUxCzAJBgNVBAgMAkhFMRIwEAYDVQQHDAlGcmFua2Z1cnQxFTATBgNVBAoMDEFTMjEzMTUxIExMQzEMMAoGA1UECwwDTk9DMR8wHQYJKoZIhvcNAQkBFhBub2NAYXMyMTMxNTEubmV0MB4XDTIxMDgzMTIxNTg1MFoXDTIyMDgzMTIxNTg1MFowdDELMAkGA1UEBhMCREUxCzAJBgNVBAgMAkhFMRIwEAYDVQQHDAlGcmFua2Z1cnQxFTATBgNVBAoMDEFTMjEzMTUxIExMQzEMMAoGA1UECwwDTk9DMR8wHQYJKoZIhvcNAQkBFhBub2NAYXMyMTMxNTEubmV0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuVeZfmkEPM2Oh5K9vISgoBFJP/lxuCrZE81VTErGjrPAeXfQaKXJzTf4xL4QZPBJmAbtSD91d4ubGEwVv8FIH8vg712opgLefMDYwv1SoAV0YUG0C23Zadm31MHOWtYX/KgEXOtUkAUuL8QEUH2fgU/6F+0PEBWC985zKTCMxEu2GmyEdjPT0dcun2F/eLFaEjtkZ5Il+ruhoN9grhBWWqau4DG0EyBnkARSmB8zpqSFte6IO+XypSpEglc3792xnLQFVUc1N7jynIMXXIf9fnPKP87jTcxmyDszFfguC9nsdmSDB9VMe3rnnJmDN13nkGWWgtve0grM8yULBb93IwIDAQABo1MwUTAdBgNVHQ4EFgQUaLbwp0B6sJR9bhlQOAFE9Ts/BKkwHwYDVR0jBBgwFoAUaLbwp0B6sJR9bhlQOAFE9Ts/BKkwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAIbvgfqQgCDkKi35Gj0St0aOk1+h8iOdqrW3/JXvNUsIRJJcPpwJyA/kBOuy64YWc9kk7lod+TxFXdMZiUKUFKJtC5FDY2RaR5YpstLNG/+T19ydNLjPQ2WBrUqUyCL9T195/TmZ437k/Rg1VMGisHPlLrOON8IPFg/G3Xy/9fTEQIIZczWlWAprtxacgCMHgZvr31vDEgSNbJux6s+P8YZA7j8M2GclAX13gtim9IeTGgQTjRX9YtlGSP8hHj9vVIxktyyJFF9PphMjlEKuNvlj5rG9YWjjqXUUPrhihlC53MmH7p1dtDKL63f3XAqJPTjJYvj7joBXz4evVVohjEg==-----END CERTIFICATE-----
+mnt-by:         Christian_Elsen-MNT
+source:         RIPE
+</code></pre></div></div>
+
+<h2 id="step-4-creating-a-signed-message">Step 4: Creating a signed message</h2>
+
+<p>Now we can create our signed message that will tie the CIDR to be brought into AWS via BYOIP to the account ID under which it shall later live. As outlined in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-provision" target="_blank" rel="noopener noreferrer">AWS documentation</a>, the format of the corresponding plain text message looks like <code class="language-plaintext highlighter-rouge">1|aws|&lt;account&gt;|&lt;cidr&gt;|&lt;expiration date&gt;|SHA256|RSAPSS</code></p>
+
+<p>Assuming an AWS account id of <code class="language-plaintext highlighter-rouge">1234-5678-9012</code> and an expiration date of 1 year out from today - to give us enough time for the next steps - the resulting way to assign the plain text message would look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ text_message="1|aws|123456789012|2a06:e881:73ff::/48|20220711|SHA256|RSAPSS"
+[cloudshell-user@ip-10-1-2-3 ~]$ echo $text_message
+1|aws|123456789012|2a06:e881:73ff::/48|20220711|SHA256|RSAPSS
+[cloudshell-user@ip-10-1-2-3 ~]$
+</code></pre></div></div>
+<p>Next we will create the signed message using the command <code class="language-plaintext highlighter-rouge">signed_message=$( echo -n $text_message | openssl dgst -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:-1 -sign private-key.pem -keyform PEM | openssl base64 | tr -- '+=/' '-_~' | tr -d "\n")</code></p>
+
+<p>The result will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ signed_message=$( echo -n $text_message | openssl dgst -sha256 -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:-1 -sign private-key.pem -keyform PEM | openssl base64 | tr -- '+=/' '-_~' | tr -d "\n")
+Enter pass phrase for private-key.pem:
+[cloudshell-user@ip-10-1-2-3 ~]$ echo $signed_message
+Ncj8Yrm~6gbPuqDokOh9-tLsiCuMqzid5CxlseO87sRSG1DAhuz2RmL9Dw6TQA83lhiyhcLuHdiY34xojYxcFLHHHpona0l8Ul2MlkppehFP5qN11O4VlN78COzC37JqnuIqfngc~3juFY9u4Wt4qBqzAb08AzhaWf3v9Fu9qut5Hr3NRWtRaHfgeGvIYWZ2C864RvWPLEW6RmdXdHDojszcgxCfV-O5jCaafu8v~~m~vASq~-xOnlanqNsZ9D66l4r-MMLhYXccMyBgBKP3qhluR0FsQ~LfcBQbyEwEtS-wxWPG8~Dm9o67rkI19bVT16p~cGCBAQA17nefK3o-kw__
+[cloudshell-user@ip-10-1-2-3 ~]$
+</code></pre></div></div>
+
+<h2 id="step-5-provision-and-advertise-address-space">Step 5: Provision and advertise address space</h2>
+
+<h3 id="provision-the-cidr-with-an-aws-region">Provision the CIDR with an AWS region</h3>
+
+<p>Next we have to provision the above CIDR into the desired AWS region - here EU-Central-1 (Frankfurt). 
+This is done via the AWS CLI command <code class="language-plaintext highlighter-rouge">aws ec2 provision-byoip-cidr --cidr &lt;cidr&gt; --cidr-authorization-context Message="$text_message",Signature="$signed_message" --region &lt;region&gt;</code>. As AWS CloudShell has the <a href="https://aws.amazon.com/cli/" target="_blank" rel="noopener noreferrer">AWS Command Line Interface (CLI)</a> already installed no further preparation is necessary and the result will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ aws ec2 provision-byoip-cidr --cidr 2a06:e881:73ff::/48 --cidr-authorization-context Message="$text_message",Signature="$signed_message" --region eu-central-1
+{
+    "ByoipCidr": {
+        "Cidr": "2a06:e881:73ff::/48",
+        "State": "pending-provision"
+    }
+}
+[cloudshell-user@ip-10-1-2-3 ~]$ 
+</code></pre></div></div>
+
+<p>It can take between minutes to days for the provisioning to be successful. You can use the command <code class="language-plaintext highlighter-rouge">aws ec2 describe-byoip-cidrs --max-results 5 --region &lt;region&gt;</code> to monitor the progress.</p>
+
+<p>For the above example the successful result would look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ aws ec2 describe-byoip-cidrs --max-results 5 --region eu-central-1
+{
+    "ByoipCidrs": [
+        {
+            "Cidr": "2a06:e881:73ff::/48",
+            "StatusMessage": "Cidr successfully provisioned into Ipv6Pool: ipv6pool-ec2-0123456789abcdefgh",
+            "State": "provisioned"
+        }
+    ]
+}
+[cloudshell-user@ip-10-1-2-3 ~]$ 
+</code></pre></div></div>
+
+<p class="notice--info"><strong>Notice:</strong> At this point the public certificate no longer needs to be placed within the inet6num object of the RIR DB - in this case for RIPE within the “descr:” field. You can therefore remove it. On the other hand if you created the public certificate for a parent IP block and plan to provision additional child blocks later on, you can keep the public certificate in place. In this case make sure you don loose the corresponding private key within your AWS CloudShell and keep an eye on the expiration date of the certificate. The ROA on the other hand has to remain in place!</p>
+
+<h3 id="advertise-the-address-space">Advertise the address space</h3>
+
+<p>Wwe are almost done and as a last step need to instruct AWS to advertise the BYOIP CIDR from the AWS region into which the address space was provisioned. This is done via the AWS CLI command <code class="language-plaintext highlighter-rouge">aws ec2 advertise-byoip-cidr --cidr &lt;cidr&gt; --region &lt;region&gt;</code>.</p>
+
+<p>The result would look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ aws ec2 advertise-byoip-cidr --cidr 2a06:e881:73ff::/48 --region eu-central-1
+{
+    "ByoipCidr": {
+        "Cidr": "2a06:e881:73ff::/48",
+        "State": "advertised"
+    }
+}
+[cloudshell-user@ip-10-1-2-3 ~]$
+</code></pre></div></div>
+<p>At this point we are done with bringing over the desired IPv6 address space to AWS via BYOIP. But is that address space actually working as expected and how do we use it? Read on in the next paragraph for answers to these questions.</p>
+
+<h1 id="validation">Validation</h1>
+
+<p>This section will walk you through the validation of your BYOIP setup. As I’m using real IPv6 address space and not documentation ranges, you will be able to follow along with the below steps on your own.</p>
+
+<h2 id="roa-object-for-rpki">ROA object for RPKI</h2>
+
+<p>You can validate the successful creation of the ROA objects using the <a href="https://stat.ripe.net/docs/02.data-api/rpki-validation.html" target="_blank" rel="noopener noreferrer">RIPEstat Data API</a>, irrespective if the address space in question is administered by RIPE or not. If you are using one of the AWS commercial regions, be sure to test your address range against the Amazon ASNs 16509 and 14618, plus the ASNs that are currently authorized to advertise the address range.  If you are using BYOIP with GovCloud (US) check your ROA against the ASN 8987.</p>
+
+<p>You can inspect the ROA objects from different Amazon ASNs with your address range by using the following command: <code class="language-plaintext highlighter-rouge">curl --location --request GET "https://stat.ripe.net/data/rpki-validation/data.json?resource=&lt;ASN&gt;&amp;prefix=&lt;CIDR&gt;"</code></p>
+
+<p>The successful output for the <a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&amp;key=2a06:e881:73ff::%2F48&amp;type=inet6num" target="_blank" rel="noopener noreferrer">/48 block</a> of <code class="language-plaintext highlighter-rouge">2a06:e881:73ff::/48</code> that is being used in this example looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ curl --location --request GET "https://stat.ripe.net/data/rpki-validation/data.json?resource=16509&amp;prefix=2a06:e881:73ff::/48"
+{
+    "messages": [],
+    "see_also": [],
+    "version": "0.3",
+    "data_call_name": "rpki-validation",
+    "data_call_status": "supported",
+    "cached": false,
+    "data": {
+        "validating_roas": [
+            {
+                "origin": "16509",
+                "prefix": "2a06:e881:73ff::/48",
+                "max_length": 48,
+                "validity": "valid"
+            },
+            {
+                "origin": "14618",
+                "prefix": "2a06:e881:73ff::/48",
+                "max_length": 48,
+                "validity": "invalid_asn"
+            },
+            {
+                "origin": "213151",
+                "prefix": "2a06:e881:7300::/40",
+                "max_length": 48,
+                "validity": "invalid_asn"
+            }
+        ],
+        "status": "valid",
+        "validator": "routinator",
+        "resource": "16509",
+        "prefix": "2a06:e881:73ff::/48"
+    },
+    "query_id": "20220711193722-64c20e2b-55af-499e-9975-e6e60b24cf6a",
+    "process_time": 37,
+    "server_id": "app112",
+    "build_version": "live.2022.7.11.99",
+    "status": "ok",
+    "status_code": 200,
+    "time": "2022-07-11T19:37:22.292101"
+}
+[cloudshell-user@ip-10-1-2-3 ~]$
+</code></pre></div></div>
+
+<p>In this example output, the response has a result of <em>“status”: “valid”</em> for the Amazon ASN 16509. This indicates the ROA object for the address range was created successfully.</p>
+
+<p>If on the other side the response includes a response of <em>“status”: “unknown”</em>, it indicates the ROA object for the address range has not been created. And a response of <em>“status”: “invalid_asn”</em> shows that the ROA object for the address range was not created successfully.</p>
+
+<p>With that the following example would indicate that the required ROA for the address space <code class="language-plaintext highlighter-rouge">2a06:e881:73fe::/48</code> and the ASN 16509 was not created:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ curl --location --request GET "https://stat.ripe.net/data/rpki-validation/data.json?resource=16509&amp;prefix=2a06:e881:73fe::/48"
+{
+    "messages": [],
+    "see_also": [],
+    "version": "0.3",
+    "data_call_name": "rpki-validation",
+    "data_call_status": "supported",
+    "cached": false,
+    "data": {
+        "validating_roas": [
+            {
+                "origin": "213151",
+                "prefix": "2a06:e881:7300::/40",
+                "max_length": 48,
+                "validity": "invalid_asn"
+            }
+        ],
+        "status": "invalid_asn",
+        "validator": "routinator",
+        "resource": "16509",
+        "prefix": "2a06:e881:73fe::/48"
+    },
+    "query_id": "20220711194025-926889c0-973e-4f0a-bfb6-ba38551f467c",
+    "process_time": 3045,
+    "server_id": "app142",
+    "build_version": "live.2022.7.11.99",
+    "status": "ok",
+    "status_code": 200,
+    "time": "2022-07-11T19:40:28.961834"
+}
+[cloudshell-user@ip-10-1-2-3 ~]$
+</code></pre></div></div>
+
+<p>That makes sense as it doesn’t match the IP range from this example.</p>
+
+<h2 id="public-certificate-in-rir-resource-database">Public certificate in RIR resource database</h2>
+
+<p>Next, let’s validate whether the public certificate has been correctly placed into the RIR’s resource database. This certificate is used by AWS in the provisioning step to validate which AWS account a certain CIDR should be allocated to.</p>
+
+<p>As we are using the RIR RIPE for this example, the command to lookup the public certificate is <code class="language-plaintext highlighter-rouge">whois -r -h whois.ripe.net &lt;CIDR&gt; | grep descr | grep BEGIN</code>. Before we can do so, we have to install the command <em>whois</em> within our AWS CloudShell environment via <code class="language-plaintext highlighter-rouge">sudo yum -y install whois</code></p>
+
+<p>With this we should expect the following output for this example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ sudo yum -y install whois
+Loaded plugins: ovl, priorities
+amzn2-core                                                                                                                                                                                                                 | 3.7 kB  00:00:00     
+Resolving Dependencies
+--&gt; Running transaction check
+---&gt; Package whois.x86_64 0:5.1.1-2.amzn2.0.1 will be installed
+--&gt; Finished Dependency Resolution
+
+Dependencies Resolved
+
+==================================================================================================================================================================================================================================================
+ Package                                               Arch                                                   Version                                                            Repository                                                  Size
+==================================================================================================================================================================================================================================================
+Installing:
+ whois                                                 x86_64                                                 5.1.1-2.amzn2.0.1                                                  amzn2-core                                                  72 k
+
+Transaction Summary
+==================================================================================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 72 k
+Installed size: 218 k
+Downloading packages:
+whois-5.1.1-2.amzn2.0.1.x86_64.rpm                                                                                                                                                                                         |  72 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : whois-5.1.1-2.amzn2.0.1.x86_64                                                                                                                                                                                                 1/1 
+  Verifying  : whois-5.1.1-2.amzn2.0.1.x86_64                                                                                                                                                                                                 1/1 
+
+Installed:
+  whois.x86_64 0:5.1.1-2.amzn2.0.1                                                                                                                                                                                                                
+
+Complete!
+[cloudshell-user@ip-10-1-2-3 ~]$ whois -r -h whois.ripe.net 2a06:e881:73ff::/48 | grep descr | grep BEGIN
+descr:          -----BEGIN CERTIFICATE-----MIIDyTCCArGgAwIBAgIUR2P0aLZtfm2L9QZI5muMqtCQcM0wDQYJKoZIhvcNAQELBQAwdDELMAkGA1UEBhMCREUxCzAJBgNVBAgMAkhFMRIwEAYDVQQHDAlGcmFua2Z1cnQxFTATBgNVBAoMDEFTMjEzMTUxIExMQzEMMAoGA1UECwwDTk9DMR8wHQYJKoZIhvcNAQkBFhBub2NAYXMyMTMxNTEubmV0MB4XDTIxMDgzMTIxNTg1MFoXDTIyMDgzMTIxNTg1MFowdDELMAkGA1UEBhMCREUxCzAJBgNVBAgMAkhFMRIwEAYDVQQHDAlGcmFua2Z1cnQxFTATBgNVBAoMDEFTMjEzMTUxIExMQzEMMAoGA1UECwwDTk9DMR8wHQYJKoZIhvcNAQkBFhBub2NAYXMyMTMxNTEubmV0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuVeZfmkEPM2Oh5K9vISgoBFJP/lxuCrZE81VTErGjrPAeXfQaKXJzTf4xL4QZPBJmAbtSD91d4ubGEwVv8FIH8vg712opgLefMDYwv1SoAV0YUG0C23Zadm31MHOWtYX/KgEXOtUkAUuL8QEUH2fgU/6F+0PEBWC985zKTCMxEu2GmyEdjPT0dcun2F/eLFaEjtkZ5Il+ruhoN9grhBWWqau4DG0EyBnkARSmB8zpqSFte6IO+XypSpEglc3792xnLQFVUc1N7jynIMXXIf9fnPKP87jTcxmyDszFfguC9nsdmSDB9VMe3rnnJmDN13nkGWWgtve0grM8yULBb93IwIDAQABo1MwUTAdBgNVHQ4EFgQUaLbwp0B6sJR9bhlQOAFE9Ts/BKkwHwYDVR0jBBgwFoAUaLbwp0B6sJR9bhlQOAFE9Ts/BKkwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAIbvgfqQgCDkKi35Gj0St0aOk1+h8iOdqrW3/JXvNUsIRJJcPpwJyA/kBOuy64YWc9kk7lod+TxFXdMZiUKUFKJtC5FDY2RaR5YpstLNG/+T19ydNLjPQ2WBrUqUyCL9T195/TmZ437k/Rg1VMGisHPlLrOON8IPFg/G3Xy/9fTEQIIZczWlWAprtxacgCMHgZvr31vDEgSNbJux6s+P8YZA7j8M2GclAX13gtim9IeTGgQTjRX9YtlGSP8hHj9vVIxktyyJFF9PphMjlEKuNvlj5rG9YWjjqXUUPrhihlC53MmH7p1dtDKL63f3XAqJPTjJYvj7joBXz4evVVohjEg==-----END CERTIFICATE-----
+[cloudshell-user@ip-10-1-2-3 ~]$
+</code></pre></div></div>
+
+<p>You should ensure that the result in the line marked with <em>“descr:”</em> includes both the leading <code class="language-plaintext highlighter-rouge">-----BEGIN CERTIFICATE-----</code> and the trailing <code class="language-plaintext highlighter-rouge">-----END CERTIFICATE-----</code> part of the certificate and that the certificate itself matches the certificate you created.</p>
+
+<p>You can also copy &amp; paste the result into a online <a href="https://certificatedecoder.dev/" target="_blank" rel="noopener noreferrer">Certificate Decoder</a> to validate that the certificate itself is valid and not expired.</p>
+
+<p>In case you are using one of the other supported RIR, the above command will look slightly different. In the case of ARIN it will be <code class="language-plaintext highlighter-rouge">whois -h whois.arin.net r + &lt;CIDR&gt; | grep Comment | grep BEGIN</code>, while for APNIC it is <code class="language-plaintext highlighter-rouge">whois -h whois.apnic.net &lt;CIDR&gt; | grep remarks | grep BEGIN</code>.</p>
+
+<h2 id="aws-provisioning-outcome">AWS Provisioning outcome</h2>
+
+<p><a href="#step-5-provision-and-advertise-address-space">Above</a> we already saw how the successful provisioning of the BYOIP address space via the <code class="language-plaintext highlighter-rouge">aws ec2 provision-byoip-cidr</code> looks like. Here let’s have a look at an unsuccessful provisioning example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-2-3 ~]$ aws ec2 describe-byoip-cidrs --max-results 5 --region eu-central-1
+{
+    "ByoipCidrs": [
+        {
+            "Cidr": "2a06:e881:73fe::/48",
+            "StatusMessage": "No X509 certificate could be found in the Whois remarks",
+            "State": "failed-provision"
+        }
+    ]
+}
+[cloudshell-user@ip-10-1-2-3 ~]$ 
+</code></pre></div></div>
+
+<p>In this case you can see that the provisioning failed, because AWS was unable to find the public certificate for this IP space within the RIR’s database. And if you look closer, that result does make sense, as we (on purpose) attempted to provision an IP space that hasn’t been prepared.</p>
+
+<h2 id="bgp-advertisement">BGP advertisement</h2>
+
+<p>After <a href="#step-5-provision-and-advertise-address-space">succesfully provisioning the IP space above</a> we asked AWS to advertise the IP space via the <code class="language-plaintext highlighter-rouge">aws ec2 advertise-byoip-cidr</code> command. But how can we tell that this advertisement is actually happening? We can use the <a href="https://en.wikipedia.org/wiki/Looking_Glass_server" target="_blank" rel="noopener noreferrer">Looking Glass server</a> of a major Tier 1 transit provider like the <a href="https://lg.he.net/" target="_blank" rel="noopener noreferrer">Hurricane Electric Looking Glass</a> service.</p>
+
+<p>Selecting any of the Hurricane Electric Router locations along with the command <code class="language-plaintext highlighter-rouge">BGP Route</code> and the Argument <code class="language-plaintext highlighter-rouge">2a06:e881:73ff::/48</code> for the address space in question will show us the following result.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/BYOIP-LG-Success.png" title="Figure 6: Looking glass result for a successfully advertised BYOIP CIDR. " class="image-popup">
+<picture>
+  <source width="1036" height="727" type="image/webp" data-srcset="        /content/resized/2022/07/BYOIP-LG-Success-320.webp 320w,         /content/resized/2022/07/BYOIP-LG-Success-384.webp 384w,         /content/resized/2022/07/BYOIP-LG-Success-512.webp 512w,         /content/resized/2022/07/BYOIP-LG-Success-683.webp 683w,         /content/resized/2022/07/BYOIP-LG-Success-800.webp 800w,         /content/resized/2022/07/BYOIP-LG-Success-960.webp 960w,  /content/uploads/2022/07/BYOIP-LG-Success.webp 1036w" sizes="1036px"></source>
+  <source width="1036" height="727" data-srcset="    /content/resized/2022/07/BYOIP-LG-Success-320.png 320w,     /content/resized/2022/07/BYOIP-LG-Success-384.png 384w,     /content/resized/2022/07/BYOIP-LG-Success-512.png 512w,     /content/resized/2022/07/BYOIP-LG-Success-683.png 683w,     /content/resized/2022/07/BYOIP-LG-Success-800.png 800w,     /content/resized/2022/07/BYOIP-LG-Success-960.png 960w,  /content/uploads/2022/07/BYOIP-LG-Success.png 1036w" sizes="1036px"></source>
+  <img src="/content/resized/2022/07/BYOIP-LG-Success-320.png" data-src="/content/uploads/2022/07/BYOIP-LG-Success.png" class="blur-up lazyautosizes lazyload" width="1036" height="727" alt="Figure 6: Looking glass result for a successfully advertised BYOIP CIDR. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Looking glass result for a successfully advertised BYOIP CIDR.
+</figcaption>
+
+</figure>
+
+<p>As expected you can see that Hurricane Electric network learns the prefix 2a06:e881:73ff::/48 via multiple different routes. Looking at the <em>path</em>  column shows us that some of these routes are directly connected (where path only includes “16509”), while others are via other networks (E.g. the best route via <a href="https://bgp.he.net/AS6453" target="_blank" rel="noopener noreferrer">AS6453 - Tata Communications</a>).</p>
+
+<p>Now let’s have a look at a looking glass example for an IP range that was not successfully announced. Let’s use our example from above again for an IP prefix that is not used with AWS BYOIP:</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/BYOIP-LG-Failure.png" title="Figure 7: Looking glass result for a BYOIP CIDR that is not being advertised. " class="image-popup">
+<picture>
+  <source width="1036" height="457" type="image/webp" data-srcset="        /content/resized/2022/07/BYOIP-LG-Failure-320.webp 320w,         /content/resized/2022/07/BYOIP-LG-Failure-384.webp 384w,         /content/resized/2022/07/BYOIP-LG-Failure-512.webp 512w,         /content/resized/2022/07/BYOIP-LG-Failure-683.webp 683w,         /content/resized/2022/07/BYOIP-LG-Failure-800.webp 800w,         /content/resized/2022/07/BYOIP-LG-Failure-960.webp 960w,  /content/uploads/2022/07/BYOIP-LG-Failure.webp 1036w" sizes="1036px"></source>
+  <source width="1036" height="457" data-srcset="    /content/resized/2022/07/BYOIP-LG-Failure-320.png 320w,     /content/resized/2022/07/BYOIP-LG-Failure-384.png 384w,     /content/resized/2022/07/BYOIP-LG-Failure-512.png 512w,     /content/resized/2022/07/BYOIP-LG-Failure-683.png 683w,     /content/resized/2022/07/BYOIP-LG-Failure-800.png 800w,     /content/resized/2022/07/BYOIP-LG-Failure-960.png 960w,  /content/uploads/2022/07/BYOIP-LG-Failure.png 1036w" sizes="1036px"></source>
+  <img src="/content/resized/2022/07/BYOIP-LG-Failure-320.png" data-src="/content/uploads/2022/07/BYOIP-LG-Failure.png" class="blur-up lazyautosizes lazyload" width="1036" height="457" alt="Figure 7: Looking glass result for a BYOIP CIDR that is not being advertised. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Looking glass result for a BYOIP CIDR that is not being advertised.
+</figcaption>
+
+</figure>
+
+<p>As this particular prefix is not announced on the Internet at all - only its parent block is announced - Hurricane Electric will not have any routes for this particular prefix.</p>
+
+<h1 id="using-byoip-address-space">Using BYOIP address space</h1>
+
+<p>We have not only provisioned the IP address space, but also validate that everything is correctly working. What remains is the question about how to use this IP prefix in AWS.</p>
+
+<h2 id="aws-console-view-of-byoip-cidr">AWS Console view of BYOIP CIDR</h2>
+
+<p>AWS BYOIP prefixes become regular CIDR pools within the AWS VPC (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2022/07/BYOIP-AWS-VPC-Pool.png" title="Figure 8: Resulting IPv6 pool within a VPC. " class="image-popup">
+<picture>
+  <source width="603" height="373" type="image/webp" data-srcset="        /content/resized/2022/07/BYOIP-AWS-VPC-Pool-320.webp 320w,         /content/resized/2022/07/BYOIP-AWS-VPC-Pool-384.webp 384w,         /content/resized/2022/07/BYOIP-AWS-VPC-Pool-512.webp 512w,  /content/uploads/2022/07/BYOIP-AWS-VPC-Pool.webp 603w" sizes="603px"></source>
+  <source width="603" height="373" data-srcset="    /content/resized/2022/07/BYOIP-AWS-VPC-Pool-320.png 320w,     /content/resized/2022/07/BYOIP-AWS-VPC-Pool-384.png 384w,     /content/resized/2022/07/BYOIP-AWS-VPC-Pool-512.png 512w,  /content/uploads/2022/07/BYOIP-AWS-VPC-Pool.png 603w" sizes="603px"></source>
+  <img src="/content/resized/2022/07/BYOIP-AWS-VPC-Pool-320.png" data-src="/content/uploads/2022/07/BYOIP-AWS-VPC-Pool.png" class="blur-up lazyautosizes lazyload" width="603" height="373" alt="Figure 8: Resulting IPv6 pool within a VPC. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Resulting IPv6 pool within a VPC.
+</figcaption>
+
+</figure>
+
+<p>IPv4 prefixes can be used the same way as <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html" target="_blank" rel="noopener noreferrer">Elastic IP addresses (EIP)</a> and IPv6 prefixes can be <a href="https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#vpc-associate-ipv6-cidr" target="_blank" rel="noopener noreferrer">associated with VPCs</a> the same way as AWS provided IPv6 addresses.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This article provide you a walk-through example of bringing IPv6 address space to AWS via the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html" target="_blank" rel="noopener noreferrer">Bring your own IP addresses (BYOIP) for Amazon EC2</a> feature. It used a real address space example, so that you can follow along the onboarding and validation of the IP space.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#aws" class="page__taxonomy-item p-category" rel="tag">AWS</a><span class="sep">, </span>
+    
+      <a href="/tags/#ipv6" class="page__taxonomy-item p-category" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      <a href="/tags/#network" class="page__taxonomy-item p-category" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://toot.kytta.dev/?text=Hands-on%20with%20AWS%20Bring%20your%20own%20IP%20addresses%20(BYOIP)%20in%20Amazon%20EC2%0Ahttps://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
+
+  <a href="https://twitter.com/intent/tweet?text=Hands-on+with+AWS+Bring+your+own+IP+addresses+%28BYOIP%29+in+Amazon+EC2%20https%3A%2F%2Fwww.edge-cloud.net%2F2022%2F07%2F19%2Fhands-on-with-aws-byoip%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2022%2F07%2F19%2Fhands-on-with-aws-byoip%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2022%2F07%2F19%2Fhands-on-with-aws-byoip%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2022%2F07%2F19%2Fhands-on-with-aws-byoip%2F&amp;title=Hands-on+with+AWS+Bring+your+own+IP+addresses+%28BYOIP%29+in+Amazon+EC2" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2022/06/28/dx-overview/" class="pagination--pager" title="AWS Direct Connect overview
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Direct-Connect
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2020/09/28/understanding-bgp/" rel="permalink">Better understanding BGP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-28T00:00:00-07:00">September 28, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #BGP, #Network
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Primer to better understanding BGP
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2020/09/18/understanding-routing/" rel="permalink">Better understanding IP Routing
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-18T00:00:00-07:00">September 18, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #BGP, #Network
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Look at fundamental principles of IP routing to better design and troubleshoot networks
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6, #VPN
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+  <div class="search-searchbar"></div>
+  <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2022 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const hightlight = hit._highlightResult;
+  const title = hightlight.title && hightlight.title.value  || "";
+  const content = hightlight.html && hightlight.html.value  || "";
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate,
+      empty: 'No results',
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

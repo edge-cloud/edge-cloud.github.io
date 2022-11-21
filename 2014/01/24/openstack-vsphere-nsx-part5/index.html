@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 5: Create virtual networks and launch a VM instance in OpenStack">
-  <meta name="twitter:description" content="Create virtual networks and launch a VM instance for a setup including VMware vSphere, VMware NSX and OpenStack.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/01/24/openstack-vsphere-nsx-part5/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2014-01-24T02:26:16-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -428,9 +416,9 @@
 
 <a href="/content/uploads/2014/01/VOVA01.png" title="Figure 1: Login to OpenStack Horizon " class="image-popup">
 <picture>
-  <source width="468" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA01-320.webp 320w,         /content/resized/2014/01/VOVA01-384.webp 384w,  /content/uploads/2014/01/VOVA01.webp 468w" sizes="468px"></source>
-  <source width="468" data-srcset="    /content/resized/2014/01/VOVA01-320.png 320w,     /content/resized/2014/01/VOVA01-384.png 384w,  /content/uploads/2014/01/VOVA01.png 468w" sizes="468px"></source>
-  <img src="/content/resized/2014/01/VOVA01-320.png" data-src="/content/uploads/2014/01/VOVA01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Login to OpenStack Horizon ">
+  <source width="468" height="661" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA01-320.webp 320w,         /content/resized/2014/01/VOVA01-384.webp 384w,  /content/uploads/2014/01/VOVA01.webp 468w" sizes="468px"></source>
+  <source width="468" height="661" data-srcset="    /content/resized/2014/01/VOVA01-320.png 320w,     /content/resized/2014/01/VOVA01-384.png 384w,  /content/uploads/2014/01/VOVA01.png 468w" sizes="468px"></source>
+  <img src="/content/resized/2014/01/VOVA01-320.png" data-src="/content/uploads/2014/01/VOVA01.png" class="blur-up lazyautosizes lazyload" width="468" height="661" alt="Figure 1: Login to OpenStack Horizon ">
 </picture>
 </a>
 
@@ -454,9 +442,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-02.png" title="Figure 2: OpenStack Horizon - Admin View " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-02-320.webp 320w,         /content/resized/2014/01/VOVA-02-384.webp 384w,         /content/resized/2014/01/VOVA-02-512.webp 512w,         /content/resized/2014/01/VOVA-02-683.webp 683w,  /content/uploads/2014/01/VOVA-02.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-02-320.png 320w,     /content/resized/2014/01/VOVA-02-384.png 384w,     /content/resized/2014/01/VOVA-02-512.png 512w,     /content/resized/2014/01/VOVA-02-683.png 683w,  /content/uploads/2014/01/VOVA-02.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-02-320.png" data-src="/content/uploads/2014/01/VOVA-02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: OpenStack Horizon - Admin View ">
+  <source width="800" height="552" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-02-320.webp 320w,         /content/resized/2014/01/VOVA-02-384.webp 384w,         /content/resized/2014/01/VOVA-02-512.webp 512w,         /content/resized/2014/01/VOVA-02-683.webp 683w,  /content/uploads/2014/01/VOVA-02.webp 800w" sizes="800px"></source>
+  <source width="800" height="552" data-srcset="    /content/resized/2014/01/VOVA-02-320.png 320w,     /content/resized/2014/01/VOVA-02-384.png 384w,     /content/resized/2014/01/VOVA-02-512.png 512w,     /content/resized/2014/01/VOVA-02-683.png 683w,  /content/uploads/2014/01/VOVA-02.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-02-320.png" data-src="/content/uploads/2014/01/VOVA-02.png" class="blur-up lazyautosizes lazyload" width="800" height="552" alt="Figure 2: OpenStack Horizon - Admin View ">
 </picture>
 </a>
 
@@ -480,9 +468,9 @@
 
 <a href="/content/uploads/2014/01/VOVA03.png" title="Figure 3: OpenStack Horizon - Project View " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA03-320.webp 320w,         /content/resized/2014/01/VOVA03-384.webp 384w,         /content/resized/2014/01/VOVA03-512.webp 512w,         /content/resized/2014/01/VOVA03-683.webp 683w,  /content/uploads/2014/01/VOVA03.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA03-320.png 320w,     /content/resized/2014/01/VOVA03-384.png 384w,     /content/resized/2014/01/VOVA03-512.png 512w,     /content/resized/2014/01/VOVA03-683.png 683w,  /content/uploads/2014/01/VOVA03.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA03-320.png" data-src="/content/uploads/2014/01/VOVA03.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: OpenStack Horizon - Project View ">
+  <source width="800" height="438" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA03-320.webp 320w,         /content/resized/2014/01/VOVA03-384.webp 384w,         /content/resized/2014/01/VOVA03-512.webp 512w,         /content/resized/2014/01/VOVA03-683.webp 683w,  /content/uploads/2014/01/VOVA03.webp 800w" sizes="800px"></source>
+  <source width="800" height="438" data-srcset="    /content/resized/2014/01/VOVA03-320.png 320w,     /content/resized/2014/01/VOVA03-384.png 384w,     /content/resized/2014/01/VOVA03-512.png 512w,     /content/resized/2014/01/VOVA03-683.png 683w,  /content/uploads/2014/01/VOVA03.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA03-320.png" data-src="/content/uploads/2014/01/VOVA03.png" class="blur-up lazyautosizes lazyload" width="800" height="438" alt="Figure 3: OpenStack Horizon - Project View ">
 </picture>
 </a>
 
@@ -506,9 +494,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-03.png" title="Figure 4: Tenant View - Initially empty network topology " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-03-320.webp 320w,         /content/resized/2014/01/VOVA-03-384.webp 384w,         /content/resized/2014/01/VOVA-03-512.webp 512w,         /content/resized/2014/01/VOVA-03-683.webp 683w,  /content/uploads/2014/01/VOVA-03.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-03-320.png 320w,     /content/resized/2014/01/VOVA-03-384.png 384w,     /content/resized/2014/01/VOVA-03-512.png 512w,     /content/resized/2014/01/VOVA-03-683.png 683w,  /content/uploads/2014/01/VOVA-03.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-03-320.png" data-src="/content/uploads/2014/01/VOVA-03.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Tenant View - Initially empty network topology ">
+  <source width="800" height="440" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-03-320.webp 320w,         /content/resized/2014/01/VOVA-03-384.webp 384w,         /content/resized/2014/01/VOVA-03-512.webp 512w,         /content/resized/2014/01/VOVA-03-683.webp 683w,  /content/uploads/2014/01/VOVA-03.webp 800w" sizes="800px"></source>
+  <source width="800" height="440" data-srcset="    /content/resized/2014/01/VOVA-03-320.png 320w,     /content/resized/2014/01/VOVA-03-384.png 384w,     /content/resized/2014/01/VOVA-03-512.png 512w,     /content/resized/2014/01/VOVA-03-683.png 683w,  /content/uploads/2014/01/VOVA-03.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-03-320.png" data-src="/content/uploads/2014/01/VOVA-03.png" class="blur-up lazyautosizes lazyload" width="800" height="440" alt="Figure 4: Tenant View - Initially empty network topology ">
 </picture>
 </a>
 
@@ -538,9 +526,9 @@
 
 <a href="/content/uploads/2014/01/OpenStackInternalExternalNetwork.png" title="Figure 5: Simple Virtual Network for OpenStack " class="image-popup">
 <picture>
-  <source width="255" type="image/webp" data-srcset=" /content/uploads/2014/01/OpenStackInternalExternalNetwork.webp 255w" sizes="255px"></source>
-  <source width="255" data-srcset=" /content/uploads/2014/01/OpenStackInternalExternalNetwork.png 255w" sizes="255px"></source>
-  <img src="/" data-src="/content/uploads/2014/01/OpenStackInternalExternalNetwork.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Simple Virtual Network for OpenStack ">
+  <source width="255" height="199" type="image/webp" data-srcset=" /content/uploads/2014/01/OpenStackInternalExternalNetwork.webp 255w" sizes="255px"></source>
+  <source width="255" height="199" data-srcset=" /content/uploads/2014/01/OpenStackInternalExternalNetwork.png 255w" sizes="255px"></source>
+  <img src="/" data-src="/content/uploads/2014/01/OpenStackInternalExternalNetwork.png" class="blur-up lazyautosizes lazyload" width="255" height="199" alt="Figure 5: Simple Virtual Network for OpenStack ">
 </picture>
 </a>
 
@@ -572,9 +560,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-05.png" title="Figure 6: Admin View - Create new network " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-05-320.webp 320w,         /content/resized/2014/01/VOVA-05-384.webp 384w,         /content/resized/2014/01/VOVA-05-512.webp 512w,         /content/resized/2014/01/VOVA-05-683.webp 683w,  /content/uploads/2014/01/VOVA-05.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-05-320.png 320w,     /content/resized/2014/01/VOVA-05-384.png 384w,     /content/resized/2014/01/VOVA-05-512.png 512w,     /content/resized/2014/01/VOVA-05-683.png 683w,  /content/uploads/2014/01/VOVA-05.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-05-320.png" data-src="/content/uploads/2014/01/VOVA-05.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Admin View - Create new network ">
+  <source width="800" height="333" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-05-320.webp 320w,         /content/resized/2014/01/VOVA-05-384.webp 384w,         /content/resized/2014/01/VOVA-05-512.webp 512w,         /content/resized/2014/01/VOVA-05-683.webp 683w,  /content/uploads/2014/01/VOVA-05.webp 800w" sizes="800px"></source>
+  <source width="800" height="333" data-srcset="    /content/resized/2014/01/VOVA-05-320.png 320w,     /content/resized/2014/01/VOVA-05-384.png 384w,     /content/resized/2014/01/VOVA-05-512.png 512w,     /content/resized/2014/01/VOVA-05-683.png 683w,  /content/uploads/2014/01/VOVA-05.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-05-320.png" data-src="/content/uploads/2014/01/VOVA-05.png" class="blur-up lazyautosizes lazyload" width="800" height="333" alt="Figure 6: Admin View - Create new network ">
 </picture>
 </a>
 
@@ -598,9 +586,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-06.png" title="Figure 7: Create External Network " class="image-popup">
 <picture>
-  <source width="698" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-06-320.webp 320w,         /content/resized/2014/01/VOVA-06-384.webp 384w,         /content/resized/2014/01/VOVA-06-512.webp 512w,         /content/resized/2014/01/VOVA-06-683.webp 683w,  /content/uploads/2014/01/VOVA-06.webp 698w" sizes="698px"></source>
-  <source width="698" data-srcset="    /content/resized/2014/01/VOVA-06-320.png 320w,     /content/resized/2014/01/VOVA-06-384.png 384w,     /content/resized/2014/01/VOVA-06-512.png 512w,     /content/resized/2014/01/VOVA-06-683.png 683w,  /content/uploads/2014/01/VOVA-06.png 698w" sizes="698px"></source>
-  <img src="/content/resized/2014/01/VOVA-06-320.png" data-src="/content/uploads/2014/01/VOVA-06.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Create External Network ">
+  <source width="698" height="423" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-06-320.webp 320w,         /content/resized/2014/01/VOVA-06-384.webp 384w,         /content/resized/2014/01/VOVA-06-512.webp 512w,         /content/resized/2014/01/VOVA-06-683.webp 683w,  /content/uploads/2014/01/VOVA-06.webp 698w" sizes="698px"></source>
+  <source width="698" height="423" data-srcset="    /content/resized/2014/01/VOVA-06-320.png 320w,     /content/resized/2014/01/VOVA-06-384.png 384w,     /content/resized/2014/01/VOVA-06-512.png 512w,     /content/resized/2014/01/VOVA-06-683.png 683w,  /content/uploads/2014/01/VOVA-06.png 698w" sizes="698px"></source>
+  <img src="/content/resized/2014/01/VOVA-06-320.png" data-src="/content/uploads/2014/01/VOVA-06.png" class="blur-up lazyautosizes lazyload" width="698" height="423" alt="Figure 7: Create External Network ">
 </picture>
 </a>
 
@@ -624,9 +612,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-07.png" title="Figure 8: Change network settings " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-07-320.webp 320w,         /content/resized/2014/01/VOVA-07-384.webp 384w,         /content/resized/2014/01/VOVA-07-512.webp 512w,         /content/resized/2014/01/VOVA-07-683.webp 683w,  /content/uploads/2014/01/VOVA-07.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-07-320.png 320w,     /content/resized/2014/01/VOVA-07-384.png 384w,     /content/resized/2014/01/VOVA-07-512.png 512w,     /content/resized/2014/01/VOVA-07-683.png 683w,  /content/uploads/2014/01/VOVA-07.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-07-320.png" data-src="/content/uploads/2014/01/VOVA-07.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Change network settings ">
+  <source width="800" height="152" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-07-320.webp 320w,         /content/resized/2014/01/VOVA-07-384.webp 384w,         /content/resized/2014/01/VOVA-07-512.webp 512w,         /content/resized/2014/01/VOVA-07-683.webp 683w,  /content/uploads/2014/01/VOVA-07.webp 800w" sizes="800px"></source>
+  <source width="800" height="152" data-srcset="    /content/resized/2014/01/VOVA-07-320.png 320w,     /content/resized/2014/01/VOVA-07-384.png 384w,     /content/resized/2014/01/VOVA-07-512.png 512w,     /content/resized/2014/01/VOVA-07-683.png 683w,  /content/uploads/2014/01/VOVA-07.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-07-320.png" data-src="/content/uploads/2014/01/VOVA-07.png" class="blur-up lazyautosizes lazyload" width="800" height="152" alt="Figure 8: Change network settings ">
 </picture>
 </a>
 
@@ -650,9 +638,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-08.png" title="Figure 9: Create new subnet " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-08-320.webp 320w,         /content/resized/2014/01/VOVA-08-384.webp 384w,         /content/resized/2014/01/VOVA-08-512.webp 512w,         /content/resized/2014/01/VOVA-08-683.webp 683w,  /content/uploads/2014/01/VOVA-08.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-08-320.png 320w,     /content/resized/2014/01/VOVA-08-384.png 384w,     /content/resized/2014/01/VOVA-08-512.png 512w,     /content/resized/2014/01/VOVA-08-683.png 683w,  /content/uploads/2014/01/VOVA-08.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-08-320.png" data-src="/content/uploads/2014/01/VOVA-08.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Create new subnet ">
+  <source width="800" height="578" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-08-320.webp 320w,         /content/resized/2014/01/VOVA-08-384.webp 384w,         /content/resized/2014/01/VOVA-08-512.webp 512w,         /content/resized/2014/01/VOVA-08-683.webp 683w,  /content/uploads/2014/01/VOVA-08.webp 800w" sizes="800px"></source>
+  <source width="800" height="578" data-srcset="    /content/resized/2014/01/VOVA-08-320.png 320w,     /content/resized/2014/01/VOVA-08-384.png 384w,     /content/resized/2014/01/VOVA-08-512.png 512w,     /content/resized/2014/01/VOVA-08-683.png 683w,  /content/uploads/2014/01/VOVA-08.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-08-320.png" data-src="/content/uploads/2014/01/VOVA-08.png" class="blur-up lazyautosizes lazyload" width="800" height="578" alt="Figure 9: Create new subnet ">
 </picture>
 </a>
 
@@ -680,9 +668,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-09.png" title="Figure 10: Create Subnet - Step 1 " class="image-popup">
 <picture>
-  <source width="696" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-09-320.webp 320w,         /content/resized/2014/01/VOVA-09-384.webp 384w,         /content/resized/2014/01/VOVA-09-512.webp 512w,         /content/resized/2014/01/VOVA-09-683.webp 683w,  /content/uploads/2014/01/VOVA-09.webp 696w" sizes="696px"></source>
-  <source width="696" data-srcset="    /content/resized/2014/01/VOVA-09-320.png 320w,     /content/resized/2014/01/VOVA-09-384.png 384w,     /content/resized/2014/01/VOVA-09-512.png 512w,     /content/resized/2014/01/VOVA-09-683.png 683w,  /content/uploads/2014/01/VOVA-09.png 696w" sizes="696px"></source>
-  <img src="/content/resized/2014/01/VOVA-09-320.png" data-src="/content/uploads/2014/01/VOVA-09.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Create Subnet - Step 1 ">
+  <source width="696" height="511" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-09-320.webp 320w,         /content/resized/2014/01/VOVA-09-384.webp 384w,         /content/resized/2014/01/VOVA-09-512.webp 512w,         /content/resized/2014/01/VOVA-09-683.webp 683w,  /content/uploads/2014/01/VOVA-09.webp 696w" sizes="696px"></source>
+  <source width="696" height="511" data-srcset="    /content/resized/2014/01/VOVA-09-320.png 320w,     /content/resized/2014/01/VOVA-09-384.png 384w,     /content/resized/2014/01/VOVA-09-512.png 512w,     /content/resized/2014/01/VOVA-09-683.png 683w,  /content/uploads/2014/01/VOVA-09.png 696w" sizes="696px"></source>
+  <img src="/content/resized/2014/01/VOVA-09-320.png" data-src="/content/uploads/2014/01/VOVA-09.png" class="blur-up lazyautosizes lazyload" width="696" height="511" alt="Figure 10: Create Subnet - Step 1 ">
 </picture>
 </a>
 
@@ -706,9 +694,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-10.png" title="Figure 11: Create Subnet - Step 2 " class="image-popup">
 <picture>
-  <source width="698" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-10-320.webp 320w,         /content/resized/2014/01/VOVA-10-384.webp 384w,         /content/resized/2014/01/VOVA-10-512.webp 512w,         /content/resized/2014/01/VOVA-10-683.webp 683w,  /content/uploads/2014/01/VOVA-10.webp 698w" sizes="698px"></source>
-  <source width="698" data-srcset="    /content/resized/2014/01/VOVA-10-320.png 320w,     /content/resized/2014/01/VOVA-10-384.png 384w,     /content/resized/2014/01/VOVA-10-512.png 512w,     /content/resized/2014/01/VOVA-10-683.png 683w,  /content/uploads/2014/01/VOVA-10.png 698w" sizes="698px"></source>
-  <img src="/content/resized/2014/01/VOVA-10-320.png" data-src="/content/uploads/2014/01/VOVA-10.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Create Subnet - Step 2 ">
+  <source width="698" height="498" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-10-320.webp 320w,         /content/resized/2014/01/VOVA-10-384.webp 384w,         /content/resized/2014/01/VOVA-10-512.webp 512w,         /content/resized/2014/01/VOVA-10-683.webp 683w,  /content/uploads/2014/01/VOVA-10.webp 698w" sizes="698px"></source>
+  <source width="698" height="498" data-srcset="    /content/resized/2014/01/VOVA-10-320.png 320w,     /content/resized/2014/01/VOVA-10-384.png 384w,     /content/resized/2014/01/VOVA-10-512.png 512w,     /content/resized/2014/01/VOVA-10-683.png 683w,  /content/uploads/2014/01/VOVA-10.png 698w" sizes="698px"></source>
+  <img src="/content/resized/2014/01/VOVA-10-320.png" data-src="/content/uploads/2014/01/VOVA-10.png" class="blur-up lazyautosizes lazyload" width="698" height="498" alt="Figure 11: Create Subnet - Step 2 ">
 </picture>
 </a>
 
@@ -732,9 +720,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-11.png" title="Figure 12: Successfully created External Network " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-11-320.webp 320w,         /content/resized/2014/01/VOVA-11-384.webp 384w,         /content/resized/2014/01/VOVA-11-512.webp 512w,         /content/resized/2014/01/VOVA-11-683.webp 683w,  /content/uploads/2014/01/VOVA-11.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-11-320.png 320w,     /content/resized/2014/01/VOVA-11-384.png 384w,     /content/resized/2014/01/VOVA-11-512.png 512w,     /content/resized/2014/01/VOVA-11-683.png 683w,  /content/uploads/2014/01/VOVA-11.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-11-320.png" data-src="/content/uploads/2014/01/VOVA-11.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Successfully created External Network ">
+  <source width="800" height="595" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-11-320.webp 320w,         /content/resized/2014/01/VOVA-11-384.webp 384w,         /content/resized/2014/01/VOVA-11-512.webp 512w,         /content/resized/2014/01/VOVA-11-683.webp 683w,  /content/uploads/2014/01/VOVA-11.webp 800w" sizes="800px"></source>
+  <source width="800" height="595" data-srcset="    /content/resized/2014/01/VOVA-11-320.png 320w,     /content/resized/2014/01/VOVA-11-384.png 384w,     /content/resized/2014/01/VOVA-11-512.png 512w,     /content/resized/2014/01/VOVA-11-683.png 683w,  /content/uploads/2014/01/VOVA-11.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-11-320.png" data-src="/content/uploads/2014/01/VOVA-11.png" class="blur-up lazyautosizes lazyload" width="800" height="595" alt="Figure 12: Successfully created External Network ">
 </picture>
 </a>
 
@@ -762,9 +750,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-12.png" title="Figure 13: Tenant View - Create internal network " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-12-320.webp 320w,         /content/resized/2014/01/VOVA-12-384.webp 384w,         /content/resized/2014/01/VOVA-12-512.webp 512w,         /content/resized/2014/01/VOVA-12-683.webp 683w,  /content/uploads/2014/01/VOVA-12.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-12-320.png 320w,     /content/resized/2014/01/VOVA-12-384.png 384w,     /content/resized/2014/01/VOVA-12-512.png 512w,     /content/resized/2014/01/VOVA-12-683.png 683w,  /content/uploads/2014/01/VOVA-12.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-12-320.png" data-src="/content/uploads/2014/01/VOVA-12.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Tenant View - Create internal network ">
+  <source width="800" height="439" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-12-320.webp 320w,         /content/resized/2014/01/VOVA-12-384.webp 384w,         /content/resized/2014/01/VOVA-12-512.webp 512w,         /content/resized/2014/01/VOVA-12-683.webp 683w,  /content/uploads/2014/01/VOVA-12.webp 800w" sizes="800px"></source>
+  <source width="800" height="439" data-srcset="    /content/resized/2014/01/VOVA-12-320.png 320w,     /content/resized/2014/01/VOVA-12-384.png 384w,     /content/resized/2014/01/VOVA-12-512.png 512w,     /content/resized/2014/01/VOVA-12-683.png 683w,  /content/uploads/2014/01/VOVA-12.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-12-320.png" data-src="/content/uploads/2014/01/VOVA-12.png" class="blur-up lazyautosizes lazyload" width="800" height="439" alt="Figure 13: Tenant View - Create internal network ">
 </picture>
 </a>
 
@@ -790,9 +778,9 @@
 
 <a href="/content/uploads/2014/01/VOVA15.png" title="Figure 14: Create Network - Step 1 " class="image-popup">
 <picture>
-  <source width="702" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA15-320.webp 320w,         /content/resized/2014/01/VOVA15-384.webp 384w,         /content/resized/2014/01/VOVA15-512.webp 512w,         /content/resized/2014/01/VOVA15-683.webp 683w,  /content/uploads/2014/01/VOVA15.webp 702w" sizes="702px"></source>
-  <source width="702" data-srcset="    /content/resized/2014/01/VOVA15-320.png 320w,     /content/resized/2014/01/VOVA15-384.png 384w,     /content/resized/2014/01/VOVA15-512.png 512w,     /content/resized/2014/01/VOVA15-683.png 683w,  /content/uploads/2014/01/VOVA15.png 702w" sizes="702px"></source>
-  <img src="/content/resized/2014/01/VOVA15-320.png" data-src="/content/uploads/2014/01/VOVA15.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Create Network - Step 1 ">
+  <source width="702" height="310" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA15-320.webp 320w,         /content/resized/2014/01/VOVA15-384.webp 384w,         /content/resized/2014/01/VOVA15-512.webp 512w,         /content/resized/2014/01/VOVA15-683.webp 683w,  /content/uploads/2014/01/VOVA15.webp 702w" sizes="702px"></source>
+  <source width="702" height="310" data-srcset="    /content/resized/2014/01/VOVA15-320.png 320w,     /content/resized/2014/01/VOVA15-384.png 384w,     /content/resized/2014/01/VOVA15-512.png 512w,     /content/resized/2014/01/VOVA15-683.png 683w,  /content/uploads/2014/01/VOVA15.png 702w" sizes="702px"></source>
+  <img src="/content/resized/2014/01/VOVA15-320.png" data-src="/content/uploads/2014/01/VOVA15.png" class="blur-up lazyautosizes lazyload" width="702" height="310" alt="Figure 14: Create Network - Step 1 ">
 </picture>
 </a>
 
@@ -816,9 +804,9 @@
 
 <a href="/content/uploads/2014/01/VOVA16.png" title="Figure 15: Create Network - Step 2 " class="image-popup">
 <picture>
-  <source width="701" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA16-320.webp 320w,         /content/resized/2014/01/VOVA16-384.webp 384w,         /content/resized/2014/01/VOVA16-512.webp 512w,         /content/resized/2014/01/VOVA16-683.webp 683w,  /content/uploads/2014/01/VOVA16.webp 701w" sizes="701px"></source>
-  <source width="701" data-srcset="    /content/resized/2014/01/VOVA16-320.png 320w,     /content/resized/2014/01/VOVA16-384.png 384w,     /content/resized/2014/01/VOVA16-512.png 512w,     /content/resized/2014/01/VOVA16-683.png 683w,  /content/uploads/2014/01/VOVA16.png 701w" sizes="701px"></source>
-  <img src="/content/resized/2014/01/VOVA16-320.png" data-src="/content/uploads/2014/01/VOVA16.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Create Network - Step 2 ">
+  <source width="701" height="567" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA16-320.webp 320w,         /content/resized/2014/01/VOVA16-384.webp 384w,         /content/resized/2014/01/VOVA16-512.webp 512w,         /content/resized/2014/01/VOVA16-683.webp 683w,  /content/uploads/2014/01/VOVA16.webp 701w" sizes="701px"></source>
+  <source width="701" height="567" data-srcset="    /content/resized/2014/01/VOVA16-320.png 320w,     /content/resized/2014/01/VOVA16-384.png 384w,     /content/resized/2014/01/VOVA16-512.png 512w,     /content/resized/2014/01/VOVA16-683.png 683w,  /content/uploads/2014/01/VOVA16.png 701w" sizes="701px"></source>
+  <img src="/content/resized/2014/01/VOVA16-320.png" data-src="/content/uploads/2014/01/VOVA16.png" class="blur-up lazyautosizes lazyload" width="701" height="567" alt="Figure 15: Create Network - Step 2 ">
 </picture>
 </a>
 
@@ -842,9 +830,9 @@
 
 <a href="/content/uploads/2014/01/VOVA17.png" title="Figure 16: Create Network - Step 3 " class="image-popup">
 <picture>
-  <source width="701" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA17-320.webp 320w,         /content/resized/2014/01/VOVA17-384.webp 384w,         /content/resized/2014/01/VOVA17-512.webp 512w,         /content/resized/2014/01/VOVA17-683.webp 683w,  /content/uploads/2014/01/VOVA17.webp 701w" sizes="701px"></source>
-  <source width="701" data-srcset="    /content/resized/2014/01/VOVA17-320.png 320w,     /content/resized/2014/01/VOVA17-384.png 384w,     /content/resized/2014/01/VOVA17-512.png 512w,     /content/resized/2014/01/VOVA17-683.png 683w,  /content/uploads/2014/01/VOVA17.png 701w" sizes="701px"></source>
-  <img src="/content/resized/2014/01/VOVA17-320.png" data-src="/content/uploads/2014/01/VOVA17.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Create Network - Step 3 ">
+  <source width="701" height="500" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA17-320.webp 320w,         /content/resized/2014/01/VOVA17-384.webp 384w,         /content/resized/2014/01/VOVA17-512.webp 512w,         /content/resized/2014/01/VOVA17-683.webp 683w,  /content/uploads/2014/01/VOVA17.webp 701w" sizes="701px"></source>
+  <source width="701" height="500" data-srcset="    /content/resized/2014/01/VOVA17-320.png 320w,     /content/resized/2014/01/VOVA17-384.png 384w,     /content/resized/2014/01/VOVA17-512.png 512w,     /content/resized/2014/01/VOVA17-683.png 683w,  /content/uploads/2014/01/VOVA17.png 701w" sizes="701px"></source>
+  <img src="/content/resized/2014/01/VOVA17-320.png" data-src="/content/uploads/2014/01/VOVA17.png" class="blur-up lazyautosizes lazyload" width="701" height="500" alt="Figure 16: Create Network - Step 3 ">
 </picture>
 </a>
 
@@ -872,9 +860,9 @@
 
 <a href="/content/uploads/2014/01/VOVA18.png" title="Figure 17: Network Topology with Internal and External network " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA18-320.webp 320w,         /content/resized/2014/01/VOVA18-384.webp 384w,         /content/resized/2014/01/VOVA18-512.webp 512w,         /content/resized/2014/01/VOVA18-683.webp 683w,  /content/uploads/2014/01/VOVA18.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA18-320.png 320w,     /content/resized/2014/01/VOVA18-384.png 384w,     /content/resized/2014/01/VOVA18-512.png 512w,     /content/resized/2014/01/VOVA18-683.png 683w,  /content/uploads/2014/01/VOVA18.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA18-320.png" data-src="/content/uploads/2014/01/VOVA18.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Network Topology with Internal and External network ">
+  <source width="800" height="470" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA18-320.webp 320w,         /content/resized/2014/01/VOVA18-384.webp 384w,         /content/resized/2014/01/VOVA18-512.webp 512w,         /content/resized/2014/01/VOVA18-683.webp 683w,  /content/uploads/2014/01/VOVA18.webp 800w" sizes="800px"></source>
+  <source width="800" height="470" data-srcset="    /content/resized/2014/01/VOVA18-320.png 320w,     /content/resized/2014/01/VOVA18-384.png 384w,     /content/resized/2014/01/VOVA18-512.png 512w,     /content/resized/2014/01/VOVA18-683.png 683w,  /content/uploads/2014/01/VOVA18.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA18-320.png" data-src="/content/uploads/2014/01/VOVA18.png" class="blur-up lazyautosizes lazyload" width="800" height="470" alt="Figure 17: Network Topology with Internal and External network ">
 </picture>
 </a>
 
@@ -898,9 +886,9 @@
 
 <a href="/content/uploads/2014/01/VOVA19.png" title="Figure 18: Create Router dialog " class="image-popup">
 <picture>
-  <source width="700" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA19-320.webp 320w,         /content/resized/2014/01/VOVA19-384.webp 384w,         /content/resized/2014/01/VOVA19-512.webp 512w,         /content/resized/2014/01/VOVA19-683.webp 683w,  /content/uploads/2014/01/VOVA19.webp 700w" sizes="700px"></source>
-  <source width="700" data-srcset="    /content/resized/2014/01/VOVA19-320.png 320w,     /content/resized/2014/01/VOVA19-384.png 384w,     /content/resized/2014/01/VOVA19-512.png 512w,     /content/resized/2014/01/VOVA19-683.png 683w,  /content/uploads/2014/01/VOVA19.png 700w" sizes="700px"></source>
-  <img src="/content/resized/2014/01/VOVA19-320.png" data-src="/content/uploads/2014/01/VOVA19.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Create Router dialog ">
+  <source width="700" height="203" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA19-320.webp 320w,         /content/resized/2014/01/VOVA19-384.webp 384w,         /content/resized/2014/01/VOVA19-512.webp 512w,         /content/resized/2014/01/VOVA19-683.webp 683w,  /content/uploads/2014/01/VOVA19.webp 700w" sizes="700px"></source>
+  <source width="700" height="203" data-srcset="    /content/resized/2014/01/VOVA19-320.png 320w,     /content/resized/2014/01/VOVA19-384.png 384w,     /content/resized/2014/01/VOVA19-512.png 512w,     /content/resized/2014/01/VOVA19-683.png 683w,  /content/uploads/2014/01/VOVA19.png 700w" sizes="700px"></source>
+  <img src="/content/resized/2014/01/VOVA19-320.png" data-src="/content/uploads/2014/01/VOVA19.png" class="blur-up lazyautosizes lazyload" width="700" height="203" alt="Figure 18: Create Router dialog ">
 </picture>
 </a>
 
@@ -924,9 +912,9 @@
 
 <a href="/content/uploads/2014/01/VOVA20.png" title="Figure 19: Network Topology with unconnected router " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA20-320.webp 320w,         /content/resized/2014/01/VOVA20-384.webp 384w,         /content/resized/2014/01/VOVA20-512.webp 512w,         /content/resized/2014/01/VOVA20-683.webp 683w,  /content/uploads/2014/01/VOVA20.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA20-320.png 320w,     /content/resized/2014/01/VOVA20-384.png 384w,     /content/resized/2014/01/VOVA20-512.png 512w,     /content/resized/2014/01/VOVA20-683.png 683w,  /content/uploads/2014/01/VOVA20.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA20-320.png" data-src="/content/uploads/2014/01/VOVA20.png" class="blur-up lazyautosizes lazyload" alt="Figure 19: Network Topology with unconnected router ">
+  <source width="800" height="649" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA20-320.webp 320w,         /content/resized/2014/01/VOVA20-384.webp 384w,         /content/resized/2014/01/VOVA20-512.webp 512w,         /content/resized/2014/01/VOVA20-683.webp 683w,  /content/uploads/2014/01/VOVA20.webp 800w" sizes="800px"></source>
+  <source width="800" height="649" data-srcset="    /content/resized/2014/01/VOVA20-320.png 320w,     /content/resized/2014/01/VOVA20-384.png 384w,     /content/resized/2014/01/VOVA20-512.png 512w,     /content/resized/2014/01/VOVA20-683.png 683w,  /content/uploads/2014/01/VOVA20.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA20-320.png" data-src="/content/uploads/2014/01/VOVA20.png" class="blur-up lazyautosizes lazyload" width="800" height="649" alt="Figure 19: Network Topology with unconnected router ">
 </picture>
 </a>
 
@@ -950,9 +938,9 @@
 
 <a href="/content/uploads/2014/01/VOVA21.png" title="Figure 20: Router Overview " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA21-320.webp 320w,         /content/resized/2014/01/VOVA21-384.webp 384w,         /content/resized/2014/01/VOVA21-512.webp 512w,         /content/resized/2014/01/VOVA21-683.webp 683w,  /content/uploads/2014/01/VOVA21.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA21-320.png 320w,     /content/resized/2014/01/VOVA21-384.png 384w,     /content/resized/2014/01/VOVA21-512.png 512w,     /content/resized/2014/01/VOVA21-683.png 683w,  /content/uploads/2014/01/VOVA21.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA21-320.png" data-src="/content/uploads/2014/01/VOVA21.png" class="blur-up lazyautosizes lazyload" alt="Figure 20: Router Overview ">
+  <source width="800" height="362" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA21-320.webp 320w,         /content/resized/2014/01/VOVA21-384.webp 384w,         /content/resized/2014/01/VOVA21-512.webp 512w,         /content/resized/2014/01/VOVA21-683.webp 683w,  /content/uploads/2014/01/VOVA21.webp 800w" sizes="800px"></source>
+  <source width="800" height="362" data-srcset="    /content/resized/2014/01/VOVA21-320.png 320w,     /content/resized/2014/01/VOVA21-384.png 384w,     /content/resized/2014/01/VOVA21-512.png 512w,     /content/resized/2014/01/VOVA21-683.png 683w,  /content/uploads/2014/01/VOVA21.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA21-320.png" data-src="/content/uploads/2014/01/VOVA21.png" class="blur-up lazyautosizes lazyload" width="800" height="362" alt="Figure 20: Router Overview ">
 </picture>
 </a>
 
@@ -976,9 +964,9 @@
 
 <a href="/content/uploads/2014/01/VOVA22.png" title="Figure 21: Add interface to router " class="image-popup">
 <picture>
-  <source width="701" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA22-320.webp 320w,         /content/resized/2014/01/VOVA22-384.webp 384w,         /content/resized/2014/01/VOVA22-512.webp 512w,         /content/resized/2014/01/VOVA22-683.webp 683w,  /content/uploads/2014/01/VOVA22.webp 701w" sizes="701px"></source>
-  <source width="701" data-srcset="    /content/resized/2014/01/VOVA22-320.png 320w,     /content/resized/2014/01/VOVA22-384.png 384w,     /content/resized/2014/01/VOVA22-512.png 512w,     /content/resized/2014/01/VOVA22-683.png 683w,  /content/uploads/2014/01/VOVA22.png 701w" sizes="701px"></source>
-  <img src="/content/resized/2014/01/VOVA22-320.png" data-src="/content/uploads/2014/01/VOVA22.png" class="blur-up lazyautosizes lazyload" alt="Figure 21: Add interface to router ">
+  <source width="701" height="409" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA22-320.webp 320w,         /content/resized/2014/01/VOVA22-384.webp 384w,         /content/resized/2014/01/VOVA22-512.webp 512w,         /content/resized/2014/01/VOVA22-683.webp 683w,  /content/uploads/2014/01/VOVA22.webp 701w" sizes="701px"></source>
+  <source width="701" height="409" data-srcset="    /content/resized/2014/01/VOVA22-320.png 320w,     /content/resized/2014/01/VOVA22-384.png 384w,     /content/resized/2014/01/VOVA22-512.png 512w,     /content/resized/2014/01/VOVA22-683.png 683w,  /content/uploads/2014/01/VOVA22.png 701w" sizes="701px"></source>
+  <img src="/content/resized/2014/01/VOVA22-320.png" data-src="/content/uploads/2014/01/VOVA22.png" class="blur-up lazyautosizes lazyload" width="701" height="409" alt="Figure 21: Add interface to router ">
 </picture>
 </a>
 
@@ -1002,9 +990,9 @@
 
 <a href="/content/uploads/2014/01/VOVA24.png" title="Figure 22: Router with connection to internal network " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA24-320.webp 320w,         /content/resized/2014/01/VOVA24-384.webp 384w,         /content/resized/2014/01/VOVA24-512.webp 512w,         /content/resized/2014/01/VOVA24-683.webp 683w,  /content/uploads/2014/01/VOVA24.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA24-320.png 320w,     /content/resized/2014/01/VOVA24-384.png 384w,     /content/resized/2014/01/VOVA24-512.png 512w,     /content/resized/2014/01/VOVA24-683.png 683w,  /content/uploads/2014/01/VOVA24.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA24-320.png" data-src="/content/uploads/2014/01/VOVA24.png" class="blur-up lazyautosizes lazyload" alt="Figure 22: Router with connection to internal network ">
+  <source width="800" height="470" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA24-320.webp 320w,         /content/resized/2014/01/VOVA24-384.webp 384w,         /content/resized/2014/01/VOVA24-512.webp 512w,         /content/resized/2014/01/VOVA24-683.webp 683w,  /content/uploads/2014/01/VOVA24.webp 800w" sizes="800px"></source>
+  <source width="800" height="470" data-srcset="    /content/resized/2014/01/VOVA24-320.png 320w,     /content/resized/2014/01/VOVA24-384.png 384w,     /content/resized/2014/01/VOVA24-512.png 512w,     /content/resized/2014/01/VOVA24-683.png 683w,  /content/uploads/2014/01/VOVA24.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA24-320.png" data-src="/content/uploads/2014/01/VOVA24.png" class="blur-up lazyautosizes lazyload" width="800" height="470" alt="Figure 22: Router with connection to internal network ">
 </picture>
 </a>
 
@@ -1032,9 +1020,9 @@
 
 <a href="/content/uploads/2014/01/VOVA25.png" title="Figure 23: Specify the Router Gateway " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA25-320.webp 320w,         /content/resized/2014/01/VOVA25-384.webp 384w,         /content/resized/2014/01/VOVA25-512.webp 512w,         /content/resized/2014/01/VOVA25-683.webp 683w,  /content/uploads/2014/01/VOVA25.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA25-320.png 320w,     /content/resized/2014/01/VOVA25-384.png 384w,     /content/resized/2014/01/VOVA25-512.png 512w,     /content/resized/2014/01/VOVA25-683.png 683w,  /content/uploads/2014/01/VOVA25.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA25-320.png" data-src="/content/uploads/2014/01/VOVA25.png" class="blur-up lazyautosizes lazyload" alt="Figure 23: Specify the Router Gateway ">
+  <source width="800" height="189" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA25-320.webp 320w,         /content/resized/2014/01/VOVA25-384.webp 384w,         /content/resized/2014/01/VOVA25-512.webp 512w,         /content/resized/2014/01/VOVA25-683.webp 683w,  /content/uploads/2014/01/VOVA25.webp 800w" sizes="800px"></source>
+  <source width="800" height="189" data-srcset="    /content/resized/2014/01/VOVA25-320.png 320w,     /content/resized/2014/01/VOVA25-384.png 384w,     /content/resized/2014/01/VOVA25-512.png 512w,     /content/resized/2014/01/VOVA25-683.png 683w,  /content/uploads/2014/01/VOVA25.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA25-320.png" data-src="/content/uploads/2014/01/VOVA25.png" class="blur-up lazyautosizes lazyload" width="800" height="189" alt="Figure 23: Specify the Router Gateway ">
 </picture>
 </a>
 
@@ -1058,9 +1046,9 @@
 
 <a href="/content/uploads/2014/01/VOVA26.png" title="Figure 24: Set Router Gateway dialog " class="image-popup">
 <picture>
-  <source width="699" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA26-320.webp 320w,         /content/resized/2014/01/VOVA26-384.webp 384w,         /content/resized/2014/01/VOVA26-512.webp 512w,         /content/resized/2014/01/VOVA26-683.webp 683w,  /content/uploads/2014/01/VOVA26.webp 699w" sizes="699px"></source>
-  <source width="699" data-srcset="    /content/resized/2014/01/VOVA26-320.png 320w,     /content/resized/2014/01/VOVA26-384.png 384w,     /content/resized/2014/01/VOVA26-512.png 512w,     /content/resized/2014/01/VOVA26-683.png 683w,  /content/uploads/2014/01/VOVA26.png 699w" sizes="699px"></source>
-  <img src="/content/resized/2014/01/VOVA26-320.png" data-src="/content/uploads/2014/01/VOVA26.png" class="blur-up lazyautosizes lazyload" alt="Figure 24: Set Router Gateway dialog ">
+  <source width="699" height="341" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA26-320.webp 320w,         /content/resized/2014/01/VOVA26-384.webp 384w,         /content/resized/2014/01/VOVA26-512.webp 512w,         /content/resized/2014/01/VOVA26-683.webp 683w,  /content/uploads/2014/01/VOVA26.webp 699w" sizes="699px"></source>
+  <source width="699" height="341" data-srcset="    /content/resized/2014/01/VOVA26-320.png 320w,     /content/resized/2014/01/VOVA26-384.png 384w,     /content/resized/2014/01/VOVA26-512.png 512w,     /content/resized/2014/01/VOVA26-683.png 683w,  /content/uploads/2014/01/VOVA26.png 699w" sizes="699px"></source>
+  <img src="/content/resized/2014/01/VOVA26-320.png" data-src="/content/uploads/2014/01/VOVA26.png" class="blur-up lazyautosizes lazyload" width="699" height="341" alt="Figure 24: Set Router Gateway dialog ">
 </picture>
 </a>
 
@@ -1084,9 +1072,9 @@
 
 <a href="/content/uploads/2014/01/VOVA28.png" title="Figure 25: Network Topology with Internal Network, External Network and Router between them " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA28-320.webp 320w,         /content/resized/2014/01/VOVA28-384.webp 384w,         /content/resized/2014/01/VOVA28-512.webp 512w,         /content/resized/2014/01/VOVA28-683.webp 683w,  /content/uploads/2014/01/VOVA28.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA28-320.png 320w,     /content/resized/2014/01/VOVA28-384.png 384w,     /content/resized/2014/01/VOVA28-512.png 512w,     /content/resized/2014/01/VOVA28-683.png 683w,  /content/uploads/2014/01/VOVA28.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA28-320.png" data-src="/content/uploads/2014/01/VOVA28.png" class="blur-up lazyautosizes lazyload" alt="Figure 25: Network Topology with Internal Network, External Network and Router between them ">
+  <source width="800" height="470" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA28-320.webp 320w,         /content/resized/2014/01/VOVA28-384.webp 384w,         /content/resized/2014/01/VOVA28-512.webp 512w,         /content/resized/2014/01/VOVA28-683.webp 683w,  /content/uploads/2014/01/VOVA28.webp 800w" sizes="800px"></source>
+  <source width="800" height="470" data-srcset="    /content/resized/2014/01/VOVA28-320.png 320w,     /content/resized/2014/01/VOVA28-384.png 384w,     /content/resized/2014/01/VOVA28-512.png 512w,     /content/resized/2014/01/VOVA28-683.png 683w,  /content/uploads/2014/01/VOVA28.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA28-320.png" data-src="/content/uploads/2014/01/VOVA28.png" class="blur-up lazyautosizes lazyload" width="800" height="470" alt="Figure 25: Network Topology with Internal Network, External Network and Router between them ">
 </picture>
 </a>
 
@@ -1116,9 +1104,9 @@
 
 <a href="/content/uploads/2014/01/VOVA29.png" title="Figure 26: Launch Instance - Step 1 " class="image-popup">
 <picture>
-  <source width="699" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA29-320.webp 320w,         /content/resized/2014/01/VOVA29-384.webp 384w,         /content/resized/2014/01/VOVA29-512.webp 512w,         /content/resized/2014/01/VOVA29-683.webp 683w,  /content/uploads/2014/01/VOVA29.webp 699w" sizes="699px"></source>
-  <source width="699" data-srcset="    /content/resized/2014/01/VOVA29-320.png 320w,     /content/resized/2014/01/VOVA29-384.png 384w,     /content/resized/2014/01/VOVA29-512.png 512w,     /content/resized/2014/01/VOVA29-683.png 683w,  /content/uploads/2014/01/VOVA29.png 699w" sizes="699px"></source>
-  <img src="/content/resized/2014/01/VOVA29-320.png" data-src="/content/uploads/2014/01/VOVA29.png" class="blur-up lazyautosizes lazyload" alt="Figure 26: Launch Instance - Step 1 ">
+  <source width="699" height="645" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA29-320.webp 320w,         /content/resized/2014/01/VOVA29-384.webp 384w,         /content/resized/2014/01/VOVA29-512.webp 512w,         /content/resized/2014/01/VOVA29-683.webp 683w,  /content/uploads/2014/01/VOVA29.webp 699w" sizes="699px"></source>
+  <source width="699" height="645" data-srcset="    /content/resized/2014/01/VOVA29-320.png 320w,     /content/resized/2014/01/VOVA29-384.png 384w,     /content/resized/2014/01/VOVA29-512.png 512w,     /content/resized/2014/01/VOVA29-683.png 683w,  /content/uploads/2014/01/VOVA29.png 699w" sizes="699px"></source>
+  <img src="/content/resized/2014/01/VOVA29-320.png" data-src="/content/uploads/2014/01/VOVA29.png" class="blur-up lazyautosizes lazyload" width="699" height="645" alt="Figure 26: Launch Instance - Step 1 ">
 </picture>
 </a>
 
@@ -1144,9 +1132,9 @@
 
 <a href="/content/uploads/2014/01/VOVA30.png" title="Figure 27: Launch Instance - Step 2 " class="image-popup">
 <picture>
-  <source width="699" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA30-320.webp 320w,         /content/resized/2014/01/VOVA30-384.webp 384w,         /content/resized/2014/01/VOVA30-512.webp 512w,         /content/resized/2014/01/VOVA30-683.webp 683w,  /content/uploads/2014/01/VOVA30.webp 699w" sizes="699px"></source>
-  <source width="699" data-srcset="    /content/resized/2014/01/VOVA30-320.png 320w,     /content/resized/2014/01/VOVA30-384.png 384w,     /content/resized/2014/01/VOVA30-512.png 512w,     /content/resized/2014/01/VOVA30-683.png 683w,  /content/uploads/2014/01/VOVA30.png 699w" sizes="699px"></source>
-  <img src="/content/resized/2014/01/VOVA30-320.png" data-src="/content/uploads/2014/01/VOVA30.png" class="blur-up lazyautosizes lazyload" alt="Figure 27: Launch Instance - Step 2 ">
+  <source width="699" height="350" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA30-320.webp 320w,         /content/resized/2014/01/VOVA30-384.webp 384w,         /content/resized/2014/01/VOVA30-512.webp 512w,         /content/resized/2014/01/VOVA30-683.webp 683w,  /content/uploads/2014/01/VOVA30.webp 699w" sizes="699px"></source>
+  <source width="699" height="350" data-srcset="    /content/resized/2014/01/VOVA30-320.png 320w,     /content/resized/2014/01/VOVA30-384.png 384w,     /content/resized/2014/01/VOVA30-512.png 512w,     /content/resized/2014/01/VOVA30-683.png 683w,  /content/uploads/2014/01/VOVA30.png 699w" sizes="699px"></source>
+  <img src="/content/resized/2014/01/VOVA30-320.png" data-src="/content/uploads/2014/01/VOVA30.png" class="blur-up lazyautosizes lazyload" width="699" height="350" alt="Figure 27: Launch Instance - Step 2 ">
 </picture>
 </a>
 
@@ -1170,9 +1158,9 @@
 
 <a href="/content/uploads/2014/01/VOVA31.png" title="Figure 28: Successful Launch of Instance " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA31-320.webp 320w,         /content/resized/2014/01/VOVA31-384.webp 384w,         /content/resized/2014/01/VOVA31-512.webp 512w,         /content/resized/2014/01/VOVA31-683.webp 683w,  /content/uploads/2014/01/VOVA31.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA31-320.png 320w,     /content/resized/2014/01/VOVA31-384.png 384w,     /content/resized/2014/01/VOVA31-512.png 512w,     /content/resized/2014/01/VOVA31-683.png 683w,  /content/uploads/2014/01/VOVA31.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA31-320.png" data-src="/content/uploads/2014/01/VOVA31.png" class="blur-up lazyautosizes lazyload" alt="Figure 28: Successful Launch of Instance ">
+  <source width="800" height="264" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA31-320.webp 320w,         /content/resized/2014/01/VOVA31-384.webp 384w,         /content/resized/2014/01/VOVA31-512.webp 512w,         /content/resized/2014/01/VOVA31-683.webp 683w,  /content/uploads/2014/01/VOVA31.webp 800w" sizes="800px"></source>
+  <source width="800" height="264" data-srcset="    /content/resized/2014/01/VOVA31-320.png 320w,     /content/resized/2014/01/VOVA31-384.png 384w,     /content/resized/2014/01/VOVA31-512.png 512w,     /content/resized/2014/01/VOVA31-683.png 683w,  /content/uploads/2014/01/VOVA31.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA31-320.png" data-src="/content/uploads/2014/01/VOVA31.png" class="blur-up lazyautosizes lazyload" width="800" height="264" alt="Figure 28: Successful Launch of Instance ">
 </picture>
 </a>
 
@@ -1196,9 +1184,9 @@
 
 <a href="/content/uploads/2014/01/VOVA32.png" title="Figure 29: Instance Details " class="image-popup">
 <picture>
-  <source width="402" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA32-320.webp 320w,         /content/resized/2014/01/VOVA32-384.webp 384w,  /content/uploads/2014/01/VOVA32.webp 402w" sizes="402px"></source>
-  <source width="402" data-srcset="    /content/resized/2014/01/VOVA32-320.png 320w,     /content/resized/2014/01/VOVA32-384.png 384w,  /content/uploads/2014/01/VOVA32.png 402w" sizes="402px"></source>
-  <img src="/content/resized/2014/01/VOVA32-320.png" data-src="/content/uploads/2014/01/VOVA32.png" class="blur-up lazyautosizes lazyload" alt="Figure 29: Instance Details ">
+  <source width="402" height="713" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA32-320.webp 320w,         /content/resized/2014/01/VOVA32-384.webp 384w,  /content/uploads/2014/01/VOVA32.webp 402w" sizes="402px"></source>
+  <source width="402" height="713" data-srcset="    /content/resized/2014/01/VOVA32-320.png 320w,     /content/resized/2014/01/VOVA32-384.png 384w,  /content/uploads/2014/01/VOVA32.png 402w" sizes="402px"></source>
+  <img src="/content/resized/2014/01/VOVA32-320.png" data-src="/content/uploads/2014/01/VOVA32.png" class="blur-up lazyautosizes lazyload" width="402" height="713" alt="Figure 29: Instance Details ">
 </picture>
 </a>
 
@@ -1222,9 +1210,9 @@
 
 <a href="/content/uploads/2014/01/VOVA33.png" title="Figure 30: Instance Console " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA33-320.webp 320w,         /content/resized/2014/01/VOVA33-384.webp 384w,         /content/resized/2014/01/VOVA33-512.webp 512w,         /content/resized/2014/01/VOVA33-683.webp 683w,  /content/uploads/2014/01/VOVA33.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA33-320.png 320w,     /content/resized/2014/01/VOVA33-384.png 384w,     /content/resized/2014/01/VOVA33-512.png 512w,     /content/resized/2014/01/VOVA33-683.png 683w,  /content/uploads/2014/01/VOVA33.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA33-320.png" data-src="/content/uploads/2014/01/VOVA33.png" class="blur-up lazyautosizes lazyload" alt="Figure 30: Instance Console ">
+  <source width="800" height="572" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA33-320.webp 320w,         /content/resized/2014/01/VOVA33-384.webp 384w,         /content/resized/2014/01/VOVA33-512.webp 512w,         /content/resized/2014/01/VOVA33-683.webp 683w,  /content/uploads/2014/01/VOVA33.webp 800w" sizes="800px"></source>
+  <source width="800" height="572" data-srcset="    /content/resized/2014/01/VOVA33-320.png 320w,     /content/resized/2014/01/VOVA33-384.png 384w,     /content/resized/2014/01/VOVA33-512.png 512w,     /content/resized/2014/01/VOVA33-683.png 683w,  /content/uploads/2014/01/VOVA33.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA33-320.png" data-src="/content/uploads/2014/01/VOVA33.png" class="blur-up lazyautosizes lazyload" width="800" height="572" alt="Figure 30: Instance Console ">
 </picture>
 </a>
 
@@ -1281,13 +1269,21 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+5%3A+Create+virtual+networks+and+launch+a+VM+instance+in+OpenStack%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=OpenStack%20with%20vSphere%20and%20NSX%20-%20Part%205:%20Create%20virtual%20networks%20and%20launch%20a%20VM%20instance%20in%20OpenStack%0Ahttps://www.edge-cloud.net/2014/01/24/openstack-vsphere-nsx-part5/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=OpenStack+with+vSphere+and+NSX+-+Part+5%3A+Create+virtual+networks+and+launch+a+VM+instance+in+OpenStack%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+5%3A+Create+virtual+networks+and+launch+a+VM+instance+in+OpenStack" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F24%2Fopenstack-vsphere-nsx-part5%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+5%3A+Create+virtual+networks+and+launch+a+VM+instance+in+OpenStack" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -1313,6 +1309,62 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -1485,63 +1537,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1576,7 +1571,7 @@
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1661,14 +1656,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

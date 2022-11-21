@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 2: Create and configure the VMware NSX cluster">
-  <meta name="twitter:description" content="Create and configure the VMware NSX cluster  for a setup including VMware vSphere, VMware NSX and OpenStack.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/12/27/openstack-with-vsphere-and-nsx-part2/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2013-12-27T00:30:17-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -426,9 +414,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager01.png" title="Figure 1: Login to NSX Manager " class="image-popup">
 <picture>
-  <source width="1049" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager01-320.webp 320w,         /content/resized/2013/12/NSX-Manager01-384.webp 384w,         /content/resized/2013/12/NSX-Manager01-512.webp 512w,         /content/resized/2013/12/NSX-Manager01-683.webp 683w,         /content/resized/2013/12/NSX-Manager01-800.webp 800w,         /content/resized/2013/12/NSX-Manager01-960.webp 960w,  /content/uploads/2013/12/NSX-Manager01.webp 1049w" sizes="1049px"></source>
-  <source width="1049" data-srcset="    /content/resized/2013/12/NSX-Manager01-320.png 320w,     /content/resized/2013/12/NSX-Manager01-384.png 384w,     /content/resized/2013/12/NSX-Manager01-512.png 512w,     /content/resized/2013/12/NSX-Manager01-683.png 683w,     /content/resized/2013/12/NSX-Manager01-800.png 800w,     /content/resized/2013/12/NSX-Manager01-960.png 960w,  /content/uploads/2013/12/NSX-Manager01.png 1049w" sizes="1049px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager01-320.png" data-src="/content/uploads/2013/12/NSX-Manager01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Login to NSX Manager ">
+  <source width="1049" height="674" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager01-320.webp 320w,         /content/resized/2013/12/NSX-Manager01-384.webp 384w,         /content/resized/2013/12/NSX-Manager01-512.webp 512w,         /content/resized/2013/12/NSX-Manager01-683.webp 683w,         /content/resized/2013/12/NSX-Manager01-800.webp 800w,         /content/resized/2013/12/NSX-Manager01-960.webp 960w,  /content/uploads/2013/12/NSX-Manager01.webp 1049w" sizes="1049px"></source>
+  <source width="1049" height="674" data-srcset="    /content/resized/2013/12/NSX-Manager01-320.png 320w,     /content/resized/2013/12/NSX-Manager01-384.png 384w,     /content/resized/2013/12/NSX-Manager01-512.png 512w,     /content/resized/2013/12/NSX-Manager01-683.png 683w,     /content/resized/2013/12/NSX-Manager01-800.png 800w,     /content/resized/2013/12/NSX-Manager01-960.png 960w,  /content/uploads/2013/12/NSX-Manager01.png 1049w" sizes="1049px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager01-320.png" data-src="/content/uploads/2013/12/NSX-Manager01.png" class="blur-up lazyautosizes lazyload" width="1049" height="674" alt="Figure 1: Login to NSX Manager ">
 </picture>
 </a>
 
@@ -452,9 +440,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager02.png" title="Figure 2: NSX Manager without a cluster " class="image-popup">
 <picture>
-  <source width="1034" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager02-320.webp 320w,         /content/resized/2013/12/NSX-Manager02-384.webp 384w,         /content/resized/2013/12/NSX-Manager02-512.webp 512w,         /content/resized/2013/12/NSX-Manager02-683.webp 683w,         /content/resized/2013/12/NSX-Manager02-800.webp 800w,         /content/resized/2013/12/NSX-Manager02-960.webp 960w,  /content/uploads/2013/12/NSX-Manager02.webp 1034w" sizes="1034px"></source>
-  <source width="1034" data-srcset="    /content/resized/2013/12/NSX-Manager02-320.png 320w,     /content/resized/2013/12/NSX-Manager02-384.png 384w,     /content/resized/2013/12/NSX-Manager02-512.png 512w,     /content/resized/2013/12/NSX-Manager02-683.png 683w,     /content/resized/2013/12/NSX-Manager02-800.png 800w,     /content/resized/2013/12/NSX-Manager02-960.png 960w,  /content/uploads/2013/12/NSX-Manager02.png 1034w" sizes="1034px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager02-320.png" data-src="/content/uploads/2013/12/NSX-Manager02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: NSX Manager without a cluster ">
+  <source width="1034" height="642" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager02-320.webp 320w,         /content/resized/2013/12/NSX-Manager02-384.webp 384w,         /content/resized/2013/12/NSX-Manager02-512.webp 512w,         /content/resized/2013/12/NSX-Manager02-683.webp 683w,         /content/resized/2013/12/NSX-Manager02-800.webp 800w,         /content/resized/2013/12/NSX-Manager02-960.webp 960w,  /content/uploads/2013/12/NSX-Manager02.webp 1034w" sizes="1034px"></source>
+  <source width="1034" height="642" data-srcset="    /content/resized/2013/12/NSX-Manager02-320.png 320w,     /content/resized/2013/12/NSX-Manager02-384.png 384w,     /content/resized/2013/12/NSX-Manager02-512.png 512w,     /content/resized/2013/12/NSX-Manager02-683.png 683w,     /content/resized/2013/12/NSX-Manager02-800.png 800w,     /content/resized/2013/12/NSX-Manager02-960.png 960w,  /content/uploads/2013/12/NSX-Manager02.png 1034w" sizes="1034px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager02-320.png" data-src="/content/uploads/2013/12/NSX-Manager02.png" class="blur-up lazyautosizes lazyload" width="1034" height="642" alt="Figure 2: NSX Manager without a cluster ">
 </picture>
 </a>
 
@@ -478,9 +466,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager03.png" title="Figure 3: Connect to NSX Controller Cluster - Step 1 " class="image-popup">
 <picture>
-  <source width="444" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager03-320.webp 320w,         /content/resized/2013/12/NSX-Manager03-384.webp 384w,  /content/uploads/2013/12/NSX-Manager03.webp 444w" sizes="444px"></source>
-  <source width="444" data-srcset="    /content/resized/2013/12/NSX-Manager03-320.png 320w,     /content/resized/2013/12/NSX-Manager03-384.png 384w,  /content/uploads/2013/12/NSX-Manager03.png 444w" sizes="444px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager03-320.png" data-src="/content/uploads/2013/12/NSX-Manager03.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Connect to NSX Controller Cluster - Step 1 ">
+  <source width="444" height="277" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager03-320.webp 320w,         /content/resized/2013/12/NSX-Manager03-384.webp 384w,  /content/uploads/2013/12/NSX-Manager03.webp 444w" sizes="444px"></source>
+  <source width="444" height="277" data-srcset="    /content/resized/2013/12/NSX-Manager03-320.png 320w,     /content/resized/2013/12/NSX-Manager03-384.png 384w,  /content/uploads/2013/12/NSX-Manager03.png 444w" sizes="444px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager03-320.png" data-src="/content/uploads/2013/12/NSX-Manager03.png" class="blur-up lazyautosizes lazyload" width="444" height="277" alt="Figure 3: Connect to NSX Controller Cluster - Step 1 ">
 </picture>
 </a>
 
@@ -504,9 +492,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager05.png" title="Figure 4: Connect to NSX Controller Cluster - Step 2 " class="image-popup">
 <picture>
-  <source width="857" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager05-320.webp 320w,         /content/resized/2013/12/NSX-Manager05-384.webp 384w,         /content/resized/2013/12/NSX-Manager05-512.webp 512w,         /content/resized/2013/12/NSX-Manager05-683.webp 683w,         /content/resized/2013/12/NSX-Manager05-800.webp 800w,  /content/uploads/2013/12/NSX-Manager05.webp 857w" sizes="857px"></source>
-  <source width="857" data-srcset="    /content/resized/2013/12/NSX-Manager05-320.png 320w,     /content/resized/2013/12/NSX-Manager05-384.png 384w,     /content/resized/2013/12/NSX-Manager05-512.png 512w,     /content/resized/2013/12/NSX-Manager05-683.png 683w,     /content/resized/2013/12/NSX-Manager05-800.png 800w,  /content/uploads/2013/12/NSX-Manager05.png 857w" sizes="857px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager05-320.png" data-src="/content/uploads/2013/12/NSX-Manager05.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Connect to NSX Controller Cluster - Step 2 ">
+  <source width="857" height="598" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager05-320.webp 320w,         /content/resized/2013/12/NSX-Manager05-384.webp 384w,         /content/resized/2013/12/NSX-Manager05-512.webp 512w,         /content/resized/2013/12/NSX-Manager05-683.webp 683w,         /content/resized/2013/12/NSX-Manager05-800.webp 800w,  /content/uploads/2013/12/NSX-Manager05.webp 857w" sizes="857px"></source>
+  <source width="857" height="598" data-srcset="    /content/resized/2013/12/NSX-Manager05-320.png 320w,     /content/resized/2013/12/NSX-Manager05-384.png 384w,     /content/resized/2013/12/NSX-Manager05-512.png 512w,     /content/resized/2013/12/NSX-Manager05-683.png 683w,     /content/resized/2013/12/NSX-Manager05-800.png 800w,  /content/uploads/2013/12/NSX-Manager05.png 857w" sizes="857px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager05-320.png" data-src="/content/uploads/2013/12/NSX-Manager05.png" class="blur-up lazyautosizes lazyload" width="857" height="598" alt="Figure 4: Connect to NSX Controller Cluster - Step 2 ">
 </picture>
 </a>
 
@@ -532,9 +520,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager06.png" title="Figure 5: Connect to NSX Controller Cluster - Step 3 " class="image-popup">
 <picture>
-  <source width="659" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager06-320.webp 320w,         /content/resized/2013/12/NSX-Manager06-384.webp 384w,         /content/resized/2013/12/NSX-Manager06-512.webp 512w,  /content/uploads/2013/12/NSX-Manager06.webp 659w" sizes="659px"></source>
-  <source width="659" data-srcset="    /content/resized/2013/12/NSX-Manager06-320.png 320w,     /content/resized/2013/12/NSX-Manager06-384.png 384w,     /content/resized/2013/12/NSX-Manager06-512.png 512w,  /content/uploads/2013/12/NSX-Manager06.png 659w" sizes="659px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager06-320.png" data-src="/content/uploads/2013/12/NSX-Manager06.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Connect to NSX Controller Cluster - Step 3 ">
+  <source width="659" height="601" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager06-320.webp 320w,         /content/resized/2013/12/NSX-Manager06-384.webp 384w,         /content/resized/2013/12/NSX-Manager06-512.webp 512w,  /content/uploads/2013/12/NSX-Manager06.webp 659w" sizes="659px"></source>
+  <source width="659" height="601" data-srcset="    /content/resized/2013/12/NSX-Manager06-320.png 320w,     /content/resized/2013/12/NSX-Manager06-384.png 384w,     /content/resized/2013/12/NSX-Manager06-512.png 512w,  /content/uploads/2013/12/NSX-Manager06.png 659w" sizes="659px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager06-320.png" data-src="/content/uploads/2013/12/NSX-Manager06.png" class="blur-up lazyautosizes lazyload" width="659" height="601" alt="Figure 5: Connect to NSX Controller Cluster - Step 3 ">
 </picture>
 </a>
 
@@ -558,9 +546,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager07.png" title="Figure 6: NSX Controller Cluster successfully added " class="image-popup">
 <picture>
-  <source width="1035" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager07-320.webp 320w,         /content/resized/2013/12/NSX-Manager07-384.webp 384w,         /content/resized/2013/12/NSX-Manager07-512.webp 512w,         /content/resized/2013/12/NSX-Manager07-683.webp 683w,         /content/resized/2013/12/NSX-Manager07-800.webp 800w,         /content/resized/2013/12/NSX-Manager07-960.webp 960w,  /content/uploads/2013/12/NSX-Manager07.webp 1035w" sizes="1035px"></source>
-  <source width="1035" data-srcset="    /content/resized/2013/12/NSX-Manager07-320.png 320w,     /content/resized/2013/12/NSX-Manager07-384.png 384w,     /content/resized/2013/12/NSX-Manager07-512.png 512w,     /content/resized/2013/12/NSX-Manager07-683.png 683w,     /content/resized/2013/12/NSX-Manager07-800.png 800w,     /content/resized/2013/12/NSX-Manager07-960.png 960w,  /content/uploads/2013/12/NSX-Manager07.png 1035w" sizes="1035px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager07-320.png" data-src="/content/uploads/2013/12/NSX-Manager07.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: NSX Controller Cluster successfully added ">
+  <source width="1035" height="410" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager07-320.webp 320w,         /content/resized/2013/12/NSX-Manager07-384.webp 384w,         /content/resized/2013/12/NSX-Manager07-512.webp 512w,         /content/resized/2013/12/NSX-Manager07-683.webp 683w,         /content/resized/2013/12/NSX-Manager07-800.webp 800w,         /content/resized/2013/12/NSX-Manager07-960.webp 960w,  /content/uploads/2013/12/NSX-Manager07.webp 1035w" sizes="1035px"></source>
+  <source width="1035" height="410" data-srcset="    /content/resized/2013/12/NSX-Manager07-320.png 320w,     /content/resized/2013/12/NSX-Manager07-384.png 384w,     /content/resized/2013/12/NSX-Manager07-512.png 512w,     /content/resized/2013/12/NSX-Manager07-683.png 683w,     /content/resized/2013/12/NSX-Manager07-800.png 800w,     /content/resized/2013/12/NSX-Manager07-960.png 960w,  /content/uploads/2013/12/NSX-Manager07.png 1035w" sizes="1035px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager07-320.png" data-src="/content/uploads/2013/12/NSX-Manager07.png" class="blur-up lazyautosizes lazyload" width="1035" height="410" alt="Figure 6: NSX Controller Cluster successfully added ">
 </picture>
 </a>
 
@@ -584,9 +572,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager08.png" title="Figure 7: NSX Controller Cluster without any Transport Nodes " class="image-popup">
 <picture>
-  <source width="1033" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager08-320.webp 320w,         /content/resized/2013/12/NSX-Manager08-384.webp 384w,         /content/resized/2013/12/NSX-Manager08-512.webp 512w,         /content/resized/2013/12/NSX-Manager08-683.webp 683w,         /content/resized/2013/12/NSX-Manager08-800.webp 800w,         /content/resized/2013/12/NSX-Manager08-960.webp 960w,  /content/uploads/2013/12/NSX-Manager08.webp 1033w" sizes="1033px"></source>
-  <source width="1033" data-srcset="    /content/resized/2013/12/NSX-Manager08-320.png 320w,     /content/resized/2013/12/NSX-Manager08-384.png 384w,     /content/resized/2013/12/NSX-Manager08-512.png 512w,     /content/resized/2013/12/NSX-Manager08-683.png 683w,     /content/resized/2013/12/NSX-Manager08-800.png 800w,     /content/resized/2013/12/NSX-Manager08-960.png 960w,  /content/uploads/2013/12/NSX-Manager08.png 1033w" sizes="1033px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager08-320.png" data-src="/content/uploads/2013/12/NSX-Manager08.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: NSX Controller Cluster without any Transport Nodes ">
+  <source width="1033" height="639" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager08-320.webp 320w,         /content/resized/2013/12/NSX-Manager08-384.webp 384w,         /content/resized/2013/12/NSX-Manager08-512.webp 512w,         /content/resized/2013/12/NSX-Manager08-683.webp 683w,         /content/resized/2013/12/NSX-Manager08-800.webp 800w,         /content/resized/2013/12/NSX-Manager08-960.webp 960w,  /content/uploads/2013/12/NSX-Manager08.webp 1033w" sizes="1033px"></source>
+  <source width="1033" height="639" data-srcset="    /content/resized/2013/12/NSX-Manager08-320.png 320w,     /content/resized/2013/12/NSX-Manager08-384.png 384w,     /content/resized/2013/12/NSX-Manager08-512.png 512w,     /content/resized/2013/12/NSX-Manager08-683.png 683w,     /content/resized/2013/12/NSX-Manager08-800.png 800w,     /content/resized/2013/12/NSX-Manager08-960.png 960w,  /content/uploads/2013/12/NSX-Manager08.png 1033w" sizes="1033px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager08-320.png" data-src="/content/uploads/2013/12/NSX-Manager08.png" class="blur-up lazyautosizes lazyload" width="1033" height="639" alt="Figure 7: NSX Controller Cluster without any Transport Nodes ">
 </picture>
 </a>
 
@@ -616,9 +604,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager09.png" title="Figure 8: Add a new Transport Zone " class="image-popup">
 <picture>
-  <source width="422" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager09-320.webp 320w,         /content/resized/2013/12/NSX-Manager09-384.webp 384w,  /content/uploads/2013/12/NSX-Manager09.webp 422w" sizes="422px"></source>
-  <source width="422" data-srcset="    /content/resized/2013/12/NSX-Manager09-320.png 320w,     /content/resized/2013/12/NSX-Manager09-384.png 384w,  /content/uploads/2013/12/NSX-Manager09.png 422w" sizes="422px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager09-320.png" data-src="/content/uploads/2013/12/NSX-Manager09.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Add a new Transport Zone ">
+  <source width="422" height="197" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager09-320.webp 320w,         /content/resized/2013/12/NSX-Manager09-384.webp 384w,  /content/uploads/2013/12/NSX-Manager09.webp 422w" sizes="422px"></source>
+  <source width="422" height="197" data-srcset="    /content/resized/2013/12/NSX-Manager09-320.png 320w,     /content/resized/2013/12/NSX-Manager09-384.png 384w,  /content/uploads/2013/12/NSX-Manager09.png 422w" sizes="422px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager09-320.png" data-src="/content/uploads/2013/12/NSX-Manager09.png" class="blur-up lazyautosizes lazyload" width="422" height="197" alt="Figure 8: Add a new Transport Zone ">
 </picture>
 </a>
 
@@ -642,9 +630,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager10.png" title="Figure 9: Create Transport Zone " class="image-popup">
 <picture>
-  <source width="323" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager10-320.webp 320w,  /content/uploads/2013/12/NSX-Manager10.webp 323w" sizes="323px"></source>
-  <source width="323" data-srcset="    /content/resized/2013/12/NSX-Manager10-320.png 320w,  /content/uploads/2013/12/NSX-Manager10.png 323w" sizes="323px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager10-320.png" data-src="/content/uploads/2013/12/NSX-Manager10.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Create Transport Zone ">
+  <source width="323" height="274" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager10-320.webp 320w,  /content/uploads/2013/12/NSX-Manager10.webp 323w" sizes="323px"></source>
+  <source width="323" height="274" data-srcset="    /content/resized/2013/12/NSX-Manager10-320.png 320w,  /content/uploads/2013/12/NSX-Manager10.png 323w" sizes="323px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager10-320.png" data-src="/content/uploads/2013/12/NSX-Manager10.png" class="blur-up lazyautosizes lazyload" width="323" height="274" alt="Figure 9: Create Transport Zone ">
 </picture>
 </a>
 
@@ -668,9 +656,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager11.png" title="Figure 10: UUID of the new Transport Zone " class="image-popup">
 <picture>
-  <source width="469" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager11-320.webp 320w,         /content/resized/2013/12/NSX-Manager11-384.webp 384w,  /content/uploads/2013/12/NSX-Manager11.webp 469w" sizes="469px"></source>
-  <source width="469" data-srcset="    /content/resized/2013/12/NSX-Manager11-320.png 320w,     /content/resized/2013/12/NSX-Manager11-384.png 384w,  /content/uploads/2013/12/NSX-Manager11.png 469w" sizes="469px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager11-320.png" data-src="/content/uploads/2013/12/NSX-Manager11.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: UUID of the new Transport Zone ">
+  <source width="469" height="290" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager11-320.webp 320w,         /content/resized/2013/12/NSX-Manager11-384.webp 384w,  /content/uploads/2013/12/NSX-Manager11.webp 469w" sizes="469px"></source>
+  <source width="469" height="290" data-srcset="    /content/resized/2013/12/NSX-Manager11-320.png 320w,     /content/resized/2013/12/NSX-Manager11-384.png 384w,  /content/uploads/2013/12/NSX-Manager11.png 469w" sizes="469px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager11-320.png" data-src="/content/uploads/2013/12/NSX-Manager11.png" class="blur-up lazyautosizes lazyload" width="469" height="290" alt="Figure 10: UUID of the new Transport Zone ">
 </picture>
 </a>
 
@@ -698,9 +686,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager19.png" title="Figure 11: Add a new Gateway " class="image-popup">
 <picture>
-  <source width="424" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager19-320.webp 320w,         /content/resized/2013/12/NSX-Manager19-384.webp 384w,  /content/uploads/2013/12/NSX-Manager19.webp 424w" sizes="424px"></source>
-  <source width="424" data-srcset="    /content/resized/2013/12/NSX-Manager19-320.png 320w,     /content/resized/2013/12/NSX-Manager19-384.png 384w,  /content/uploads/2013/12/NSX-Manager19.png 424w" sizes="424px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager19-320.png" data-src="/content/uploads/2013/12/NSX-Manager19.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Add a new Gateway ">
+  <source width="424" height="197" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager19-320.webp 320w,         /content/resized/2013/12/NSX-Manager19-384.webp 384w,  /content/uploads/2013/12/NSX-Manager19.webp 424w" sizes="424px"></source>
+  <source width="424" height="197" data-srcset="    /content/resized/2013/12/NSX-Manager19-320.png 320w,     /content/resized/2013/12/NSX-Manager19-384.png 384w,  /content/uploads/2013/12/NSX-Manager19.png 424w" sizes="424px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager19-320.png" data-src="/content/uploads/2013/12/NSX-Manager19.png" class="blur-up lazyautosizes lazyload" width="424" height="197" alt="Figure 11: Add a new Gateway ">
 </picture>
 </a>
 
@@ -724,9 +712,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager20.png" title="Figure 12: Create Gateway - Step 1 " class="image-popup">
 <picture>
-  <source width="797" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager20-320.webp 320w,         /content/resized/2013/12/NSX-Manager20-384.webp 384w,         /content/resized/2013/12/NSX-Manager20-512.webp 512w,         /content/resized/2013/12/NSX-Manager20-683.webp 683w,  /content/uploads/2013/12/NSX-Manager20.webp 797w" sizes="797px"></source>
-  <source width="797" data-srcset="    /content/resized/2013/12/NSX-Manager20-320.png 320w,     /content/resized/2013/12/NSX-Manager20-384.png 384w,     /content/resized/2013/12/NSX-Manager20-512.png 512w,     /content/resized/2013/12/NSX-Manager20-683.png 683w,  /content/uploads/2013/12/NSX-Manager20.png 797w" sizes="797px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager20-320.png" data-src="/content/uploads/2013/12/NSX-Manager20.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Create Gateway - Step 1 ">
+  <source width="797" height="500" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager20-320.webp 320w,         /content/resized/2013/12/NSX-Manager20-384.webp 384w,         /content/resized/2013/12/NSX-Manager20-512.webp 512w,         /content/resized/2013/12/NSX-Manager20-683.webp 683w,  /content/uploads/2013/12/NSX-Manager20.webp 797w" sizes="797px"></source>
+  <source width="797" height="500" data-srcset="    /content/resized/2013/12/NSX-Manager20-320.png 320w,     /content/resized/2013/12/NSX-Manager20-384.png 384w,     /content/resized/2013/12/NSX-Manager20-512.png 512w,     /content/resized/2013/12/NSX-Manager20-683.png 683w,  /content/uploads/2013/12/NSX-Manager20.png 797w" sizes="797px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager20-320.png" data-src="/content/uploads/2013/12/NSX-Manager20.png" class="blur-up lazyautosizes lazyload" width="797" height="500" alt="Figure 12: Create Gateway - Step 1 ">
 </picture>
 </a>
 
@@ -750,9 +738,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager21.png" title="Figure 13: Create Gateway - Step 2 " class="image-popup">
 <picture>
-  <source width="794" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager21-320.webp 320w,         /content/resized/2013/12/NSX-Manager21-384.webp 384w,         /content/resized/2013/12/NSX-Manager21-512.webp 512w,         /content/resized/2013/12/NSX-Manager21-683.webp 683w,  /content/uploads/2013/12/NSX-Manager21.webp 794w" sizes="794px"></source>
-  <source width="794" data-srcset="    /content/resized/2013/12/NSX-Manager21-320.png 320w,     /content/resized/2013/12/NSX-Manager21-384.png 384w,     /content/resized/2013/12/NSX-Manager21-512.png 512w,     /content/resized/2013/12/NSX-Manager21-683.png 683w,  /content/uploads/2013/12/NSX-Manager21.png 794w" sizes="794px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager21-320.png" data-src="/content/uploads/2013/12/NSX-Manager21.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Create Gateway - Step 2 ">
+  <source width="794" height="498" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager21-320.webp 320w,         /content/resized/2013/12/NSX-Manager21-384.webp 384w,         /content/resized/2013/12/NSX-Manager21-512.webp 512w,         /content/resized/2013/12/NSX-Manager21-683.webp 683w,  /content/uploads/2013/12/NSX-Manager21.webp 794w" sizes="794px"></source>
+  <source width="794" height="498" data-srcset="    /content/resized/2013/12/NSX-Manager21-320.png 320w,     /content/resized/2013/12/NSX-Manager21-384.png 384w,     /content/resized/2013/12/NSX-Manager21-512.png 512w,     /content/resized/2013/12/NSX-Manager21-683.png 683w,  /content/uploads/2013/12/NSX-Manager21.png 794w" sizes="794px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager21-320.png" data-src="/content/uploads/2013/12/NSX-Manager21.png" class="blur-up lazyautosizes lazyload" width="794" height="498" alt="Figure 13: Create Gateway - Step 2 ">
 </picture>
 </a>
 
@@ -776,9 +764,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager22.png" title="Figure 14: Create Gateway - Step 3 " class="image-popup">
 <picture>
-  <source width="795" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager22-320.webp 320w,         /content/resized/2013/12/NSX-Manager22-384.webp 384w,         /content/resized/2013/12/NSX-Manager22-512.webp 512w,         /content/resized/2013/12/NSX-Manager22-683.webp 683w,  /content/uploads/2013/12/NSX-Manager22.webp 795w" sizes="795px"></source>
-  <source width="795" data-srcset="    /content/resized/2013/12/NSX-Manager22-320.png 320w,     /content/resized/2013/12/NSX-Manager22-384.png 384w,     /content/resized/2013/12/NSX-Manager22-512.png 512w,     /content/resized/2013/12/NSX-Manager22-683.png 683w,  /content/uploads/2013/12/NSX-Manager22.png 795w" sizes="795px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager22-320.png" data-src="/content/uploads/2013/12/NSX-Manager22.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Create Gateway - Step 3 ">
+  <source width="795" height="499" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager22-320.webp 320w,         /content/resized/2013/12/NSX-Manager22-384.webp 384w,         /content/resized/2013/12/NSX-Manager22-512.webp 512w,         /content/resized/2013/12/NSX-Manager22-683.webp 683w,  /content/uploads/2013/12/NSX-Manager22.webp 795w" sizes="795px"></source>
+  <source width="795" height="499" data-srcset="    /content/resized/2013/12/NSX-Manager22-320.png 320w,     /content/resized/2013/12/NSX-Manager22-384.png 384w,     /content/resized/2013/12/NSX-Manager22-512.png 512w,     /content/resized/2013/12/NSX-Manager22-683.png 683w,  /content/uploads/2013/12/NSX-Manager22.png 795w" sizes="795px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager22-320.png" data-src="/content/uploads/2013/12/NSX-Manager22.png" class="blur-up lazyautosizes lazyload" width="795" height="499" alt="Figure 14: Create Gateway - Step 3 ">
 </picture>
 </a>
 
@@ -802,9 +790,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager23.png" title="Figure 15: Extract NSX Gateway certificate - Step 1 " class="image-popup">
 <picture>
-  <source width="659" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager23-320.webp 320w,         /content/resized/2013/12/NSX-Manager23-384.webp 384w,         /content/resized/2013/12/NSX-Manager23-512.webp 512w,  /content/uploads/2013/12/NSX-Manager23.webp 659w" sizes="659px"></source>
-  <source width="659" data-srcset="    /content/resized/2013/12/NSX-Manager23-320.png 320w,     /content/resized/2013/12/NSX-Manager23-384.png 384w,     /content/resized/2013/12/NSX-Manager23-512.png 512w,  /content/uploads/2013/12/NSX-Manager23.png 659w" sizes="659px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager23-320.png" data-src="/content/uploads/2013/12/NSX-Manager23.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Extract NSX Gateway certificate - Step 1 ">
+  <source width="659" height="164" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager23-320.webp 320w,         /content/resized/2013/12/NSX-Manager23-384.webp 384w,         /content/resized/2013/12/NSX-Manager23-512.webp 512w,  /content/uploads/2013/12/NSX-Manager23.webp 659w" sizes="659px"></source>
+  <source width="659" height="164" data-srcset="    /content/resized/2013/12/NSX-Manager23-320.png 320w,     /content/resized/2013/12/NSX-Manager23-384.png 384w,     /content/resized/2013/12/NSX-Manager23-512.png 512w,  /content/uploads/2013/12/NSX-Manager23.png 659w" sizes="659px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager23-320.png" data-src="/content/uploads/2013/12/NSX-Manager23.png" class="blur-up lazyautosizes lazyload" width="659" height="164" alt="Figure 15: Extract NSX Gateway certificate - Step 1 ">
 </picture>
 </a>
 
@@ -828,9 +816,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager24.png" title="Figure 16: Extract NSX Gateway certificate - Step 2 " class="image-popup">
 <picture>
-  <source width="668" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager24-320.webp 320w,         /content/resized/2013/12/NSX-Manager24-384.webp 384w,         /content/resized/2013/12/NSX-Manager24-512.webp 512w,  /content/uploads/2013/12/NSX-Manager24.webp 668w" sizes="668px"></source>
-  <source width="668" data-srcset="    /content/resized/2013/12/NSX-Manager24-320.png 320w,     /content/resized/2013/12/NSX-Manager24-384.png 384w,     /content/resized/2013/12/NSX-Manager24-512.png 512w,  /content/uploads/2013/12/NSX-Manager24.png 668w" sizes="668px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager24-320.png" data-src="/content/uploads/2013/12/NSX-Manager24.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Extract NSX Gateway certificate - Step 2 ">
+  <source width="668" height="414" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager24-320.webp 320w,         /content/resized/2013/12/NSX-Manager24-384.webp 384w,         /content/resized/2013/12/NSX-Manager24-512.webp 512w,  /content/uploads/2013/12/NSX-Manager24.webp 668w" sizes="668px"></source>
+  <source width="668" height="414" data-srcset="    /content/resized/2013/12/NSX-Manager24-320.png 320w,     /content/resized/2013/12/NSX-Manager24-384.png 384w,     /content/resized/2013/12/NSX-Manager24-512.png 512w,  /content/uploads/2013/12/NSX-Manager24.png 668w" sizes="668px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager24-320.png" data-src="/content/uploads/2013/12/NSX-Manager24.png" class="blur-up lazyautosizes lazyload" width="668" height="414" alt="Figure 16: Extract NSX Gateway certificate - Step 2 ">
 </picture>
 </a>
 
@@ -854,9 +842,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager25.png" title="Figure 17: Create Gateway – Step 4 " class="image-popup">
 <picture>
-  <source width="796" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager25-320.webp 320w,         /content/resized/2013/12/NSX-Manager25-384.webp 384w,         /content/resized/2013/12/NSX-Manager25-512.webp 512w,         /content/resized/2013/12/NSX-Manager25-683.webp 683w,  /content/uploads/2013/12/NSX-Manager25.webp 796w" sizes="796px"></source>
-  <source width="796" data-srcset="    /content/resized/2013/12/NSX-Manager25-320.png 320w,     /content/resized/2013/12/NSX-Manager25-384.png 384w,     /content/resized/2013/12/NSX-Manager25-512.png 512w,     /content/resized/2013/12/NSX-Manager25-683.png 683w,  /content/uploads/2013/12/NSX-Manager25.png 796w" sizes="796px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager25-320.png" data-src="/content/uploads/2013/12/NSX-Manager25.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Create Gateway – Step 4 ">
+  <source width="796" height="498" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager25-320.webp 320w,         /content/resized/2013/12/NSX-Manager25-384.webp 384w,         /content/resized/2013/12/NSX-Manager25-512.webp 512w,         /content/resized/2013/12/NSX-Manager25-683.webp 683w,  /content/uploads/2013/12/NSX-Manager25.webp 796w" sizes="796px"></source>
+  <source width="796" height="498" data-srcset="    /content/resized/2013/12/NSX-Manager25-320.png 320w,     /content/resized/2013/12/NSX-Manager25-384.png 384w,     /content/resized/2013/12/NSX-Manager25-512.png 512w,     /content/resized/2013/12/NSX-Manager25-683.png 683w,  /content/uploads/2013/12/NSX-Manager25.png 796w" sizes="796px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager25-320.png" data-src="/content/uploads/2013/12/NSX-Manager25.png" class="blur-up lazyautosizes lazyload" width="796" height="498" alt="Figure 17: Create Gateway – Step 4 ">
 </picture>
 </a>
 
@@ -889,9 +877,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager26.png" title="Figure 18: Create Gateway – Step 5 " class="image-popup">
 <picture>
-  <source width="796" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager26-320.webp 320w,         /content/resized/2013/12/NSX-Manager26-384.webp 384w,         /content/resized/2013/12/NSX-Manager26-512.webp 512w,         /content/resized/2013/12/NSX-Manager26-683.webp 683w,  /content/uploads/2013/12/NSX-Manager26.webp 796w" sizes="796px"></source>
-  <source width="796" data-srcset="    /content/resized/2013/12/NSX-Manager26-320.png 320w,     /content/resized/2013/12/NSX-Manager26-384.png 384w,     /content/resized/2013/12/NSX-Manager26-512.png 512w,     /content/resized/2013/12/NSX-Manager26-683.png 683w,  /content/uploads/2013/12/NSX-Manager26.png 796w" sizes="796px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager26-320.png" data-src="/content/uploads/2013/12/NSX-Manager26.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Create Gateway – Step 5 ">
+  <source width="796" height="500" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager26-320.webp 320w,         /content/resized/2013/12/NSX-Manager26-384.webp 384w,         /content/resized/2013/12/NSX-Manager26-512.webp 512w,         /content/resized/2013/12/NSX-Manager26-683.webp 683w,  /content/uploads/2013/12/NSX-Manager26.webp 796w" sizes="796px"></source>
+  <source width="796" height="500" data-srcset="    /content/resized/2013/12/NSX-Manager26-320.png 320w,     /content/resized/2013/12/NSX-Manager26-384.png 384w,     /content/resized/2013/12/NSX-Manager26-512.png 512w,     /content/resized/2013/12/NSX-Manager26-683.png 683w,  /content/uploads/2013/12/NSX-Manager26.png 796w" sizes="796px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager26-320.png" data-src="/content/uploads/2013/12/NSX-Manager26.png" class="blur-up lazyautosizes lazyload" width="796" height="500" alt="Figure 18: Create Gateway – Step 5 ">
 </picture>
 </a>
 
@@ -915,9 +903,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager27.png" title="Figure 19: Create Gateway – Step 6 " class="image-popup">
 <picture>
-  <source width="438" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager27-320.webp 320w,         /content/resized/2013/12/NSX-Manager27-384.webp 384w,  /content/uploads/2013/12/NSX-Manager27.webp 438w" sizes="438px"></source>
-  <source width="438" data-srcset="    /content/resized/2013/12/NSX-Manager27-320.png 320w,     /content/resized/2013/12/NSX-Manager27-384.png 384w,  /content/uploads/2013/12/NSX-Manager27.png 438w" sizes="438px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager27-320.png" data-src="/content/uploads/2013/12/NSX-Manager27.png" class="blur-up lazyautosizes lazyload" alt="Figure 19: Create Gateway – Step 6 ">
+  <source width="438" height="290" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager27-320.webp 320w,         /content/resized/2013/12/NSX-Manager27-384.webp 384w,  /content/uploads/2013/12/NSX-Manager27.webp 438w" sizes="438px"></source>
+  <source width="438" height="290" data-srcset="    /content/resized/2013/12/NSX-Manager27-320.png 320w,     /content/resized/2013/12/NSX-Manager27-384.png 384w,  /content/uploads/2013/12/NSX-Manager27.png 438w" sizes="438px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager27-320.png" data-src="/content/uploads/2013/12/NSX-Manager27.png" class="blur-up lazyautosizes lazyload" width="438" height="290" alt="Figure 19: Create Gateway – Step 6 ">
 </picture>
 </a>
 
@@ -941,9 +929,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager28.png" title="Figure 20: Create Gateway – Step 7 " class="image-popup">
 <picture>
-  <source width="796" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager28-320.webp 320w,         /content/resized/2013/12/NSX-Manager28-384.webp 384w,         /content/resized/2013/12/NSX-Manager28-512.webp 512w,         /content/resized/2013/12/NSX-Manager28-683.webp 683w,  /content/uploads/2013/12/NSX-Manager28.webp 796w" sizes="796px"></source>
-  <source width="796" data-srcset="    /content/resized/2013/12/NSX-Manager28-320.png 320w,     /content/resized/2013/12/NSX-Manager28-384.png 384w,     /content/resized/2013/12/NSX-Manager28-512.png 512w,     /content/resized/2013/12/NSX-Manager28-683.png 683w,  /content/uploads/2013/12/NSX-Manager28.png 796w" sizes="796px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager28-320.png" data-src="/content/uploads/2013/12/NSX-Manager28.png" class="blur-up lazyautosizes lazyload" alt="Figure 20: Create Gateway – Step 7 ">
+  <source width="796" height="501" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager28-320.webp 320w,         /content/resized/2013/12/NSX-Manager28-384.webp 384w,         /content/resized/2013/12/NSX-Manager28-512.webp 512w,         /content/resized/2013/12/NSX-Manager28-683.webp 683w,  /content/uploads/2013/12/NSX-Manager28.webp 796w" sizes="796px"></source>
+  <source width="796" height="501" data-srcset="    /content/resized/2013/12/NSX-Manager28-320.png 320w,     /content/resized/2013/12/NSX-Manager28-384.png 384w,     /content/resized/2013/12/NSX-Manager28-512.png 512w,     /content/resized/2013/12/NSX-Manager28-683.png 683w,  /content/uploads/2013/12/NSX-Manager28.png 796w" sizes="796px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager28-320.png" data-src="/content/uploads/2013/12/NSX-Manager28.png" class="blur-up lazyautosizes lazyload" width="796" height="501" alt="Figure 20: Create Gateway – Step 7 ">
 </picture>
 </a>
 
@@ -967,9 +955,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager29.png" title="Figure 21: NSX Gateway successfully added " class="image-popup">
 <picture>
-  <source width="428" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager29-320.webp 320w,         /content/resized/2013/12/NSX-Manager29-384.webp 384w,  /content/uploads/2013/12/NSX-Manager29.webp 428w" sizes="428px"></source>
-  <source width="428" data-srcset="    /content/resized/2013/12/NSX-Manager29-320.png 320w,     /content/resized/2013/12/NSX-Manager29-384.png 384w,  /content/uploads/2013/12/NSX-Manager29.png 428w" sizes="428px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager29-320.png" data-src="/content/uploads/2013/12/NSX-Manager29.png" class="blur-up lazyautosizes lazyload" alt="Figure 21: NSX Gateway successfully added ">
+  <source width="428" height="199" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager29-320.webp 320w,         /content/resized/2013/12/NSX-Manager29-384.webp 384w,  /content/uploads/2013/12/NSX-Manager29.webp 428w" sizes="428px"></source>
+  <source width="428" height="199" data-srcset="    /content/resized/2013/12/NSX-Manager29-320.png 320w,     /content/resized/2013/12/NSX-Manager29-384.png 384w,  /content/uploads/2013/12/NSX-Manager29.png 428w" sizes="428px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager29-320.png" data-src="/content/uploads/2013/12/NSX-Manager29.png" class="blur-up lazyautosizes lazyload" width="428" height="199" alt="Figure 21: NSX Gateway successfully added ">
 </picture>
 </a>
 
@@ -993,9 +981,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager30.png" title="Figure 22: NSX Gateway displaying status of &lt;em&gt;Connected&lt;/em&gt; " class="image-popup">
 <picture>
-  <source width="875" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager30-320.webp 320w,         /content/resized/2013/12/NSX-Manager30-384.webp 384w,         /content/resized/2013/12/NSX-Manager30-512.webp 512w,         /content/resized/2013/12/NSX-Manager30-683.webp 683w,         /content/resized/2013/12/NSX-Manager30-800.webp 800w,  /content/uploads/2013/12/NSX-Manager30.webp 875w" sizes="875px"></source>
-  <source width="875" data-srcset="    /content/resized/2013/12/NSX-Manager30-320.png 320w,     /content/resized/2013/12/NSX-Manager30-384.png 384w,     /content/resized/2013/12/NSX-Manager30-512.png 512w,     /content/resized/2013/12/NSX-Manager30-683.png 683w,     /content/resized/2013/12/NSX-Manager30-800.png 800w,  /content/uploads/2013/12/NSX-Manager30.png 875w" sizes="875px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager30-320.png" data-src="/content/uploads/2013/12/NSX-Manager30.png" class="blur-up lazyautosizes lazyload" alt="Figure 22: NSX Gateway displaying status of &lt;em&gt;Connected&lt;/em&gt; ">
+  <source width="875" height="154" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager30-320.webp 320w,         /content/resized/2013/12/NSX-Manager30-384.webp 384w,         /content/resized/2013/12/NSX-Manager30-512.webp 512w,         /content/resized/2013/12/NSX-Manager30-683.webp 683w,         /content/resized/2013/12/NSX-Manager30-800.webp 800w,  /content/uploads/2013/12/NSX-Manager30.webp 875w" sizes="875px"></source>
+  <source width="875" height="154" data-srcset="    /content/resized/2013/12/NSX-Manager30-320.png 320w,     /content/resized/2013/12/NSX-Manager30-384.png 384w,     /content/resized/2013/12/NSX-Manager30-512.png 512w,     /content/resized/2013/12/NSX-Manager30-683.png 683w,     /content/resized/2013/12/NSX-Manager30-800.png 800w,  /content/uploads/2013/12/NSX-Manager30.png 875w" sizes="875px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager30-320.png" data-src="/content/uploads/2013/12/NSX-Manager30.png" class="blur-up lazyautosizes lazyload" width="875" height="154" alt="Figure 22: NSX Gateway displaying status of &lt;em&gt;Connected&lt;/em&gt; ">
 </picture>
 </a>
 
@@ -1023,9 +1011,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager31.png" title="Figure 23: Add a new Service Node " class="image-popup">
 <picture>
-  <source width="429" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager31-320.webp 320w,         /content/resized/2013/12/NSX-Manager31-384.webp 384w,  /content/uploads/2013/12/NSX-Manager31.webp 429w" sizes="429px"></source>
-  <source width="429" data-srcset="    /content/resized/2013/12/NSX-Manager31-320.png 320w,     /content/resized/2013/12/NSX-Manager31-384.png 384w,  /content/uploads/2013/12/NSX-Manager31.png 429w" sizes="429px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager31-320.png" data-src="/content/uploads/2013/12/NSX-Manager31.png" class="blur-up lazyautosizes lazyload" alt="Figure 23: Add a new Service Node ">
+  <source width="429" height="206" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager31-320.webp 320w,         /content/resized/2013/12/NSX-Manager31-384.webp 384w,  /content/uploads/2013/12/NSX-Manager31.webp 429w" sizes="429px"></source>
+  <source width="429" height="206" data-srcset="    /content/resized/2013/12/NSX-Manager31-320.png 320w,     /content/resized/2013/12/NSX-Manager31-384.png 384w,  /content/uploads/2013/12/NSX-Manager31.png 429w" sizes="429px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager31-320.png" data-src="/content/uploads/2013/12/NSX-Manager31.png" class="blur-up lazyautosizes lazyload" width="429" height="206" alt="Figure 23: Add a new Service Node ">
 </picture>
 </a>
 
@@ -1049,9 +1037,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager32.png" title="Figure 24: Create Service Node - Step 1 " class="image-popup">
 <picture>
-  <source width="796" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager32-320.webp 320w,         /content/resized/2013/12/NSX-Manager32-384.webp 384w,         /content/resized/2013/12/NSX-Manager32-512.webp 512w,         /content/resized/2013/12/NSX-Manager32-683.webp 683w,  /content/uploads/2013/12/NSX-Manager32.webp 796w" sizes="796px"></source>
-  <source width="796" data-srcset="    /content/resized/2013/12/NSX-Manager32-320.png 320w,     /content/resized/2013/12/NSX-Manager32-384.png 384w,     /content/resized/2013/12/NSX-Manager32-512.png 512w,     /content/resized/2013/12/NSX-Manager32-683.png 683w,  /content/uploads/2013/12/NSX-Manager32.png 796w" sizes="796px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager32-320.png" data-src="/content/uploads/2013/12/NSX-Manager32.png" class="blur-up lazyautosizes lazyload" alt="Figure 24: Create Service Node - Step 1 ">
+  <source width="796" height="500" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager32-320.webp 320w,         /content/resized/2013/12/NSX-Manager32-384.webp 384w,         /content/resized/2013/12/NSX-Manager32-512.webp 512w,         /content/resized/2013/12/NSX-Manager32-683.webp 683w,  /content/uploads/2013/12/NSX-Manager32.webp 796w" sizes="796px"></source>
+  <source width="796" height="500" data-srcset="    /content/resized/2013/12/NSX-Manager32-320.png 320w,     /content/resized/2013/12/NSX-Manager32-384.png 384w,     /content/resized/2013/12/NSX-Manager32-512.png 512w,     /content/resized/2013/12/NSX-Manager32-683.png 683w,  /content/uploads/2013/12/NSX-Manager32.png 796w" sizes="796px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager32-320.png" data-src="/content/uploads/2013/12/NSX-Manager32.png" class="blur-up lazyautosizes lazyload" width="796" height="500" alt="Figure 24: Create Service Node - Step 1 ">
 </picture>
 </a>
 
@@ -1087,9 +1075,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager37.png" title="Figure 25: NSX Service Node successfully added " class="image-popup">
 <picture>
-  <source width="428" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager37-320.webp 320w,         /content/resized/2013/12/NSX-Manager37-384.webp 384w,  /content/uploads/2013/12/NSX-Manager37.webp 428w" sizes="428px"></source>
-  <source width="428" data-srcset="    /content/resized/2013/12/NSX-Manager37-320.png 320w,     /content/resized/2013/12/NSX-Manager37-384.png 384w,  /content/uploads/2013/12/NSX-Manager37.png 428w" sizes="428px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager37-320.png" data-src="/content/uploads/2013/12/NSX-Manager37.png" class="blur-up lazyautosizes lazyload" alt="Figure 25: NSX Service Node successfully added ">
+  <source width="428" height="203" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager37-320.webp 320w,         /content/resized/2013/12/NSX-Manager37-384.webp 384w,  /content/uploads/2013/12/NSX-Manager37.webp 428w" sizes="428px"></source>
+  <source width="428" height="203" data-srcset="    /content/resized/2013/12/NSX-Manager37-320.png 320w,     /content/resized/2013/12/NSX-Manager37-384.png 384w,  /content/uploads/2013/12/NSX-Manager37.png 428w" sizes="428px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager37-320.png" data-src="/content/uploads/2013/12/NSX-Manager37.png" class="blur-up lazyautosizes lazyload" width="428" height="203" alt="Figure 25: NSX Service Node successfully added ">
 </picture>
 </a>
 
@@ -1124,9 +1112,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager41.png" title="Figure 26: Add a new Gateway Service " class="image-popup">
 <picture>
-  <source width="424" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager41-320.webp 320w,         /content/resized/2013/12/NSX-Manager41-384.webp 384w,  /content/uploads/2013/12/NSX-Manager41.webp 424w" sizes="424px"></source>
-  <source width="424" data-srcset="    /content/resized/2013/12/NSX-Manager41-320.png 320w,     /content/resized/2013/12/NSX-Manager41-384.png 384w,  /content/uploads/2013/12/NSX-Manager41.png 424w" sizes="424px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager41-320.png" data-src="/content/uploads/2013/12/NSX-Manager41.png" class="blur-up lazyautosizes lazyload" alt="Figure 26: Add a new Gateway Service ">
+  <source width="424" height="203" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager41-320.webp 320w,         /content/resized/2013/12/NSX-Manager41-384.webp 384w,  /content/uploads/2013/12/NSX-Manager41.webp 424w" sizes="424px"></source>
+  <source width="424" height="203" data-srcset="    /content/resized/2013/12/NSX-Manager41-320.png 320w,     /content/resized/2013/12/NSX-Manager41-384.png 384w,  /content/uploads/2013/12/NSX-Manager41.png 424w" sizes="424px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager41-320.png" data-src="/content/uploads/2013/12/NSX-Manager41.png" class="blur-up lazyautosizes lazyload" width="424" height="203" alt="Figure 26: Add a new Gateway Service ">
 </picture>
 </a>
 
@@ -1150,9 +1138,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager42.png" title="Figure 27: Create Gateway Service - Step 1 " class="image-popup">
 <picture>
-  <source width="776" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager42-320.webp 320w,         /content/resized/2013/12/NSX-Manager42-384.webp 384w,         /content/resized/2013/12/NSX-Manager42-512.webp 512w,         /content/resized/2013/12/NSX-Manager42-683.webp 683w,  /content/uploads/2013/12/NSX-Manager42.webp 776w" sizes="776px"></source>
-  <source width="776" data-srcset="    /content/resized/2013/12/NSX-Manager42-320.png 320w,     /content/resized/2013/12/NSX-Manager42-384.png 384w,     /content/resized/2013/12/NSX-Manager42-512.png 512w,     /content/resized/2013/12/NSX-Manager42-683.png 683w,  /content/uploads/2013/12/NSX-Manager42.png 776w" sizes="776px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager42-320.png" data-src="/content/uploads/2013/12/NSX-Manager42.png" class="blur-up lazyautosizes lazyload" alt="Figure 27: Create Gateway Service - Step 1 ">
+  <source width="776" height="350" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager42-320.webp 320w,         /content/resized/2013/12/NSX-Manager42-384.webp 384w,         /content/resized/2013/12/NSX-Manager42-512.webp 512w,         /content/resized/2013/12/NSX-Manager42-683.webp 683w,  /content/uploads/2013/12/NSX-Manager42.webp 776w" sizes="776px"></source>
+  <source width="776" height="350" data-srcset="    /content/resized/2013/12/NSX-Manager42-320.png 320w,     /content/resized/2013/12/NSX-Manager42-384.png 384w,     /content/resized/2013/12/NSX-Manager42-512.png 512w,     /content/resized/2013/12/NSX-Manager42-683.png 683w,  /content/uploads/2013/12/NSX-Manager42.png 776w" sizes="776px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager42-320.png" data-src="/content/uploads/2013/12/NSX-Manager42.png" class="blur-up lazyautosizes lazyload" width="776" height="350" alt="Figure 27: Create Gateway Service - Step 1 ">
 </picture>
 </a>
 
@@ -1176,9 +1164,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager43.png" title="Figure 28: Create Gateway Service - Step 2 " class="image-popup">
 <picture>
-  <source width="775" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager43-320.webp 320w,         /content/resized/2013/12/NSX-Manager43-384.webp 384w,         /content/resized/2013/12/NSX-Manager43-512.webp 512w,         /content/resized/2013/12/NSX-Manager43-683.webp 683w,  /content/uploads/2013/12/NSX-Manager43.webp 775w" sizes="775px"></source>
-  <source width="775" data-srcset="    /content/resized/2013/12/NSX-Manager43-320.png 320w,     /content/resized/2013/12/NSX-Manager43-384.png 384w,     /content/resized/2013/12/NSX-Manager43-512.png 512w,     /content/resized/2013/12/NSX-Manager43-683.png 683w,  /content/uploads/2013/12/NSX-Manager43.png 775w" sizes="775px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager43-320.png" data-src="/content/uploads/2013/12/NSX-Manager43.png" class="blur-up lazyautosizes lazyload" alt="Figure 28: Create Gateway Service - Step 2 ">
+  <source width="775" height="350" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager43-320.webp 320w,         /content/resized/2013/12/NSX-Manager43-384.webp 384w,         /content/resized/2013/12/NSX-Manager43-512.webp 512w,         /content/resized/2013/12/NSX-Manager43-683.webp 683w,  /content/uploads/2013/12/NSX-Manager43.webp 775w" sizes="775px"></source>
+  <source width="775" height="350" data-srcset="    /content/resized/2013/12/NSX-Manager43-320.png 320w,     /content/resized/2013/12/NSX-Manager43-384.png 384w,     /content/resized/2013/12/NSX-Manager43-512.png 512w,     /content/resized/2013/12/NSX-Manager43-683.png 683w,  /content/uploads/2013/12/NSX-Manager43.png 775w" sizes="775px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager43-320.png" data-src="/content/uploads/2013/12/NSX-Manager43.png" class="blur-up lazyautosizes lazyload" width="775" height="350" alt="Figure 28: Create Gateway Service - Step 2 ">
 </picture>
 </a>
 
@@ -1202,9 +1190,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager44.png" title="Figure 29: Create Gateway Service - Step 3 " class="image-popup">
 <picture>
-  <source width="775" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager44-320.webp 320w,         /content/resized/2013/12/NSX-Manager44-384.webp 384w,         /content/resized/2013/12/NSX-Manager44-512.webp 512w,         /content/resized/2013/12/NSX-Manager44-683.webp 683w,  /content/uploads/2013/12/NSX-Manager44.webp 775w" sizes="775px"></source>
-  <source width="775" data-srcset="    /content/resized/2013/12/NSX-Manager44-320.png 320w,     /content/resized/2013/12/NSX-Manager44-384.png 384w,     /content/resized/2013/12/NSX-Manager44-512.png 512w,     /content/resized/2013/12/NSX-Manager44-683.png 683w,  /content/uploads/2013/12/NSX-Manager44.png 775w" sizes="775px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager44-320.png" data-src="/content/uploads/2013/12/NSX-Manager44.png" class="blur-up lazyautosizes lazyload" alt="Figure 29: Create Gateway Service - Step 3 ">
+  <source width="775" height="350" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager44-320.webp 320w,         /content/resized/2013/12/NSX-Manager44-384.webp 384w,         /content/resized/2013/12/NSX-Manager44-512.webp 512w,         /content/resized/2013/12/NSX-Manager44-683.webp 683w,  /content/uploads/2013/12/NSX-Manager44.webp 775w" sizes="775px"></source>
+  <source width="775" height="350" data-srcset="    /content/resized/2013/12/NSX-Manager44-320.png 320w,     /content/resized/2013/12/NSX-Manager44-384.png 384w,     /content/resized/2013/12/NSX-Manager44-512.png 512w,     /content/resized/2013/12/NSX-Manager44-683.png 683w,  /content/uploads/2013/12/NSX-Manager44.png 775w" sizes="775px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager44-320.png" data-src="/content/uploads/2013/12/NSX-Manager44.png" class="blur-up lazyautosizes lazyload" width="775" height="350" alt="Figure 29: Create Gateway Service - Step 3 ">
 </picture>
 </a>
 
@@ -1228,9 +1216,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager45.png" title="Figure 30: Create Gateway Service - Step 4 " class="image-popup">
 <picture>
-  <source width="420" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager45-320.webp 320w,         /content/resized/2013/12/NSX-Manager45-384.webp 384w,  /content/uploads/2013/12/NSX-Manager45.webp 420w" sizes="420px"></source>
-  <source width="420" data-srcset="    /content/resized/2013/12/NSX-Manager45-320.png 320w,     /content/resized/2013/12/NSX-Manager45-384.png 384w,  /content/uploads/2013/12/NSX-Manager45.png 420w" sizes="420px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager45-320.png" data-src="/content/uploads/2013/12/NSX-Manager45.png" class="blur-up lazyautosizes lazyload" alt="Figure 30: Create Gateway Service - Step 4 ">
+  <source width="420" height="323" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager45-320.webp 320w,         /content/resized/2013/12/NSX-Manager45-384.webp 384w,  /content/uploads/2013/12/NSX-Manager45.webp 420w" sizes="420px"></source>
+  <source width="420" height="323" data-srcset="    /content/resized/2013/12/NSX-Manager45-320.png 320w,     /content/resized/2013/12/NSX-Manager45-384.png 384w,  /content/uploads/2013/12/NSX-Manager45.png 420w" sizes="420px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager45-320.png" data-src="/content/uploads/2013/12/NSX-Manager45.png" class="blur-up lazyautosizes lazyload" width="420" height="323" alt="Figure 30: Create Gateway Service - Step 4 ">
 </picture>
 </a>
 
@@ -1254,9 +1242,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager46.png" title="Figure 31: Create Gateway Service - Step 5 " class="image-popup">
 <picture>
-  <source width="775" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager46-320.webp 320w,         /content/resized/2013/12/NSX-Manager46-384.webp 384w,         /content/resized/2013/12/NSX-Manager46-512.webp 512w,         /content/resized/2013/12/NSX-Manager46-683.webp 683w,  /content/uploads/2013/12/NSX-Manager46.webp 775w" sizes="775px"></source>
-  <source width="775" data-srcset="    /content/resized/2013/12/NSX-Manager46-320.png 320w,     /content/resized/2013/12/NSX-Manager46-384.png 384w,     /content/resized/2013/12/NSX-Manager46-512.png 512w,     /content/resized/2013/12/NSX-Manager46-683.png 683w,  /content/uploads/2013/12/NSX-Manager46.png 775w" sizes="775px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager46-320.png" data-src="/content/uploads/2013/12/NSX-Manager46.png" class="blur-up lazyautosizes lazyload" alt="Figure 31: Create Gateway Service - Step 5 ">
+  <source width="775" height="349" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager46-320.webp 320w,         /content/resized/2013/12/NSX-Manager46-384.webp 384w,         /content/resized/2013/12/NSX-Manager46-512.webp 512w,         /content/resized/2013/12/NSX-Manager46-683.webp 683w,  /content/uploads/2013/12/NSX-Manager46.webp 775w" sizes="775px"></source>
+  <source width="775" height="349" data-srcset="    /content/resized/2013/12/NSX-Manager46-320.png 320w,     /content/resized/2013/12/NSX-Manager46-384.png 384w,     /content/resized/2013/12/NSX-Manager46-512.png 512w,     /content/resized/2013/12/NSX-Manager46-683.png 683w,  /content/uploads/2013/12/NSX-Manager46.png 775w" sizes="775px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager46-320.png" data-src="/content/uploads/2013/12/NSX-Manager46.png" class="blur-up lazyautosizes lazyload" width="775" height="349" alt="Figure 31: Create Gateway Service - Step 5 ">
 </picture>
 </a>
 
@@ -1280,9 +1268,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager46b.png" title="Figure 32: UUID of NSX Gateway Service " class="image-popup">
 <picture>
-  <source width="651" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager46b-320.webp 320w,         /content/resized/2013/12/NSX-Manager46b-384.webp 384w,         /content/resized/2013/12/NSX-Manager46b-512.webp 512w,  /content/uploads/2013/12/NSX-Manager46b.webp 651w" sizes="651px"></source>
-  <source width="651" data-srcset="    /content/resized/2013/12/NSX-Manager46b-320.png 320w,     /content/resized/2013/12/NSX-Manager46b-384.png 384w,     /content/resized/2013/12/NSX-Manager46b-512.png 512w,  /content/uploads/2013/12/NSX-Manager46b.png 651w" sizes="651px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager46b-320.png" data-src="/content/uploads/2013/12/NSX-Manager46b.png" class="blur-up lazyautosizes lazyload" alt="Figure 32: UUID of NSX Gateway Service ">
+  <source width="651" height="299" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager46b-320.webp 320w,         /content/resized/2013/12/NSX-Manager46b-384.webp 384w,         /content/resized/2013/12/NSX-Manager46b-512.webp 512w,  /content/uploads/2013/12/NSX-Manager46b.webp 651w" sizes="651px"></source>
+  <source width="651" height="299" data-srcset="    /content/resized/2013/12/NSX-Manager46b-320.png 320w,     /content/resized/2013/12/NSX-Manager46b-384.png 384w,     /content/resized/2013/12/NSX-Manager46b-512.png 512w,  /content/uploads/2013/12/NSX-Manager46b.png 651w" sizes="651px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager46b-320.png" data-src="/content/uploads/2013/12/NSX-Manager46b.png" class="blur-up lazyautosizes lazyload" width="651" height="299" alt="Figure 32: UUID of NSX Gateway Service ">
 </picture>
 </a>
 
@@ -1306,9 +1294,9 @@
 
 <a href="/content/uploads/2013/12/NSX-Manager47.png" title="Figure 33: NSX Setup with Gateway, Service Node, Transport Zone and Gateway Services " class="image-popup">
 <picture>
-  <source width="427" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager47-320.webp 320w,         /content/resized/2013/12/NSX-Manager47-384.webp 384w,  /content/uploads/2013/12/NSX-Manager47.webp 427w" sizes="427px"></source>
-  <source width="427" data-srcset="    /content/resized/2013/12/NSX-Manager47-320.png 320w,     /content/resized/2013/12/NSX-Manager47-384.png 384w,  /content/uploads/2013/12/NSX-Manager47.png 427w" sizes="427px"></source>
-  <img src="/content/resized/2013/12/NSX-Manager47-320.png" data-src="/content/uploads/2013/12/NSX-Manager47.png" class="blur-up lazyautosizes lazyload" alt="Figure 33: NSX Setup with Gateway, Service Node, Transport Zone and Gateway Services ">
+  <source width="427" height="210" type="image/webp" data-srcset="        /content/resized/2013/12/NSX-Manager47-320.webp 320w,         /content/resized/2013/12/NSX-Manager47-384.webp 384w,  /content/uploads/2013/12/NSX-Manager47.webp 427w" sizes="427px"></source>
+  <source width="427" height="210" data-srcset="    /content/resized/2013/12/NSX-Manager47-320.png 320w,     /content/resized/2013/12/NSX-Manager47-384.png 384w,  /content/uploads/2013/12/NSX-Manager47.png 427w" sizes="427px"></source>
+  <img src="/content/resized/2013/12/NSX-Manager47-320.png" data-src="/content/uploads/2013/12/NSX-Manager47.png" class="blur-up lazyautosizes lazyload" width="427" height="210" alt="Figure 33: NSX Setup with Gateway, Service Node, Transport Zone and Gateway Services ">
 </picture>
 </a>
 
@@ -1361,13 +1349,21 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+2%3A+Create+and+configure+the+VMware+NSX+cluster%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=OpenStack%20with%20vSphere%20and%20NSX%20-%20Part%202:%20Create%20and%20configure%20the%20VMware%20NSX%20cluster%0Ahttps://www.edge-cloud.net/2013/12/27/openstack-with-vsphere-and-nsx-part2/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=OpenStack+with+vSphere+and+NSX+-+Part+2%3A+Create+and+configure+the+VMware+NSX+cluster%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+2%3A+Create+and+configure+the+VMware+NSX+cluster" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F12%2F27%2Fopenstack-with-vsphere-and-nsx-part2%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+2%3A+Create+and+configure+the+VMware+NSX+cluster" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -1393,6 +1389,62 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -1565,63 +1617,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1656,7 +1651,7 @@
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1741,14 +1736,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

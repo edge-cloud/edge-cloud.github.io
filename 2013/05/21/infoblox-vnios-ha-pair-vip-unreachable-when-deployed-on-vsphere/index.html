@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Infoblox vNIOS HA pair VIP unreachable when deployed on vSphere">
-  <meta name="twitter:description" content="Yesterday I stumbled over an interesting networking problem while deploying an Infoblox vNIOS IPAM HA pair on a fresh installation of VMware vSphere: After setting up the vNIOS appliances to act as an HA pair, it’s floating virtual IP address was not reachable from the rest of the network. Yet, at the same time the individual IP addresses of the LAN interface were reachable.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/05/21/infoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2013-05-21T15:04:08-07:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -417,9 +405,9 @@
 
 <a href="/content/uploads/2013/05/InfobloxNIOS_HA.png" title="Figure 1: Setup of an Infoblox vNIOS HA pair " class="image-popup">
 <picture>
-  <source width="850" type="image/webp" data-srcset="        /content/resized/2013/05/InfobloxNIOS_HA-320.webp 320w,         /content/resized/2013/05/InfobloxNIOS_HA-384.webp 384w,         /content/resized/2013/05/InfobloxNIOS_HA-512.webp 512w,         /content/resized/2013/05/InfobloxNIOS_HA-683.webp 683w,         /content/resized/2013/05/InfobloxNIOS_HA-800.webp 800w,  /content/uploads/2013/05/InfobloxNIOS_HA.webp 850w" sizes="850px"></source>
-  <source width="850" data-srcset="    /content/resized/2013/05/InfobloxNIOS_HA-320.png 320w,     /content/resized/2013/05/InfobloxNIOS_HA-384.png 384w,     /content/resized/2013/05/InfobloxNIOS_HA-512.png 512w,     /content/resized/2013/05/InfobloxNIOS_HA-683.png 683w,     /content/resized/2013/05/InfobloxNIOS_HA-800.png 800w,  /content/uploads/2013/05/InfobloxNIOS_HA.png 850w" sizes="850px"></source>
-  <img src="/content/resized/2013/05/InfobloxNIOS_HA-320.png" data-src="/content/uploads/2013/05/InfobloxNIOS_HA.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Setup of an Infoblox vNIOS HA pair ">
+  <source width="850" height="378" type="image/webp" data-srcset="        /content/resized/2013/05/InfobloxNIOS_HA-320.webp 320w,         /content/resized/2013/05/InfobloxNIOS_HA-384.webp 384w,         /content/resized/2013/05/InfobloxNIOS_HA-512.webp 512w,         /content/resized/2013/05/InfobloxNIOS_HA-683.webp 683w,         /content/resized/2013/05/InfobloxNIOS_HA-800.webp 800w,  /content/uploads/2013/05/InfobloxNIOS_HA.webp 850w" sizes="850px"></source>
+  <source width="850" height="378" data-srcset="    /content/resized/2013/05/InfobloxNIOS_HA-320.png 320w,     /content/resized/2013/05/InfobloxNIOS_HA-384.png 384w,     /content/resized/2013/05/InfobloxNIOS_HA-512.png 512w,     /content/resized/2013/05/InfobloxNIOS_HA-683.png 683w,     /content/resized/2013/05/InfobloxNIOS_HA-800.png 800w,  /content/uploads/2013/05/InfobloxNIOS_HA.png 850w" sizes="850px"></source>
+  <img src="/content/resized/2013/05/InfobloxNIOS_HA-320.png" data-src="/content/uploads/2013/05/InfobloxNIOS_HA.png" class="blur-up lazyautosizes lazyload" width="850" height="378" alt="Figure 1: Setup of an Infoblox vNIOS HA pair ">
 </picture>
 </a>
 
@@ -449,9 +437,9 @@
 
 <a href="/content/uploads/2013/05/PortGroupSecurity.png" title="Figure 2: Allow &lt;em&gt;MAC address changes&lt;/em&gt; and &lt;em&gt;Forged Transmits&lt;/em&gt; on a vDS " class="image-popup">
 <picture>
-  <source width="1114" type="image/webp" data-srcset="        /content/resized/2013/05/PortGroupSecurity-320.webp 320w,         /content/resized/2013/05/PortGroupSecurity-384.webp 384w,         /content/resized/2013/05/PortGroupSecurity-512.webp 512w,         /content/resized/2013/05/PortGroupSecurity-683.webp 683w,         /content/resized/2013/05/PortGroupSecurity-800.webp 800w,         /content/resized/2013/05/PortGroupSecurity-960.webp 960w,  /content/uploads/2013/05/PortGroupSecurity.webp 1114w" sizes="1114px"></source>
-  <source width="1114" data-srcset="    /content/resized/2013/05/PortGroupSecurity-320.png 320w,     /content/resized/2013/05/PortGroupSecurity-384.png 384w,     /content/resized/2013/05/PortGroupSecurity-512.png 512w,     /content/resized/2013/05/PortGroupSecurity-683.png 683w,     /content/resized/2013/05/PortGroupSecurity-800.png 800w,     /content/resized/2013/05/PortGroupSecurity-960.png 960w,  /content/uploads/2013/05/PortGroupSecurity.png 1114w" sizes="1114px"></source>
-  <img src="/content/resized/2013/05/PortGroupSecurity-320.png" data-src="/content/uploads/2013/05/PortGroupSecurity.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Allow &lt;em&gt;MAC address changes&lt;/em&gt; and &lt;em&gt;Forged Transmits&lt;/em&gt; on a vDS ">
+  <source width="1114" height="749" type="image/webp" data-srcset="        /content/resized/2013/05/PortGroupSecurity-320.webp 320w,         /content/resized/2013/05/PortGroupSecurity-384.webp 384w,         /content/resized/2013/05/PortGroupSecurity-512.webp 512w,         /content/resized/2013/05/PortGroupSecurity-683.webp 683w,         /content/resized/2013/05/PortGroupSecurity-800.webp 800w,         /content/resized/2013/05/PortGroupSecurity-960.webp 960w,  /content/uploads/2013/05/PortGroupSecurity.webp 1114w" sizes="1114px"></source>
+  <source width="1114" height="749" data-srcset="    /content/resized/2013/05/PortGroupSecurity-320.png 320w,     /content/resized/2013/05/PortGroupSecurity-384.png 384w,     /content/resized/2013/05/PortGroupSecurity-512.png 512w,     /content/resized/2013/05/PortGroupSecurity-683.png 683w,     /content/resized/2013/05/PortGroupSecurity-800.png 800w,     /content/resized/2013/05/PortGroupSecurity-960.png 960w,  /content/uploads/2013/05/PortGroupSecurity.png 1114w" sizes="1114px"></source>
+  <img src="/content/resized/2013/05/PortGroupSecurity-320.png" data-src="/content/uploads/2013/05/PortGroupSecurity.png" class="blur-up lazyautosizes lazyload" width="1114" height="749" alt="Figure 2: Allow &lt;em&gt;MAC address changes&lt;/em&gt; and &lt;em&gt;Forged Transmits&lt;/em&gt; on a vDS ">
 </picture>
 </a>
 
@@ -504,13 +492,21 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Infoblox+vNIOS+HA+pair+VIP+unreachable+when+deployed+on+vSphere%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F21%2Finfoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=Infoblox%20vNIOS%20HA%20pair%20VIP%20unreachable%20when%20deployed%20on%20vSphere%0Ahttps://www.edge-cloud.net/2013/05/21/infoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F21%2Finfoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Infoblox+vNIOS+HA+pair+VIP+unreachable+when+deployed+on+vSphere%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F21%2Finfoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F21%2Finfoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F21%2Finfoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F21%2Finfoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere%2F&amp;title=Infoblox+vNIOS+HA+pair+VIP+unreachable+when+deployed+on+vSphere" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F21%2Finfoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F05%2F21%2Finfoblox-vnios-ha-pair-vip-unreachable-when-deployed-on-vsphere%2F&amp;title=Infoblox+vNIOS+HA+pair+VIP+unreachable+when+deployed+on+vSphere" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -536,6 +532,62 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -708,63 +760,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -799,7 +794,7 @@
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -884,14 +879,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="IPv6 with Amazon Web Services VPC and EC2">
-  <meta name="twitter:description" content="Step-by-step instructions for enabling your AWS Default VPC and Subnets for IPv6">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/12/12/ipv6-aws-ec2/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2016-12-12T00:19:42-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -453,9 +441,9 @@
 
 <a href="/content/uploads/2016/12/Default_VPC02.png" title="Figure 1: Edit VPC CIDRs" class="image-popup">
 <picture>
-  <source width="969" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC02-320.webp 320w,         /content/resized/2016/12/Default_VPC02-384.webp 384w,         /content/resized/2016/12/Default_VPC02-512.webp 512w,         /content/resized/2016/12/Default_VPC02-683.webp 683w,         /content/resized/2016/12/Default_VPC02-800.webp 800w,         /content/resized/2016/12/Default_VPC02-960.webp 960w,  /content/uploads/2016/12/Default_VPC02.webp 969w" sizes="969px"></source>
-  <source width="969" data-srcset="    /content/resized/2016/12/Default_VPC02-320.png 320w,     /content/resized/2016/12/Default_VPC02-384.png 384w,     /content/resized/2016/12/Default_VPC02-512.png 512w,     /content/resized/2016/12/Default_VPC02-683.png 683w,     /content/resized/2016/12/Default_VPC02-800.png 800w,     /content/resized/2016/12/Default_VPC02-960.png 960w,  /content/uploads/2016/12/Default_VPC02.png 969w" sizes="969px"></source>
-  <img src="/content/resized/2016/12/Default_VPC02-320.png" data-src="/content/uploads/2016/12/Default_VPC02.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Edit VPC CIDRs">
+  <source width="969" height="501" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC02-320.webp 320w,         /content/resized/2016/12/Default_VPC02-384.webp 384w,         /content/resized/2016/12/Default_VPC02-512.webp 512w,         /content/resized/2016/12/Default_VPC02-683.webp 683w,         /content/resized/2016/12/Default_VPC02-800.webp 800w,         /content/resized/2016/12/Default_VPC02-960.webp 960w,  /content/uploads/2016/12/Default_VPC02.webp 969w" sizes="969px"></source>
+  <source width="969" height="501" data-srcset="    /content/resized/2016/12/Default_VPC02-320.png 320w,     /content/resized/2016/12/Default_VPC02-384.png 384w,     /content/resized/2016/12/Default_VPC02-512.png 512w,     /content/resized/2016/12/Default_VPC02-683.png 683w,     /content/resized/2016/12/Default_VPC02-800.png 800w,     /content/resized/2016/12/Default_VPC02-960.png 960w,  /content/uploads/2016/12/Default_VPC02.png 969w" sizes="969px"></source>
+  <img src="/content/resized/2016/12/Default_VPC02-320.png" data-src="/content/uploads/2016/12/Default_VPC02.png" class="blur-up lazyautosizes lazyload" width="969" height="501" alt="Figure 1: Edit VPC CIDRs">
 </picture>
 </a>
 
@@ -479,9 +467,9 @@
 
 <a href="/content/uploads/2016/12/Default_VPC03.png" title="Figure 2: Edit VPC IPv6 CIDRs" class="image-popup">
 <picture>
-  <source width="1092" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC03-320.webp 320w,         /content/resized/2016/12/Default_VPC03-384.webp 384w,         /content/resized/2016/12/Default_VPC03-512.webp 512w,         /content/resized/2016/12/Default_VPC03-683.webp 683w,         /content/resized/2016/12/Default_VPC03-800.webp 800w,         /content/resized/2016/12/Default_VPC03-960.webp 960w,  /content/uploads/2016/12/Default_VPC03.webp 1092w" sizes="1092px"></source>
-  <source width="1092" data-srcset="    /content/resized/2016/12/Default_VPC03-320.png 320w,     /content/resized/2016/12/Default_VPC03-384.png 384w,     /content/resized/2016/12/Default_VPC03-512.png 512w,     /content/resized/2016/12/Default_VPC03-683.png 683w,     /content/resized/2016/12/Default_VPC03-800.png 800w,     /content/resized/2016/12/Default_VPC03-960.png 960w,  /content/uploads/2016/12/Default_VPC03.png 1092w" sizes="1092px"></source>
-  <img src="/content/resized/2016/12/Default_VPC03-320.png" data-src="/content/uploads/2016/12/Default_VPC03.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Edit VPC IPv6 CIDRs">
+  <source width="1092" height="832" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC03-320.webp 320w,         /content/resized/2016/12/Default_VPC03-384.webp 384w,         /content/resized/2016/12/Default_VPC03-512.webp 512w,         /content/resized/2016/12/Default_VPC03-683.webp 683w,         /content/resized/2016/12/Default_VPC03-800.webp 800w,         /content/resized/2016/12/Default_VPC03-960.webp 960w,  /content/uploads/2016/12/Default_VPC03.webp 1092w" sizes="1092px"></source>
+  <source width="1092" height="832" data-srcset="    /content/resized/2016/12/Default_VPC03-320.png 320w,     /content/resized/2016/12/Default_VPC03-384.png 384w,     /content/resized/2016/12/Default_VPC03-512.png 512w,     /content/resized/2016/12/Default_VPC03-683.png 683w,     /content/resized/2016/12/Default_VPC03-800.png 800w,     /content/resized/2016/12/Default_VPC03-960.png 960w,  /content/uploads/2016/12/Default_VPC03.png 1092w" sizes="1092px"></source>
+  <img src="/content/resized/2016/12/Default_VPC03-320.png" data-src="/content/uploads/2016/12/Default_VPC03.png" class="blur-up lazyautosizes lazyload" width="1092" height="832" alt="Figure 2: Edit VPC IPv6 CIDRs">
 </picture>
 </a>
 
@@ -511,9 +499,9 @@
 
 <a href="/content/uploads/2016/12/Default_VPC06.png" title="Figure 3: Edit a Subnet IPv6 CIDRs" class="image-popup">
 <picture>
-  <source width="512" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC06-320.webp 320w,         /content/resized/2016/12/Default_VPC06-384.webp 384w,  /content/uploads/2016/12/Default_VPC06.webp 512w" sizes="512px"></source>
-  <source width="512" data-srcset="    /content/resized/2016/12/Default_VPC06-320.png 320w,     /content/resized/2016/12/Default_VPC06-384.png 384w,  /content/uploads/2016/12/Default_VPC06.png 512w" sizes="512px"></source>
-  <img src="/content/resized/2016/12/Default_VPC06-320.png" data-src="/content/uploads/2016/12/Default_VPC06.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Edit a Subnet IPv6 CIDRs">
+  <source width="512" height="417" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC06-320.webp 320w,         /content/resized/2016/12/Default_VPC06-384.webp 384w,  /content/uploads/2016/12/Default_VPC06.webp 512w" sizes="512px"></source>
+  <source width="512" height="417" data-srcset="    /content/resized/2016/12/Default_VPC06-320.png 320w,     /content/resized/2016/12/Default_VPC06-384.png 384w,  /content/uploads/2016/12/Default_VPC06.png 512w" sizes="512px"></source>
+  <img src="/content/resized/2016/12/Default_VPC06-320.png" data-src="/content/uploads/2016/12/Default_VPC06.png" class="blur-up lazyautosizes lazyload" width="512" height="417" alt="Figure 3: Edit a Subnet IPv6 CIDRs">
 </picture>
 </a>
 
@@ -537,9 +525,9 @@
 
 <a href="/content/uploads/2016/12/Default_VPC07.png" title="Figure 4: Subnet CIDR blocks" class="image-popup">
 <picture>
-  <source width="1199" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC07-320.webp 320w,         /content/resized/2016/12/Default_VPC07-384.webp 384w,         /content/resized/2016/12/Default_VPC07-512.webp 512w,         /content/resized/2016/12/Default_VPC07-683.webp 683w,         /content/resized/2016/12/Default_VPC07-800.webp 800w,         /content/resized/2016/12/Default_VPC07-960.webp 960w,  /content/uploads/2016/12/Default_VPC07.webp 1199w" sizes="1199px"></source>
-  <source width="1199" data-srcset="    /content/resized/2016/12/Default_VPC07-320.png 320w,     /content/resized/2016/12/Default_VPC07-384.png 384w,     /content/resized/2016/12/Default_VPC07-512.png 512w,     /content/resized/2016/12/Default_VPC07-683.png 683w,     /content/resized/2016/12/Default_VPC07-800.png 800w,     /content/resized/2016/12/Default_VPC07-960.png 960w,  /content/uploads/2016/12/Default_VPC07.png 1199w" sizes="1199px"></source>
-  <img src="/content/resized/2016/12/Default_VPC07-320.png" data-src="/content/uploads/2016/12/Default_VPC07.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Subnet CIDR blocks">
+  <source width="1199" height="704" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC07-320.webp 320w,         /content/resized/2016/12/Default_VPC07-384.webp 384w,         /content/resized/2016/12/Default_VPC07-512.webp 512w,         /content/resized/2016/12/Default_VPC07-683.webp 683w,         /content/resized/2016/12/Default_VPC07-800.webp 800w,         /content/resized/2016/12/Default_VPC07-960.webp 960w,  /content/uploads/2016/12/Default_VPC07.webp 1199w" sizes="1199px"></source>
+  <source width="1199" height="704" data-srcset="    /content/resized/2016/12/Default_VPC07-320.png 320w,     /content/resized/2016/12/Default_VPC07-384.png 384w,     /content/resized/2016/12/Default_VPC07-512.png 512w,     /content/resized/2016/12/Default_VPC07-683.png 683w,     /content/resized/2016/12/Default_VPC07-800.png 800w,     /content/resized/2016/12/Default_VPC07-960.png 960w,  /content/uploads/2016/12/Default_VPC07.png 1199w" sizes="1199px"></source>
+  <img src="/content/resized/2016/12/Default_VPC07-320.png" data-src="/content/uploads/2016/12/Default_VPC07.png" class="blur-up lazyautosizes lazyload" width="1199" height="704" alt="Figure 4: Subnet CIDR blocks">
 </picture>
 </a>
 
@@ -593,9 +581,9 @@
 
 <a href="/content/uploads/2016/12/Default_VPC09.png" title="Figure 6: Modify auto-assign IP settings" class="image-popup">
 <picture>
-  <source width="592" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC09-320.webp 320w,         /content/resized/2016/12/Default_VPC09-384.webp 384w,         /content/resized/2016/12/Default_VPC09-512.webp 512w,  /content/uploads/2016/12/Default_VPC09.webp 592w" sizes="592px"></source>
-  <source width="592" data-srcset="    /content/resized/2016/12/Default_VPC09-320.png 320w,     /content/resized/2016/12/Default_VPC09-384.png 384w,     /content/resized/2016/12/Default_VPC09-512.png 512w,  /content/uploads/2016/12/Default_VPC09.png 592w" sizes="592px"></source>
-  <img src="/content/resized/2016/12/Default_VPC09-320.png" data-src="/content/uploads/2016/12/Default_VPC09.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Modify auto-assign IP settings">
+  <source width="592" height="421" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC09-320.webp 320w,         /content/resized/2016/12/Default_VPC09-384.webp 384w,         /content/resized/2016/12/Default_VPC09-512.webp 512w,  /content/uploads/2016/12/Default_VPC09.webp 592w" sizes="592px"></source>
+  <source width="592" height="421" data-srcset="    /content/resized/2016/12/Default_VPC09-320.png 320w,     /content/resized/2016/12/Default_VPC09-384.png 384w,     /content/resized/2016/12/Default_VPC09-512.png 512w,  /content/uploads/2016/12/Default_VPC09.png 592w" sizes="592px"></source>
+  <img src="/content/resized/2016/12/Default_VPC09-320.png" data-src="/content/uploads/2016/12/Default_VPC09.png" class="blur-up lazyautosizes lazyload" width="592" height="421" alt="Figure 6: Modify auto-assign IP settings">
 </picture>
 </a>
 
@@ -619,9 +607,9 @@
 
 <a href="/content/uploads/2016/12/Default_VPC10.png" title="Figure 7: Enable auto-assign IPv6 address" class="image-popup">
 <picture>
-  <source width="1126" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC10-320.webp 320w,         /content/resized/2016/12/Default_VPC10-384.webp 384w,         /content/resized/2016/12/Default_VPC10-512.webp 512w,         /content/resized/2016/12/Default_VPC10-683.webp 683w,         /content/resized/2016/12/Default_VPC10-800.webp 800w,         /content/resized/2016/12/Default_VPC10-960.webp 960w,  /content/uploads/2016/12/Default_VPC10.webp 1126w" sizes="1126px"></source>
-  <source width="1126" data-srcset="    /content/resized/2016/12/Default_VPC10-320.png 320w,     /content/resized/2016/12/Default_VPC10-384.png 384w,     /content/resized/2016/12/Default_VPC10-512.png 512w,     /content/resized/2016/12/Default_VPC10-683.png 683w,     /content/resized/2016/12/Default_VPC10-800.png 800w,     /content/resized/2016/12/Default_VPC10-960.png 960w,  /content/uploads/2016/12/Default_VPC10.png 1126w" sizes="1126px"></source>
-  <img src="/content/resized/2016/12/Default_VPC10-320.png" data-src="/content/uploads/2016/12/Default_VPC10.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Enable auto-assign IPv6 address">
+  <source width="1126" height="601" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC10-320.webp 320w,         /content/resized/2016/12/Default_VPC10-384.webp 384w,         /content/resized/2016/12/Default_VPC10-512.webp 512w,         /content/resized/2016/12/Default_VPC10-683.webp 683w,         /content/resized/2016/12/Default_VPC10-800.webp 800w,         /content/resized/2016/12/Default_VPC10-960.webp 960w,  /content/uploads/2016/12/Default_VPC10.webp 1126w" sizes="1126px"></source>
+  <source width="1126" height="601" data-srcset="    /content/resized/2016/12/Default_VPC10-320.png 320w,     /content/resized/2016/12/Default_VPC10-384.png 384w,     /content/resized/2016/12/Default_VPC10-512.png 512w,     /content/resized/2016/12/Default_VPC10-683.png 683w,     /content/resized/2016/12/Default_VPC10-800.png 800w,     /content/resized/2016/12/Default_VPC10-960.png 960w,  /content/uploads/2016/12/Default_VPC10.png 1126w" sizes="1126px"></source>
+  <img src="/content/resized/2016/12/Default_VPC10-320.png" data-src="/content/uploads/2016/12/Default_VPC10.png" class="blur-up lazyautosizes lazyload" width="1126" height="601" alt="Figure 7: Enable auto-assign IPv6 address">
 </picture>
 </a>
 
@@ -653,9 +641,9 @@
 
 <a href="/content/uploads/2016/12/Default_VPC12.png" title="Figure 8: Default route for IPv6" class="image-popup">
 <picture>
-  <source width="1250" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC12-320.webp 320w,         /content/resized/2016/12/Default_VPC12-384.webp 384w,         /content/resized/2016/12/Default_VPC12-512.webp 512w,         /content/resized/2016/12/Default_VPC12-683.webp 683w,         /content/resized/2016/12/Default_VPC12-800.webp 800w,         /content/resized/2016/12/Default_VPC12-960.webp 960w,  /content/uploads/2016/12/Default_VPC12.webp 1250w" sizes="1250px"></source>
-  <source width="1250" data-srcset="    /content/resized/2016/12/Default_VPC12-320.png 320w,     /content/resized/2016/12/Default_VPC12-384.png 384w,     /content/resized/2016/12/Default_VPC12-512.png 512w,     /content/resized/2016/12/Default_VPC12-683.png 683w,     /content/resized/2016/12/Default_VPC12-800.png 800w,     /content/resized/2016/12/Default_VPC12-960.png 960w,  /content/uploads/2016/12/Default_VPC12.png 1250w" sizes="1250px"></source>
-  <img src="/content/resized/2016/12/Default_VPC12-320.png" data-src="/content/uploads/2016/12/Default_VPC12.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Default route for IPv6">
+  <source width="1250" height="824" type="image/webp" data-srcset="        /content/resized/2016/12/Default_VPC12-320.webp 320w,         /content/resized/2016/12/Default_VPC12-384.webp 384w,         /content/resized/2016/12/Default_VPC12-512.webp 512w,         /content/resized/2016/12/Default_VPC12-683.webp 683w,         /content/resized/2016/12/Default_VPC12-800.webp 800w,         /content/resized/2016/12/Default_VPC12-960.webp 960w,  /content/uploads/2016/12/Default_VPC12.webp 1250w" sizes="1250px"></source>
+  <source width="1250" height="824" data-srcset="    /content/resized/2016/12/Default_VPC12-320.png 320w,     /content/resized/2016/12/Default_VPC12-384.png 384w,     /content/resized/2016/12/Default_VPC12-512.png 512w,     /content/resized/2016/12/Default_VPC12-683.png 683w,     /content/resized/2016/12/Default_VPC12-800.png 800w,     /content/resized/2016/12/Default_VPC12-960.png 960w,  /content/uploads/2016/12/Default_VPC12.png 1250w" sizes="1250px"></source>
+  <img src="/content/resized/2016/12/Default_VPC12-320.png" data-src="/content/uploads/2016/12/Default_VPC12.png" class="blur-up lazyautosizes lazyload" width="1250" height="824" alt="Figure 8: Default route for IPv6">
 </picture>
 </a>
 
@@ -820,13 +808,21 @@ netsh interface teredo set state disable
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=IPv6+with+Amazon+Web+Services+VPC+and+EC2%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=IPv6%20with%20Amazon%20Web%20Services%20VPC%20and%20EC2%0Ahttps://www.edge-cloud.net/2016/12/12/ipv6-aws-ec2/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=IPv6+with+Amazon+Web+Services+VPC+and+EC2%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F&amp;title=IPv6+with+Amazon+Web+Services+VPC+and+EC2" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F&amp;title=IPv6+with+Amazon+Web+Services+VPC+and+EC2" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -852,6 +848,62 @@ netsh interface teredo set state disable
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -1024,63 +1076,6 @@ netsh interface teredo set state disable
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1115,7 +1110,7 @@ netsh interface teredo set state disable
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1200,14 +1195,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

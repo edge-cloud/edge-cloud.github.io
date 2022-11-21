@@ -32,18 +32,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Edge Cloud">
-  <meta name="twitter:description" content="Edge Cloud is a personal blog about various technical subjects, especially data centers, virtualization, networking and cloud computing.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/page7/">
-
-  
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/cloud-image-1.webp">
-  
-
-  
-
 
 
 
@@ -71,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -279,7 +267,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -294,6 +282,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -370,6 +360,63 @@
 
 
 <div class="entries-list">
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2015/08/04/sddc-sddc-architecture-basic-design-elements/" rel="permalink">SDDC Architecture – Basic Design Elements
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2015-08-04T07:59:10-07:00">August 4, 2015</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #Architecture, #Cloud, #SDDC
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements.
+</p>
+  </article>
+</div>
+
   
     
 
@@ -597,62 +644,6 @@
 </div>
 
   
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2015/03/10/sddc-architecture-core-pod/" rel="permalink">SDDC Architecture – Core and POD design
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2015-03-10T08:34:20-07:00">March 10, 2015</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          8 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-tags" aria-hidden="true"></i>  
-      #Architecture, #Cloud, #SDDC
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">This article is part of a series of articles, focusing on the architecture of an SDDC as well as some of its design elements. In this post we want to look at...</p>
-  </article>
-</div>
-
-  
 </div>
 
 
@@ -764,7 +755,7 @@
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -849,14 +840,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

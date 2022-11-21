@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="CloudFlare Railgun on AWS">
-  <meta name="twitter:description" content="Instructions for configuring a highly available CloudFlare Railgun setup within Amazon Web Services (AWS), using ElastiCache, AutoScaling and Elastic Load Balancing (ELB).">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/02/17/cloudflare-railgun-on-aws/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2016-02-17T00:00:51-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -487,9 +475,9 @@
 
 <a href="/content/uploads/2016/02/001-VPC01.png" title="Figure 2: VPC with Public and Private Subnets - Step 1 " class="image-popup">
 <picture>
-  <source width="1048" type="image/webp" data-srcset="        /content/resized/2016/02/001-VPC01-320.webp 320w,         /content/resized/2016/02/001-VPC01-384.webp 384w,         /content/resized/2016/02/001-VPC01-512.webp 512w,         /content/resized/2016/02/001-VPC01-683.webp 683w,         /content/resized/2016/02/001-VPC01-800.webp 800w,         /content/resized/2016/02/001-VPC01-960.webp 960w,  /content/uploads/2016/02/001-VPC01.webp 1048w" sizes="1048px"></source>
-  <source width="1048" data-srcset="    /content/resized/2016/02/001-VPC01-320.png 320w,     /content/resized/2016/02/001-VPC01-384.png 384w,     /content/resized/2016/02/001-VPC01-512.png 512w,     /content/resized/2016/02/001-VPC01-683.png 683w,     /content/resized/2016/02/001-VPC01-800.png 800w,     /content/resized/2016/02/001-VPC01-960.png 960w,  /content/uploads/2016/02/001-VPC01.png 1048w" sizes="1048px"></source>
-  <img src="/content/resized/2016/02/001-VPC01-320.png" data-src="/content/uploads/2016/02/001-VPC01.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: VPC with Public and Private Subnets - Step 1 ">
+  <source width="1048" height="405" type="image/webp" data-srcset="        /content/resized/2016/02/001-VPC01-320.webp 320w,         /content/resized/2016/02/001-VPC01-384.webp 384w,         /content/resized/2016/02/001-VPC01-512.webp 512w,         /content/resized/2016/02/001-VPC01-683.webp 683w,         /content/resized/2016/02/001-VPC01-800.webp 800w,         /content/resized/2016/02/001-VPC01-960.webp 960w,  /content/uploads/2016/02/001-VPC01.webp 1048w" sizes="1048px"></source>
+  <source width="1048" height="405" data-srcset="    /content/resized/2016/02/001-VPC01-320.png 320w,     /content/resized/2016/02/001-VPC01-384.png 384w,     /content/resized/2016/02/001-VPC01-512.png 512w,     /content/resized/2016/02/001-VPC01-683.png 683w,     /content/resized/2016/02/001-VPC01-800.png 800w,     /content/resized/2016/02/001-VPC01-960.png 960w,  /content/uploads/2016/02/001-VPC01.png 1048w" sizes="1048px"></source>
+  <img src="/content/resized/2016/02/001-VPC01-320.png" data-src="/content/uploads/2016/02/001-VPC01.png" class="blur-up lazyautosizes lazyload" width="1048" height="405" alt="Figure 2: VPC with Public and Private Subnets - Step 1 ">
 </picture>
 </a>
 
@@ -513,9 +501,9 @@
 
 <a href="/content/uploads/2016/02/002-VPC02.png" title="Figure 3: VPC with Public and Private Subnets - Step 2 " class="image-popup">
 <picture>
-  <source width="1159" type="image/webp" data-srcset="        /content/resized/2016/02/002-VPC02-320.webp 320w,         /content/resized/2016/02/002-VPC02-384.webp 384w,         /content/resized/2016/02/002-VPC02-512.webp 512w,         /content/resized/2016/02/002-VPC02-683.webp 683w,         /content/resized/2016/02/002-VPC02-800.webp 800w,         /content/resized/2016/02/002-VPC02-960.webp 960w,  /content/uploads/2016/02/002-VPC02.webp 1159w" sizes="1159px"></source>
-  <source width="1159" data-srcset="    /content/resized/2016/02/002-VPC02-320.png 320w,     /content/resized/2016/02/002-VPC02-384.png 384w,     /content/resized/2016/02/002-VPC02-512.png 512w,     /content/resized/2016/02/002-VPC02-683.png 683w,     /content/resized/2016/02/002-VPC02-800.png 800w,     /content/resized/2016/02/002-VPC02-960.png 960w,  /content/uploads/2016/02/002-VPC02.png 1159w" sizes="1159px"></source>
-  <img src="/content/resized/2016/02/002-VPC02-320.png" data-src="/content/uploads/2016/02/002-VPC02.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: VPC with Public and Private Subnets - Step 2 ">
+  <source width="1159" height="648" type="image/webp" data-srcset="        /content/resized/2016/02/002-VPC02-320.webp 320w,         /content/resized/2016/02/002-VPC02-384.webp 384w,         /content/resized/2016/02/002-VPC02-512.webp 512w,         /content/resized/2016/02/002-VPC02-683.webp 683w,         /content/resized/2016/02/002-VPC02-800.webp 800w,         /content/resized/2016/02/002-VPC02-960.webp 960w,  /content/uploads/2016/02/002-VPC02.webp 1159w" sizes="1159px"></source>
+  <source width="1159" height="648" data-srcset="    /content/resized/2016/02/002-VPC02-320.png 320w,     /content/resized/2016/02/002-VPC02-384.png 384w,     /content/resized/2016/02/002-VPC02-512.png 512w,     /content/resized/2016/02/002-VPC02-683.png 683w,     /content/resized/2016/02/002-VPC02-800.png 800w,     /content/resized/2016/02/002-VPC02-960.png 960w,  /content/uploads/2016/02/002-VPC02.png 1159w" sizes="1159px"></source>
+  <img src="/content/resized/2016/02/002-VPC02-320.png" data-src="/content/uploads/2016/02/002-VPC02.png" class="blur-up lazyautosizes lazyload" width="1159" height="648" alt="Figure 3: VPC with Public and Private Subnets - Step 2 ">
 </picture>
 </a>
 
@@ -541,9 +529,9 @@
 
 <a href="/content/uploads/2016/02/003-VPC03.png" title="Figure 4: Add another Public subnet " class="image-popup">
 <picture>
-  <source width="655" type="image/webp" data-srcset="        /content/resized/2016/02/003-VPC03-320.webp 320w,         /content/resized/2016/02/003-VPC03-384.webp 384w,         /content/resized/2016/02/003-VPC03-512.webp 512w,  /content/uploads/2016/02/003-VPC03.webp 655w" sizes="655px"></source>
-  <source width="655" data-srcset="    /content/resized/2016/02/003-VPC03-320.png 320w,     /content/resized/2016/02/003-VPC03-384.png 384w,     /content/resized/2016/02/003-VPC03-512.png 512w,  /content/uploads/2016/02/003-VPC03.png 655w" sizes="655px"></source>
-  <img src="/content/resized/2016/02/003-VPC03-320.png" data-src="/content/uploads/2016/02/003-VPC03.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Add another Public subnet ">
+  <source width="655" height="344" type="image/webp" data-srcset="        /content/resized/2016/02/003-VPC03-320.webp 320w,         /content/resized/2016/02/003-VPC03-384.webp 384w,         /content/resized/2016/02/003-VPC03-512.webp 512w,  /content/uploads/2016/02/003-VPC03.webp 655w" sizes="655px"></source>
+  <source width="655" height="344" data-srcset="    /content/resized/2016/02/003-VPC03-320.png 320w,     /content/resized/2016/02/003-VPC03-384.png 384w,     /content/resized/2016/02/003-VPC03-512.png 512w,  /content/uploads/2016/02/003-VPC03.png 655w" sizes="655px"></source>
+  <img src="/content/resized/2016/02/003-VPC03-320.png" data-src="/content/uploads/2016/02/003-VPC03.png" class="blur-up lazyautosizes lazyload" width="655" height="344" alt="Figure 4: Add another Public subnet ">
 </picture>
 </a>
 
@@ -567,9 +555,9 @@
 
 <a href="/content/uploads/2016/02/005-VPC05.png" title="Figure 5: Configure the Internet Gateway for the Public Subnet " class="image-popup">
 <picture>
-  <source width="620" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC05-320.webp 320w,         /content/resized/2016/02/005-VPC05-384.webp 384w,         /content/resized/2016/02/005-VPC05-512.webp 512w,  /content/uploads/2016/02/005-VPC05.webp 620w" sizes="620px"></source>
-  <source width="620" data-srcset="    /content/resized/2016/02/005-VPC05-320.png 320w,     /content/resized/2016/02/005-VPC05-384.png 384w,     /content/resized/2016/02/005-VPC05-512.png 512w,  /content/uploads/2016/02/005-VPC05.png 620w" sizes="620px"></source>
-  <img src="/content/resized/2016/02/005-VPC05-320.png" data-src="/content/uploads/2016/02/005-VPC05.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Configure the Internet Gateway for the Public Subnet ">
+  <source width="620" height="277" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC05-320.webp 320w,         /content/resized/2016/02/005-VPC05-384.webp 384w,         /content/resized/2016/02/005-VPC05-512.webp 512w,  /content/uploads/2016/02/005-VPC05.webp 620w" sizes="620px"></source>
+  <source width="620" height="277" data-srcset="    /content/resized/2016/02/005-VPC05-320.png 320w,     /content/resized/2016/02/005-VPC05-384.png 384w,     /content/resized/2016/02/005-VPC05-512.png 512w,  /content/uploads/2016/02/005-VPC05.png 620w" sizes="620px"></source>
+  <img src="/content/resized/2016/02/005-VPC05-320.png" data-src="/content/uploads/2016/02/005-VPC05.png" class="blur-up lazyautosizes lazyload" width="620" height="277" alt="Figure 5: Configure the Internet Gateway for the Public Subnet ">
 </picture>
 </a>
 
@@ -593,9 +581,9 @@
 
 <a href="/content/uploads/2016/02/004-VPC04.png" title="Figure 6: Add another Private subnet " class="image-popup">
 <picture>
-  <source width="657" type="image/webp" data-srcset="        /content/resized/2016/02/004-VPC04-320.webp 320w,         /content/resized/2016/02/004-VPC04-384.webp 384w,         /content/resized/2016/02/004-VPC04-512.webp 512w,  /content/uploads/2016/02/004-VPC04.webp 657w" sizes="657px"></source>
-  <source width="657" data-srcset="    /content/resized/2016/02/004-VPC04-320.png 320w,     /content/resized/2016/02/004-VPC04-384.png 384w,     /content/resized/2016/02/004-VPC04-512.png 512w,  /content/uploads/2016/02/004-VPC04.png 657w" sizes="657px"></source>
-  <img src="/content/resized/2016/02/004-VPC04-320.png" data-src="/content/uploads/2016/02/004-VPC04.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Add another Private subnet ">
+  <source width="657" height="344" type="image/webp" data-srcset="        /content/resized/2016/02/004-VPC04-320.webp 320w,         /content/resized/2016/02/004-VPC04-384.webp 384w,         /content/resized/2016/02/004-VPC04-512.webp 512w,  /content/uploads/2016/02/004-VPC04.webp 657w" sizes="657px"></source>
+  <source width="657" height="344" data-srcset="    /content/resized/2016/02/004-VPC04-320.png 320w,     /content/resized/2016/02/004-VPC04-384.png 384w,     /content/resized/2016/02/004-VPC04-512.png 512w,  /content/uploads/2016/02/004-VPC04.png 657w" sizes="657px"></source>
+  <img src="/content/resized/2016/02/004-VPC04-320.png" data-src="/content/uploads/2016/02/004-VPC04.png" class="blur-up lazyautosizes lazyload" width="657" height="344" alt="Figure 6: Add another Private subnet ">
 </picture>
 </a>
 
@@ -621,9 +609,9 @@
 
 <a href="/content/uploads/2016/02/005-VPC06.png" title="Figure 7: Create a Security Group for Memcached " class="image-popup">
 <picture>
-  <source width="654" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC06-320.webp 320w,         /content/resized/2016/02/005-VPC06-384.webp 384w,         /content/resized/2016/02/005-VPC06-512.webp 512w,  /content/uploads/2016/02/005-VPC06.webp 654w" sizes="654px"></source>
-  <source width="654" data-srcset="    /content/resized/2016/02/005-VPC06-320.png 320w,     /content/resized/2016/02/005-VPC06-384.png 384w,     /content/resized/2016/02/005-VPC06-512.png 512w,  /content/uploads/2016/02/005-VPC06.png 654w" sizes="654px"></source>
-  <img src="/content/resized/2016/02/005-VPC06-320.png" data-src="/content/uploads/2016/02/005-VPC06.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Create a Security Group for Memcached ">
+  <source width="654" height="273" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC06-320.webp 320w,         /content/resized/2016/02/005-VPC06-384.webp 384w,         /content/resized/2016/02/005-VPC06-512.webp 512w,  /content/uploads/2016/02/005-VPC06.webp 654w" sizes="654px"></source>
+  <source width="654" height="273" data-srcset="    /content/resized/2016/02/005-VPC06-320.png 320w,     /content/resized/2016/02/005-VPC06-384.png 384w,     /content/resized/2016/02/005-VPC06-512.png 512w,  /content/uploads/2016/02/005-VPC06.png 654w" sizes="654px"></source>
+  <img src="/content/resized/2016/02/005-VPC06-320.png" data-src="/content/uploads/2016/02/005-VPC06.png" class="blur-up lazyautosizes lazyload" width="654" height="273" alt="Figure 7: Create a Security Group for Memcached ">
 </picture>
 </a>
 
@@ -647,9 +635,9 @@
 
 <a href="/content/uploads/2016/02/005-VPC07.png" title="Figure 8: Configure the Inbound Rules for the Memcached Security Group " class="image-popup">
 <picture>
-  <source width="936" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC07-320.webp 320w,         /content/resized/2016/02/005-VPC07-384.webp 384w,         /content/resized/2016/02/005-VPC07-512.webp 512w,         /content/resized/2016/02/005-VPC07-683.webp 683w,         /content/resized/2016/02/005-VPC07-800.webp 800w,  /content/uploads/2016/02/005-VPC07.webp 936w" sizes="936px"></source>
-  <source width="936" data-srcset="    /content/resized/2016/02/005-VPC07-320.png 320w,     /content/resized/2016/02/005-VPC07-384.png 384w,     /content/resized/2016/02/005-VPC07-512.png 512w,     /content/resized/2016/02/005-VPC07-683.png 683w,     /content/resized/2016/02/005-VPC07-800.png 800w,  /content/uploads/2016/02/005-VPC07.png 936w" sizes="936px"></source>
-  <img src="/content/resized/2016/02/005-VPC07-320.png" data-src="/content/uploads/2016/02/005-VPC07.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Configure the Inbound Rules for the Memcached Security Group ">
+  <source width="936" height="227" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC07-320.webp 320w,         /content/resized/2016/02/005-VPC07-384.webp 384w,         /content/resized/2016/02/005-VPC07-512.webp 512w,         /content/resized/2016/02/005-VPC07-683.webp 683w,         /content/resized/2016/02/005-VPC07-800.webp 800w,  /content/uploads/2016/02/005-VPC07.webp 936w" sizes="936px"></source>
+  <source width="936" height="227" data-srcset="    /content/resized/2016/02/005-VPC07-320.png 320w,     /content/resized/2016/02/005-VPC07-384.png 384w,     /content/resized/2016/02/005-VPC07-512.png 512w,     /content/resized/2016/02/005-VPC07-683.png 683w,     /content/resized/2016/02/005-VPC07-800.png 800w,  /content/uploads/2016/02/005-VPC07.png 936w" sizes="936px"></source>
+  <img src="/content/resized/2016/02/005-VPC07-320.png" data-src="/content/uploads/2016/02/005-VPC07.png" class="blur-up lazyautosizes lazyload" width="936" height="227" alt="Figure 8: Configure the Inbound Rules for the Memcached Security Group ">
 </picture>
 </a>
 
@@ -673,9 +661,9 @@
 
 <a href="/content/uploads/2016/02/005-VPC08.png" title="Figure 9: Create a Security Group for Railgun " class="image-popup">
 <picture>
-  <source width="655" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC08-320.webp 320w,         /content/resized/2016/02/005-VPC08-384.webp 384w,         /content/resized/2016/02/005-VPC08-512.webp 512w,  /content/uploads/2016/02/005-VPC08.webp 655w" sizes="655px"></source>
-  <source width="655" data-srcset="    /content/resized/2016/02/005-VPC08-320.png 320w,     /content/resized/2016/02/005-VPC08-384.png 384w,     /content/resized/2016/02/005-VPC08-512.png 512w,  /content/uploads/2016/02/005-VPC08.png 655w" sizes="655px"></source>
-  <img src="/content/resized/2016/02/005-VPC08-320.png" data-src="/content/uploads/2016/02/005-VPC08.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Create a Security Group for Railgun ">
+  <source width="655" height="274" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC08-320.webp 320w,         /content/resized/2016/02/005-VPC08-384.webp 384w,         /content/resized/2016/02/005-VPC08-512.webp 512w,  /content/uploads/2016/02/005-VPC08.webp 655w" sizes="655px"></source>
+  <source width="655" height="274" data-srcset="    /content/resized/2016/02/005-VPC08-320.png 320w,     /content/resized/2016/02/005-VPC08-384.png 384w,     /content/resized/2016/02/005-VPC08-512.png 512w,  /content/uploads/2016/02/005-VPC08.png 655w" sizes="655px"></source>
+  <img src="/content/resized/2016/02/005-VPC08-320.png" data-src="/content/uploads/2016/02/005-VPC08.png" class="blur-up lazyautosizes lazyload" width="655" height="274" alt="Figure 9: Create a Security Group for Railgun ">
 </picture>
 </a>
 
@@ -699,9 +687,9 @@
 
 <a href="/content/uploads/2016/02/005-VPC09.png" title="Figure 10: Configure the Inbound Rules for the Railgun Security Group " class="image-popup">
 <picture>
-  <source width="942" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC09-320.webp 320w,         /content/resized/2016/02/005-VPC09-384.webp 384w,         /content/resized/2016/02/005-VPC09-512.webp 512w,         /content/resized/2016/02/005-VPC09-683.webp 683w,         /content/resized/2016/02/005-VPC09-800.webp 800w,  /content/uploads/2016/02/005-VPC09.webp 942w" sizes="942px"></source>
-  <source width="942" data-srcset="    /content/resized/2016/02/005-VPC09-320.png 320w,     /content/resized/2016/02/005-VPC09-384.png 384w,     /content/resized/2016/02/005-VPC09-512.png 512w,     /content/resized/2016/02/005-VPC09-683.png 683w,     /content/resized/2016/02/005-VPC09-800.png 800w,  /content/uploads/2016/02/005-VPC09.png 942w" sizes="942px"></source>
-  <img src="/content/resized/2016/02/005-VPC09-320.png" data-src="/content/uploads/2016/02/005-VPC09.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Configure the Inbound Rules for the Railgun Security Group ">
+  <source width="942" height="228" type="image/webp" data-srcset="        /content/resized/2016/02/005-VPC09-320.webp 320w,         /content/resized/2016/02/005-VPC09-384.webp 384w,         /content/resized/2016/02/005-VPC09-512.webp 512w,         /content/resized/2016/02/005-VPC09-683.webp 683w,         /content/resized/2016/02/005-VPC09-800.webp 800w,  /content/uploads/2016/02/005-VPC09.webp 942w" sizes="942px"></source>
+  <source width="942" height="228" data-srcset="    /content/resized/2016/02/005-VPC09-320.png 320w,     /content/resized/2016/02/005-VPC09-384.png 384w,     /content/resized/2016/02/005-VPC09-512.png 512w,     /content/resized/2016/02/005-VPC09-683.png 683w,     /content/resized/2016/02/005-VPC09-800.png 800w,  /content/uploads/2016/02/005-VPC09.png 942w" sizes="942px"></source>
+  <img src="/content/resized/2016/02/005-VPC09-320.png" data-src="/content/uploads/2016/02/005-VPC09.png" class="blur-up lazyautosizes lazyload" width="942" height="228" alt="Figure 10: Configure the Inbound Rules for the Railgun Security Group ">
 </picture>
 </a>
 
@@ -733,9 +721,9 @@
 
 <a href="/content/uploads/2016/02/006-ElastiCache01.png" title="Figure 11: Create a Cache Subnet Group for Memcached " class="image-popup">
 <picture>
-  <source width="854" type="image/webp" data-srcset="        /content/resized/2016/02/006-ElastiCache01-320.webp 320w,         /content/resized/2016/02/006-ElastiCache01-384.webp 384w,         /content/resized/2016/02/006-ElastiCache01-512.webp 512w,         /content/resized/2016/02/006-ElastiCache01-683.webp 683w,         /content/resized/2016/02/006-ElastiCache01-800.webp 800w,  /content/uploads/2016/02/006-ElastiCache01.webp 854w" sizes="854px"></source>
-  <source width="854" data-srcset="    /content/resized/2016/02/006-ElastiCache01-320.png 320w,     /content/resized/2016/02/006-ElastiCache01-384.png 384w,     /content/resized/2016/02/006-ElastiCache01-512.png 512w,     /content/resized/2016/02/006-ElastiCache01-683.png 683w,     /content/resized/2016/02/006-ElastiCache01-800.png 800w,  /content/uploads/2016/02/006-ElastiCache01.png 854w" sizes="854px"></source>
-  <img src="/content/resized/2016/02/006-ElastiCache01-320.png" data-src="/content/uploads/2016/02/006-ElastiCache01.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Create a Cache Subnet Group for Memcached ">
+  <source width="854" height="448" type="image/webp" data-srcset="        /content/resized/2016/02/006-ElastiCache01-320.webp 320w,         /content/resized/2016/02/006-ElastiCache01-384.webp 384w,         /content/resized/2016/02/006-ElastiCache01-512.webp 512w,         /content/resized/2016/02/006-ElastiCache01-683.webp 683w,         /content/resized/2016/02/006-ElastiCache01-800.webp 800w,  /content/uploads/2016/02/006-ElastiCache01.webp 854w" sizes="854px"></source>
+  <source width="854" height="448" data-srcset="    /content/resized/2016/02/006-ElastiCache01-320.png 320w,     /content/resized/2016/02/006-ElastiCache01-384.png 384w,     /content/resized/2016/02/006-ElastiCache01-512.png 512w,     /content/resized/2016/02/006-ElastiCache01-683.png 683w,     /content/resized/2016/02/006-ElastiCache01-800.png 800w,  /content/uploads/2016/02/006-ElastiCache01.png 854w" sizes="854px"></source>
+  <img src="/content/resized/2016/02/006-ElastiCache01-320.png" data-src="/content/uploads/2016/02/006-ElastiCache01.png" class="blur-up lazyautosizes lazyload" width="854" height="448" alt="Figure 11: Create a Cache Subnet Group for Memcached ">
 </picture>
 </a>
 
@@ -759,9 +747,9 @@
 
 <a href="/content/uploads/2016/02/007-ElastiCache02.png" title="Figure 12: Create an ElastiCache cluster with the engine Memcached - Step 1 " class="image-popup">
 <picture>
-  <source width="987" type="image/webp" data-srcset="        /content/resized/2016/02/007-ElastiCache02-320.webp 320w,         /content/resized/2016/02/007-ElastiCache02-384.webp 384w,         /content/resized/2016/02/007-ElastiCache02-512.webp 512w,         /content/resized/2016/02/007-ElastiCache02-683.webp 683w,         /content/resized/2016/02/007-ElastiCache02-800.webp 800w,         /content/resized/2016/02/007-ElastiCache02-960.webp 960w,  /content/uploads/2016/02/007-ElastiCache02.webp 987w" sizes="987px"></source>
-  <source width="987" data-srcset="    /content/resized/2016/02/007-ElastiCache02-320.png 320w,     /content/resized/2016/02/007-ElastiCache02-384.png 384w,     /content/resized/2016/02/007-ElastiCache02-512.png 512w,     /content/resized/2016/02/007-ElastiCache02-683.png 683w,     /content/resized/2016/02/007-ElastiCache02-800.png 800w,     /content/resized/2016/02/007-ElastiCache02-960.png 960w,  /content/uploads/2016/02/007-ElastiCache02.png 987w" sizes="987px"></source>
-  <img src="/content/resized/2016/02/007-ElastiCache02-320.png" data-src="/content/uploads/2016/02/007-ElastiCache02.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Create an ElastiCache cluster with the engine Memcached - Step 1 ">
+  <source width="987" height="417" type="image/webp" data-srcset="        /content/resized/2016/02/007-ElastiCache02-320.webp 320w,         /content/resized/2016/02/007-ElastiCache02-384.webp 384w,         /content/resized/2016/02/007-ElastiCache02-512.webp 512w,         /content/resized/2016/02/007-ElastiCache02-683.webp 683w,         /content/resized/2016/02/007-ElastiCache02-800.webp 800w,         /content/resized/2016/02/007-ElastiCache02-960.webp 960w,  /content/uploads/2016/02/007-ElastiCache02.webp 987w" sizes="987px"></source>
+  <source width="987" height="417" data-srcset="    /content/resized/2016/02/007-ElastiCache02-320.png 320w,     /content/resized/2016/02/007-ElastiCache02-384.png 384w,     /content/resized/2016/02/007-ElastiCache02-512.png 512w,     /content/resized/2016/02/007-ElastiCache02-683.png 683w,     /content/resized/2016/02/007-ElastiCache02-800.png 800w,     /content/resized/2016/02/007-ElastiCache02-960.png 960w,  /content/uploads/2016/02/007-ElastiCache02.png 987w" sizes="987px"></source>
+  <img src="/content/resized/2016/02/007-ElastiCache02-320.png" data-src="/content/uploads/2016/02/007-ElastiCache02.png" class="blur-up lazyautosizes lazyload" width="987" height="417" alt="Figure 12: Create an ElastiCache cluster with the engine Memcached - Step 1 ">
 </picture>
 </a>
 
@@ -785,9 +773,9 @@
 
 <a href="/content/uploads/2016/02/008-ElastiCache03.png" title="Figure 13: Create an ElastiCache cluster with the engine Memcached - Step 2 " class="image-popup">
 <picture>
-  <source width="966" type="image/webp" data-srcset="        /content/resized/2016/02/008-ElastiCache03-320.webp 320w,         /content/resized/2016/02/008-ElastiCache03-384.webp 384w,         /content/resized/2016/02/008-ElastiCache03-512.webp 512w,         /content/resized/2016/02/008-ElastiCache03-683.webp 683w,         /content/resized/2016/02/008-ElastiCache03-800.webp 800w,         /content/resized/2016/02/008-ElastiCache03-960.webp 960w,  /content/uploads/2016/02/008-ElastiCache03.webp 966w" sizes="966px"></source>
-  <source width="966" data-srcset="    /content/resized/2016/02/008-ElastiCache03-320.png 320w,     /content/resized/2016/02/008-ElastiCache03-384.png 384w,     /content/resized/2016/02/008-ElastiCache03-512.png 512w,     /content/resized/2016/02/008-ElastiCache03-683.png 683w,     /content/resized/2016/02/008-ElastiCache03-800.png 800w,     /content/resized/2016/02/008-ElastiCache03-960.png 960w,  /content/uploads/2016/02/008-ElastiCache03.png 966w" sizes="966px"></source>
-  <img src="/content/resized/2016/02/008-ElastiCache03-320.png" data-src="/content/uploads/2016/02/008-ElastiCache03.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Create an ElastiCache cluster with the engine Memcached - Step 2 ">
+  <source width="966" height="540" type="image/webp" data-srcset="        /content/resized/2016/02/008-ElastiCache03-320.webp 320w,         /content/resized/2016/02/008-ElastiCache03-384.webp 384w,         /content/resized/2016/02/008-ElastiCache03-512.webp 512w,         /content/resized/2016/02/008-ElastiCache03-683.webp 683w,         /content/resized/2016/02/008-ElastiCache03-800.webp 800w,         /content/resized/2016/02/008-ElastiCache03-960.webp 960w,  /content/uploads/2016/02/008-ElastiCache03.webp 966w" sizes="966px"></source>
+  <source width="966" height="540" data-srcset="    /content/resized/2016/02/008-ElastiCache03-320.png 320w,     /content/resized/2016/02/008-ElastiCache03-384.png 384w,     /content/resized/2016/02/008-ElastiCache03-512.png 512w,     /content/resized/2016/02/008-ElastiCache03-683.png 683w,     /content/resized/2016/02/008-ElastiCache03-800.png 800w,     /content/resized/2016/02/008-ElastiCache03-960.png 960w,  /content/uploads/2016/02/008-ElastiCache03.png 966w" sizes="966px"></source>
+  <img src="/content/resized/2016/02/008-ElastiCache03-320.png" data-src="/content/uploads/2016/02/008-ElastiCache03.png" class="blur-up lazyautosizes lazyload" width="966" height="540" alt="Figure 13: Create an ElastiCache cluster with the engine Memcached - Step 2 ">
 </picture>
 </a>
 
@@ -811,9 +799,9 @@
 
 <a href="/content/uploads/2016/02/009-ElastiCache04.png" title="Figure 14: Create an ElastiCache cluster with the engine Memcached - Step 3 " class="image-popup">
 <picture>
-  <source width="998" type="image/webp" data-srcset="        /content/resized/2016/02/009-ElastiCache04-320.webp 320w,         /content/resized/2016/02/009-ElastiCache04-384.webp 384w,         /content/resized/2016/02/009-ElastiCache04-512.webp 512w,         /content/resized/2016/02/009-ElastiCache04-683.webp 683w,         /content/resized/2016/02/009-ElastiCache04-800.webp 800w,         /content/resized/2016/02/009-ElastiCache04-960.webp 960w,  /content/uploads/2016/02/009-ElastiCache04.webp 998w" sizes="998px"></source>
-  <source width="998" data-srcset="    /content/resized/2016/02/009-ElastiCache04-320.png 320w,     /content/resized/2016/02/009-ElastiCache04-384.png 384w,     /content/resized/2016/02/009-ElastiCache04-512.png 512w,     /content/resized/2016/02/009-ElastiCache04-683.png 683w,     /content/resized/2016/02/009-ElastiCache04-800.png 800w,     /content/resized/2016/02/009-ElastiCache04-960.png 960w,  /content/uploads/2016/02/009-ElastiCache04.png 998w" sizes="998px"></source>
-  <img src="/content/resized/2016/02/009-ElastiCache04-320.png" data-src="/content/uploads/2016/02/009-ElastiCache04.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Create an ElastiCache cluster with the engine Memcached - Step 3 ">
+  <source width="998" height="523" type="image/webp" data-srcset="        /content/resized/2016/02/009-ElastiCache04-320.webp 320w,         /content/resized/2016/02/009-ElastiCache04-384.webp 384w,         /content/resized/2016/02/009-ElastiCache04-512.webp 512w,         /content/resized/2016/02/009-ElastiCache04-683.webp 683w,         /content/resized/2016/02/009-ElastiCache04-800.webp 800w,         /content/resized/2016/02/009-ElastiCache04-960.webp 960w,  /content/uploads/2016/02/009-ElastiCache04.webp 998w" sizes="998px"></source>
+  <source width="998" height="523" data-srcset="    /content/resized/2016/02/009-ElastiCache04-320.png 320w,     /content/resized/2016/02/009-ElastiCache04-384.png 384w,     /content/resized/2016/02/009-ElastiCache04-512.png 512w,     /content/resized/2016/02/009-ElastiCache04-683.png 683w,     /content/resized/2016/02/009-ElastiCache04-800.png 800w,     /content/resized/2016/02/009-ElastiCache04-960.png 960w,  /content/uploads/2016/02/009-ElastiCache04.png 998w" sizes="998px"></source>
+  <img src="/content/resized/2016/02/009-ElastiCache04-320.png" data-src="/content/uploads/2016/02/009-ElastiCache04.png" class="blur-up lazyautosizes lazyload" width="998" height="523" alt="Figure 14: Create an ElastiCache cluster with the engine Memcached - Step 3 ">
 </picture>
 </a>
 
@@ -837,9 +825,9 @@
 
 <a href="/content/uploads/2016/02/010-ElastiCache06.png" title="Figure 15: Lookup the Memcached endpoint address " class="image-popup">
 <picture>
-  <source width="1197" type="image/webp" data-srcset="        /content/resized/2016/02/010-ElastiCache06-320.webp 320w,         /content/resized/2016/02/010-ElastiCache06-384.webp 384w,         /content/resized/2016/02/010-ElastiCache06-512.webp 512w,         /content/resized/2016/02/010-ElastiCache06-683.webp 683w,         /content/resized/2016/02/010-ElastiCache06-800.webp 800w,         /content/resized/2016/02/010-ElastiCache06-960.webp 960w,  /content/uploads/2016/02/010-ElastiCache06.webp 1197w" sizes="1197px"></source>
-  <source width="1197" data-srcset="    /content/resized/2016/02/010-ElastiCache06-320.png 320w,     /content/resized/2016/02/010-ElastiCache06-384.png 384w,     /content/resized/2016/02/010-ElastiCache06-512.png 512w,     /content/resized/2016/02/010-ElastiCache06-683.png 683w,     /content/resized/2016/02/010-ElastiCache06-800.png 800w,     /content/resized/2016/02/010-ElastiCache06-960.png 960w,  /content/uploads/2016/02/010-ElastiCache06.png 1197w" sizes="1197px"></source>
-  <img src="/content/resized/2016/02/010-ElastiCache06-320.png" data-src="/content/uploads/2016/02/010-ElastiCache06.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Lookup the Memcached endpoint address ">
+  <source width="1197" height="759" type="image/webp" data-srcset="        /content/resized/2016/02/010-ElastiCache06-320.webp 320w,         /content/resized/2016/02/010-ElastiCache06-384.webp 384w,         /content/resized/2016/02/010-ElastiCache06-512.webp 512w,         /content/resized/2016/02/010-ElastiCache06-683.webp 683w,         /content/resized/2016/02/010-ElastiCache06-800.webp 800w,         /content/resized/2016/02/010-ElastiCache06-960.webp 960w,  /content/uploads/2016/02/010-ElastiCache06.webp 1197w" sizes="1197px"></source>
+  <source width="1197" height="759" data-srcset="    /content/resized/2016/02/010-ElastiCache06-320.png 320w,     /content/resized/2016/02/010-ElastiCache06-384.png 384w,     /content/resized/2016/02/010-ElastiCache06-512.png 512w,     /content/resized/2016/02/010-ElastiCache06-683.png 683w,     /content/resized/2016/02/010-ElastiCache06-800.png 800w,     /content/resized/2016/02/010-ElastiCache06-960.png 960w,  /content/uploads/2016/02/010-ElastiCache06.png 1197w" sizes="1197px"></source>
+  <img src="/content/resized/2016/02/010-ElastiCache06-320.png" data-src="/content/uploads/2016/02/010-ElastiCache06.png" class="blur-up lazyautosizes lazyload" width="1197" height="759" alt="Figure 15: Lookup the Memcached endpoint address ">
 </picture>
 </a>
 
@@ -871,9 +859,9 @@
 
 <a href="/content/uploads/2016/02/011-ELB01.png" title="Figure 16: Define an Elastic Load Balancer - Step 1 " class="image-popup">
 <picture>
-  <source width="1182" type="image/webp" data-srcset="        /content/resized/2016/02/011-ELB01-320.webp 320w,         /content/resized/2016/02/011-ELB01-384.webp 384w,         /content/resized/2016/02/011-ELB01-512.webp 512w,         /content/resized/2016/02/011-ELB01-683.webp 683w,         /content/resized/2016/02/011-ELB01-800.webp 800w,         /content/resized/2016/02/011-ELB01-960.webp 960w,  /content/uploads/2016/02/011-ELB01.webp 1182w" sizes="1182px"></source>
-  <source width="1182" data-srcset="    /content/resized/2016/02/011-ELB01-320.png 320w,     /content/resized/2016/02/011-ELB01-384.png 384w,     /content/resized/2016/02/011-ELB01-512.png 512w,     /content/resized/2016/02/011-ELB01-683.png 683w,     /content/resized/2016/02/011-ELB01-800.png 800w,     /content/resized/2016/02/011-ELB01-960.png 960w,  /content/uploads/2016/02/011-ELB01.png 1182w" sizes="1182px"></source>
-  <img src="/content/resized/2016/02/011-ELB01-320.png" data-src="/content/uploads/2016/02/011-ELB01.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Define an Elastic Load Balancer - Step 1 ">
+  <source width="1182" height="926" type="image/webp" data-srcset="        /content/resized/2016/02/011-ELB01-320.webp 320w,         /content/resized/2016/02/011-ELB01-384.webp 384w,         /content/resized/2016/02/011-ELB01-512.webp 512w,         /content/resized/2016/02/011-ELB01-683.webp 683w,         /content/resized/2016/02/011-ELB01-800.webp 800w,         /content/resized/2016/02/011-ELB01-960.webp 960w,  /content/uploads/2016/02/011-ELB01.webp 1182w" sizes="1182px"></source>
+  <source width="1182" height="926" data-srcset="    /content/resized/2016/02/011-ELB01-320.png 320w,     /content/resized/2016/02/011-ELB01-384.png 384w,     /content/resized/2016/02/011-ELB01-512.png 512w,     /content/resized/2016/02/011-ELB01-683.png 683w,     /content/resized/2016/02/011-ELB01-800.png 800w,     /content/resized/2016/02/011-ELB01-960.png 960w,  /content/uploads/2016/02/011-ELB01.png 1182w" sizes="1182px"></source>
+  <img src="/content/resized/2016/02/011-ELB01-320.png" data-src="/content/uploads/2016/02/011-ELB01.png" class="blur-up lazyautosizes lazyload" width="1182" height="926" alt="Figure 16: Define an Elastic Load Balancer - Step 1 ">
 </picture>
 </a>
 
@@ -897,9 +885,9 @@
 
 <a href="/content/uploads/2016/02/012-ELB02.png" title="Figure 17: Define an Elastic Load Balancer - Step 2 " class="image-popup">
 <picture>
-  <source width="1180" type="image/webp" data-srcset="        /content/resized/2016/02/012-ELB02-320.webp 320w,         /content/resized/2016/02/012-ELB02-384.webp 384w,         /content/resized/2016/02/012-ELB02-512.webp 512w,         /content/resized/2016/02/012-ELB02-683.webp 683w,         /content/resized/2016/02/012-ELB02-800.webp 800w,         /content/resized/2016/02/012-ELB02-960.webp 960w,  /content/uploads/2016/02/012-ELB02.webp 1180w" sizes="1180px"></source>
-  <source width="1180" data-srcset="    /content/resized/2016/02/012-ELB02-320.png 320w,     /content/resized/2016/02/012-ELB02-384.png 384w,     /content/resized/2016/02/012-ELB02-512.png 512w,     /content/resized/2016/02/012-ELB02-683.png 683w,     /content/resized/2016/02/012-ELB02-800.png 800w,     /content/resized/2016/02/012-ELB02-960.png 960w,  /content/uploads/2016/02/012-ELB02.png 1180w" sizes="1180px"></source>
-  <img src="/content/resized/2016/02/012-ELB02-320.png" data-src="/content/uploads/2016/02/012-ELB02.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Define an Elastic Load Balancer - Step 2 ">
+  <source width="1180" height="370" type="image/webp" data-srcset="        /content/resized/2016/02/012-ELB02-320.webp 320w,         /content/resized/2016/02/012-ELB02-384.webp 384w,         /content/resized/2016/02/012-ELB02-512.webp 512w,         /content/resized/2016/02/012-ELB02-683.webp 683w,         /content/resized/2016/02/012-ELB02-800.webp 800w,         /content/resized/2016/02/012-ELB02-960.webp 960w,  /content/uploads/2016/02/012-ELB02.webp 1180w" sizes="1180px"></source>
+  <source width="1180" height="370" data-srcset="    /content/resized/2016/02/012-ELB02-320.png 320w,     /content/resized/2016/02/012-ELB02-384.png 384w,     /content/resized/2016/02/012-ELB02-512.png 512w,     /content/resized/2016/02/012-ELB02-683.png 683w,     /content/resized/2016/02/012-ELB02-800.png 800w,     /content/resized/2016/02/012-ELB02-960.png 960w,  /content/uploads/2016/02/012-ELB02.png 1180w" sizes="1180px"></source>
+  <img src="/content/resized/2016/02/012-ELB02-320.png" data-src="/content/uploads/2016/02/012-ELB02.png" class="blur-up lazyautosizes lazyload" width="1180" height="370" alt="Figure 17: Define an Elastic Load Balancer - Step 2 ">
 </picture>
 </a>
 
@@ -923,9 +911,9 @@
 
 <a href="/content/uploads/2016/02/013-ELB03.png" title="Figure 18: Define an Elastic Load Balancer - Step 3 " class="image-popup">
 <picture>
-  <source width="1183" type="image/webp" data-srcset="        /content/resized/2016/02/013-ELB03-320.webp 320w,         /content/resized/2016/02/013-ELB03-384.webp 384w,         /content/resized/2016/02/013-ELB03-512.webp 512w,         /content/resized/2016/02/013-ELB03-683.webp 683w,         /content/resized/2016/02/013-ELB03-800.webp 800w,         /content/resized/2016/02/013-ELB03-960.webp 960w,  /content/uploads/2016/02/013-ELB03.webp 1183w" sizes="1183px"></source>
-  <source width="1183" data-srcset="    /content/resized/2016/02/013-ELB03-320.png 320w,     /content/resized/2016/02/013-ELB03-384.png 384w,     /content/resized/2016/02/013-ELB03-512.png 512w,     /content/resized/2016/02/013-ELB03-683.png 683w,     /content/resized/2016/02/013-ELB03-800.png 800w,     /content/resized/2016/02/013-ELB03-960.png 960w,  /content/uploads/2016/02/013-ELB03.png 1183w" sizes="1183px"></source>
-  <img src="/content/resized/2016/02/013-ELB03-320.png" data-src="/content/uploads/2016/02/013-ELB03.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Define an Elastic Load Balancer - Step 3 ">
+  <source width="1183" height="371" type="image/webp" data-srcset="        /content/resized/2016/02/013-ELB03-320.webp 320w,         /content/resized/2016/02/013-ELB03-384.webp 384w,         /content/resized/2016/02/013-ELB03-512.webp 512w,         /content/resized/2016/02/013-ELB03-683.webp 683w,         /content/resized/2016/02/013-ELB03-800.webp 800w,         /content/resized/2016/02/013-ELB03-960.webp 960w,  /content/uploads/2016/02/013-ELB03.webp 1183w" sizes="1183px"></source>
+  <source width="1183" height="371" data-srcset="    /content/resized/2016/02/013-ELB03-320.png 320w,     /content/resized/2016/02/013-ELB03-384.png 384w,     /content/resized/2016/02/013-ELB03-512.png 512w,     /content/resized/2016/02/013-ELB03-683.png 683w,     /content/resized/2016/02/013-ELB03-800.png 800w,     /content/resized/2016/02/013-ELB03-960.png 960w,  /content/uploads/2016/02/013-ELB03.png 1183w" sizes="1183px"></source>
+  <img src="/content/resized/2016/02/013-ELB03-320.png" data-src="/content/uploads/2016/02/013-ELB03.png" class="blur-up lazyautosizes lazyload" width="1183" height="371" alt="Figure 18: Define an Elastic Load Balancer - Step 3 ">
 </picture>
 </a>
 
@@ -951,9 +939,9 @@
 
 <a href="/content/uploads/2016/02/014-ELB04.png" title="Figure 19: Define an Elastic Load Balancer - Step 4 " class="image-popup">
 <picture>
-  <source width="1183" type="image/webp" data-srcset="        /content/resized/2016/02/014-ELB04-320.webp 320w,         /content/resized/2016/02/014-ELB04-384.webp 384w,         /content/resized/2016/02/014-ELB04-512.webp 512w,         /content/resized/2016/02/014-ELB04-683.webp 683w,         /content/resized/2016/02/014-ELB04-800.webp 800w,         /content/resized/2016/02/014-ELB04-960.webp 960w,  /content/uploads/2016/02/014-ELB04.webp 1183w" sizes="1183px"></source>
-  <source width="1183" data-srcset="    /content/resized/2016/02/014-ELB04-320.png 320w,     /content/resized/2016/02/014-ELB04-384.png 384w,     /content/resized/2016/02/014-ELB04-512.png 512w,     /content/resized/2016/02/014-ELB04-683.png 683w,     /content/resized/2016/02/014-ELB04-800.png 800w,     /content/resized/2016/02/014-ELB04-960.png 960w,  /content/uploads/2016/02/014-ELB04.png 1183w" sizes="1183px"></source>
-  <img src="/content/resized/2016/02/014-ELB04-320.png" data-src="/content/uploads/2016/02/014-ELB04.png" class="blur-up lazyautosizes lazyload" alt="Figure 19: Define an Elastic Load Balancer - Step 4 ">
+  <source width="1183" height="508" type="image/webp" data-srcset="        /content/resized/2016/02/014-ELB04-320.webp 320w,         /content/resized/2016/02/014-ELB04-384.webp 384w,         /content/resized/2016/02/014-ELB04-512.webp 512w,         /content/resized/2016/02/014-ELB04-683.webp 683w,         /content/resized/2016/02/014-ELB04-800.webp 800w,         /content/resized/2016/02/014-ELB04-960.webp 960w,  /content/uploads/2016/02/014-ELB04.webp 1183w" sizes="1183px"></source>
+  <source width="1183" height="508" data-srcset="    /content/resized/2016/02/014-ELB04-320.png 320w,     /content/resized/2016/02/014-ELB04-384.png 384w,     /content/resized/2016/02/014-ELB04-512.png 512w,     /content/resized/2016/02/014-ELB04-683.png 683w,     /content/resized/2016/02/014-ELB04-800.png 800w,     /content/resized/2016/02/014-ELB04-960.png 960w,  /content/uploads/2016/02/014-ELB04.png 1183w" sizes="1183px"></source>
+  <img src="/content/resized/2016/02/014-ELB04-320.png" data-src="/content/uploads/2016/02/014-ELB04.png" class="blur-up lazyautosizes lazyload" width="1183" height="508" alt="Figure 19: Define an Elastic Load Balancer - Step 4 ">
 </picture>
 </a>
 
@@ -977,9 +965,9 @@
 
 <a href="/content/uploads/2016/02/015-ELB05.png" title="Figure 20: Define an Elastic Load Balancer - Step 5 " class="image-popup">
 <picture>
-  <source width="1178" type="image/webp" data-srcset="        /content/resized/2016/02/015-ELB05-320.webp 320w,         /content/resized/2016/02/015-ELB05-384.webp 384w,         /content/resized/2016/02/015-ELB05-512.webp 512w,         /content/resized/2016/02/015-ELB05-683.webp 683w,         /content/resized/2016/02/015-ELB05-800.webp 800w,         /content/resized/2016/02/015-ELB05-960.webp 960w,  /content/uploads/2016/02/015-ELB05.webp 1178w" sizes="1178px"></source>
-  <source width="1178" data-srcset="    /content/resized/2016/02/015-ELB05-320.png 320w,     /content/resized/2016/02/015-ELB05-384.png 384w,     /content/resized/2016/02/015-ELB05-512.png 512w,     /content/resized/2016/02/015-ELB05-683.png 683w,     /content/resized/2016/02/015-ELB05-800.png 800w,     /content/resized/2016/02/015-ELB05-960.png 960w,  /content/uploads/2016/02/015-ELB05.png 1178w" sizes="1178px"></source>
-  <img src="/content/resized/2016/02/015-ELB05-320.png" data-src="/content/uploads/2016/02/015-ELB05.png" class="blur-up lazyautosizes lazyload" alt="Figure 20: Define an Elastic Load Balancer - Step 5 ">
+  <source width="1178" height="313" type="image/webp" data-srcset="        /content/resized/2016/02/015-ELB05-320.webp 320w,         /content/resized/2016/02/015-ELB05-384.webp 384w,         /content/resized/2016/02/015-ELB05-512.webp 512w,         /content/resized/2016/02/015-ELB05-683.webp 683w,         /content/resized/2016/02/015-ELB05-800.webp 800w,         /content/resized/2016/02/015-ELB05-960.webp 960w,  /content/uploads/2016/02/015-ELB05.webp 1178w" sizes="1178px"></source>
+  <source width="1178" height="313" data-srcset="    /content/resized/2016/02/015-ELB05-320.png 320w,     /content/resized/2016/02/015-ELB05-384.png 384w,     /content/resized/2016/02/015-ELB05-512.png 512w,     /content/resized/2016/02/015-ELB05-683.png 683w,     /content/resized/2016/02/015-ELB05-800.png 800w,     /content/resized/2016/02/015-ELB05-960.png 960w,  /content/uploads/2016/02/015-ELB05.png 1178w" sizes="1178px"></source>
+  <img src="/content/resized/2016/02/015-ELB05-320.png" data-src="/content/uploads/2016/02/015-ELB05.png" class="blur-up lazyautosizes lazyload" width="1178" height="313" alt="Figure 20: Define an Elastic Load Balancer - Step 5 ">
 </picture>
 </a>
 
@@ -1003,9 +991,9 @@
 
 <a href="/content/uploads/2016/02/016-ELB06.png" title="Figure 21: Define an Elastic Load Balancer - Step 6 " class="image-popup">
 <picture>
-  <source width="1180" type="image/webp" data-srcset="        /content/resized/2016/02/016-ELB06-320.webp 320w,         /content/resized/2016/02/016-ELB06-384.webp 384w,         /content/resized/2016/02/016-ELB06-512.webp 512w,         /content/resized/2016/02/016-ELB06-683.webp 683w,         /content/resized/2016/02/016-ELB06-800.webp 800w,         /content/resized/2016/02/016-ELB06-960.webp 960w,  /content/uploads/2016/02/016-ELB06.webp 1180w" sizes="1180px"></source>
-  <source width="1180" data-srcset="    /content/resized/2016/02/016-ELB06-320.png 320w,     /content/resized/2016/02/016-ELB06-384.png 384w,     /content/resized/2016/02/016-ELB06-512.png 512w,     /content/resized/2016/02/016-ELB06-683.png 683w,     /content/resized/2016/02/016-ELB06-800.png 800w,     /content/resized/2016/02/016-ELB06-960.png 960w,  /content/uploads/2016/02/016-ELB06.png 1180w" sizes="1180px"></source>
-  <img src="/content/resized/2016/02/016-ELB06-320.png" data-src="/content/uploads/2016/02/016-ELB06.png" class="blur-up lazyautosizes lazyload" alt="Figure 21: Define an Elastic Load Balancer - Step 6 ">
+  <source width="1180" height="771" type="image/webp" data-srcset="        /content/resized/2016/02/016-ELB06-320.webp 320w,         /content/resized/2016/02/016-ELB06-384.webp 384w,         /content/resized/2016/02/016-ELB06-512.webp 512w,         /content/resized/2016/02/016-ELB06-683.webp 683w,         /content/resized/2016/02/016-ELB06-800.webp 800w,         /content/resized/2016/02/016-ELB06-960.webp 960w,  /content/uploads/2016/02/016-ELB06.webp 1180w" sizes="1180px"></source>
+  <source width="1180" height="771" data-srcset="    /content/resized/2016/02/016-ELB06-320.png 320w,     /content/resized/2016/02/016-ELB06-384.png 384w,     /content/resized/2016/02/016-ELB06-512.png 512w,     /content/resized/2016/02/016-ELB06-683.png 683w,     /content/resized/2016/02/016-ELB06-800.png 800w,     /content/resized/2016/02/016-ELB06-960.png 960w,  /content/uploads/2016/02/016-ELB06.png 1180w" sizes="1180px"></source>
+  <img src="/content/resized/2016/02/016-ELB06-320.png" data-src="/content/uploads/2016/02/016-ELB06.png" class="blur-up lazyautosizes lazyload" width="1180" height="771" alt="Figure 21: Define an Elastic Load Balancer - Step 6 ">
 </picture>
 </a>
 
@@ -1029,9 +1017,9 @@
 
 <a href="/content/uploads/2016/02/017-ELB07.png" title="Figure 22: Lookup the ELB DNS name " class="image-popup">
 <picture>
-  <source width="1232" type="image/webp" data-srcset="        /content/resized/2016/02/017-ELB07-320.webp 320w,         /content/resized/2016/02/017-ELB07-384.webp 384w,         /content/resized/2016/02/017-ELB07-512.webp 512w,         /content/resized/2016/02/017-ELB07-683.webp 683w,         /content/resized/2016/02/017-ELB07-800.webp 800w,         /content/resized/2016/02/017-ELB07-960.webp 960w,  /content/uploads/2016/02/017-ELB07.webp 1232w" sizes="1232px"></source>
-  <source width="1232" data-srcset="    /content/resized/2016/02/017-ELB07-320.png 320w,     /content/resized/2016/02/017-ELB07-384.png 384w,     /content/resized/2016/02/017-ELB07-512.png 512w,     /content/resized/2016/02/017-ELB07-683.png 683w,     /content/resized/2016/02/017-ELB07-800.png 800w,     /content/resized/2016/02/017-ELB07-960.png 960w,  /content/uploads/2016/02/017-ELB07.png 1232w" sizes="1232px"></source>
-  <img src="/content/resized/2016/02/017-ELB07-320.png" data-src="/content/uploads/2016/02/017-ELB07.png" class="blur-up lazyautosizes lazyload" alt="Figure 22: Lookup the ELB DNS name ">
+  <source width="1232" height="580" type="image/webp" data-srcset="        /content/resized/2016/02/017-ELB07-320.webp 320w,         /content/resized/2016/02/017-ELB07-384.webp 384w,         /content/resized/2016/02/017-ELB07-512.webp 512w,         /content/resized/2016/02/017-ELB07-683.webp 683w,         /content/resized/2016/02/017-ELB07-800.webp 800w,         /content/resized/2016/02/017-ELB07-960.webp 960w,  /content/uploads/2016/02/017-ELB07.webp 1232w" sizes="1232px"></source>
+  <source width="1232" height="580" data-srcset="    /content/resized/2016/02/017-ELB07-320.png 320w,     /content/resized/2016/02/017-ELB07-384.png 384w,     /content/resized/2016/02/017-ELB07-512.png 512w,     /content/resized/2016/02/017-ELB07-683.png 683w,     /content/resized/2016/02/017-ELB07-800.png 800w,     /content/resized/2016/02/017-ELB07-960.png 960w,  /content/uploads/2016/02/017-ELB07.png 1232w" sizes="1232px"></source>
+  <img src="/content/resized/2016/02/017-ELB07-320.png" data-src="/content/uploads/2016/02/017-ELB07.png" class="blur-up lazyautosizes lazyload" width="1232" height="580" alt="Figure 22: Lookup the ELB DNS name ">
 </picture>
 </a>
 
@@ -1111,9 +1099,9 @@
 
 <a href="/content/uploads/2016/02/019-EC2_02.png" title="Figure 24: Create a Launch Configuration - Step 2 " class="image-popup">
 <picture>
-  <source width="1036" type="image/webp" data-srcset="        /content/resized/2016/02/019-EC2_02-320.webp 320w,         /content/resized/2016/02/019-EC2_02-384.webp 384w,         /content/resized/2016/02/019-EC2_02-512.webp 512w,         /content/resized/2016/02/019-EC2_02-683.webp 683w,         /content/resized/2016/02/019-EC2_02-800.webp 800w,         /content/resized/2016/02/019-EC2_02-960.webp 960w,  /content/uploads/2016/02/019-EC2_02.webp 1036w" sizes="1036px"></source>
-  <source width="1036" data-srcset="    /content/resized/2016/02/019-EC2_02-320.png 320w,     /content/resized/2016/02/019-EC2_02-384.png 384w,     /content/resized/2016/02/019-EC2_02-512.png 512w,     /content/resized/2016/02/019-EC2_02-683.png 683w,     /content/resized/2016/02/019-EC2_02-800.png 800w,     /content/resized/2016/02/019-EC2_02-960.png 960w,  /content/uploads/2016/02/019-EC2_02.png 1036w" sizes="1036px"></source>
-  <img src="/content/resized/2016/02/019-EC2_02-320.png" data-src="/content/uploads/2016/02/019-EC2_02.png" class="blur-up lazyautosizes lazyload" alt="Figure 24: Create a Launch Configuration - Step 2 ">
+  <source width="1036" height="725" type="image/webp" data-srcset="        /content/resized/2016/02/019-EC2_02-320.webp 320w,         /content/resized/2016/02/019-EC2_02-384.webp 384w,         /content/resized/2016/02/019-EC2_02-512.webp 512w,         /content/resized/2016/02/019-EC2_02-683.webp 683w,         /content/resized/2016/02/019-EC2_02-800.webp 800w,         /content/resized/2016/02/019-EC2_02-960.webp 960w,  /content/uploads/2016/02/019-EC2_02.webp 1036w" sizes="1036px"></source>
+  <source width="1036" height="725" data-srcset="    /content/resized/2016/02/019-EC2_02-320.png 320w,     /content/resized/2016/02/019-EC2_02-384.png 384w,     /content/resized/2016/02/019-EC2_02-512.png 512w,     /content/resized/2016/02/019-EC2_02-683.png 683w,     /content/resized/2016/02/019-EC2_02-800.png 800w,     /content/resized/2016/02/019-EC2_02-960.png 960w,  /content/uploads/2016/02/019-EC2_02.png 1036w" sizes="1036px"></source>
+  <img src="/content/resized/2016/02/019-EC2_02-320.png" data-src="/content/uploads/2016/02/019-EC2_02.png" class="blur-up lazyautosizes lazyload" width="1036" height="725" alt="Figure 24: Create a Launch Configuration - Step 2 ">
 </picture>
 </a>
 
@@ -1167,9 +1155,9 @@
 
 <a href="/content/uploads/2016/02/021-EC2_04.png" title="Figure 26: Create an Auto Scaling Group - Step 1 " class="image-popup">
 <picture>
-  <source width="861" type="image/webp" data-srcset="        /content/resized/2016/02/021-EC2_04-320.webp 320w,         /content/resized/2016/02/021-EC2_04-384.webp 384w,         /content/resized/2016/02/021-EC2_04-512.webp 512w,         /content/resized/2016/02/021-EC2_04-683.webp 683w,         /content/resized/2016/02/021-EC2_04-800.webp 800w,  /content/uploads/2016/02/021-EC2_04.webp 861w" sizes="861px"></source>
-  <source width="861" data-srcset="    /content/resized/2016/02/021-EC2_04-320.png 320w,     /content/resized/2016/02/021-EC2_04-384.png 384w,     /content/resized/2016/02/021-EC2_04-512.png 512w,     /content/resized/2016/02/021-EC2_04-683.png 683w,     /content/resized/2016/02/021-EC2_04-800.png 800w,  /content/uploads/2016/02/021-EC2_04.png 861w" sizes="861px"></source>
-  <img src="/content/resized/2016/02/021-EC2_04-320.png" data-src="/content/uploads/2016/02/021-EC2_04.png" class="blur-up lazyautosizes lazyload" alt="Figure 26: Create an Auto Scaling Group - Step 1 ">
+  <source width="861" height="927" type="image/webp" data-srcset="        /content/resized/2016/02/021-EC2_04-320.webp 320w,         /content/resized/2016/02/021-EC2_04-384.webp 384w,         /content/resized/2016/02/021-EC2_04-512.webp 512w,         /content/resized/2016/02/021-EC2_04-683.webp 683w,         /content/resized/2016/02/021-EC2_04-800.webp 800w,  /content/uploads/2016/02/021-EC2_04.webp 861w" sizes="861px"></source>
+  <source width="861" height="927" data-srcset="    /content/resized/2016/02/021-EC2_04-320.png 320w,     /content/resized/2016/02/021-EC2_04-384.png 384w,     /content/resized/2016/02/021-EC2_04-512.png 512w,     /content/resized/2016/02/021-EC2_04-683.png 683w,     /content/resized/2016/02/021-EC2_04-800.png 800w,  /content/uploads/2016/02/021-EC2_04.png 861w" sizes="861px"></source>
+  <img src="/content/resized/2016/02/021-EC2_04-320.png" data-src="/content/uploads/2016/02/021-EC2_04.png" class="blur-up lazyautosizes lazyload" width="861" height="927" alt="Figure 26: Create an Auto Scaling Group - Step 1 ">
 </picture>
 </a>
 
@@ -1249,9 +1237,9 @@
 
 <a href="/content/uploads/2016/02/024-STAT01.png" title="Figure 29: Monitor the Load Balancer Instances " class="image-popup">
 <picture>
-  <source width="1234" type="image/webp" data-srcset="        /content/resized/2016/02/024-STAT01-320.webp 320w,         /content/resized/2016/02/024-STAT01-384.webp 384w,         /content/resized/2016/02/024-STAT01-512.webp 512w,         /content/resized/2016/02/024-STAT01-683.webp 683w,         /content/resized/2016/02/024-STAT01-800.webp 800w,         /content/resized/2016/02/024-STAT01-960.webp 960w,  /content/uploads/2016/02/024-STAT01.webp 1234w" sizes="1234px"></source>
-  <source width="1234" data-srcset="    /content/resized/2016/02/024-STAT01-320.png 320w,     /content/resized/2016/02/024-STAT01-384.png 384w,     /content/resized/2016/02/024-STAT01-512.png 512w,     /content/resized/2016/02/024-STAT01-683.png 683w,     /content/resized/2016/02/024-STAT01-800.png 800w,     /content/resized/2016/02/024-STAT01-960.png 960w,  /content/uploads/2016/02/024-STAT01.png 1234w" sizes="1234px"></source>
-  <img src="/content/resized/2016/02/024-STAT01-320.png" data-src="/content/uploads/2016/02/024-STAT01.png" class="blur-up lazyautosizes lazyload" alt="Figure 29: Monitor the Load Balancer Instances ">
+  <source width="1234" height="694" type="image/webp" data-srcset="        /content/resized/2016/02/024-STAT01-320.webp 320w,         /content/resized/2016/02/024-STAT01-384.webp 384w,         /content/resized/2016/02/024-STAT01-512.webp 512w,         /content/resized/2016/02/024-STAT01-683.webp 683w,         /content/resized/2016/02/024-STAT01-800.webp 800w,         /content/resized/2016/02/024-STAT01-960.webp 960w,  /content/uploads/2016/02/024-STAT01.webp 1234w" sizes="1234px"></source>
+  <source width="1234" height="694" data-srcset="    /content/resized/2016/02/024-STAT01-320.png 320w,     /content/resized/2016/02/024-STAT01-384.png 384w,     /content/resized/2016/02/024-STAT01-512.png 512w,     /content/resized/2016/02/024-STAT01-683.png 683w,     /content/resized/2016/02/024-STAT01-800.png 800w,     /content/resized/2016/02/024-STAT01-960.png 960w,  /content/uploads/2016/02/024-STAT01.png 1234w" sizes="1234px"></source>
+  <img src="/content/resized/2016/02/024-STAT01-320.png" data-src="/content/uploads/2016/02/024-STAT01.png" class="blur-up lazyautosizes lazyload" width="1234" height="694" alt="Figure 29: Monitor the Load Balancer Instances ">
 </picture>
 </a>
 
@@ -1275,9 +1263,9 @@
 
 <a href="/content/uploads/2016/02/024-STAT01-.png" title="Figure 30: ELB instances in status &lt;em&gt;InService&lt;/em&gt; " class="image-popup">
 <picture>
-  <source width="909" type="image/webp" data-srcset="        /content/resized/2016/02/024-STAT01--320.webp 320w,         /content/resized/2016/02/024-STAT01--384.webp 384w,         /content/resized/2016/02/024-STAT01--512.webp 512w,         /content/resized/2016/02/024-STAT01--683.webp 683w,         /content/resized/2016/02/024-STAT01--800.webp 800w,  /content/uploads/2016/02/024-STAT01-.webp 909w" sizes="909px"></source>
-  <source width="909" data-srcset="    /content/resized/2016/02/024-STAT01--320.png 320w,     /content/resized/2016/02/024-STAT01--384.png 384w,     /content/resized/2016/02/024-STAT01--512.png 512w,     /content/resized/2016/02/024-STAT01--683.png 683w,     /content/resized/2016/02/024-STAT01--800.png 800w,  /content/uploads/2016/02/024-STAT01-.png 909w" sizes="909px"></source>
-  <img src="/content/resized/2016/02/024-STAT01--320.png" data-src="/content/uploads/2016/02/024-STAT01-.png" class="blur-up lazyautosizes lazyload" alt="Figure 30: ELB instances in status &lt;em&gt;InService&lt;/em&gt; ">
+  <source width="909" height="124" type="image/webp" data-srcset="        /content/resized/2016/02/024-STAT01--320.webp 320w,         /content/resized/2016/02/024-STAT01--384.webp 384w,         /content/resized/2016/02/024-STAT01--512.webp 512w,         /content/resized/2016/02/024-STAT01--683.webp 683w,         /content/resized/2016/02/024-STAT01--800.webp 800w,  /content/uploads/2016/02/024-STAT01-.webp 909w" sizes="909px"></source>
+  <source width="909" height="124" data-srcset="    /content/resized/2016/02/024-STAT01--320.png 320w,     /content/resized/2016/02/024-STAT01--384.png 384w,     /content/resized/2016/02/024-STAT01--512.png 512w,     /content/resized/2016/02/024-STAT01--683.png 683w,     /content/resized/2016/02/024-STAT01--800.png 800w,  /content/uploads/2016/02/024-STAT01-.png 909w" sizes="909px"></source>
+  <img src="/content/resized/2016/02/024-STAT01--320.png" data-src="/content/uploads/2016/02/024-STAT01-.png" class="blur-up lazyautosizes lazyload" width="909" height="124" alt="Figure 30: ELB instances in status &lt;em&gt;InService&lt;/em&gt; ">
 </picture>
 </a>
 
@@ -1301,9 +1289,9 @@
 
 <a href="/content/uploads/2016/02/023-RG01.png" title="Figure 31: Validate the functionality of Railgun " class="image-popup">
 <picture>
-  <source width="602" type="image/webp" data-srcset="        /content/resized/2016/02/023-RG01-320.webp 320w,         /content/resized/2016/02/023-RG01-384.webp 384w,         /content/resized/2016/02/023-RG01-512.webp 512w,  /content/uploads/2016/02/023-RG01.webp 602w" sizes="602px"></source>
-  <source width="602" data-srcset="    /content/resized/2016/02/023-RG01-320.png 320w,     /content/resized/2016/02/023-RG01-384.png 384w,     /content/resized/2016/02/023-RG01-512.png 512w,  /content/uploads/2016/02/023-RG01.png 602w" sizes="602px"></source>
-  <img src="/content/resized/2016/02/023-RG01-320.png" data-src="/content/uploads/2016/02/023-RG01.png" class="blur-up lazyautosizes lazyload" alt="Figure 31: Validate the functionality of Railgun ">
+  <source width="602" height="919" type="image/webp" data-srcset="        /content/resized/2016/02/023-RG01-320.webp 320w,         /content/resized/2016/02/023-RG01-384.webp 384w,         /content/resized/2016/02/023-RG01-512.webp 512w,  /content/uploads/2016/02/023-RG01.webp 602w" sizes="602px"></source>
+  <source width="602" height="919" data-srcset="    /content/resized/2016/02/023-RG01-320.png 320w,     /content/resized/2016/02/023-RG01-384.png 384w,     /content/resized/2016/02/023-RG01-512.png 512w,  /content/uploads/2016/02/023-RG01.png 602w" sizes="602px"></source>
+  <img src="/content/resized/2016/02/023-RG01-320.png" data-src="/content/uploads/2016/02/023-RG01.png" class="blur-up lazyautosizes lazyload" width="602" height="919" alt="Figure 31: Validate the functionality of Railgun ">
 </picture>
 </a>
 
@@ -1354,13 +1342,21 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=CloudFlare+Railgun+on+AWS%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F17%2Fcloudflare-railgun-on-aws%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=CloudFlare%20Railgun%20on%20AWS%0Ahttps://www.edge-cloud.net/2016/02/17/cloudflare-railgun-on-aws/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F17%2Fcloudflare-railgun-on-aws%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=CloudFlare+Railgun+on+AWS%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F17%2Fcloudflare-railgun-on-aws%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F17%2Fcloudflare-railgun-on-aws%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F17%2Fcloudflare-railgun-on-aws%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F17%2Fcloudflare-railgun-on-aws%2F&amp;title=CloudFlare+Railgun+on+AWS" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F17%2Fcloudflare-railgun-on-aws%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F17%2Fcloudflare-railgun-on-aws%2F&amp;title=CloudFlare+Railgun+on+AWS" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -1386,6 +1382,62 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -1558,63 +1610,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1649,7 +1644,7 @@
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1734,14 +1729,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

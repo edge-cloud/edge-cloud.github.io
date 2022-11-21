@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 4: Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA)">
-  <meta name="twitter:description" content="Import and configure the VMware vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/01/08/openstack-vsphere-nsx-part4/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2014-01-08T00:29:08-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -441,9 +429,9 @@
 
 <a href="/content/uploads/2014/01/vPod-VOVA-Version2.png" title="Figure 1: VMware OpenStack Virtual Appliance (VOVA) in the overal setup " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/vPod-VOVA-Version2-320.webp 320w,         /content/resized/2014/01/vPod-VOVA-Version2-384.webp 384w,         /content/resized/2014/01/vPod-VOVA-Version2-512.webp 512w,         /content/resized/2014/01/vPod-VOVA-Version2-683.webp 683w,  /content/uploads/2014/01/vPod-VOVA-Version2.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/vPod-VOVA-Version2-320.png 320w,     /content/resized/2014/01/vPod-VOVA-Version2-384.png 384w,     /content/resized/2014/01/vPod-VOVA-Version2-512.png 512w,     /content/resized/2014/01/vPod-VOVA-Version2-683.png 683w,  /content/uploads/2014/01/vPod-VOVA-Version2.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/vPod-VOVA-Version2-320.png" data-src="/content/uploads/2014/01/vPod-VOVA-Version2.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: VMware OpenStack Virtual Appliance (VOVA) in the overal setup ">
+  <source width="800" height="270" type="image/webp" data-srcset="        /content/resized/2014/01/vPod-VOVA-Version2-320.webp 320w,         /content/resized/2014/01/vPod-VOVA-Version2-384.webp 384w,         /content/resized/2014/01/vPod-VOVA-Version2-512.webp 512w,         /content/resized/2014/01/vPod-VOVA-Version2-683.webp 683w,  /content/uploads/2014/01/vPod-VOVA-Version2.webp 800w" sizes="800px"></source>
+  <source width="800" height="270" data-srcset="    /content/resized/2014/01/vPod-VOVA-Version2-320.png 320w,     /content/resized/2014/01/vPod-VOVA-Version2-384.png 384w,     /content/resized/2014/01/vPod-VOVA-Version2-512.png 512w,     /content/resized/2014/01/vPod-VOVA-Version2-683.png 683w,  /content/uploads/2014/01/vPod-VOVA-Version2.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/vPod-VOVA-Version2-320.png" data-src="/content/uploads/2014/01/vPod-VOVA-Version2.png" class="blur-up lazyautosizes lazyload" width="800" height="270" alt="Figure 1: VMware OpenStack Virtual Appliance (VOVA) in the overal setup ">
 </picture>
 </a>
 
@@ -481,9 +469,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-Pre01.png" title="Figure 2: Datacenter and Cluster name for configuration of VOVA " class="image-popup">
 <picture>
-  <source width="254" type="image/webp" data-srcset=" /content/uploads/2014/01/VOVA-Pre01.webp 254w" sizes="254px"></source>
-  <source width="254" data-srcset=" /content/uploads/2014/01/VOVA-Pre01.png 254w" sizes="254px"></source>
-  <img src="/" data-src="/content/uploads/2014/01/VOVA-Pre01.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Datacenter and Cluster name for configuration of VOVA ">
+  <source width="254" height="224" type="image/webp" data-srcset=" /content/uploads/2014/01/VOVA-Pre01.webp 254w" sizes="254px"></source>
+  <source width="254" height="224" data-srcset=" /content/uploads/2014/01/VOVA-Pre01.png 254w" sizes="254px"></source>
+  <img src="/" data-src="/content/uploads/2014/01/VOVA-Pre01.png" class="blur-up lazyautosizes lazyload" width="254" height="224" alt="Figure 2: Datacenter and Cluster name for configuration of VOVA ">
 </picture>
 </a>
 
@@ -507,9 +495,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-Pre00.png" title="Figure 3: Lookup Transport Zone and Gateway Services UUID in the NSX manager " class="image-popup">
 <picture>
-  <source width="421" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Pre00-320.webp 320w,         /content/resized/2014/01/VOVA-Pre00-384.webp 384w,  /content/uploads/2014/01/VOVA-Pre00.webp 421w" sizes="421px"></source>
-  <source width="421" data-srcset="    /content/resized/2014/01/VOVA-Pre00-320.png 320w,     /content/resized/2014/01/VOVA-Pre00-384.png 384w,  /content/uploads/2014/01/VOVA-Pre00.png 421w" sizes="421px"></source>
-  <img src="/content/resized/2014/01/VOVA-Pre00-320.png" data-src="/content/uploads/2014/01/VOVA-Pre00.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Lookup Transport Zone and Gateway Services UUID in the NSX manager ">
+  <source width="421" height="197" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Pre00-320.webp 320w,         /content/resized/2014/01/VOVA-Pre00-384.webp 384w,  /content/uploads/2014/01/VOVA-Pre00.webp 421w" sizes="421px"></source>
+  <source width="421" height="197" data-srcset="    /content/resized/2014/01/VOVA-Pre00-320.png 320w,     /content/resized/2014/01/VOVA-Pre00-384.png 384w,  /content/uploads/2014/01/VOVA-Pre00.png 421w" sizes="421px"></source>
+  <img src="/content/resized/2014/01/VOVA-Pre00-320.png" data-src="/content/uploads/2014/01/VOVA-Pre00.png" class="blur-up lazyautosizes lazyload" width="421" height="197" alt="Figure 3: Lookup Transport Zone and Gateway Services UUID in the NSX manager ">
 </picture>
 </a>
 
@@ -533,9 +521,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-Pre02.png" title="Figure 4: UUID of the NSX Gateway Service " class="image-popup">
 <picture>
-  <source width="719" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Pre02-320.webp 320w,         /content/resized/2014/01/VOVA-Pre02-384.webp 384w,         /content/resized/2014/01/VOVA-Pre02-512.webp 512w,         /content/resized/2014/01/VOVA-Pre02-683.webp 683w,  /content/uploads/2014/01/VOVA-Pre02.webp 719w" sizes="719px"></source>
-  <source width="719" data-srcset="    /content/resized/2014/01/VOVA-Pre02-320.png 320w,     /content/resized/2014/01/VOVA-Pre02-384.png 384w,     /content/resized/2014/01/VOVA-Pre02-512.png 512w,     /content/resized/2014/01/VOVA-Pre02-683.png 683w,  /content/uploads/2014/01/VOVA-Pre02.png 719w" sizes="719px"></source>
-  <img src="/content/resized/2014/01/VOVA-Pre02-320.png" data-src="/content/uploads/2014/01/VOVA-Pre02.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: UUID of the NSX Gateway Service ">
+  <source width="719" height="399" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Pre02-320.webp 320w,         /content/resized/2014/01/VOVA-Pre02-384.webp 384w,         /content/resized/2014/01/VOVA-Pre02-512.webp 512w,         /content/resized/2014/01/VOVA-Pre02-683.webp 683w,  /content/uploads/2014/01/VOVA-Pre02.webp 719w" sizes="719px"></source>
+  <source width="719" height="399" data-srcset="    /content/resized/2014/01/VOVA-Pre02-320.png 320w,     /content/resized/2014/01/VOVA-Pre02-384.png 384w,     /content/resized/2014/01/VOVA-Pre02-512.png 512w,     /content/resized/2014/01/VOVA-Pre02-683.png 683w,  /content/uploads/2014/01/VOVA-Pre02.png 719w" sizes="719px"></source>
+  <img src="/content/resized/2014/01/VOVA-Pre02-320.png" data-src="/content/uploads/2014/01/VOVA-Pre02.png" class="blur-up lazyautosizes lazyload" width="719" height="399" alt="Figure 4: UUID of the NSX Gateway Service ">
 </picture>
 </a>
 
@@ -559,9 +547,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-Pre03.png" title="Figure 5: UUID of the NSX Transport Zone " class="image-popup">
 <picture>
-  <source width="536" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Pre03-320.webp 320w,         /content/resized/2014/01/VOVA-Pre03-384.webp 384w,         /content/resized/2014/01/VOVA-Pre03-512.webp 512w,  /content/uploads/2014/01/VOVA-Pre03.webp 536w" sizes="536px"></source>
-  <source width="536" data-srcset="    /content/resized/2014/01/VOVA-Pre03-320.png 320w,     /content/resized/2014/01/VOVA-Pre03-384.png 384w,     /content/resized/2014/01/VOVA-Pre03-512.png 512w,  /content/uploads/2014/01/VOVA-Pre03.png 536w" sizes="536px"></source>
-  <img src="/content/resized/2014/01/VOVA-Pre03-320.png" data-src="/content/uploads/2014/01/VOVA-Pre03.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: UUID of the NSX Transport Zone ">
+  <source width="536" height="292" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Pre03-320.webp 320w,         /content/resized/2014/01/VOVA-Pre03-384.webp 384w,         /content/resized/2014/01/VOVA-Pre03-512.webp 512w,  /content/uploads/2014/01/VOVA-Pre03.webp 536w" sizes="536px"></source>
+  <source width="536" height="292" data-srcset="    /content/resized/2014/01/VOVA-Pre03-320.png 320w,     /content/resized/2014/01/VOVA-Pre03-384.png 384w,     /content/resized/2014/01/VOVA-Pre03-512.png 512w,  /content/uploads/2014/01/VOVA-Pre03.png 536w" sizes="536px"></source>
+  <img src="/content/resized/2014/01/VOVA-Pre03-320.png" data-src="/content/uploads/2014/01/VOVA-Pre03.png" class="blur-up lazyautosizes lazyload" width="536" height="292" alt="Figure 5: UUID of the NSX Transport Zone ">
 </picture>
 </a>
 
@@ -593,9 +581,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-Import01.png" title="Figure 6: OVA Import of VOVA - Step 1 " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Import01-320.webp 320w,         /content/resized/2014/01/VOVA-Import01-384.webp 384w,         /content/resized/2014/01/VOVA-Import01-512.webp 512w,         /content/resized/2014/01/VOVA-Import01-683.webp 683w,  /content/uploads/2014/01/VOVA-Import01.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-Import01-320.png 320w,     /content/resized/2014/01/VOVA-Import01-384.png 384w,     /content/resized/2014/01/VOVA-Import01-512.png 512w,     /content/resized/2014/01/VOVA-Import01-683.png 683w,  /content/uploads/2014/01/VOVA-Import01.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-Import01-320.png" data-src="/content/uploads/2014/01/VOVA-Import01.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: OVA Import of VOVA - Step 1 ">
+  <source width="800" height="468" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Import01-320.webp 320w,         /content/resized/2014/01/VOVA-Import01-384.webp 384w,         /content/resized/2014/01/VOVA-Import01-512.webp 512w,         /content/resized/2014/01/VOVA-Import01-683.webp 683w,  /content/uploads/2014/01/VOVA-Import01.webp 800w" sizes="800px"></source>
+  <source width="800" height="468" data-srcset="    /content/resized/2014/01/VOVA-Import01-320.png 320w,     /content/resized/2014/01/VOVA-Import01-384.png 384w,     /content/resized/2014/01/VOVA-Import01-512.png 512w,     /content/resized/2014/01/VOVA-Import01-683.png 683w,  /content/uploads/2014/01/VOVA-Import01.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-Import01-320.png" data-src="/content/uploads/2014/01/VOVA-Import01.png" class="blur-up lazyautosizes lazyload" width="800" height="468" alt="Figure 6: OVA Import of VOVA - Step 1 ">
 </picture>
 </a>
 
@@ -626,9 +614,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-Import02.png" title="Figure 7: OVA Import of VOVA - Step 2 " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Import02-320.webp 320w,         /content/resized/2014/01/VOVA-Import02-384.webp 384w,         /content/resized/2014/01/VOVA-Import02-512.webp 512w,         /content/resized/2014/01/VOVA-Import02-683.webp 683w,  /content/uploads/2014/01/VOVA-Import02.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-Import02-320.png 320w,     /content/resized/2014/01/VOVA-Import02-384.png 384w,     /content/resized/2014/01/VOVA-Import02-512.png 512w,     /content/resized/2014/01/VOVA-Import02-683.png 683w,  /content/uploads/2014/01/VOVA-Import02.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-Import02-320.png" data-src="/content/uploads/2014/01/VOVA-Import02.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: OVA Import of VOVA - Step 2 ">
+  <source width="800" height="469" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Import02-320.webp 320w,         /content/resized/2014/01/VOVA-Import02-384.webp 384w,         /content/resized/2014/01/VOVA-Import02-512.webp 512w,         /content/resized/2014/01/VOVA-Import02-683.webp 683w,  /content/uploads/2014/01/VOVA-Import02.webp 800w" sizes="800px"></source>
+  <source width="800" height="469" data-srcset="    /content/resized/2014/01/VOVA-Import02-320.png 320w,     /content/resized/2014/01/VOVA-Import02-384.png 384w,     /content/resized/2014/01/VOVA-Import02-512.png 512w,     /content/resized/2014/01/VOVA-Import02-683.png 683w,  /content/uploads/2014/01/VOVA-Import02.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-Import02-320.png" data-src="/content/uploads/2014/01/VOVA-Import02.png" class="blur-up lazyautosizes lazyload" width="800" height="469" alt="Figure 7: OVA Import of VOVA - Step 2 ">
 </picture>
 </a>
 
@@ -659,9 +647,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-Import03.png" title="Figure 8: OVA Import of VOVA - Step 3 " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Import03-320.webp 320w,         /content/resized/2014/01/VOVA-Import03-384.webp 384w,         /content/resized/2014/01/VOVA-Import03-512.webp 512w,         /content/resized/2014/01/VOVA-Import03-683.webp 683w,  /content/uploads/2014/01/VOVA-Import03.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-Import03-320.png 320w,     /content/resized/2014/01/VOVA-Import03-384.png 384w,     /content/resized/2014/01/VOVA-Import03-512.png 512w,     /content/resized/2014/01/VOVA-Import03-683.png 683w,  /content/uploads/2014/01/VOVA-Import03.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-Import03-320.png" data-src="/content/uploads/2014/01/VOVA-Import03.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: OVA Import of VOVA - Step 3 ">
+  <source width="800" height="468" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Import03-320.webp 320w,         /content/resized/2014/01/VOVA-Import03-384.webp 384w,         /content/resized/2014/01/VOVA-Import03-512.webp 512w,         /content/resized/2014/01/VOVA-Import03-683.webp 683w,  /content/uploads/2014/01/VOVA-Import03.webp 800w" sizes="800px"></source>
+  <source width="800" height="468" data-srcset="    /content/resized/2014/01/VOVA-Import03-320.png 320w,     /content/resized/2014/01/VOVA-Import03-384.png 384w,     /content/resized/2014/01/VOVA-Import03-512.png 512w,     /content/resized/2014/01/VOVA-Import03-683.png 683w,  /content/uploads/2014/01/VOVA-Import03.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-Import03-320.png" data-src="/content/uploads/2014/01/VOVA-Import03.png" class="blur-up lazyautosizes lazyload" width="800" height="468" alt="Figure 8: OVA Import of VOVA - Step 3 ">
 </picture>
 </a>
 
@@ -685,9 +673,9 @@
 
 <a href="/content/uploads/2014/01/VOVA-Import04.png" title="Figure 9: OVA Import of VOVA - Step 4 " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Import04-320.webp 320w,         /content/resized/2014/01/VOVA-Import04-384.webp 384w,         /content/resized/2014/01/VOVA-Import04-512.webp 512w,         /content/resized/2014/01/VOVA-Import04-683.webp 683w,  /content/uploads/2014/01/VOVA-Import04.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA-Import04-320.png 320w,     /content/resized/2014/01/VOVA-Import04-384.png 384w,     /content/resized/2014/01/VOVA-Import04-512.png 512w,     /content/resized/2014/01/VOVA-Import04-683.png 683w,  /content/uploads/2014/01/VOVA-Import04.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA-Import04-320.png" data-src="/content/uploads/2014/01/VOVA-Import04.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: OVA Import of VOVA - Step 4 ">
+  <source width="800" height="468" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA-Import04-320.webp 320w,         /content/resized/2014/01/VOVA-Import04-384.webp 384w,         /content/resized/2014/01/VOVA-Import04-512.webp 512w,         /content/resized/2014/01/VOVA-Import04-683.webp 683w,  /content/uploads/2014/01/VOVA-Import04.webp 800w" sizes="800px"></source>
+  <source width="800" height="468" data-srcset="    /content/resized/2014/01/VOVA-Import04-320.png 320w,     /content/resized/2014/01/VOVA-Import04-384.png 384w,     /content/resized/2014/01/VOVA-Import04-512.png 512w,     /content/resized/2014/01/VOVA-Import04-683.png 683w,  /content/uploads/2014/01/VOVA-Import04.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA-Import04-320.png" data-src="/content/uploads/2014/01/VOVA-Import04.png" class="blur-up lazyautosizes lazyload" width="800" height="468" alt="Figure 9: OVA Import of VOVA - Step 4 ">
 </picture>
 </a>
 
@@ -711,9 +699,9 @@
 
 <a href="/content/uploads/2014/01/VOVA10.png" title="Figure 10: VMware OpenStack Virtual Appliance (VOVA) login screen " class="image-popup">
 <picture>
-  <source width="408" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA10-320.webp 320w,         /content/resized/2014/01/VOVA10-384.webp 384w,  /content/uploads/2014/01/VOVA10.webp 408w" sizes="408px"></source>
-  <source width="408" data-srcset="    /content/resized/2014/01/VOVA10-320.png 320w,     /content/resized/2014/01/VOVA10-384.png 384w,  /content/uploads/2014/01/VOVA10.png 408w" sizes="408px"></source>
-  <img src="/content/resized/2014/01/VOVA10-320.png" data-src="/content/uploads/2014/01/VOVA10.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: VMware OpenStack Virtual Appliance (VOVA) login screen ">
+  <source width="408" height="607" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA10-320.webp 320w,         /content/resized/2014/01/VOVA10-384.webp 384w,  /content/uploads/2014/01/VOVA10.webp 408w" sizes="408px"></source>
+  <source width="408" height="607" data-srcset="    /content/resized/2014/01/VOVA10-320.png 320w,     /content/resized/2014/01/VOVA10-384.png 384w,  /content/uploads/2014/01/VOVA10.png 408w" sizes="408px"></source>
+  <img src="/content/resized/2014/01/VOVA10-320.png" data-src="/content/uploads/2014/01/VOVA10.png" class="blur-up lazyautosizes lazyload" width="408" height="607" alt="Figure 10: VMware OpenStack Virtual Appliance (VOVA) login screen ">
 </picture>
 </a>
 
@@ -741,9 +729,9 @@
 
 <a href="/content/uploads/2014/01/VOVA11.png" title="Figure 11: Edit the Security Profile of the ESXi hosts " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA11-320.webp 320w,         /content/resized/2014/01/VOVA11-384.webp 384w,         /content/resized/2014/01/VOVA11-512.webp 512w,         /content/resized/2014/01/VOVA11-683.webp 683w,  /content/uploads/2014/01/VOVA11.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2014/01/VOVA11-320.png 320w,     /content/resized/2014/01/VOVA11-384.png 384w,     /content/resized/2014/01/VOVA11-512.png 512w,     /content/resized/2014/01/VOVA11-683.png 683w,  /content/uploads/2014/01/VOVA11.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2014/01/VOVA11-320.png" data-src="/content/uploads/2014/01/VOVA11.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Edit the Security Profile of the ESXi hosts ">
+  <source width="800" height="471" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA11-320.webp 320w,         /content/resized/2014/01/VOVA11-384.webp 384w,         /content/resized/2014/01/VOVA11-512.webp 512w,         /content/resized/2014/01/VOVA11-683.webp 683w,  /content/uploads/2014/01/VOVA11.webp 800w" sizes="800px"></source>
+  <source width="800" height="471" data-srcset="    /content/resized/2014/01/VOVA11-320.png 320w,     /content/resized/2014/01/VOVA11-384.png 384w,     /content/resized/2014/01/VOVA11-512.png 512w,     /content/resized/2014/01/VOVA11-683.png 683w,  /content/uploads/2014/01/VOVA11.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2014/01/VOVA11-320.png" data-src="/content/uploads/2014/01/VOVA11.png" class="blur-up lazyautosizes lazyload" width="800" height="471" alt="Figure 11: Edit the Security Profile of the ESXi hosts ">
 </picture>
 </a>
 
@@ -767,9 +755,9 @@
 
 <a href="/content/uploads/2014/01/VOVA12.png" title="Figure 12: Enable the &lt;em&gt;gdbserver&lt;/em&gt; security profile to enable VNC access to guests " class="image-popup">
 <picture>
-  <source width="729" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA12-320.webp 320w,         /content/resized/2014/01/VOVA12-384.webp 384w,         /content/resized/2014/01/VOVA12-512.webp 512w,         /content/resized/2014/01/VOVA12-683.webp 683w,  /content/uploads/2014/01/VOVA12.webp 729w" sizes="729px"></source>
-  <source width="729" data-srcset="    /content/resized/2014/01/VOVA12-320.png 320w,     /content/resized/2014/01/VOVA12-384.png 384w,     /content/resized/2014/01/VOVA12-512.png 512w,     /content/resized/2014/01/VOVA12-683.png 683w,  /content/uploads/2014/01/VOVA12.png 729w" sizes="729px"></source>
-  <img src="/content/resized/2014/01/VOVA12-320.png" data-src="/content/uploads/2014/01/VOVA12.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Enable the &lt;em&gt;gdbserver&lt;/em&gt; security profile to enable VNC access to guests ">
+  <source width="729" height="511" type="image/webp" data-srcset="        /content/resized/2014/01/VOVA12-320.webp 320w,         /content/resized/2014/01/VOVA12-384.webp 384w,         /content/resized/2014/01/VOVA12-512.webp 512w,         /content/resized/2014/01/VOVA12-683.webp 683w,  /content/uploads/2014/01/VOVA12.webp 729w" sizes="729px"></source>
+  <source width="729" height="511" data-srcset="    /content/resized/2014/01/VOVA12-320.png 320w,     /content/resized/2014/01/VOVA12-384.png 384w,     /content/resized/2014/01/VOVA12-512.png 512w,     /content/resized/2014/01/VOVA12-683.png 683w,  /content/uploads/2014/01/VOVA12.png 729w" sizes="729px"></source>
+  <img src="/content/resized/2014/01/VOVA12-320.png" data-src="/content/uploads/2014/01/VOVA12.png" class="blur-up lazyautosizes lazyload" width="729" height="511" alt="Figure 12: Enable the &lt;em&gt;gdbserver&lt;/em&gt; security profile to enable VNC access to guests ">
 </picture>
 </a>
 
@@ -889,9 +877,9 @@ root@openstack:/tmp/ovs#
 
 <a href="/content/uploads/2014/01/OVS01.png" title="Figure 13: NSX OVS SSL certificate displayed for VOVA " class="image-popup">
 <picture>
-  <source width="664" type="image/webp" data-srcset="        /content/resized/2014/01/OVS01-320.webp 320w,         /content/resized/2014/01/OVS01-384.webp 384w,         /content/resized/2014/01/OVS01-512.webp 512w,  /content/uploads/2014/01/OVS01.webp 664w" sizes="664px"></source>
-  <source width="664" data-srcset="    /content/resized/2014/01/OVS01-320.png 320w,     /content/resized/2014/01/OVS01-384.png 384w,     /content/resized/2014/01/OVS01-512.png 512w,  /content/uploads/2014/01/OVS01.png 664w" sizes="664px"></source>
-  <img src="/content/resized/2014/01/OVS01-320.png" data-src="/content/uploads/2014/01/OVS01.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: NSX OVS SSL certificate displayed for VOVA ">
+  <source width="664" height="540" type="image/webp" data-srcset="        /content/resized/2014/01/OVS01-320.webp 320w,         /content/resized/2014/01/OVS01-384.webp 384w,         /content/resized/2014/01/OVS01-512.webp 512w,  /content/uploads/2014/01/OVS01.webp 664w" sizes="664px"></source>
+  <source width="664" height="540" data-srcset="    /content/resized/2014/01/OVS01-320.png 320w,     /content/resized/2014/01/OVS01-384.png 384w,     /content/resized/2014/01/OVS01-512.png 512w,  /content/uploads/2014/01/OVS01.png 664w" sizes="664px"></source>
+  <img src="/content/resized/2014/01/OVS01-320.png" data-src="/content/uploads/2014/01/OVS01.png" class="blur-up lazyautosizes lazyload" width="664" height="540" alt="Figure 13: NSX OVS SSL certificate displayed for VOVA ">
 </picture>
 </a>
 
@@ -915,9 +903,9 @@ root@openstack:/tmp/ovs#
 
 <a href="/content/uploads/2014/01/OVS02.png" title="Figure 14: Add a new Hypervisor in NSX Manager " class="image-popup">
 <picture>
-  <source width="416" type="image/webp" data-srcset="        /content/resized/2014/01/OVS02-320.webp 320w,         /content/resized/2014/01/OVS02-384.webp 384w,  /content/uploads/2014/01/OVS02.webp 416w" sizes="416px"></source>
-  <source width="416" data-srcset="    /content/resized/2014/01/OVS02-320.png 320w,     /content/resized/2014/01/OVS02-384.png 384w,  /content/uploads/2014/01/OVS02.png 416w" sizes="416px"></source>
-  <img src="/content/resized/2014/01/OVS02-320.png" data-src="/content/uploads/2014/01/OVS02.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Add a new Hypervisor in NSX Manager ">
+  <source width="416" height="191" type="image/webp" data-srcset="        /content/resized/2014/01/OVS02-320.webp 320w,         /content/resized/2014/01/OVS02-384.webp 384w,  /content/uploads/2014/01/OVS02.webp 416w" sizes="416px"></source>
+  <source width="416" height="191" data-srcset="    /content/resized/2014/01/OVS02-320.png 320w,     /content/resized/2014/01/OVS02-384.png 384w,  /content/uploads/2014/01/OVS02.png 416w" sizes="416px"></source>
+  <img src="/content/resized/2014/01/OVS02-320.png" data-src="/content/uploads/2014/01/OVS02.png" class="blur-up lazyautosizes lazyload" width="416" height="191" alt="Figure 14: Add a new Hypervisor in NSX Manager ">
 </picture>
 </a>
 
@@ -951,9 +939,9 @@ root@openstack:/tmp/ovs#
 
 <a href="/content/uploads/2014/01/OVS03.png" title="Figure 15: VOVA successfully added as Hypervisor " class="image-popup">
 <picture>
-  <source width="479" type="image/webp" data-srcset="        /content/resized/2014/01/OVS03-320.webp 320w,         /content/resized/2014/01/OVS03-384.webp 384w,  /content/uploads/2014/01/OVS03.webp 479w" sizes="479px"></source>
-  <source width="479" data-srcset="    /content/resized/2014/01/OVS03-320.png 320w,     /content/resized/2014/01/OVS03-384.png 384w,  /content/uploads/2014/01/OVS03.png 479w" sizes="479px"></source>
-  <img src="/content/resized/2014/01/OVS03-320.png" data-src="/content/uploads/2014/01/OVS03.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: VOVA successfully added as Hypervisor ">
+  <source width="479" height="110" type="image/webp" data-srcset="        /content/resized/2014/01/OVS03-320.webp 320w,         /content/resized/2014/01/OVS03-384.webp 384w,  /content/uploads/2014/01/OVS03.webp 479w" sizes="479px"></source>
+  <source width="479" height="110" data-srcset="    /content/resized/2014/01/OVS03-320.png 320w,     /content/resized/2014/01/OVS03-384.png 384w,  /content/uploads/2014/01/OVS03.png 479w" sizes="479px"></source>
+  <img src="/content/resized/2014/01/OVS03-320.png" data-src="/content/uploads/2014/01/OVS03.png" class="blur-up lazyautosizes lazyload" width="479" height="110" alt="Figure 15: VOVA successfully added as Hypervisor ">
 </picture>
 </a>
 
@@ -1010,13 +998,21 @@ root@openstack:/tmp/ovs#
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+4%3A+Import+and+configure+the+VMware+vSphere+OpenStack+Virtual+Appliance+%28VOVA%29%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=OpenStack%20with%20vSphere%20and%20NSX%20-%20Part%204:%20Import%20and%20configure%20the%20VMware%20vSphere%20OpenStack%20Virtual%20Appliance%20(VOVA)%0Ahttps://www.edge-cloud.net/2014/01/08/openstack-vsphere-nsx-part4/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=OpenStack+with+vSphere+and+NSX+-+Part+4%3A+Import+and+configure+the+VMware+vSphere+OpenStack+Virtual+Appliance+%28VOVA%29%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+4%3A+Import+and+configure+the+VMware+vSphere+OpenStack+Virtual+Appliance+%28VOVA%29" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F08%2Fopenstack-vsphere-nsx-part4%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+4%3A+Import+and+configure+the+VMware+vSphere+OpenStack+Virtual+Appliance+%28VOVA%29" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -1042,6 +1038,62 @@ root@openstack:/tmp/ovs#
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -1214,63 +1266,6 @@ root@openstack:/tmp/ovs#
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1305,7 +1300,7 @@ root@openstack:/tmp/ovs#
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1390,14 +1385,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

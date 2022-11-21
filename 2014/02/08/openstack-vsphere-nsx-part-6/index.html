@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes">
-  <meta name="twitter:description" content="Install the VMware NSX plugin into the vSphere OpenStack Virtual Appliance (VOVA) for a setup including VMware vSphere, VMware NSX and OpenStack.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2014-02-08T02:44:46-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -428,9 +416,9 @@
 
 <a href="/content/uploads/2014/01/VC_Plugin_01.png" title="Figure 1: OpenStack API Endpoint Information " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Plugin_01-320.webp 320w,         /content/resized/2014/01/VC_Plugin_01-384.webp 384w,         /content/resized/2014/01/VC_Plugin_01-512.webp 512w,  /content/uploads/2014/01/VC_Plugin_01.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Plugin_01-320.png 320w,     /content/resized/2014/01/VC_Plugin_01-384.png 384w,     /content/resized/2014/01/VC_Plugin_01-512.png 512w,  /content/uploads/2014/01/VC_Plugin_01.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Plugin_01-320.png" data-src="/content/uploads/2014/01/VC_Plugin_01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: OpenStack API Endpoint Information ">
+  <source width="600" height="290" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Plugin_01-320.webp 320w,         /content/resized/2014/01/VC_Plugin_01-384.webp 384w,         /content/resized/2014/01/VC_Plugin_01-512.webp 512w,  /content/uploads/2014/01/VC_Plugin_01.webp 600w" sizes="600px"></source>
+  <source width="600" height="290" data-srcset="    /content/resized/2014/01/VC_Plugin_01-320.png 320w,     /content/resized/2014/01/VC_Plugin_01-384.png 384w,     /content/resized/2014/01/VC_Plugin_01-512.png 512w,  /content/uploads/2014/01/VC_Plugin_01.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Plugin_01-320.png" data-src="/content/uploads/2014/01/VC_Plugin_01.png" class="blur-up lazyautosizes lazyload" width="600" height="290" alt="Figure 1: OpenStack API Endpoint Information ">
 </picture>
 </a>
 
@@ -454,9 +442,9 @@
 
 <a href="/content/uploads/2014/01/VC_Plugin_02.png" title="Figure 2: vSphere Web Client Administration tab " class="image-popup">
 <picture>
-  <source width="246" type="image/webp" data-srcset=" /content/uploads/2014/01/VC_Plugin_02.webp 246w" sizes="246px"></source>
-  <source width="246" data-srcset=" /content/uploads/2014/01/VC_Plugin_02.png 246w" sizes="246px"></source>
-  <img src="/" data-src="/content/uploads/2014/01/VC_Plugin_02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: vSphere Web Client Administration tab ">
+  <source width="246" height="230" type="image/webp" data-srcset=" /content/uploads/2014/01/VC_Plugin_02.webp 246w" sizes="246px"></source>
+  <source width="246" height="230" data-srcset=" /content/uploads/2014/01/VC_Plugin_02.png 246w" sizes="246px"></source>
+  <img src="/" data-src="/content/uploads/2014/01/VC_Plugin_02.png" class="blur-up lazyautosizes lazyload" width="246" height="230" alt="Figure 2: vSphere Web Client Administration tab ">
 </picture>
 </a>
 
@@ -480,9 +468,9 @@
 
 <a href="/content/uploads/2014/01/VC_Plugin_03.png" title="Figure 3: Unconfigured vSphere Web Client Openstack Plugin " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Plugin_03-320.webp 320w,         /content/resized/2014/01/VC_Plugin_03-384.webp 384w,         /content/resized/2014/01/VC_Plugin_03-512.webp 512w,  /content/uploads/2014/01/VC_Plugin_03.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Plugin_03-320.png 320w,     /content/resized/2014/01/VC_Plugin_03-384.png 384w,     /content/resized/2014/01/VC_Plugin_03-512.png 512w,  /content/uploads/2014/01/VC_Plugin_03.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Plugin_03-320.png" data-src="/content/uploads/2014/01/VC_Plugin_03.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Unconfigured vSphere Web Client Openstack Plugin ">
+  <source width="600" height="401" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Plugin_03-320.webp 320w,         /content/resized/2014/01/VC_Plugin_03-384.webp 384w,         /content/resized/2014/01/VC_Plugin_03-512.webp 512w,  /content/uploads/2014/01/VC_Plugin_03.webp 600w" sizes="600px"></source>
+  <source width="600" height="401" data-srcset="    /content/resized/2014/01/VC_Plugin_03-320.png 320w,     /content/resized/2014/01/VC_Plugin_03-384.png 384w,     /content/resized/2014/01/VC_Plugin_03-512.png 512w,  /content/uploads/2014/01/VC_Plugin_03.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Plugin_03-320.png" data-src="/content/uploads/2014/01/VC_Plugin_03.png" class="blur-up lazyautosizes lazyload" width="600" height="401" alt="Figure 3: Unconfigured vSphere Web Client Openstack Plugin ">
 </picture>
 </a>
 
@@ -508,9 +496,9 @@
 
 <a href="/content/uploads/2014/01/VC_Plugin_04.png" title="Figure 4: Fully configured vSphere Web Client Openstack Plugin " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Plugin_04-320.webp 320w,         /content/resized/2014/01/VC_Plugin_04-384.webp 384w,         /content/resized/2014/01/VC_Plugin_04-512.webp 512w,  /content/uploads/2014/01/VC_Plugin_04.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Plugin_04-320.png 320w,     /content/resized/2014/01/VC_Plugin_04-384.png 384w,     /content/resized/2014/01/VC_Plugin_04-512.png 512w,  /content/uploads/2014/01/VC_Plugin_04.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Plugin_04-320.png" data-src="/content/uploads/2014/01/VC_Plugin_04.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Fully configured vSphere Web Client Openstack Plugin ">
+  <source width="600" height="254" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Plugin_04-320.webp 320w,         /content/resized/2014/01/VC_Plugin_04-384.webp 384w,         /content/resized/2014/01/VC_Plugin_04-512.webp 512w,  /content/uploads/2014/01/VC_Plugin_04.webp 600w" sizes="600px"></source>
+  <source width="600" height="254" data-srcset="    /content/resized/2014/01/VC_Plugin_04-320.png 320w,     /content/resized/2014/01/VC_Plugin_04-384.png 384w,     /content/resized/2014/01/VC_Plugin_04-512.png 512w,  /content/uploads/2014/01/VC_Plugin_04.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Plugin_04-320.png" data-src="/content/uploads/2014/01/VC_Plugin_04.png" class="blur-up lazyautosizes lazyload" width="600" height="254" alt="Figure 4: Fully configured vSphere Web Client Openstack Plugin ">
 </picture>
 </a>
 
@@ -536,9 +524,9 @@
 
 <a href="/content/uploads/2014/01/VC_Plugin_05.png" title="Figure 5: Information provided by the vSphere Web Client OpenStack plugin " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Plugin_05-320.webp 320w,         /content/resized/2014/01/VC_Plugin_05-384.webp 384w,         /content/resized/2014/01/VC_Plugin_05-512.webp 512w,  /content/uploads/2014/01/VC_Plugin_05.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Plugin_05-320.png 320w,     /content/resized/2014/01/VC_Plugin_05-384.png 384w,     /content/resized/2014/01/VC_Plugin_05-512.png 512w,  /content/uploads/2014/01/VC_Plugin_05.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Plugin_05-320.png" data-src="/content/uploads/2014/01/VC_Plugin_05.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Information provided by the vSphere Web Client OpenStack plugin ">
+  <source width="600" height="461" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Plugin_05-320.webp 320w,         /content/resized/2014/01/VC_Plugin_05-384.webp 384w,         /content/resized/2014/01/VC_Plugin_05-512.webp 512w,  /content/uploads/2014/01/VC_Plugin_05.webp 600w" sizes="600px"></source>
+  <source width="600" height="461" data-srcset="    /content/resized/2014/01/VC_Plugin_05-320.png 320w,     /content/resized/2014/01/VC_Plugin_05-384.png 384w,     /content/resized/2014/01/VC_Plugin_05-512.png 512w,  /content/uploads/2014/01/VC_Plugin_05.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Plugin_05-320.png" data-src="/content/uploads/2014/01/VC_Plugin_05.png" class="blur-up lazyautosizes lazyload" width="600" height="461" alt="Figure 5: Information provided by the vSphere Web Client OpenStack plugin ">
 </picture>
 </a>
 
@@ -566,9 +554,9 @@
 
 <a href="/content/uploads/2014/01/VC_Manage01.png" title="Figure 6: Perform a VMotion of an OpenStack VM - Step 1 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage01-320.webp 320w,         /content/resized/2014/01/VC_Manage01-384.webp 384w,         /content/resized/2014/01/VC_Manage01-512.webp 512w,  /content/uploads/2014/01/VC_Manage01.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Manage01-320.png 320w,     /content/resized/2014/01/VC_Manage01-384.png 384w,     /content/resized/2014/01/VC_Manage01-512.png 512w,  /content/uploads/2014/01/VC_Manage01.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Manage01-320.png" data-src="/content/uploads/2014/01/VC_Manage01.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Perform a VMotion of an OpenStack VM - Step 1 ">
+  <source width="600" height="406" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage01-320.webp 320w,         /content/resized/2014/01/VC_Manage01-384.webp 384w,         /content/resized/2014/01/VC_Manage01-512.webp 512w,  /content/uploads/2014/01/VC_Manage01.webp 600w" sizes="600px"></source>
+  <source width="600" height="406" data-srcset="    /content/resized/2014/01/VC_Manage01-320.png 320w,     /content/resized/2014/01/VC_Manage01-384.png 384w,     /content/resized/2014/01/VC_Manage01-512.png 512w,  /content/uploads/2014/01/VC_Manage01.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Manage01-320.png" data-src="/content/uploads/2014/01/VC_Manage01.png" class="blur-up lazyautosizes lazyload" width="600" height="406" alt="Figure 6: Perform a VMotion of an OpenStack VM - Step 1 ">
 </picture>
 </a>
 
@@ -592,9 +580,9 @@
 
 <a href="/content/uploads/2014/01/VC_Manage02.png" title="Figure 7: Perform a VMotion of an OpenStack VM - Step 2 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage02-320.webp 320w,         /content/resized/2014/01/VC_Manage02-384.webp 384w,         /content/resized/2014/01/VC_Manage02-512.webp 512w,  /content/uploads/2014/01/VC_Manage02.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Manage02-320.png 320w,     /content/resized/2014/01/VC_Manage02-384.png 384w,     /content/resized/2014/01/VC_Manage02-512.png 512w,  /content/uploads/2014/01/VC_Manage02.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Manage02-320.png" data-src="/content/uploads/2014/01/VC_Manage02.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Perform a VMotion of an OpenStack VM - Step 2 ">
+  <source width="600" height="195" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage02-320.webp 320w,         /content/resized/2014/01/VC_Manage02-384.webp 384w,         /content/resized/2014/01/VC_Manage02-512.webp 512w,  /content/uploads/2014/01/VC_Manage02.webp 600w" sizes="600px"></source>
+  <source width="600" height="195" data-srcset="    /content/resized/2014/01/VC_Manage02-320.png 320w,     /content/resized/2014/01/VC_Manage02-384.png 384w,     /content/resized/2014/01/VC_Manage02-512.png 512w,  /content/uploads/2014/01/VC_Manage02.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Manage02-320.png" data-src="/content/uploads/2014/01/VC_Manage02.png" class="blur-up lazyautosizes lazyload" width="600" height="195" alt="Figure 7: Perform a VMotion of an OpenStack VM - Step 2 ">
 </picture>
 </a>
 
@@ -618,9 +606,9 @@
 
 <a href="/content/uploads/2014/01/VC_Manage03.png" title="Figure 8: Perform a VMotion of an OpenStack VM - Step 3 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage03-320.webp 320w,         /content/resized/2014/01/VC_Manage03-384.webp 384w,         /content/resized/2014/01/VC_Manage03-512.webp 512w,  /content/uploads/2014/01/VC_Manage03.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Manage03-320.png 320w,     /content/resized/2014/01/VC_Manage03-384.png 384w,     /content/resized/2014/01/VC_Manage03-512.png 512w,  /content/uploads/2014/01/VC_Manage03.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Manage03-320.png" data-src="/content/uploads/2014/01/VC_Manage03.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Perform a VMotion of an OpenStack VM - Step 3 ">
+  <source width="600" height="352" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage03-320.webp 320w,         /content/resized/2014/01/VC_Manage03-384.webp 384w,         /content/resized/2014/01/VC_Manage03-512.webp 512w,  /content/uploads/2014/01/VC_Manage03.webp 600w" sizes="600px"></source>
+  <source width="600" height="352" data-srcset="    /content/resized/2014/01/VC_Manage03-320.png 320w,     /content/resized/2014/01/VC_Manage03-384.png 384w,     /content/resized/2014/01/VC_Manage03-512.png 512w,  /content/uploads/2014/01/VC_Manage03.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Manage03-320.png" data-src="/content/uploads/2014/01/VC_Manage03.png" class="blur-up lazyautosizes lazyload" width="600" height="352" alt="Figure 8: Perform a VMotion of an OpenStack VM - Step 3 ">
 </picture>
 </a>
 
@@ -644,9 +632,9 @@
 
 <a href="/content/uploads/2014/01/VC_Manage04.png" title="Figure 9: Perform a VMotion of an OpenStack VM - Step 4 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage04-320.webp 320w,         /content/resized/2014/01/VC_Manage04-384.webp 384w,         /content/resized/2014/01/VC_Manage04-512.webp 512w,  /content/uploads/2014/01/VC_Manage04.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Manage04-320.png 320w,     /content/resized/2014/01/VC_Manage04-384.png 384w,     /content/resized/2014/01/VC_Manage04-512.png 512w,  /content/uploads/2014/01/VC_Manage04.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Manage04-320.png" data-src="/content/uploads/2014/01/VC_Manage04.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Perform a VMotion of an OpenStack VM - Step 4 ">
+  <source width="600" height="351" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage04-320.webp 320w,         /content/resized/2014/01/VC_Manage04-384.webp 384w,         /content/resized/2014/01/VC_Manage04-512.webp 512w,  /content/uploads/2014/01/VC_Manage04.webp 600w" sizes="600px"></source>
+  <source width="600" height="351" data-srcset="    /content/resized/2014/01/VC_Manage04-320.png 320w,     /content/resized/2014/01/VC_Manage04-384.png 384w,     /content/resized/2014/01/VC_Manage04-512.png 512w,  /content/uploads/2014/01/VC_Manage04.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Manage04-320.png" data-src="/content/uploads/2014/01/VC_Manage04.png" class="blur-up lazyautosizes lazyload" width="600" height="351" alt="Figure 9: Perform a VMotion of an OpenStack VM - Step 4 ">
 </picture>
 </a>
 
@@ -670,9 +658,9 @@
 
 <a href="/content/uploads/2014/01/VC_Manage05.png" title="Figure 10: Perform a VMotion of an OpenStack VM - Step 5 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage05-320.webp 320w,         /content/resized/2014/01/VC_Manage05-384.webp 384w,         /content/resized/2014/01/VC_Manage05-512.webp 512w,  /content/uploads/2014/01/VC_Manage05.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/VC_Manage05-320.png 320w,     /content/resized/2014/01/VC_Manage05-384.png 384w,     /content/resized/2014/01/VC_Manage05-512.png 512w,  /content/uploads/2014/01/VC_Manage05.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/VC_Manage05-320.png" data-src="/content/uploads/2014/01/VC_Manage05.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Perform a VMotion of an OpenStack VM - Step 5 ">
+  <source width="600" height="212" type="image/webp" data-srcset="        /content/resized/2014/01/VC_Manage05-320.webp 320w,         /content/resized/2014/01/VC_Manage05-384.webp 384w,         /content/resized/2014/01/VC_Manage05-512.webp 512w,  /content/uploads/2014/01/VC_Manage05.webp 600w" sizes="600px"></source>
+  <source width="600" height="212" data-srcset="    /content/resized/2014/01/VC_Manage05-320.png 320w,     /content/resized/2014/01/VC_Manage05-384.png 384w,     /content/resized/2014/01/VC_Manage05-512.png 512w,  /content/uploads/2014/01/VC_Manage05.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/VC_Manage05-320.png" data-src="/content/uploads/2014/01/VC_Manage05.png" class="blur-up lazyautosizes lazyload" width="600" height="212" alt="Figure 10: Perform a VMotion of an OpenStack VM - Step 5 ">
 </picture>
 </a>
 
@@ -702,9 +690,9 @@
 
 <a href="/content/uploads/2014/01/DNAT01.png" title="Figure 11: Associate a floating IP in OpenStack - Step 1 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT01-320.webp 320w,         /content/resized/2014/01/DNAT01-384.webp 384w,         /content/resized/2014/01/DNAT01-512.webp 512w,  /content/uploads/2014/01/DNAT01.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT01-320.png 320w,     /content/resized/2014/01/DNAT01-384.png 384w,     /content/resized/2014/01/DNAT01-512.png 512w,  /content/uploads/2014/01/DNAT01.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT01-320.png" data-src="/content/uploads/2014/01/DNAT01.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Associate a floating IP in OpenStack - Step 1 ">
+  <source width="600" height="332" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT01-320.webp 320w,         /content/resized/2014/01/DNAT01-384.webp 384w,         /content/resized/2014/01/DNAT01-512.webp 512w,  /content/uploads/2014/01/DNAT01.webp 600w" sizes="600px"></source>
+  <source width="600" height="332" data-srcset="    /content/resized/2014/01/DNAT01-320.png 320w,     /content/resized/2014/01/DNAT01-384.png 384w,     /content/resized/2014/01/DNAT01-512.png 512w,  /content/uploads/2014/01/DNAT01.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT01-320.png" data-src="/content/uploads/2014/01/DNAT01.png" class="blur-up lazyautosizes lazyload" width="600" height="332" alt="Figure 11: Associate a floating IP in OpenStack - Step 1 ">
 </picture>
 </a>
 
@@ -728,9 +716,9 @@
 
 <a href="/content/uploads/2014/01/DNAT02.png" title="Figure 12: Associate a floating IP in OpenStack - Step 2 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT02-320.webp 320w,         /content/resized/2014/01/DNAT02-384.webp 384w,         /content/resized/2014/01/DNAT02-512.webp 512w,  /content/uploads/2014/01/DNAT02.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT02-320.png 320w,     /content/resized/2014/01/DNAT02-384.png 384w,     /content/resized/2014/01/DNAT02-512.png 512w,  /content/uploads/2014/01/DNAT02.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT02-320.png" data-src="/content/uploads/2014/01/DNAT02.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Associate a floating IP in OpenStack - Step 2 ">
+  <source width="600" height="278" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT02-320.webp 320w,         /content/resized/2014/01/DNAT02-384.webp 384w,         /content/resized/2014/01/DNAT02-512.webp 512w,  /content/uploads/2014/01/DNAT02.webp 600w" sizes="600px"></source>
+  <source width="600" height="278" data-srcset="    /content/resized/2014/01/DNAT02-320.png 320w,     /content/resized/2014/01/DNAT02-384.png 384w,     /content/resized/2014/01/DNAT02-512.png 512w,  /content/uploads/2014/01/DNAT02.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT02-320.png" data-src="/content/uploads/2014/01/DNAT02.png" class="blur-up lazyautosizes lazyload" width="600" height="278" alt="Figure 12: Associate a floating IP in OpenStack - Step 2 ">
 </picture>
 </a>
 
@@ -754,9 +742,9 @@
 
 <a href="/content/uploads/2014/01/DNAT03.png" title="Figure 13: Associate a floating IP in OpenStack - Step 3 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT03-320.webp 320w,         /content/resized/2014/01/DNAT03-384.webp 384w,         /content/resized/2014/01/DNAT03-512.webp 512w,  /content/uploads/2014/01/DNAT03.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT03-320.png 320w,     /content/resized/2014/01/DNAT03-384.png 384w,     /content/resized/2014/01/DNAT03-512.png 512w,  /content/uploads/2014/01/DNAT03.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT03-320.png" data-src="/content/uploads/2014/01/DNAT03.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: Associate a floating IP in OpenStack - Step 3 ">
+  <source width="600" height="224" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT03-320.webp 320w,         /content/resized/2014/01/DNAT03-384.webp 384w,         /content/resized/2014/01/DNAT03-512.webp 512w,  /content/uploads/2014/01/DNAT03.webp 600w" sizes="600px"></source>
+  <source width="600" height="224" data-srcset="    /content/resized/2014/01/DNAT03-320.png 320w,     /content/resized/2014/01/DNAT03-384.png 384w,     /content/resized/2014/01/DNAT03-512.png 512w,  /content/uploads/2014/01/DNAT03.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT03-320.png" data-src="/content/uploads/2014/01/DNAT03.png" class="blur-up lazyautosizes lazyload" width="600" height="224" alt="Figure 13: Associate a floating IP in OpenStack - Step 3 ">
 </picture>
 </a>
 
@@ -780,9 +768,9 @@
 
 <a href="/content/uploads/2014/01/DNAT04.png" title="Figure 14: Associate a floating IP in OpenStack - Step 4 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT04-320.webp 320w,         /content/resized/2014/01/DNAT04-384.webp 384w,         /content/resized/2014/01/DNAT04-512.webp 512w,  /content/uploads/2014/01/DNAT04.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT04-320.png 320w,     /content/resized/2014/01/DNAT04-384.png 384w,     /content/resized/2014/01/DNAT04-512.png 512w,  /content/uploads/2014/01/DNAT04.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT04-320.png" data-src="/content/uploads/2014/01/DNAT04.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Associate a floating IP in OpenStack - Step 4 ">
+  <source width="600" height="278" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT04-320.webp 320w,         /content/resized/2014/01/DNAT04-384.webp 384w,         /content/resized/2014/01/DNAT04-512.webp 512w,  /content/uploads/2014/01/DNAT04.webp 600w" sizes="600px"></source>
+  <source width="600" height="278" data-srcset="    /content/resized/2014/01/DNAT04-320.png 320w,     /content/resized/2014/01/DNAT04-384.png 384w,     /content/resized/2014/01/DNAT04-512.png 512w,  /content/uploads/2014/01/DNAT04.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT04-320.png" data-src="/content/uploads/2014/01/DNAT04.png" class="blur-up lazyautosizes lazyload" width="600" height="278" alt="Figure 14: Associate a floating IP in OpenStack - Step 4 ">
 </picture>
 </a>
 
@@ -808,9 +796,9 @@
 
 <a href="/content/uploads/2014/01/DNAT05.png" title="Figure 15: Successfully associate a floating IP in OpenStack " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT05-320.webp 320w,         /content/resized/2014/01/DNAT05-384.webp 384w,         /content/resized/2014/01/DNAT05-512.webp 512w,  /content/uploads/2014/01/DNAT05.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT05-320.png 320w,     /content/resized/2014/01/DNAT05-384.png 384w,     /content/resized/2014/01/DNAT05-512.png 512w,  /content/uploads/2014/01/DNAT05.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT05-320.png" data-src="/content/uploads/2014/01/DNAT05.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Successfully associate a floating IP in OpenStack ">
+  <source width="600" height="206" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT05-320.webp 320w,         /content/resized/2014/01/DNAT05-384.webp 384w,         /content/resized/2014/01/DNAT05-512.webp 512w,  /content/uploads/2014/01/DNAT05.webp 600w" sizes="600px"></source>
+  <source width="600" height="206" data-srcset="    /content/resized/2014/01/DNAT05-320.png 320w,     /content/resized/2014/01/DNAT05-384.png 384w,     /content/resized/2014/01/DNAT05-512.png 512w,  /content/uploads/2014/01/DNAT05.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT05-320.png" data-src="/content/uploads/2014/01/DNAT05.png" class="blur-up lazyautosizes lazyload" width="600" height="206" alt="Figure 15: Successfully associate a floating IP in OpenStack ">
 </picture>
 </a>
 
@@ -834,9 +822,9 @@
 
 <a href="/content/uploads/2014/01/DNAT06.png" title="Figure 16: Edit Security Groups in OpenStack - Step 1 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT06-320.webp 320w,         /content/resized/2014/01/DNAT06-384.webp 384w,         /content/resized/2014/01/DNAT06-512.webp 512w,  /content/uploads/2014/01/DNAT06.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT06-320.png 320w,     /content/resized/2014/01/DNAT06-384.png 384w,     /content/resized/2014/01/DNAT06-512.png 512w,  /content/uploads/2014/01/DNAT06.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT06-320.png" data-src="/content/uploads/2014/01/DNAT06.png" class="blur-up lazyautosizes lazyload" alt="Figure 16: Edit Security Groups in OpenStack - Step 1 ">
+  <source width="600" height="265" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT06-320.webp 320w,         /content/resized/2014/01/DNAT06-384.webp 384w,         /content/resized/2014/01/DNAT06-512.webp 512w,  /content/uploads/2014/01/DNAT06.webp 600w" sizes="600px"></source>
+  <source width="600" height="265" data-srcset="    /content/resized/2014/01/DNAT06-320.png 320w,     /content/resized/2014/01/DNAT06-384.png 384w,     /content/resized/2014/01/DNAT06-512.png 512w,  /content/uploads/2014/01/DNAT06.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT06-320.png" data-src="/content/uploads/2014/01/DNAT06.png" class="blur-up lazyautosizes lazyload" width="600" height="265" alt="Figure 16: Edit Security Groups in OpenStack - Step 1 ">
 </picture>
 </a>
 
@@ -860,9 +848,9 @@
 
 <a href="/content/uploads/2014/01/DNAT07.png" title="Figure 17: Edit Security Groups in OpenStack - Step 2 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT07-320.webp 320w,         /content/resized/2014/01/DNAT07-384.webp 384w,         /content/resized/2014/01/DNAT07-512.webp 512w,  /content/uploads/2014/01/DNAT07.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT07-320.png 320w,     /content/resized/2014/01/DNAT07-384.png 384w,     /content/resized/2014/01/DNAT07-512.png 512w,  /content/uploads/2014/01/DNAT07.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT07-320.png" data-src="/content/uploads/2014/01/DNAT07.png" class="blur-up lazyautosizes lazyload" alt="Figure 17: Edit Security Groups in OpenStack - Step 2 ">
+  <source width="600" height="256" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT07-320.webp 320w,         /content/resized/2014/01/DNAT07-384.webp 384w,         /content/resized/2014/01/DNAT07-512.webp 512w,  /content/uploads/2014/01/DNAT07.webp 600w" sizes="600px"></source>
+  <source width="600" height="256" data-srcset="    /content/resized/2014/01/DNAT07-320.png 320w,     /content/resized/2014/01/DNAT07-384.png 384w,     /content/resized/2014/01/DNAT07-512.png 512w,  /content/uploads/2014/01/DNAT07.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT07-320.png" data-src="/content/uploads/2014/01/DNAT07.png" class="blur-up lazyautosizes lazyload" width="600" height="256" alt="Figure 17: Edit Security Groups in OpenStack - Step 2 ">
 </picture>
 </a>
 
@@ -886,9 +874,9 @@
 
 <a href="/content/uploads/2014/01/DNAT08.png" title="Figure 18: Edit Security Groups in OpenStack - Step 3 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT08-320.webp 320w,         /content/resized/2014/01/DNAT08-384.webp 384w,         /content/resized/2014/01/DNAT08-512.webp 512w,  /content/uploads/2014/01/DNAT08.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT08-320.png 320w,     /content/resized/2014/01/DNAT08-384.png 384w,     /content/resized/2014/01/DNAT08-512.png 512w,  /content/uploads/2014/01/DNAT08.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT08-320.png" data-src="/content/uploads/2014/01/DNAT08.png" class="blur-up lazyautosizes lazyload" alt="Figure 18: Edit Security Groups in OpenStack - Step 3 ">
+  <source width="600" height="476" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT08-320.webp 320w,         /content/resized/2014/01/DNAT08-384.webp 384w,         /content/resized/2014/01/DNAT08-512.webp 512w,  /content/uploads/2014/01/DNAT08.webp 600w" sizes="600px"></source>
+  <source width="600" height="476" data-srcset="    /content/resized/2014/01/DNAT08-320.png 320w,     /content/resized/2014/01/DNAT08-384.png 384w,     /content/resized/2014/01/DNAT08-512.png 512w,  /content/uploads/2014/01/DNAT08.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT08-320.png" data-src="/content/uploads/2014/01/DNAT08.png" class="blur-up lazyautosizes lazyload" width="600" height="476" alt="Figure 18: Edit Security Groups in OpenStack - Step 3 ">
 </picture>
 </a>
 
@@ -912,9 +900,9 @@
 
 <a href="/content/uploads/2014/01/DNAT09.png" title="Figure 19: Edit Security Groups in OpenStack - Step 4 " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT09-320.webp 320w,         /content/resized/2014/01/DNAT09-384.webp 384w,         /content/resized/2014/01/DNAT09-512.webp 512w,  /content/uploads/2014/01/DNAT09.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT09-320.png 320w,     /content/resized/2014/01/DNAT09-384.png 384w,     /content/resized/2014/01/DNAT09-512.png 512w,  /content/uploads/2014/01/DNAT09.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT09-320.png" data-src="/content/uploads/2014/01/DNAT09.png" class="blur-up lazyautosizes lazyload" alt="Figure 19: Edit Security Groups in OpenStack - Step 4 ">
+  <source width="600" height="92" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT09-320.webp 320w,         /content/resized/2014/01/DNAT09-384.webp 384w,         /content/resized/2014/01/DNAT09-512.webp 512w,  /content/uploads/2014/01/DNAT09.webp 600w" sizes="600px"></source>
+  <source width="600" height="92" data-srcset="    /content/resized/2014/01/DNAT09-320.png 320w,     /content/resized/2014/01/DNAT09-384.png 384w,     /content/resized/2014/01/DNAT09-512.png 512w,  /content/uploads/2014/01/DNAT09.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT09-320.png" data-src="/content/uploads/2014/01/DNAT09.png" class="blur-up lazyautosizes lazyload" width="600" height="92" alt="Figure 19: Edit Security Groups in OpenStack - Step 4 ">
 </picture>
 </a>
 
@@ -938,9 +926,9 @@
 
 <a href="/content/uploads/2014/01/DNAT10.png" title="Figure 20: Connect via SSH to the floating IP address " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT10-320.webp 320w,         /content/resized/2014/01/DNAT10-384.webp 384w,         /content/resized/2014/01/DNAT10-512.webp 512w,  /content/uploads/2014/01/DNAT10.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2014/01/DNAT10-320.png 320w,     /content/resized/2014/01/DNAT10-384.png 384w,     /content/resized/2014/01/DNAT10-512.png 512w,  /content/uploads/2014/01/DNAT10.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2014/01/DNAT10-320.png" data-src="/content/uploads/2014/01/DNAT10.png" class="blur-up lazyautosizes lazyload" alt="Figure 20: Connect via SSH to the floating IP address ">
+  <source width="600" height="410" type="image/webp" data-srcset="        /content/resized/2014/01/DNAT10-320.webp 320w,         /content/resized/2014/01/DNAT10-384.webp 384w,         /content/resized/2014/01/DNAT10-512.webp 512w,  /content/uploads/2014/01/DNAT10.webp 600w" sizes="600px"></source>
+  <source width="600" height="410" data-srcset="    /content/resized/2014/01/DNAT10-320.png 320w,     /content/resized/2014/01/DNAT10-384.png 384w,     /content/resized/2014/01/DNAT10-512.png 512w,  /content/uploads/2014/01/DNAT10.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2014/01/DNAT10-320.png" data-src="/content/uploads/2014/01/DNAT10.png" class="blur-up lazyautosizes lazyload" width="600" height="410" alt="Figure 20: Connect via SSH to the floating IP address ">
 </picture>
 </a>
 
@@ -1042,13 +1030,21 @@ print "VM booted to status '%s'" % instance.status
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=OpenStack%20with%20vSphere%20and%20NSX%20-%20Part%206:%20Install%20the%20VMware%20vCenter%20Plugin%20for%20Openstack%20and%20look%20behind%20the%20scenes%0Ahttps://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -1074,6 +1070,62 @@ print "VM booted to status '%s'" % instance.status
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -1246,63 +1298,6 @@ print "VM booted to status '%s'" % instance.status
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1337,7 +1332,7 @@ print "VM booted to status '%s'" % instance.status
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1422,14 +1417,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

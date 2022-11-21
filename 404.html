@@ -32,20 +32,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Page Not Found">
-  <meta name="twitter:description" content="Page not found. Your pixels are in another canvas.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/404.html">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
 
@@ -69,7 +55,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -140,7 +126,7 @@
 
   </head>
 
-  <body class="layout--single">
+  <body class="layout--search">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -201,8 +187,6 @@
 
 
 
-
-
 <div id="main" role="main">
   
   <div class="sidebar sticky">
@@ -247,7 +231,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -262,6 +246,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -328,58 +314,15 @@
 
 
 
-  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Page Not Found">
-    <meta itemprop="description" content="Page not found. Your pixels are in another canvas.">
+  <div class="archive">
     
+      <h1 id="page-title" class="page__title">Page Not Found</h1>
     
 
-    <div class="page__inner-wrap">
-      
-        <header>
-          <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://www.edge-cloud.net/404.html" class="u-url" itemprop="url">Page Not Found
-</a>
-          </h1>
-          
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-        <p>Sorry, but the page you were trying to view does not exist — perhaps you can try searching for it below.</p>
-
-<div class="search-content__inner-wrap">
-<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
-  <div class="search-searchbar"></div>
-  <div class="search-hits"></div>
+    <p>Sorry, but the page you were trying to view does not exist — perhaps you can try searching for it below.</p>
+<div class="search-searchbar"></div>
+        <div class="search-hits"></div>
 </div>
-
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-
-
-        
-
-      </footer>
-
-      
-
-      
-    </div>
-
-    
-  </article>
-
-  
-  
 </div>
 
     </div>
@@ -410,7 +353,7 @@
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -495,14 +438,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

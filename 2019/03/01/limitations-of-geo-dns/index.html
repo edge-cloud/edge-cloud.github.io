@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Limitations of DNS-based geographic routing">
-  <meta name="twitter:description" content="Exploring the limitations of DNS-based geographic routing using AWS Route 53 and RIPE Atlas, through visualizing the real life results.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/03/01/limitations-of-geo-dns/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2019-03-01T00:00:00-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -388,7 +376,7 @@
 
       <section class="page__content e-content" itemprop="text">
         
-          <aside class="sidebar__right ">
+          <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
@@ -438,9 +426,9 @@
 
 <a href="/content/uploads/2019/02/DNS-Resolver.png" title="Figure 1: DNS Resolver and authoritative name server " class="image-popup">
 <picture>
-  <source width="600" type="image/webp" data-srcset="        /content/resized/2019/02/DNS-Resolver-320.webp 320w,         /content/resized/2019/02/DNS-Resolver-384.webp 384w,         /content/resized/2019/02/DNS-Resolver-512.webp 512w,  /content/uploads/2019/02/DNS-Resolver.webp 600w" sizes="600px"></source>
-  <source width="600" data-srcset="    /content/resized/2019/02/DNS-Resolver-320.png 320w,     /content/resized/2019/02/DNS-Resolver-384.png 384w,     /content/resized/2019/02/DNS-Resolver-512.png 512w,  /content/uploads/2019/02/DNS-Resolver.png 600w" sizes="600px"></source>
-  <img src="/content/resized/2019/02/DNS-Resolver-320.png" data-src="/content/uploads/2019/02/DNS-Resolver.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: DNS Resolver and authoritative name server ">
+  <source width="600" height="166" type="image/webp" data-srcset="        /content/resized/2019/02/DNS-Resolver-320.webp 320w,         /content/resized/2019/02/DNS-Resolver-384.webp 384w,         /content/resized/2019/02/DNS-Resolver-512.webp 512w,  /content/uploads/2019/02/DNS-Resolver.webp 600w" sizes="600px"></source>
+  <source width="600" height="166" data-srcset="    /content/resized/2019/02/DNS-Resolver-320.png 320w,     /content/resized/2019/02/DNS-Resolver-384.png 384w,     /content/resized/2019/02/DNS-Resolver-512.png 512w,  /content/uploads/2019/02/DNS-Resolver.png 600w" sizes="600px"></source>
+  <img src="/content/resized/2019/02/DNS-Resolver-320.png" data-src="/content/uploads/2019/02/DNS-Resolver.png" class="blur-up lazyautosizes lazyload" width="600" height="166" alt="Figure 1: DNS Resolver and authoritative name server ">
 </picture>
 </a>
 
@@ -520,9 +508,9 @@ In the past Maxmind placed these IP addresses into the backyard of a Kansas fami
 
 <a href="/content/uploads/2019/02/R53_Setup.png" title="Figure 2: Desired Geoproximity Routing " class="image-popup">
 <picture>
-  <source width="753" type="image/webp" data-srcset="        /content/resized/2019/02/R53_Setup-320.webp 320w,         /content/resized/2019/02/R53_Setup-384.webp 384w,         /content/resized/2019/02/R53_Setup-512.webp 512w,         /content/resized/2019/02/R53_Setup-683.webp 683w,  /content/uploads/2019/02/R53_Setup.webp 753w" sizes="753px"></source>
-  <source width="753" data-srcset="    /content/resized/2019/02/R53_Setup-320.png 320w,     /content/resized/2019/02/R53_Setup-384.png 384w,     /content/resized/2019/02/R53_Setup-512.png 512w,     /content/resized/2019/02/R53_Setup-683.png 683w,  /content/uploads/2019/02/R53_Setup.png 753w" sizes="753px"></source>
-  <img src="/content/resized/2019/02/R53_Setup-320.png" data-src="/content/uploads/2019/02/R53_Setup.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Desired Geoproximity Routing ">
+  <source width="753" height="541" type="image/webp" data-srcset="        /content/resized/2019/02/R53_Setup-320.webp 320w,         /content/resized/2019/02/R53_Setup-384.webp 384w,         /content/resized/2019/02/R53_Setup-512.webp 512w,         /content/resized/2019/02/R53_Setup-683.webp 683w,  /content/uploads/2019/02/R53_Setup.webp 753w" sizes="753px"></source>
+  <source width="753" height="541" data-srcset="    /content/resized/2019/02/R53_Setup-320.png 320w,     /content/resized/2019/02/R53_Setup-384.png 384w,     /content/resized/2019/02/R53_Setup-512.png 512w,     /content/resized/2019/02/R53_Setup-683.png 683w,  /content/uploads/2019/02/R53_Setup.png 753w" sizes="753px"></source>
+  <img src="/content/resized/2019/02/R53_Setup-320.png" data-src="/content/uploads/2019/02/R53_Setup.png" class="blur-up lazyautosizes lazyload" width="753" height="541" alt="Figure 2: Desired Geoproximity Routing ">
 </picture>
 </a>
 
@@ -568,9 +556,9 @@ Also we can find out the IP address of the DNS Resolver for each probe as seen b
 
 <a href="/content/uploads/2019/02/RIPE-Atlas-US-Probes.png" title="Figure 3: Mapping of RIPE Atlas probes to Origins " class="image-popup">
 <picture>
-  <source width="1223" type="image/webp" data-srcset="        /content/resized/2019/02/RIPE-Atlas-US-Probes-320.webp 320w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-384.webp 384w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-512.webp 512w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-683.webp 683w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-800.webp 800w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-960.webp 960w,  /content/uploads/2019/02/RIPE-Atlas-US-Probes.webp 1223w" sizes="1223px"></source>
-  <source width="1223" data-srcset="    /content/resized/2019/02/RIPE-Atlas-US-Probes-320.png 320w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-384.png 384w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-512.png 512w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-683.png 683w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-800.png 800w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-960.png 960w,  /content/uploads/2019/02/RIPE-Atlas-US-Probes.png 1223w" sizes="1223px"></source>
-  <img src="/content/resized/2019/02/RIPE-Atlas-US-Probes-320.png" data-src="/content/uploads/2019/02/RIPE-Atlas-US-Probes.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Mapping of RIPE Atlas probes to Origins ">
+  <source width="1223" height="620" type="image/webp" data-srcset="        /content/resized/2019/02/RIPE-Atlas-US-Probes-320.webp 320w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-384.webp 384w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-512.webp 512w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-683.webp 683w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-800.webp 800w,         /content/resized/2019/02/RIPE-Atlas-US-Probes-960.webp 960w,  /content/uploads/2019/02/RIPE-Atlas-US-Probes.webp 1223w" sizes="1223px"></source>
+  <source width="1223" height="620" data-srcset="    /content/resized/2019/02/RIPE-Atlas-US-Probes-320.png 320w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-384.png 384w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-512.png 512w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-683.png 683w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-800.png 800w,     /content/resized/2019/02/RIPE-Atlas-US-Probes-960.png 960w,  /content/uploads/2019/02/RIPE-Atlas-US-Probes.png 1223w" sizes="1223px"></source>
+  <img src="/content/resized/2019/02/RIPE-Atlas-US-Probes-320.png" data-src="/content/uploads/2019/02/RIPE-Atlas-US-Probes.png" class="blur-up lazyautosizes lazyload" width="1223" height="620" alt="Figure 3: Mapping of RIPE Atlas probes to Origins ">
 </picture>
 </a>
 
@@ -608,9 +596,9 @@ Also we can find out the IP address of the DNS Resolver for each probe as seen b
 
 <a href="/content/uploads/2019/02/RIPE-Atlas-Probe.png" title="Figure 4: Detail view of RIPE Atlas probe results " class="image-popup">
 <picture>
-  <source width="983" type="image/webp" data-srcset="        /content/resized/2019/02/RIPE-Atlas-Probe-320.webp 320w,         /content/resized/2019/02/RIPE-Atlas-Probe-384.webp 384w,         /content/resized/2019/02/RIPE-Atlas-Probe-512.webp 512w,         /content/resized/2019/02/RIPE-Atlas-Probe-683.webp 683w,         /content/resized/2019/02/RIPE-Atlas-Probe-800.webp 800w,         /content/resized/2019/02/RIPE-Atlas-Probe-960.webp 960w,  /content/uploads/2019/02/RIPE-Atlas-Probe.webp 983w" sizes="983px"></source>
-  <source width="983" data-srcset="    /content/resized/2019/02/RIPE-Atlas-Probe-320.png 320w,     /content/resized/2019/02/RIPE-Atlas-Probe-384.png 384w,     /content/resized/2019/02/RIPE-Atlas-Probe-512.png 512w,     /content/resized/2019/02/RIPE-Atlas-Probe-683.png 683w,     /content/resized/2019/02/RIPE-Atlas-Probe-800.png 800w,     /content/resized/2019/02/RIPE-Atlas-Probe-960.png 960w,  /content/uploads/2019/02/RIPE-Atlas-Probe.png 983w" sizes="983px"></source>
-  <img src="/content/resized/2019/02/RIPE-Atlas-Probe-320.png" data-src="/content/uploads/2019/02/RIPE-Atlas-Probe.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Detail view of RIPE Atlas probe results ">
+  <source width="983" height="888" type="image/webp" data-srcset="        /content/resized/2019/02/RIPE-Atlas-Probe-320.webp 320w,         /content/resized/2019/02/RIPE-Atlas-Probe-384.webp 384w,         /content/resized/2019/02/RIPE-Atlas-Probe-512.webp 512w,         /content/resized/2019/02/RIPE-Atlas-Probe-683.webp 683w,         /content/resized/2019/02/RIPE-Atlas-Probe-800.webp 800w,         /content/resized/2019/02/RIPE-Atlas-Probe-960.webp 960w,  /content/uploads/2019/02/RIPE-Atlas-Probe.webp 983w" sizes="983px"></source>
+  <source width="983" height="888" data-srcset="    /content/resized/2019/02/RIPE-Atlas-Probe-320.png 320w,     /content/resized/2019/02/RIPE-Atlas-Probe-384.png 384w,     /content/resized/2019/02/RIPE-Atlas-Probe-512.png 512w,     /content/resized/2019/02/RIPE-Atlas-Probe-683.png 683w,     /content/resized/2019/02/RIPE-Atlas-Probe-800.png 800w,     /content/resized/2019/02/RIPE-Atlas-Probe-960.png 960w,  /content/uploads/2019/02/RIPE-Atlas-Probe.png 983w" sizes="983px"></source>
+  <img src="/content/resized/2019/02/RIPE-Atlas-Probe-320.png" data-src="/content/uploads/2019/02/RIPE-Atlas-Probe.png" class="blur-up lazyautosizes lazyload" width="983" height="888" alt="Figure 4: Detail view of RIPE Atlas probe results ">
 </picture>
 </a>
 
@@ -657,9 +645,9 @@ Also we can find out the IP address of the DNS Resolver for each probe as seen b
 
 <a href="/content/uploads/2019/02/RIPE-Atlas-Details.png" title="Figure 5: Zoom into subset of RIPE Atlas probe results " class="image-popup">
 <picture>
-  <source width="1220" type="image/webp" data-srcset="        /content/resized/2019/02/RIPE-Atlas-Details-320.webp 320w,         /content/resized/2019/02/RIPE-Atlas-Details-384.webp 384w,         /content/resized/2019/02/RIPE-Atlas-Details-512.webp 512w,         /content/resized/2019/02/RIPE-Atlas-Details-683.webp 683w,         /content/resized/2019/02/RIPE-Atlas-Details-800.webp 800w,         /content/resized/2019/02/RIPE-Atlas-Details-960.webp 960w,  /content/uploads/2019/02/RIPE-Atlas-Details.webp 1220w" sizes="1220px"></source>
-  <source width="1220" data-srcset="    /content/resized/2019/02/RIPE-Atlas-Details-320.png 320w,     /content/resized/2019/02/RIPE-Atlas-Details-384.png 384w,     /content/resized/2019/02/RIPE-Atlas-Details-512.png 512w,     /content/resized/2019/02/RIPE-Atlas-Details-683.png 683w,     /content/resized/2019/02/RIPE-Atlas-Details-800.png 800w,     /content/resized/2019/02/RIPE-Atlas-Details-960.png 960w,  /content/uploads/2019/02/RIPE-Atlas-Details.png 1220w" sizes="1220px"></source>
-  <img src="/content/resized/2019/02/RIPE-Atlas-Details-320.png" data-src="/content/uploads/2019/02/RIPE-Atlas-Details.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Zoom into subset of RIPE Atlas probe results ">
+  <source width="1220" height="620" type="image/webp" data-srcset="        /content/resized/2019/02/RIPE-Atlas-Details-320.webp 320w,         /content/resized/2019/02/RIPE-Atlas-Details-384.webp 384w,         /content/resized/2019/02/RIPE-Atlas-Details-512.webp 512w,         /content/resized/2019/02/RIPE-Atlas-Details-683.webp 683w,         /content/resized/2019/02/RIPE-Atlas-Details-800.webp 800w,         /content/resized/2019/02/RIPE-Atlas-Details-960.webp 960w,  /content/uploads/2019/02/RIPE-Atlas-Details.webp 1220w" sizes="1220px"></source>
+  <source width="1220" height="620" data-srcset="    /content/resized/2019/02/RIPE-Atlas-Details-320.png 320w,     /content/resized/2019/02/RIPE-Atlas-Details-384.png 384w,     /content/resized/2019/02/RIPE-Atlas-Details-512.png 512w,     /content/resized/2019/02/RIPE-Atlas-Details-683.png 683w,     /content/resized/2019/02/RIPE-Atlas-Details-800.png 800w,     /content/resized/2019/02/RIPE-Atlas-Details-960.png 960w,  /content/uploads/2019/02/RIPE-Atlas-Details.png 1220w" sizes="1220px"></source>
+  <img src="/content/resized/2019/02/RIPE-Atlas-Details-320.png" data-src="/content/uploads/2019/02/RIPE-Atlas-Details.png" class="blur-up lazyautosizes lazyload" width="1220" height="620" alt="Figure 5: Zoom into subset of RIPE Atlas probe results ">
 </picture>
 </a>
 
@@ -735,13 +723,21 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Limitations+of+DNS-based+geographic+routing%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=Limitations%20of%20DNS-based%20geographic%20routing%0Ahttps://www.edge-cloud.net/2019/03/01/limitations-of-geo-dns/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Limitations+of+DNS-based+geographic+routing%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F&amp;title=Limitations+of+DNS-based+geographic+routing" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F&amp;title=Limitations+of+DNS-based+geographic+routing" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -767,6 +763,62 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -939,63 +991,6 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1030,7 +1025,7 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1115,14 +1110,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

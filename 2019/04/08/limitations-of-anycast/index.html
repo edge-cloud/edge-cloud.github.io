@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Limitations of Anycast for distributed content delivery">
-  <meta name="twitter:description" content="Exploring the limitations of Anycast using AWS Global Accelerator and RIPE Atlas, through visualizing the real life results.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/04/08/limitations-of-anycast/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2019-04-08T00:00:00-07:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -388,7 +376,7 @@
 
       <section class="page__content e-content" itemprop="text">
         
-          <aside class="sidebar__right ">
+          <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
@@ -434,9 +422,9 @@
 
 <a href="/content/uploads/2019/04/Anycast.png" title="Figure 1: Unicast vs. Anycast " class="image-popup">
 <picture>
-  <source width="850" type="image/webp" data-srcset="        /content/resized/2019/04/Anycast-320.webp 320w,         /content/resized/2019/04/Anycast-384.webp 384w,         /content/resized/2019/04/Anycast-512.webp 512w,         /content/resized/2019/04/Anycast-683.webp 683w,         /content/resized/2019/04/Anycast-800.webp 800w,  /content/uploads/2019/04/Anycast.webp 850w" sizes="850px"></source>
-  <source width="850" data-srcset="    /content/resized/2019/04/Anycast-320.png 320w,     /content/resized/2019/04/Anycast-384.png 384w,     /content/resized/2019/04/Anycast-512.png 512w,     /content/resized/2019/04/Anycast-683.png 683w,     /content/resized/2019/04/Anycast-800.png 800w,  /content/uploads/2019/04/Anycast.png 850w" sizes="850px"></source>
-  <img src="/content/resized/2019/04/Anycast-320.png" data-src="/content/uploads/2019/04/Anycast.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Unicast vs. Anycast ">
+  <source width="850" height="291" type="image/webp" data-srcset="        /content/resized/2019/04/Anycast-320.webp 320w,         /content/resized/2019/04/Anycast-384.webp 384w,         /content/resized/2019/04/Anycast-512.webp 512w,         /content/resized/2019/04/Anycast-683.webp 683w,         /content/resized/2019/04/Anycast-800.webp 800w,  /content/uploads/2019/04/Anycast.webp 850w" sizes="850px"></source>
+  <source width="850" height="291" data-srcset="    /content/resized/2019/04/Anycast-320.png 320w,     /content/resized/2019/04/Anycast-384.png 384w,     /content/resized/2019/04/Anycast-512.png 512w,     /content/resized/2019/04/Anycast-683.png 683w,     /content/resized/2019/04/Anycast-800.png 800w,  /content/uploads/2019/04/Anycast.png 850w" sizes="850px"></source>
+  <img src="/content/resized/2019/04/Anycast-320.png" data-src="/content/uploads/2019/04/Anycast.png" class="blur-up lazyautosizes lazyload" width="850" height="291" alt="Figure 1: Unicast vs. Anycast ">
 </picture>
 </a>
 
@@ -465,9 +453,9 @@ In the case of e.g. the <a href="https://developers.google.com/speed/public-dns/
 
 <a href="/content/uploads/2019/04/Global-Accelerator-Concept.png" title="Figure 2: Concept of AWS Global Accelerator " class="image-popup">
 <picture>
-  <source width="661" type="image/webp" data-srcset="        /content/resized/2019/04/Global-Accelerator-Concept-320.webp 320w,         /content/resized/2019/04/Global-Accelerator-Concept-384.webp 384w,         /content/resized/2019/04/Global-Accelerator-Concept-512.webp 512w,  /content/uploads/2019/04/Global-Accelerator-Concept.webp 661w" sizes="661px"></source>
-  <source width="661" data-srcset="    /content/resized/2019/04/Global-Accelerator-Concept-320.png 320w,     /content/resized/2019/04/Global-Accelerator-Concept-384.png 384w,     /content/resized/2019/04/Global-Accelerator-Concept-512.png 512w,  /content/uploads/2019/04/Global-Accelerator-Concept.png 661w" sizes="661px"></source>
-  <img src="/content/resized/2019/04/Global-Accelerator-Concept-320.png" data-src="/content/uploads/2019/04/Global-Accelerator-Concept.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Concept of AWS Global Accelerator ">
+  <source width="661" height="135" type="image/webp" data-srcset="        /content/resized/2019/04/Global-Accelerator-Concept-320.webp 320w,         /content/resized/2019/04/Global-Accelerator-Concept-384.webp 384w,         /content/resized/2019/04/Global-Accelerator-Concept-512.webp 512w,  /content/uploads/2019/04/Global-Accelerator-Concept.webp 661w" sizes="661px"></source>
+  <source width="661" height="135" data-srcset="    /content/resized/2019/04/Global-Accelerator-Concept-320.png 320w,     /content/resized/2019/04/Global-Accelerator-Concept-384.png 384w,     /content/resized/2019/04/Global-Accelerator-Concept-512.png 512w,  /content/uploads/2019/04/Global-Accelerator-Concept.png 661w" sizes="661px"></source>
+  <img src="/content/resized/2019/04/Global-Accelerator-Concept-320.png" data-src="/content/uploads/2019/04/Global-Accelerator-Concept.png" class="blur-up lazyautosizes lazyload" width="661" height="135" alt="Figure 2: Concept of AWS Global Accelerator ">
 </picture>
 </a>
 
@@ -513,9 +501,9 @@ In the case of e.g. the <a href="https://developers.google.com/speed/public-dns/
 
 <a href="/content/uploads/2019/04/Test-Setup.png" title="Figure 3: Test Setup with AWS Global Accelerator and two origins " class="image-popup">
 <picture>
-  <source width="585" type="image/webp" data-srcset="        /content/resized/2019/04/Test-Setup-320.webp 320w,         /content/resized/2019/04/Test-Setup-384.webp 384w,         /content/resized/2019/04/Test-Setup-512.webp 512w,  /content/uploads/2019/04/Test-Setup.webp 585w" sizes="585px"></source>
-  <source width="585" data-srcset="    /content/resized/2019/04/Test-Setup-320.png 320w,     /content/resized/2019/04/Test-Setup-384.png 384w,     /content/resized/2019/04/Test-Setup-512.png 512w,  /content/uploads/2019/04/Test-Setup.png 585w" sizes="585px"></source>
-  <img src="/content/resized/2019/04/Test-Setup-320.png" data-src="/content/uploads/2019/04/Test-Setup.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Test Setup with AWS Global Accelerator and two origins ">
+  <source width="585" height="257" type="image/webp" data-srcset="        /content/resized/2019/04/Test-Setup-320.webp 320w,         /content/resized/2019/04/Test-Setup-384.webp 384w,         /content/resized/2019/04/Test-Setup-512.webp 512w,  /content/uploads/2019/04/Test-Setup.webp 585w" sizes="585px"></source>
+  <source width="585" height="257" data-srcset="    /content/resized/2019/04/Test-Setup-320.png 320w,     /content/resized/2019/04/Test-Setup-384.png 384w,     /content/resized/2019/04/Test-Setup-512.png 512w,  /content/uploads/2019/04/Test-Setup.png 585w" sizes="585px"></source>
+  <img src="/content/resized/2019/04/Test-Setup-320.png" data-src="/content/uploads/2019/04/Test-Setup.png" class="blur-up lazyautosizes lazyload" width="585" height="257" alt="Figure 3: Test Setup with AWS Global Accelerator and two origins ">
 </picture>
 </a>
 
@@ -592,9 +580,9 @@ In the case of e.g. the <a href="https://developers.google.com/speed/public-dns/
 
 <a href="/content/uploads/2019/04/RIPE-Atlas-Probe-Detail.png" title="Figure 5: Detail view of RIPE Atlas probe results " class="image-popup">
 <picture>
-  <source width="371" type="image/webp" data-srcset="        /content/resized/2019/04/RIPE-Atlas-Probe-Detail-320.webp 320w,  /content/uploads/2019/04/RIPE-Atlas-Probe-Detail.webp 371w" sizes="371px"></source>
-  <source width="371" data-srcset="    /content/resized/2019/04/RIPE-Atlas-Probe-Detail-320.png 320w,  /content/uploads/2019/04/RIPE-Atlas-Probe-Detail.png 371w" sizes="371px"></source>
-  <img src="/content/resized/2019/04/RIPE-Atlas-Probe-Detail-320.png" data-src="/content/uploads/2019/04/RIPE-Atlas-Probe-Detail.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Detail view of RIPE Atlas probe results ">
+  <source width="371" height="494" type="image/webp" data-srcset="        /content/resized/2019/04/RIPE-Atlas-Probe-Detail-320.webp 320w,  /content/uploads/2019/04/RIPE-Atlas-Probe-Detail.webp 371w" sizes="371px"></source>
+  <source width="371" height="494" data-srcset="    /content/resized/2019/04/RIPE-Atlas-Probe-Detail-320.png 320w,  /content/uploads/2019/04/RIPE-Atlas-Probe-Detail.png 371w" sizes="371px"></source>
+  <img src="/content/resized/2019/04/RIPE-Atlas-Probe-Detail-320.png" data-src="/content/uploads/2019/04/RIPE-Atlas-Probe-Detail.png" class="blur-up lazyautosizes lazyload" width="371" height="494" alt="Figure 5: Detail view of RIPE Atlas probe results ">
 </picture>
 </a>
 
@@ -646,9 +634,9 @@ Looking at the Traceroute results for this probe, we can see that it uses the <a
 
 <a href="/content/uploads/2019/04/RIPE-Atlas-Internet2.png" title="Figure 6: Example of RIPE Atlas probe on US East Coast preferring the origin in US-West-2 " class="image-popup">
 <picture>
-  <source width="976" type="image/webp" data-srcset="        /content/resized/2019/04/RIPE-Atlas-Internet2-320.webp 320w,         /content/resized/2019/04/RIPE-Atlas-Internet2-384.webp 384w,         /content/resized/2019/04/RIPE-Atlas-Internet2-512.webp 512w,         /content/resized/2019/04/RIPE-Atlas-Internet2-683.webp 683w,         /content/resized/2019/04/RIPE-Atlas-Internet2-800.webp 800w,         /content/resized/2019/04/RIPE-Atlas-Internet2-960.webp 960w,  /content/uploads/2019/04/RIPE-Atlas-Internet2.webp 976w" sizes="976px"></source>
-  <source width="976" data-srcset="    /content/resized/2019/04/RIPE-Atlas-Internet2-320.png 320w,     /content/resized/2019/04/RIPE-Atlas-Internet2-384.png 384w,     /content/resized/2019/04/RIPE-Atlas-Internet2-512.png 512w,     /content/resized/2019/04/RIPE-Atlas-Internet2-683.png 683w,     /content/resized/2019/04/RIPE-Atlas-Internet2-800.png 800w,     /content/resized/2019/04/RIPE-Atlas-Internet2-960.png 960w,  /content/uploads/2019/04/RIPE-Atlas-Internet2.png 976w" sizes="976px"></source>
-  <img src="/content/resized/2019/04/RIPE-Atlas-Internet2-320.png" data-src="/content/uploads/2019/04/RIPE-Atlas-Internet2.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Example of RIPE Atlas probe on US East Coast preferring the origin in US-West-2 ">
+  <source width="976" height="500" type="image/webp" data-srcset="        /content/resized/2019/04/RIPE-Atlas-Internet2-320.webp 320w,         /content/resized/2019/04/RIPE-Atlas-Internet2-384.webp 384w,         /content/resized/2019/04/RIPE-Atlas-Internet2-512.webp 512w,         /content/resized/2019/04/RIPE-Atlas-Internet2-683.webp 683w,         /content/resized/2019/04/RIPE-Atlas-Internet2-800.webp 800w,         /content/resized/2019/04/RIPE-Atlas-Internet2-960.webp 960w,  /content/uploads/2019/04/RIPE-Atlas-Internet2.webp 976w" sizes="976px"></source>
+  <source width="976" height="500" data-srcset="    /content/resized/2019/04/RIPE-Atlas-Internet2-320.png 320w,     /content/resized/2019/04/RIPE-Atlas-Internet2-384.png 384w,     /content/resized/2019/04/RIPE-Atlas-Internet2-512.png 512w,     /content/resized/2019/04/RIPE-Atlas-Internet2-683.png 683w,     /content/resized/2019/04/RIPE-Atlas-Internet2-800.png 800w,     /content/resized/2019/04/RIPE-Atlas-Internet2-960.png 960w,  /content/uploads/2019/04/RIPE-Atlas-Internet2.png 976w" sizes="976px"></source>
+  <img src="/content/resized/2019/04/RIPE-Atlas-Internet2-320.png" data-src="/content/uploads/2019/04/RIPE-Atlas-Internet2.png" class="blur-up lazyautosizes lazyload" width="976" height="500" alt="Figure 6: Example of RIPE Atlas probe on US East Coast preferring the origin in US-West-2 ">
 </picture>
 </a>
 
@@ -676,9 +664,9 @@ Looking at the Traceroute results for this probe, we can see that it uses the <a
 
 <a href="/content/uploads/2019/04/RIPE-Atlas-Charter.png" title="Figure 7: Example of RIPE Atlas probe on US West Coast preferring the origin in US-East-2 " class="image-popup">
 <picture>
-  <source width="976" type="image/webp" data-srcset="        /content/resized/2019/04/RIPE-Atlas-Charter-320.webp 320w,         /content/resized/2019/04/RIPE-Atlas-Charter-384.webp 384w,         /content/resized/2019/04/RIPE-Atlas-Charter-512.webp 512w,         /content/resized/2019/04/RIPE-Atlas-Charter-683.webp 683w,         /content/resized/2019/04/RIPE-Atlas-Charter-800.webp 800w,         /content/resized/2019/04/RIPE-Atlas-Charter-960.webp 960w,  /content/uploads/2019/04/RIPE-Atlas-Charter.webp 976w" sizes="976px"></source>
-  <source width="976" data-srcset="    /content/resized/2019/04/RIPE-Atlas-Charter-320.png 320w,     /content/resized/2019/04/RIPE-Atlas-Charter-384.png 384w,     /content/resized/2019/04/RIPE-Atlas-Charter-512.png 512w,     /content/resized/2019/04/RIPE-Atlas-Charter-683.png 683w,     /content/resized/2019/04/RIPE-Atlas-Charter-800.png 800w,     /content/resized/2019/04/RIPE-Atlas-Charter-960.png 960w,  /content/uploads/2019/04/RIPE-Atlas-Charter.png 976w" sizes="976px"></source>
-  <img src="/content/resized/2019/04/RIPE-Atlas-Charter-320.png" data-src="/content/uploads/2019/04/RIPE-Atlas-Charter.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Example of RIPE Atlas probe on US West Coast preferring the origin in US-East-2 ">
+  <source width="976" height="498" type="image/webp" data-srcset="        /content/resized/2019/04/RIPE-Atlas-Charter-320.webp 320w,         /content/resized/2019/04/RIPE-Atlas-Charter-384.webp 384w,         /content/resized/2019/04/RIPE-Atlas-Charter-512.webp 512w,         /content/resized/2019/04/RIPE-Atlas-Charter-683.webp 683w,         /content/resized/2019/04/RIPE-Atlas-Charter-800.webp 800w,         /content/resized/2019/04/RIPE-Atlas-Charter-960.webp 960w,  /content/uploads/2019/04/RIPE-Atlas-Charter.webp 976w" sizes="976px"></source>
+  <source width="976" height="498" data-srcset="    /content/resized/2019/04/RIPE-Atlas-Charter-320.png 320w,     /content/resized/2019/04/RIPE-Atlas-Charter-384.png 384w,     /content/resized/2019/04/RIPE-Atlas-Charter-512.png 512w,     /content/resized/2019/04/RIPE-Atlas-Charter-683.png 683w,     /content/resized/2019/04/RIPE-Atlas-Charter-800.png 800w,     /content/resized/2019/04/RIPE-Atlas-Charter-960.png 960w,  /content/uploads/2019/04/RIPE-Atlas-Charter.png 976w" sizes="976px"></source>
+  <img src="/content/resized/2019/04/RIPE-Atlas-Charter-320.png" data-src="/content/uploads/2019/04/RIPE-Atlas-Charter.png" class="blur-up lazyautosizes lazyload" width="976" height="498" alt="Figure 7: Example of RIPE Atlas probe on US West Coast preferring the origin in US-East-2 ">
 </picture>
 </a>
 
@@ -733,13 +721,21 @@ But what performs better, DNS-based geographic routing or traffic steering via A
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Limitations+of+Anycast+for+distributed+content+delivery%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F04%2F08%2Flimitations-of-anycast%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=Limitations%20of%20Anycast%20for%20distributed%20content%20delivery%0Ahttps://www.edge-cloud.net/2019/04/08/limitations-of-anycast/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F04%2F08%2Flimitations-of-anycast%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Limitations+of+Anycast+for+distributed+content+delivery%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F04%2F08%2Flimitations-of-anycast%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F04%2F08%2Flimitations-of-anycast%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F04%2F08%2Flimitations-of-anycast%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F04%2F08%2Flimitations-of-anycast%2F&amp;title=Limitations+of+Anycast+for+distributed+content+delivery" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F04%2F08%2Flimitations-of-anycast%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F04%2F08%2Flimitations-of-anycast%2F&amp;title=Limitations+of+Anycast+for+distributed+content+delivery" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -765,6 +761,62 @@ But what performs better, DNS-based geographic routing or traffic steering via A
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -937,63 +989,6 @@ But what performs better, DNS-based geographic routing or traffic steering via A
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1028,7 +1023,7 @@ But what performs better, DNS-based geographic routing or traffic steering via A
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1113,14 +1108,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

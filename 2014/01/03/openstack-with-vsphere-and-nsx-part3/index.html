@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="OpenStack with vSphere and NSX - Part 3: Install and configure the Open vSwitch inside the ESXi hosts">
-  <meta name="twitter:description" content="Install and configure the Open vSwitch inside the ESXi hosts for a setup including VMware vSphere, VMware NSX and OpenStack.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2014/01/03/openstack-with-vsphere-and-nsx-part3/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2014-01-03T00:32:41-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -421,9 +409,9 @@
 
 <a href="/content/uploads/2013/12/ESXwithOVS01.png" title="Figure 1: Ensure a free vmnic is available on ESXi hosts " class="image-popup">
 <picture>
-  <source width="980" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS01-320.webp 320w,         /content/resized/2013/12/ESXwithOVS01-384.webp 384w,         /content/resized/2013/12/ESXwithOVS01-512.webp 512w,         /content/resized/2013/12/ESXwithOVS01-683.webp 683w,         /content/resized/2013/12/ESXwithOVS01-800.webp 800w,         /content/resized/2013/12/ESXwithOVS01-960.webp 960w,  /content/uploads/2013/12/ESXwithOVS01.webp 980w" sizes="980px"></source>
-  <source width="980" data-srcset="    /content/resized/2013/12/ESXwithOVS01-320.png 320w,     /content/resized/2013/12/ESXwithOVS01-384.png 384w,     /content/resized/2013/12/ESXwithOVS01-512.png 512w,     /content/resized/2013/12/ESXwithOVS01-683.png 683w,     /content/resized/2013/12/ESXwithOVS01-800.png 800w,     /content/resized/2013/12/ESXwithOVS01-960.png 960w,  /content/uploads/2013/12/ESXwithOVS01.png 980w" sizes="980px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS01-320.png" data-src="/content/uploads/2013/12/ESXwithOVS01.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Ensure a free vmnic is available on ESXi hosts ">
+  <source width="980" height="412" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS01-320.webp 320w,         /content/resized/2013/12/ESXwithOVS01-384.webp 384w,         /content/resized/2013/12/ESXwithOVS01-512.webp 512w,         /content/resized/2013/12/ESXwithOVS01-683.webp 683w,         /content/resized/2013/12/ESXwithOVS01-800.webp 800w,         /content/resized/2013/12/ESXwithOVS01-960.webp 960w,  /content/uploads/2013/12/ESXwithOVS01.webp 980w" sizes="980px"></source>
+  <source width="980" height="412" data-srcset="    /content/resized/2013/12/ESXwithOVS01-320.png 320w,     /content/resized/2013/12/ESXwithOVS01-384.png 384w,     /content/resized/2013/12/ESXwithOVS01-512.png 512w,     /content/resized/2013/12/ESXwithOVS01-683.png 683w,     /content/resized/2013/12/ESXwithOVS01-800.png 800w,     /content/resized/2013/12/ESXwithOVS01-960.png 960w,  /content/uploads/2013/12/ESXwithOVS01.png 980w" sizes="980px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS01-320.png" data-src="/content/uploads/2013/12/ESXwithOVS01.png" class="blur-up lazyautosizes lazyload" width="980" height="412" alt="Figure 1: Ensure a free vmnic is available on ESXi hosts ">
 </picture>
 </a>
 
@@ -451,9 +439,9 @@
 
 <a href="/content/uploads/2013/12/ESXwithOVS02.png" title="Figure 2: Upload the NSX vSwitch vib to storage accessible by ESXi " class="image-popup">
 <picture>
-  <source width="981" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS02-320.webp 320w,         /content/resized/2013/12/ESXwithOVS02-384.webp 384w,         /content/resized/2013/12/ESXwithOVS02-512.webp 512w,         /content/resized/2013/12/ESXwithOVS02-683.webp 683w,         /content/resized/2013/12/ESXwithOVS02-800.webp 800w,         /content/resized/2013/12/ESXwithOVS02-960.webp 960w,  /content/uploads/2013/12/ESXwithOVS02.webp 981w" sizes="981px"></source>
-  <source width="981" data-srcset="    /content/resized/2013/12/ESXwithOVS02-320.png 320w,     /content/resized/2013/12/ESXwithOVS02-384.png 384w,     /content/resized/2013/12/ESXwithOVS02-512.png 512w,     /content/resized/2013/12/ESXwithOVS02-683.png 683w,     /content/resized/2013/12/ESXwithOVS02-800.png 800w,     /content/resized/2013/12/ESXwithOVS02-960.png 960w,  /content/uploads/2013/12/ESXwithOVS02.png 981w" sizes="981px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS02-320.png" data-src="/content/uploads/2013/12/ESXwithOVS02.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Upload the NSX vSwitch vib to storage accessible by ESXi ">
+  <source width="981" height="298" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS02-320.webp 320w,         /content/resized/2013/12/ESXwithOVS02-384.webp 384w,         /content/resized/2013/12/ESXwithOVS02-512.webp 512w,         /content/resized/2013/12/ESXwithOVS02-683.webp 683w,         /content/resized/2013/12/ESXwithOVS02-800.webp 800w,         /content/resized/2013/12/ESXwithOVS02-960.webp 960w,  /content/uploads/2013/12/ESXwithOVS02.webp 981w" sizes="981px"></source>
+  <source width="981" height="298" data-srcset="    /content/resized/2013/12/ESXwithOVS02-320.png 320w,     /content/resized/2013/12/ESXwithOVS02-384.png 384w,     /content/resized/2013/12/ESXwithOVS02-512.png 512w,     /content/resized/2013/12/ESXwithOVS02-683.png 683w,     /content/resized/2013/12/ESXwithOVS02-800.png 800w,     /content/resized/2013/12/ESXwithOVS02-960.png 960w,  /content/uploads/2013/12/ESXwithOVS02.png 981w" sizes="981px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS02-320.png" data-src="/content/uploads/2013/12/ESXwithOVS02.png" class="blur-up lazyautosizes lazyload" width="981" height="298" alt="Figure 2: Upload the NSX vSwitch vib to storage accessible by ESXi ">
 </picture>
 </a>
 
@@ -477,9 +465,9 @@
 
 <a href="/content/uploads/2013/12/ESXwithOVS04.png" title="Figure 3: Enable SSH access to ESXi hosts " class="image-popup">
 <picture>
-  <source width="727" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS04-320.webp 320w,         /content/resized/2013/12/ESXwithOVS04-384.webp 384w,         /content/resized/2013/12/ESXwithOVS04-512.webp 512w,         /content/resized/2013/12/ESXwithOVS04-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS04.webp 727w" sizes="727px"></source>
-  <source width="727" data-srcset="    /content/resized/2013/12/ESXwithOVS04-320.png 320w,     /content/resized/2013/12/ESXwithOVS04-384.png 384w,     /content/resized/2013/12/ESXwithOVS04-512.png 512w,     /content/resized/2013/12/ESXwithOVS04-683.png 683w,  /content/uploads/2013/12/ESXwithOVS04.png 727w" sizes="727px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS04-320.png" data-src="/content/uploads/2013/12/ESXwithOVS04.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Enable SSH access to ESXi hosts ">
+  <source width="727" height="508" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS04-320.webp 320w,         /content/resized/2013/12/ESXwithOVS04-384.webp 384w,         /content/resized/2013/12/ESXwithOVS04-512.webp 512w,         /content/resized/2013/12/ESXwithOVS04-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS04.webp 727w" sizes="727px"></source>
+  <source width="727" height="508" data-srcset="    /content/resized/2013/12/ESXwithOVS04-320.png 320w,     /content/resized/2013/12/ESXwithOVS04-384.png 384w,     /content/resized/2013/12/ESXwithOVS04-512.png 512w,     /content/resized/2013/12/ESXwithOVS04-683.png 683w,  /content/uploads/2013/12/ESXwithOVS04.png 727w" sizes="727px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS04-320.png" data-src="/content/uploads/2013/12/ESXwithOVS04.png" class="blur-up lazyautosizes lazyload" width="727" height="508" alt="Figure 3: Enable SSH access to ESXi hosts ">
 </picture>
 </a>
 
@@ -560,9 +548,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS06.png" title="Figure 4: NSX OVS SSL certificate displayed for an ESXi host " class="image-popup">
 <picture>
-  <source width="663" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS06-320.webp 320w,         /content/resized/2013/12/ESXwithOVS06-384.webp 384w,         /content/resized/2013/12/ESXwithOVS06-512.webp 512w,  /content/uploads/2013/12/ESXwithOVS06.webp 663w" sizes="663px"></source>
-  <source width="663" data-srcset="    /content/resized/2013/12/ESXwithOVS06-320.png 320w,     /content/resized/2013/12/ESXwithOVS06-384.png 384w,     /content/resized/2013/12/ESXwithOVS06-512.png 512w,  /content/uploads/2013/12/ESXwithOVS06.png 663w" sizes="663px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS06-320.png" data-src="/content/uploads/2013/12/ESXwithOVS06.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: NSX OVS SSL certificate displayed for an ESXi host ">
+  <source width="663" height="408" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS06-320.webp 320w,         /content/resized/2013/12/ESXwithOVS06-384.webp 384w,         /content/resized/2013/12/ESXwithOVS06-512.webp 512w,  /content/uploads/2013/12/ESXwithOVS06.webp 663w" sizes="663px"></source>
+  <source width="663" height="408" data-srcset="    /content/resized/2013/12/ESXwithOVS06-320.png 320w,     /content/resized/2013/12/ESXwithOVS06-384.png 384w,     /content/resized/2013/12/ESXwithOVS06-512.png 512w,  /content/uploads/2013/12/ESXwithOVS06.png 663w" sizes="663px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS06-320.png" data-src="/content/uploads/2013/12/ESXwithOVS06.png" class="blur-up lazyautosizes lazyload" width="663" height="408" alt="Figure 4: NSX OVS SSL certificate displayed for an ESXi host ">
 </picture>
 </a>
 
@@ -588,9 +576,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS07.png" title="Figure 5: Add a new Hypervisor in NSX Manager " class="image-popup">
 <picture>
-  <source width="423" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS07-320.webp 320w,         /content/resized/2013/12/ESXwithOVS07-384.webp 384w,  /content/uploads/2013/12/ESXwithOVS07.webp 423w" sizes="423px"></source>
-  <source width="423" data-srcset="    /content/resized/2013/12/ESXwithOVS07-320.png 320w,     /content/resized/2013/12/ESXwithOVS07-384.png 384w,  /content/uploads/2013/12/ESXwithOVS07.png 423w" sizes="423px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS07-320.png" data-src="/content/uploads/2013/12/ESXwithOVS07.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Add a new Hypervisor in NSX Manager ">
+  <source width="423" height="199" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS07-320.webp 320w,         /content/resized/2013/12/ESXwithOVS07-384.webp 384w,  /content/uploads/2013/12/ESXwithOVS07.webp 423w" sizes="423px"></source>
+  <source width="423" height="199" data-srcset="    /content/resized/2013/12/ESXwithOVS07-320.png 320w,     /content/resized/2013/12/ESXwithOVS07-384.png 384w,  /content/uploads/2013/12/ESXwithOVS07.png 423w" sizes="423px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS07-320.png" data-src="/content/uploads/2013/12/ESXwithOVS07.png" class="blur-up lazyautosizes lazyload" width="423" height="199" alt="Figure 5: Add a new Hypervisor in NSX Manager ">
 </picture>
 </a>
 
@@ -614,9 +602,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS08.png" title="Figure 6: Create Hypervisor - Step 1 " class="image-popup">
 <picture>
-  <source width="796" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS08-320.webp 320w,         /content/resized/2013/12/ESXwithOVS08-384.webp 384w,         /content/resized/2013/12/ESXwithOVS08-512.webp 512w,         /content/resized/2013/12/ESXwithOVS08-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS08.webp 796w" sizes="796px"></source>
-  <source width="796" data-srcset="    /content/resized/2013/12/ESXwithOVS08-320.png 320w,     /content/resized/2013/12/ESXwithOVS08-384.png 384w,     /content/resized/2013/12/ESXwithOVS08-512.png 512w,     /content/resized/2013/12/ESXwithOVS08-683.png 683w,  /content/uploads/2013/12/ESXwithOVS08.png 796w" sizes="796px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS08-320.png" data-src="/content/uploads/2013/12/ESXwithOVS08.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Create Hypervisor - Step 1 ">
+  <source width="796" height="498" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS08-320.webp 320w,         /content/resized/2013/12/ESXwithOVS08-384.webp 384w,         /content/resized/2013/12/ESXwithOVS08-512.webp 512w,         /content/resized/2013/12/ESXwithOVS08-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS08.webp 796w" sizes="796px"></source>
+  <source width="796" height="498" data-srcset="    /content/resized/2013/12/ESXwithOVS08-320.png 320w,     /content/resized/2013/12/ESXwithOVS08-384.png 384w,     /content/resized/2013/12/ESXwithOVS08-512.png 512w,     /content/resized/2013/12/ESXwithOVS08-683.png 683w,  /content/uploads/2013/12/ESXwithOVS08.png 796w" sizes="796px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS08-320.png" data-src="/content/uploads/2013/12/ESXwithOVS08.png" class="blur-up lazyautosizes lazyload" width="796" height="498" alt="Figure 6: Create Hypervisor - Step 1 ">
 </picture>
 </a>
 
@@ -640,9 +628,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS09.png" title="Figure 7: Create Hypervisor - Step 2 " class="image-popup">
 <picture>
-  <source width="796" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS09-320.webp 320w,         /content/resized/2013/12/ESXwithOVS09-384.webp 384w,         /content/resized/2013/12/ESXwithOVS09-512.webp 512w,         /content/resized/2013/12/ESXwithOVS09-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS09.webp 796w" sizes="796px"></source>
-  <source width="796" data-srcset="    /content/resized/2013/12/ESXwithOVS09-320.png 320w,     /content/resized/2013/12/ESXwithOVS09-384.png 384w,     /content/resized/2013/12/ESXwithOVS09-512.png 512w,     /content/resized/2013/12/ESXwithOVS09-683.png 683w,  /content/uploads/2013/12/ESXwithOVS09.png 796w" sizes="796px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS09-320.png" data-src="/content/uploads/2013/12/ESXwithOVS09.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Create Hypervisor - Step 2 ">
+  <source width="796" height="499" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS09-320.webp 320w,         /content/resized/2013/12/ESXwithOVS09-384.webp 384w,         /content/resized/2013/12/ESXwithOVS09-512.webp 512w,         /content/resized/2013/12/ESXwithOVS09-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS09.webp 796w" sizes="796px"></source>
+  <source width="796" height="499" data-srcset="    /content/resized/2013/12/ESXwithOVS09-320.png 320w,     /content/resized/2013/12/ESXwithOVS09-384.png 384w,     /content/resized/2013/12/ESXwithOVS09-512.png 512w,     /content/resized/2013/12/ESXwithOVS09-683.png 683w,  /content/uploads/2013/12/ESXwithOVS09.png 796w" sizes="796px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS09-320.png" data-src="/content/uploads/2013/12/ESXwithOVS09.png" class="blur-up lazyautosizes lazyload" width="796" height="499" alt="Figure 7: Create Hypervisor - Step 2 ">
 </picture>
 </a>
 
@@ -666,9 +654,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS10.png" title="Figure 8: Create Hypervisor - Step 3 " class="image-popup">
 <picture>
-  <source width="794" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS10-320.webp 320w,         /content/resized/2013/12/ESXwithOVS10-384.webp 384w,         /content/resized/2013/12/ESXwithOVS10-512.webp 512w,         /content/resized/2013/12/ESXwithOVS10-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS10.webp 794w" sizes="794px"></source>
-  <source width="794" data-srcset="    /content/resized/2013/12/ESXwithOVS10-320.png 320w,     /content/resized/2013/12/ESXwithOVS10-384.png 384w,     /content/resized/2013/12/ESXwithOVS10-512.png 512w,     /content/resized/2013/12/ESXwithOVS10-683.png 683w,  /content/uploads/2013/12/ESXwithOVS10.png 794w" sizes="794px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS10-320.png" data-src="/content/uploads/2013/12/ESXwithOVS10.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: Create Hypervisor - Step 3 ">
+  <source width="794" height="498" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS10-320.webp 320w,         /content/resized/2013/12/ESXwithOVS10-384.webp 384w,         /content/resized/2013/12/ESXwithOVS10-512.webp 512w,         /content/resized/2013/12/ESXwithOVS10-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS10.webp 794w" sizes="794px"></source>
+  <source width="794" height="498" data-srcset="    /content/resized/2013/12/ESXwithOVS10-320.png 320w,     /content/resized/2013/12/ESXwithOVS10-384.png 384w,     /content/resized/2013/12/ESXwithOVS10-512.png 512w,     /content/resized/2013/12/ESXwithOVS10-683.png 683w,  /content/uploads/2013/12/ESXwithOVS10.png 794w" sizes="794px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS10-320.png" data-src="/content/uploads/2013/12/ESXwithOVS10.png" class="blur-up lazyautosizes lazyload" width="794" height="498" alt="Figure 8: Create Hypervisor - Step 3 ">
 </picture>
 </a>
 
@@ -692,9 +680,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS11.png" title="Figure 9: Create Hypervisor - Step 4 " class="image-popup">
 <picture>
-  <source width="797" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS11-320.webp 320w,         /content/resized/2013/12/ESXwithOVS11-384.webp 384w,         /content/resized/2013/12/ESXwithOVS11-512.webp 512w,         /content/resized/2013/12/ESXwithOVS11-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS11.webp 797w" sizes="797px"></source>
-  <source width="797" data-srcset="    /content/resized/2013/12/ESXwithOVS11-320.png 320w,     /content/resized/2013/12/ESXwithOVS11-384.png 384w,     /content/resized/2013/12/ESXwithOVS11-512.png 512w,     /content/resized/2013/12/ESXwithOVS11-683.png 683w,  /content/uploads/2013/12/ESXwithOVS11.png 797w" sizes="797px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS11-320.png" data-src="/content/uploads/2013/12/ESXwithOVS11.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Create Hypervisor - Step 4 ">
+  <source width="797" height="502" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS11-320.webp 320w,         /content/resized/2013/12/ESXwithOVS11-384.webp 384w,         /content/resized/2013/12/ESXwithOVS11-512.webp 512w,         /content/resized/2013/12/ESXwithOVS11-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS11.webp 797w" sizes="797px"></source>
+  <source width="797" height="502" data-srcset="    /content/resized/2013/12/ESXwithOVS11-320.png 320w,     /content/resized/2013/12/ESXwithOVS11-384.png 384w,     /content/resized/2013/12/ESXwithOVS11-512.png 512w,     /content/resized/2013/12/ESXwithOVS11-683.png 683w,  /content/uploads/2013/12/ESXwithOVS11.png 797w" sizes="797px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS11-320.png" data-src="/content/uploads/2013/12/ESXwithOVS11.png" class="blur-up lazyautosizes lazyload" width="797" height="502" alt="Figure 9: Create Hypervisor - Step 4 ">
 </picture>
 </a>
 
@@ -718,9 +706,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS14.png" title="Figure 10: Create Hypervisor - Step 5 " class="image-popup">
 <picture>
-  <source width="797" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS14-320.webp 320w,         /content/resized/2013/12/ESXwithOVS14-384.webp 384w,         /content/resized/2013/12/ESXwithOVS14-512.webp 512w,         /content/resized/2013/12/ESXwithOVS14-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS14.webp 797w" sizes="797px"></source>
-  <source width="797" data-srcset="    /content/resized/2013/12/ESXwithOVS14-320.png 320w,     /content/resized/2013/12/ESXwithOVS14-384.png 384w,     /content/resized/2013/12/ESXwithOVS14-512.png 512w,     /content/resized/2013/12/ESXwithOVS14-683.png 683w,  /content/uploads/2013/12/ESXwithOVS14.png 797w" sizes="797px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS14-320.png" data-src="/content/uploads/2013/12/ESXwithOVS14.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Create Hypervisor - Step 5 ">
+  <source width="797" height="501" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS14-320.webp 320w,         /content/resized/2013/12/ESXwithOVS14-384.webp 384w,         /content/resized/2013/12/ESXwithOVS14-512.webp 512w,         /content/resized/2013/12/ESXwithOVS14-683.webp 683w,  /content/uploads/2013/12/ESXwithOVS14.webp 797w" sizes="797px"></source>
+  <source width="797" height="501" data-srcset="    /content/resized/2013/12/ESXwithOVS14-320.png 320w,     /content/resized/2013/12/ESXwithOVS14-384.png 384w,     /content/resized/2013/12/ESXwithOVS14-512.png 512w,     /content/resized/2013/12/ESXwithOVS14-683.png 683w,  /content/uploads/2013/12/ESXwithOVS14.png 797w" sizes="797px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS14-320.png" data-src="/content/uploads/2013/12/ESXwithOVS14.png" class="blur-up lazyautosizes lazyload" width="797" height="501" alt="Figure 10: Create Hypervisor - Step 5 ">
 </picture>
 </a>
 
@@ -744,9 +732,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS15.png" title="Figure 11: ESXi successfully added as Hypervisor " class="image-popup">
 <picture>
-  <source width="424" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS15-320.webp 320w,         /content/resized/2013/12/ESXwithOVS15-384.webp 384w,  /content/uploads/2013/12/ESXwithOVS15.webp 424w" sizes="424px"></source>
-  <source width="424" data-srcset="    /content/resized/2013/12/ESXwithOVS15-320.png 320w,     /content/resized/2013/12/ESXwithOVS15-384.png 384w,  /content/uploads/2013/12/ESXwithOVS15.png 424w" sizes="424px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS15-320.png" data-src="/content/uploads/2013/12/ESXwithOVS15.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: ESXi successfully added as Hypervisor ">
+  <source width="424" height="200" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS15-320.webp 320w,         /content/resized/2013/12/ESXwithOVS15-384.webp 384w,  /content/uploads/2013/12/ESXwithOVS15.webp 424w" sizes="424px"></source>
+  <source width="424" height="200" data-srcset="    /content/resized/2013/12/ESXwithOVS15-320.png 320w,     /content/resized/2013/12/ESXwithOVS15-384.png 384w,  /content/uploads/2013/12/ESXwithOVS15.png 424w" sizes="424px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS15-320.png" data-src="/content/uploads/2013/12/ESXwithOVS15.png" class="blur-up lazyautosizes lazyload" width="424" height="200" alt="Figure 11: ESXi successfully added as Hypervisor ">
 </picture>
 </a>
 
@@ -770,9 +758,9 @@ success
 
 <a href="/content/uploads/2013/12/ESXwithOVS16.png" title="Figure 12: Hypervisor displaying status of “Connected” " class="image-popup">
 <picture>
-  <source width="978" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS16-320.webp 320w,         /content/resized/2013/12/ESXwithOVS16-384.webp 384w,         /content/resized/2013/12/ESXwithOVS16-512.webp 512w,         /content/resized/2013/12/ESXwithOVS16-683.webp 683w,         /content/resized/2013/12/ESXwithOVS16-800.webp 800w,         /content/resized/2013/12/ESXwithOVS16-960.webp 960w,  /content/uploads/2013/12/ESXwithOVS16.webp 978w" sizes="978px"></source>
-  <source width="978" data-srcset="    /content/resized/2013/12/ESXwithOVS16-320.png 320w,     /content/resized/2013/12/ESXwithOVS16-384.png 384w,     /content/resized/2013/12/ESXwithOVS16-512.png 512w,     /content/resized/2013/12/ESXwithOVS16-683.png 683w,     /content/resized/2013/12/ESXwithOVS16-800.png 800w,     /content/resized/2013/12/ESXwithOVS16-960.png 960w,  /content/uploads/2013/12/ESXwithOVS16.png 978w" sizes="978px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS16-320.png" data-src="/content/uploads/2013/12/ESXwithOVS16.png" class="blur-up lazyautosizes lazyload" alt="Figure 12: Hypervisor displaying status of “Connected” ">
+  <source width="978" height="141" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS16-320.webp 320w,         /content/resized/2013/12/ESXwithOVS16-384.webp 384w,         /content/resized/2013/12/ESXwithOVS16-512.webp 512w,         /content/resized/2013/12/ESXwithOVS16-683.webp 683w,         /content/resized/2013/12/ESXwithOVS16-800.webp 800w,         /content/resized/2013/12/ESXwithOVS16-960.webp 960w,  /content/uploads/2013/12/ESXwithOVS16.webp 978w" sizes="978px"></source>
+  <source width="978" height="141" data-srcset="    /content/resized/2013/12/ESXwithOVS16-320.png 320w,     /content/resized/2013/12/ESXwithOVS16-384.png 384w,     /content/resized/2013/12/ESXwithOVS16-512.png 512w,     /content/resized/2013/12/ESXwithOVS16-683.png 683w,     /content/resized/2013/12/ESXwithOVS16-800.png 800w,     /content/resized/2013/12/ESXwithOVS16-960.png 960w,  /content/uploads/2013/12/ESXwithOVS16.png 978w" sizes="978px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS16-320.png" data-src="/content/uploads/2013/12/ESXwithOVS16.png" class="blur-up lazyautosizes lazyload" width="978" height="141" alt="Figure 12: Hypervisor displaying status of “Connected” ">
 </picture>
 </a>
 
@@ -822,9 +810,9 @@ Custom-VIFs: Enabled
 
 <a href="/content/uploads/2013/12/ESXwithOVS17.png" title="Figure 13: NSX vSwitch for ESXi visible in vSphere Web Client " class="image-popup">
 <picture>
-  <source width="978" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS17-320.webp 320w,         /content/resized/2013/12/ESXwithOVS17-384.webp 384w,         /content/resized/2013/12/ESXwithOVS17-512.webp 512w,         /content/resized/2013/12/ESXwithOVS17-683.webp 683w,         /content/resized/2013/12/ESXwithOVS17-800.webp 800w,         /content/resized/2013/12/ESXwithOVS17-960.webp 960w,  /content/uploads/2013/12/ESXwithOVS17.webp 978w" sizes="978px"></source>
-  <source width="978" data-srcset="    /content/resized/2013/12/ESXwithOVS17-320.png 320w,     /content/resized/2013/12/ESXwithOVS17-384.png 384w,     /content/resized/2013/12/ESXwithOVS17-512.png 512w,     /content/resized/2013/12/ESXwithOVS17-683.png 683w,     /content/resized/2013/12/ESXwithOVS17-800.png 800w,     /content/resized/2013/12/ESXwithOVS17-960.png 960w,  /content/uploads/2013/12/ESXwithOVS17.png 978w" sizes="978px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS17-320.png" data-src="/content/uploads/2013/12/ESXwithOVS17.png" class="blur-up lazyautosizes lazyload" alt="Figure 13: NSX vSwitch for ESXi visible in vSphere Web Client ">
+  <source width="978" height="406" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS17-320.webp 320w,         /content/resized/2013/12/ESXwithOVS17-384.webp 384w,         /content/resized/2013/12/ESXwithOVS17-512.webp 512w,         /content/resized/2013/12/ESXwithOVS17-683.webp 683w,         /content/resized/2013/12/ESXwithOVS17-800.webp 800w,         /content/resized/2013/12/ESXwithOVS17-960.webp 960w,  /content/uploads/2013/12/ESXwithOVS17.webp 978w" sizes="978px"></source>
+  <source width="978" height="406" data-srcset="    /content/resized/2013/12/ESXwithOVS17-320.png 320w,     /content/resized/2013/12/ESXwithOVS17-384.png 384w,     /content/resized/2013/12/ESXwithOVS17-512.png 512w,     /content/resized/2013/12/ESXwithOVS17-683.png 683w,     /content/resized/2013/12/ESXwithOVS17-800.png 800w,     /content/resized/2013/12/ESXwithOVS17-960.png 960w,  /content/uploads/2013/12/ESXwithOVS17.png 978w" sizes="978px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS17-320.png" data-src="/content/uploads/2013/12/ESXwithOVS17.png" class="blur-up lazyautosizes lazyload" width="978" height="406" alt="Figure 13: NSX vSwitch for ESXi visible in vSphere Web Client ">
 </picture>
 </a>
 
@@ -852,9 +840,9 @@ Custom-VIFs: Enabled
 
 <a href="/content/uploads/2013/12/ESXwithOVS18.png" title="Figure 14: Two ESXi hosts added the NSX cluster " class="image-popup">
 <picture>
-  <source width="427" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS18-320.webp 320w,         /content/resized/2013/12/ESXwithOVS18-384.webp 384w,  /content/uploads/2013/12/ESXwithOVS18.webp 427w" sizes="427px"></source>
-  <source width="427" data-srcset="    /content/resized/2013/12/ESXwithOVS18-320.png 320w,     /content/resized/2013/12/ESXwithOVS18-384.png 384w,  /content/uploads/2013/12/ESXwithOVS18.png 427w" sizes="427px"></source>
-  <img src="/content/resized/2013/12/ESXwithOVS18-320.png" data-src="/content/uploads/2013/12/ESXwithOVS18.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Two ESXi hosts added the NSX cluster ">
+  <source width="427" height="204" type="image/webp" data-srcset="        /content/resized/2013/12/ESXwithOVS18-320.webp 320w,         /content/resized/2013/12/ESXwithOVS18-384.webp 384w,  /content/uploads/2013/12/ESXwithOVS18.webp 427w" sizes="427px"></source>
+  <source width="427" height="204" data-srcset="    /content/resized/2013/12/ESXwithOVS18-320.png 320w,     /content/resized/2013/12/ESXwithOVS18-384.png 384w,  /content/uploads/2013/12/ESXwithOVS18.png 427w" sizes="427px"></source>
+  <img src="/content/resized/2013/12/ESXwithOVS18-320.png" data-src="/content/uploads/2013/12/ESXwithOVS18.png" class="blur-up lazyautosizes lazyload" width="427" height="204" alt="Figure 14: Two ESXi hosts added the NSX cluster ">
 </picture>
 </a>
 
@@ -909,13 +897,21 @@ Custom-VIFs: Enabled
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=OpenStack+with+vSphere+and+NSX+-+Part+3%3A+Install+and+configure+the+Open+vSwitch+inside+the+ESXi+hosts%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=OpenStack%20with%20vSphere%20and%20NSX%20-%20Part%203:%20Install%20and%20configure%20the%20Open%20vSwitch%20inside%20the%20ESXi%20hosts%0Ahttps://www.edge-cloud.net/2014/01/03/openstack-with-vsphere-and-nsx-part3/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=OpenStack+with+vSphere+and+NSX+-+Part+3%3A+Install+and+configure+the+Open+vSwitch+inside+the+ESXi+hosts%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+3%3A+Install+and+configure+the+Open+vSwitch+inside+the+ESXi+hosts" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F01%2F03%2Fopenstack-with-vsphere-and-nsx-part3%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+3%3A+Install+and+configure+the+Open+vSwitch+inside+the+ESXi+hosts" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -941,6 +937,62 @@ Custom-VIFs: Enabled
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -1113,63 +1165,6 @@ Custom-VIFs: Enabled
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1204,7 +1199,7 @@ Custom-VIFs: Enabled
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1289,14 +1284,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

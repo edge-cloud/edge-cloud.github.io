@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="RUM “Light” with CloudFlare and Google Analytics">
-  <meta name="twitter:description" content="Would you like to know the ratio of visitors accessing your website over IPv4 vs. IPv6? Or curious about how many visitors you serve over HTTP/2 vs. SPDY or HTTP 1.1? Using Google Analytics, CloudFlare and some JavaScript magic we can easily get answers to these questions. For this we will use the principle of Real User Monitoring (RUM).">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2016-02-05T00:00:31-08:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -465,9 +453,9 @@ It would make more sense to have the field “http” available with ”http=h2
 
 <a href="/content/uploads/2016/02/RUM-Flowchart.png" title="Figure 1: Interaction between browser, CloudFlare and Google Analytics " class="image-popup">
 <picture>
-  <source width="943" type="image/webp" data-srcset="        /content/resized/2016/02/RUM-Flowchart-320.webp 320w,         /content/resized/2016/02/RUM-Flowchart-384.webp 384w,         /content/resized/2016/02/RUM-Flowchart-512.webp 512w,         /content/resized/2016/02/RUM-Flowchart-683.webp 683w,         /content/resized/2016/02/RUM-Flowchart-800.webp 800w,  /content/uploads/2016/02/RUM-Flowchart.webp 943w" sizes="943px"></source>
-  <source width="943" data-srcset="    /content/resized/2016/02/RUM-Flowchart-320.png 320w,     /content/resized/2016/02/RUM-Flowchart-384.png 384w,     /content/resized/2016/02/RUM-Flowchart-512.png 512w,     /content/resized/2016/02/RUM-Flowchart-683.png 683w,     /content/resized/2016/02/RUM-Flowchart-800.png 800w,  /content/uploads/2016/02/RUM-Flowchart.png 943w" sizes="943px"></source>
-  <img src="/content/resized/2016/02/RUM-Flowchart-320.png" data-src="/content/uploads/2016/02/RUM-Flowchart.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Interaction between browser, CloudFlare and Google Analytics ">
+  <source width="943" height="573" type="image/webp" data-srcset="        /content/resized/2016/02/RUM-Flowchart-320.webp 320w,         /content/resized/2016/02/RUM-Flowchart-384.webp 384w,         /content/resized/2016/02/RUM-Flowchart-512.webp 512w,         /content/resized/2016/02/RUM-Flowchart-683.webp 683w,         /content/resized/2016/02/RUM-Flowchart-800.webp 800w,  /content/uploads/2016/02/RUM-Flowchart.webp 943w" sizes="943px"></source>
+  <source width="943" height="573" data-srcset="    /content/resized/2016/02/RUM-Flowchart-320.png 320w,     /content/resized/2016/02/RUM-Flowchart-384.png 384w,     /content/resized/2016/02/RUM-Flowchart-512.png 512w,     /content/resized/2016/02/RUM-Flowchart-683.png 683w,     /content/resized/2016/02/RUM-Flowchart-800.png 800w,  /content/uploads/2016/02/RUM-Flowchart.png 943w" sizes="943px"></source>
+  <img src="/content/resized/2016/02/RUM-Flowchart-320.png" data-src="/content/uploads/2016/02/RUM-Flowchart.png" class="blur-up lazyautosizes lazyload" width="943" height="573" alt="Figure 1: Interaction between browser, CloudFlare and Google Analytics ">
 </picture>
 </a>
 
@@ -531,9 +519,9 @@ It would make more sense to have the field “http” available with ”http=h2
 
 <a href="/content/uploads/2016/02/RUM_01.png" title="Figure 2: Create a Google Analytics Custom Dimension " class="image-popup">
 <picture>
-  <source width="1108" type="image/webp" data-srcset="        /content/resized/2016/02/RUM_01-320.webp 320w,         /content/resized/2016/02/RUM_01-384.webp 384w,         /content/resized/2016/02/RUM_01-512.webp 512w,         /content/resized/2016/02/RUM_01-683.webp 683w,         /content/resized/2016/02/RUM_01-800.webp 800w,         /content/resized/2016/02/RUM_01-960.webp 960w,  /content/uploads/2016/02/RUM_01.webp 1108w" sizes="1108px"></source>
-  <source width="1108" data-srcset="    /content/resized/2016/02/RUM_01-320.png 320w,     /content/resized/2016/02/RUM_01-384.png 384w,     /content/resized/2016/02/RUM_01-512.png 512w,     /content/resized/2016/02/RUM_01-683.png 683w,     /content/resized/2016/02/RUM_01-800.png 800w,     /content/resized/2016/02/RUM_01-960.png 960w,  /content/uploads/2016/02/RUM_01.png 1108w" sizes="1108px"></source>
-  <img src="/content/resized/2016/02/RUM_01-320.png" data-src="/content/uploads/2016/02/RUM_01.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Create a Google Analytics Custom Dimension ">
+  <source width="1108" height="386" type="image/webp" data-srcset="        /content/resized/2016/02/RUM_01-320.webp 320w,         /content/resized/2016/02/RUM_01-384.webp 384w,         /content/resized/2016/02/RUM_01-512.webp 512w,         /content/resized/2016/02/RUM_01-683.webp 683w,         /content/resized/2016/02/RUM_01-800.webp 800w,         /content/resized/2016/02/RUM_01-960.webp 960w,  /content/uploads/2016/02/RUM_01.webp 1108w" sizes="1108px"></source>
+  <source width="1108" height="386" data-srcset="    /content/resized/2016/02/RUM_01-320.png 320w,     /content/resized/2016/02/RUM_01-384.png 384w,     /content/resized/2016/02/RUM_01-512.png 512w,     /content/resized/2016/02/RUM_01-683.png 683w,     /content/resized/2016/02/RUM_01-800.png 800w,     /content/resized/2016/02/RUM_01-960.png 960w,  /content/uploads/2016/02/RUM_01.png 1108w" sizes="1108px"></source>
+  <img src="/content/resized/2016/02/RUM_01-320.png" data-src="/content/uploads/2016/02/RUM_01.png" class="blur-up lazyautosizes lazyload" width="1108" height="386" alt="Figure 2: Create a Google Analytics Custom Dimension ">
 </picture>
 </a>
 
@@ -623,9 +611,9 @@ It would make more sense to have the field “http” available with ”http=h2
 
 <a href="/content/uploads/2016/02/RUM_02.png" title="Figure 3: Create a Custom Report in Google Analytics " class="image-popup">
 <picture>
-  <source width="661" type="image/webp" data-srcset="        /content/resized/2016/02/RUM_02-320.webp 320w,         /content/resized/2016/02/RUM_02-384.webp 384w,         /content/resized/2016/02/RUM_02-512.webp 512w,  /content/uploads/2016/02/RUM_02.webp 661w" sizes="661px"></source>
-  <source width="661" data-srcset="    /content/resized/2016/02/RUM_02-320.png 320w,     /content/resized/2016/02/RUM_02-384.png 384w,     /content/resized/2016/02/RUM_02-512.png 512w,  /content/uploads/2016/02/RUM_02.png 661w" sizes="661px"></source>
-  <img src="/content/resized/2016/02/RUM_02-320.png" data-src="/content/uploads/2016/02/RUM_02.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Create a Custom Report in Google Analytics ">
+  <source width="661" height="753" type="image/webp" data-srcset="        /content/resized/2016/02/RUM_02-320.webp 320w,         /content/resized/2016/02/RUM_02-384.webp 384w,         /content/resized/2016/02/RUM_02-512.webp 512w,  /content/uploads/2016/02/RUM_02.webp 661w" sizes="661px"></source>
+  <source width="661" height="753" data-srcset="    /content/resized/2016/02/RUM_02-320.png 320w,     /content/resized/2016/02/RUM_02-384.png 384w,     /content/resized/2016/02/RUM_02-512.png 512w,  /content/uploads/2016/02/RUM_02.png 661w" sizes="661px"></source>
+  <img src="/content/resized/2016/02/RUM_02-320.png" data-src="/content/uploads/2016/02/RUM_02.png" class="blur-up lazyautosizes lazyload" width="661" height="753" alt="Figure 3: Create a Custom Report in Google Analytics ">
 </picture>
 </a>
 
@@ -649,9 +637,9 @@ It would make more sense to have the field “http” available with ”http=h2
 
 <a href="/content/uploads/2016/02/RUM_03.png" title="Figure 4: Traffic served over IPv4 vs. IPv6 " class="image-popup">
 <picture>
-  <source width="936" type="image/webp" data-srcset="        /content/resized/2016/02/RUM_03-320.webp 320w,         /content/resized/2016/02/RUM_03-384.webp 384w,         /content/resized/2016/02/RUM_03-512.webp 512w,         /content/resized/2016/02/RUM_03-683.webp 683w,         /content/resized/2016/02/RUM_03-800.webp 800w,  /content/uploads/2016/02/RUM_03.webp 936w" sizes="936px"></source>
-  <source width="936" data-srcset="    /content/resized/2016/02/RUM_03-320.png 320w,     /content/resized/2016/02/RUM_03-384.png 384w,     /content/resized/2016/02/RUM_03-512.png 512w,     /content/resized/2016/02/RUM_03-683.png 683w,     /content/resized/2016/02/RUM_03-800.png 800w,  /content/uploads/2016/02/RUM_03.png 936w" sizes="936px"></source>
-  <img src="/content/resized/2016/02/RUM_03-320.png" data-src="/content/uploads/2016/02/RUM_03.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Traffic served over IPv4 vs. IPv6 ">
+  <source width="936" height="785" type="image/webp" data-srcset="        /content/resized/2016/02/RUM_03-320.webp 320w,         /content/resized/2016/02/RUM_03-384.webp 384w,         /content/resized/2016/02/RUM_03-512.webp 512w,         /content/resized/2016/02/RUM_03-683.webp 683w,         /content/resized/2016/02/RUM_03-800.webp 800w,  /content/uploads/2016/02/RUM_03.webp 936w" sizes="936px"></source>
+  <source width="936" height="785" data-srcset="    /content/resized/2016/02/RUM_03-320.png 320w,     /content/resized/2016/02/RUM_03-384.png 384w,     /content/resized/2016/02/RUM_03-512.png 512w,     /content/resized/2016/02/RUM_03-683.png 683w,     /content/resized/2016/02/RUM_03-800.png 800w,  /content/uploads/2016/02/RUM_03.png 936w" sizes="936px"></source>
+  <img src="/content/resized/2016/02/RUM_03-320.png" data-src="/content/uploads/2016/02/RUM_03.png" class="blur-up lazyautosizes lazyload" width="936" height="785" alt="Figure 4: Traffic served over IPv4 vs. IPv6 ">
 </picture>
 </a>
 
@@ -675,9 +663,9 @@ It would make more sense to have the field “http” available with ”http=h2
 
 <a href="/content/uploads/2016/02/RUM_04.png" title="Figure 5: Traffic served over HTTP/2 vs. SPDY vs. HTTP 1.x " class="image-popup">
 <picture>
-  <source width="969" type="image/webp" data-srcset="        /content/resized/2016/02/RUM_04-320.webp 320w,         /content/resized/2016/02/RUM_04-384.webp 384w,         /content/resized/2016/02/RUM_04-512.webp 512w,         /content/resized/2016/02/RUM_04-683.webp 683w,         /content/resized/2016/02/RUM_04-800.webp 800w,         /content/resized/2016/02/RUM_04-960.webp 960w,  /content/uploads/2016/02/RUM_04.webp 969w" sizes="969px"></source>
-  <source width="969" data-srcset="    /content/resized/2016/02/RUM_04-320.png 320w,     /content/resized/2016/02/RUM_04-384.png 384w,     /content/resized/2016/02/RUM_04-512.png 512w,     /content/resized/2016/02/RUM_04-683.png 683w,     /content/resized/2016/02/RUM_04-800.png 800w,     /content/resized/2016/02/RUM_04-960.png 960w,  /content/uploads/2016/02/RUM_04.png 969w" sizes="969px"></source>
-  <img src="/content/resized/2016/02/RUM_04-320.png" data-src="/content/uploads/2016/02/RUM_04.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Traffic served over HTTP/2 vs. SPDY vs. HTTP 1.x ">
+  <source width="969" height="754" type="image/webp" data-srcset="        /content/resized/2016/02/RUM_04-320.webp 320w,         /content/resized/2016/02/RUM_04-384.webp 384w,         /content/resized/2016/02/RUM_04-512.webp 512w,         /content/resized/2016/02/RUM_04-683.webp 683w,         /content/resized/2016/02/RUM_04-800.webp 800w,         /content/resized/2016/02/RUM_04-960.webp 960w,  /content/uploads/2016/02/RUM_04.webp 969w" sizes="969px"></source>
+  <source width="969" height="754" data-srcset="    /content/resized/2016/02/RUM_04-320.png 320w,     /content/resized/2016/02/RUM_04-384.png 384w,     /content/resized/2016/02/RUM_04-512.png 512w,     /content/resized/2016/02/RUM_04-683.png 683w,     /content/resized/2016/02/RUM_04-800.png 800w,     /content/resized/2016/02/RUM_04-960.png 960w,  /content/uploads/2016/02/RUM_04.png 969w" sizes="969px"></source>
+  <img src="/content/resized/2016/02/RUM_04-320.png" data-src="/content/uploads/2016/02/RUM_04.png" class="blur-up lazyautosizes lazyload" width="969" height="754" alt="Figure 5: Traffic served over HTTP/2 vs. SPDY vs. HTTP 1.x ">
 </picture>
 </a>
 
@@ -736,13 +724,21 @@ It would make more sense to have the field “http” available with ”http=h2
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=RUM+%22Light%22+with+CloudFlare+and+Google+Analytics%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=RUM%20%22Light%22%20with%20CloudFlare%20and%20Google%20Analytics%0Ahttps://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=RUM+%22Light%22+with+CloudFlare+and+Google+Analytics%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F&amp;title=RUM+%22Light%22+with+CloudFlare+and+Google+Analytics" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F02%2F05%2Frum-light-with-cloudflare%2F&amp;title=RUM+%22Light%22+with+CloudFlare+and+Google+Analytics" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -768,6 +764,62 @@ It would make more sense to have the field “http” available with ”http=h2
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -940,63 +992,6 @@ It would make more sense to have the field “http” available with ”http=h2
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1031,7 +1026,7 @@ It would make more sense to have the field “http” available with ”http=h2
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1116,14 +1111,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

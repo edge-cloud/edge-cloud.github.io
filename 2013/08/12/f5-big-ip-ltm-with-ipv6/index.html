@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="Using F5 Big-IP LTM with IPv6">
-  <meta name="twitter:description" content="A very simple way to enable legacy IPv4-based web applications to be reachable via IPv6 is to use an IPv4/IPv6-enabled load balancer - such as the F5 Big-IP LTM - to frontend the application. This is e.g. the approach that Netflix took in mid 2012 to enable their service for IPv6 via the AWS Elastic Load Balancers (ELBs). In this post we will use the F5 Big-IP Local Traffic Manager (LTM) load balancer to provide this capability.">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2013-08-12T01:00:22-07:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -429,9 +417,9 @@
 
 <a href="/content/uploads/2013/08/Overview.png" title="Figure 1: F5 Big-IP LTM brokering IPv6 traffic to legacy IPv4 Web App " class="image-popup">
 <picture>
-  <source width="707" type="image/webp" data-srcset="        /content/resized/2013/08/Overview-320.webp 320w,         /content/resized/2013/08/Overview-384.webp 384w,         /content/resized/2013/08/Overview-512.webp 512w,         /content/resized/2013/08/Overview-683.webp 683w,  /content/uploads/2013/08/Overview.webp 707w" sizes="707px"></source>
-  <source width="707" data-srcset="    /content/resized/2013/08/Overview-320.png 320w,     /content/resized/2013/08/Overview-384.png 384w,     /content/resized/2013/08/Overview-512.png 512w,     /content/resized/2013/08/Overview-683.png 683w,  /content/uploads/2013/08/Overview.png 707w" sizes="707px"></source>
-  <img src="/content/resized/2013/08/Overview-320.png" data-src="/content/uploads/2013/08/Overview.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: F5 Big-IP LTM brokering IPv6 traffic to legacy IPv4 Web App ">
+  <source width="707" height="283" type="image/webp" data-srcset="        /content/resized/2013/08/Overview-320.webp 320w,         /content/resized/2013/08/Overview-384.webp 384w,         /content/resized/2013/08/Overview-512.webp 512w,         /content/resized/2013/08/Overview-683.webp 683w,  /content/uploads/2013/08/Overview.webp 707w" sizes="707px"></source>
+  <source width="707" height="283" data-srcset="    /content/resized/2013/08/Overview-320.png 320w,     /content/resized/2013/08/Overview-384.png 384w,     /content/resized/2013/08/Overview-512.png 512w,     /content/resized/2013/08/Overview-683.png 683w,  /content/uploads/2013/08/Overview.png 707w" sizes="707px"></source>
+  <img src="/content/resized/2013/08/Overview-320.png" data-src="/content/uploads/2013/08/Overview.png" class="blur-up lazyautosizes lazyload" width="707" height="283" alt="Figure 1: F5 Big-IP LTM brokering IPv6 traffic to legacy IPv4 Web App ">
 </picture>
 </a>
 
@@ -473,9 +461,9 @@
 
 <a href="/content/uploads/2013/08/Self-IPs1_HL.png" title="Figure 2: Create new Self-IP " class="image-popup">
 <picture>
-  <source width="252" type="image/webp" data-srcset=" /content/uploads/2013/08/Self-IPs1_HL.webp 252w" sizes="252px"></source>
-  <source width="252" data-srcset=" /content/uploads/2013/08/Self-IPs1_HL.png 252w" sizes="252px"></source>
-  <img src="/" data-src="/content/uploads/2013/08/Self-IPs1_HL.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Create new Self-IP ">
+  <source width="252" height="653" type="image/webp" data-srcset=" /content/uploads/2013/08/Self-IPs1_HL.webp 252w" sizes="252px"></source>
+  <source width="252" height="653" data-srcset=" /content/uploads/2013/08/Self-IPs1_HL.png 252w" sizes="252px"></source>
+  <img src="/" data-src="/content/uploads/2013/08/Self-IPs1_HL.png" class="blur-up lazyautosizes lazyload" width="252" height="653" alt="Figure 2: Create new Self-IP ">
 </picture>
 </a>
 
@@ -499,9 +487,9 @@
 
 <a href="/content/uploads/2013/08/Self-IPs2.png" title="Figure 3: Use an IPv4-style subnet mask for the IPv6 address instead of the typical prefix length " class="image-popup">
 <picture>
-  <source width="551" type="image/webp" data-srcset="        /content/resized/2013/08/Self-IPs2-320.webp 320w,         /content/resized/2013/08/Self-IPs2-384.webp 384w,         /content/resized/2013/08/Self-IPs2-512.webp 512w,  /content/uploads/2013/08/Self-IPs2.webp 551w" sizes="551px"></source>
-  <source width="551" data-srcset="    /content/resized/2013/08/Self-IPs2-320.png 320w,     /content/resized/2013/08/Self-IPs2-384.png 384w,     /content/resized/2013/08/Self-IPs2-512.png 512w,  /content/uploads/2013/08/Self-IPs2.png 551w" sizes="551px"></source>
-  <img src="/content/resized/2013/08/Self-IPs2-320.png" data-src="/content/uploads/2013/08/Self-IPs2.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Use an IPv4-style subnet mask for the IPv6 address instead of the typical prefix length ">
+  <source width="551" height="354" type="image/webp" data-srcset="        /content/resized/2013/08/Self-IPs2-320.webp 320w,         /content/resized/2013/08/Self-IPs2-384.webp 384w,         /content/resized/2013/08/Self-IPs2-512.webp 512w,  /content/uploads/2013/08/Self-IPs2.webp 551w" sizes="551px"></source>
+  <source width="551" height="354" data-srcset="    /content/resized/2013/08/Self-IPs2-320.png 320w,     /content/resized/2013/08/Self-IPs2-384.png 384w,     /content/resized/2013/08/Self-IPs2-512.png 512w,  /content/uploads/2013/08/Self-IPs2.png 551w" sizes="551px"></source>
+  <img src="/content/resized/2013/08/Self-IPs2-320.png" data-src="/content/uploads/2013/08/Self-IPs2.png" class="blur-up lazyautosizes lazyload" width="551" height="354" alt="Figure 3: Use an IPv4-style subnet mask for the IPv6 address instead of the typical prefix length ">
 </picture>
 </a>
 
@@ -525,9 +513,9 @@
 
 <a href="/content/uploads/2013/08/Self-IPs3.png" title="Figure 4: Create a floating IPv6 address in a similar fashion " class="image-popup">
 <picture>
-  <source width="570" type="image/webp" data-srcset="        /content/resized/2013/08/Self-IPs3-320.webp 320w,         /content/resized/2013/08/Self-IPs3-384.webp 384w,         /content/resized/2013/08/Self-IPs3-512.webp 512w,  /content/uploads/2013/08/Self-IPs3.webp 570w" sizes="570px"></source>
-  <source width="570" data-srcset="    /content/resized/2013/08/Self-IPs3-320.png 320w,     /content/resized/2013/08/Self-IPs3-384.png 384w,     /content/resized/2013/08/Self-IPs3-512.png 512w,  /content/uploads/2013/08/Self-IPs3.png 570w" sizes="570px"></source>
-  <img src="/content/resized/2013/08/Self-IPs3-320.png" data-src="/content/uploads/2013/08/Self-IPs3.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Create a floating IPv6 address in a similar fashion ">
+  <source width="570" height="369" type="image/webp" data-srcset="        /content/resized/2013/08/Self-IPs3-320.webp 320w,         /content/resized/2013/08/Self-IPs3-384.webp 384w,         /content/resized/2013/08/Self-IPs3-512.webp 512w,  /content/uploads/2013/08/Self-IPs3.webp 570w" sizes="570px"></source>
+  <source width="570" height="369" data-srcset="    /content/resized/2013/08/Self-IPs3-320.png 320w,     /content/resized/2013/08/Self-IPs3-384.png 384w,     /content/resized/2013/08/Self-IPs3-512.png 512w,  /content/uploads/2013/08/Self-IPs3.png 570w" sizes="570px"></source>
+  <img src="/content/resized/2013/08/Self-IPs3-320.png" data-src="/content/uploads/2013/08/Self-IPs3.png" class="blur-up lazyautosizes lazyload" width="570" height="369" alt="Figure 4: Create a floating IPv6 address in a similar fashion ">
 </picture>
 </a>
 
@@ -553,9 +541,9 @@
 
 <a href="/content/uploads/2013/08/Route1_HL.png" title="Figure 5: Create a new route for the IPv6 default route " class="image-popup">
 <picture>
-  <source width="253" type="image/webp" data-srcset=" /content/uploads/2013/08/Route1_HL.webp 253w" sizes="253px"></source>
-  <source width="253" data-srcset=" /content/uploads/2013/08/Route1_HL.png 253w" sizes="253px"></source>
-  <img src="/" data-src="/content/uploads/2013/08/Route1_HL.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Create a new route for the IPv6 default route ">
+  <source width="253" height="389" type="image/webp" data-srcset=" /content/uploads/2013/08/Route1_HL.webp 253w" sizes="253px"></source>
+  <source width="253" height="389" data-srcset=" /content/uploads/2013/08/Route1_HL.png 253w" sizes="253px"></source>
+  <img src="/" data-src="/content/uploads/2013/08/Route1_HL.png" class="blur-up lazyautosizes lazyload" width="253" height="389" alt="Figure 5: Create a new route for the IPv6 default route ">
 </picture>
 </a>
 
@@ -579,9 +567,9 @@
 
 <a href="/content/uploads/2013/08/Route2.png" title="Figure 6: Specify the destination address for the IPv6 default route " class="image-popup">
 <picture>
-  <source width="615" type="image/webp" data-srcset="        /content/resized/2013/08/Route2-320.webp 320w,         /content/resized/2013/08/Route2-384.webp 384w,         /content/resized/2013/08/Route2-512.webp 512w,  /content/uploads/2013/08/Route2.webp 615w" sizes="615px"></source>
-  <source width="615" data-srcset="    /content/resized/2013/08/Route2-320.png 320w,     /content/resized/2013/08/Route2-384.png 384w,     /content/resized/2013/08/Route2-512.png 512w,  /content/uploads/2013/08/Route2.png 615w" sizes="615px"></source>
-  <img src="/content/resized/2013/08/Route2-320.png" data-src="/content/uploads/2013/08/Route2.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Specify the destination address for the IPv6 default route ">
+  <source width="615" height="308" type="image/webp" data-srcset="        /content/resized/2013/08/Route2-320.webp 320w,         /content/resized/2013/08/Route2-384.webp 384w,         /content/resized/2013/08/Route2-512.webp 512w,  /content/uploads/2013/08/Route2.webp 615w" sizes="615px"></source>
+  <source width="615" height="308" data-srcset="    /content/resized/2013/08/Route2-320.png 320w,     /content/resized/2013/08/Route2-384.png 384w,     /content/resized/2013/08/Route2-512.png 512w,  /content/uploads/2013/08/Route2.png 615w" sizes="615px"></source>
+  <img src="/content/resized/2013/08/Route2-320.png" data-src="/content/uploads/2013/08/Route2.png" class="blur-up lazyautosizes lazyload" width="615" height="308" alt="Figure 6: Specify the destination address for the IPv6 default route ">
 </picture>
 </a>
 
@@ -607,9 +595,9 @@
 
 <a href="/content/uploads/2013/08/VirtualServer2.png" title="Figure 7: Create the virtual servers similar to their IPv4 correspondent, but with an IPv6 address " class="image-popup">
 <picture>
-  <source width="484" type="image/webp" data-srcset="        /content/resized/2013/08/VirtualServer2-320.webp 320w,         /content/resized/2013/08/VirtualServer2-384.webp 384w,  /content/uploads/2013/08/VirtualServer2.webp 484w" sizes="484px"></source>
-  <source width="484" data-srcset="    /content/resized/2013/08/VirtualServer2-320.png 320w,     /content/resized/2013/08/VirtualServer2-384.png 384w,  /content/uploads/2013/08/VirtualServer2.png 484w" sizes="484px"></source>
-  <img src="/content/resized/2013/08/VirtualServer2-320.png" data-src="/content/uploads/2013/08/VirtualServer2.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Create the virtual servers similar to their IPv4 correspondent, but with an IPv6 address ">
+  <source width="484" height="567" type="image/webp" data-srcset="        /content/resized/2013/08/VirtualServer2-320.webp 320w,         /content/resized/2013/08/VirtualServer2-384.webp 384w,  /content/uploads/2013/08/VirtualServer2.webp 484w" sizes="484px"></source>
+  <source width="484" height="567" data-srcset="    /content/resized/2013/08/VirtualServer2-320.png 320w,     /content/resized/2013/08/VirtualServer2-384.png 384w,  /content/uploads/2013/08/VirtualServer2.png 484w" sizes="484px"></source>
+  <img src="/content/resized/2013/08/VirtualServer2-320.png" data-src="/content/uploads/2013/08/VirtualServer2.png" class="blur-up lazyautosizes lazyload" width="484" height="567" alt="Figure 7: Create the virtual servers similar to their IPv4 correspondent, but with an IPv6 address ">
 </picture>
 </a>
 
@@ -664,13 +652,21 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=Using+F5+Big-IP+LTM+with+IPv6%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=Using%20F5%20Big-IP%20LTM%20with%20IPv6%0Ahttps://www.edge-cloud.net/2013/08/12/f5-big-ip-ltm-with-ipv6/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Using+F5+Big-IP+LTM+with+IPv6%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F&amp;title=Using+F5+Big-IP+LTM+with+IPv6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F12%2Ff5-big-ip-ltm-with-ipv6%2F&amp;title=Using+F5+Big-IP+LTM+with+IPv6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -696,6 +692,62 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -868,63 +920,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -959,7 +954,7 @@
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1044,14 +1039,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 

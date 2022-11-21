@@ -34,20 +34,6 @@
 
 
 
-  <meta name="twitter:site" content="@ChristianElsen">
-  <meta name="twitter:title" content="AWS Direct Connect Gateway Deep Dive">
-  <meta name="twitter:description" content="A deep dive look into the AWS Direct Connect Gateway">
-  <meta name="twitter:url" content="https://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-      <meta name="twitter:image" content="https://www.edge-cloud.net/assets/images/og-image.jpg">
-    
-  
-
-  
-
 
 
   <meta property="article:published_time" content="2019-09-06T00:00:00-07:00">
@@ -73,7 +59,7 @@
       "@type": "Person",
       "name": "Christian Elsen",
       "url": "https://www.edge-cloud.net/",
-      "sameAs": ["https://twitter.com/ChristianElsen","https://www.linkedin.com/in/christianelsen/"]
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
     
   }
 </script>
@@ -251,7 +237,7 @@
           
         
           
-            <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
@@ -266,6 +252,8 @@
             <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
+      
+
       
 
       
@@ -388,7 +376,7 @@
 
       <section class="page__content e-content" itemprop="text">
         
-          <aside class="sidebar__right ">
+          <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
@@ -442,9 +430,9 @@ As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in a
 
 <a href="/content/uploads/2019/09/DX-Associated-Region.png" title="Figure 1: Direct Connect with associated AWS region. " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2019/09/DX-Associated-Region-320.webp 320w,         /content/resized/2019/09/DX-Associated-Region-384.webp 384w,         /content/resized/2019/09/DX-Associated-Region-512.webp 512w,         /content/resized/2019/09/DX-Associated-Region-683.webp 683w,  /content/uploads/2019/09/DX-Associated-Region.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2019/09/DX-Associated-Region-320.png 320w,     /content/resized/2019/09/DX-Associated-Region-384.png 384w,     /content/resized/2019/09/DX-Associated-Region-512.png 512w,     /content/resized/2019/09/DX-Associated-Region-683.png 683w,  /content/uploads/2019/09/DX-Associated-Region.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2019/09/DX-Associated-Region-320.png" data-src="/content/uploads/2019/09/DX-Associated-Region.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Direct Connect with associated AWS region. ">
+  <source width="800" height="401" type="image/webp" data-srcset="        /content/resized/2019/09/DX-Associated-Region-320.webp 320w,         /content/resized/2019/09/DX-Associated-Region-384.webp 384w,         /content/resized/2019/09/DX-Associated-Region-512.webp 512w,         /content/resized/2019/09/DX-Associated-Region-683.webp 683w,  /content/uploads/2019/09/DX-Associated-Region.webp 800w" sizes="800px"></source>
+  <source width="800" height="401" data-srcset="    /content/resized/2019/09/DX-Associated-Region-320.png 320w,     /content/resized/2019/09/DX-Associated-Region-384.png 384w,     /content/resized/2019/09/DX-Associated-Region-512.png 512w,     /content/resized/2019/09/DX-Associated-Region-683.png 683w,  /content/uploads/2019/09/DX-Associated-Region.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2019/09/DX-Associated-Region-320.png" data-src="/content/uploads/2019/09/DX-Associated-Region.png" class="blur-up lazyautosizes lazyload" width="800" height="401" alt="Figure 1: Direct Connect with associated AWS region. ">
 </picture>
 </a>
 
@@ -470,9 +458,9 @@ As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in a
 
 <a href="/content/uploads/2019/09/DX-with-DXGW.png" title="Figure 2: Direct Connect with Direct Connect Gateway. " class="image-popup">
 <picture>
-  <source width="800" type="image/webp" data-srcset="        /content/resized/2019/09/DX-with-DXGW-320.webp 320w,         /content/resized/2019/09/DX-with-DXGW-384.webp 384w,         /content/resized/2019/09/DX-with-DXGW-512.webp 512w,         /content/resized/2019/09/DX-with-DXGW-683.webp 683w,  /content/uploads/2019/09/DX-with-DXGW.webp 800w" sizes="800px"></source>
-  <source width="800" data-srcset="    /content/resized/2019/09/DX-with-DXGW-320.png 320w,     /content/resized/2019/09/DX-with-DXGW-384.png 384w,     /content/resized/2019/09/DX-with-DXGW-512.png 512w,     /content/resized/2019/09/DX-with-DXGW-683.png 683w,  /content/uploads/2019/09/DX-with-DXGW.png 800w" sizes="800px"></source>
-  <img src="/content/resized/2019/09/DX-with-DXGW-320.png" data-src="/content/uploads/2019/09/DX-with-DXGW.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Direct Connect with Direct Connect Gateway. ">
+  <source width="800" height="401" type="image/webp" data-srcset="        /content/resized/2019/09/DX-with-DXGW-320.webp 320w,         /content/resized/2019/09/DX-with-DXGW-384.webp 384w,         /content/resized/2019/09/DX-with-DXGW-512.webp 512w,         /content/resized/2019/09/DX-with-DXGW-683.webp 683w,  /content/uploads/2019/09/DX-with-DXGW.webp 800w" sizes="800px"></source>
+  <source width="800" height="401" data-srcset="    /content/resized/2019/09/DX-with-DXGW-320.png 320w,     /content/resized/2019/09/DX-with-DXGW-384.png 384w,     /content/resized/2019/09/DX-with-DXGW-512.png 512w,     /content/resized/2019/09/DX-with-DXGW-683.png 683w,  /content/uploads/2019/09/DX-with-DXGW.png 800w" sizes="800px"></source>
+  <img src="/content/resized/2019/09/DX-with-DXGW-320.png" data-src="/content/uploads/2019/09/DX-with-DXGW.png" class="blur-up lazyautosizes lazyload" width="800" height="401" alt="Figure 2: Direct Connect with Direct Connect Gateway. ">
 </picture>
 </a>
 
@@ -508,9 +496,9 @@ As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in a
 
 <a href="/content/uploads/2019/09/DXGW-with-TGW.png" title="Figure 3: Direct Connect Gateway with Transit Gateway. " class="image-popup">
 <picture>
-  <source width="851" type="image/webp" data-srcset="        /content/resized/2019/09/DXGW-with-TGW-320.webp 320w,         /content/resized/2019/09/DXGW-with-TGW-384.webp 384w,         /content/resized/2019/09/DXGW-with-TGW-512.webp 512w,         /content/resized/2019/09/DXGW-with-TGW-683.webp 683w,         /content/resized/2019/09/DXGW-with-TGW-800.webp 800w,  /content/uploads/2019/09/DXGW-with-TGW.webp 851w" sizes="851px"></source>
-  <source width="851" data-srcset="    /content/resized/2019/09/DXGW-with-TGW-320.png 320w,     /content/resized/2019/09/DXGW-with-TGW-384.png 384w,     /content/resized/2019/09/DXGW-with-TGW-512.png 512w,     /content/resized/2019/09/DXGW-with-TGW-683.png 683w,     /content/resized/2019/09/DXGW-with-TGW-800.png 800w,  /content/uploads/2019/09/DXGW-with-TGW.png 851w" sizes="851px"></source>
-  <img src="/content/resized/2019/09/DXGW-with-TGW-320.png" data-src="/content/uploads/2019/09/DXGW-with-TGW.png" class="blur-up lazyautosizes lazyload" alt="Figure 3: Direct Connect Gateway with Transit Gateway. ">
+  <source width="851" height="291" type="image/webp" data-srcset="        /content/resized/2019/09/DXGW-with-TGW-320.webp 320w,         /content/resized/2019/09/DXGW-with-TGW-384.webp 384w,         /content/resized/2019/09/DXGW-with-TGW-512.webp 512w,         /content/resized/2019/09/DXGW-with-TGW-683.webp 683w,         /content/resized/2019/09/DXGW-with-TGW-800.webp 800w,  /content/uploads/2019/09/DXGW-with-TGW.webp 851w" sizes="851px"></source>
+  <source width="851" height="291" data-srcset="    /content/resized/2019/09/DXGW-with-TGW-320.png 320w,     /content/resized/2019/09/DXGW-with-TGW-384.png 384w,     /content/resized/2019/09/DXGW-with-TGW-512.png 512w,     /content/resized/2019/09/DXGW-with-TGW-683.png 683w,     /content/resized/2019/09/DXGW-with-TGW-800.png 800w,  /content/uploads/2019/09/DXGW-with-TGW.png 851w" sizes="851px"></source>
+  <img src="/content/resized/2019/09/DXGW-with-TGW-320.png" data-src="/content/uploads/2019/09/DXGW-with-TGW.png" class="blur-up lazyautosizes lazyload" width="851" height="291" alt="Figure 3: Direct Connect Gateway with Transit Gateway. ">
 </picture>
 </a>
 
@@ -567,9 +555,9 @@ AWS Direct Connect <em>Hosted Virtual Interfaces</em> do not support Transit VIF
 
 <a href="/content/uploads/2019/09/DXGW-Owner.png" title="Figure 4: Possible account ownership in multi-account setup. " class="image-popup">
 <picture>
-  <source width="801" type="image/webp" data-srcset="        /content/resized/2019/09/DXGW-Owner-320.webp 320w,         /content/resized/2019/09/DXGW-Owner-384.webp 384w,         /content/resized/2019/09/DXGW-Owner-512.webp 512w,         /content/resized/2019/09/DXGW-Owner-683.webp 683w,         /content/resized/2019/09/DXGW-Owner-800.webp 800w,  /content/uploads/2019/09/DXGW-Owner.webp 801w" sizes="801px"></source>
-  <source width="801" data-srcset="    /content/resized/2019/09/DXGW-Owner-320.png 320w,     /content/resized/2019/09/DXGW-Owner-384.png 384w,     /content/resized/2019/09/DXGW-Owner-512.png 512w,     /content/resized/2019/09/DXGW-Owner-683.png 683w,     /content/resized/2019/09/DXGW-Owner-800.png 800w,  /content/uploads/2019/09/DXGW-Owner.png 801w" sizes="801px"></source>
-  <img src="/content/resized/2019/09/DXGW-Owner-320.png" data-src="/content/uploads/2019/09/DXGW-Owner.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Possible account ownership in multi-account setup. ">
+  <source width="801" height="361" type="image/webp" data-srcset="        /content/resized/2019/09/DXGW-Owner-320.webp 320w,         /content/resized/2019/09/DXGW-Owner-384.webp 384w,         /content/resized/2019/09/DXGW-Owner-512.webp 512w,         /content/resized/2019/09/DXGW-Owner-683.webp 683w,         /content/resized/2019/09/DXGW-Owner-800.webp 800w,  /content/uploads/2019/09/DXGW-Owner.webp 801w" sizes="801px"></source>
+  <source width="801" height="361" data-srcset="    /content/resized/2019/09/DXGW-Owner-320.png 320w,     /content/resized/2019/09/DXGW-Owner-384.png 384w,     /content/resized/2019/09/DXGW-Owner-512.png 512w,     /content/resized/2019/09/DXGW-Owner-683.png 683w,     /content/resized/2019/09/DXGW-Owner-800.png 800w,  /content/uploads/2019/09/DXGW-Owner.png 801w" sizes="801px"></source>
+  <img src="/content/resized/2019/09/DXGW-Owner-320.png" data-src="/content/uploads/2019/09/DXGW-Owner.png" class="blur-up lazyautosizes lazyload" width="801" height="361" alt="Figure 4: Possible account ownership in multi-account setup. ">
 </picture>
 </a>
 
@@ -618,9 +606,9 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
 
 <a href="/content/uploads/2019/09/DXGW-DataFlow-SiteLink.png" title="Figure 5: Permitted data flow (green), data flow with optional SiteLink enabled (orange) and not permitted data flow (red) with Direct Connect Gateway. " class="image-popup">
 <picture>
-  <source width="801" type="image/webp" data-srcset="        /content/resized/2019/09/DXGW-DataFlow-SiteLink-320.webp 320w,         /content/resized/2019/09/DXGW-DataFlow-SiteLink-384.webp 384w,         /content/resized/2019/09/DXGW-DataFlow-SiteLink-512.webp 512w,         /content/resized/2019/09/DXGW-DataFlow-SiteLink-683.webp 683w,         /content/resized/2019/09/DXGW-DataFlow-SiteLink-800.webp 800w,  /content/uploads/2019/09/DXGW-DataFlow-SiteLink.webp 801w" sizes="801px"></source>
-  <source width="801" data-srcset="    /content/resized/2019/09/DXGW-DataFlow-SiteLink-320.png 320w,     /content/resized/2019/09/DXGW-DataFlow-SiteLink-384.png 384w,     /content/resized/2019/09/DXGW-DataFlow-SiteLink-512.png 512w,     /content/resized/2019/09/DXGW-DataFlow-SiteLink-683.png 683w,     /content/resized/2019/09/DXGW-DataFlow-SiteLink-800.png 800w,  /content/uploads/2019/09/DXGW-DataFlow-SiteLink.png 801w" sizes="801px"></source>
-  <img src="/content/resized/2019/09/DXGW-DataFlow-SiteLink-320.png" data-src="/content/uploads/2019/09/DXGW-DataFlow-SiteLink.png" class="blur-up lazyautosizes lazyload" alt="Figure 5: Permitted data flow (green), data flow with optional SiteLink enabled (orange) and not permitted data flow (red) with Direct Connect Gateway. ">
+  <source width="801" height="361" type="image/webp" data-srcset="        /content/resized/2019/09/DXGW-DataFlow-SiteLink-320.webp 320w,         /content/resized/2019/09/DXGW-DataFlow-SiteLink-384.webp 384w,         /content/resized/2019/09/DXGW-DataFlow-SiteLink-512.webp 512w,         /content/resized/2019/09/DXGW-DataFlow-SiteLink-683.webp 683w,         /content/resized/2019/09/DXGW-DataFlow-SiteLink-800.webp 800w,  /content/uploads/2019/09/DXGW-DataFlow-SiteLink.webp 801w" sizes="801px"></source>
+  <source width="801" height="361" data-srcset="    /content/resized/2019/09/DXGW-DataFlow-SiteLink-320.png 320w,     /content/resized/2019/09/DXGW-DataFlow-SiteLink-384.png 384w,     /content/resized/2019/09/DXGW-DataFlow-SiteLink-512.png 512w,     /content/resized/2019/09/DXGW-DataFlow-SiteLink-683.png 683w,     /content/resized/2019/09/DXGW-DataFlow-SiteLink-800.png 800w,  /content/uploads/2019/09/DXGW-DataFlow-SiteLink.png 801w" sizes="801px"></source>
+  <img src="/content/resized/2019/09/DXGW-DataFlow-SiteLink-320.png" data-src="/content/uploads/2019/09/DXGW-DataFlow-SiteLink.png" class="blur-up lazyautosizes lazyload" width="801" height="361" alt="Figure 5: Permitted data flow (green), data flow with optional SiteLink enabled (orange) and not permitted data flow (red) with Direct Connect Gateway. ">
 </picture>
 </a>
 
@@ -705,13 +693,21 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=ChristianElsen&amp;text=AWS+Direct+Connect+Gateway+Deep+Dive%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://toot.kytta.dev/?text=AWS%20Direct%20Connect%20Gateway%20Deep%20Dive%0Ahttps://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://twitter.com/intent/tweet?text=AWS+Direct+Connect+Gateway+Deep+Dive%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F&amp;title=AWS+Direct+Connect+Gateway+Deep+Dive" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F&amp;title=AWS+Direct+Connect+Gateway+Deep+Dive" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
 </section>
 
 
@@ -737,6 +733,62 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
         
           
 
@@ -909,63 +961,6 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2020/09/11/aws-ipsec-vpn-ipv6/" rel="permalink">AWS Site-to-Site VPN (IPSec) with IPv6
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2020-09-11T00:00:00-07:00">September 11, 2020</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          7 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6, #VPN
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1000,7 +995,7 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
     
       
         
-          <li><a href="https://twitter.com/ChristianElsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
@@ -1085,14 +1080,8 @@ search.addWidget(
   })
 );
 
-// Starting the search only when toggle is clicked
-$(document).ready(function () {
-  $(".search__toggle").on("click", function() {
-    if(!search.started) {
-      search.start();
-    }
-  });
-});
+// Starting the search
+search.start();
 </script>
 
 
