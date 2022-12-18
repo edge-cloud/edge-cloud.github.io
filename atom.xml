@@ -3,7 +3,7 @@
   <channel>
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2022-12-18T15:08:43-08:00</updated>
+  <updated>2022-12-18T15:11:02-08:00</updated>
   <id>https://www.edge-cloud.net/atom.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -25,8 +25,8 @@
     <entry>
       <title>Cost considerations for centralized NAT with Transit Gateway</title>
       <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</id>
-      <updated>2022-12-18T15:08:16-08:00</updated>
-      <published>2022-12-18T15:08:16-08:00</published>
+      <updated>2022-12-18T15:10:31-08:00</updated>
+      <published>2022-12-18T15:10:31-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -46,8 +46,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2022/01/01/template/</id>
-      <updated>2022-12-18T15:08:16-08:00</updated>
-      <published>2022-12-18T15:08:16-08:00</published>
+      <updated>2022-12-18T15:10:31-08:00</updated>
+      <published>2022-12-18T15:10:31-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -116,8 +116,8 @@ Math
     <entry>
       <title>Securing your AWS networks</title>
       <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</id>
-      <updated>2022-12-18T15:08:16-08:00</updated>
-      <published>2022-12-18T15:08:16-08:00</published>
+      <updated>2022-12-18T15:10:31-08:00</updated>
+      <published>2022-12-18T15:10:31-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -137,8 +137,8 @@ Math
     <entry>
       <title>Direct Connect Public VIF for S3 traffic only</title>
       <id>https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/</id>
-      <updated>2022-12-18T15:08:16-08:00</updated>
-      <published>2022-12-18T15:08:16-08:00</published>
+      <updated>2022-12-18T15:10:31-08:00</updated>
+      <published>2022-12-18T15:10:31-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
