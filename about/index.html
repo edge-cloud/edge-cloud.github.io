@@ -88,8 +88,8 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+<link href="/assets/css/fontawesome/css/all.min.css" rel="stylesheet">
+<noscript><link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css"></noscript>
 
 
 
@@ -108,11 +108,11 @@
 
 <link rel="preload" href="/assets/js/main.min.js" as="script">
 <link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js" as="script">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.js" as="script">
 
 <link rel="preload" href="/assets/css/main.css" as="style">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css" as="style">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css" as="style">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css" as="style">
 
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
 <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
@@ -225,12 +225,12 @@
     <button class="btn btn--inverse">Follow</button>
     <ul class="author__urls social-icons">
       
-        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">San Francisco, CA</span>
-        </li>
-      
 
       
+        
+          
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+          
         
           
             <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
@@ -394,7 +394,7 @@
     
       <div class="search-content">
         <div class="search-content__inner-wrap">
-<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<script src="/assets/js/instantsearch/dist/instantsearch.min.js"></script>
   <div class="search-searchbar"></div>
   <div class="search-hits"></div>
 </div>
@@ -436,7 +436,7 @@
   </ul>
 </div>
 
-<div align="center" class="page__footer-copyright">© 2013 - 2022 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+<div align="center" class="page__footer-copyright">© 2013 - 2023 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
 
       </footer>
     </div>
@@ -450,9 +450,9 @@
 
 
 <!-- Including InstantSearch.js library and styling -->
-<script async src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+<script async src="/assets/js/instantsearch/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="/assets/js/instantsearch/dist/instantsearch.min.css">
+<link rel="stylesheet" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css">
 
 <script>
 // Instanciating InstantSearch.js with Algolia credentials
