@@ -3,7 +3,7 @@
   <channel>
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2023-03-21T11:50:16-07:00</updated>
+  <updated>2023-03-21T11:54:22-07:00</updated>
   <id>https://www.edge-cloud.net/atom.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -25,8 +25,8 @@
     <entry>
       <title>Cost considerations for centralized NAT with Transit Gateway</title>
       <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</id>
-      <updated>2023-03-21T11:49:06-07:00</updated>
-      <published>2023-03-21T11:49:06-07:00</published>
+      <updated>2023-03-21T11:53:47-07:00</updated>
+      <published>2023-03-21T11:53:47-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -46,8 +46,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2022/01/01/template/</id>
-      <updated>2023-03-21T11:49:06-07:00</updated>
-      <published>2023-03-21T11:49:06-07:00</published>
+      <updated>2023-03-21T11:53:47-07:00</updated>
+      <published>2023-03-21T11:53:47-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -116,8 +116,8 @@ Math
     <entry>
       <title>Securing your AWS networks</title>
       <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</id>
-      <updated>2023-03-21T11:49:06-07:00</updated>
-      <published>2023-03-21T11:49:06-07:00</published>
+      <updated>2023-03-21T11:53:47-07:00</updated>
+      <published>2023-03-21T11:53:47-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -137,8 +137,8 @@ Math
     <entry>
       <title>Direct Connect Public VIF for S3 traffic only</title>
       <id>https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/</id>
-      <updated>2023-03-21T11:49:06-07:00</updated>
-      <published>2023-03-21T11:49:06-07:00</published>
+      <updated>2023-03-21T11:53:47-07:00</updated>
+      <published>2023-03-21T11:53:47-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -192,6 +192,31 @@ Note: This is a notice box
       <category term="Network" />
       
       <category term="Direct-Connect" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>URL Redirect with Amazon CloudFront and Amazon Route 53</title>
+      <id>https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/</id>
+      <updated>2023-03-20T00:00:00-07:00</updated>
+      <published>2023-03-20T00:00:00-07:00</published>
+      <author>
+        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
+      </author>
+      <link href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/" />
+      <summary type="html">How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.</summary>
+      <content type="html">A URL redirect, also called URL forwarding, allows you to make a web page available under more than one URL. When a web browser attempts to open a URL that has been redirected, a page with a different URL is opened. This is also indicated in the web browser itself by showing the new URL in the navigation bar. As an example: You might enter the URL https://about.example.com into the browser and be redirected to...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      <category term="CloudFront" />
+      
+      <category term="Web" />
       
       
       <category term="EdgeCloud" />
@@ -305,29 +330,6 @@ Note: This is a notice box
       <category term="IPv6" />
       
       <category term="VPN" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Multicast with AWS Transit Gateway</title>
-      <id>https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/</id>
-      <updated>2020-05-01T00:00:00-07:00</updated>
-      <published>2020-05-01T00:00:00-07:00</published>
-      <author>
-        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
-      </author>
-      <link href="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/" />
-      <summary type="html">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)</summary>
-      <content type="html">At the beginning of December 2019, AWS released Multicast support within the AWS Transit Gateway. This marked the beginning of being able to use applications that require support for IP Multicast within AWS. The following article will give you a brief overview of how to use IP Multicast with the AWS Transit Gateway and especially how to validate that your setup is working correctly. Multicast Let’s have a look at the basics of IP Multicasting...</content>
-      
-      <category term="AWS" />
-      
-      <category term="Network" />
-      
-      <category term="Transit-Gateway" />
       
       
       <category term="EdgeCloud" />

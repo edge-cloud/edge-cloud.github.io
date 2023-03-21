@@ -1,0 +1,1231 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>URL Redirect with Amazon CloudFront and Amazon Route 53 - Edge Cloud</title>
+<meta name="description" content="How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.">
+
+
+  <meta name="author" content="Christian Elsen">
+  
+  <meta property="article:author" content="Christian Elsen">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="URL Redirect with Amazon CloudFront and Amazon Route 53">
+<meta property="og:url" content="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/">
+
+
+  <meta property="og:description" content="How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/content/uploads/2023/03/title-url-redirect-with-cloudfront.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-03-20T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net/",
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link href="/assets/css/fontawesome/css/all.min.css" rel="stylesheet">
+<noscript><link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt=" On the edge of cloud computing"></a>
+        
+        <a class="site-title" href="/">
+           On the edge of cloud computing
+          
+        </a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://www.edge-cloud.net/">
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://www.edge-cloud.net/" itemprop="url">Christian Elsen</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Technology Generalist</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+          
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://as213151.net/" rel="noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="URL Redirect with Amazon CloudFront and Amazon Route 53">
+    <meta itemprop="description" content="How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.">
+    <meta itemprop="datePublished" content="2023-03-20T00:00:00-07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/" class="u-url" itemprop="url">URL Redirect with Amazon CloudFront and Amazon Route 53
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-03-20T00:00:00-07:00">March 20, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #CloudFront, #Web
+    
+    
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+<li>
+<a href="#background">Background</a><ul>
+<li><a href="#how-does-a-url-redirect-work">How does a URL redirect work</a></li>
+<li><a href="#host-header-and-server-name-indication-sni">Host header and Server Name Indication (SNI)</a></li>
+</ul>
+</li>
+<li><a href="#example-use-case">Example use case</a></li>
+<li>
+<a href="#cloudfront-for-url-redirect">CloudFront for URL redirect</a><ul>
+<li><a href="#cloudfront-distribution-and-dummy-origin">Cloudfront distribution and dummy origin</a></li>
+<li><a href="#certificates-and-cnames">Certificates and CNAMEs</a></li>
+<li><a href="#cloudfront-function">CloudFront function</a></li>
+</ul>
+</li>
+<li><a href="#dns-setup-with-route-53">DNS setup with Route 53</a></li>
+<li><a href="#testing-the-setup">Testing the setup</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>A <a href="https://en.wikipedia.org/wiki/URL_redirection" target="_blank" rel="noopener noreferrer">URL redirect</a>, also called URL forwarding, allows you to make a web page available under more than one URL. When a web browser attempts to open a URL that has been redirected, a page with a different URL is opened. This is also indicated in the web browser itself by showing the new URL in the navigation bar. As an example: You might enter the URL <code class="language-plaintext highlighter-rouge">https://about.example.com</code> into the browser and be redirected to <code class="language-plaintext highlighter-rouge">https://www.example.com/about/</code>.</p>
+
+<p>While often misunderstood as a function or DNS, a URL redirect is actually a function of HTTP and therefore of a web server. Therefore if we want to implement such a redirect, we need a web server to perform such a URL redirect.</p>
+
+<p>This blog post shows you how to use <a href="https://aws.amazon.com/cloudfront/" target="_blank" rel="noopener noreferrer">Amazon CloudFront</a>, the content delivery network (CDN) of AWS, to perform such a redirect.</p>
+
+<h1 id="background">Background</h1>
+
+<h2 id="how-does-a-url-redirect-work">How does a URL redirect work</h2>
+
+<p>While a URL redirect mainly uses the <a href="https://en.wikipedia.org/wiki/HTTP" target="_blank" rel="noopener noreferrer">Hypertext Transfer Protocol (HTTP)</a>, the <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer">Domain Name System (DNS)</a> naturally also plays a role when using HTTP. In order to understand what we need to configure it’s a good idea to understand the flow between these two protocol when it comes to a URL redirect.</p>
+
+<p>Consider Figure 1, which displays the conceptual overview of a redirect from <code class="language-plaintext highlighter-rouge">https://www.example.com</code> to <code class="language-plaintext highlighter-rouge">https://www.example.org</code>. The end-user will here initially enter <code class="language-plaintext highlighter-rouge">https://www.example.com</code> into the browser, but be redirected to <code class="language-plaintext highlighter-rouge">https://www.example.org</code> and displayed that website’s content.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/03/url-redirect-how-it-works.png" title="Figure 1: Conceptional overview of a URL redirect with the DNS request and responses as well as the HTTP request and responses. " class="image-popup">
+<picture>
+  <source width="702" height="487" type="image/webp" data-srcset="        /content/resized/2023/03/url-redirect-how-it-works-320.webp 320w,         /content/resized/2023/03/url-redirect-how-it-works-384.webp 384w,         /content/resized/2023/03/url-redirect-how-it-works-512.webp 512w,         /content/resized/2023/03/url-redirect-how-it-works-683.webp 683w,  /content/uploads/2023/03/url-redirect-how-it-works.webp 702w" sizes="702px"></source>
+  <source width="702" height="487" data-srcset="    /content/resized/2023/03/url-redirect-how-it-works-320.png 320w,     /content/resized/2023/03/url-redirect-how-it-works-384.png 384w,     /content/resized/2023/03/url-redirect-how-it-works-512.png 512w,     /content/resized/2023/03/url-redirect-how-it-works-683.png 683w,  /content/uploads/2023/03/url-redirect-how-it-works.png 702w" sizes="702px"></source>
+  <img src="/content/resized/2023/03/url-redirect-how-it-works-320.png" data-src="/content/uploads/2023/03/url-redirect-how-it-works.png" class="blur-up lazyautosizes lazyload" width="702" height="487" alt="Figure 1: Conceptional overview of a URL redirect with the DNS request and responses as well as the HTTP request and responses. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Conceptional overview of a URL redirect with the DNS request and responses as well as the HTTP request and responses.
+</figcaption>
+
+</figure>
+
+<p>Let’s have a look the involved steps:</p>
+<ol>
+  <li>The browser performs a DNS lookup for <code class="language-plaintext highlighter-rouge">www.example.com</code>.</li>
+  <li>The local DNS resolver responds with the IP address for <code class="language-plaintext highlighter-rouge">www.example.com</code>. Note, that the recursive behavior of the DNS resolver is not depicted here, to keep the example simple.</li>
+  <li>The browser performs an HTTP “GET” request against te web server for <code class="language-plaintext highlighter-rouge">www.example.com</code>, using the IP address it just received.</li>
+  <li>The web server for <code class="language-plaintext highlighter-rouge">www.example.com</code> responds with a “301 Permanent Redirect” response, also delivering the new location as <code class="language-plaintext highlighter-rouge">https://www.example.org</code> via HTTP.</li>
+  <li>The browser performs a DNS lookup for <code class="language-plaintext highlighter-rouge">www.example.org</code>. The new URL <code class="language-plaintext highlighter-rouge">https://www.example.org</code> is also displayed in the browser’s address bar.</li>
+  <li>The local DNS resolver responds with the IP address for <code class="language-plaintext highlighter-rouge">www.example.org</code>. Again, the recursive behavior of the DNS resolver is not depicted.</li>
+  <li>The browser performs an HTTP “GET” request against the web server for <code class="language-plaintext highlighter-rouge">www.example.org</code>, using the IP address it just received.</li>
+  <li>The web server for <code class="language-plaintext highlighter-rouge">www.example.org</code> responds with the actual data for this website.</li>
+</ol>
+
+<h2 id="host-header-and-server-name-indication-sni">Host header and Server Name Indication (SNI)</h2>
+
+<p>Sometimes the question comes up why it is not sufficient to just configure a <a href="https://en.wikipedia.org/wiki/CNAME_record" target="_blank" rel="noopener noreferrer">Canonical Name (CNAME) record</a> in DNS instead of a full URL redirect.</p>
+
+<p>Imagine you want to allow your company’s users to access the AWS Console under <code class="language-plaintext highlighter-rouge">https://aws.mycompany.com</code> instead of <code class="language-plaintext highlighter-rouge">https://console.aws.amazon.com</code>. Why isn’t it enough to create a CNAME in the DNS zone of <code class="language-plaintext highlighter-rouge">mycompany.com</code> that points to <code class="language-plaintext highlighter-rouge">console.aws.amazon.com</code>?</p>
+
+<p>For this we have to look back at the early days of HTTP with its first version of HTTP/1.0. This version neither included the ability of “Host” headers, nor Server Name Indication (SNI), which is necessary to use “Host” headers with TLS. With this HTTP version, each webserver required a unique IP address for each site it was hosting (See Figure 2).</p>
+
+<p>This is obviously very inefficient with regards to IP address usages and issues such as the <a href="https://en.wikipedia.org/wiki/IPv4_address_exhaustion" target="_blank" rel="noopener noreferrer">IPv4 address exhaustion</a> forced the need for solutions. To do so, <a href="https://www.rfc-editor.org/rfc/rfc2616" target="_blank" rel="noopener noreferrer">HTTP/1.1</a> introduced the concept the “Host” header, where the client indicates to the server the hostname of the actual website it wants to access. This allows to host multiple different websites with different hostnames on the same web server with the same IP address.</p>
+
+<p>With the <a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener noreferrer">Hypertext Transfer Protocol Secure (HTTPS)</a> becoming more common, this concept had to be extended as any of the request headers - from the client to the server - which includes the “Host” header are part of the TLS encryption. Therefore the web server was in a “catch 22” situation, where it needed to know the website being targeted so that it could pick the right certificate without looking at the HTTP session data. That’s where <a href="https://en.wikipedia.org/wiki/Server_Name_Indication" target="_blank" rel="noopener noreferrer">Server Name Indication (SNI)</a> comes into the picture and allows the browser to indicate which hostname it wants to talk to (Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/03/url-redirect-how-sni-works.png" title="Figure 2: The role of Server Name Indication (SNI) on a web server. " class="image-popup">
+<picture>
+  <source width="1230" height="515" type="image/webp" data-srcset="        /content/resized/2023/03/url-redirect-how-sni-works-320.webp 320w,         /content/resized/2023/03/url-redirect-how-sni-works-384.webp 384w,         /content/resized/2023/03/url-redirect-how-sni-works-512.webp 512w,         /content/resized/2023/03/url-redirect-how-sni-works-683.webp 683w,         /content/resized/2023/03/url-redirect-how-sni-works-800.webp 800w,         /content/resized/2023/03/url-redirect-how-sni-works-960.webp 960w,  /content/uploads/2023/03/url-redirect-how-sni-works.webp 1230w" sizes="1230px"></source>
+  <source width="1230" height="515" data-srcset="    /content/resized/2023/03/url-redirect-how-sni-works-320.png 320w,     /content/resized/2023/03/url-redirect-how-sni-works-384.png 384w,     /content/resized/2023/03/url-redirect-how-sni-works-512.png 512w,     /content/resized/2023/03/url-redirect-how-sni-works-683.png 683w,     /content/resized/2023/03/url-redirect-how-sni-works-800.png 800w,     /content/resized/2023/03/url-redirect-how-sni-works-960.png 960w,  /content/uploads/2023/03/url-redirect-how-sni-works.png 1230w" sizes="1230px"></source>
+  <img src="/content/resized/2023/03/url-redirect-how-sni-works-320.png" data-src="/content/uploads/2023/03/url-redirect-how-sni-works.png" class="blur-up lazyautosizes lazyload" width="1230" height="515" alt="Figure 2: The role of Server Name Indication (SNI) on a web server. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: The role of Server Name Indication (SNI) on a web server.
+</figcaption>
+
+</figure>
+
+<p>What does all of that have to do with our CNAME? Today use of SNI and Host headers is the norm and as such the web server that delivers the website for <code class="language-plaintext highlighter-rouge">https://console.aws.amazon.com</code> expects to see that hostname as part of the SNI handshake. Any other hostname will be rejected for security reasons. 
+But creating a CNAME from  <code class="language-plaintext highlighter-rouge">https://aws.mycompany.com</code> to <code class="language-plaintext highlighter-rouge">https://console.aws.amazon.com</code> and subsequently entering <code class="language-plaintext highlighter-rouge">https://aws.mycompany.com</code> into the browser would do exactly this: It would attempt to talk to the web server for <code class="language-plaintext highlighter-rouge">https://console.aws.amazon.com</code>, while including <code class="language-plaintext highlighter-rouge">https://aws.mycompany.com</code> in the SNI. Therefore the web server for <code class="language-plaintext highlighter-rouge">https://console.aws.amazon.com</code> will prevent this communication.</p>
+
+<h1 id="example-use-case">Example use case</h1>
+
+<p>For this blog post we will use an example to demonstrate the power of URL redirects. You can see that this blog site has main navigation elements in the upper right corner. Besides the item “Home”, which will bring you back to the Homepage, there are also items for “AWS”, “IPv6”, “Tags”, and “About”, which will directly bring you to certain pages.</p>
+
+<p>What if we could add the following URLs that will bring you to the same pages:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">https://aws.edge-cloud.net</code></li>
+  <li><code class="language-plaintext highlighter-rouge">https://ipv6.edge-cloud.net</code></li>
+  <li><code class="language-plaintext highlighter-rouge">https://tags.edge-cloud.net</code></li>
+  <li><code class="language-plaintext highlighter-rouge">https://about.edge-cloud.net</code></li>
+</ul>
+
+<p>Each of these URL will be a redirect to the main page at <code class="language-plaintext highlighter-rouge">https://www.edge-cloud.net/&lt;target&gt;</code>, where <code class="language-plaintext highlighter-rouge">&lt;target&gt;</code> matches the current URI for that item.</p>
+
+<h1 id="cloudfront-for-url-redirect">CloudFront for URL redirect</h1>
+
+<p>Let’s setup an example to showcase a URL redirect with Amazon CloudFront as the web server and Amazon Route 53 for the DNS records.</p>
+
+<h2 id="cloudfront-distribution-and-dummy-origin">Cloudfront distribution and dummy origin</h2>
+
+<p>As a first step we will <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html" target="_blank" rel="noopener noreferrer">create a new CloudFront distribution</a>.</p>
+
+<p>One of the items that you need to specify when creating a CloudFront distribution is the origin domain or the source of the content that will be served by CloudFront. In our case we have no such origin and no actual objects will ever be served. Therefore it’s safe to enter the origin domain <strong>invalid.invalid</strong>, while choosing the Protocol as <strong>Match viewer</strong> (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/03/url-redirect-dummy-origin.png" title="Figure 3: CloudFront distribution with hostname ‘invalid.invalid’ as dummy origin. " class="image-popup">
+<picture>
+  <source width="797" height="292" type="image/webp" data-srcset="        /content/resized/2023/03/url-redirect-dummy-origin-320.webp 320w,         /content/resized/2023/03/url-redirect-dummy-origin-384.webp 384w,         /content/resized/2023/03/url-redirect-dummy-origin-512.webp 512w,         /content/resized/2023/03/url-redirect-dummy-origin-683.webp 683w,  /content/uploads/2023/03/url-redirect-dummy-origin.webp 797w" sizes="797px"></source>
+  <source width="797" height="292" data-srcset="    /content/resized/2023/03/url-redirect-dummy-origin-320.png 320w,     /content/resized/2023/03/url-redirect-dummy-origin-384.png 384w,     /content/resized/2023/03/url-redirect-dummy-origin-512.png 512w,     /content/resized/2023/03/url-redirect-dummy-origin-683.png 683w,  /content/uploads/2023/03/url-redirect-dummy-origin.png 797w" sizes="797px"></source>
+  <img src="/content/resized/2023/03/url-redirect-dummy-origin-320.png" data-src="/content/uploads/2023/03/url-redirect-dummy-origin.png" class="blur-up lazyautosizes lazyload" width="797" height="292" alt="Figure 3: CloudFront distribution with hostname ‘invalid.invalid’ as dummy origin. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: CloudFront distribution with hostname ‘invalid.invalid’ as dummy origin.
+</figcaption>
+
+</figure>
+
+<p>All other settings can remain as default for now.</p>
+
+<h2 id="certificates-and-cnames">Certificates and CNAMEs</h2>
+
+<p>Next we need to configure the new CloudFront distribution for <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html" target="_blank" rel="noopener noreferrer">alternate domain names</a>.</p>
+
+<p>As a first step this means using ideally <a href="https://aws.amazon.com/certificate-manager/" target="_blank" rel="noopener noreferrer">AWS Certificate Manager</a> to <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html" target="_blank" rel="noopener noreferrer">create a wildcard certificate</a> for <code class="language-plaintext highlighter-rouge">*.edge-cloud.net</code>. As an alternative we could create a Subject Alternative Name (SAN) certificate for just the four hostnames.</p>
+
+<p>Next, we will add the certificate and the alternate domain names to the CloudFront distribution (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/03/url-redirect-alternate-domain-names.png" title="Figure 4: Configuring alternate domain names in a CloudFront distribution. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/03/url-redirect-alternate-domain-names-320.webp 320w,         /content/resized/2023/03/url-redirect-alternate-domain-names-384.webp 384w,         /content/resized/2023/03/url-redirect-alternate-domain-names-512.webp 512w,         /content/resized/2023/03/url-redirect-alternate-domain-names-683.webp 683w,         /content/resized/2023/03/url-redirect-alternate-domain-names-800.webp 800w,         /content/resized/2023/03/url-redirect-alternate-domain-names-960.webp 960w, " sizes="1276px"></source>
+  <source data-srcset="    /content/resized/2023/03/url-redirect-alternate-domain-names-320.png 320w,     /content/resized/2023/03/url-redirect-alternate-domain-names-384.png 384w,     /content/resized/2023/03/url-redirect-alternate-domain-names-512.png 512w,     /content/resized/2023/03/url-redirect-alternate-domain-names-683.png 683w,     /content/resized/2023/03/url-redirect-alternate-domain-names-800.png 800w,     /content/resized/2023/03/url-redirect-alternate-domain-names-960.png 960w, " sizes="1276px"></source>
+  <img src="/content/resized/2023/03/url-redirect-alternate-domain-names-320.png" data-src="/content/uploads/2023/03/url-redirect-alternate-domain-names.png" class="blur-up lazyautosizes lazyload" alt="Figure 4: Configuring alternate domain names in a CloudFront distribution. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Configuring alternate domain names in a CloudFront distribution.
+</figcaption>
+
+</figure>
+
+<h2 id="cloudfront-function">CloudFront function</h2>
+
+<p>Now it’s time for the actual magic: The logic to execute in CloudFront and perform the URL redirect. For this CloudFront offers “CloudFront Functions”. With CloudFront Functions, you can write lightweight functions in JavaScript for high-scale, latency-sensitive CDN customizations. In our case that customization will be returning a “301 Permanent Redirect”.</p>
+
+<p>Start by <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/create-function.html" target="_blank" rel="noopener noreferrer">creating the CloudFront function</a> via the AWS Console (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/03/url-redirect-cloudfront-function.png" title="Figure 5: Creating an Amazon CloudFront function. " class="image-popup">
+<picture>
+  <source width="1087" height="1122" type="image/webp" data-srcset="        /content/resized/2023/03/url-redirect-cloudfront-function-320.webp 320w,         /content/resized/2023/03/url-redirect-cloudfront-function-384.webp 384w,         /content/resized/2023/03/url-redirect-cloudfront-function-512.webp 512w,         /content/resized/2023/03/url-redirect-cloudfront-function-683.webp 683w,         /content/resized/2023/03/url-redirect-cloudfront-function-800.webp 800w,         /content/resized/2023/03/url-redirect-cloudfront-function-960.webp 960w,  /content/uploads/2023/03/url-redirect-cloudfront-function.webp 1087w" sizes="1087px"></source>
+  <source width="1087" height="1122" data-srcset="    /content/resized/2023/03/url-redirect-cloudfront-function-320.png 320w,     /content/resized/2023/03/url-redirect-cloudfront-function-384.png 384w,     /content/resized/2023/03/url-redirect-cloudfront-function-512.png 512w,     /content/resized/2023/03/url-redirect-cloudfront-function-683.png 683w,     /content/resized/2023/03/url-redirect-cloudfront-function-800.png 800w,     /content/resized/2023/03/url-redirect-cloudfront-function-960.png 960w,  /content/uploads/2023/03/url-redirect-cloudfront-function.png 1087w" sizes="1087px"></source>
+  <img src="/content/resized/2023/03/url-redirect-cloudfront-function-320.png" data-src="/content/uploads/2023/03/url-redirect-cloudfront-function.png" class="blur-up lazyautosizes lazyload" width="1087" height="1122" alt="Figure 5: Creating an Amazon CloudFront function. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Creating an Amazon CloudFront function.
+</figcaption>
+
+</figure>
+
+<p>Below is the actual CloudFront Functions code. It extracts the host header value from the request and performs a “switch” based on the value of the found header, assigning the target URL for each expected host header value. 
+Next the function responds with a redirect, using the status code “301” for permanent redirect and the response header “location” to indicate the new URL.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
+# Amazon CloudFront function for selective URL redirect
+#
+function handler(event) {
+    var request = event.request;
+    var headers = request.headers;
+    var host = request.headers.host.value;
+    var newurl = `https://www.edge-cloud.net` // Default value for redirect target
+
+    switch(host) {
+        case "aws.edge-cloud.net": {
+            newurl = `https://www.edge-cloud.net/tags/#aws`
+            break;
+        }
+        case "ipv6.edge-cloud.net": {
+            newurl = `https://www.edge-cloud.net/tags/#ipv6`
+            break;
+        }
+        case "tags.edge-cloud.net": {
+            newurl = `https://www.edge-cloud.net/tags/`
+            break;
+        }
+        case "about.edge-cloud.net": {
+            newurl = `https://www.edge-cloud.net/about/`
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    
+    var response = {
+        statusCode: 301,
+        statusDescription: 'Moved Permanently',
+        headers:
+            { "location": { "value": newurl } }
+    }
+    
+    return response;
+}
+
+</code></pre></div></div>
+
+<p>After publishing the above CloudFront Function, return to the CloudFront distribution that we initially created and <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/create-function.html" target="_blank" rel="noopener noreferrer">update the viewer request with this CloudFront function</a> (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/03/url-redirect-viewer-function.png" title="Figure 6: Selecting a CloudFront function as a Viewer Action. " class="image-popup">
+<picture>
+  <source width="797" height="327" type="image/webp" data-srcset="        /content/resized/2023/03/url-redirect-viewer-function-320.webp 320w,         /content/resized/2023/03/url-redirect-viewer-function-384.webp 384w,         /content/resized/2023/03/url-redirect-viewer-function-512.webp 512w,         /content/resized/2023/03/url-redirect-viewer-function-683.webp 683w,  /content/uploads/2023/03/url-redirect-viewer-function.webp 797w" sizes="797px"></source>
+  <source width="797" height="327" data-srcset="    /content/resized/2023/03/url-redirect-viewer-function-320.png 320w,     /content/resized/2023/03/url-redirect-viewer-function-384.png 384w,     /content/resized/2023/03/url-redirect-viewer-function-512.png 512w,     /content/resized/2023/03/url-redirect-viewer-function-683.png 683w,  /content/uploads/2023/03/url-redirect-viewer-function.png 797w" sizes="797px"></source>
+  <img src="/content/resized/2023/03/url-redirect-viewer-function-320.png" data-src="/content/uploads/2023/03/url-redirect-viewer-function.png" class="blur-up lazyautosizes lazyload" width="797" height="327" alt="Figure 6: Selecting a CloudFront function as a Viewer Action. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Selecting a CloudFront function as a Viewer Action.
+</figcaption>
+
+</figure>
+
+<h1 id="dns-setup-with-route-53">DNS setup with Route 53</h1>
+
+<p>As a last step we have to setup the DNS records in Amazon Route 53 for the host names <code class="language-plaintext highlighter-rouge">aws.edge-cloud.net</code>, <code class="language-plaintext highlighter-rouge">ipv6.edge-cloud.net</code>, <code class="language-plaintext highlighter-rouge">tags.edge-cloud.net</code>, and <code class="language-plaintext highlighter-rouge">about.edge-cloud.net</code>. To do so, we will <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html" target="_blank" rel="noopener noreferrer">create an Alias records</a> with the above CloudFront distribution as the target (See Figure 7). Create both an “A” record for IPv4 and an “AAAA’ record for IPv6 for each of the host names. Thereby we need to create a total of 8 DNS records.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/03/url-redirect-r53-create-alias.png" title="Figure 7: Creating an Amazon Route 53 Alias record. " class="image-popup">
+<picture>
+  <source width="1080" height="568" type="image/webp" data-srcset="        /content/resized/2023/03/url-redirect-r53-create-alias-320.webp 320w,         /content/resized/2023/03/url-redirect-r53-create-alias-384.webp 384w,         /content/resized/2023/03/url-redirect-r53-create-alias-512.webp 512w,         /content/resized/2023/03/url-redirect-r53-create-alias-683.webp 683w,         /content/resized/2023/03/url-redirect-r53-create-alias-800.webp 800w,         /content/resized/2023/03/url-redirect-r53-create-alias-960.webp 960w,  /content/uploads/2023/03/url-redirect-r53-create-alias.webp 1080w" sizes="1080px"></source>
+  <source width="1080" height="568" data-srcset="    /content/resized/2023/03/url-redirect-r53-create-alias-320.png 320w,     /content/resized/2023/03/url-redirect-r53-create-alias-384.png 384w,     /content/resized/2023/03/url-redirect-r53-create-alias-512.png 512w,     /content/resized/2023/03/url-redirect-r53-create-alias-683.png 683w,     /content/resized/2023/03/url-redirect-r53-create-alias-800.png 800w,     /content/resized/2023/03/url-redirect-r53-create-alias-960.png 960w,  /content/uploads/2023/03/url-redirect-r53-create-alias.png 1080w" sizes="1080px"></source>
+  <img src="/content/resized/2023/03/url-redirect-r53-create-alias-320.png" data-src="/content/uploads/2023/03/url-redirect-r53-create-alias.png" class="blur-up lazyautosizes lazyload" width="1080" height="568" alt="Figure 7: Creating an Amazon Route 53 Alias record. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Creating an Amazon Route 53 Alias record.
+</figcaption>
+
+</figure>
+
+<p>As a final result we should see the 8 entries for the host names <code class="language-plaintext highlighter-rouge">aws.edge-cloud.net</code>, <code class="language-plaintext highlighter-rouge">ipv6.edge-cloud.net</code>, <code class="language-plaintext highlighter-rouge">tags.edge-cloud.net</code>, and <code class="language-plaintext highlighter-rouge">about.edge-cloud.net</code> as an Alias record (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/03/url-redirect-r53-setup.png" title="Figure 8: Completed Amazon Route 53 Setup. " class="image-popup">
+<picture>
+  <source width="823" height="364" type="image/webp" data-srcset="        /content/resized/2023/03/url-redirect-r53-setup-320.webp 320w,         /content/resized/2023/03/url-redirect-r53-setup-384.webp 384w,         /content/resized/2023/03/url-redirect-r53-setup-512.webp 512w,         /content/resized/2023/03/url-redirect-r53-setup-683.webp 683w,         /content/resized/2023/03/url-redirect-r53-setup-800.webp 800w,  /content/uploads/2023/03/url-redirect-r53-setup.webp 823w" sizes="823px"></source>
+  <source width="823" height="364" data-srcset="    /content/resized/2023/03/url-redirect-r53-setup-320.png 320w,     /content/resized/2023/03/url-redirect-r53-setup-384.png 384w,     /content/resized/2023/03/url-redirect-r53-setup-512.png 512w,     /content/resized/2023/03/url-redirect-r53-setup-683.png 683w,     /content/resized/2023/03/url-redirect-r53-setup-800.png 800w,  /content/uploads/2023/03/url-redirect-r53-setup.png 823w" sizes="823px"></source>
+  <img src="/content/resized/2023/03/url-redirect-r53-setup-320.png" data-src="/content/uploads/2023/03/url-redirect-r53-setup.png" class="blur-up lazyautosizes lazyload" width="823" height="364" alt="Figure 8: Completed Amazon Route 53 Setup. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: Completed Amazon Route 53 Setup.
+</figcaption>
+
+</figure>
+
+<h1 id="testing-the-setup">Testing the setup</h1>
+
+<p>Let’s test our URL redirect with the Curl command. <code class="language-plaintext highlighter-rouge">curl -sS -D - https://aws.edge-cloud.net -o /dev/null</code>.</p>
+
+<p>The output will look as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ curl -sS -D - https://aws.edge-cloud.net -o /dev/null
+HTTP/2 301
+server: CloudFront
+date: Mon, 20 Mar 2023 23:27:50 GMT
+content-length: 0
+location: https://www.edge-cloud.net/tags/#aws
+x-cache: FunctionGeneratedResponse from cloudfront
+via: 1.1 f6e2aa8788731292478df0dab2377dd8.cloudfront.net (CloudFront)
+x-amz-cf-pop: AKL50-C1
+alt-svc: h3=":443"; ma=86400
+x-amz-cf-id: MVmSx7lhwJ8IcXqcv-sPZb1CD2kYB8GHjWKWlcHYs__EiWtqd25Dcg==
+</code></pre></div></div>
+
+<p>The key lines to look for are:</p>
+<ul>
+  <li>The response in the first line, with the HTTP/2 status code of “301” indicating a permanent redirect</li>
+  <li>The “location” line, which shows the target URL of the redirect.</li>
+</ul>
+
+<p>That’s it. Everything is working as expected.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This blog post walked you through utilizing Amazon CloudFront with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-functions.html" target="_blank" rel="noopener noreferrer">CloudFront functions</a> to perform a URL redirect.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#aws" class="page__taxonomy-item p-category" rel="tag">AWS</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudfront" class="page__taxonomy-item p-category" rel="tag">CloudFront</a><span class="sep">, </span>
+    
+      <a href="/tags/#network" class="page__taxonomy-item p-category" rel="tag">Network</a><span class="sep">, </span>
+    
+      <a href="/tags/#web" class="page__taxonomy-item p-category" rel="tag">Web</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-03-20T00:00:00-07:00">March 20, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://toot.kytta.dev/?text=URL%20Redirect%20with%20Amazon%20CloudFront%20and%20Amazon%20Route%2053%0Ahttps://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
+
+  <a href="https://twitter.com/intent/tweet?text=URL+Redirect+with+Amazon+CloudFront+and+Amazon+Route+53%20https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F03%2F20%2Fhttp-redirect-with-cloudfront%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F03%2F20%2Fhttp-redirect-with-cloudfront%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F03%2F20%2Fhttp-redirect-with-cloudfront%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F03%2F20%2Fhttp-redirect-with-cloudfront%2F&amp;title=URL+Redirect+with+Amazon+CloudFront+and+Amazon+Route+53" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F03%2F20%2Fhttp-redirect-with-cloudfront%2F&amp;title=URL+Redirect+with+Amazon+CloudFront+and+Amazon+Route+53" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2022/07/19/hands-on-with-aws-byoip/" class="pagination--pager" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          19 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Direct-Connect
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2020/09/28/understanding-bgp/" rel="permalink">Better understanding BGP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-28T00:00:00-07:00">September 28, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #BGP, #Network
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Primer to better understanding BGP
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2020/09/18/understanding-routing/" rel="permalink">Better understanding IP Routing
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-18T00:00:00-07:00">September 18, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #BGP, #Network
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Look at fundamental principles of IP routing to better design and troubleshoot networks
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="/assets/js/instantsearch/dist/instantsearch.min.js"></script>
+  <div class="search-searchbar"></div>
+  <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://noc.social/@chriselsen" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2023 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="/assets/js/instantsearch/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="/assets/js/instantsearch/dist/instantsearch.min.css">
+<link rel="stylesheet" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const hightlight = hit._highlightResult;
+  const title = hightlight.title && hightlight.title.value  || "";
+  const content = hightlight.html && hightlight.html.value  || "";
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate,
+      empty: 'No results',
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
