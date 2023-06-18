@@ -3,7 +3,7 @@
   <channel>
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2023-05-26T15:43:54-07:00</updated>
+  <updated>2023-06-18T11:59:27-07:00</updated>
   <id>https://www.edge-cloud.net/atom.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -25,8 +25,8 @@
     <entry>
       <title>Cost considerations for centralized NAT with Transit Gateway</title>
       <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</id>
-      <updated>2023-05-26T15:41:50-07:00</updated>
-      <published>2023-05-26T15:41:50-07:00</published>
+      <updated>2023-06-18T11:58:46-07:00</updated>
+      <published>2023-06-18T11:58:46-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -46,8 +46,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2022/01/01/template/</id>
-      <updated>2023-05-26T15:41:50-07:00</updated>
-      <published>2023-05-26T15:41:50-07:00</published>
+      <updated>2023-06-18T11:58:46-07:00</updated>
+      <published>2023-06-18T11:58:46-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -116,8 +116,8 @@ Math
     <entry>
       <title>Securing your AWS networks</title>
       <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</id>
-      <updated>2023-05-26T15:41:50-07:00</updated>
-      <published>2023-05-26T15:41:50-07:00</published>
+      <updated>2023-06-18T11:58:46-07:00</updated>
+      <published>2023-06-18T11:58:46-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -137,8 +137,8 @@ Math
     <entry>
       <title>Direct Connect Public VIF for S3 traffic only</title>
       <id>https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/</id>
-      <updated>2023-05-26T15:41:50-07:00</updated>
-      <published>2023-05-26T15:41:50-07:00</published>
+      <updated>2023-06-18T11:58:46-07:00</updated>
+      <published>2023-06-18T11:58:46-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -192,6 +192,29 @@ Note: This is a notice box
       <category term="Network" />
       
       <category term="Direct-Connect" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>Random prefix attack mitigation with Amazon Route 53</title>
+      <id>https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/</id>
+      <updated>2023-06-18T00:00:00-07:00</updated>
+      <published>2023-06-18T00:00:00-07:00</published>
+      <author>
+        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
+      </author>
+      <link href="https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/" />
+      <summary type="html">How to mitigate random prefix attacks - when someone send a lot of traffic to subdomains of your main domain - with Amazon Route 53</summary>
+      <content type="html">This blog post shows how to mitigate a random prefix attack with Amazon Route 53. While such an attack will not have an impact on performance or availability, owners of the corresponding public hosted zone will incur charges for queries to non-existing subdomains or prefixes. These charges can be prevented via the mitigation presented here. Background What is a random prefix attack With a random prefix attack someone sends large amounts of DNS queries to...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      <category term="Route-53" />
       
       
       <category term="EdgeCloud" />
@@ -305,31 +328,6 @@ Note: This is a notice box
       <category term="BGP" />
       
       <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>AWS Site-to-Site VPN (IPSec) with IPv6</title>
-      <id>https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/</id>
-      <updated>2020-09-11T00:00:00-07:00</updated>
-      <published>2020-09-11T00:00:00-07:00</published>
-      <author>
-        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
-      </author>
-      <link href="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/" />
-      <summary type="html">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6</summary>
-      <content type="html">Recently AWS released support for IPv6 traffic over the AWS Site-to-Site VPN (IPSec). The setup of the AWS Site-to-Site VPN has always been quite straight forward and thanks to the downloadable configuration files at times even trivial. With the introduction of IPv6 support this is unfortunately no longer the case. Therefore this blog post will guide you around some of the pitfalls of setting up an AWS Site-to-Site VPN with IPv6 support, hoping that they...</content>
-      
-      <category term="AWS" />
-      
-      <category term="Network" />
-      
-      <category term="IPv6" />
-      
-      <category term="VPN" />
       
       
       <category term="EdgeCloud" />

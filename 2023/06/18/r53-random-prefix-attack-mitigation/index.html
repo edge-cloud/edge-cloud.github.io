@@ -1,0 +1,1003 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Random prefix attack mitigation with Amazon Route 53 - Edge Cloud</title>
+<meta name="description" content="How to mitigate random prefix attacks - when someone send a lot of traffic to subdomains of your main domain - with Amazon Route 53">
+
+
+  <meta name="author" content="Christian Elsen">
+  
+  <meta property="article:author" content="Christian Elsen">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Random prefix attack mitigation with Amazon Route 53">
+<meta property="og:url" content="https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/">
+
+
+  <meta property="og:description" content="How to mitigate random prefix attacks - when someone send a lot of traffic to subdomains of your main domain - with Amazon Route 53">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/content/uploads/2023/06/title-r53-random-prefix-attack-mitigation.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-06-18T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net/",
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link href="/assets/css/fontawesome/css/all.min.css" rel="stylesheet">
+<noscript><link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt=" On the edge of cloud computing"></a>
+        
+        <a class="site-title" href="/">
+           On the edge of cloud computing
+          
+        </a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://www.edge-cloud.net/">
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://www.edge-cloud.net/" itemprop="url">Christian Elsen</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Technology Generalist</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">About</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+          
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Random prefix attack mitigation with Amazon Route 53">
+    <meta itemprop="description" content="How to mitigate random prefix attacks - when someone send a lot of traffic to subdomains of your main domain - with Amazon Route 53">
+    <meta itemprop="datePublished" content="2023-06-18T00:00:00-07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/" class="u-url" itemprop="url">Random prefix attack mitigation with Amazon Route 53
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-18T00:00:00-07:00">June 18, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+<li>
+<a href="#background">Background</a><ul>
+<li><a href="#what-is-a-random-prefix-attack">What is a random prefix attack</a></li>
+<li><a href="#the-impact-with-amazon-route-53">The impact with Amazon Route 53</a></li>
+<li><a href="#cost-model-of-amazon-route-53">Cost model of Amazon Route 53</a></li>
+</ul>
+</li>
+<li>
+<a href="#mitigation">Mitigation</a><ul>
+<li><a href="#cloudfront-distribution-with-wildcard-name">Cloudfront distribution with wildcard name</a></li>
+<li><a href="#create-wildcard-record-in-route-53">Create wildcard record in Route 53</a></li>
+<li><a href="#testing-the-setup">Testing the setup</a></li>
+<li><a href="#further-reduce-cost">Further reduce cost</a></li>
+</ul>
+</li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>This blog post shows how to mitigate a random prefix attack with Amazon Route 53. While such an attack will not have an impact on performance or availability, owners of the corresponding public hosted zone will incur charges for queries to non-existing subdomains or prefixes. These charges can be prevented via the mitigation presented here.</p>
+
+<h1 id="background">Background</h1>
+
+<h2 id="what-is-a-random-prefix-attack">What is a random prefix attack</h2>
+
+<p>With a random prefix attack someone sends large amounts of DNS queries to random subdomains (or prefixes) that most likely do not exist (e.g. “b835n0knic.edge-cloud.net, lkxmwdw13n.edge-cloud.net, ul1xx83vyq.edge-cloud.net, …”). Nevertheless these attacks are still connected to your domain, e.g. edge-cloud.net in the above example. 
+Usually the DNS queries to these subdomains or prefixes cannot be cached by DNS resolvers, due to their randomness and that the requests are not repeated. This in return leads to the requests always reaching the authoritative nameservers.</p>
+
+<p>Rate limiting or blocking these requests based on the source address typically introduces a high amount of false positives as these attacks are usually conducted via public resolvers. Therefore these attacks are particularly effective and hard to mitigate.</p>
+
+<h2 id="the-impact-with-amazon-route-53">The impact with Amazon Route 53</h2>
+
+<p>In the case of <a href="https://aws.amazon.com/route53/" target="_blank" rel="noopener noreferrer">Amazon Route 53</a> as the authoritative nameserver, owners of the corresponding public hosted zone will not see an impact on performance or availability from random prefix attacks. But as Amazon Route 53 also <a href="https://aws.amazon.com/route53/pricing/#Queries" target="_blank" rel="noopener noreferrer">charges for queries</a> to non-existing subdomains or prefixes, users will incur cost.</p>
+
+<h2 id="cost-model-of-amazon-route-53">Cost model of Amazon Route 53</h2>
+
+<p>Having a look at the <a href="https://aws.amazon.com/route53/pricing/" target="_blank" rel="noopener noreferrer">Amazon Route 53 pricing</a>, you’ll notice that queries for a record that doesn’t exist are charged at the standard rate for queries. Currently this is US$ 0.40 per million queries for the first 1 billion queries / month. 
+Using the <a href="https://calculator.aws/#/addService/Route53" target="_blank" rel="noopener noreferrer">AWS Pricing Calculator</a> you can therefore see that e.g. 1 billion queries would incur charges of US$ 400.</p>
+
+<p>It’s interesting and important to have a closer look at the pricing for <a href="https://aws.amazon.com/route53/pricing/#Alias_Queries" target="_blank" rel="noopener noreferrer">Alias Queries</a>. You will notice that queries to records where the alias target is an AWS resource other than another Route 53 record are free.</p>
+
+<p>From a cost perspective it would therefore be very beneficial if we could turn any query to a non-existing record into a query for an AWS resource.</p>
+
+<h1 id="mitigation">Mitigation</h1>
+
+<p>For the mitigation of the random prefix attack we want to create an AWS resource that we can safely point any non-existing prefix to. Ideally we want to use a service that can perform an URL redirect in case someone just fat-fingered a valid prefix. For this use case the previous blog post <a href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/">URL Redirect with Amazon CloudFront and Amazon Route 53</a> can be re-used.</p>
+
+<h2 id="cloudfront-distribution-with-wildcard-name">Cloudfront distribution with wildcard name</h2>
+
+<p>You can follow the instructions from the previous blog post <a href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/">URL Redirect with Amazon CloudFront and Amazon Route 53</a>, starting at the section <a href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/#cloudfront-for-url-redirect">CloudFront for URL redirectPermalink</a>.</p>
+
+<p>The only difference is that this time you configure the alternate domain names to be <code class="language-plaintext highlighter-rouge">*.edge-cloud.net</code> (See Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname.png" title="Figure 1: CloudFront distribution with wildcard alternate domain name. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-320.webp 320w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-384.webp 384w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-512.webp 512w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-683.webp 683w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-800.webp 800w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-960.webp 960w, " sizes="1616px"></source>
+  <source data-srcset="    /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-320.png 320w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-384.png 384w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-512.png 512w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-683.png 683w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-800.png 800w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-960.png 960w, " sizes="1616px"></source>
+  <img src="/content/resized/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname-320.png" data-src="/content/uploads/2023/06/r53-random-prefix-attack-mitigation-random-cloudfront-wildcard-cname.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: CloudFront distribution with wildcard alternate domain name. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: CloudFront distribution with wildcard alternate domain name.
+</figcaption>
+
+</figure>
+
+<p>Everything else can remain the same. Therefore if you already have this CloudFront distribution in place, you can just change the alternate domain name.</p>
+
+<h2 id="create-wildcard-record-in-route-53">Create wildcard record in Route 53</h2>
+
+<p>As a next step we need to setup a wildcard Alias record in Route 53. This <code class="language-plaintext highlighter-rouge">*.edge-cloud.net</code> record will effectively point to the CloudFront distribution created above.</p>
+
+<p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html" target="_blank" rel="noopener noreferrer">Create a new Route 53 record</a>, where the <em>record name</em> is <em>“</em>”* (star), the <em>record type</em> is  <em>“A”</em>, <em>“Alias” is enabled, _Route traffic to_ is selected as *“Alias to CloudFront distribution”</em> with the above CloudFront distribution selected (See Figure 2).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create.png" title="Figure 2: Route 53 wildcard record pointing to a CloudFront distribution. " class="image-popup">
+<picture>
+  <source width="1093" height="579" type="image/webp" data-srcset="        /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-320.webp 320w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-384.webp 384w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-512.webp 512w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-683.webp 683w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-800.webp 800w,         /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-960.webp 960w,  /content/uploads/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create.webp 1093w" sizes="1093px"></source>
+  <source width="1093" height="579" data-srcset="    /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-320.png 320w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-384.png 384w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-512.png 512w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-683.png 683w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-800.png 800w,     /content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-960.png 960w,  /content/uploads/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create.png 1093w" sizes="1093px"></source>
+  <img src="/content/resized/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create-320.png" data-src="/content/uploads/2023/06/r53-random-prefix-attack-mitigation-random-r53-alias-create.png" class="blur-up lazyautosizes lazyload" width="1093" height="579" alt="Figure 2: Route 53 wildcard record pointing to a CloudFront distribution. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Route 53 wildcard record pointing to a CloudFront distribution.
+</figcaption>
+
+</figure>
+
+<p>You can repeat the same step for the <em>record type</em> <em>“AAAA”</em> to enable IPv6 support.</p>
+
+<h2 id="testing-the-setup">Testing the setup</h2>
+
+<p>Now it’s time to test our setup. Let’s perform a DNS query against another random subdomain or records underneath the domain in question. While previously such a query should have returned a <em>“NX Domain”</em> response, we should now see IP addresses for CloudFront.</p>
+
+<p>And indeed that’s what we will see.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ dig +short hknk5e69s72d2l31cjuw.edge-cloud.net
+65.8.158.5
+65.8.158.21
+65.8.158.83
+65.8.158.100
+
+</code></pre></div></div>
+
+<p>Therefore any attacker trying to resolve random prefixes would be presented with an IP address for CloudFront. As a reminder: We won’t be charged for that request as it’s an Alias record where the alias target is an AWS resource other than another Route 53 record.</p>
+
+<p>Next let’s see what happens if we enter this random hostname into a browser.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ curl -sS -D - https://knk5e69s72d2l31cjuw.edge-cloud.net -o /dev/null
+HTTP/2 301 
+server: CloudFront
+date: Mon, 12 Jun 2023 00:10:39 GMT
+content-length: 0
+location: https://www.edge-cloud.net
+x-cache: FunctionGeneratedResponse from cloudfront
+via: 1.1 1943af12d816afc5bfe1ce2c8b3de416.cloudfront.net (CloudFront)
+x-amz-cf-pop: SFO53-C1
+alt-svc: h3=":443"; ma=86400
+x-amz-cf-id: kdnl6bTnfVMSNe7uyRSKEqrqk2djdvP4g1y0XRvMkLee4Iauk8j80w==
+</code></pre></div></div>
+
+<p>Just as with the previous blog post <a href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/#testing-the-setup">URL Redirect with Amazon CloudFront and Amazon Route 53</a>, we are being redirected to the website at <code class="language-plaintext highlighter-rouge">https://aws.edge-cloud.net</code>.</p>
+
+<h2 id="further-reduce-cost">Further reduce cost</h2>
+
+<p>As you will incur charges for HTTP(S) traffic successfully served by CloudFront, you could also chose to only configure your distribution with common mistake hostnames, such as “ww”, or “wwww”. This reduces the cost in case the attacker combines the DNS random prefix attack with an HTTP(S) based attack.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>This blog post showed you how to mitigate a random prefix attack with Amazon Route 53. While such an attack will not have an impact to performance or availability, owners of the corresponding public hosted zone will incur charges for queries to non-existing subdomains or prefixes. 
+By creating a wildcard CloudFront distribution along with an Amazon Route 53 wildcard record, using this CloudFront distribution as the target, cost for queries to non-existing subdomains or prefixes will be removed.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#aws" class="page__taxonomy-item p-category" rel="tag">AWS</a><span class="sep">, </span>
+    
+      <a href="/tags/#network" class="page__taxonomy-item p-category" rel="tag">Network</a><span class="sep">, </span>
+    
+      <a href="/tags/#route-53" class="page__taxonomy-item p-category" rel="tag">Route-53</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-06-18T00:00:00-07:00">June 18, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://toot.kytta.dev/?text=Random%20prefix%20attack%20mitigation%20with%20Amazon%20Route%2053%0Ahttps://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
+
+  <a href="https://twitter.com/intent/tweet?text=Random+prefix+attack+mitigation+with+Amazon+Route+53%20https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F18%2Fr53-random-prefix-attack-mitigation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F18%2Fr53-random-prefix-attack-mitigation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F18%2Fr53-random-prefix-attack-mitigation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F18%2Fr53-random-prefix-attack-mitigation%2F&amp;title=Random+prefix+attack+mitigation+with+Amazon+Route+53" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F18%2Fr53-random-prefix-attack-mitigation%2F&amp;title=Random+prefix+attack+mitigation+with+Amazon+Route+53" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2023/03/20/http-redirect-with-cloudfront/" class="pagination--pager" title="URL Redirect with Amazon CloudFront and Amazon Route 53
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/03/20/http-redirect-with-cloudfront/" rel="permalink">URL Redirect with Amazon CloudFront and Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-03-20T00:00:00-07:00">March 20, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #CloudFront, #Web
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          19 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Direct-Connect
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2020/09/28/understanding-bgp/" rel="permalink">Better understanding BGP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-28T00:00:00-07:00">September 28, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #BGP, #Network
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Primer to better understanding BGP
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="/assets/js/instantsearch/dist/instantsearch.min.js"></script>
+  <div class="search-searchbar"></div>
+  <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2023 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="/assets/js/instantsearch/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="/assets/js/instantsearch/dist/instantsearch.min.css">
+<link rel="stylesheet" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const hightlight = hit._highlightResult;
+  const title = hightlight.title && hightlight.title.value  || "";
+  const content = hightlight.html && hightlight.html.value  || "";
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate,
+      empty: 'No results',
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
