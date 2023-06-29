@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>OpenStack with vSphere and NSX - Part 6: Install the VMware vCenter Plugin for Openstack and look behind the scenes - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>9 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -399,7 +408,7 @@
 
 <h1 id="configure-the-vmware-vcenter-plugin-for-openstack">Configure the VMware vCenter Plugin for OpenStack</h1>
 
-<p>The idea behind the <a href="http://blogs.vmware.com/vsphere/2013/11/vcenter-web-client-plug-in-for-openstack.html" target="_blank" rel="noopener noreferrer">VMware vCenter Plugin for OpenStack</a> is to provide operators of the virtualization layer insight into the OpenStack layer running on top. This can greatly enhance troubleshooting capabilities, especially for the case that the vSphere virtualization layer and the OpenStack layer are managed by different people or teams.</p>
+<p>The idea behind the <a href="http://blogs.vmware.com/vsphere/2013/11/vcenter-web-client-plug-in-for-openstack.html" rel="external nofollow noopener" target="_blank">VMware vCenter Plugin for OpenStack</a> is to provide operators of the virtualization layer insight into the OpenStack layer running on top. This can greatly enhance troubleshooting capabilities, especially for the case that the vSphere virtualization layer and the OpenStack layer are managed by different people or teams.</p>
 
 <p>The VMware vCenter Plugin for OpenStack is part of VOVA and is automatically installed once VOVA is pointed to a vCenter. For some reason it currently doesn’t auto-configure itself, but requires manual intervention in the vSphere Web Client. Let’s therefore perform this manual configuration:</p>
 
@@ -941,7 +950,7 @@
 
 <h1 id="api-driven-creation-of-a-vm-in-openstack">API-driven creation of a VM in OpenStack</h1>
 
-<p>One of the big benefits of OpenStack is the simple, yet very powerful API along with various SDK for all kinds of programming languages. Let’s use the <a href="http://docs.openstack.org/developer/python-novaclient/" target="_blank" rel="noopener noreferrer">Python SDK</a> for creating a new VM via the OpenStack API.</p>
+<p>One of the big benefits of OpenStack is the simple, yet very powerful API along with various SDK for all kinds of programming languages. Let’s use the <a href="http://docs.openstack.org/developer/python-novaclient/" rel="external nofollow noopener" target="_blank">Python SDK</a> for creating a new VM via the OpenStack API.</p>
 
 <p>Below is a simple Python script, which will connect to your OpenStack cloud, create a new VM and start it.</p>
 
@@ -980,15 +989,15 @@ print "VM booted to status '%s'" % instance.status
   <li>network: The name of the network to which this VM should get connected to.</li>
 </ul>
 
-<p>You can run this script directly from VOVA. As VOVA is based on <a href="https://www.ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a> you can use the command <code class="language-plaintext highlighter-rouge">sudo apt-get install python-novaclient</code> to install the required SDK.</p>
+<p>You can run this script directly from VOVA. As VOVA is based on <a href="https://www.ubuntu.com/" rel="external nofollow noopener" target="_blank">Ubuntu</a> you can use the command <code class="language-plaintext highlighter-rouge">sudo apt-get install python-novaclient</code> to install the required SDK.</p>
 
 <h1 id="wrap-up">Wrap-Up</h1>
 
 <p>Congratulation! We successfully looked behind the scenes into VMware vSphere to see what’s happening during the operation of OpenStack on vSphere. We also installed the VMware vCenter Plugin for Openstack to gain more insight into OpenStack from vSphere, as well as used some of the well-known enterprise-class benefits of vSphere – such as VMotion – along with OpenStack. Furthermore we took a glimpse at how to use OpenStack’s legendary APIs to automate the deployment of a VM. This completes the <a href="/2013/12/12/openstack-vsphere-nsx/">series: “OpenStack with vSphere and NSX”</a> on OpenStack with vSphere and NSX.</p>
 
-<p>If you are at <a href="https://www.vmworld.com/en/us/programs/partner-exchange.html" target="_blank" rel="noopener noreferrer">VMware Partner Exchange (PEX)</a> from February 10-13 2014, head over to the Hands-On Labs and check out the lab “HOL-SDC-1320 - OpenStack on VMware vSphere” in order to get hands-on experience with the setup described in this setup. After PEX this lab will also become available for general usage within the VMware Hands-On labs.</p>
+<p>If you are at <a href="https://www.vmworld.com/en/us/programs/partner-exchange.html" rel="external nofollow noopener" target="_blank">VMware Partner Exchange (PEX)</a> from February 10-13 2014, head over to the Hands-On Labs and check out the lab “HOL-SDC-1320 - OpenStack on VMware vSphere” in order to get hands-on experience with the setup described in this setup. After PEX this lab will also become available for general usage within the VMware Hands-On labs.</p>
 
-<p>Also if you want to learn more about using OpenStack with VMware vSphere, have a look at the VMware whitepaper “<a href="http://blogs.vmware.com/vsphere/2014/01/getting-started-with-openstack-and-vmware-vsphere-white-paper.html" target="_blank" rel="noopener noreferrer">Getting Started with OpenStack and VMware vSphere</a>”.</p>
+<p>Also if you want to learn more about using OpenStack with VMware vSphere, have a look at the VMware whitepaper “<a href="http://blogs.vmware.com/vsphere/2014/01/getting-started-with-openstack-and-vmware-vsphere-white-paper.html" rel="external nofollow noopener" target="_blank">Getting Started with OpenStack and VMware vSphere</a>”.</p>
 
         
       </section>
@@ -1030,22 +1039,22 @@ print "VM booted to status '%s'" % instance.status
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=OpenStack%20with%20vSphere%20and%20NSX%20-%20Part%206:%20Install%20the%20VMware%20vCenter%20Plugin%20for%20Openstack%20and%20look%20behind%20the%20scenes%0Ahttps://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=OpenStack%20with%20vSphere%20and%20NSX%20-%20Part%206:%20Install%20the%20VMware%20vCenter%20Plugin%20for%20Openstack%20and%20look%20behind%20the%20scenes%0Ahttps://www.edge-cloud.net/2014/02/08/openstack-vsphere-nsx-part-6/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F08%2Fopenstack-vsphere-nsx-part-6%2F&amp;title=OpenStack+with+vSphere+and+NSX+-+Part+6%3A+Install+the+VMware+vCenter+Plugin+for+Openstack+and+look+behind+the+scenes" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -1073,6 +1082,63 @@ print "VM booted to status '%s'" % instance.status
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1244,63 +1310,6 @@ print "VM booted to status '%s'" % instance.status
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1335,15 +1344,15 @@ print "VM booted to status '%s'" % instance.status
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

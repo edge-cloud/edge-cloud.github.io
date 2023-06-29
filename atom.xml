@@ -3,7 +3,7 @@
   <channel>
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2023-06-24T16:20:43-07:00</updated>
+  <updated>2023-06-29T15:06:50-07:00</updated>
   <id>https://www.edge-cloud.net/atom.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -25,8 +25,8 @@
     <entry>
       <title>Cost considerations for centralized NAT with Transit Gateway</title>
       <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</id>
-      <updated>2023-06-24T16:19:51-07:00</updated>
-      <published>2023-06-24T16:19:51-07:00</published>
+      <updated>2023-06-29T15:05:20-07:00</updated>
+      <published>2023-06-29T15:05:20-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -46,8 +46,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2022/01/01/template/</id>
-      <updated>2023-06-24T16:19:51-07:00</updated>
-      <published>2023-06-24T16:19:51-07:00</published>
+      <updated>2023-06-29T15:05:20-07:00</updated>
+      <published>2023-06-29T15:05:20-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -116,8 +116,8 @@ Math
     <entry>
       <title>Securing your AWS networks</title>
       <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</id>
-      <updated>2023-06-24T16:19:51-07:00</updated>
-      <published>2023-06-24T16:19:51-07:00</published>
+      <updated>2023-06-29T15:05:20-07:00</updated>
+      <published>2023-06-29T15:05:20-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -137,8 +137,8 @@ Math
     <entry>
       <title>Direct Connect Public VIF for S3 traffic only</title>
       <id>https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/</id>
-      <updated>2023-06-24T16:19:51-07:00</updated>
-      <published>2023-06-24T16:19:51-07:00</published>
+      <updated>2023-06-29T15:05:20-07:00</updated>
+      <published>2023-06-29T15:05:20-07:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -192,6 +192,29 @@ Note: This is a notice box
       <category term="Network" />
       
       <category term="Direct-Connect" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>How to move your DNS to Amazon Route 53</title>
+      <id>https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/</id>
+      <updated>2023-06-25T00:00:00-07:00</updated>
+      <published>2023-06-25T00:00:00-07:00</published>
+      <author>
+        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
+      </author>
+      <link href="https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/" />
+      <summary type="html">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53</summary>
+      <content type="html">This blog post will walk through the migration steps of the DNS setup for a public zone to Amazon Route 53. It will include steps for both making Route 53 the DNS service for an existing domain, but also transferring the DNS registration for this domain to Route 53. While it will use Google Domains as the DNS service initially providing the zone and registration service, the steps should be easily transferable to any other...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      <category term="Route-53" />
       
       
       <category term="EdgeCloud" />
@@ -303,27 +326,6 @@ Note: This is a notice box
       <link href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/" />
       <summary type="html">Primer to better understanding BGP</summary>
       <content type="html">In a previous post we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking, along with examples from running an Autonomous System on the Internet. This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve...</content>
-      
-      <category term="BGP" />
-      
-      <category term="Network" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Better understanding IP Routing</title>
-      <id>https://www.edge-cloud.net/2020/09/18/understanding-routing/</id>
-      <updated>2020-09-18T00:00:00-07:00</updated>
-      <published>2020-09-18T00:00:00-07:00</published>
-      <author>
-        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
-      </author>
-      <link href="https://www.edge-cloud.net/2020/09/18/understanding-routing/" />
-      <summary type="html">Look at fundamental principles of IP routing to better design and troubleshoot networks</summary>
-      <content type="html">Today we will look at some of the fundamental principles of IP routing. While these principles and concepts are generic, we will use examples based on AWS networking. This blog post is not intended to be an all encompassing primer on IP routing. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to highlight and explain...</content>
       
       <category term="BGP" />
       

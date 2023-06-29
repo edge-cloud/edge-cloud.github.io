@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>IPv6 with Amazon Web Services VPC and EC2 - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>6 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -406,21 +415,21 @@
             </nav>
           </aside>
         
-        <p>On December 1st, 2016 AWS released <a href="https://aws.amazon.com/blogs/aws/new-ipv6-support-for-ec2-instances-in-virtual-private-clouds/" target="_blank" rel="noopener noreferrer">IPv6 Support for EC2 Instances in Virtual Private Clouds (VPCs)</a>, currently limited to the <a href="https://aws.amazon.com/blogs/aws/now-open-aws-us-east-ohio-region/" target="_blank" rel="noopener noreferrer">US-East-2 (Ohio)</a> region.</p>
+        <p>On December 1st, 2016 AWS released <a href="https://aws.amazon.com/blogs/aws/new-ipv6-support-for-ec2-instances-in-virtual-private-clouds/" rel="external nofollow noopener" target="_blank">IPv6 Support for EC2 Instances in Virtual Private Clouds (VPCs)</a>, currently limited to the <a href="https://aws.amazon.com/blogs/aws/now-open-aws-us-east-ohio-region/" rel="external nofollow noopener" target="_blank">US-East-2 (Ohio)</a> region.</p>
 
-<p>This post will show you how to enable your existing <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html" target="_blank" rel="noopener noreferrer">Default VPC and Default Subnets</a> for IPv6.</p>
+<p>This post will show you how to enable your existing <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html" rel="external nofollow noopener" target="_blank">Default VPC and Default Subnets</a> for IPv6.</p>
 
 <h1 id="background">Background</h1>
 
-<p><a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html" target="_blank" rel="noopener noreferrer">Amazon Virtual Private Cloud (Amazon VPC)</a> enables you to launch Amazon Web Services (AWS) resources into a virtual network that you’ve defined. This virtual network closely resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable infrastructure of AWS. A virtual private cloud (VPC) is logically isolated from other virtual networks in the AWS Cloud and allows you to launch your AWS resources, such as Amazon EC2 instances, isolated from other VPCs within your own or other accounts.</p>
+<p><a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html" rel="external nofollow noopener" target="_blank">Amazon Virtual Private Cloud (Amazon VPC)</a> enables you to launch Amazon Web Services (AWS) resources into a virtual network that you’ve defined. This virtual network closely resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable infrastructure of AWS. A virtual private cloud (VPC) is logically isolated from other virtual networks in the AWS Cloud and allows you to launch your AWS resources, such as Amazon EC2 instances, isolated from other VPCs within your own or other accounts.</p>
 
-<p>A <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html" target="_blank" rel="noopener noreferrer">default VPC</a> allows you to jump-start your AWS EC2 experience, without having to worry about VPCs and subnets. It is ready for you to use — you can immediately start launching instances into your default VPC without having to perform any additional configuration steps.</p>
+<p>A <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html" rel="external nofollow noopener" target="_blank">default VPC</a> allows you to jump-start your AWS EC2 experience, without having to worry about VPCs and subnets. It is ready for you to use — you can immediately start launching instances into your default VPC without having to perform any additional configuration steps.</p>
 
 <p>Unfortunately with the introduction of IPv6 within VPC, you do need to once perform some manual configuration steps in order to enable your VPC for IPv6. This blog post will show you the minimal required steps to do so.</p>
 
 <h1 id="pre-requisites">Pre-Requisites</h1>
 
-<p>Please note that as of this writing IPv6 within VPC is only in the US-East-2 (Ohio) region. You therefore need to perform the below configurations in this region. Within your AWS Console, navigate to <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#vpcs:" target="_blank" rel="noopener noreferrer">VPC section within the US-East-2 (Ohio) region</a>.</p>
+<p>Please note that as of this writing IPv6 within VPC is only in the US-East-2 (Ohio) region. You therefore need to perform the below configurations in this region. Within your AWS Console, navigate to <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#vpcs:" rel="external nofollow noopener" target="_blank">VPC section within the US-East-2 (Ohio) region</a>.</p>
 
 <h1 id="enable-default-vpc-and-default-subnets-for-ipv6">Enable Default VPC and Default Subnets for IPv6</h1>
 
@@ -484,9 +493,9 @@
 
 <h2 id="edit-subnet-cidrs">Edit Subnet CIDRs</h2>
 
-<p>Your default VPC will come with one subnet per <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html" target="_blank" rel="noopener noreferrer">Availability Zone (AZ)</a>. As US-East-2 (Ohio) has three availability zones, you will have the subnets 172.31.0.0/20 for the AZ us-east-2a, 172.31.16.0/20 for the AZ us-east-2b, and 172.31.32.0/20 for the AZ us-east-2c. In this step we will want to assign each of these subnets a /64 IPv6 CIDR block.</p>
+<p>Your default VPC will come with one subnet per <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html" rel="external nofollow noopener" target="_blank">Availability Zone (AZ)</a>. As US-East-2 (Ohio) has three availability zones, you will have the subnets 172.31.0.0/20 for the AZ us-east-2a, 172.31.16.0/20 for the AZ us-east-2b, and 172.31.32.0/20 for the AZ us-east-2c. In this step we will want to assign each of these subnets a /64 IPv6 CIDR block.</p>
 
-<p>Navigate to the <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#subnets:" target="_blank" rel="noopener noreferrer">Subnets</a>. Start with a right-click on the first subnet and select <strong>Edit IPv6 CIDRs</strong> (See Figure 3).</p>
+<p>Navigate to the <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#subnets:" rel="external nofollow noopener" target="_blank">Subnets</a>. Start with a right-click on the first subnet and select <strong>Edit IPv6 CIDRs</strong> (See Figure 3).</p>
 
 <figure class="">
 
@@ -628,7 +637,7 @@
 
 <p>In case you only want your EC2 instances to reach the outside world but not be reachable via the Internet over IPv6, you need to first create an “Egress Only Internet Gateway”. This concept is new to VPC and only available for IPv6. It allows you to block incoming traffic while still allowing outbound traffic (think of it as an Internet Gateway mated to a Security Group).</p>
 
-<p>Navigate to the <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#routetables:" target="_blank" rel="noopener noreferrer"><em>“Route Tables”</em></a>, select the route table for your default VPC and click <strong>Edit</strong>. Add a route with the <strong>Destination</strong> of “::/” and the target of your Internet Gateway (See Figure 8).</p>
+<p>Navigate to the <a href="https://us-east-2.console.aws.amazon.com/vpc/home?region=us-east-2#routetables:" rel="external nofollow noopener" target="_blank"><em>“Route Tables”</em></a>, select the route table for your default VPC and click <strong>Edit</strong>. Add a route with the <strong>Destination</strong> of “::/” and the target of your Internet Gateway (See Figure 8).</p>
 
 <figure class="">
 
@@ -656,7 +665,7 @@
 
 <h1 id="launching-ec2-instances">Launching EC2 instances</h1>
 
-<p>You can now head over to <a href="https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId" target="_blank" rel="noopener noreferrer">EC2 within the AWS Console</a> and launch your first IPv6-enabled EC2 instance.</p>
+<p>You can now head over to <a href="https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId" rel="external nofollow noopener" target="_blank">EC2 within the AWS Console</a> and launch your first IPv6-enabled EC2 instance.</p>
 
 <p>AWS uses <a href="https://www.edge-cloud.net/2013/11/18/ipv6-address-management-hosts/">stateful IPv6 address assignment</a>. Therefore IPv6 addresses are assigned via DHCPv6 and not Stateless Autoconfiguration (SLAAC). Most operating systems (OS) are not prepared to acquire an IPv6 address via DHCPv6 out of the box and AWS has unfortunately only updated the AMI for Amazon Linux to do so. The common AMI for Ubuntu 16.04 will fail to acquire an IPv6 address out of the box and the Windows 2016 AMI should be updated to disable Teredo.</p>
 
@@ -684,7 +693,7 @@
        valid_lft forever preferred_lft forever
 </code></pre></div></div>
 
-<p>You can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" target="_blank" rel="noopener noreferrer">User Data</a>, when creating a new Ubuntu instance:</p>
+<p>You can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" rel="external nofollow noopener" target="_blank">User Data</a>, when creating a new Ubuntu instance:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
 echo "iface eth0 inet6 dhcp" &gt;&gt; /etc/network/interfaces.d/60-eth0-with-ipv6.cfg
@@ -704,7 +713,7 @@ iface eth0 inet dhcp
     up dhclient -6 $IFACE
 </code></pre></div></div>
 
-<p>Here, you can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" target="_blank" rel="noopener noreferrer">User Data</a>, when creating a new Ubuntu instance:</p>
+<p>Here, you can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" rel="external nofollow noopener" target="_blank">User Data</a>, when creating a new Ubuntu instance:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
 echo "    up dhclient -6 $IFACE" &gt;&gt; /etc/network/interfaces.d/eth0.cfg
@@ -736,7 +745,7 @@ USERCTL="yes"
 PEERDNS="yes"
 </code></pre></div></div>
 
-<p>Same as with Ubuntu you can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" target="_blank" rel="noopener noreferrer">User Data</a>, when creating a new RHEL7/CentOS7 instance:</p>
+<p>Same as with Ubuntu you can also pass the following script via <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts" rel="external nofollow noopener" target="_blank">User Data</a>, when creating a new RHEL7/CentOS7 instance:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
 echo "NETWORKING_IPV6=yes" &gt;&gt; /etc/sysconfig/network
@@ -748,11 +757,11 @@ service network restart
 
 <h2 id="rhel-6--centos-6">RHEL 6 / CentOS 6</h2>
 
-<p>While RHEL 6 and CentOS should follow the same process as RHEL 7 and CentOS 7, it includes a bug which prevents DHCPv6 from being usable and has only been <a href="https://github.com/fedora-sysv/initscripts/commit/590adf623afff95c4b601f6e" target="_blank" rel="noopener noreferrer">fixed in very recent versions</a>. Therefore before you can use the above configuration you need to change the file <em>/etc/sysconfig/network-scripts/ifup-eth</em> and change line 327 from <code class="language-plaintext highlighter-rouge">if /sbin/dhclient “$DHCLIENTARGS”; then</code> to <code class="language-plaintext highlighter-rouge">if /sbin/dhclient $DHCLIENTARGS; then</code>. Yes, that’s correct: Just drop the double quotes.</p>
+<p>While RHEL 6 and CentOS should follow the same process as RHEL 7 and CentOS 7, it includes a bug which prevents DHCPv6 from being usable and has only been <a href="https://github.com/fedora-sysv/initscripts/commit/590adf623afff95c4b601f6e" rel="external nofollow noopener" target="_blank">fixed in very recent versions</a>. Therefore before you can use the above configuration you need to change the file <em>/etc/sysconfig/network-scripts/ifup-eth</em> and change line 327 from <code class="language-plaintext highlighter-rouge">if /sbin/dhclient “$DHCLIENTARGS”; then</code> to <code class="language-plaintext highlighter-rouge">if /sbin/dhclient $DHCLIENTARGS; then</code>. Yes, that’s correct: Just drop the double quotes.</p>
 
 <h2 id="windows-server-2016">Windows Server 2016</h2>
 
-<p>The AMI for Windows Server 2016 configured to create an IPv6 over IPv4 tunnel via <a href="https://en.wikipedia.org/wiki/Teredo_tunneling" target="_blank" rel="noopener noreferrer">Teredo</a>. The security implications for using IPv6 over IPv4 tunnels are described in <a href="https://tools.ietf.org/html/rfc7123" target="_blank" rel="noopener noreferrer">RFC7123</a>, while <a href="https://tools.ietf.org/html/rfc6169" target="_blank" rel="noopener noreferrer">RFC6169</a> clearly spells out the security concerns with IPv6 tunnels.</p>
+<p>The AMI for Windows Server 2016 configured to create an IPv6 over IPv4 tunnel via <a href="https://en.wikipedia.org/wiki/Teredo_tunneling" rel="external nofollow noopener" target="_blank">Teredo</a>. The security implications for using IPv6 over IPv4 tunnels are described in <a href="https://tools.ietf.org/html/rfc7123" rel="external nofollow noopener" target="_blank">RFC7123</a>, while <a href="https://tools.ietf.org/html/rfc6169" rel="external nofollow noopener" target="_blank">RFC6169</a> clearly spells out the security concerns with IPv6 tunnels.</p>
 
 <p>Instead we want to solely use a native IPv6 address and disable any IPv6 over IPv4 tunnels.</p>
 
@@ -764,9 +773,9 @@ netsh interface teredo set state disable
 
 <p>Your Windows host will now solely have IPv6 connectivity via the Ethernet interface.</p>
 
-<p>But you might notice that your Windows instance will prefer IPv4 connections over IPv6. You can easily test this by opening <a href="http://test-ipv6.com/" target="_blank" rel="noopener noreferrer">http://test-ipv6.com/</a> from a browser on the Windows instance.</p>
+<p>But you might notice that your Windows instance will prefer IPv4 connections over IPv6. You can easily test this by opening <a href="http://test-ipv6.com/" rel="external nofollow noopener" target="_blank">http://test-ipv6.com/</a> from a browser on the Windows instance.</p>
 
-<p>This non-recommended behavior can be fixed by downloading and running the Microsoft easy fix wizard for “Prefer IPv6 over IPv4 in prefix policies” from the Windows Support <a href="https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows" target="_blank" rel="noopener noreferrer">Guidance for configuring IPv6 in Windows for advanced users</a> article. It’s the second item in the second row.</p>
+<p>This non-recommended behavior can be fixed by downloading and running the Microsoft easy fix wizard for “Prefer IPv6 over IPv4 in prefix policies” from the Windows Support <a href="https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows" rel="external nofollow noopener" target="_blank">Guidance for configuring IPv6 in Windows for advanced users</a> article. It’s the second item in the second row.</p>
 
 <h1 id="summary">Summary</h1>
 
@@ -808,22 +817,22 @@ netsh interface teredo set state disable
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=IPv6%20with%20Amazon%20Web%20Services%20VPC%20and%20EC2%0Ahttps://www.edge-cloud.net/2016/12/12/ipv6-aws-ec2/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=IPv6%20with%20Amazon%20Web%20Services%20VPC%20and%20EC2%0Ahttps://www.edge-cloud.net/2016/12/12/ipv6-aws-ec2/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=IPv6+with+Amazon+Web+Services+VPC+and+EC2%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=IPv6+with+Amazon+Web+Services+VPC+and+EC2%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F&amp;title=IPv6+with+Amazon+Web+Services+VPC+and+EC2" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F&amp;title=IPv6+with+Amazon+Web+Services+VPC+and+EC2" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F&amp;title=IPv6+with+Amazon+Web+Services+VPC+and+EC2" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F12%2F12%2Fipv6-aws-ec2%2F&amp;title=IPv6+with+Amazon+Web+Services+VPC+and+EC2" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -851,6 +860,63 @@ netsh interface teredo set state disable
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1022,63 +1088,6 @@ netsh interface teredo set state disable
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1113,15 +1122,15 @@ netsh interface teredo set state disable
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

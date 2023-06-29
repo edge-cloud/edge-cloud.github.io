@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Limitations of DNS-based geographic routing - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,13 @@
         </header>
       
 
+      
+
+
+
+
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right sticky">
@@ -408,12 +415,12 @@
             </nav>
           </aside>
         
-        <p>Various Internet services and offerings - such as <a href="https://aws.amazon.com/cloudfront/" target="_blank" rel="noopener noreferrer">AWS CloudFront </a> - rely on geographic routing, also known as geolocation or geo-locational routing. And with <a href="https://aws.amazon.com/route53/" target="_blank" rel="noopener noreferrer">Amazon Route 53</a> you can build your own geographic routing enabled services. The basic concept behind this capability is to return a DNS answer for an endpoint that is physically closest to the requestor. In the case of AWS CloudFront this would be the closest <a href="https://aws.amazon.com/cloudfront/features/" target="_blank" rel="noopener noreferrer">edge location</a>, while for a service that you build yourself it might be the decision between an <a href="https://aws.amazon.com/elasticloadbalancing/" target="_blank" rel="noopener noreferrer">Amazon Elastic Load Balancer</a> endpoint in the us-west-2 (Oregon) or in the us-east-2 (Ohio) region.</p>
+        <p>Various Internet services and offerings - such as <a href="https://aws.amazon.com/cloudfront/" rel="external nofollow noopener" target="_blank">AWS CloudFront </a> - rely on geographic routing, also known as geolocation or geo-locational routing. And with <a href="https://aws.amazon.com/route53/" rel="external nofollow noopener" target="_blank">Amazon Route 53</a> you can build your own geographic routing enabled services. The basic concept behind this capability is to return a DNS answer for an endpoint that is physically closest to the requestor. In the case of AWS CloudFront this would be the closest <a href="https://aws.amazon.com/cloudfront/features/" rel="external nofollow noopener" target="_blank">edge location</a>, while for a service that you build yourself it might be the decision between an <a href="https://aws.amazon.com/elasticloadbalancing/" rel="external nofollow noopener" target="_blank">Amazon Elastic Load Balancer</a> endpoint in the us-west-2 (Oregon) or in the us-east-2 (Ohio) region.</p>
 
 <p>This post will look at how geographic routing works, how you can validate the interaction of it with your service and what the expected limitations of the service are.</p>
 
 <h1 id="geographic-routing">Geographic Routing</h1>
-<p>To understand how geographic routing works we first need to have a look at <a href="https://en.wikipedia.org/wiki/Domain_Name_System#Address_resolution_mechanism" target="_blank" rel="noopener noreferrer">DNS resolution</a> via <a href="https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers" target="_blank" rel="noopener noreferrer">DNS Resolver</a>. Figure 1 shows a simplified representation of this mechanism, where a client connects to a local DNS Resolver, which then initiates and sequences the queries that ultimately lead to a full resolution (translation) of the resource sought. While depicted in an overly simplified way, this includes querying the Authoritative Nameserver for the interested record by the DNS Resolver.</p>
+<p>To understand how geographic routing works we first need to have a look at <a href="https://en.wikipedia.org/wiki/Domain_Name_System#Address_resolution_mechanism" rel="external nofollow noopener" target="_blank">DNS resolution</a> via <a href="https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers" rel="external nofollow noopener" target="_blank">DNS Resolver</a>. Figure 1 shows a simplified representation of this mechanism, where a client connects to a local DNS Resolver, which then initiates and sequences the queries that ultimately lead to a full resolution (translation) of the resource sought. While depicted in an overly simplified way, this includes querying the Authoritative Nameserver for the interested record by the DNS Resolver.</p>
 
 <figure class="">
 
@@ -443,7 +450,7 @@
 
 <p>With this the Authoritative Nameserver would e.g. respond to the querry for <code class="language-plaintext highlighter-rouge">www.example.com</code> with <code class="language-plaintext highlighter-rouge">us-west-2.www.example.com</code> (and its subsequent resolution to an actual IPv4 or IPv6 address), while the DNS Resolver’s IP address is believed to be closer to the AWS Oregon region and with <code class="language-plaintext highlighter-rouge">us-east-2.www.example.com</code>, in case the Resolver is closer to the AWS Ohio region.</p>
 
-<p>To do so, the Authoritative Nameserver will use the IP address information for the DNS Resolver to calculate the geographic location. A common service provider for IP Address to location mapping data is <a href="https://www.maxmind.com/" target="_blank" rel="noopener noreferrer">Maxmind</a>, which is frequently used for this purpose. An example is the Howto Guide for <a href="https://geoip.site/" target="_blank" rel="noopener noreferrer">implementing geographical routing with BIND</a>, which incorporates this GeoIP database.</p>
+<p>To do so, the Authoritative Nameserver will use the IP address information for the DNS Resolver to calculate the geographic location. A common service provider for IP Address to location mapping data is <a href="https://www.maxmind.com/" rel="external nofollow noopener" target="_blank">Maxmind</a>, which is frequently used for this purpose. An example is the Howto Guide for <a href="https://geoip.site/" rel="external nofollow noopener" target="_blank">implementing geographical routing with BIND</a>, which incorporates this GeoIP database.</p>
 
 <p>And while AWS does not publicly divulge information about the source of the used IP address mapping data, Amazon Route 53 uses the same principle.</p>
 
@@ -455,14 +462,14 @@
 
 <h2 id="edns0-client-subnet-extension">EDNS0-Client-Subnet extension</h2>
 
-<p><a href="https://tools.ietf.org/html/rfc6891" target="_blank" rel="noopener noreferrer">EDNS0</a> is an extension mechanism for the DNS, which expands the size of several parameters of the DNS protocol for increasing functionality of the protocol. One such increased functionality is <a href="https://tools.ietf.org/html/rfc7871" target="_blank" rel="noopener noreferrer">EDNS0-Client-Subnet (ECS)</a>.
+<p><a href="https://tools.ietf.org/html/rfc6891" rel="external nofollow noopener" target="_blank">EDNS0</a> is an extension mechanism for the DNS, which expands the size of several parameters of the DNS protocol for increasing functionality of the protocol. One such increased functionality is <a href="https://tools.ietf.org/html/rfc7871" rel="external nofollow noopener" target="_blank">EDNS0-Client-Subnet (ECS)</a>.
 The EDNS0-Client-Subnet (ECS) extension allows a recursive DNS Resolver to specify the network subnet for the host on which behalf it is making a DNS query. Therefore the Authoritative Nameserver will gain insight into the location of the client based on GeoIP information.</p>
 
-<p>Unfortunately not all DNS Resolvers support EDNS0-Client-Subnet. You can find support in frequently used public resolvers, such as <a href="https://developers.google.com/speed/public-dns/docs/ecs" target="_blank" rel="noopener noreferrer">Google’s Public DNS</a> Resolver, <a href="http://www.afasterinternet.com/" target="_blank" rel="noopener noreferrer">OpenDNS</a>, and <a href="https://www.quad9.net/faq/" target="_blank" rel="noopener noreferrer">Quad9</a>. Other public resolvers such as <a href="https://developers.cloudflare.com/1.1.1.1/nitty-gritty-details/" target="_blank" rel="noopener noreferrer">CloudFlare</a> do not support it.</p>
+<p>Unfortunately not all DNS Resolvers support EDNS0-Client-Subnet. You can find support in frequently used public resolvers, such as <a href="https://developers.google.com/speed/public-dns/docs/ecs" rel="external nofollow noopener" target="_blank">Google’s Public DNS</a> Resolver, <a href="http://www.afasterinternet.com/" rel="external nofollow noopener" target="_blank">OpenDNS</a>, and <a href="https://www.quad9.net/faq/" rel="external nofollow noopener" target="_blank">Quad9</a>. Other public resolvers such as <a href="https://developers.cloudflare.com/1.1.1.1/nitty-gritty-details/" rel="external nofollow noopener" target="_blank">CloudFlare</a> do not support it.</p>
 
-<p>If you want to check if your Resolver supports EDNS0-Client-Subnet (ECS), you can use a special Google debugging hostname as outlined in the AWS Support article <a href="https://aws.amazon.com/premiumsupport/knowledge-center/troubleshoot-latency-based-records/" target="_blank" rel="noopener noreferrer">“How do I troubleshoot issues with latency-based resource records and Route 53?”</a>. With this hostname the command <code class="language-plaintext highlighter-rouge">dig +nocl TXT o-o.myaddr.l.google.com @&lt;DNS Resolver&gt;</code> will not only show you the IPv4 or IPv6 address of the DNS Resolver that is seen by Google’s Authoritative Nameserver. If supported it will also show the client subnet as provided via EDNS0-Client-Subnet (ECS).</p>
+<p>If you want to check if your Resolver supports EDNS0-Client-Subnet (ECS), you can use a special Google debugging hostname as outlined in the AWS Support article <a href="https://aws.amazon.com/premiumsupport/knowledge-center/troubleshoot-latency-based-records/" rel="external nofollow noopener" target="_blank">“How do I troubleshoot issues with latency-based resource records and Route 53?”</a>. With this hostname the command <code class="language-plaintext highlighter-rouge">dig +nocl TXT o-o.myaddr.l.google.com @&lt;DNS Resolver&gt;</code> will not only show you the IPv4 or IPv6 address of the DNS Resolver that is seen by Google’s Authoritative Nameserver. If supported it will also show the client subnet as provided via EDNS0-Client-Subnet (ECS).</p>
 
-<p>Below is an example run from an Amazon EC2 instance within the US-West-2 (Oregon) region against the <a href="https://developers.google.com/speed/public-dns/docs/intro" target="_blank" rel="noopener noreferrer">Google Public DNS resolver</a>:</p>
+<p>Below is an example run from an Amazon EC2 instance within the US-West-2 (Oregon) region against the <a href="https://developers.google.com/speed/public-dns/docs/intro" rel="external nofollow noopener" target="_blank">Google Public DNS resolver</a>:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ dig +nocl +short TXT o-o.myaddr.l.google.com @8.8.8.8
 "2607:f8b0:400e:c09::10f"
@@ -471,16 +478,16 @@ The EDNS0-Client-Subnet (ECS) extension allows a recursive DNS Resolver to speci
 
 <p>We can clearly see that Google’s Resolver supports EDNS0-Client-Subnet (ECS).</p>
 
-<p>Similarly on the CDN side support to actually leverage the EDNS0-Client-Subnet provided information is not universal. Amazon CloudFront <a href="https://aws.amazon.com/about-aws/whats-new/2014/04/02/amazon-cloudfront-announces-support-for-edns-client-subnet/" target="_blank" rel="noopener noreferrer">added support in 2014</a>.
-Also <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-edns0" target="_blank" rel="noopener noreferrer">Amazon Route 53 supports EDNS0-Client-Subnet</a> as part of routing policies.</p>
+<p>Similarly on the CDN side support to actually leverage the EDNS0-Client-Subnet provided information is not universal. Amazon CloudFront <a href="https://aws.amazon.com/about-aws/whats-new/2014/04/02/amazon-cloudfront-announces-support-for-edns-client-subnet/" rel="external nofollow noopener" target="_blank">added support in 2014</a>.
+Also <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-edns0" rel="external nofollow noopener" target="_blank">Amazon Route 53 supports EDNS0-Client-Subnet</a> as part of routing policies.</p>
 
 <h1 id="ripe-atlas">RIPE Atlas</h1>
 
 <p>In this post we will use RIPE Atlas to check the performance of a geographic routing enabled DNS entry.</p>
 
-<p><a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> is a global network of hardware devices, called probes and anchors, that actively measure Internet connectivity. Anyone can access this data via Internet traffic maps, streaming data visualisations, and an API. RIPE Atlas users can also perform customised measurements to gain valuable data about their own networks.</p>
+<p><a href="https://atlas.ripe.net/" rel="external nofollow noopener" target="_blank">RIPE Atlas</a> is a global network of hardware devices, called probes and anchors, that actively measure Internet connectivity. Anyone can access this data via Internet traffic maps, streaming data visualisations, and an API. RIPE Atlas users can also perform customised measurements to gain valuable data about their own networks.</p>
 
-<p>I highly recommend you to consider <a href="https://atlas.ripe.net/get-involved/become-a-host/" target="_blank" rel="noopener noreferrer">hosting a RIPE Atlas probe</a> yourself. Not only will you benefit from the data that it collects on your Internet connection, but it will also allow you to run customized measurements against various Internet targets. And in the end every additional RIPE Atlas probe will benefit the overall Internet community.</p>
+<p>I highly recommend you to consider <a href="https://atlas.ripe.net/get-involved/become-a-host/" rel="external nofollow noopener" target="_blank">hosting a RIPE Atlas probe</a> yourself. Not only will you benefit from the data that it collects on your Internet connection, but it will also allow you to run customized measurements against various Internet targets. And in the end every additional RIPE Atlas probe will benefit the overall Internet community.</p>
 
 <p>Here we will be using RIPE Atlas customized measurements to investigate the performance of DNS-based geographic routing.</p>
 
@@ -490,10 +497,10 @@ Also <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-
 
 <p>For this article the test setup will consist of fictional origins where we want to steer traffic to via geographic routing. The test will focus on the US with one origin in the US East coast and one origin in the US West coast.</p>
 
-<p>A third origin will be placed into Kansas. With IP location based data a mostly unknown lake in Kansas takes over a special meaning: <a href="https://en.wikipedia.org/wiki/Cheney_Reservoir" target="_blank" rel="noopener noreferrer">The Cheney Reservoir</a> is close to the geographical center of the continental US. As such the IP location company <a href="https://www.maxmind.com/" target="_blank" rel="noopener noreferrer">Maxmind</a> places all IP addresses for which it has no more information than that it is located somewhere in the US, at this location. It is estimated that over 600 Million Internet IP addresses point to Cheney Reservoir.
-In the past Maxmind placed these IP addresses into the backyard of a Kansas family, whose life was <a href="https://www.theguardian.com/technology/2016/aug/09/maxmind-mapping-lawsuit-kansas-farm-ip-address" target="_blank" rel="noopener noreferrer">turned upside down</a> as a result.</p>
+<p>A third origin will be placed into Kansas. With IP location based data a mostly unknown lake in Kansas takes over a special meaning: <a href="https://en.wikipedia.org/wiki/Cheney_Reservoir" rel="external nofollow noopener" target="_blank">The Cheney Reservoir</a> is close to the geographical center of the continental US. As such the IP location company <a href="https://www.maxmind.com/" rel="external nofollow noopener" target="_blank">Maxmind</a> places all IP addresses for which it has no more information than that it is located somewhere in the US, at this location. It is estimated that over 600 Million Internet IP addresses point to Cheney Reservoir.
+In the past Maxmind placed these IP addresses into the backyard of a Kansas family, whose life was <a href="https://www.theguardian.com/technology/2016/aug/09/maxmind-mapping-lawsuit-kansas-farm-ip-address" rel="external nofollow noopener" target="_blank">turned upside down</a> as a result.</p>
 
-<p>We will model this setup with AWS Route 53 <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geoproximity" target="_blank" rel="noopener noreferrer">Geoproximity routing</a>, where the AWS regions US-East-2 (Ohio) - as the US East coast location - and US-West-2 (Oregon) - as the US West coast location - receive neutral bias of 0. The origin at Cheney Reservoir receives a large negative bias, to create a small circle of a few miles around this area.</p>
+<p>We will model this setup with AWS Route 53 <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geoproximity" rel="external nofollow noopener" target="_blank">Geoproximity routing</a>, where the AWS regions US-East-2 (Ohio) - as the US East coast location - and US-West-2 (Oregon) - as the US West coast location - receive neutral bias of 0. The origin at Cheney Reservoir receives a large negative bias, to create a small circle of a few miles around this area.</p>
 
 <p>The expected geoproximity routing should look like depicted in Figure 2.</p>
 
@@ -536,14 +543,14 @@ Breaking these clients out separately in the test setup will allow us to visuali
 
 <h2 id="ripe-atlas-setup">RIPE Atlas setup</h2>
 
-<p>Next we create a <a href="https://atlas.ripe.net/about/customised-measurements/" target="_blank" rel="noopener noreferrer">RIPE Atlas customized measurement</a> that will leverage up to 500 randomly selected probes within the US against the DNS hostname that was setup for geographic routing with Route 53 above. We expect each probe to report back a result of either “US-West-2”, “US-East-2”, or “Unknown”.</p>
+<p>Next we create a <a href="https://atlas.ripe.net/about/customised-measurements/" rel="external nofollow noopener" target="_blank">RIPE Atlas customized measurement</a> that will leverage up to 500 randomly selected probes within the US against the DNS hostname that was setup for geographic routing with Route 53 above. We expect each probe to report back a result of either “US-West-2”, “US-East-2”, or “Unknown”.</p>
 
 <p>Similar the same set of up to 500 US-based RIPE Atlas probes will be used in a second customized DNS measurement. This measurement will resolve the above introduced TXT-based record for thr special hostname of <code class="language-plaintext highlighter-rouge">TXT o-o.myaddr.l.google.com</code>. With this RIPE Atlas measurement we can find out for each probe whether EDNS0-Client-Subnet (ECS) is supported and what the provided subnet is.
 Also we can find out the IP address of the DNS Resolver for each probe as seen by the Authoritative Nameserver. This information is especially of interest for the case where the DNS Resolver does not support EDNS0-Client-Subnet (ECS).</p>
 
 <h1 id="test-results">Test Results</h1>
 <h2 id="overview">Overview</h2>
-<p>With some Python code the gathered results can easily be turned into a <a href="http://geojson.org/" target="_blank" rel="noopener noreferrer">GeoJSON</a> file (See Figure 3).</p>
+<p>With some Python code the gathered results can easily be turned into a <a href="http://geojson.org/" rel="external nofollow noopener" target="_blank">GeoJSON</a> file (See Figure 3).</p>
 
 <figure class="">
 
@@ -624,7 +631,7 @@ Also we can find out the IP address of the DNS Resolver for each probe as seen b
 
 <h2 id="explore-the-geojson">Explore the GeoJSON</h2>
 
-<p>You can explore this GeoJSON yourself below, as it is published as a <a href="https://gist.github.com/chriselsen/ff5d0d535781e61d879ff154e785259a" target="_blank" rel="noopener noreferrer">Gist to Github</a>.</p>
+<p>You can explore this GeoJSON yourself below, as it is published as a <a href="https://gist.github.com/chriselsen/ff5d0d535781e61d879ff154e785259a" rel="external nofollow noopener" target="_blank">Gist to Github</a>.</p>
 
 <script src="https://gist.github.com/chriselsen/ff5d0d535781e61d879ff154e785259a.js"></script>
 
@@ -660,11 +667,11 @@ Also we can find out the IP address of the DNS Resolver for each probe as seen b
 
 <p>These probes are all located in the San Diego, CA area and should therefore be routed to the US-West-2 location, represented by a red pin on the map. This location and the resulting probes were selected as they represent typical cases observed with geographic routing.</p>
 
-<p>We will be using Maxmind’s <a href="https://www.maxmind.com/en/geoip-demo" target="_blank" rel="noopener noreferrer">GeoIP2 City Database Demo</a> to lookup GeoIP data associated with the IPv4 and IPv6 addresses that are discovered for these probes as part of this test.</p>
+<p>We will be using Maxmind’s <a href="https://www.maxmind.com/en/geoip-demo" rel="external nofollow noopener" target="_blank">GeoIP2 City Database Demo</a> to lookup GeoIP data associated with the IPv4 and IPv6 addresses that are discovered for these probes as part of this test.</p>
 
 <ul>
   <li>
-    <p><strong>Location 1:</strong> This probe is <em>correctly</em> routed to the US-West-2 origin. The DNS Resolver IPv4 address for this probe is located in <em>The Dalles, Oregon</em> and also resides on Google’s <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">Autonomous System Number (ASN)</a>. It therefore appears to be one of Google’s Public DNS Resolver nodes. Further we can see that for this RIPE Atlas probe the client subnet is provided. Using Maxmind the corresponding IPv4 address can be mapped to the location <em>Coronado, California</em> and the ISP to <em>Cox</em>.
+    <p><strong>Location 1:</strong> This probe is <em>correctly</em> routed to the US-West-2 origin. The DNS Resolver IPv4 address for this probe is located in <em>The Dalles, Oregon</em> and also resides on Google’s <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" rel="external nofollow noopener" target="_blank">Autonomous System Number (ASN)</a>. It therefore appears to be one of Google’s Public DNS Resolver nodes. Further we can see that for this RIPE Atlas probe the client subnet is provided. Using Maxmind the corresponding IPv4 address can be mapped to the location <em>Coronado, California</em> and the ISP to <em>Cox</em>.
 This location is therefore an excellent example for how the EDNS0-Client-Subnet (ECS) improves the end-user experience, while using a DNS resolver that is physically located far away from the actual customer location.</p>
   </li>
   <li>
@@ -681,7 +688,7 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
 
 <h1 id="summary">Summary</h1>
 
-<p>This article provided a closer look at how DNS geographic routing - such as provided by AWS Route 53, but also leveraged by numerous CDNs - works. Using AWS Route 53 and RIPE Atlas we were able to visualize the real life results of a geographic routing DNS setup and dive deeper into some of the wanted and unwanted effects. A question that will need to remain to be explored in an upcoming post, is how these results compare to an <a href="https://en.wikipedia.org/wiki/Anycast" target="_blank" rel="noopener noreferrer">Anycast</a> based routing approach for the same set of Origins, leveraging e.g. the <a href="https://aws.amazon.com/blogs/aws/new-aws-global-accelerator-for-availability-and-performance/" target="_blank" rel="noopener noreferrer">AWS Global Accelerator</a>.</p>
+<p>This article provided a closer look at how DNS geographic routing - such as provided by AWS Route 53, but also leveraged by numerous CDNs - works. Using AWS Route 53 and RIPE Atlas we were able to visualize the real life results of a geographic routing DNS setup and dive deeper into some of the wanted and unwanted effects. A question that will need to remain to be explored in an upcoming post, is how these results compare to an <a href="https://en.wikipedia.org/wiki/Anycast" rel="external nofollow noopener" target="_blank">Anycast</a> based routing approach for the same set of Origins, leveraging e.g. the <a href="https://aws.amazon.com/blogs/aws/new-aws-global-accelerator-for-availability-and-performance/" rel="external nofollow noopener" target="_blank">AWS Global Accelerator</a>.</p>
 
         
       </section>
@@ -723,22 +730,22 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Limitations%20of%20DNS-based%20geographic%20routing%0Ahttps://www.edge-cloud.net/2019/03/01/limitations-of-geo-dns/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Limitations%20of%20DNS-based%20geographic%20routing%0Ahttps://www.edge-cloud.net/2019/03/01/limitations-of-geo-dns/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Limitations+of+DNS-based+geographic+routing%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Limitations+of+DNS-based+geographic+routing%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F&amp;title=Limitations+of+DNS-based+geographic+routing" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F&amp;title=Limitations+of+DNS-based+geographic+routing" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F&amp;title=Limitations+of+DNS-based+geographic+routing" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F03%2F01%2Flimitations-of-geo-dns%2F&amp;title=Limitations+of+DNS-based+geographic+routing" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -766,6 +773,63 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -937,63 +1001,6 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1028,15 +1035,15 @@ With DNS geographic routing based CDNs - like AWS CloudFront - the end-user expe
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

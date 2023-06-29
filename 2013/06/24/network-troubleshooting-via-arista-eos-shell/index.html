@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Network troubleshooting via Arista EOS shell - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>10 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -394,7 +403,7 @@
             </nav>
           </aside>
         
-        <p>A few days ago the startup <a href="https://www.cumulusnetworks.com/" target="_blank" rel="noopener noreferrer">Cumulus Networks</a> emerged from the clouds with their Cumulus Linux OS for original design manufacturer (ODM) switches based on Broadcom silicon. While the average customer will have to wait a while to get their hands on a Cumulus Networks based device, users of Arista switches can already today use the benefits of a full Linux distribution running on a data center switch.</p>
+        <p>A few days ago the startup <a href="https://www.cumulusnetworks.com/" rel="external nofollow noopener" target="_blank">Cumulus Networks</a> emerged from the clouds with their Cumulus Linux OS for original design manufacturer (ODM) switches based on Broadcom silicon. While the average customer will have to wait a while to get their hands on a Cumulus Networks based device, users of Arista switches can already today use the benefits of a full Linux distribution running on a data center switch.</p>
 
 <p>Arista EOS is based on a Linux kernel and provides full and open access to a Linux shell, allowing installation and use of Linux based management and troubleshooting tools.</p>
 
@@ -402,7 +411,7 @@
 
 <h1 id="tcpdump-to-pcap">TCPDump to PCAP</h1>
 
-<p>Quite frequently it happens that network devices aren’t behaving the way they should be. Let’s take the example of a virtual router that doesn’t want to form OSPFv3 adjacency with the core switch. What usually helps quite a bit are packet captures of the traffic between the involved network devices. In the past it could be quite challenging acquiring these packet captures, requiring the setup of a <a href="https://en.wikipedia.org/wiki/Port_mirroring" target="_blank" rel="noopener noreferrer">Switched Port Analyzer (SPAN)</a> Remote Switched Port Analyzer (RSPAN) or even <a href="http://packetpushers.net/erspan-new-favorite-packet-capturing-trick/" target="_blank" rel="noopener noreferrer">Encapsulated Remote Switched Port Analyzer (ERSPAN)</a>.</p>
+<p>Quite frequently it happens that network devices aren’t behaving the way they should be. Let’s take the example of a virtual router that doesn’t want to form OSPFv3 adjacency with the core switch. What usually helps quite a bit are packet captures of the traffic between the involved network devices. In the past it could be quite challenging acquiring these packet captures, requiring the setup of a <a href="https://en.wikipedia.org/wiki/Port_mirroring" rel="external nofollow noopener" target="_blank">Switched Port Analyzer (SPAN)</a> Remote Switched Port Analyzer (RSPAN) or even <a href="http://packetpushers.net/erspan-new-favorite-packet-capturing-trick/" rel="external nofollow noopener" target="_blank">Encapsulated Remote Switched Port Analyzer (ERSPAN)</a>.</p>
 
 <p>With Arista EOS it becomes much easier, as you can run TCPDump directly on the switch to capture a PCAP file for Wireshark:</p>
 
@@ -570,22 +579,22 @@ TCP window size: 16.0 KByte (default)
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Network%20troubleshooting%20via%20Arista%20EOS%20shell%0Ahttps://www.edge-cloud.net/2013/06/24/network-troubleshooting-via-arista-eos-shell/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Network%20troubleshooting%20via%20Arista%20EOS%20shell%0Ahttps://www.edge-cloud.net/2013/06/24/network-troubleshooting-via-arista-eos-shell/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Network+troubleshooting+via+Arista+EOS+shell%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Network+troubleshooting+via+Arista+EOS+shell%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F&amp;title=Network+troubleshooting+via+Arista+EOS+shell" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F&amp;title=Network+troubleshooting+via+Arista+EOS+shell" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F&amp;title=Network+troubleshooting+via+Arista+EOS+shell" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F06%2F24%2Fnetwork-troubleshooting-via-arista-eos-shell%2F&amp;title=Network+troubleshooting+via+Arista+EOS+shell" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -613,6 +622,63 @@ TCP window size: 16.0 KByte (default)
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -784,63 +850,6 @@ TCP window size: 16.0 KByte (default)
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -875,15 +884,15 @@ TCP window size: 16.0 KByte (default)
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

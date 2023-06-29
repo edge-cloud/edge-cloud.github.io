@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Monitoring IPv6 websites and SaaS apps via ThousandEyes - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>9 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -403,7 +412,7 @@
             </nav>
           </aside>
         
-        <p>Recently I stumbled over a small startup in San Francisco called <a href="https://www.thousandeyes.com/" target="_blank" rel="noopener noreferrer">ThousandEyes</a>. They provide a service for complete, end-to-end visibility of cloud applications and infrastructure telling you where and why services are breaking or under-performing. This allows SaaS providers to ensure that their application can be leveraged by customers at various locations throughout the world with an optimal or at least acceptable performance. But it also allows Enterprise customers to ensure that the SaaS applications used by the company are available from all campuses and branch offices at the desired performance, taking into consideration all elements of the delivery chain (See Figure 1).</p>
+        <p>Recently I stumbled over a small startup in San Francisco called <a href="https://www.thousandeyes.com/" rel="external nofollow noopener" target="_blank">ThousandEyes</a>. They provide a service for complete, end-to-end visibility of cloud applications and infrastructure telling you where and why services are breaking or under-performing. This allows SaaS providers to ensure that their application can be leveraged by customers at various locations throughout the world with an optimal or at least acceptable performance. But it also allows Enterprise customers to ensure that the SaaS applications used by the company are available from all campuses and branch offices at the desired performance, taking into consideration all elements of the delivery chain (See Figure 1).</p>
 
 <figure class="">
 
@@ -463,7 +472,7 @@
 
 <p>Instead I had to simulate such a setup by using two agents, one for IPv4 and one for IPv6. Adding more agents would break this model and makes things hard to read and understand.</p>
 
-<p>Also it is currently not possible to install more than one agent on a Linux host requiring separate hosts for the IPv4 and IPv6 agents. But thanks to <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">Docker</a> I was able to deploy one agent against the IPv6 address and one agent inside a Docker container against an IPv4 address on the same host. The two agents that you therefore see in Figure 2 are actually both running on the same host. With this I could go on with my initially intended use case.</p>
+<p>Also it is currently not possible to install more than one agent on a Linux host requiring separate hosts for the IPv4 and IPv6 agents. But thanks to <a href="https://www.docker.com/" rel="external nofollow noopener" target="_blank">Docker</a> I was able to deploy one agent against the IPv6 address and one agent inside a Docker container against an IPv4 address on the same host. The two agents that you therefore see in Figure 2 are actually both running on the same host. With this I could go on with my initially intended use case.</p>
 
 <p>I’m confident that these minor shortcomings will be fixed over time as more and more Enterprise and SaaS provider customers adopt this tool.</p>
 
@@ -675,7 +684,7 @@
 
 <p>This discrepancy in path chosen for IPv4 and IPv6 traffic as well as the distance between the locations explain the performance difference.</p>
 
-<p>I need to point out that the URL in this example is served by <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer">CloudFlare</a>, a content delivery network and distributed domain name server service which uses <a href="https://en.wikipedia.org/wiki/Anycast" target="_blank" rel="noopener noreferrer">Anycast</a> for improving website performance and speed, and to protect websites from online threats. As CloudFlare has <a href="https://www.cloudflare.com/network/" target="_blank" rel="noopener noreferrer">Points-of-Presence (POPs)</a> in both Vienna and Frankfurt, traffic can be served by either of these locations, both in IPv4 and IPv6.</p>
+<p>I need to point out that the URL in this example is served by <a href="https://www.cloudflare.com/" rel="external nofollow noopener" target="_blank">CloudFlare</a>, a content delivery network and distributed domain name server service which uses <a href="https://en.wikipedia.org/wiki/Anycast" rel="external nofollow noopener" target="_blank">Anycast</a> for improving website performance and speed, and to protect websites from online threats. As CloudFlare has <a href="https://www.cloudflare.com/network/" rel="external nofollow noopener" target="_blank">Points-of-Presence (POPs)</a> in both Vienna and Frankfurt, traffic can be served by either of these locations, both in IPv4 and IPv6.</p>
 
 <p>The problem in this case appears to be on the side of the provider in Nuremberg as they prefer a path towards Frankfurt for connecting to AS13335 (CloudFlare) via IPv4 while preferring a path towards Vienna for the same AS via IPv6. Here another nice feature of ThousandEyes comes into play: Share This Screen. This allows me to share the current screen with either live data or “canned” data around the time I have currently selected with someone who is not a customer of ThousandEyes. I can therefore easily share what I just discovered with the Service Provider in Nuremberg, allowing them to reproduce and better understand the issue. A great feature that saves a lot of time (See Figure 10).</p>
 
@@ -905,7 +914,7 @@
 
 <h1 id="summary">Summary</h1>
 
-<p>ThousandEyes is a very interesting tool for gaining insight into SaaS application performance and your overall network infrastructure. If you are an enterprise relying on SaaS applications such as <a href="https://products.office.com/en-us/" target="_blank" rel="noopener noreferrer">Microsoft Office 365</a> or <a href="https://gsuite.google.com/" target="_blank" rel="noopener noreferrer">Google Apps</a>, this is a great way to ensure that your employees get the performance they expect. It will help you identify issues and let you troubleshoot and resolve them quickly.</p>
+<p>ThousandEyes is a very interesting tool for gaining insight into SaaS application performance and your overall network infrastructure. If you are an enterprise relying on SaaS applications such as <a href="https://products.office.com/en-us/" rel="external nofollow noopener" target="_blank">Microsoft Office 365</a> or <a href="https://gsuite.google.com/" rel="external nofollow noopener" target="_blank">Google Apps</a>, this is a great way to ensure that your employees get the performance they expect. It will help you identify issues and let you troubleshoot and resolve them quickly.</p>
 
 <p>If you are a service provider offering a SaaS application, ThousandEyes is equally valuable as you are now not only able to monitor your service from various locations worldwide, but also drill down deep into any issues in the Internet that might degrade your customer’s experience. In the end the customer cares about the end-to-end experience, where a SaaS provider has limited direct control over the delivery chain.</p>
 
@@ -949,22 +958,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Monitoring%20IPv6%20websites%20and%20SaaS%20apps%20via%20ThousandEyes%0Ahttps://www.edge-cloud.net/2014/06/02/monitoring-ipv6-websites-via-thousandeyes/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Monitoring%20IPv6%20websites%20and%20SaaS%20apps%20via%20ThousandEyes%0Ahttps://www.edge-cloud.net/2014/06/02/monitoring-ipv6-websites-via-thousandeyes/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Monitoring+IPv6+websites+and+SaaS+apps+via+ThousandEyes%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Monitoring+IPv6+websites+and+SaaS+apps+via+ThousandEyes%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F&amp;title=Monitoring+IPv6+websites+and+SaaS+apps+via+ThousandEyes" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F&amp;title=Monitoring+IPv6+websites+and+SaaS+apps+via+ThousandEyes" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F&amp;title=Monitoring+IPv6+websites+and+SaaS+apps+via+ThousandEyes" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F06%2F02%2Fmonitoring-ipv6-websites-via-thousandeyes%2F&amp;title=Monitoring+IPv6+websites+and+SaaS+apps+via+ThousandEyes" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -992,6 +1001,63 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1163,63 +1229,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1254,15 +1263,15 @@
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

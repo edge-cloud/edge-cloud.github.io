@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Physical networks for VMware NSX - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>9 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -397,11 +406,11 @@
             </nav>
           </aside>
         
-        <p>During <a href="https://www.vmworld.com/community/sessions/2013" target="_blank" rel="noopener noreferrer">VMWorld 2013</a> the network virtualization platform <a href="http://www.vmware.com/products/nsx.html" target="_blank" rel="noopener noreferrer">VMware NSX</a> was announced by VMware. While there is a plethora of information available on how NSX works or what benefits it brings to the table, the answer on how NSX affects the physical infrastructure remains mostly untouched. Even during various VMWorld presentations this design piece was only covered under the term “Enterprise-class data center network”. Let’s have a look at how the physical underpinning should look like, beyond of what the VMware Network Virtualization Design Guide already states.</p>
+        <p>During <a href="https://www.vmworld.com/community/sessions/2013" rel="external nofollow noopener" target="_blank">VMWorld 2013</a> the network virtualization platform <a href="http://www.vmware.com/products/nsx.html" rel="external nofollow noopener" target="_blank">VMware NSX</a> was announced by VMware. While there is a plethora of information available on how NSX works or what benefits it brings to the table, the answer on how NSX affects the physical infrastructure remains mostly untouched. Even during various VMWorld presentations this design piece was only covered under the term “Enterprise-class data center network”. Let’s have a look at how the physical underpinning should look like, beyond of what the VMware Network Virtualization Design Guide already states.</p>
 
 <h1 id="characteristics-of-overlay-networks">Characteristics of Overlay Networks</h1>
 
-<p>By definition <em>an overlay network is a virtual network of nodes and logical links that is built on top of an existing (physical) network with the purpose to implement a network service that is not available in the existing network</em>. An example of such an overlay network is the <a href="https://en.wikipedia.org/wiki/Internet#Infrastructure" target="_blank" rel="noopener noreferrer">Internet</a> itself, which originally provided a packet-oriented network on top of connection-oriented phone lines. Another example is the <a href="https://en.wikipedia.org/wiki/Mbone" target="_blank" rel="noopener noreferrer">Multicast Backbone (MBONE)</a> for multicast deployment. Turning this definition upside down, shows us that capabilities <em>not</em> provided by the overlay network need to be provided by the network underneath.</p>
+<p>By definition <em>an overlay network is a virtual network of nodes and logical links that is built on top of an existing (physical) network with the purpose to implement a network service that is not available in the existing network</em>. An example of such an overlay network is the <a href="https://en.wikipedia.org/wiki/Internet#Infrastructure" rel="external nofollow noopener" target="_blank">Internet</a> itself, which originally provided a packet-oriented network on top of connection-oriented phone lines. Another example is the <a href="https://en.wikipedia.org/wiki/Mbone" rel="external nofollow noopener" target="_blank">Multicast Backbone (MBONE)</a> for multicast deployment. Turning this definition upside down, shows us that capabilities <em>not</em> provided by the overlay network need to be provided by the network underneath.</p>
 
 <figure class="">
 
@@ -435,7 +444,7 @@
 
 <h2 id="fault-containment">Fault containment</h2>
 
-<p><a href="https://en.wikipedia.org/wiki/Spanning_Tree_Protocol" target="_blank" rel="noopener noreferrer">Spanning Tree</a> is widely considered a risky technology and for many network engineers it’s hard to master it within their data center network and maintain a stable network. IP routing on the other side, while also not trivial to implement, at least provides much better fault isolation in the case that something does go wrong. Simplified speaking: Using IP routing (L3) over switching (L2) increases the chance of not blowing away the entire data center network if something goes wrong.</p>
+<p><a href="https://en.wikipedia.org/wiki/Spanning_Tree_Protocol" rel="external nofollow noopener" target="_blank">Spanning Tree</a> is widely considered a risky technology and for many network engineers it’s hard to master it within their data center network and maintain a stable network. IP routing on the other side, while also not trivial to implement, at least provides much better fault isolation in the case that something does go wrong. Simplified speaking: Using IP routing (L3) over switching (L2) increases the chance of not blowing away the entire data center network if something goes wrong.</p>
 
 <h2 id="traffic-isolation-and-multi-tenant-security">Traffic isolation and multi-tenant security</h2>
 
@@ -443,7 +452,7 @@
 
 <h2 id="redundancy-and-efficiency">Redundancy and efficiency</h2>
 
-<p>Last but not least an enterprise class data center network needs to support mission critical workloads. Therefore it needs to have redundancy built-in to support high availability, while at the same time this build-in redundancy shouldn’t be wasted but instead be used in normal operations. Reducing the throughput in a hardware failure scenario is usually a more efficient approach than keeping excess connections in place that only become available during a failure. Here spanning tree by design disables redundant links while routing supports <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" target="_blank" rel="noopener noreferrer">Equal-cost multi-path routing (ECMP)</a>, where packet forwarding to a single destination can occur over multiple “best paths”.</p>
+<p>Last but not least an enterprise class data center network needs to support mission critical workloads. Therefore it needs to have redundancy built-in to support high availability, while at the same time this build-in redundancy shouldn’t be wasted but instead be used in normal operations. Reducing the throughput in a hardware failure scenario is usually a more efficient approach than keeping excess connections in place that only become available during a failure. Here spanning tree by design disables redundant links while routing supports <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" rel="external nofollow noopener" target="_blank">Equal-cost multi-path routing (ECMP)</a>, where packet forwarding to a single destination can occur over multiple “best paths”.</p>
 
 <h1 id="nsx-to-the-rescue">NSX to the rescue?</h1>
 
@@ -475,9 +484,9 @@
 
 <h1 id="physical-network-design-for-nsx">Physical network design for NSX</h1>
 
-<p>The proposed physical network design is based on the well-known concept of a <a href="http://www.cisco.com/c/dam/en/us/td/docs/solutions/Enterprise/Data_Center/MSDC/1-0/MSDC_AAG_1.pdf" target="_blank" rel="noopener noreferrer">Spine and Leaf Architecture</a>. Each leaf corresponds to a rack, where the Top-of-Rack (ToR) switches provides L2 connectivity towards the server or storage arrays within the rack. This simple design reduces the requirement for using Spanning Tree to within the rack. Leaf and Spine devices are interconnected via L3 (Routing) and can use the previously mentioned ECMP capability.</p>
+<p>The proposed physical network design is based on the well-known concept of a <a href="http://www.cisco.com/c/dam/en/us/td/docs/solutions/Enterprise/Data_Center/MSDC/1-0/MSDC_AAG_1.pdf" rel="external nofollow noopener" target="_blank">Spine and Leaf Architecture</a>. Each leaf corresponds to a rack, where the Top-of-Rack (ToR) switches provides L2 connectivity towards the server or storage arrays within the rack. This simple design reduces the requirement for using Spanning Tree to within the rack. Leaf and Spine devices are interconnected via L3 (Routing) and can use the previously mentioned ECMP capability.</p>
 
-<p>Connectivity from within the NSX overlay network to the outside world (WAN or Internet) is provided by VXLAN Tunnel End-Points (VTEP) within the Core layer switches. This capability is e.g. offered by Arista’s <a href="https://www.arista.com/en/solutions/network-virtualization" target="_blank" rel="noopener noreferrer">Network Virtualization</a> feature. Thus core devices “translate” between VXLAN segments and VLANs.</p>
+<p>Connectivity from within the NSX overlay network to the outside world (WAN or Internet) is provided by VXLAN Tunnel End-Points (VTEP) within the Core layer switches. This capability is e.g. offered by Arista’s <a href="https://www.arista.com/en/solutions/network-virtualization" rel="external nofollow noopener" target="_blank">Network Virtualization</a> feature. Thus core devices “translate” between VXLAN segments and VLANs.</p>
 
 <p>As an alternative this connectivity can also be provided purely in software - e.g. via an “Edge Rack” - using the Edge devices within NSX.</p>
 
@@ -559,22 +568,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Physical%20networks%20for%20VMware%20NSX%0Ahttps://www.edge-cloud.net/2013/09/04/physical-networks-for-vmware-nsx/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Physical%20networks%20for%20VMware%20NSX%0Ahttps://www.edge-cloud.net/2013/09/04/physical-networks-for-vmware-nsx/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Physical+networks+for+VMware+NSX%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Physical+networks+for+VMware+NSX%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F&amp;title=Physical+networks+for+VMware+NSX" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F&amp;title=Physical+networks+for+VMware+NSX" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F&amp;title=Physical+networks+for+VMware+NSX" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F09%2F04%2Fphysical-networks-for-vmware-nsx%2F&amp;title=Physical+networks+for+VMware+NSX" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -602,6 +611,63 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -773,63 +839,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -864,15 +873,15 @@
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

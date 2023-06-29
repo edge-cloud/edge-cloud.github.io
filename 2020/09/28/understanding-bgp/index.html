@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Better understanding BGP - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,13 @@
         </header>
       
 
+      
+
+
+
+
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right sticky">
@@ -399,21 +406,21 @@
             </nav>
           </aside>
         
-        <p>In a <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">previous post</a> we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking, along with examples from running an <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">Autonomous System</a> on the Internet.</p>
+        <p>In a <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">previous post</a> we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking, along with examples from running an <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" rel="external nofollow noopener" target="_blank">Autonomous System</a> on the Internet.</p>
 
 <p>This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve seen numerous people confused by some of these principles and concepts while either designing networks or troubleshooting them. Therefore it appears to be a good idea to select and explain them explicitly.</p>
 
 <h1 id="routing-protocols">Routing Protocols</h1>
 
-<p>A <a href="https://en.wikipedia.org/wiki/Routing_protocol" target="_blank" rel="noopener noreferrer">Routing Protocol</a> specifies how routers communicate with each other to exchange information about the network and as a result populate and update the local route tables. While there are many different routing protocols, they all fall into the categories of either Interior gateway protocols or Exterior gateway protocols. <a href="https://en.wikipedia.org/wiki/Interior_gateway_protocol" target="_blank" rel="noopener noreferrer">Interior gateway protocols (IGPs)</a>, such as e.g. <a href="https://en.wikipedia.org/wiki/Open_Shortest_Path_First" target="_blank" rel="noopener noreferrer">OSPF</a>, <a href="https://en.wikipedia.org/wiki/Routing_Information_Protocol" target="_blank" rel="noopener noreferrer">RIP</a>, or <a href="https://en.wikipedia.org/wiki/IS-IS" target="_blank" rel="noopener noreferrer">IS-IS</a>, exchange routing information within a single routing domain, thereby under the control of a single administration. <a href="https://en.wikipedia.org/wiki/Exterior_gateway_protocol" target="_blank" rel="noopener noreferrer">Exterior gateway protocols (EGP)</a>, such as e.g. <a href="https://en.wikipedia.org/wiki/Border_Gateway_Protocol" target="_blank" rel="noopener noreferrer">BGP</a> exchange routing information between autonomous systems.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Routing_protocol" rel="external nofollow noopener" target="_blank">Routing Protocol</a> specifies how routers communicate with each other to exchange information about the network and as a result populate and update the local route tables. While there are many different routing protocols, they all fall into the categories of either Interior gateway protocols or Exterior gateway protocols. <a href="https://en.wikipedia.org/wiki/Interior_gateway_protocol" rel="external nofollow noopener" target="_blank">Interior gateway protocols (IGPs)</a>, such as e.g. <a href="https://en.wikipedia.org/wiki/Open_Shortest_Path_First" rel="external nofollow noopener" target="_blank">OSPF</a>, <a href="https://en.wikipedia.org/wiki/Routing_Information_Protocol" rel="external nofollow noopener" target="_blank">RIP</a>, or <a href="https://en.wikipedia.org/wiki/IS-IS" rel="external nofollow noopener" target="_blank">IS-IS</a>, exchange routing information within a single routing domain, thereby under the control of a single administration. <a href="https://en.wikipedia.org/wiki/Exterior_gateway_protocol" rel="external nofollow noopener" target="_blank">Exterior gateway protocols (EGP)</a>, such as e.g. <a href="https://en.wikipedia.org/wiki/Border_Gateway_Protocol" rel="external nofollow noopener" target="_blank">BGP</a> exchange routing information between autonomous systems.</p>
 
 <h1 id="bgp">BGP</h1>
 
-<p>Border Gateway Protocol (BGP) is an <a href="https://en.wikipedia.org/wiki/Exterior_gateway_protocol" target="_blank" rel="noopener noreferrer">Exterior gateway protocols (EGP)</a> designed to exchange routing and reachability information across Autonomous Systems (AS) on an Internet scale. It can be used for routing within an autonomous system, which is called Interior Border Gateway Protocol /  Internal BGP (iBGP). Or it can be used - as on the Internet - to route between AS, which is called Exterior Border Gateway Protocol / External BGP (eBGP). Here we will focus on the eBGP use case.</p>
+<p>Border Gateway Protocol (BGP) is an <a href="https://en.wikipedia.org/wiki/Exterior_gateway_protocol" rel="external nofollow noopener" target="_blank">Exterior gateway protocols (EGP)</a> designed to exchange routing and reachability information across Autonomous Systems (AS) on an Internet scale. It can be used for routing within an autonomous system, which is called Interior Border Gateway Protocol /  Internal BGP (iBGP). Or it can be used - as on the Internet - to route between AS, which is called Exterior Border Gateway Protocol / External BGP (eBGP). Here we will focus on the eBGP use case.</p>
 
 <h1 id="bgp-best-path-selection-algorithm">BGP Best Path Selection Algorithm</h1>
 
-<p>Within BGP the <a href="https://www.noction.com/blog/bgp-best-path-selection-algorithm" target="_blank" rel="noopener noreferrer">Best Path Selection Algorithm</a> is used to select the best route, which is then installed into the local route table. As the Internet route table - used in the <a href="https://en.wikipedia.org/wiki/Default-free_zone" target="_blank" rel="noopener noreferrer">Default Free Zone</a> - holds approximately 850,000 IPv4 and 95,000 IPv6 routes as of today and because some of these routes might be received from multiple peer - e.g. Transit Provider and direct peering, this selection is no easy task.
+<p>Within BGP the <a href="https://www.noction.com/blog/bgp-best-path-selection-algorithm" rel="external nofollow noopener" target="_blank">Best Path Selection Algorithm</a> is used to select the best route, which is then installed into the local route table. As the Internet route table - used in the <a href="https://en.wikipedia.org/wiki/Default-free_zone" rel="external nofollow noopener" target="_blank">Default Free Zone</a> - holds approximately 850,000 IPv4 and 95,000 IPv6 routes as of today and because some of these routes might be received from multiple peer - e.g. Transit Provider and direct peering, this selection is no easy task.
 Unless the default settings within a BGP enabled router are changed, the Best Path Selection Algorithm selects the shortest path as the best path, where shortest path means the least amount of AS in the path.</p>
 
 <p>In the following we want to look in more detail at the three most important selection criteria within the BGP Best Path Selection Algorithm:</p>
@@ -491,7 +498,7 @@ Unless the default settings within a BGP enabled router are changed, the Best Pa
 
 <h2 id="as_path-length">AS_PATH length</h2>
 
-<p>A common mechanism to manage traffic across AS with BGP is to make a BGP AS_PATH longer via <a href="https://www.noction.com/blog/as-path-and-as-path-prepending" target="_blank" rel="noopener noreferrer">AS path prepending</a>. Prepending means adding one or more AS numbers to the left side of the AS path. Normally this is done using one’s own AS number, while announcing routes to another AS.</p>
+<p>A common mechanism to manage traffic across AS with BGP is to make a BGP AS_PATH longer via <a href="https://www.noction.com/blog/as-path-and-as-path-prepending" rel="external nofollow noopener" target="_blank">AS path prepending</a>. Prepending means adding one or more AS numbers to the left side of the AS path. Normally this is done using one’s own AS number, while announcing routes to another AS.</p>
 
 <p>With that we can influence how traffic will reach our ASN. Similar to what I described before we might not only have a commercial interest in reducing the cost that we pay for Transit for traffic leaving our ASN, but also for traffic entering our ASN. We have seen that we can perform traffic engineering for egress traffic via Local_Pref, using AS path prepending can be used for traffic engineering on ingress traffic (See Figure 2). Here ASN 1 makes its path artificially longer towards ASN 3 by prepending its own ASN once.</p>
 
@@ -617,7 +624,7 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 <p>With regards to what we learned in the <a href="https://www.edge-cloud.net/2020/09/18/understanding-routing/">previous post</a> about route tables, it is important to understand that only the best path is installed in the route table. Only if the BGP best path selection algorithm results in a “tie”, more than one route can be installed into the route table.</p>
 
-<p>This is called BGP Multipath and it is independent of whether the underlying route table has <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" target="_blank" rel="noopener noreferrer">Equal-cost multi-path routing (ECMP)</a> capabilities. In other words: To have full ECMP capability on a BGP enabled router, BGP needs to deliver parallel path to the routing table and the router needs to make use of them.</p>
+<p>This is called BGP Multipath and it is independent of whether the underlying route table has <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" rel="external nofollow noopener" target="_blank">Equal-cost multi-path routing (ECMP)</a> capabilities. In other words: To have full ECMP capability on a BGP enabled router, BGP needs to deliver parallel path to the routing table and the router needs to make use of them.</p>
 
 <p>Therefore if we want to use ECMP with prefixes learned over BGP, we have to enforce such a “tie”. This means we need to ensure the following BGP attributes are kept same on each paths:</p>
 <ul>
@@ -671,22 +678,22 @@ RPKI validation codes: V valid, I invalid, N Not found
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Better%20understanding%20BGP%0Ahttps://www.edge-cloud.net/2020/09/28/understanding-bgp/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Better%20understanding%20BGP%0Ahttps://www.edge-cloud.net/2020/09/28/understanding-bgp/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Better+understanding+BGP%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Better+understanding+BGP%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F&amp;title=Better+understanding+BGP" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F&amp;title=Better+understanding+BGP" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F&amp;title=Better+understanding+BGP" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F28%2Funderstanding-bgp%2F&amp;title=Better+understanding+BGP" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -714,6 +721,63 @@ RPKI validation codes: V valid, I invalid, N Not found
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -885,63 +949,6 @@ RPKI validation codes: V valid, I invalid, N Not found
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -976,15 +983,15 @@ RPKI validation codes: V valid, I invalid, N Not found
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

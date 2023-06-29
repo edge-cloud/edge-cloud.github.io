@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>How AT&amp;T broke my IPv6 Internet connection - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,13 @@
         </header>
       
 
+      
+
+
+
+
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right sticky">
@@ -392,12 +399,12 @@
             </nav>
           </aside>
         
-        <p>A few days ago I discovered that my <a href="https://www.att.com/internet/" target="_blank" rel="noopener noreferrer">AT&amp;T Internet</a> connection at Home wasn’t working as expected. Websites were loading sluggish and access to Ubuntu’s repo via APT flat-out failed. My first suspicion that there must be an issue with the IPv6 connectivity was confirmed after heading to <a href="https://test-ipv6.com/" target="_blank" rel="noopener noreferrer">Test-IPv6.com</a>.</p>
+        <p>A few days ago I discovered that my <a href="https://www.att.com/internet/" rel="external nofollow noopener" target="_blank">AT&amp;T Internet</a> connection at Home wasn’t working as expected. Websites were loading sluggish and access to Ubuntu’s repo via APT flat-out failed. My first suspicion that there must be an issue with the IPv6 connectivity was confirmed after heading to <a href="https://test-ipv6.com/" rel="external nofollow noopener" target="_blank">Test-IPv6.com</a>.</p>
 
 <p>It was time to start the troubleshooting and take a closer look:</p>
 
 <h1 id="first-look-at-ripe-atlas">First look at RIPE Atlas</h1>
-<p>I have had a <a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> probe directly connected to my AT&amp;T Home-gateway for the last 5 years. RIPE Atlas is a global network of hardware devices, called probes and anchors, that actively measure Internet connectivity. Anyone can access this data via Internet traffic maps, streaming data visualisations, and an API. RIPE Atlas users can also perform customised measurements to gain valuable data about their own networks. The data collected by this probe allows me to gain interesting insights into my own Internet connectivity at home, but also the global Internet connectivity.</p>
+<p>I have had a <a href="https://atlas.ripe.net/" rel="external nofollow noopener" target="_blank">RIPE Atlas</a> probe directly connected to my AT&amp;T Home-gateway for the last 5 years. RIPE Atlas is a global network of hardware devices, called probes and anchors, that actively measure Internet connectivity. Anyone can access this data via Internet traffic maps, streaming data visualisations, and an API. RIPE Atlas users can also perform customised measurements to gain valuable data about their own networks. The data collected by this probe allows me to gain interesting insights into my own Internet connectivity at home, but also the global Internet connectivity.</p>
 
 <p>In this case the status page for my RIPE Atlas probe showed me in plain English that “IPv6 Doesn’t Work Properly” (See Figure 1).</p>
 
@@ -427,7 +434,7 @@
 
 <h1 id="measurement-targets">Measurement targets</h1>
 
-<p>The RIPE Atlas error message talks about “stable and cooperating targets (i.e. targets known to respond to pings)”. Looking at the built-in measurements, we can see that these targets include some of the <a href="https://www.iana.org/domains/root/servers" target="_blank" rel="noopener noreferrer">root name server</a>. The root name servers are a authoritative name server for the root zone (“.”) of the Domain Name System (DNS) of the Internet. Due to the important role of these name servers to the overall DNS architecture, these servers are implemented in a highly reliable way, using e.g. <a href="https://en.wikipedia.org/wiki/Anycast" target="_blank" rel="noopener noreferrer">Anycast</a>, making them stable anchor points throughout different international locations.</p>
+<p>The RIPE Atlas error message talks about “stable and cooperating targets (i.e. targets known to respond to pings)”. Looking at the built-in measurements, we can see that these targets include some of the <a href="https://www.iana.org/domains/root/servers" rel="external nofollow noopener" target="_blank">root name server</a>. The root name servers are a authoritative name server for the root zone (“.”) of the Domain Name System (DNS) of the Internet. Due to the important role of these name servers to the overall DNS architecture, these servers are implemented in a highly reliable way, using e.g. <a href="https://en.wikipedia.org/wiki/Anycast" rel="external nofollow noopener" target="_blank">Anycast</a>, making them stable anchor points throughout different international locations.</p>
 
 <p>And as all but the “G” root server respond to ICMP echo requests (aka. “Ping”) over IPv4 and IPv6, the root name servers are excellent targets for availability tests.
 In the case of my RIPE Atlas probe, we can see that all Pings to root name servers over IPv6 are failing, while Pings over IPv4 are successful (See Figure 2).</p>
@@ -492,8 +499,8 @@ In the case of my RIPE Atlas probe, we can see that all Pings to root name serve
 
 <p>Now that we know that IPv6 is broken and when it broke, let’s try to figure out where things are broken. Is the link between the AT&amp;T home gateway and the next hop upstream router broken or is the culprit further down in the AT&amp;T network? RIPE Atlas can also help answer this question.</p>
 
-<p>To do so we create a One-off measurement from solely the affected Probe to one of the IPv6 addresses of <a href="https://developers.google.com/speed/public-dns/docs/using" target="_blank" rel="noopener noreferrer">Google Public DNS</a> resolvers at 2001:4860:4860::8888. We could also use any other host that is known to respond to IPv6 pings.
-Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" rel="noopener noreferrer">RIPE Atlas API</a>, this test can quickly be created via:</p>
+<p>To do so we create a One-off measurement from solely the affected Probe to one of the IPv6 addresses of <a href="https://developers.google.com/speed/public-dns/docs/using" rel="external nofollow noopener" target="_blank">Google Public DNS</a> resolvers at 2001:4860:4860::8888. We could also use any other host that is known to respond to IPv6 pings.
+Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" rel="external nofollow noopener" target="_blank">RIPE Atlas API</a>, this test can quickly be created via:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    curl --dump-header - -H "Content-Type: application/json" -H "Accept:
     application/json" -X POST -d '{
@@ -553,7 +560,7 @@ Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" r
 
 </figure>
 
-<p>To have another data point and to understand how a successful IPv6 Traceroute to Google Public DNS resolvers should look like, let’s run the same measurement from a RIPE Atlas probe that is also connected to AT&amp;T - indicated by the same <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" target="_blank" rel="noopener noreferrer">ASN</a>. The RIPE Atlas website allows you to find probes based on various characteristics, such as IPv6 working state, ASN but also location. With this it was easy to find a probe that is connected to AT&amp;T with a working IPv6 connection.</p>
+<p>To have another data point and to understand how a successful IPv6 Traceroute to Google Public DNS resolvers should look like, let’s run the same measurement from a RIPE Atlas probe that is also connected to AT&amp;T - indicated by the same <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" rel="external nofollow noopener" target="_blank">ASN</a>. The RIPE Atlas website allows you to find probes based on various characteristics, such as IPv6 working state, ASN but also location. With this it was easy to find a probe that is connected to AT&amp;T with a working IPv6 connection.</p>
 
 <p>As expected, the traceroute to the Google Public DNS Resolver at 2001:4860:4860::8888 successfully completes after 9 hops (See Figure 5).</p>
 
@@ -581,13 +588,13 @@ Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" r
 
 </figure>
 
-<p>This indicates that the issue is not just on the direct link between my AT&amp;T home gateway and the next hop upstream, but deeper inside the AT&amp;T network. Therefore this problem most likely affects other users within my neighborhood. And of course I was able to find other reports of this issue on the <a href="https://forums.att.com/" target="_blank" rel="noopener noreferrer">AT&amp;T Forum</a>, <a href="https://www.dslreports.com" target="_blank" rel="noopener noreferrer">DSLReports</a> and <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">Reddit</a>. Here is a small selection:</p>
+<p>This indicates that the issue is not just on the direct link between my AT&amp;T home gateway and the next hop upstream, but deeper inside the AT&amp;T network. Therefore this problem most likely affects other users within my neighborhood. And of course I was able to find other reports of this issue on the <a href="https://forums.att.com/" rel="external nofollow noopener" target="_blank">AT&amp;T Forum</a>, <a href="https://www.dslreports.com" rel="external nofollow noopener" target="_blank">DSLReports</a> and <a href="https://www.reddit.com/" rel="external nofollow noopener" target="_blank">Reddit</a>. Here is a small selection:</p>
 <ul>
-  <li>AT&amp;T Forum: <a href="https://forums.att.com/t5/AT-T-Fiber-Installation/ipv6-broken/m-p/5805237#M5197" target="_blank" rel="noopener noreferrer">ipv6 broken?</a>
+  <li>AT&amp;T Forum: <a href="https://forums.att.com/t5/AT-T-Fiber-Installation/ipv6-broken/m-p/5805237#M5197" rel="external nofollow noopener" target="_blank">ipv6 broken?</a>
 </li>
-  <li>DSLReports: <a href="http://www.dslreports.com/forum/r31897147-Replacement-BGW210-and-can-t-route-IPV6" target="_blank" rel="noopener noreferrer">Replacement BGW210 and can’t route IPV6</a>
+  <li>DSLReports: <a href="http://www.dslreports.com/forum/r31897147-Replacement-BGW210-and-can-t-route-IPV6" rel="external nofollow noopener" target="_blank">Replacement BGW210 and can’t route IPV6</a>
 </li>
-  <li>Reddit: <a href="https://www.reddit.com/r/Austin/comments/7etbro/ipv6_broken_on_att_uverse_gigapower_fiber/" target="_blank" rel="noopener noreferrer">IPv6 Broken on AT&amp;T U-verse Gigapower (Fiber) (Northeast Austin)</a>
+  <li>Reddit: <a href="https://www.reddit.com/r/Austin/comments/7etbro/ipv6_broken_on_att_uverse_gigapower_fiber/" rel="external nofollow noopener" target="_blank">IPv6 Broken on AT&amp;T U-verse Gigapower (Fiber) (Northeast Austin)</a>
 </li>
 </ul>
 
@@ -623,7 +630,7 @@ Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" r
 
 </figure>
 
-<p>At least for IPv4 things look a little better since my upgrade to <a href="https://en.wikipedia.org/wiki/Passive_optical_network" target="_blank" rel="noopener noreferrer">GPON</a> in mid 2017. Since then connectivity has been mosly stable with some packet loss, but no full outages (See Figure 7).</p>
+<p>At least for IPv4 things look a little better since my upgrade to <a href="https://en.wikipedia.org/wiki/Passive_optical_network" rel="external nofollow noopener" target="_blank">GPON</a> in mid 2017. Since then connectivity has been mosly stable with some packet loss, but no full outages (See Figure 7).</p>
 
 <figure class="">
 
@@ -653,7 +660,7 @@ Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" r
 
 <p>RIPE Atlas provides an awesome tool to keep an eye on the performance and availability of your own Internet connection, but also helps troubleshooting. Keep in mind that for none of the steps shown above I had to be actually at home. You can use RIPE Atlas from anywhere.</p>
 
-<p>I highly recommend you to consider <a href="https://atlas.ripe.net/get-involved/become-a-host/" target="_blank" rel="noopener noreferrer">hosting a RIPE Atlas probe</a> yourself. Not only will you benefit from the data that it collects, but it will also benefit the overall Internet community.</p>
+<p>I highly recommend you to consider <a href="https://atlas.ripe.net/get-involved/become-a-host/" rel="external nofollow noopener" target="_blank">hosting a RIPE Atlas probe</a> yourself. Not only will you benefit from the data that it collects, but it will also benefit the overall Internet community.</p>
 
 <p>At this point I have no hope whatsoever that AT&amp;T will fix this issue anytime soon. Getting in contact with a human at AT&amp;T is already a daunting task and finding someone with knowledge of IPv6 who can actually fix this issue seems impossible. As AT&amp;T also blocks 6in4 tunnels, I’ll be forced to disable IPv6 on my home internet connection for the time being.</p>
 
@@ -693,22 +700,22 @@ Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" r
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=How%20AT&amp;T%20broke%20my%20IPv6%20Internet%20connection%0Ahttps://www.edge-cloud.net/2019/02/13/how-att-broke-my-ipv6/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=How%20AT&amp;T%20broke%20my%20IPv6%20Internet%20connection%0Ahttps://www.edge-cloud.net/2019/02/13/how-att-broke-my-ipv6/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=How+AT%26T+broke+my+IPv6+Internet+connection%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=How+AT%26T+broke+my+IPv6+Internet+connection%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F&amp;title=How+AT%26T+broke+my+IPv6+Internet+connection" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F&amp;title=How+AT%26T+broke+my+IPv6+Internet+connection" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F&amp;title=How+AT%26T+broke+my+IPv6+Internet+connection" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F02%2F13%2Fhow-att-broke-my-ipv6%2F&amp;title=How+AT%26T+broke+my+IPv6+Internet+connection" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -736,6 +743,63 @@ Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" r
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -907,63 +971,6 @@ Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" r
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -998,15 +1005,15 @@ Using the <a href="https://atlas.ripe.net/docs/api/v2/manual/" target="_blank" r
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

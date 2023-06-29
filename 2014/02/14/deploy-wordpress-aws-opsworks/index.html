@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Deploy WordPress with AWS OpsWorks - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>9 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -398,9 +407,9 @@
             </nav>
           </aside>
         
-        <p><a href="https://aws.amazon.com/opsworks/" target="_blank" rel="noopener noreferrer">AWS OpsWorks</a> is an application management service that makes it easy for DevOps users to model and manage the entire application from load balancers to databases. It offers a very powerful solution for users to deploy their application easily in AWS without giving up control.</p>
+        <p><a href="https://aws.amazon.com/opsworks/" rel="external nofollow noopener" target="_blank">AWS OpsWorks</a> is an application management service that makes it easy for DevOps users to model and manage the entire application from load balancers to databases. It offers a very powerful solution for users to deploy their application easily in AWS without giving up control.</p>
 
-<p>In this post I want to show you how easy it is to use AWS OpsWorks for deploying WordPress - a typical <a href="https://en.wikipedia.org/wiki/LAMP_(software_bundle)" target="_blank" rel="noopener noreferrer">LAMP</a> application. This includes deploying a fresh blank WordPress install as well as re-creating a WordPress site from a backup for Dev/Test or Disaster Recovery purposes. In all cases it should take you only a few minutes to have a running WordPress site.</p>
+<p>In this post I want to show you how easy it is to use AWS OpsWorks for deploying WordPress - a typical <a href="https://en.wikipedia.org/wiki/LAMP_(software_bundle)" rel="external nofollow noopener" target="_blank">LAMP</a> application. This includes deploying a fresh blank WordPress install as well as re-creating a WordPress site from a backup for Dev/Test or Disaster Recovery purposes. In all cases it should take you only a few minutes to have a running WordPress site.</p>
 
 <p>While I use a Webhoster for running Edge Cloud, I do use the described approach to test changes to WordPress before deploying them into production. And I thereby also know that I could restore Edge Cloud as part of a Disaster Recovery (DR) plan via this approach.</p>
 
@@ -434,11 +443,11 @@
 
 <ul>
   <li>
-<a href="https://aws.amazon.com/elasticbeanstalk/" target="_blank" rel="noopener noreferrer">AWS Elastic Beanstalk</a> is an easy-to-use solution for building web apps and web services with popular application containers such as Java, PHP, Python, Ruby and .NET. You upload your code and Elastic Beanstalk automatically does the rest. Elastic Beanstalk supports the most common web architectures, application containers, and frameworks.</li>
+<a href="https://aws.amazon.com/elasticbeanstalk/" rel="external nofollow noopener" target="_blank">AWS Elastic Beanstalk</a> is an easy-to-use solution for building web apps and web services with popular application containers such as Java, PHP, Python, Ruby and .NET. You upload your code and Elastic Beanstalk automatically does the rest. Elastic Beanstalk supports the most common web architectures, application containers, and frameworks.</li>
   <li>
-<a href="https://aws.amazon.com/opsworks/" target="_blank" rel="noopener noreferrer">AWS OpsWorks</a> is a powerful end-to-end solution that gives you an easy way to manage applications of nearly any scale and complexity without sacrificing control. You model, customize, and automate the entire application throughout its lifecycle. OpsWorks provides integrated experiences for IT administrators and ops-minded developers who want a high degree of productivity and control over operations.</li>
+<a href="https://aws.amazon.com/opsworks/" rel="external nofollow noopener" target="_blank">AWS OpsWorks</a> is a powerful end-to-end solution that gives you an easy way to manage applications of nearly any scale and complexity without sacrificing control. You model, customize, and automate the entire application throughout its lifecycle. OpsWorks provides integrated experiences for IT administrators and ops-minded developers who want a high degree of productivity and control over operations.</li>
   <li>
-<a href="https://aws.amazon.com/cloudformation/" target="_blank" rel="noopener noreferrer">AWS CloudFormation</a> is a building block service that enables customers to provision and manage almost any AWS resource via a domain specific language. You define JSON templates and use them to provision and manage AWS resources, operating systems and application code. CloudFormation focuses on providing foundational capabilities for the full breadth of AWS, without prescribing a particular model for development and operations.</li>
+<a href="https://aws.amazon.com/cloudformation/" rel="external nofollow noopener" target="_blank">AWS CloudFormation</a> is a building block service that enables customers to provision and manage almost any AWS resource via a domain specific language. You define JSON templates and use them to provision and manage AWS resources, operating systems and application code. CloudFormation focuses on providing foundational capabilities for the full breadth of AWS, without prescribing a particular model for development and operations.</li>
 </ul>
 
 <h1 id="use-case">Use case</h1>
@@ -449,7 +458,7 @@
   <li>
 <strong>Fresh blank site:</strong> Create a fresh blank WordPress site that you can use to start hosting your own blog.</li>
   <li>
-<strong>Re-Created site from an existing backup:</strong> If you have an existing WordPress site, you can use a WordPress Backup Plugin, such as <a href="https://wordpress.org/plugins/backwpup/" target="_blank" rel="noopener noreferrer">BackWPup</a>. Using AWS OpsWorks will allow you to recover your WordPress site from a backup as a Dev/Test site. This way you can e.g. test installing a new plugin before doing so in the production site. But you can also use the recovered WordPress site for a disaster recovery scenario in case your primary site is hard down. The benefit here is that the recovery can happen almost entirely automated, which is always a good idea for a DR solution.</li>
+<strong>Re-Created site from an existing backup:</strong> If you have an existing WordPress site, you can use a WordPress Backup Plugin, such as <a href="https://wordpress.org/plugins/backwpup/" rel="external nofollow noopener" target="_blank">BackWPup</a>. Using AWS OpsWorks will allow you to recover your WordPress site from a backup as a Dev/Test site. This way you can e.g. test installing a new plugin before doing so in the production site. But you can also use the recovered WordPress site for a disaster recovery scenario in case your primary site is hard down. The benefit here is that the recovery can happen almost entirely automated, which is always a good idea for a DR solution.</li>
 </ul>
 
 <p>Even though we will run the WordPress site in AWS, we will not make use of AWS cloud concepts in order to achieve high availability for coping with AWS failures. Instead we will keep it very simple (See Figure 2).</p>
@@ -488,12 +497,12 @@
   <li>
 <strong>Existing Backup (Optional):</strong> A full backup of an existing WordPress site as a Zip file in a S3 bucket.</li>
   <li>
-<strong>WordPress source code (Optional):</strong> The WordPress source code - available at <a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer">www.wordpress.org</a> for a fresh install of WordPress.</li>
+<strong>WordPress source code (Optional):</strong> The WordPress source code - available at <a href="https://wordpress.org/" rel="external nofollow noopener" target="_blank">www.wordpress.org</a> for a fresh install of WordPress.</li>
 </ul>
 
 <h1 id="getting-started-with-aws-opsworks">Getting Started with AWS OpsWorks</h1>
 
-<p>Let’s head over to the AWS OpsWorks console at <a href="https://console.aws.amazon.com/opsworks" target="_blank" rel="noopener noreferrer">console.aws.amazon.com/opsworks</a> to get started. Login with your existing AWS credentials. AWS OpsWorks itself is a global service and you therefore do not need to pick a region at this point.</p>
+<p>Let’s head over to the AWS OpsWorks console at <a href="https://console.aws.amazon.com/opsworks" rel="external nofollow noopener" target="_blank">console.aws.amazon.com/opsworks</a> to get started. Login with your existing AWS credentials. AWS OpsWorks itself is a global service and you therefore do not need to pick a region at this point.</p>
 
 <p>Creating a service or application in AWS OpsWorks includes 4 steps (See Figure 3):</p>
 
@@ -503,7 +512,7 @@
   <li>
 <strong>Add layers:</strong> Each stack consist of one or more layers, with each layer having a certain function. Here we will use a PHP App Server layer and a MySQL database layer.</li>
   <li>
-<strong>Add an app:</strong> Define the application to be run via a source code repository or file bundle. This includes the ability to use <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Github</a> and <a href="https://en.wikipedia.org/wiki/Apache_Subversion" target="_blank" rel="noopener noreferrer">Subversion</a>, a simple Zip file via a HTTP or HTTPS URL or a ZIP file in a S3 bucket.</li>
+<strong>Add an app:</strong> Define the application to be run via a source code repository or file bundle. This includes the ability to use <a href="https://github.com/" rel="external nofollow noopener" target="_blank">Github</a> and <a href="https://en.wikipedia.org/wiki/Apache_Subversion" rel="external nofollow noopener" target="_blank">Subversion</a>, a simple Zip file via a HTTP or HTTPS URL or a ZIP file in a S3 bucket.</li>
   <li>
 <strong>Deploy and manage:</strong> Deploy the application by starting the layer’s instances. Manage further capabilities such as deploying another application version at runtime.</li>
 </ol>
@@ -588,9 +597,9 @@
 
 </figure>
 
-<p>AWS OpsWorks uses the configuration management tool <a href="https://www.chef.io/chef/" target="_blank" rel="noopener noreferrer">Chef</a> to configure the EC2 instances within each layer. For this it provides so-called Chef “recipes” that describe how server applications (such as Apache or MySQL) are managed and how they are to be configured. These recipes describe a series of resources that should be in a particular state: packages that should be installed, services that should be running, or files that should be written.</p>
+<p>AWS OpsWorks uses the configuration management tool <a href="https://www.chef.io/chef/" rel="external nofollow noopener" target="_blank">Chef</a> to configure the EC2 instances within each layer. For this it provides so-called Chef “recipes” that describe how server applications (such as Apache or MySQL) are managed and how they are to be configured. These recipes describe a series of resources that should be in a particular state: packages that should be installed, services that should be running, or files that should be written.</p>
 
-<p>While AWS OpsWorks provides many useful recipes out of the box we want to add a few minor custom recipes. In particular we will use two custom recipes which can be found at <a href="https://github.com/chriselsen/opsworks-cookbooks" target="_blank" rel="noopener noreferrer">https://github.com/chriselsen/opsworks-cookbooks</a>:</p>
+<p>While AWS OpsWorks provides many useful recipes out of the box we want to add a few minor custom recipes. In particular we will use two custom recipes which can be found at <a href="https://github.com/chriselsen/opsworks-cookbooks" rel="external nofollow noopener" target="_blank">https://github.com/chriselsen/opsworks-cookbooks</a>:</p>
 
 <ul>
   <li>AWS-Ubuntu: Configure an AWS Opsworks Ubuntu image with a swap space. This is aimed at t1.micro instances to prevent “out of memory” issues.</li>
@@ -634,7 +643,7 @@
   <li>Apache Prefork and Keepalive tuning: As we will be using the memory constraint EC2 flavor t1.micro, we want to make changes to the Apache Prefork and Keepalive settings to better adapt to this flavor type.</li>
 </ol>
 
-<p>In AWS Opsworks the setup and configuration of Apache is performed by Chef recipes that use various parameters which can be controlled by the user via a simple JSON file. This way we don’t have to create a custom Chef recipe or even manually perform changes of our servers. Instead we can look up the <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/attributes-recipes-apache.html" target="_blank" rel="noopener noreferrer">apache2 attributes</a> which are configurable and create a custom JSON file.</p>
+<p>In AWS Opsworks the setup and configuration of Apache is performed by Chef recipes that use various parameters which can be controlled by the user via a simple JSON file. This way we don’t have to create a custom Chef recipe or even manually perform changes of our servers. Instead we can look up the <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/attributes-recipes-apache.html" rel="external nofollow noopener" target="_blank">apache2 attributes</a> which are configurable and create a custom JSON file.</p>
 
 <p>This JSON file will look as follows:</p>
 
@@ -824,7 +833,7 @@
 
 </figure>
 
-<p>Although we have already pointed AWS OpsWorks to our custom Chef cookbooks, we still need to assign the individual recipes to the correct layer and lifecycle event. In AWS OpsWorks a layer has a sequence of <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-events.html" target="_blank" rel="noopener noreferrer">five lifecycle events</a>, each of which has an associated set of recipes that are specific to the layer. When an event occurs on a layer’s instance, AWS OpsWorks automatically runs the appropriate set of recipes.</p>
+<p>Although we have already pointed AWS OpsWorks to our custom Chef cookbooks, we still need to assign the individual recipes to the correct layer and lifecycle event. In AWS OpsWorks a layer has a sequence of <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-events.html" rel="external nofollow noopener" target="_blank">five lifecycle events</a>, each of which has an associated set of recipes that are specific to the layer. When an event occurs on a layer’s instance, AWS OpsWorks automatically runs the appropriate set of recipes.</p>
 
 <p>For the PHP App Server layer we need to define the following two recipes to lifecycle events (See Figure 13).</p>
 
@@ -1253,7 +1262,7 @@
 
 <h1 id="references">References</h1>
 
-<p>If you want to find out more about AWS OpsWorks, have a look at the AWS re:Invent 2013 presentation <a href="http://www.slideshare.net/AmazonWebServices/zero-to-sixty-aws-opsworks-dmg202-aws-reinvent-2013" target="_blank" rel="noopener noreferrer">Zero to Sixty: AWS OpsWorks (DMG202)</a> or the excellent <a href="https://aws.amazon.com/documentation/opsworks/" target="_blank" rel="noopener noreferrer">AWS OpsWorks Documentation</a>.</p>
+<p>If you want to find out more about AWS OpsWorks, have a look at the AWS re:Invent 2013 presentation <a href="http://www.slideshare.net/AmazonWebServices/zero-to-sixty-aws-opsworks-dmg202-aws-reinvent-2013" rel="external nofollow noopener" target="_blank">Zero to Sixty: AWS OpsWorks (DMG202)</a> or the excellent <a href="https://aws.amazon.com/documentation/opsworks/" rel="external nofollow noopener" target="_blank">AWS OpsWorks Documentation</a>.</p>
 
         
       </section>
@@ -1289,22 +1298,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Deploy%20WordPress%20with%20AWS%20OpsWorks%0Ahttps://www.edge-cloud.net/2014/02/14/deploy-wordpress-aws-opsworks/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Deploy%20WordPress%20with%20AWS%20OpsWorks%0Ahttps://www.edge-cloud.net/2014/02/14/deploy-wordpress-aws-opsworks/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Deploy+WordPress+with+AWS+OpsWorks%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Deploy+WordPress+with+AWS+OpsWorks%20https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F&amp;title=Deploy+WordPress+with+AWS+OpsWorks" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F&amp;title=Deploy+WordPress+with+AWS+OpsWorks" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F&amp;title=Deploy+WordPress+with+AWS+OpsWorks" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2014%2F02%2F14%2Fdeploy-wordpress-aws-opsworks%2F&amp;title=Deploy+WordPress+with+AWS+OpsWorks" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -1332,6 +1341,63 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1503,63 +1569,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1594,15 +1603,15 @@
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

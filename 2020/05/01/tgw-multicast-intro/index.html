@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Multicast with AWS Transit Gateway - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,13 @@
         </header>
       
 
+      
+
+
+
+
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right sticky">
@@ -408,7 +415,7 @@
             </nav>
           </aside>
         
-        <p>At the beginning of December 2019, AWS released <a href="https://aws.amazon.com/blogs/aws/aws-transit-gateway-adds-multicast-and-inter-regional-peering/" target="_blank" rel="noopener noreferrer">Multicast support</a> within the <a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway</a>. This marked the beginning of being able to use applications that require support for <a href="https://en.wikipedia.org/wiki/IP_multicast" target="_blank" rel="noopener noreferrer">IP Multicast</a> within AWS.</p>
+        <p>At the beginning of December 2019, AWS released <a href="https://aws.amazon.com/blogs/aws/aws-transit-gateway-adds-multicast-and-inter-regional-peering/" rel="external nofollow noopener" target="_blank">Multicast support</a> within the <a href="https://aws.amazon.com/transit-gateway/" rel="external nofollow noopener" target="_blank">AWS Transit Gateway</a>. This marked the beginning of being able to use applications that require support for <a href="https://en.wikipedia.org/wiki/IP_multicast" rel="external nofollow noopener" target="_blank">IP Multicast</a> within AWS.</p>
 
 <p>The following article will give you a brief overview of how to use IP Multicast with the AWS Transit Gateway and especially how to validate that your setup is working correctly.</p>
 
@@ -445,7 +452,7 @@
 </figure>
 
 <p>For this to work the source host addresses the packet with a Multicast Address from the range of 224.0.0.0 through 239.255.255.255. Each Multicast Address specifies a Multicast group to which other hosts can subscribe to. Such a group can have between one and an unlimited number of members as neither hosts nor routers maintain a list of all members. Instead the source host send the packet to an initial router, called the rendezvous point (RP), which serves as the root of a tree-like multicast distribution.
-The most common <a href="https://en.wikipedia.org/wiki/Transport_layer" target="_blank" rel="noopener noreferrer">transport layer</a> protocol to use multicast addressing is <a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" target="_blank" rel="noopener noreferrer">User Datagram Protocol (UDP)</a>.</p>
+The most common <a href="https://en.wikipedia.org/wiki/Transport_layer" rel="external nofollow noopener" target="_blank">transport layer</a> protocol to use multicast addressing is <a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" rel="external nofollow noopener" target="_blank">User Datagram Protocol (UDP)</a>.</p>
 
 <h2 id="multicast-and-aws-transit-gateway">Multicast and AWS Transit Gateway</h2>
 
@@ -457,9 +464,9 @@ The most common <a href="https://en.wikipedia.org/wiki/Transport_layer" target="
 <ul>
   <li>Creation and usage of Multicast-enabled TGW is currently only supported in the AWS Region us-east-1 (N. Virginia).</li>
   <li>You must create a new TGW to enable Multicast. It is not possible to enable Multicast on an existing Transit Gateway. In case you are already using a Transit Gateway, you can create another instance that will just serve the purpose of distributing Multicast traffic (See Figure 2). As neither VPC nor TGW route tables are used to handle multicast traffic, this deployment model will not interfere with your existing traditional TGW or VPC route tables.</li>
-  <li>Self-Management of Multicast group membership by hosts through the <a href="https://en.wikipedia.org/wiki/Internet_Group_Management_Protocol" target="_blank" rel="noopener noreferrer">Internet Group Management Protocol (IGMP)</a> is not yet supported. Instead Multicast group membership is solely managed using Amazon VPC Console or the AWS CLI.</li>
-  <li>Only <a href="https://aws.amazon.com/ec2/nitro/" target="_blank" rel="noopener noreferrer">AWS Nitro</a> instances can be a Multicast source. If you use a non-Nitro instance as a receiver, you must disable the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#change_source_dest_check" target="_blank" rel="noopener noreferrer">Source/Dest check</a>.</li>
-  <li>While the AWS Transit Gateway has a default limit of only supporting <a href="https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-quotas.html#multicast-quota" target="_blank" rel="noopener noreferrer">1x TGW source per group</a>, this limit can be increased.</li>
+  <li>Self-Management of Multicast group membership by hosts through the <a href="https://en.wikipedia.org/wiki/Internet_Group_Management_Protocol" rel="external nofollow noopener" target="_blank">Internet Group Management Protocol (IGMP)</a> is not yet supported. Instead Multicast group membership is solely managed using Amazon VPC Console or the AWS CLI.</li>
+  <li>Only <a href="https://aws.amazon.com/ec2/nitro/" rel="external nofollow noopener" target="_blank">AWS Nitro</a> instances can be a Multicast source. If you use a non-Nitro instance as a receiver, you must disable the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#change_source_dest_check" rel="external nofollow noopener" target="_blank">Source/Dest check</a>.</li>
+  <li>While the AWS Transit Gateway has a default limit of only supporting <a href="https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-quotas.html#multicast-quota" rel="external nofollow noopener" target="_blank">1x TGW source per group</a>, this limit can be increased.</li>
 </ul>
 
 <figure class="webfeedsFeaturedVisual">
@@ -493,13 +500,13 @@ The most common <a href="https://en.wikipedia.org/wiki/Transport_layer" target="
 <h2 id="source-and-receiver-instances">Source and Receiver Instances</h2>
 
 <p>First setup the EC2 instances that we will use in our testing as the Multicast Source and Multicast Receiver. To better understand how Multicast works, you should create at least one Multicast Source and two Multicast Receiver. Also keep the constraint around usage of AWS Nitro instances in mind and select a Nitro-based EC2 instance for the three EC2 instances.
-This blog post will assume use of Ubuntu Linux instances for the EC2 instances and you should install <a href="https://iperf.fr/" target="_blank" rel="noopener noreferrer">iPerf</a> on these instances. On Ubuntu Linux you will do this via <code class="language-plaintext highlighter-rouge">sudo apt get install iperf</code>.</p>
+This blog post will assume use of Ubuntu Linux instances for the EC2 instances and you should install <a href="https://iperf.fr/" rel="external nofollow noopener" target="_blank">iPerf</a> on these instances. On Ubuntu Linux you will do this via <code class="language-plaintext highlighter-rouge">sudo apt get install iperf</code>.</p>
 
-<p>Last, but not least ensure that port UDP 5001 is opened within the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html" target="_blank" rel="noopener noreferrer">security group</a> associated with the Multicast Receiver instances. The source IP will be the IPv4 address of the ENI associated with the Multicast Source EC2 instance.</p>
+<p>Last, but not least ensure that port UDP 5001 is opened within the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html" rel="external nofollow noopener" target="_blank">security group</a> associated with the Multicast Receiver instances. The source IP will be the IPv4 address of the ENI associated with the Multicast Source EC2 instance.</p>
 
 <h2 id="transit-gateway-tgw">Transit Gateway (TGW)</h2>
 
-<p>You can follow the <a href="https://docs.aws.amazon.com/vpc/latest/tgw/working-with-multicast.html" target="_blank" rel="noopener noreferrer">AWS instructions</a> for setting up a Multicast-enabled TGW, along with a multicast domain.
+<p>You can follow the <a href="https://docs.aws.amazon.com/vpc/latest/tgw/working-with-multicast.html" rel="external nofollow noopener" target="_blank">AWS instructions</a> for setting up a Multicast-enabled TGW, along with a multicast domain.
 Next associate any of the VPCs and subnets that will include Multicast Sources and Receivers to this TGW. Multicast Source and Receiver can either be in the same VPC, or in different VPCs. Then associate the individual Multicast Sources and Receiver via their Elastic Network Interface (ENI) with a Multicast Group (See Figure 3).</p>
 
 <figure class="">
@@ -597,7 +604,7 @@ UDP buffer size:  110 KByte (default)
 <strong>TGW Multicast Domain groups:</strong> Make sure that the Multicast group IP address that you are using with iPerf matches the setup in TGW. Also make sure that you specified the correct EC2 instances - via their ENI - as the source and receiver.</li>
 </ul>
 
-<p>If things still don’t work, fire up <a href="https://www.tcpdump.org/" target="_blank" rel="noopener noreferrer">tcpdump</a> on the Source and Receiver side and see what packets you’re seeing.</p>
+<p>If things still don’t work, fire up <a href="https://www.tcpdump.org/" rel="external nofollow noopener" target="_blank">tcpdump</a> on the Source and Receiver side and see what packets you’re seeing.</p>
 
 <h1 id="summary">Summary</h1>
 
@@ -641,22 +648,22 @@ UDP buffer size:  110 KByte (default)
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Multicast%20with%20AWS%20Transit%20Gateway%0Ahttps://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Multicast%20with%20AWS%20Transit%20Gateway%0Ahttps://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Multicast+with+AWS+Transit+Gateway%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Multicast+with+AWS+Transit+Gateway%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F&amp;title=Multicast+with+AWS+Transit+Gateway" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F&amp;title=Multicast+with+AWS+Transit+Gateway" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F&amp;title=Multicast+with+AWS+Transit+Gateway" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F05%2F01%2Ftgw-multicast-intro%2F&amp;title=Multicast+with+AWS+Transit+Gateway" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -684,6 +691,63 @@ UDP buffer size:  110 KByte (default)
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -855,63 +919,6 @@ UDP buffer size:  110 KByte (default)
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -946,15 +953,15 @@ UDP buffer size:  110 KByte (default)
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

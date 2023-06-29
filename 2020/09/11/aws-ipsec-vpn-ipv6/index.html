@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>AWS Site-to-Site VPN (IPSec) with IPv6 - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,13 @@
         </header>
       
 
+      
+
+
+
+
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right sticky">
@@ -402,15 +409,15 @@
             </nav>
           </aside>
         
-        <p>Recently AWS <a href="https://aws.amazon.com/about-aws/whats-new/2020/08/aws-site-to-site-vpn-supports-ipv6-traffic/" target="_blank" rel="noopener noreferrer">released support for IPv6 traffic over the AWS Site-to-Site VPN (IPSec)</a>. The <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html" target="_blank" rel="noopener noreferrer">setup of the AWS Site-to-Site VPN</a> has always been quite straight forward and thanks to the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config" target="_blank" rel="noopener noreferrer">downloadable configuration files</a> at times even trivial.
+        <p>Recently AWS <a href="https://aws.amazon.com/about-aws/whats-new/2020/08/aws-site-to-site-vpn-supports-ipv6-traffic/" rel="external nofollow noopener" target="_blank">released support for IPv6 traffic over the AWS Site-to-Site VPN (IPSec)</a>. The <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html" rel="external nofollow noopener" target="_blank">setup of the AWS Site-to-Site VPN</a> has always been quite straight forward and thanks to the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config" rel="external nofollow noopener" target="_blank">downloadable configuration files</a> at times even trivial.
 With the introduction of IPv6 support this is unfortunately no longer the case. Therefore this blog post will guide you around some of the pitfalls of setting up an AWS Site-to-Site VPN with IPv6 support, hoping that they will eventually be removed and this post become unnecessary.</p>
 
 <h1 id="constraints">Constraints</h1>
 
-<p>A few <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" target="_blank" rel="noopener noreferrer">constraints apply</a> when using AWS Site-to-Site VPN (IPSec) with IPv6:</p>
+<p>A few <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" rel="external nofollow noopener" target="_blank">constraints apply</a> when using AWS Site-to-Site VPN (IPSec) with IPv6:</p>
 <ul>
   <li>The outside tunnel IP addresses - which are the public non-RFC1918 addresses - still only support IPv4. You can only use IPv6 on the inside of the tunnel, in order to carry IPv6 traffic between your on-premises network and AWS.</li>
-  <li>You have to use an <a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway (TGW)</a> as the AWS termination of your VPN. Site-to-Site VPNs to a Virtual Private Gateways (VGW) do not support IPv6.</li>
+  <li>You have to use an <a href="https://aws.amazon.com/transit-gateway/" rel="external nofollow noopener" target="_blank">AWS Transit Gateway (TGW)</a> as the AWS termination of your VPN. Site-to-Site VPNs to a Virtual Private Gateways (VGW) do not support IPv6.</li>
   <li>You cannot retrofit existing Site-to-Site connections with IPv6, but need to create a new connection.</li>
   <li>A Site-to-Site VPN connection can only support IPv4, or IPv6. This means that if you need to carry both IPv4 and IPv6 traffic between AWS and on-premises you need to create two separate connections, one for IPv4 and one for IPv6 (See Figure 1).</li>
 </ul>
@@ -446,7 +453,7 @@ Also note that this means you’ll be paying separately for the tunnel carrying 
 
 <h2 id="aws-setup">AWS Setup</h2>
 
-<p>The <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-create-vpn-connection" target="_blank" rel="noopener noreferrer">creation of a Site-to-Site VPN connection</a> is straight forward and only differs from its IPv4 counterpart by setting the “Tunnel Inside IP version” to IPv6 instead of IPv4 (See Figure 2).</p>
+<p>The <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-create-vpn-connection" rel="external nofollow noopener" target="_blank">creation of a Site-to-Site VPN connection</a> is straight forward and only differs from its IPv4 counterpart by setting the “Tunnel Inside IP version” to IPv6 instead of IPv4 (See Figure 2).</p>
 
 <figure class="">
 
@@ -472,7 +479,7 @@ Also note that this means you’ll be paying separately for the tunnel carrying 
 
 </figure>
 
-<p>The IPv6 enabled Site-to-Site VPN connection also supports defining the IPv6 addresses used within the tunnel yourself. If you want to make use of this capability you have to select a /126 IPv6 subent out of the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">Unique local address</a> address range. This is useful to prevent IP address collisions across multiple tunnels. Although with IPv6 addresses, such a collision is much less likely than with IPv4.</p>
+<p>The IPv6 enabled Site-to-Site VPN connection also supports defining the IPv6 addresses used within the tunnel yourself. If you want to make use of this capability you have to select a /126 IPv6 subent out of the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" rel="external nofollow noopener" target="_blank">Unique local address</a> address range. This is useful to prevent IP address collisions across multiple tunnels. Although with IPv6 addresses, such a collision is much less likely than with IPv4.</p>
 
 <h2 id="customer-side-configuration">Customer-side Configuration</h2>
 
@@ -504,11 +511,11 @@ Also note that this means you’ll be paying separately for the tunnel carrying 
 
 </figure>
 
-<p>You’ll see that for both tunnels “Inside IPv4 CIDRs” from the 169.254.0.0/16 <a href="https://en.wikipedia.org/wiki/Link-local_address" target="_blank" rel="noopener noreferrer">Link-local address</a> range will be shown. As mentioned previously an AWS Site-to-Site connection - and thereby its tunnels - only supports either IPv4 or IPv6. As this is an IPv6 enabled tunnel, the displayed Inner IPv4 CIDRs are irrelevant from a tunnel transport perspective. You can completely ignore them when configuring the tunnel itself.
+<p>You’ll see that for both tunnels “Inside IPv4 CIDRs” from the 169.254.0.0/16 <a href="https://en.wikipedia.org/wiki/Link-local_address" rel="external nofollow noopener" target="_blank">Link-local address</a> range will be shown. As mentioned previously an AWS Site-to-Site connection - and thereby its tunnels - only supports either IPv4 or IPv6. As this is an IPv6 enabled tunnel, the displayed Inner IPv4 CIDRs are irrelevant from a tunnel transport perspective. You can completely ignore them when configuring the tunnel itself.
 The provided information does come in handy with regards to the BGP router ID. In the above case, with Tunnel 1 the AWS side of the BGP session uses the BGP router ID of 169.254.123.<strong>89</strong>. To prevent collisions you should therefore not use the same BGP router ID on your side.</p>
 
-<p>Next you will notice that for the “Inside IPv6 CIDRs” the addresses are provided with a /128 netmask - which is the IPv6 equivalent of /32 and therefore a “host-only” netmask. This netmask therefore only contains a single IP address. Yet the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" target="_blank" rel="noopener noreferrer">documentation clearly calls out</a> that these “Inside IPv6 CIDRs” should be a /126 IPv6 CIDR block, which includes 4 IPv6 addresses. A /126 IPv6 CIDR is the equivalent of a /30 IPv4 CIDR.
-Also the provided IPv6 address from the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">Unique local address</a> address range ends in an odd number and is therefore not a network address, which always end in even numbers.
+<p>Next you will notice that for the “Inside IPv6 CIDRs” the addresses are provided with a /128 netmask - which is the IPv6 equivalent of /32 and therefore a “host-only” netmask. This netmask therefore only contains a single IP address. Yet the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html" rel="external nofollow noopener" target="_blank">documentation clearly calls out</a> that these “Inside IPv6 CIDRs” should be a /126 IPv6 CIDR block, which includes 4 IPv6 addresses. A /126 IPv6 CIDR is the equivalent of a /30 IPv4 CIDR.
+Also the provided IPv6 address from the fd00::/8 <a href="https://en.wikipedia.org/wiki/Unique_local_address" rel="external nofollow noopener" target="_blank">Unique local address</a> address range ends in an odd number and is therefore not a network address, which always end in even numbers.
 Turns out that the displayed IPv6 address is actually the AWS side of the inner connection.</p>
 
 <p>So with the value of “fdbe:1a26:45b0:4631:ca60:3307:371b:631<strong>5</strong>/128” displayed in the provided example, the relevant IPv6 information would be:</p>
@@ -541,7 +548,7 @@ Turns out that the displayed IPv6 address is actually the AWS side of the inner 
 
 <h3 id="configuration-download">Configuration download</h3>
 
-<p>The next challenge you will notice is that when downloading the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config" target="_blank" rel="noopener noreferrer">downloadable configuration files</a> from the AWS Console, it does not include any IPv6 address information. Instead for the inner address it includes IPv4 address information that are irrelevant as already pointed out.</p>
+<p>The next challenge you will notice is that when downloading the <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html#vpn-download-config" rel="external nofollow noopener" target="_blank">downloadable configuration files</a> from the AWS Console, it does not include any IPv6 address information. Instead for the inner address it includes IPv4 address information that are irrelevant as already pointed out.</p>
 
 <p>Nevertheless you can leverage the downloadable configuration file for the Internet Key Exchange (IKE) and IPSec Configuration of your tunnels. These two sections within the file can be used without any changes, unless you diverted with your IKE or IPSec settings from the default values. Because these downloadable configuration files are only baseline examples that assume default values.</p>
 
@@ -680,22 +687,22 @@ B   2600:1A16:807:3A00::/56 [20/100]
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=AWS%20Site-to-Site%20VPN%20(IPSec)%20with%20IPv6%0Ahttps://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=AWS%20Site-to-Site%20VPN%20(IPSec)%20with%20IPv6%0Ahttps://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6%20https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F&amp;title=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F&amp;title=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F&amp;title=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2020%2F09%2F11%2Faws-ipsec-vpn-ipv6%2F&amp;title=AWS+Site-to-Site+VPN+%28IPSec%29+with+IPv6" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -723,6 +730,63 @@ B   2600:1A16:807:3A00::/56 [20/100]
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -894,63 +958,6 @@ B   2600:1A16:807:3A00::/56 [20/100]
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -985,15 +992,15 @@ B   2600:1A16:807:3A00::/56 [20/100]
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

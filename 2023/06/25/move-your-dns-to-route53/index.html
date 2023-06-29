@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+--><html lang="en" class="no-js">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>How to move your DNS to Amazon Route 53 - Edge Cloud</title>
+<meta name="description" content="Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53">
+
+
+  <meta name="author" content="Christian Elsen">
+  
+  <meta property="article:author" content="Christian Elsen">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="How to move your DNS to Amazon Route 53">
+<meta property="og:url" content="https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/">
+
+
+  <meta property="og:description" content="Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/content/uploads/2023/06/title-move-your-dns-to-route53.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-06-25T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Christian Elsen",
+      "url": "https://www.edge-cloud.net/",
+      "sameAs": ["https://www.linkedin.com/in/christianelsen/"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link href="/assets/css/fontawesome/css/all.min.css" rel="stylesheet">
+<noscript><link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.css" as="style">
+<link rel="preload" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css" as="style">
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://adservice.google.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://googleads.g.doubleclick.net">
+<link rel="preconnnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnnect" href="https://adservice.google.com">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt=" On the edge of cloud computing"></a>
+        
+        <a class="site-title" href="/">
+           On the edge of cloud computing
+          
+        </a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://www.edge-cloud.net/">
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://www.edge-cloud.net/" itemprop="url">Christian Elsen</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Technology Generalist</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">About</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+          
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How to move your DNS to Amazon Route 53">
+    <meta itemprop="description" content="Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53">
+    <meta itemprop="datePublished" content="2023-06-25T00:00:00-07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/" class="u-url" itemprop="url">How to move your DNS to Amazon Route 53
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+        </header>
+      
+
+      
+
+
+
+
+
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+<li>
+<a href="#motivation">Motivation</a><ul><li><a href="#why-amazon-route-53">Why Amazon Route 53?</a></li></ul>
+</li>
+<li>
+<a href="#background">Background</a><ul>
+<li><a href="#zone-management-vs-registration-services">Zone Management vs. Registration services</a></li>
+<li><a href="#api-usage">API Usage</a></li>
+</ul>
+</li>
+<li><a href="#initial-setup">Initial setup</a></li>
+<li><a href="#migration-overview">Migration Overview</a></li>
+<li>
+<a href="#move-the-dns-zone">Move the DNS zone</a><ul>
+<li><a href="#disable-dnssec">Disable DNSSEC</a></li>
+<li>
+<a href="#export-the-zone-file">Export the zone file</a><ul><li><a href="#fixing-2048-bit-dkim-records">Fixing 2048-bit DKIM records</a></li></ul>
+</li>
+<li><a href="#create-a-public-hosted-zone-in-route-53">Create a public hosted zone in Route 53</a></li>
+<li>
+<a href="#import-the-zone-file-into-route-53">Import the zone file into Route 53</a><ul><li><a href="#create-and-import-via-route-53-api">Create and import via Route 53 API</a></li></ul>
+</li>
+<li><a href="#test-the-new-zone">Test the new zone</a></li>
+<li><a href="#enable-dnssec-optional">Enable DNSSEC (Optional)</a></li>
+<li><a href="#change-the-nameserver-for-the-zone">Change the nameserver for the zone</a></li>
+</ul>
+</li>
+<li>
+<a href="#move-the-registration-services">Move the registration services</a><ul><li><a href="#use-the-route-53-api">Use the Route 53 API</a></li></ul>
+</li>
+<li><a href="#optimize-dns-records-optional">Optimize DNS records (Optional)</a></li>
+<li><a href="#url-forwarding">URL Forwarding</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>This blog post will walk through the migration steps of the DNS setup for a public zone to <a href="https://aws.amazon.com/route53/" rel="external nofollow noopener" target="_blank">Amazon Route 53</a>. It will include steps for both making Route 53 the DNS service for an existing domain, but also transferring the DNS registration for this domain to Route 53. While it will use Google Domains as the DNS service initially providing the zone and registration service, the steps should be easily transferable to any other DNS provider (e.g. GoDaddy) that you would want to migrate away from.</p>
+
+<p class="notice--info"><strong>Note:</strong> While you can accomplish most of the steps in this guide within about 1 hour, waiting for DNSSEC to be fully disabled will take 2 days. Therefore if you are planning to follow this guide you might want to skip ahead to the “Disable DNSSEC” step now and come back for the rest in a few days.</p>
+
+<h1 id="motivation">Motivation</h1>
+
+<p>Recently Google <a href="https://support.google.com/domains/answer/13689670" rel="external nofollow noopener" target="_blank">announced the shutdown of the Google Domains service</a>. While by now Google is certainly known for <a href="https://killedbygoogle.com/" rel="external nofollow noopener" target="_blank">killing off</a> their services with often very little warning, this move came quite unexpected. Google Domains was certainly not perfect, but it offered technical capabilities - like <a href="https://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions" rel="external nofollow noopener" target="_blank">DNSSEC</a> - often well before other DNS provider, the user interface was simple and functional, and at least initially there weren’t any attempts to up-sell you to useless services. Therefore it was a great service which will certainly be missed.</p>
+
+<p>Google’s lackluster attempt to quickly put together a replacement with <a href="https://cloud.google.com/domains/docs/overview" rel="external nofollow noopener" target="_blank">Google Cloud Domains</a> does not appear very convincing either. With that it is time to move out of Google Domains and find a new home for my domains.</p>
+
+<h2 id="why-amazon-route-53">Why Amazon Route 53?</h2>
+
+<p>Amazon Route 53 provides a good compromise between <a href="https://aws.amazon.com/route53/pricing/" rel="external nofollow noopener" target="_blank">cost</a>, <a href="https://aws.amazon.com/blogs/architecture/a-case-study-in-global-fault-isolation/" rel="external nofollow noopener" target="_blank">resiliency</a>, <a href="https://www.dnsperf.com/#!dns-providers" rel="external nofollow noopener" target="_blank">performance</a>, <a href="https://aws.amazon.com/route53/features/" rel="external nofollow noopener" target="_blank">feature set</a> and ease of use. 
+The cost for a registered domain is well in line with most other providers. With AWS you pay for what you use and as such you will be charged separately for the numbers of zones you use as well as e.g. number of queries your zone receives or whether you use DNSSEC or not. But these cost are very reasonable. 
+Amazon Route 53 is the only AWS service with a <a href="https://aws.amazon.com/route53/sla/" rel="external nofollow noopener" target="_blank">100% uptime SLA</a> on the data plane - meaning responding to DNS queries. And to my knowledge since the service was released in December 2010, this SLA has not been breached. 
+Another huge benefit is the availability of an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/" rel="external nofollow noopener" target="_blank">API</a>, which allows you to programmatically manage almost all components of the domain lifecycle.</p>
+
+<h1 id="background">Background</h1>
+
+<p>First let’s understand what is actually involved when managing a DNS zone. This will help us better understand what steps are necessary to move the management of these components across providers and also what we need to do to move these management components to another provider. For this example I will use the example domain <code class="language-plaintext highlighter-rouge">movetor53.com</code>, where we will change both the zone management and also registration services.</p>
+
+<h2 id="zone-management-vs-registration-services">Zone Management vs. Registration services</h2>
+
+<p>At it’s foundation, DNS allows us to resolve a hostname like <code class="language-plaintext highlighter-rouge">www.movetor53.com</code> into an IP address like <code class="language-plaintext highlighter-rouge">198.51.100.123</code>. This is accomplished by a client - e.g. a browser - using a recursive resolver (See Figure 1). An example for such a recursive resolver is <a href="https://developers.google.com/speed/public-dns/docs/using" rel="external nofollow noopener" target="_blank">Google Public DNS</a>. Simplified speaking the resolver will contact one of the <a href="https://en.wikipedia.org/wiki/Root_name_server" rel="external nofollow noopener" target="_blank">root servers</a> to start the recursion. While the root server doesn’t know the answer for the entire hostname, it does know which top level domain (TLD) servers are responsible for <code class="language-plaintext highlighter-rouge">.com</code> and point the resolver to these servers. Similarly for the next request to one of the TLD servers will it point the resolver towards the authoritative server for <code class="language-plaintext highlighter-rouge">movetor53.com</code>. Finally after contacting the authoritative server for <code class="language-plaintext highlighter-rouge">movetor53.com</code>, will the resolver receive a response for <code class="language-plaintext highlighter-rouge">www.movetor53.com</code>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-dns-components.png" title="Figure 1: Components of a typical DNS setup for a domain, enabling recursive lookups of records. " class="image-popup">
+<picture>
+  <source width="859" height="423" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-dns-components-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-800.webp 800w,  /content/uploads/2023/06/move-your-dns-to-route53-dns-components.webp 859w" sizes="859px"></source>
+  <source width="859" height="423" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-dns-components-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-800.png 800w,  /content/uploads/2023/06/move-your-dns-to-route53-dns-components.png 859w" sizes="859px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-dns-components-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-dns-components.png" class="blur-up lazyautosizes lazyload" width="859" height="423" alt="Figure 1: Components of a typical DNS setup for a domain, enabling recursive lookups of records. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Components of a typical DNS setup for a domain, enabling recursive lookups of records.
+</figcaption>
+
+</figure>
+
+<p>From a DNS management perspective there are two spots that as the owner of <code class="language-plaintext highlighter-rouge">movetor53.com</code> we need to change:</p>
+<ul>
+  <li>
+<strong>DNS Zone Management:</strong> The DNS zone management controls the actual entries in the zone <code class="language-plaintext highlighter-rouge">movetor53.com</code> itself. It includes creating, changing or deleting records like <code class="language-plaintext highlighter-rouge">www</code> or <code class="language-plaintext highlighter-rouge">mail</code>, which can be of different types like <code class="language-plaintext highlighter-rouge">A</code>, <code class="language-plaintext highlighter-rouge">AAAA</code>, <code class="language-plaintext highlighter-rouge">CNAME</code>, <code class="language-plaintext highlighter-rouge">MX</code>, or others. While in the old days you actually had to setup a set of servers running DNS software like <a href="https://www.isc.org/bind/" rel="external nofollow noopener" target="_blank">BIND</a>, with the availability of DNS services like Route 53, you no longer have to worry about this undifferentiated heavy lifting and can focus on the entries itself. In the case of Route 53 you can thereby make use of DNS server distributed across <a href="https://aws.amazon.com/about-aws/global-infrastructure/" rel="external nofollow noopener" target="_blank">400+ Edge Locations</a>.</li>
+  <li>
+<strong>DNS Registration Services</strong> The DNS registration services offer a few main components: 1) Exclusive use of a specific domain name as long as you meet the legal requirements of that particular top level domain, 2) Ability to update the TLD server for that TLD zone with a pointer to the authoritative DNS servers of the domain name, 3) Ability to upload the DNSSEC public key for the specific domain name, to create the chain of trust.</li>
+</ul>
+
+<h2 id="api-usage">API Usage</h2>
+
+<p>While Route 53 offers an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/" rel="external nofollow noopener" target="_blank">API</a> for both the zone management and the registration services, Google Domains does not offer an API. Therefore besides showing the web-console based approach for the migration, I can only show you how to use the API with Route 53. If you are following this walk-through while using another existing DNS provider, you might be able to use this provider’s API to e.g. export the zone file.</p>
+
+<h1 id="initial-setup">Initial setup</h1>
+
+<p>Let’s have a look at our initial DNS setup in Google Domains before we start making changes (See Figure 2). As mentioned above we will be using the domain <code class="language-plaintext highlighter-rouge">movetor53.com</code> for this guide.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-google-domains-zone.png" title="Figure 2: Google Domains DNS information, highlighting the zone name, current zone entries, DNSSEC being enabled and that besides using registration services for this zone, the zone itself is also managed by Google Domains. " class="image-popup">
+<picture>
+  <source width="1123" height="1207" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-960.webp 960w,  /content/uploads/2023/06/move-your-dns-to-route53-google-domains-zone.webp 1123w" sizes="1123px"></source>
+  <source width="1123" height="1207" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-960.png 960w,  /content/uploads/2023/06/move-your-dns-to-route53-google-domains-zone.png 1123w" sizes="1123px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-google-domains-zone-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-google-domains-zone.png" class="blur-up lazyautosizes lazyload" width="1123" height="1207" alt="Figure 2: Google Domains DNS information, highlighting the zone name, current zone entries, DNSSEC being enabled and that besides using registration services for this zone, the zone itself is also managed by Google Domains. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Google Domains DNS information, highlighting the zone name, current zone entries, DNSSEC being enabled and that besides using registration services for this zone, the zone itself is also managed by Google Domains.
+</figcaption>
+
+</figure>
+
+<p>Here we can see a few important facts for the zone <code class="language-plaintext highlighter-rouge">movetor53.com</code>:</p>
+<ul>
+  <li>Both the zone itself as well as the registration services are with Google Domains.</li>
+  <li>DNSSEC is enabled for the zone.</li>
+  <li>We can see some typical zone records, including e.g. MX entries for <a href="https://workspace.google.com/" rel="external nofollow noopener" target="_blank">Google Workspaces</a>, also including <a href="https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail" rel="external nofollow noopener" target="_blank">DKIM</a> public keys. And a CNAME entry for <code class="language-plaintext highlighter-rouge">www.movetor53.com</code> pointing towards a <a href="https://aws.amazon.com/cloudfront/" rel="external nofollow noopener" target="_blank">CloudFront</a> distribution is also present.</li>
+</ul>
+
+<h1 id="migration-overview">Migration Overview</h1>
+
+<p>For the migration we will be looking at three main parts that should be performed in this order:</p>
+<ol>
+  <li>Move the DNS zone</li>
+  <li>Move the registration services</li>
+  <li>Optimize DNS records</li>
+</ol>
+
+<p>Each part has multiple steps.</p>
+
+<p class="notice--info"><strong>Note:</strong> Many DNS provider - including Google Domains - will remove the DNS zone, when you move the registration services for that domain to another provider. Therefore doing the above parts out of order or even skipping the first part would cause an outage!</p>
+
+<h1 id="move-the-dns-zone">Move the DNS zone</h1>
+
+<p>In this first part we will move the DNS zone from Google Domains into a <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/AboutHZWorkingWith.html" rel="external nofollow noopener" target="_blank">Public Hosted Zone</a> on Route 53. Once this part is complete, DNS zone management will be performed in Route 53, while DNS registration services are still with Google Domain.</p>
+
+<h2 id="disable-dnssec">Disable DNSSEC</h2>
+
+<p>Google Domains enabled DNSSEC by default for any supported domains. While there is a technical approach for DNSSEC migrations with the Double-DS KSK rollover method described in <a href="https://datatracker.ietf.org/doc/html/rfc6781#appendix-D" rel="external nofollow noopener" target="_blank">RFC 6781 - Appendix D Alternative Rollover Approach for Cooperating Operators</a>, this approach cannot be used here.
+Therefore first we must disable DNSSEC on our domain by removing any DS or DNSKEY from the TLD zone. Later on, once the zone has been migrated to Route 53, we will enable DNSSEC again.</p>
+
+<p>In Google Domains you disable DNSSEC by selecting <strong>Turn off</strong> in the <em>DNSSEC</em> section under the <em>DNS</em> tab (See Figure 3).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-disable-dnssec.png" title="Figure 3: Disable DNSSEC in the Google Domains portal. " class="image-popup">
+<picture>
+  <source width="1061" height="239" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-960.webp 960w,  /content/uploads/2023/06/move-your-dns-to-route53-disable-dnssec.webp 1061w" sizes="1061px"></source>
+  <source width="1061" height="239" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-960.png 960w,  /content/uploads/2023/06/move-your-dns-to-route53-disable-dnssec.png 1061w" sizes="1061px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-disable-dnssec-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-disable-dnssec.png" class="blur-up lazyautosizes lazyload" width="1061" height="239" alt="Figure 3: Disable DNSSEC in the Google Domains portal. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Disable DNSSEC in the Google Domains portal.
+</figcaption>
+
+</figure>
+
+<p>At this point you have to wait 48h for DNS TTLs to expire and thereby for DNSSEC to be fully disabled. Google Domains will show the date and time by when this will be the case (See Figure 4).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-wait-dnssec-disabled.png" title="Figure 4: Wait for DNSSEC to be fully disabled, two days after it was disabled. " class="image-popup">
+<picture>
+  <source width="1055" height="100" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-960.webp 960w,  /content/uploads/2023/06/move-your-dns-to-route53-wait-dnssec-disabled.webp 1055w" sizes="1055px"></source>
+  <source width="1055" height="100" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-960.png 960w,  /content/uploads/2023/06/move-your-dns-to-route53-wait-dnssec-disabled.png 1055w" sizes="1055px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-wait-dnssec-disabled-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-wait-dnssec-disabled.png" class="blur-up lazyautosizes lazyload" width="1055" height="100" alt="Figure 4: Wait for DNSSEC to be fully disabled, two days after it was disabled. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 4: Wait for DNSSEC to be fully disabled, two days after it was disabled.
+</figcaption>
+
+</figure>
+
+<p>While you can continue with the next few steps, we will have to wait for DNSSEC to be fully disable before we can change the nameserver for the zone (final step of this part).
+There is no way to speed up this wait time and if you choose not to wait you will risk an outage of DNS resolution for your domain.</p>
+
+<h2 id="export-the-zone-file">Export the zone file</h2>
+
+<p>Next we want to export the current zone file in a format that we can later import into Route 53. The standard format to exchange such zone files is the <a href="https://en.wikipedia.org/wiki/Zone_file" rel="external nofollow noopener" target="_blank">BIND format</a>. Therefore most DNS provider offer some kind of capability to export the current zone file within this format. 
+For Google Domains this process is very straight forward: Within the <em>Resource records</em>  section on the <em>DNS</em> tab, select <strong>Export DNS records</strong> and select <strong>Export to BIND</strong> on the next popup (See Figure 5).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-export-to-bind.png" title="Figure 5: Export a zone file from Google Domains in BIND format. " class="image-popup">
+<picture>
+  <source width="1060" height="361" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-960.webp 960w,  /content/uploads/2023/06/move-your-dns-to-route53-export-to-bind.webp 1060w" sizes="1060px"></source>
+  <source width="1060" height="361" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-export-to-bind-960.png 960w,  /content/uploads/2023/06/move-your-dns-to-route53-export-to-bind.png 1060w" sizes="1060px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-export-to-bind-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-export-to-bind.png" class="blur-up lazyautosizes lazyload" width="1060" height="361" alt="Figure 5: Export a zone file from Google Domains in BIND format. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 5: Export a zone file from Google Domains in BIND format.
+</figcaption>
+
+</figure>
+
+<p>That’s it! The browser will now download the resulting zone file in BIND format. Once you open it with your favorite text editor you’ll see a result similar to the one below for our zone <code class="language-plaintext highlighter-rouge">movetor53.com</code>. Each line represents one DNS record and will be imported as such.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>; A BIND file is a .TXT file that's used to export
+; DNS records from one domain to another. BIND
+; files are commonly used by lots of domain
+; registrars, so they're a good choice if
+; you're exporting resource records to a domain
+; that's managed by a different registrar.
+
+movetor53.com. 3600 IN MX 1 aspmx.l.google.com.
+movetor53.com. 3600 IN MX 5 alt1.aspmx.l.google.com.
+movetor53.com. 3600 IN MX 5 alt2.aspmx.l.google.com.
+movetor53.com. 3600 IN MX 10 alt3.aspmx.l.google.com.
+movetor53.com. 3600 IN MX 10 alt4.aspmx.l.google.com.
+movetor53.com. 3600 IN TXT "v=spf1 include:_spf.google.com -all"
+_6bf42c523881808e49a6153e5c63ba6b.movetor53.com. 3600 IN CNAME _d2f51270e8809df9671385766662cf2e.fpwkmzyskh.acm-validations.aws.
+_dmarc.movetor53.com. 3600 IN TXT "v=DMARC1;p=reject;rua=mailto:rua@example.com;ruf=mailto:ruf@example.com;fo=1"
+google._domainkey.movetor53.com. 3600 IN TXT "k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAraC3pqvqTkAfXhUn7Kn3JUNMwDkZ65ftwXH58anno/bElnTDAd/idk8kWpslrQIMsvVKAe+mvmBEnpXzJL+0LgTNVTQctUujyilWvcONRd/z37I34y6WUIbFn4ytkzkdoVmeTt32f5LxegfYP4P/w7QGN1mOcnE2Qd5SKIZv3Ia1p9d6uCaVGI8brE/7zM5c/zMthVPE2W" "ZKA28+QomQDH7ludLGhXGxpc7kZZCoB5lQiP0o07Ful33fcED73BS9Bt1SNhnrs5v7oq1pIab0LEtHsFHAZmGJDjybPA7OWWaV3L814r/JfU2NK1eNu9xYJwA8YW7WosL45CSkyp4QeQIDAQAB"
+www.movetor53.com. 3600 IN CNAME dgwkbb1gumfgi.cloudfront.net.
+movetor53.com. 3600 IN A 216.239.32.21
+movetor53.com. 3600 IN A 216.239.34.21
+movetor53.com. 3600 IN A 216.239.36.21
+movetor53.com. 3600 IN A 216.239.38.21
+movetor53.com. 3600 IN AAAA 2001:4860:4802:32::15
+movetor53.com. 3600 IN AAAA 2001:4860:4802:34::15
+movetor53.com. 3600 IN AAAA 2001:4860:4802:36::15
+movetor53.com. 3600 IN AAAA 2001:4860:4802:38::15
+
+</code></pre></div></div>
+
+<h3 id="fixing-2048-bit-dkim-records">Fixing 2048-bit DKIM records</h3>
+<p>There is one little catch that we need to take care of before we can import this zone file into Route 53 and it’s related to DKIM public key records for Google Workspaces. By default Google Workspaces uses 2048-bit DKIM keys, which you can’t enter as a single text string in a DNS record with a 255-character limit. Although Google provides <a href="https://support.google.com/a/answer/11613097?hl=en" rel="external nofollow noopener" target="_blank">guidance</a> on how to deal with these keys, that guidance is not very clear and the provided example is actually wrong. 
+In addition the Route 53 Console doesn’t like the way these 2048-bit DKIM records were exported and ignores them. But there is a very quick and easy fix to it.</p>
+
+<p>If you use the Route 53 API to import the zone file in BIND format (See below), this correction is not necessary. Also if you are not using any 2048-bit DKIM keys or other records longer than 255 characters, there is no correction necessary.</p>
+
+<p>You’ll notice a line for the 2048-bit DKIM record in the format of <code class="language-plaintext highlighter-rouge">google._domainkey.movetor53.com. 3600 IN TXT "k=rsa; p=&lt;long string&gt;" "&lt;another long string&gt;"</code>. The problem here is the whitespace between the two quotation marks (“). Just remove that whitespace to make it look like this: <code class="language-plaintext highlighter-rouge">google._domainkey.movetor53.com. 3600 IN TXT "k=rsa; p=&lt;long string&gt;""&lt;another long string&gt;"</code>.</p>
+
+<p>The final result should look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+google._domainkey.movetor53.com. 3600 IN TXT "k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAraC3pqvqTkAfXhUn7Kn3JUNMwDkZ65ftwXH58anno/bElnTDAd/idk8kWpslrQIMsvVKAe+mvmBEnpXzJL+0LgTNVTQctUujyilWvcONRd/z37I34y6WUIbFn4ytkzkdoVmeTt32f5LxegfYP4P/w7QGN1mOcnE2Qd5SKIZv3Ia1p9d6uCaVGI8brE/7zM5c/zMthVPE2W""ZKA28+QomQDH7ludLGhXGxpc7kZZCoB5lQiP0o07Ful33fcED73BS9Bt1SNhnrs5v7oq1pIab0LEtHsFHAZmGJDjybPA7OWWaV3L814r/JfU2NK1eNu9xYJwA8YW7WosL45CSkyp4QeQIDAQAB"
+...
+</code></pre></div></div>
+
+<h2 id="create-a-public-hosted-zone-in-route-53">Create a public hosted zone in Route 53</h2>
+
+<p>Next we need to <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html" rel="external nofollow noopener" target="_blank">create a new public hosted zone in Route 53</a> for our domain <code class="language-plaintext highlighter-rouge">movetor53.com</code>. Head over to the <a href="https://console.aws.amazon.com/route53/" rel="external nofollow noopener" target="_blank">Route 53 console</a> within the AWS Management Console and select <strong>Hosted Zones</strong> from the navigation pane.</p>
+<ul>
+  <li>Choose <strong>Create hosted zone</strong>. In the <em>Create Hosted Zone pane</em>, enter the name of the domain that you want to route traffic for. In our case it is <code class="language-plaintext highlighter-rouge">movetor53.com</code>. You can also optionally enter a comment.</li>
+  <li>For <em>Type</em>, accept the default value of <strong>Public Hosted Zone</strong> and choose <strong>Create</strong>.</li>
+</ul>
+
+<p>Once the zone has been created you’ll automatically be placed inside this new Public Hosted zone. At this point you will only see the NS record with the four Route 53 nameservers as well as the SOA record (See Figure 6).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-new-zone.png" title="Figure 6: Empty Public Hosted Zone in Route 53 with SOA and NS records. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-new-zone-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-new-zone-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-new-zone-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-new-zone-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-new-zone-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-new-zone-960.webp 960w, " sizes="1296px"></source>
+  <source data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-new-zone-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-new-zone-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-new-zone-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-new-zone-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-new-zone-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-new-zone-960.png 960w, " sizes="1296px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-new-zone-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-new-zone.png" class="blur-up lazyautosizes lazyload" alt="Figure 6: Empty Public Hosted Zone in Route 53 with SOA and NS records. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 6: Empty Public Hosted Zone in Route 53 with SOA and NS records.
+</figcaption>
+
+</figure>
+
+<h2 id="import-the-zone-file-into-route-53">Import the zone file into Route 53</h2>
+
+<p>You are ready to import the corrected zone file in BIND format into Route 53. For this select <strong>Import zone file</strong> within the <em>Records</em> pane of the public hosted zone in the Route 53 console. Next copy and paste the entries from the zone file in BIND format into the window that opens (See Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-import-zone.png" title="Figure 7: Import a BIND zone file into Route 53. Make sure you have fixed entries that are longer than 255 character, like DKIM public certificates. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-import-zone-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-import-zone-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-import-zone-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-import-zone-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-import-zone-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-import-zone-960.webp 960w, " sizes="1584px"></source>
+  <source data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-import-zone-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-import-zone-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-import-zone-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-import-zone-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-import-zone-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-import-zone-960.png 960w, " sizes="1584px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-import-zone-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-import-zone.png" class="blur-up lazyautosizes lazyload" alt="Figure 7: Import a BIND zone file into Route 53. Make sure you have fixed entries that are longer than 255 character, like DKIM public certificates. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Import a BIND zone file into Route 53. Make sure you have fixed entries that are longer than 255 character, like DKIM public certificates.
+</figcaption>
+
+</figure>
+
+<p>You will see all records that Route 53 was able to identify within the zone file displayed. If you correctly fixed the entry for the 2048-bit DKIM record, by removing the white space, you will also see the corresponding TXT record type entry (See highlighted in red in Figure 7).</p>
+
+<p>Once everything looks good, click on <strong>Import</strong> and Route 53 will create all the records into our public hosted zone (See Figure 8).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-r53-zone.png" title="Figure 8: The new public hosted zone with the imported records. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-r53-zone-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-r53-zone-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-r53-zone-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-r53-zone-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-r53-zone-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-r53-zone-960.webp 960w, " sizes="1281px"></source>
+  <source data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-r53-zone-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-r53-zone-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-r53-zone-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-r53-zone-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-r53-zone-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-r53-zone-960.png 960w, " sizes="1281px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-r53-zone-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-r53-zone.png" class="blur-up lazyautosizes lazyload" alt="Figure 8: The new public hosted zone with the imported records. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 8: The new public hosted zone with the imported records.
+</figcaption>
+
+</figure>
+
+<p>After a few seconds our zone is ready and can serve traffic via the Route 53 authoritative name servers. But at this point nobody other than us knows yet about this new zone on a different authoritative name server.</p>
+
+<h3 id="create-and-import-via-route-53-api">Create and import via Route 53 API</h3>
+
+<p>If you prefer using the Route 53 API - e.g. because you want to do this process for hundreds of domains - you can look at the very valuable open source command line tool for Amazon Route 53, called “<a href="https://github.com/barnybug/cli53" rel="external nofollow noopener" target="_blank">cli53</a>”. You can even run it without any issues within <a href="https://aws.amazon.com/cloudshell/" rel="external nofollow noopener" target="_blank">AWS CloudShell</a>. Just download the latest <a href="https://github.com/barnybug/cli53/releases" rel="external nofollow noopener" target="_blank">release</a> for amd64, make it executable and you’re ready to run it. If you are using AWS CloudShell you can quickly and easily upload the zone file in BIND format via <strong>Action -&gt; Upload file</strong>. Also, when running cli53 in AWS CloudShell, AWS credentials don’t need to be configured.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-23-45 ~]$ wget -q https://github.com/barnybug/cli53/releases/download/0.8.22/cli53-linux-amd64
+[cloudshell-user@ip-10-1-23-45 ~]$ chmod +x cli53-linux-amd64
+[cloudshell-user@ip-10-1-23-45 ~]$ ./cli53-linux-amd64 -v
+cli53 version 0.8.22 
+</code></pre></div></div>
+
+<p>If you are moving multiple zones, you want to make use of a <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-concepts.html#route-53-concepts-reusable-delegation-set" rel="external nofollow noopener" target="_blank">reusable delegation set</a> within Route 53. By default, Route 53 assigns a random selection of name servers to each new hosted zone. To make it easier to migrate DNS service to Route 53 for a large number of domains, you can create a reusable delegation set and then associate the reusable delegation set with new hosted zones. Therefore all migrated zones will have the same set of four Route 53 authoritative name servers.</p>
+
+<p>To create a new reusable delegation set with cli53, use the command <code class="language-plaintext highlighter-rouge">cli53 dscreate</code>. Afterwards you can specify the delegation set ID when creating a new public hosted zone with <code class="language-plaintext highlighter-rouge">cli53 create --delegation-set-id &lt;delegation set id&gt; movetor52.com</code>.</p>
+
+<p>Here is how this will look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-2-169-87 ~]$ ./cli53-linux-amd64 dscreate
+Created reusable delegation set ID: '/delegationset/N12345678ABCDEFGH1IJK'
+Nameserver: ns-1990.awsdns-56.co.uk
+Nameserver: ns-118.awsdns-14.com
+Nameserver: ns-551.awsdns-04.net
+Nameserver: ns-1366.awsdns-42.org
+[cloudshell-user@ip-10-2-169-87 ~]$ ./cli53-linux-amd64 create --delegation-set-id N12345678ABCDEFGH1IJK movetor52.com
+Created zone: 'movetor52.com.' ID: '/hostedzone/Z12345678ABC9DEF0GH12'
+</code></pre></div></div>
+
+<p>For subsequent domains you would then re-use the same delegation set via <code class="language-plaintext highlighter-rouge">--delegation-set-id N12345678ABCDEFGH1IJK</code> and receive the same set of Route 53 authoritative name servers for the zones.</p>
+
+<p>To import the zone file in BIND format with cli53, use the parameter <code class="language-plaintext highlighter-rouge">cli53 import --file movetor53.com.zone movetor53.com</code>.</p>
+
+<p>The final result will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-23-45 ~]$ ./cli53-linux-amd64 import --file movetor53.com.zone movetor53.com 
+18 records imported (8 changes / 8 additions / 0 deletions) 
+[cloudshell-user@ip-10-1-23-45 ~]$
+</code></pre></div></div>
+
+<h2 id="test-the-new-zone">Test the new zone</h2>
+
+<p>This is the perfect moment to test whether the Route 53 authoritative name servers will respond to DNS queries for the zone <code class="language-plaintext highlighter-rouge">movetor53.com</code> in the way that we expect it. A very quick and easy approach to do so is to use the tool <code class="language-plaintext highlighter-rouge">dig</code> or a <a href="https://www.digwebinterface.com/?hostnames=google._domainkey.movetor53.com&amp;type=TXT&amp;ns=self&amp;nameservers=ns-431.awsdns-53.com" rel="external nofollow noopener" target="_blank">corresponding online service</a>.</p>
+
+<p>If we e.g. want to check whether the above mentioned DKIM record is available in our Route 53 Public hosted zone, we can query one of the Route 53 authoritative name servers for our zone directly:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ dig +short TXT google._domainkey.movetor53.com @ns-431.awsdns-53.com
+"k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAraC3pqvqTkAfXhUn7Kn3JUNMwDkZ65ftwXH58anno/bElnTDAd/idk8kWpslrQIMsvVKAe+mvmBEnpXzJL+0LgTNVTQctUujyilWvcONRd/z37I34y6WUIbFn4ytkzkdoVmeTt32f5LxegfYP4P/w7QGN1mOcnE2Qd5SKIZv3Ia1p9d6uCaVGI8brE/7zM5c/zMthVPE2W" "ZKA28+QomQDH7ludLGhXGxpc7kZZCoB5lQiP0o07Ful33fcED73BS9Bt1SNhnrs5v7oq1pIab0LEtHsFHAZmGJDjybPA7OWWaV3L814r/JfU2NK1eNu9xYJwA8YW7WosL45CSkyp4QeQIDAQAB"
+</code></pre></div></div>
+<p>The nameserver specified via <code class="language-plaintext highlighter-rouge">@</code> is one of the four authoritative Route 53 name servers for our zone that is listed in the NS record. We can see that Route 53 does deliver a response and that it matches the value from our BIND file.</p>
+
+<p>But this approach is very cumbersome, especially if you want to do this for all records in a large BIND zone file. And also comparing the responses - e.g. a long DKIM key - is not very convenient.</p>
+
+<p>Instead have a look at the tool <a href="https://github.com/chriselsen/dns_compare" rel="external nofollow noopener" target="_blank">dns_compare</a>, which automates this task for you. You can either run it locally under Linux or use <a href="https://aws.amazon.com/cloudshell/" rel="external nofollow noopener" target="_blank">AWS CloudShell</a> instead. If you are using AWS CloudShell you can quickly and easily upload our zone file in BIND format via <strong>Action -&gt; Upload file</strong>.</p>
+
+<p>Once you have <em>dns_compare</em> installed, run it while pointing to the local zone file in BIND format and one of the four authoritative Route 53 name servers for the zone.</p>
+
+<p>If everything was imported correctly, <em>dns_compare</em> will report zero mis-matches:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ dns_compare --zone movetor53.com --file movetor53.com.zone --server ns-431.awsdns-53.com
+........done
+
+Results:
+Matches:        8
+Mis-matches:    0
+</code></pre></div></div>
+
+<p>In case you e.g. forgot to fix the entry for the 2048-bit DKIM record and it wasn’t imported, the tool will inform you about this mismatch.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu@ubuntu:~$ dns_compare --zone movetor53.com --file movetor53.com.zone --server ns-431.awsdns-53.com
+......X
+(MIS-MATCH) query: google._domainkey.movetor53.com.
+Expected:  3600 IN TXT "k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAraC3pqvqTkAfXhUn7Kn3JUNMwDkZ65ftwXH58anno/bElnTDAd/idk8kWpslrQIMsvVKAe+mvmBEnpXzJL+0LgTNVTQctUujyilWvcONRd/z37I34y6WUIbFn4ytkzkdoVmeTt32f5LxegfYP4P/w7QGN1mOcnE2Qd5SKIZv3Ia1p9d6uCaVGI8brE/7zM5c/zMthVPE2W" "ZKA28+QomQDH7ludLGhXGxpc7kZZCoB5lQiP0o07Ful33fcED73BS9Bt1SNhnrs5v7oq1pIab0LEtHsFHAZmGJDjybPA7OWWaV3L814r/JfU2NK1eNu9xYJwA8YW7WosL45CSkyp4QeQIDAQAB"
+Received:  None
+.done
+
+Results:
+Matches:        7
+Mis-matches:    1
+</code></pre></div></div>
+
+<p>While Route 53 <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html" rel="external nofollow noopener" target="_blank">supports a lot of DNS record types</a>, some newer and not frequently used types are not supported yet. Google Domains does already support some of these record types, which are namely: <a href="https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-svcb-https-12" rel="external nofollow noopener" target="_blank">HTTPS</a>, <a href="https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-svcb-https-12" rel="external nofollow noopener" target="_blank">SVCB</a>, <a href="https://datatracker.ietf.org/doc/html/rfc4255" rel="external nofollow noopener" target="_blank">SSHFP</a>, and <a href="https://www.rfc-editor.org/rfc/rfc6698" rel="external nofollow noopener" target="_blank">TLSA</a>. If you see mis-matches involving these record types, you’ll have to forgo using these entries.</p>
+
+<p>Once you have confirmed no other mis-matches exist between the exported zone file and the new Route 53 Public Hosted Zone, we are ready to let the world know about these new Route 53 authoritative name servers.</p>
+
+<h2 id="enable-dnssec-optional">Enable DNSSEC (Optional)</h2>
+
+<p>While enabling DNSSEC again is completely optional, it is highly recommended due to the benefits that DNSSEC brings to the table. And while using DNSSEC with Route 53 incurs an extra cost of US$ 1 / month for storing the AWS Key Management Service (AWS KMS) customer managed key (CMK) for the DNSSEC Key-signing key (KSK), that CMK can be shared across multiple zones to reduce cost.</p>
+
+<p>Also you’ll notice that the complexity and overhead for enabling and using DNSSEC is quite low with Route 53, as almost everything is done for you.</p>
+
+<p>To <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec-enable-signing.html#dns-configuring-dnssec-enable" rel="external nofollow noopener" target="_blank">enable DNSSEC</a> on our zone, head over to the <em>DNSSEC signing</em> tab within the Public Hosted Zone and choose <strong>Enable DNSSEC signing</strong>.</p>
+
+<ul>
+  <li>In the <em>Key-signing key (KSK) creation</em> section, enter a name for the KSK that Route 53 will create into the <em>Provide KSK name</em> field.</li>
+  <li>Under <em>Customer managed CMK in AWS KMS</em>, choose the customer managed key for Route 53 to use when it creates the KSK for you. You can use an existing customer managed key that applies to DNSSEC signing, or create a new customer managed key. You can re-use the same customer managed CMK for multiple DNS zones in Route 53. 
+Once complete click on <strong>Create KSK and enable signing</strong>.</li>
+</ul>
+
+<p>Next we need to lookup the information to establish the chain of trust. Within the <em>DNSSEC signing</em> tab select <strong>View information to create DS record</strong> and expand the <em>Establish a chain of trust</em> block (See Figure 9).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-lookup-dnssec.png" title="Figure 9: Lookup the new DNSSEC values to be placed into the registration services. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-960.webp 960w, " sizes="1358px"></source>
+  <source data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-960.png 960w, " sizes="1358px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-lookup-dnssec-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-lookup-dnssec.png" class="blur-up lazyautosizes lazyload" alt="Figure 9: Lookup the new DNSSEC values to be placed into the registration services. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 9: Lookup the new DNSSEC values to be placed into the registration services.
+</figcaption>
+
+</figure>
+
+<p>Out of the many displayed values we will only need four of them for the case of Google Domain:</p>
+<ul>
+  <li>Field 1: Key Tag</li>
+  <li>Field 2: Algorithm (aka “Signing algorithm type”)</li>
+  <li>Field 3: Digest Type (aka “Digest algorithm type”)</li>
+  <li>Field 4: Digest</li>
+</ul>
+
+<h2 id="change-the-nameserver-for-the-zone">Change the nameserver for the zone</h2>
+
+<p>We are almost done with moving the DNS zone for <code class="language-plaintext highlighter-rouge">movetor53.com</code>. As a last step we need to update the nameserver for that zone within the TLD severs for <code class="language-plaintext highlighter-rouge">.COM</code>.</p>
+
+<p>Make sure to only commence with this step after the 48 hours for disabling DNSSEC in Google Domains have completed (See above).</p>
+
+<p>Within the Route 53 Console lookup the nameservers for the newly created Public Hosted Zone. You will find these four nameservers in the <em>Hosted zone details</em> section (See Figure 10).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-lookup-ns.png" title="Figure 10: Lookup the new nameserver values to be placed into the registration services. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-960.webp 960w, " sizes="1333px"></source>
+  <source data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-lookup-ns-960.png 960w, " sizes="1333px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-lookup-ns-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-lookup-ns.png" class="blur-up lazyautosizes lazyload" alt="Figure 10: Lookup the new nameserver values to be placed into the registration services. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 10: Lookup the new nameserver values to be placed into the registration services.
+</figcaption>
+
+</figure>
+
+<p>Next, head back to Google Domains to change the nameservers for the zone.</p>
+
+<p>Under the <em>DNS</em> tab  select <em>*Custom name servers</em>  to start the setup. Enter the following data (See Figure 11):</p>
+<ul>
+  <li>
+<strong>Name servers:</strong> Within the <em>Name servers</em> section enter the four nameserver that correspond to the newly created Route 53 Public hosted zone.</li>
+  <li>
+<strong>DNSSEC (Optional):</strong> If you want to use DNSSEC, enter the DNSSEC details to establish the chain of trust. You have looked up the corresponding data for the fields <em>Key Tag</em>, <em>Algorithm</em>, <em>Digest Type</em>, and <em>Digest</em> in the previous step.</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-custom-ns-setup.png" title="Figure 11: Update your registration services through a “Customer name server” setup. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-960.webp 960w, " sizes="1368px"></source>
+  <source data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-960.png 960w, " sizes="1368px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-custom-ns-setup-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-custom-ns-setup.png" class="blur-up lazyautosizes lazyload" alt="Figure 11: Update your registration services through a “Customer name server” setup. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 11: Update your registration services through a “Customer name server” setup.
+</figcaption>
+
+</figure>
+
+<p>Once complete, select <strong>Save</strong> for both sections.</p>
+
+<p>At this point it will take up to 48 hours for the zone of the domain to be fully moved from Google Domains to Route 53. During this time you should not make any changes to the records in the zone. Unfortunately Google Domains does not offer you the capability to reduce the TTL for NS records and thereby speed up this migration window.</p>
+
+<h1 id="move-the-registration-services">Move the registration services</h1>
+
+<p>While the zone is being fully moved from Google Domains to Route 53 we can already start moving the registration services from Google Domains to Route 53 as well.</p>
+
+<p>To do so we start in Google Domains on the <em>Registration Settings</em> tab of the domain. In the <em>Domain registration</em>  section:</p>
+<ul>
+  <li>Under <em>Domain lock</em>  make sure your domain is unlocked.</li>
+  <li>To the right of <em>Transfer out</em> click <strong>Get auth code</strong>. Select <strong>To a different domain registrar</strong> and click <strong>Continue</strong>.
+Copy the authorization code. We will use it very shortly.</li>
+</ul>
+
+<p>Head over to the <a href="https://console.aws.amazon.com/route53/domains/" rel="external nofollow noopener" target="_blank">Route 53 Domain Registrar Console</a> within the AWS Console.</p>
+<ul>
+  <li>Select <strong>Transfer in -&gt; Single domain</strong>.</li>
+  <li>Enter the domain name to transfer and click on <strong>Check</strong>.</li>
+</ul>
+
+<p>On the next page you’ll see if the domain can be transferred (See Figure 12).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-registrar-start.png" title="Figure 12: Domain Transfer Availability. " class="image-popup">
+<picture>
+  <source width="1108" height="866" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-registrar-start-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-registrar-start-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-registrar-start-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-registrar-start-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-registrar-start-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-registrar-start-960.webp 960w,  /content/uploads/2023/06/move-your-dns-to-route53-registrar-start.webp 1108w" sizes="1108px"></source>
+  <source width="1108" height="866" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-registrar-start-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-registrar-start-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-registrar-start-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-registrar-start-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-registrar-start-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-registrar-start-960.png 960w,  /content/uploads/2023/06/move-your-dns-to-route53-registrar-start.png 1108w" sizes="1108px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-registrar-start-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-registrar-start.png" class="blur-up lazyautosizes lazyload" width="1108" height="866" alt="Figure 12: Domain Transfer Availability. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 12: Domain Transfer Availability.
+</figcaption>
+
+</figure>
+
+<p>If the domain can be transferred, select <strong>I verify that these steps have been completed and I am ready to transfer in the selected domain.</strong> to get started with the transfer process.</p>
+
+<p class="notice--info"><strong>Note:</strong> The Route 53 Domain Transfer process will <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html#domain-transfer-to-route-53-change-registrar-settings-dnssec" rel="external nofollow noopener" target="_blank">ask you to turn off DNSSEC</a> for the domain to be transferred. We can safely ignore this in this scenario here as the nameserver and DNSSEC keys have already been updated to the new Route 53 Public Hosted Zone.</p>
+
+<p>Fill out the subsequent fields, which will ask for the authorization code, or <em>Auth Code</em> that you generated in Google Domains, but also your contact details. Furthermore you should notice that you do not need to update the nameservers during this process, as Route 53 nameservers are already being used for this domain.</p>
+
+<p>Once you have completed all forms and reviewed the entered information, you can select <strong>Submit request</strong>.</p>
+
+<p>After several minutes you will receive an Email from Google Domains asking to either cancel of approve the Transfer (See Figure 13). Click on the link in the Email and select <strong>Approve</strong>.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer.png" title="Figure 13: Email notification about transferring a domain out from Google Domains. " class="image-popup">
+<picture>
+  <source width="665" height="748" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer-512.webp 512w,  /content/uploads/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer.webp 665w" sizes="665px"></source>
+  <source width="665" height="748" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer-512.png 512w,  /content/uploads/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer.png 665w" sizes="665px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-googledomains-cancelapprovetransfer.png" class="blur-up lazyautosizes lazyload" width="665" height="748" alt="Figure 13: Email notification about transferring a domain out from Google Domains. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 13: Email notification about transferring a domain out from Google Domains.
+</figcaption>
+
+</figure>
+
+<p>After several minutes the Transfer will complete and you will receive a notification from Route 53 about the completion. After a few hours the migrated domain will disappear in the Google Domains portal. Congratulations! At this point all your DNS management needs are done via Route 53.</p>
+
+<h2 id="use-the-route-53-api">Use the Route 53 API</h2>
+
+<p>While cli53 does not support Route 53’s registration services, you can use the <a href="https://docs.aws.amazon.com/cli/latest/reference/route53domains/transfer-domain.html" rel="external nofollow noopener" target="_blank">AWS CLI</a> to move a domain. This is especially useful if you want to move many domains. And as with the previous API examples you can even run it without any issues within <a href="https://aws.amazon.com/cloudshell/" rel="external nofollow noopener" target="_blank">AWS CloudShell</a>.</p>
+
+<p>Usually when migrating many domains the contact details for these domains remain the same and only the domain name and authentication code changes. With that in mind we will split the part that remains the same from what changes.</p>
+
+<p>Everything that remains the same will go into a JSON file - let’s call it <em>r53-domain-registrar.json</em> - and looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "DurationInYears": 1,
+    "AutoRenew": true,
+    "AdminContact": {
+        "FirstName": "Martha",
+        "LastName": "Rivera",
+        "ContactType": "PERSON",
+        "OrganizationName": "Example",
+        "AddressLine1": "1 Main Street",
+        "City": "Anytown",
+        "State": "WA",
+        "CountryCode": "US",
+        "ZipCode": "98101",
+        "PhoneNumber": "+1.8005551212",
+        "Email": "mrivera@example.com"
+    },
+    "RegistrantContact": {
+        "FirstName": "Li",
+        "LastName": "Juan",
+        "ContactType": "PERSON",
+        "OrganizationName": "Example",
+        "AddressLine1": "1 Main Street",
+        "City": "Anytown",
+        "State": "WA",
+        "CountryCode": "US",
+        "ZipCode": "98101",
+        "PhoneNumber": "+1.8005551212",
+        "Email": "ljuan@example.com"
+    },
+    "TechContact": {
+        "FirstName": "Mateo",
+        "LastName": "Jackson",
+        "ContactType": "PERSON",
+        "OrganizationName": "Example",
+        "AddressLine1": "1 Main Street",
+        "City": "Anytown",
+        "State": "WA",
+        "CountryCode": "US",
+        "ZipCode": "98101",
+        "PhoneNumber": "+1.8005551212",
+        "Email": "mjackson@example.com"
+    },
+    "PrivacyProtectAdminContact": true,
+    "PrivacyProtectRegistrantContact": true,
+    "PrivacyProtectTechContact": true
+}
+</code></pre></div></div>
+
+<p>Afterwards we will use the AWS CLI command <code class="language-plaintext highlighter-rouge">aws route53domains transfer-domain</code> to pass this file along with the parameters that need to be adapted for each domain, which is namely the domain name and the “Auth Code”.</p>
+
+<p>Using AWS CloudShell as an example again, result will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cloudshell-user@ip-10-1-23-45 ~]$ aws route53domains transfer-domain --region us-east-1 --domain-name movetor53.com --auth-code ")o!v3dJeXampLe" --cli-input-json file://r53-domain-registrar.json 
+{
+    "OperationId": "a012ab3c-d45e-67f9-gh01-i23j4k567lm8"
+}
+</code></pre></div></div>
+
+<p>Note that even if you are running this AWS CLI command on a Linux-based machine - like AWS CloudShell - you have to specify the file via the <em>file://filename</em> format.</p>
+
+<p>This way we could write a quick shell script that iterates through a list of domain names and “Auth Codes”, calling the above AWS CLI command for each of them.</p>
+
+<h1 id="optimize-dns-records-optional">Optimize DNS records (Optional)</h1>
+
+<p>As a final optional step we should optimize certain records in the Route 53 Public Hosted Zone by making use of <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html" rel="external nofollow noopener" target="_blank">alias records</a>.</p>
+
+<p>Route 53 alias records are a Route 53–specific extension to DNS functionality. Alias records let you route traffic to selected AWS resources, such as CloudFront distributions or Amazon S3 buckets. They also let you route traffic from one record in a hosted zone to another record.
+Unlike a CNAME record, you can create an alias record at the top node of a DNS namespace, also known as the zone apex. For example, here in our example the zone apex is <code class="language-plaintext highlighter-rouge">movetor53.com</code>. While you cannot create a CNAME record for <code class="language-plaintext highlighter-rouge">movetor53.com</code> you can create an alias record for <code class="language-plaintext highlighter-rouge">movetor53.com</code> that routes traffic to e.g. a CloudFront distribution.</p>
+
+<p>To showcase one example, where we previously had to use a CNAME record with Google Domains, have a look at the record for <code class="language-plaintext highlighter-rouge">www.movetor53.com</code> <code class="language-plaintext highlighter-rouge">movetor53.com</code> (See Figure 14). The drawback of this CNAME is that clients have to make two DNS requests to resolve <code class="language-plaintext highlighter-rouge">www.movetor53.com</code> into an IP address. One for the CNAME and another one for <code class="language-plaintext highlighter-rouge">dgwkbb1gumfgi.cloudfront.net</code> that this CNAME points to.</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-r53-cname.png" title="Figure 14: Record for “www” with type CNAME. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-r53-cname-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-r53-cname-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-r53-cname-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-r53-cname-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-r53-cname-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-r53-cname-960.webp 960w, " sizes="1311px"></source>
+  <source data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-r53-cname-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-r53-cname-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-r53-cname-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-r53-cname-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-r53-cname-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-r53-cname-960.png 960w, " sizes="1311px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-r53-cname-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-r53-cname.png" class="blur-up lazyautosizes lazyload" alt="Figure 14: Record for “www” with type CNAME. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 14: Record for “www” with type CNAME.
+</figcaption>
+
+</figure>
+
+<p>With a DNS record of type Alias, the A record for <code class="language-plaintext highlighter-rouge">www.movetor53.com</code> would directly translate into an IPv4 address, while the AAAA record directly translates to an IPv6 address. And now that the domain <code class="language-plaintext highlighter-rouge">movetor53.com</code> is on Route 53, we can replace this CNAME record with an A and AAAA record, making use of the Alias type (See Figure 15).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2023/06/move-your-dns-to-route53-r53-alias.png" title="Figure 15: Alias records for “www” with type A and AAAA. " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-r53-alias-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-r53-alias-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-r53-alias-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-r53-alias-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-r53-alias-800.webp 800w,         /content/resized/2023/06/move-your-dns-to-route53-r53-alias-960.webp 960w, " sizes="1314px"></source>
+  <source data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-r53-alias-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-r53-alias-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-r53-alias-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-r53-alias-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-r53-alias-800.png 800w,     /content/resized/2023/06/move-your-dns-to-route53-r53-alias-960.png 960w, " sizes="1314px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-r53-alias-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-r53-alias.png" class="blur-up lazyautosizes lazyload" alt="Figure 15: Alias records for “www” with type A and AAAA. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 15: Alias records for “www” with type A and AAAA.
+</figcaption>
+
+</figure>
+
+<h1 id="url-forwarding">URL Forwarding</h1>
+
+<p>While Google Domains supports URL Forwarding natively, Route 53 doesn’t. That’s because Route 53 purely focuses on DNS functionality, while URL Forwarding is a function of HTTP(s) as outline in a <a href="/2023/03/20/http-redirect-with-cloudfront/">previous blog post</a>. In AWS you can use <a href="https://aws.amazon.com/cloudfront/" rel="external nofollow noopener" target="_blank">Amazon CloudFront</a> to achieve the same. If you want to learn how to do this, head over to my previous blog post on “<a href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/">URL Redirect with Amazon CloudFront and Amazon Route 53</a>”.</p>
+<h1 id="summary">Summary</h1>
+
+<p>This blog post walked you through the migration steps of moving a domain from a DNS service provider like Google Domains to Route 53. It included steps for both moving the DNS zone as well as the registration services. At the end of this guide your domain will be fully moved from Google Domains to Route 53. 
+While all shown steps and screenshots are specific to Google Domains, the same concept applies when migrating away from other DNS provider as well.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#aws" class="page__taxonomy-item p-category" rel="tag">AWS</a><span class="sep">, </span>
+    
+      <a href="/tags/#network" class="page__taxonomy-item p-category" rel="tag">Network</a><span class="sep">, </span>
+    
+      <a href="/tags/#route-53" class="page__taxonomy-item p-category" rel="tag">Route-53</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://toot.kytta.dev/?text=How%20to%20move%20your%20DNS%20to%20Amazon%20Route%2053%0Ahttps://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
+
+  <a href="https://twitter.com/intent/tweet?text=How+to+move+your+DNS+to+Amazon+Route+53%20https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F25%2Fmove-your-dns-to-route53%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F25%2Fmove-your-dns-to-route53%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F25%2Fmove-your-dns-to-route53%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F25%2Fmove-your-dns-to-route53%2F&amp;title=How+to+move+your+DNS+to+Amazon+Route+53" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2023%2F06%2F25%2Fmove-your-dns-to-route53%2F&amp;title=How+to+move+your+DNS+to+Amazon+Route+53" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2023/06/18/r53-random-prefix-attack-mitigation/" class="pagination--pager" title="Random prefix attack mitigation with Amazon Route 53
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/18/r53-random-prefix-attack-mitigation/" rel="permalink">Random prefix attack mitigation with Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-18T00:00:00-07:00">June 18, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">How to mitigate random prefix attacks - when someone send a lot of traffic to subdomains of your main domain - with Amazon Route 53
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/03/20/http-redirect-with-cloudfront/" rel="permalink">URL Redirect with Amazon CloudFront and Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-03-20T00:00:00-07:00">March 20, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #CloudFront, #Web
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          19 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #IPv6
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Direct-Connect
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<script src="/assets/js/instantsearch/dist/instantsearch.min.js"></script>
+  <div class="search-searchbar"></div>
+  <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2023 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  
+
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script async src="/assets/js/instantsearch/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" href="/assets/js/instantsearch/dist/instantsearch.min.css">
+<link rel="stylesheet" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: '5XVQIGEDJ8',
+  apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+  indexName: 'edge-cloud-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const hightlight = hit._highlightResult;
+  const title = hightlight.title && hightlight.title.value  || "";
+  const content = hightlight.html && hightlight.html.value  || "";
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate,
+      empty: 'No results',
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

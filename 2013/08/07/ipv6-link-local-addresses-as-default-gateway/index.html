@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>IPv6 deployment: Using IPv6 link-local addresses as default gateway - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>9 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -399,7 +408,7 @@
 
 <h1 id="ipv6-use-case">IPv6 use case</h1>
 
-<p>While it’s already possible to achieve something similar for the DNS resolver in IPv4, in IPv6 link-local addresses enable us to use the same default gateway in every network segment. Simplified speaking link-local addresses translate into having the same subnet available on each L2 segment. Thus this allows network engineers to configure the default gateway for client machines to be always the same. Here it doesn’t matter whether this default gateway for static routing is provided via a single interface, via <a href="https://en.wikipedia.org/wiki/Hot_Standby_Router_Protocol" target="_blank" rel="noopener noreferrer">Hot Standby Router Protocol (HSRP)</a> or <a href="https://en.wikipedia.org/wiki/Virtual_Router_Redundancy_Protocol" target="_blank" rel="noopener noreferrer">Virtual Router Redundancy Protocol (VRPP)</a>.</p>
+<p>While it’s already possible to achieve something similar for the DNS resolver in IPv4, in IPv6 link-local addresses enable us to use the same default gateway in every network segment. Simplified speaking link-local addresses translate into having the same subnet available on each L2 segment. Thus this allows network engineers to configure the default gateway for client machines to be always the same. Here it doesn’t matter whether this default gateway for static routing is provided via a single interface, via <a href="https://en.wikipedia.org/wiki/Hot_Standby_Router_Protocol" rel="external nofollow noopener" target="_blank">Hot Standby Router Protocol (HSRP)</a> or <a href="https://en.wikipedia.org/wiki/Virtual_Router_Redundancy_Protocol" rel="external nofollow noopener" target="_blank">Virtual Router Redundancy Protocol (VRPP)</a>.</p>
 
 <p>As a result a network engineer can give users a very simple to follow statement for manually configuring their hosts with IPv6: “The default gateway is always fe80::1”. Thanks to Anycast we can already make similar statements for e.g. DNS, with “The DNS resolvers are always fd53::11 and fd53::12”.</p>
 
@@ -407,11 +416,11 @@
 
 <p>In the IPv4 world it is very common to use the first address within an IPv4 subnet as the default gateway, along with the second and third address potentially being used for individual HSRP/VRPP nodes. Thus on the network 192.168.0.0/24, the default gateway would usually be 192.168.0.1. In case of network architects using /24 networks for end-user facing usage, this often translates into the easy statement of “Always use the .1 as the default gateway.” With IPv6 we can simplify this statement further and use a link-local address as the default gateway.</p>
 
-<p>In IPv6 Link-Local addresses are mandatory addresses according to <a href="https://tools.ietf.org/html/rfc4291" target="_blank" rel="noopener noreferrer">RFC 4291</a>. This means that all interfaces are required to have at least one Link-Local unicast address from the address block fe80::/10, which has been reserved for link-local unicast addressing. The actual link-local addresses are though assigned with the prefix fe80::/64.</p>
+<p>In IPv6 Link-Local addresses are mandatory addresses according to <a href="https://tools.ietf.org/html/rfc4291" rel="external nofollow noopener" target="_blank">RFC 4291</a>. This means that all interfaces are required to have at least one Link-Local unicast address from the address block fe80::/10, which has been reserved for link-local unicast addressing. The actual link-local addresses are though assigned with the prefix fe80::/64.</p>
 
 <p>Combining what many of us are used to from the IPv4 world with this new feature particular to IPv6, the link-local address fe80::1 appears to be the perfect candidate for a generic default gateway within a data center or campus network. This address is for sure easier to remember and especially type in as e.g. <code class="language-plaintext highlighter-rouge">20ba:dd0g:f00d:1234::1</code>.</p>
 
-<p>As each IPv6-enabled router interface will already have a link-local address generated based on the <a href="https://en.wikipedia.org/wiki/IPv6_address#Modified_EUI-64" target="_blank" rel="noopener noreferrer">modified EUI-64</a> scheme, the address fe80::1 will either replace or augment this automatically generated address. At the same time an existing global unicast address on the interface will not be affected.</p>
+<p>As each IPv6-enabled router interface will already have a link-local address generated based on the <a href="https://en.wikipedia.org/wiki/IPv6_address#Modified_EUI-64" rel="external nofollow noopener" target="_blank">modified EUI-64</a> scheme, the address fe80::1 will either replace or augment this automatically generated address. At the same time an existing global unicast address on the interface will not be affected.</p>
 
 <h1 id="implementation">Implementation</h1>
 
@@ -485,7 +494,7 @@ gigabitEthernet 3/1 is up, line protocol is up
 
 <p>While we can simplify the life of end-users by using link-local addresses on router interfaces, we are slightly complicating the life of the network operations staff. As now multiple interfaces on a router can end up with the same link-local address of fe80::1, we need to be more explicit when using this interface in troubleshooting.</p>
 
-<p>As an example: In order to ping the above interface, we need to specify the <a href="https://en.wikipedia.org/wiki/IPv6_address#Link-local_addresses_and_zone_indices" target="_blank" rel="noopener noreferrer">zone index</a> - which usually corresponds to the interface name - besides the IP address of fe80::1.</p>
+<p>As an example: In order to ping the above interface, we need to specify the <a href="https://en.wikipedia.org/wiki/IPv6_address#Link-local_addresses_and_zone_indices" rel="external nofollow noopener" target="_blank">zone index</a> - which usually corresponds to the interface name - besides the IP address of fe80::1.</p>
 
 <p>This would look like this:</p>
 
@@ -500,13 +509,13 @@ Cisco#
 
 <p>Be careful as Cisco IOS requires the interface name to be case sensitive. Also you cannot abbreviate it. This is definitely an annoyance that someone should file as a bug.</p>
 
-<p>You might wonder why we didn’t have to specify a zone index when we entered fe80::1 as the default gateway in Windows above. The answer to this can be found in <a href="https://tools.ietf.org/html/rfc4007#section-6" target="_blank" rel="noopener noreferrer">RFC 4007, section 6</a>, where it states: “An implementation should also support the concept of a “default” zone for each scope”. Thus Windows above is using this “default” zone.</p>
+<p>You might wonder why we didn’t have to specify a zone index when we entered fe80::1 as the default gateway in Windows above. The answer to this can be found in <a href="https://tools.ietf.org/html/rfc4007#section-6" rel="external nofollow noopener" target="_blank">RFC 4007, section 6</a>, where it states: “An implementation should also support the concept of a “default” zone for each scope”. Thus Windows above is using this “default” zone.</p>
 
 <h1 id="what-about-dns-via-anycast">What about DNS via Anycast?</h1>
 
 <p>As mentioned earlier, Anycast - both in IPv4 and IPv6 - already gives us the possibility to provide end-users a single or single set of IP addresses for the DNS resolvers, irrespective of their physical location. But why should we “burn” a global unicast IPv6 address for this? Especially as these addresses can be quite long and hard to remember.</p>
 
-<p>Here <a href="https://en.wikipedia.org/wiki/Unique_local_address" target="_blank" rel="noopener noreferrer">unique local addresses (ULA)</a> come to the rescue. In most cases ULA can be treated like <a href="https://tools.ietf.org/html/rfc1918" target="_blank" rel="noopener noreferrer">RFC 1918</a> addresses in IPv4. Prefixes in the fd00::/8 range have similar properties as those of the IPv4 private address ranges:</p>
+<p>Here <a href="https://en.wikipedia.org/wiki/Unique_local_address" rel="external nofollow noopener" target="_blank">unique local addresses (ULA)</a> come to the rescue. In most cases ULA can be treated like <a href="https://tools.ietf.org/html/rfc1918" rel="external nofollow noopener" target="_blank">RFC 1918</a> addresses in IPv4. Prefixes in the fd00::/8 range have similar properties as those of the IPv4 private address ranges:</p>
 
 <ul>
   <li>They are not allocated by an address registry and may be used in networks by anyone without outside involvement.</li>
@@ -524,9 +533,9 @@ Cisco#
 
 <h1 id="where-is-it-used-in-the-wild">Where is it used in the wild?</h1>
 
-<p>Two examples of service providers that use the IPv6 default gateway of fe80::1 and document it accordingly for their end-users are the German hosting provider <a href="https://www.hetzner.de/en/hosting/produktmatrix/rootserver" target="_blank" rel="noopener noreferrer">Hetzner</a> as well as the <a href="https://kb.wisc.edu/ns/page.php?id=14099" target="_blank" rel="noopener noreferrer">University of Wisconsin-Madison</a>. Other examples exist, but without readily available documentation.</p>
+<p>Two examples of service providers that use the IPv6 default gateway of fe80::1 and document it accordingly for their end-users are the German hosting provider <a href="https://www.hetzner.de/en/hosting/produktmatrix/rootserver" rel="external nofollow noopener" target="_blank">Hetzner</a> as well as the <a href="https://kb.wisc.edu/ns/page.php?id=14099" rel="external nofollow noopener" target="_blank">University of Wisconsin-Madison</a>. Other examples exist, but without readily available documentation.</p>
 
-<p>The German ISP <a href="https://www.telekom.de/" target="_blank" rel="noopener noreferrer">Deutsche Telekom</a> uses their own line of branded home DSL routers called <a href="https://de.wikipedia.org/wiki/Speedport" target="_blank" rel="noopener noreferrer">Speedport</a>. Turns out that the routers within this line that are IPv6 capable use fe80::1 as the default gateway, both for static use as well as via SLAAC. These devices then also offer DNS resolver capabilities via the same IPv6 address.</p>
+<p>The German ISP <a href="https://www.telekom.de/" rel="external nofollow noopener" target="_blank">Deutsche Telekom</a> uses their own line of branded home DSL routers called <a href="https://de.wikipedia.org/wiki/Speedport" rel="external nofollow noopener" target="_blank">Speedport</a>. Turns out that the routers within this line that are IPv6 capable use fe80::1 as the default gateway, both for static use as well as via SLAAC. These devices then also offer DNS resolver capabilities via the same IPv6 address.</p>
 
 <p>So far I have not seen anyone using ULA for internal DNS resolver.</p>
 
@@ -534,7 +543,7 @@ Cisco#
 
 <p>Unfortunately there are various vendors out there, crippling their product’s IPv6 support and thus preventing usage of the above IPv6 deployment pattern.</p>
 
-<p>Examples for this are VMware ESXi, which dropped support for link-local addresses as default gateways in version 5.0 of the hypervisor. Even the Cisco documentation <a href="http://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Borderless_Networks/Internet_Edge/InternetEdgeIPv6.html#wp390490" target="_blank" rel="noopener noreferrer">“Deploying IPv6 in the Internet Edge”</a> picked up on this shortcoming.</p>
+<p>Examples for this are VMware ESXi, which dropped support for link-local addresses as default gateways in version 5.0 of the hypervisor. Even the Cisco documentation <a href="http://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Borderless_Networks/Internet_Edge/InternetEdgeIPv6.html#wp390490" rel="external nofollow noopener" target="_blank">“Deploying IPv6 in the Internet Edge”</a> picked up on this shortcoming.</p>
 
 <figure class="">
 
@@ -610,22 +619,22 @@ Cisco#
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=IPv6%20deployment:%20Using%20IPv6%20link-local%20addresses%20as%20default%20gateway%0Ahttps://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=IPv6%20deployment:%20Using%20IPv6%20link-local%20addresses%20as%20default%20gateway%0Ahttps://www.edge-cloud.net/2013/08/07/ipv6-link-local-addresses-as-default-gateway/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=IPv6+deployment%3A+Using+IPv6+link-local+addresses+as+default+gateway%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=IPv6+deployment%3A+Using+IPv6+link-local+addresses+as+default+gateway%20https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F&amp;title=IPv6+deployment%3A+Using+IPv6+link-local+addresses+as+default+gateway" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F&amp;title=IPv6+deployment%3A+Using+IPv6+link-local+addresses+as+default+gateway" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F&amp;title=IPv6+deployment%3A+Using+IPv6+link-local+addresses+as+default+gateway" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2013%2F08%2F07%2Fipv6-link-local-addresses-as-default-gateway%2F&amp;title=IPv6+deployment%3A+Using+IPv6+link-local+addresses+as+default+gateway" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -653,6 +662,63 @@ Cisco#
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -824,63 +890,6 @@ Cisco#
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -915,15 +924,15 @@ Cisco#
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

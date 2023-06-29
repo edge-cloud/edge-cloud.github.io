@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>AWS CloudFront meta data in Google Analytics - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>6 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -398,17 +407,17 @@
             </nav>
           </aside>
         
-        <p>AWS CloudFront recently enabled support for the latest HTTP protocol version with <a href="https://aws.amazon.com/about-aws/whats-new/2016/09/amazon-cloudfront-now-supports-http2/" target="_blank" rel="noopener noreferrer">HTTP/2</a> and for the latest Internet Protocol Version with <a href="https://aws.amazon.com/blogs/aws/ipv6-support-update-cloudfront-waf-and-s3-transfer-acceleration/" target="_blank" rel="noopener noreferrer">IPv6</a>. Website owners using AWS CloudFront and having enabled HTTP/2 and/or IPv6 on their distribution might now wonder how many guests use either technology. Or you might want to know where these IPv6 users are coming from. Are they really mostly coming from Mobile networks?</p>
+        <p>AWS CloudFront recently enabled support for the latest HTTP protocol version with <a href="https://aws.amazon.com/about-aws/whats-new/2016/09/amazon-cloudfront-now-supports-http2/" rel="external nofollow noopener" target="_blank">HTTP/2</a> and for the latest Internet Protocol Version with <a href="https://aws.amazon.com/blogs/aws/ipv6-support-update-cloudfront-waf-and-s3-transfer-acceleration/" rel="external nofollow noopener" target="_blank">IPv6</a>. Website owners using AWS CloudFront and having enabled HTTP/2 and/or IPv6 on their distribution might now wonder how many guests use either technology. Or you might want to know where these IPv6 users are coming from. Are they really mostly coming from Mobile networks?</p>
 
 <p>This post will show you how to use some Javascript code embedded in your web-page together with a small AWS Lambda script to push information about the IP version, HTTP version and CloudFront edge location into Google Analytics for each visitor.</p>
 
-<p>All necessary code can be found on <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<p>All necessary code can be found on <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData" rel="external nofollow noopener" target="_blank">GitHub</a>.</p>
 
-<p>In a <a href="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">previous post</a> I’ve already shown how to achieve a similar outcome while using <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer">CloudFlare</a>.</p>
+<p>In a <a href="https://www.edge-cloud.net/2016/02/05/rum-light-with-cloudflare/">previous post</a> I’ve already shown how to achieve a similar outcome while using <a href="https://www.cloudflare.com" rel="external nofollow noopener" target="_blank">CloudFlare</a>.</p>
 
 <h1 id="google-analytics-custom-dimensions">Google Analytics Custom Dimensions</h1>
 
-<p>In Google Analytics <a href="https://support.google.com/analytics/answer/2709828" target="_blank" rel="noopener noreferrer">custom dimensions</a> are like the default <a href="https://support.google.com/analytics/answer/1033861" target="_blank" rel="noopener noreferrer">dimensions</a>, except that you have to fill them with data.</p>
+<p>In Google Analytics <a href="https://support.google.com/analytics/answer/2709828" rel="external nofollow noopener" target="_blank">custom dimensions</a> are like the default <a href="https://support.google.com/analytics/answer/1033861" rel="external nofollow noopener" target="_blank">dimensions</a>, except that you have to fill them with data.</p>
 
 <p>In this case we will need to create three custom dimensions. Each will store different values for each visitor of your website.</p>
 
@@ -418,7 +427,7 @@
   <li>
 <strong>HTTP-Version:</strong> This dimension will store the values “2.0”, “1.1”, or “1.0”.</li>
   <li>
-<strong>Edge-Location:</strong> This dimension will store the three letter <a href="https://en.wikipedia.org/wiki/International_Air_Transport_Association_airport_code" target="_blank" rel="noopener noreferrer">IATA airport code</a> of the CloudFront edge location, e.g. “SFO” for San Francisco.</li>
+<strong>Edge-Location:</strong> This dimension will store the three letter <a href="https://en.wikipedia.org/wiki/International_Air_Transport_Association_airport_code" rel="external nofollow noopener" target="_blank">IATA airport code</a> of the CloudFront edge location, e.g. “SFO” for San Francisco.</li>
 </ul>
 
 <h1 id="setup">Setup</h1>
@@ -428,7 +437,7 @@
 <p>First, set up the custom dimensions in Google Analytics:</p>
 
 <ol>
-  <li>Sign in to <a href="https://www.google.com/analytics/web/#home/" target="_blank" rel="noopener noreferrer">Google Analytics</a>.</li>
+  <li>Sign in to <a href="https://www.google.com/analytics/web/#home/" rel="external nofollow noopener" target="_blank">Google Analytics</a>.</li>
   <li>Select the <strong>Admin</strong> tab and navigate to the <strong>property to which you want to add custom dimensions</strong>.</li>
   <li>In the <strong>Property</strong> column, click <strong>Custom Definitions</strong>, then click <strong>Custom Dimensions</strong>.</li>
   <li>Click <strong>New Custom Dimension</strong>.</li>
@@ -467,9 +476,9 @@
 
 <h2 id="aws-lambda-setup">AWS Lambda Setup</h2>
 
-<p>We will use a small <a href="https://aws.amazon.com/lambda/" target="_blank" rel="noopener noreferrer">AWS Lambda</a> script to extract the information about CloudFront edge location, IP version, and HTTP version from incoming requests.</p>
+<p>We will use a small <a href="https://aws.amazon.com/lambda/" rel="external nofollow noopener" target="_blank">AWS Lambda</a> script to extract the information about CloudFront edge location, IP version, and HTTP version from incoming requests.</p>
 
-<p>The script can be found on <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData/blob/master/CloudFrontMetaData.nodejs" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<p>The script can be found on <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData/blob/master/CloudFrontMetaData.nodejs" rel="external nofollow noopener" target="_blank">GitHub</a>.</p>
 
 <p>Create a new AWS Lambda Function named “CloudFrontMetaData” and using the runtime Node.js 4.3. Use the content of the “CloudFrontMetaData.nodejs” file as the source code for Lambda and keep the Handler as “index.handler”. Create a basic execution role and increase the timeout to 10 seconds (See Figure 2).</p>
 
@@ -499,13 +508,13 @@
 
 <p>Within the Script the IP-Version is inferred by looking for the character “:” in the source IP address, the IP address that CloudFront sees. If that address does include the character “:”, it is an IPv6 address, otherwise it is an IPv4 address.</p>
 
-<p>The HTTP-Version information can be extracted from the <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.45" target="_blank" rel="noopener noreferrer">“Via”</a> header, which is used by a proxy like Cloudfront to indicate the intermediate protocols.</p>
+<p>The HTTP-Version information can be extracted from the <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.45" rel="external nofollow noopener" target="_blank">“Via”</a> header, which is used by a proxy like Cloudfront to indicate the intermediate protocols.</p>
 
 <p>The edge location can be determined with a reverse DNS lookup, based on the source IP address that Amazon API Gateway sees from CloudFront.</p>
 
 <h2 id="api-gateway-setup">API Gateway Setup</h2>
 
-<p>Next we need to make the above AWS Lambda function accessible via a URL. This can easily be done using <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="noopener noreferrer">Amazon API Gateway</a>. To simplify the setup you can use a prepared <a href="http://swagger.io/" target="_blank" rel="noopener noreferrer">swagger formatted</a> file, which can be found on <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData/blob/master/CloudWatchMetaData-swagger.json" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<p>Next we need to make the above AWS Lambda function accessible via a URL. This can easily be done using <a href="https://aws.amazon.com/api-gateway/" rel="external nofollow noopener" target="_blank">Amazon API Gateway</a>. To simplify the setup you can use a prepared <a href="http://swagger.io/" rel="external nofollow noopener" target="_blank">swagger formatted</a> file, which can be found on <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData/blob/master/CloudWatchMetaData-swagger.json" rel="external nofollow noopener" target="_blank">GitHub</a>.</p>
 
 <p>Within the file “CloudWatchMetaData-swagger.json” change the ARN on line 50 to the ARN of your Lambda function.</p>
 
@@ -636,11 +645,11 @@ edgeloc=sfo
 
 <p>Next we need to update the Google Analytics tracking code within the website, in order to fill the newly created custom dimensions with data. This tracking code has to be placed between the code for creating the Google Analytics tracker, which looks like this: <code class="language-plaintext highlighter-rouge">gaTracker('create','UA-12345678-1','auto');</code>, and the code to submit the tracker, which looks like this <code class="language-plaintext highlighter-rouge">gaTracker('send','pageview');</code>.</p>
 
-<p>If you are using WordPress the easiest way to include the custom tracking code is by using the <a href="https://wordpress.org/plugins/google-analytics-for-wordpress/" target="_blank" rel="noopener noreferrer">Google Analytics by Yoast</a> plugin. This plugin allows you under <strong>Advanced &gt; Custom Code</strong> to embed the below code right away and without any coding requirements.</p>
+<p>If you are using WordPress the easiest way to include the custom tracking code is by using the <a href="https://wordpress.org/plugins/google-analytics-for-wordpress/" rel="external nofollow noopener" target="_blank">Google Analytics by Yoast</a> plugin. This plugin allows you under <strong>Advanced &gt; Custom Code</strong> to embed the below code right away and without any coding requirements.</p>
 
 <p>The below JavaScript code will read the values from <code class="language-plaintext highlighter-rouge">/cdn-cgi/edge-info</code>, extract the information we are interested it and push it into the Google Analytics custom dimension variables. Ensure that the numeric IDs of these custom dimension variables matches what you have created in above steps.</p>
 
-<p>Embedded the code from <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData/blob/master/GoogleAnalyticsCode.js" target="_blank" rel="noopener noreferrer">here</a> into your website along with the standard Google Analytics tracking code. This custom JavaScript code will be executed by a visitor, collect metrics data from <code class="language-plaintext highlighter-rouge">/cdn-cgi/edge-info</code> and push it into Google Analytics.</p>
+<p>Embedded the code from <a href="https://github.com/chriselsen/AWSLambda_CloudFrontMetaData/blob/master/GoogleAnalyticsCode.js" rel="external nofollow noopener" target="_blank">here</a> into your website along with the standard Google Analytics tracking code. This custom JavaScript code will be executed by a visitor, collect metrics data from <code class="language-plaintext highlighter-rouge">/cdn-cgi/edge-info</code> and push it into Google Analytics.</p>
 
 <p>A few hours after embedding the code you should see your first custom dimension data in Google Analytics.</p>
 
@@ -798,22 +807,22 @@ edgeloc=sfo
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=AWS%20CloudFront%20meta%20data%20in%20Google%20Analytics%0Ahttps://www.edge-cloud.net/2016/10/24/cloudfront-metadata-google-analytics/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=AWS%20CloudFront%20meta%20data%20in%20Google%20Analytics%0Ahttps://www.edge-cloud.net/2016/10/24/cloudfront-metadata-google-analytics/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=AWS+CloudFront+meta+data+in+Google+Analytics%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=AWS+CloudFront+meta+data+in+Google+Analytics%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F&amp;title=AWS+CloudFront+meta+data+in+Google+Analytics" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F&amp;title=AWS+CloudFront+meta+data+in+Google+Analytics" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F&amp;title=AWS+CloudFront+meta+data+in+Google+Analytics" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F10%2F24%2Fcloudfront-metadata-google-analytics%2F&amp;title=AWS+CloudFront+meta+data+in+Google+Analytics" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -841,6 +850,63 @@ edgeloc=sfo
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1012,63 +1078,6 @@ edgeloc=sfo
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1103,15 +1112,15 @@ edgeloc=sfo
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

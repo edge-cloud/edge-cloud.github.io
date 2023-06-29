@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Block access from certain countries with Route 53 Geolocation - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,13 @@
         </header>
       
 
+      
+
+
+
+
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right sticky">
@@ -401,23 +408,23 @@
             </nav>
           </aside>
         
-        <p>This article walks you through using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a>, in order to block access to your services from certain countries. In addition <a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> is used in a subsequent step to validate the setup.</p>
+        <p>This article walks you through using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" rel="external nofollow noopener" target="_blank">Amazon Route 53 Geolocation Routing</a>, in order to block access to your services from certain countries. In addition <a href="https://atlas.ripe.net/" rel="external nofollow noopener" target="_blank">RIPE Atlas</a> is used in a subsequent step to validate the setup.</p>
 
 <h1 id="motivation">Motivation</h1>
 
-<p>There are multiple reasons why you might want to block access to your website or API from certain countries. If you are a US based company, you are required to comply with <a href="https://www.bis.doc.gov/index.php/policy-guidance/country-guidance/sanctioned-destinations" target="_blank" rel="noopener noreferrer">US regulations regarding sanctions</a> against countries such as Cuba, Iran, North Korea, Sudan, or Syria. This could result in the requirement to block access to your website or API from these countries.</p>
+<p>There are multiple reasons why you might want to block access to your website or API from certain countries. If you are a US based company, you are required to comply with <a href="https://www.bis.doc.gov/index.php/policy-guidance/country-guidance/sanctioned-destinations" rel="external nofollow noopener" target="_blank">US regulations regarding sanctions</a> against countries such as Cuba, Iran, North Korea, Sudan, or Syria. This could result in the requirement to block access to your website or API from these countries.</p>
 
-<p>Another motivation could be to prevent illicit traffic from countries that you do not conduct business with. Especially <a href="https://www.zdnet.com/article/china-resurrects-great-cannon-for-ddos-attacks-on-hong-kong-forum/" target="_blank" rel="noopener noreferrer">China</a> and <a href="https://en.wikipedia.org/wiki/Russian_web_brigades" target="_blank" rel="noopener noreferrer">Russia</a> are known to be a prime source of illicit traffic. Therefore blocking access from these traffic might be wanted in your situation.</p>
+<p>Another motivation could be to prevent illicit traffic from countries that you do not conduct business with. Especially <a href="https://www.zdnet.com/article/china-resurrects-great-cannon-for-ddos-attacks-on-hong-kong-forum/" rel="external nofollow noopener" target="_blank">China</a> and <a href="https://en.wikipedia.org/wiki/Russian_web_brigades" rel="external nofollow noopener" target="_blank">Russia</a> are known to be a prime source of illicit traffic. Therefore blocking access from these traffic might be wanted in your situation.</p>
 
 <h1 id="configuration-setup">Configuration setup</h1>
 
-<p>Here, we are using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a> to direct traffic from China for one or multiple domain names to either an invalid target IP or a static error page.</p>
+<p>Here, we are using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" rel="external nofollow noopener" target="_blank">Amazon Route 53 Geolocation Routing</a> to direct traffic from China for one or multiple domain names to either an invalid target IP or a static error page.</p>
 
 <p>Using an invalid IP address, such as a Loopback address like 127.0.0.1 would cause traffic destined for web site or API not to even reach your or your provider’s network. Instead it will already be discarded on the client device.</p>
 
 <h2 id="route-53-geolocation-routing">Route 53 Geolocation routing</h2>
 
-<p>In this setup we solely create a DNS test entry to validate functionality of <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a> for our desired purpose. We will do so by creating a DNS entry of the type “TXT”, that will respond with “China”, when queried from within China, and with “Default” when queried from all other countries.</p>
+<p>In this setup we solely create a DNS test entry to validate functionality of <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" rel="external nofollow noopener" target="_blank">Amazon Route 53 Geolocation Routing</a> for our desired purpose. We will do so by creating a DNS entry of the type “TXT”, that will respond with “China”, when queried from within China, and with “Default” when queried from all other countries.</p>
 
 <p>Geolocation works by mapping IP addresses to locations. However, some IP addresses aren’t mapped to geographic locations, so even if you create geolocation records that cover all seven continents, Amazon Route 53 will receive some DNS queries from locations that it can’t identify. These locations are mapped to the default record. This default record handles both queries from IP addresses that aren’t mapped to any location and queries that come from locations that you haven’t created geolocation records for.</p>
 
@@ -503,24 +510,24 @@
 
 <h2 id="error-page-using-cloudfront-and-s3">Error page using CloudFront and S3</h2>
 
-<p>As mentioned above you can easily blackhole traffic from undesired locations, by responding with the <a href="https://en.wikipedia.org/wiki/Loopback" target="_blank" rel="noopener noreferrer">Loopback</a> IPv4 address of 127.0.0.1. As a result traffic from these clients destined for your endpoint would never leave their system.
+<p>As mentioned above you can easily blackhole traffic from undesired locations, by responding with the <a href="https://en.wikipedia.org/wiki/Loopback" rel="external nofollow noopener" target="_blank">Loopback</a> IPv4 address of 127.0.0.1. As a result traffic from these clients destined for your endpoint would never leave their system.
 But as mentioned before, geolocation routing works by mapping IP addresses to locations. And this approach comes with <a href="/2019/03/01/limitations-of-geo-dns/">inherent inaccuracies</a>.</p>
 
 <p>Therefore a better approach would be to direct blocked users to a static website, which outlines the reason of the block and also provides an appeal-process. In its simplest form this process could ask users to contact your technical support for help.</p>
 
-<p>You can easily use CloudFront and S3 to <a href="https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/" target="_blank" rel="noopener noreferrer">serve this static error page</a>.</p>
+<p>You can easily use CloudFront and S3 to <a href="https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/" rel="external nofollow noopener" target="_blank">serve this static error page</a>.</p>
 
 <h1 id="testing-the-setup">Testing the Setup</h1>
 
-<p>Let’s get back to testing our <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a> setup and validate that users in China are indeed served with a separate answer than users outside China. To do so, we will be using RIPE Atlas probes.</p>
+<p>Let’s get back to testing our <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" rel="external nofollow noopener" target="_blank">Amazon Route 53 Geolocation Routing</a> setup and validate that users in China are indeed served with a separate answer than users outside China. To do so, we will be using RIPE Atlas probes.</p>
 
 <h2 id="ripe-atlas">RIPE Atlas</h2>
 
-<p><a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> is a global network of hardware devices, called probes and anchors, that actively measure Internet connectivity. Anyone can access this data via Internet traffic maps, streaming data visualisations, and an API. RIPE Atlas users can also perform customised measurements to gain valuable data about their own networks.</p>
+<p><a href="https://atlas.ripe.net/" rel="external nofollow noopener" target="_blank">RIPE Atlas</a> is a global network of hardware devices, called probes and anchors, that actively measure Internet connectivity. Anyone can access this data via Internet traffic maps, streaming data visualisations, and an API. RIPE Atlas users can also perform customised measurements to gain valuable data about their own networks.</p>
 
-<p>I highly recommend you to consider <a href="https://atlas.ripe.net/get-involved/become-a-host/" target="_blank" rel="noopener noreferrer">hosting a RIPE Atlas probe</a> yourself. Not only will you benefit from the data that it collects on your Internet connection, but it will also allow you to run customized measurements against various Internet targets. And in the end every additional RIPE Atlas probe will benefit the overall Internet community.</p>
+<p>I highly recommend you to consider <a href="https://atlas.ripe.net/get-involved/become-a-host/" rel="external nofollow noopener" target="_blank">hosting a RIPE Atlas probe</a> yourself. Not only will you benefit from the data that it collects on your Internet connection, but it will also allow you to run customized measurements against various Internet targets. And in the end every additional RIPE Atlas probe will benefit the overall Internet community.</p>
 
-<p>For our purposes we will create a one-off <a href="https://atlas.ripe.net/measurements/" target="_blank" rel="noopener noreferrer">RIPE Atlas measurement</a> of type DNS with the above configured hostname as the target (See Figure 4). Make sure to configure usage of the probe’s resolver and force DNS resolution on the probe. Also we want to select all available RIPE Atlas probes within China, as well as a set of probes outside China.</p>
+<p>For our purposes we will create a one-off <a href="https://atlas.ripe.net/measurements/" rel="external nofollow noopener" target="_blank">RIPE Atlas measurement</a> of type DNS with the above configured hostname as the target (See Figure 4). Make sure to configure usage of the probe’s resolver and force DNS resolution on the probe. Also we want to select all available RIPE Atlas probes within China, as well as a set of probes outside China.</p>
 
 <figure class="">
 
@@ -623,7 +630,7 @@ Looking closer at these probes we can see that the probes are indeed located in 
 
 <h1 id="summary">Summary</h1>
 
-<p>This blog post walked you through using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" target="_blank" rel="noopener noreferrer">Amazon Route 53 Geolocation Routing</a>, in order to block access to services from certain countries. Furthermore it showed how <a href="https://atlas.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE Atlas</a> can be used to validate the geoblocking setup.</p>
+<p>This blog post walked you through using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-geo" rel="external nofollow noopener" target="_blank">Amazon Route 53 Geolocation Routing</a>, in order to block access to services from certain countries. Furthermore it showed how <a href="https://atlas.ripe.net/" rel="external nofollow noopener" target="_blank">RIPE Atlas</a> can be used to validate the geoblocking setup.</p>
 
         
       </section>
@@ -663,22 +670,22 @@ Looking closer at these probes we can see that the probes are indeed located in 
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Block%20access%20from%20certain%20countries%20with%20Route%2053%20Geolocation%0Ahttps://www.edge-cloud.net/2019/12/09/block-countries-with-route53/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Block%20access%20from%20certain%20countries%20with%20Route%2053%20Geolocation%0Ahttps://www.edge-cloud.net/2019/12/09/block-countries-with-route53/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Block+access+from+certain+countries+with+Route+53+Geolocation%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Block+access+from+certain+countries+with+Route+53+Geolocation%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F&amp;title=Block+access+from+certain+countries+with+Route+53+Geolocation" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F&amp;title=Block+access+from+certain+countries+with+Route+53+Geolocation" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F&amp;title=Block+access+from+certain+countries+with+Route+53+Geolocation" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F12%2F09%2Fblock-countries-with-route53%2F&amp;title=Block+access+from+certain+countries+with+Route+53+Geolocation" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -706,6 +713,63 @@ Looking closer at these probes we can see that the probes are indeed located in 
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -877,63 +941,6 @@ Looking closer at these probes we can see that the probes are indeed located in 
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -968,15 +975,15 @@ Looking closer at these probes we can see that the probes are indeed located in 
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

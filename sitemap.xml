@@ -2,19 +2,19 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/</loc>
-<lastmod>2023-06-24T16:19:51-07:00</lastmod>
+<lastmod>2023-06-29T15:05:20-07:00</lastmod>
 </url>
 <url>
 <loc>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</loc>
-<lastmod>2023-06-24T16:19:51-07:00</lastmod>
+<lastmod>2023-06-29T15:05:20-07:00</lastmod>
 </url>
 <url>
 <loc>https://www.edge-cloud.net/2022/01/01/template/</loc>
-<lastmod>2023-06-24T16:19:51-07:00</lastmod>
+<lastmod>2023-06-29T15:05:20-07:00</lastmod>
 </url>
 <url>
 <loc>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</loc>
-<lastmod>2023-06-24T16:19:51-07:00</lastmod>
+<lastmod>2023-06-29T15:05:20-07:00</lastmod>
 </url>
 <url>
 <loc>https://www.edge-cloud.net/2013/05/20/configuring-f5-big-ip-with-vcd/</loc>
@@ -283,6 +283,10 @@
 <url>
 <loc>https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/</loc>
 <lastmod>2023-06-18T00:00:00-07:00</lastmod>
+</url>
+<url>
+<loc>https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/</loc>
+<lastmod>2023-06-25T00:00:00-07:00</lastmod>
 </url>
 <url>
 <loc>https://www.edge-cloud.net/about/</loc>

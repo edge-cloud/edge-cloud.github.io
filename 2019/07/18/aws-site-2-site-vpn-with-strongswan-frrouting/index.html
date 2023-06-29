@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>AWS Site-to-Site VPN with IPSec VPN (Strongwan) and BGP (FRRouting) - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,13 @@
         </header>
       
 
+      
+
+
+
+
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right sticky">
@@ -410,11 +417,11 @@
             </nav>
           </aside>
         
-        <p>This blog post walks through the setup of an EC2-based VPN endpoint - using Ubuntu Linux 18.04 with <a href="https://www.strongswan.org/" target="_blank" rel="noopener noreferrer">Strongswan</a> and <a href="https://frrouting.org/" target="_blank" rel="noopener noreferrer">FRRouting</a> - for a Site-to-Site VPN connection to AWS with <a href="https://en.wikipedia.org/wiki/Border_Gateway_Protocol" target="_blank" rel="noopener noreferrer">BGP</a> routing.
-It will allow you to experiment with BGP in your AWS account, test out new AWS features such as <a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway</a> or use it for many other things.
+        <p>This blog post walks through the setup of an EC2-based VPN endpoint - using Ubuntu Linux 18.04 with <a href="https://www.strongswan.org/" rel="external nofollow noopener" target="_blank">Strongswan</a> and <a href="https://frrouting.org/" rel="external nofollow noopener" target="_blank">FRRouting</a> - for a Site-to-Site VPN connection to AWS with <a href="https://en.wikipedia.org/wiki/Border_Gateway_Protocol" rel="external nofollow noopener" target="_blank">BGP</a> routing.
+It will allow you to experiment with BGP in your AWS account, test out new AWS features such as <a href="https://aws.amazon.com/transit-gateway/" rel="external nofollow noopener" target="_blank">AWS Transit Gateway</a> or use it for many other things.
 Especially if you are interested in learning more about the interaction of BGP over a Site-to-Site VPN with AWS Transit Gateway, this is an easy way to do so.</p>
 
-<p>The desired final setup will look like depicted in Figure 1. The AWS Transit Gateway connects on one side to a VPC with the CIDR 172.31.0.0/16 and on the other side to an <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html" target="_blank" rel="noopener noreferrer">AWS Site-to-Site VPN</a>. This AWS Site-to-Site VPN connects to an EC2-based router, which uses Strongswan for IPSec and FRRouting for BGP. To make things interesting the EC2-based router has a second network interface on a private subnet of 10.16.16.0/24, which can be announced via BGP.</p>
+<p>The desired final setup will look like depicted in Figure 1. The AWS Transit Gateway connects on one side to a VPC with the CIDR 172.31.0.0/16 and on the other side to an <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html" rel="external nofollow noopener" target="_blank">AWS Site-to-Site VPN</a>. This AWS Site-to-Site VPN connects to an EC2-based router, which uses Strongswan for IPSec and FRRouting for BGP. To make things interesting the EC2-based router has a second network interface on a private subnet of 10.16.16.0/24, which can be announced via BGP.</p>
 
 <figure class="">
 
@@ -444,7 +451,7 @@ Especially if you are interested in learning more about the interaction of BGP o
 
 <h1 id="aws-transit-gateway">AWS Transit Gateway</h1>
 
-<p><a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway</a> is a service that enables customers to connect their Amazon Virtual Private Clouds (VPCs) and their on-premises networks to a single gateway. For on-premises connectivity the AWS Transit Gateway allows you to leverage AWS Site-to-Site VPNs (IPSec) or AWS Direct Connect via <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html" target="_blank" rel="noopener noreferrer">AWS Direct Connect Gateways</a> (See Figure 2).</p>
+<p><a href="https://aws.amazon.com/transit-gateway/" rel="external nofollow noopener" target="_blank">AWS Transit Gateway</a> is a service that enables customers to connect their Amazon Virtual Private Clouds (VPCs) and their on-premises networks to a single gateway. For on-premises connectivity the AWS Transit Gateway allows you to leverage AWS Site-to-Site VPNs (IPSec) or AWS Direct Connect via <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html" rel="external nofollow noopener" target="_blank">AWS Direct Connect Gateways</a> (See Figure 2).</p>
 
 <figure class="">
 
@@ -476,17 +483,17 @@ Especially if you are interested in learning more about the interaction of BGP o
 
 <h2 id="transit-gateway-and-site-to-site-vpn-setup">Transit Gateway and Site-to-Site VPN setup</h2>
 
-<p>Follow the AWS documentation for <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-getting-started.html" target="_blank" rel="noopener noreferrer">setting up the AWS Transit Gateway</a> and <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpn-attachments.html" target="_blank" rel="noopener noreferrer">attaching it to an AWS Site-to-Site VPN</a>.</p>
+<p>Follow the AWS documentation for <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-getting-started.html" rel="external nofollow noopener" target="_blank">setting up the AWS Transit Gateway</a> and <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpn-attachments.html" rel="external nofollow noopener" target="_blank">attaching it to an AWS Site-to-Site VPN</a>.</p>
 
-<p>It is recommended to configure <em>“VPN ECMP support”</em> with <em>“enable”</em> to enable <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html" target="_blank" rel="noopener noreferrer">Equal Cost Multipath (ECMP) routing support between VPN connections</a>. This will allow you to use both tunnels of the AWS Sit-to-Site VPN connection at the same time.</p>
+<p>It is recommended to configure <em>“VPN ECMP support”</em> with <em>“enable”</em> to enable <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html" rel="external nofollow noopener" target="_blank">Equal Cost Multipath (ECMP) routing support between VPN connections</a>. This will allow you to use both tunnels of the AWS Sit-to-Site VPN connection at the same time.</p>
 
 <h1 id="linux-based-router">Linux-based Router</h1>
 
-<p>This setup uses Ubuntu 16.04-LTS, Xenial Xerus as the Linux distribution for the EC2-based VPN gateway and router. <a href="https://www.strongswan.org/" target="_blank" rel="noopener noreferrer">Strongswan</a> provides the IPSec termination for the AWS Site-to-Site VPN connection. And <a href="https://frrouting.org/" target="_blank" rel="noopener noreferrer">FRRouting</a> provides the dynamic routing capabilities for BGP.</p>
+<p>This setup uses Ubuntu 16.04-LTS, Xenial Xerus as the Linux distribution for the EC2-based VPN gateway and router. <a href="https://www.strongswan.org/" rel="external nofollow noopener" target="_blank">Strongswan</a> provides the IPSec termination for the AWS Site-to-Site VPN connection. And <a href="https://frrouting.org/" rel="external nofollow noopener" target="_blank">FRRouting</a> provides the dynamic routing capabilities for BGP.</p>
 
 <h2 id="interface-setup">Interface Setup</h2>
 
-<p>As mentioned earlier the Ubuntu Linux EC2 instance uses a secondary network interface on a private subnet. This subnet is announced via BGP towards the AWS Transit Gateway. AWS Premium Support provides a detailed instruction on <a href="https://aws.amazon.com/premiumsupport/knowledge-center/ec2-ubuntu-secondary-network-interface/" target="_blank" rel="noopener noreferrer">how to make a secondary network interface work in Ubuntu EC2 instances</a>. The presented concepts are used here.</p>
+<p>As mentioned earlier the Ubuntu Linux EC2 instance uses a secondary network interface on a private subnet. This subnet is announced via BGP towards the AWS Transit Gateway. AWS Premium Support provides a detailed instruction on <a href="https://aws.amazon.com/premiumsupport/knowledge-center/ec2-ubuntu-secondary-network-interface/" rel="external nofollow noopener" target="_blank">how to make a secondary network interface work in Ubuntu EC2 instances</a>. The presented concepts are used here.</p>
 
 <p>First create a configuration file for the secondary interface at <em>/etc/network/interfaces.d/99-eth1.cfg</em>. his example uses a secondary interface of ‘eth1’. Be sure to change ‘eth1’ to match your secondary interface name.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
@@ -535,7 +542,7 @@ eth1      Link encap:Ethernet  HWaddr 02:7b:35:90:92:ae
 
 <p>In AWS the Source or Destination checking attribute on an interface determines whether an instance can handle network traffic that isn’t specifically destined for the instance.</p>
 
-<p>Before installing Strongswan on your EC2 instance <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html#EIP_Disable_SrcDestCheck" target="_blank" rel="noopener noreferrer">disable Source/Destination Checks</a> for this instance.
+<p>Before installing Strongswan on your EC2 instance <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html#EIP_Disable_SrcDestCheck" rel="external nofollow noopener" target="_blank">disable Source/Destination Checks</a> for this instance.
 Keep in mind that this needs to be done for both interfaces (ENIs) separately.</p>
 
 <h3 id="security-group-setup">Security Group setup</h3>
@@ -626,7 +633,7 @@ conn AWS-VPC-GW2
 18.123.45.67 54.98.76.54 : PSK "!yTF%t$nQTwp++6rB9#qft?Vfa%KAhnU"
 </code></pre></div></div>
 
-<p>As we want to run a dynamic routing protocol with BGP over this AWS Site-to-Site VPN, we need to use a <a href="https://wiki.strongswan.org/projects/strongswan/wiki/RouteBasedVPN" target="_blank" rel="noopener noreferrer">route-based VPN</a> setup instead of a policy-based one.</p>
+<p>As we want to run a dynamic routing protocol with BGP over this AWS Site-to-Site VPN, we need to use a <a href="https://wiki.strongswan.org/projects/strongswan/wiki/RouteBasedVPN" rel="external nofollow noopener" target="_blank">route-based VPN</a> setup instead of a policy-based one.</p>
 
 <p>The bash script in file <strong>/etc/ipsec-vti.sh</strong> sets up the virtual tunnel interfaces for a route-based IPSec VPN. Also here make sure to replace the IPv4 addresses of this example with the IPv4 addresses of your setup.</p>
 
@@ -730,7 +737,7 @@ vti1: flags=209&lt;UP,POINTOPOINT,RUNNING,NOARP&gt;  mtu 1436
 
 <h2 id="frrouting-setup">FRRouting Setup</h2>
 
-<p>Follow the FFRouting <a href="http://docs.frrouting.org/projects/dev-guide/en/latest/building-frr-for-ubuntu1804.html" target="_blank" rel="noopener noreferrer">documentation</a> for installing FFRouting on Ubuntu 18.04 or have a look at my <a href="https://gist.github.com/chriselsen/a0aec32f615da8047fbd04e6afca305b" target="_blank" rel="noopener noreferrer">installation script</a>.</p>
+<p>Follow the FFRouting <a href="http://docs.frrouting.org/projects/dev-guide/en/latest/building-frr-for-ubuntu1804.html" rel="external nofollow noopener" target="_blank">documentation</a> for installing FFRouting on Ubuntu 18.04 or have a look at my <a href="https://gist.github.com/chriselsen/a0aec32f615da8047fbd04e6afca305b" rel="external nofollow noopener" target="_blank">installation script</a>.</p>
 
 <p>When configuring the <em>/etc/frr/daemons</em> file, ensure to enable the <em>bgpd</em> daemon.</p>
 
@@ -789,7 +796,7 @@ B&gt;* 172.31.0.0/16 [20/100] via 169.254.14.229, vti2, 00:23:10
   *                        via 169.254.12.37, vti1, 00:23:10
 </code></pre></div></div>
 
-<p>Notice that in case you configured the AWS Transit Gateway with <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" target="_blank" rel="noopener noreferrer">Equal-cost multi-path routing (ECMP)</a>, you will see the remote VPCs CIDR of 172.31.0.0/16 announced over both AWS Site-to-Site VPN tunnels.</p>
+<p>Notice that in case you configured the AWS Transit Gateway with <a href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing" rel="external nofollow noopener" target="_blank">Equal-cost multi-path routing (ECMP)</a>, you will see the remote VPCs CIDR of 172.31.0.0/16 announced over both AWS Site-to-Site VPN tunnels.</p>
 
 <h2 id="aws-console">AWS Console</h2>
 
@@ -863,22 +870,22 @@ B&gt;* 172.31.0.0/16 [20/100] via 169.254.14.229, vti2, 00:23:10
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=AWS%20Site-to-Site%20VPN%20with%20IPSec%20VPN%20(Strongwan)%20and%20BGP%20(FRRouting)%0Ahttps://www.edge-cloud.net/2019/07/18/aws-site-2-site-vpn-with-strongswan-frrouting/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=AWS%20Site-to-Site%20VPN%20with%20IPSec%20VPN%20(Strongwan)%20and%20BGP%20(FRRouting)%0Ahttps://www.edge-cloud.net/2019/07/18/aws-site-2-site-vpn-with-strongswan-frrouting/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=AWS+Site-to-Site+VPN+with+IPSec+VPN+%28Strongwan%29+and+BGP+%28FRRouting%29%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=AWS+Site-to-Site+VPN+with+IPSec+VPN+%28Strongwan%29+and+BGP+%28FRRouting%29%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F&amp;title=AWS+Site-to-Site+VPN+with+IPSec+VPN+%28Strongwan%29+and+BGP+%28FRRouting%29" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F&amp;title=AWS+Site-to-Site+VPN+with+IPSec+VPN+%28Strongwan%29+and+BGP+%28FRRouting%29" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F&amp;title=AWS+Site-to-Site+VPN+with+IPSec+VPN+%28Strongwan%29+and+BGP+%28FRRouting%29" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F07%2F18%2Faws-site-2-site-vpn-with-strongswan-frrouting%2F&amp;title=AWS+Site-to-Site+VPN+with+IPSec+VPN+%28Strongwan%29+and+BGP+%28FRRouting%29" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -906,6 +913,63 @@ B&gt;* 172.31.0.0/16 [20/100] via 169.254.14.229, vti2, 00:23:10
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1077,63 +1141,6 @@ B&gt;* 172.31.0.0/16 [20/100] via 169.254.14.229, vti2, 00:23:10
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1168,15 +1175,15 @@ B&gt;* 172.31.0.0/16 [20/100] via 169.254.14.229, vti2, 00:23:10
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Processing Flowroute text messages with AWS Lambda - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,15 @@
         </header>
       
 
+      
+
+
+
+
+
+    <p class="notice--warning"><strong><i class="fas fa-clock"></i> Notice:</strong> This article is more than <strong>7 years old</strong>. It might be outdated.</p>
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right ">
@@ -399,11 +408,11 @@
             </nav>
           </aside>
         
-        <p><a href="https://www.flowroute.com/" target="_blank" rel="noopener noreferrer">Flowroute</a> is a great SIP communications provider that I’ve been using for a few years now. Especially because they support <a href="https://en.wikipedia.org/wiki/T.38" target="_blank" rel="noopener noreferrer">T.38</a> for sending and receiving fax messages.</p>
+        <p><a href="https://www.flowroute.com/" rel="external nofollow noopener" target="_blank">Flowroute</a> is a great SIP communications provider that I’ve been using for a few years now. Especially because they support <a href="https://en.wikipedia.org/wiki/T.38" rel="external nofollow noopener" target="_blank">T.38</a> for sending and receiving fax messages.</p>
 
-<p>Earlier this year Flowroute added the capability for inbound and outbound <a href="https://www.flowroute.com/sms/" target="_blank" rel="noopener noreferrer">text messages</a> (aka. SMS) to their service.</p>
+<p>Earlier this year Flowroute added the capability for inbound and outbound <a href="https://www.flowroute.com/sms/" rel="external nofollow noopener" target="_blank">text messages</a> (aka. SMS) to their service.</p>
 
-<p>In this post I want to show you how to integrate Flowroute’s inbound text messaging capabilities with <a href="https://aws.amazon.com/lambda/" target="_blank" rel="noopener noreferrer">AWS Lambda</a> - the serverless compute offering from AWS. Instead of keeping servers up and running, but mostly idle, Lambda offers you the ability to only pay for execution of a software function whenever a text message arrives. Such a solution is able to handle various loads ranging from a handful of text messages per month to millions of messages.</p>
+<p>In this post I want to show you how to integrate Flowroute’s inbound text messaging capabilities with <a href="https://aws.amazon.com/lambda/" rel="external nofollow noopener" target="_blank">AWS Lambda</a> - the serverless compute offering from AWS. Instead of keeping servers up and running, but mostly idle, Lambda offers you the ability to only pay for execution of a software function whenever a text message arrives. Such a solution is able to handle various loads ranging from a handful of text messages per month to millions of messages.</p>
 
 <p>In this example incoming text messages are forwarded via E-Mail to a configurable address (See Figure 1). But you could as well implement other functionality, such as text message based voting or alike with this approach.</p>
 
@@ -433,7 +442,7 @@
 
 <h1 id="flowroute-text-message-api-documentation">Flowroute text message API documentation</h1>
 
-<p>You can find more details on the Flowroute API documentation for receiving inbound text messages at <a href="https://developer.flowroute.com/" target="_blank" rel="noopener noreferrer">https://developer.flowroute.com/</a>.</p>
+<p>You can find more details on the Flowroute API documentation for receiving inbound text messages at <a href="https://developer.flowroute.com/" rel="external nofollow noopener" target="_blank">https://developer.flowroute.com/</a>.</p>
 
 <p>Note that you need:</p>
 <ul>
@@ -445,13 +454,13 @@
 
 <h2 id="aws-pre-requisites">AWS Pre-Requisites</h2>
 
-<p>This example uses <a href="https://aws.amazon.com/ses/" target="_blank" rel="noopener noreferrer">Amazon Simple Email Service (Amazon SES)</a> to deliver the received text message. You must at least have <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html" target="_blank" rel="noopener noreferrer">configured SES with a verified E-Mail address or domain</a> in order to use it for sending E-Mails via the script below.</p>
+<p>This example uses <a href="https://aws.amazon.com/ses/" rel="external nofollow noopener" target="_blank">Amazon Simple Email Service (Amazon SES)</a> to deliver the received text message. You must at least have <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html" rel="external nofollow noopener" target="_blank">configured SES with a verified E-Mail address or domain</a> in order to use it for sending E-Mails via the script below.</p>
 
 <h2 id="aws-identity-and-access-management-role">AWS Identity and Access Management role</h2>
 
-<p><a href="https://aws.amazon.com/iam/" target="_blank" rel="noopener noreferrer">AWS Identity and Access Management</a> roles allow you to delegate access to services. The AWS services can assume a role to obtain temporary security credentials that can be used to make AWS API calls. Consequently, you don’t have to share long-term credentials or define permissions for each entity that requires access to a resource.</p>
+<p><a href="https://aws.amazon.com/iam/" rel="external nofollow noopener" target="_blank">AWS Identity and Access Management</a> roles allow you to delegate access to services. The AWS services can assume a role to obtain temporary security credentials that can be used to make AWS API calls. Consequently, you don’t have to share long-term credentials or define permissions for each entity that requires access to a resource.</p>
 
-<p>This approach allows us to grant AWS Lambda permission to access Amazon SES, without the need to embed credentials within the code executed by Lambda. We can therefore even store the code in a public <a href="https://github.com/chriselsen/AWSLambda_FlowrouteSMS" target="_blank" rel="noopener noreferrer">Github repository</a> without the risk of exposing access keys.</p>
+<p>This approach allows us to grant AWS Lambda permission to access Amazon SES, without the need to embed credentials within the code executed by Lambda. We can therefore even store the code in a public <a href="https://github.com/chriselsen/AWSLambda_FlowrouteSMS" rel="external nofollow noopener" target="_blank">Github repository</a> without the risk of exposing access keys.</p>
 
 <p>To create an AWS IAM profile navigate to the <strong>Identity &amp; Access Management</strong> service within the <em>Security &amp; Identity</em> section in the AWS Console (See Figure 2).</p>
 
@@ -673,7 +682,7 @@
 
 </figure>
 
-<p>Enter the code below into the inline code window. You can also find the code on <a href="https://github.com/chriselsen/AWSLambda_FlowrouteSMS/blob/master/SMS2EMail.nodejs" target="_blank" rel="noopener noreferrer">Github</a>.</p>
+<p>Enter the code below into the inline code window. You can also find the code on <a href="https://github.com/chriselsen/AWSLambda_FlowrouteSMS/blob/master/SMS2EMail.nodejs" rel="external nofollow noopener" target="_blank">Github</a>.</p>
 
 <p>The first section sets up the AWS SDK for interfacing with Amazon SES. The next section extracts text message values out of the posted data from Flowroute. The next section formats the outgoing E-Mail message. The last section sends the E-Mail message via Amazon SES.</p>
 
@@ -831,7 +840,7 @@
 }
 </code></pre></div></div>
 
-<p>This test event data is derived from the <a href="https://developer.flowroute.com/" target="_blank" rel="noopener noreferrer">Flowroute Messaging API documentation</a> and is an example for what Lambda will receive from AWS API Gateway.</p>
+<p>This test event data is derived from the <a href="https://developer.flowroute.com/" rel="external nofollow noopener" target="_blank">Flowroute Messaging API documentation</a> and is an example for what Lambda will receive from AWS API Gateway.</p>
 
 <p>Execute the test by selecting <strong>Save and test</strong> (See Figure 13).</p>
 
@@ -919,7 +928,7 @@
 
 <h1 id="configuring-flowroute">Configuring Flowroute</h1>
 
-<p>As a last step you need to configure Flowroute to use the new web service that we just created. For this head over to the <a href="https://manage.flowroute.com/accounts/preferences/api/" target="_blank" rel="noopener noreferrer">Flowroute web console</a> and open the tab <strong>Preferences -&gt; API Control</strong>.</p>
+<p>As a last step you need to configure Flowroute to use the new web service that we just created. For this head over to the <a href="https://manage.flowroute.com/accounts/preferences/api/" rel="external nofollow noopener" target="_blank">Flowroute web console</a> and open the tab <strong>Preferences -&gt; API Control</strong>.</p>
 
 <p>Enter the URL of your Lambda API endpoint into the <em>SMS Callback</em> field and save the configuration via a click on <strong>+ Enable SMS</strong> (See Figure 16).</p>
 
@@ -987,22 +996,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=Processing%20Flowroute%20text%20messages%20with%20AWS%20Lambda%0Ahttps://www.edge-cloud.net/2016/05/16/processing-flowroute-text-messages-aws-lambda/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=Processing%20Flowroute%20text%20messages%20with%20AWS%20Lambda%0Ahttps://www.edge-cloud.net/2016/05/16/processing-flowroute-text-messages-aws-lambda/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=Processing+Flowroute+text+messages+with+AWS+Lambda%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=Processing+Flowroute+text+messages+with+AWS+Lambda%20https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F&amp;title=Processing+Flowroute+text+messages+with+AWS+Lambda" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F&amp;title=Processing+Flowroute+text+messages+with+AWS+Lambda" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F&amp;title=Processing+Flowroute+text+messages+with+AWS+Lambda" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2016%2F05%2F16%2Fprocessing-flowroute-text-messages-aws-lambda%2F&amp;title=Processing+Flowroute+text+messages+with+AWS+Lambda" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -1030,6 +1039,63 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1201,63 +1267,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1292,15 +1301,15 @@
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     

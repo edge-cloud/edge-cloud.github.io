@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="en" class="no-js">
+--><html lang="en" class="no-js">
   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>AWS Direct Connect Gateway Deep Dive - Edge Cloud</title>
@@ -65,7 +65,7 @@
 </script>
 
 
-  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM" />
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
 
 
 
@@ -229,27 +229,27 @@
       
         
           
-            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i><span class="label">Aotearoa</span></a></li>
           
         
           
-            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
-            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+            <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
           
         
           
-            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
           
         
           
-            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
-            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer me noopener noreferrer" itemprop="sameAs" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank"><i class="fas fa-fw fa-network-wired" aria-hidden="true"></i><span class="label">AS213151</span></a></li>
           
         
       
@@ -374,6 +374,13 @@
         </header>
       
 
+      
+
+
+
+
+
+
       <section class="page__content e-content" itemprop="text">
         
           <aside class="sidebar__right sticky">
@@ -404,11 +411,11 @@
             </nav>
           </aside>
         
-        <p>In November 2017 AWS <a href="https://aws.amazon.com/blogs/aws/new-aws-direct-connect-gateway-inter-region-vpc-access/" target="_blank" rel="noopener noreferrer">released</a> AWS Direct Connect Gateway, which is probably one of the biggest innovations within the <a href="https://aws.amazon.com/directconnect/" target="_blank" rel="noopener noreferrer">AWS Direct Connect</a> product in recent years. At the same time Direct Connect Gateway is often overlooked or not well understood. Therefore this blog post will dive deeper at the ins and outs of this extremely helpful AWS network capability.</p>
+        <p>In November 2017 AWS <a href="https://aws.amazon.com/blogs/aws/new-aws-direct-connect-gateway-inter-region-vpc-access/" rel="external nofollow noopener" target="_blank">released</a> AWS Direct Connect Gateway, which is probably one of the biggest innovations within the <a href="https://aws.amazon.com/directconnect/" rel="external nofollow noopener" target="_blank">AWS Direct Connect</a> product in recent years. At the same time Direct Connect Gateway is often overlooked or not well understood. Therefore this blog post will dive deeper at the ins and outs of this extremely helpful AWS network capability.</p>
 
 <h1 id="use-cases">Use Cases</h1>
 
-<p><a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-gateways.html" target="_blank" rel="noopener noreferrer">AWS Direct Connect Gateway</a> allows you establish connectivity that spans Virtual Private Clouds (VPCs) spread across multiple AWS Regions. Instead of establishing multiple BGP sessions for each VPC, you only need to establish a single BGP session with the Direct Connect Gateway per DX location.
+<p><a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-gateways.html" rel="external nofollow noopener" target="_blank">AWS Direct Connect Gateway</a> allows you establish connectivity that spans Virtual Private Clouds (VPCs) spread across multiple AWS Regions. Instead of establishing multiple BGP sessions for each VPC, you only need to establish a single BGP session with the Direct Connect Gateway per DX location.
 As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in any location (except China) can be bridged.</p>
 
 <p class="notice--info">The rules of IP routing still apply and you will only be able to reach VPCs from on-premises locations if the IP CIDRs don’t overlap.</p>
@@ -417,7 +424,7 @@ As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in a
 
 <h2 id="direct-connect-to-remote-regions">Direct Connect to remote regions</h2>
 
-<p>Before Direct Connect Gateway you were only able to reach the AWS Region <a href="https://aws.amazon.com/directconnect/features/#AWS_Direct_Connect_Geographic_Regions" target="_blank" rel="noopener noreferrer">associated with a DX location</a> via a Private Virtual Interface (VIF). With this the AWS DX location at e.g. CoreSite NY1, New York, NY could only establish a Private VIF for usage in the US-East (N. Virginia) region, but not for the US-West (Oregon) region (See Figure 1).</p>
+<p>Before Direct Connect Gateway you were only able to reach the AWS Region <a href="https://aws.amazon.com/directconnect/features/#AWS_Direct_Connect_Geographic_Regions" rel="external nofollow noopener" target="_blank">associated with a DX location</a> via a Private Virtual Interface (VIF). With this the AWS DX location at e.g. CoreSite NY1, New York, NY could only establish a Private VIF for usage in the US-East (N. Virginia) region, but not for the US-West (Oregon) region (See Figure 1).</p>
 
 <figure class="">
 
@@ -443,7 +450,7 @@ As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in a
 
 </figure>
 
-<p>If you required to access multiple AWS regions via Direct Connect over Private VIFs you had to work with <a href="https://aws.amazon.com/directconnect/partners/" target="_blank" rel="noopener noreferrer">AWS Direct Connect Partners</a> to establish a presence in a DX location associated with the AWS Region of interest. Depending on your location and the location of the DX location this could become very expensive.</p>
+<p>If you required to access multiple AWS regions via Direct Connect over Private VIFs you had to work with <a href="https://aws.amazon.com/directconnect/partners/" rel="external nofollow noopener" target="_blank">AWS Direct Connect Partners</a> to establish a presence in a DX location associated with the AWS Region of interest. Depending on your location and the location of the DX location this could become very expensive.</p>
 
 <p>With AWS Direct Connect Gateway you can now access Virtual Private Clouds (VPC) via Virtual Private Gateways (VGW) in any AWS region (except China) from any Direct Connect location (except China), simplifying this use case dramatically (See Figure 2).</p>
 
@@ -471,7 +478,7 @@ As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in a
 
 </figure>
 
-<p>This dramatically improves flexibility and reduces cost, when connecting from on-premises to AWS regions. Looking at the <a href="https://aws.amazon.com/directconnect/pricing/#AWS_Direct_Connect_data_transfer" target="_blank" rel="noopener noreferrer">AWS Direct Connect data transfer cost</a> for AWS Regions in North America, you can see that the data transfer OUT price to any of the Direct Connect locations in North America is the same at currently $0.02. Therefore in this case picking a Direct Connect location within North America that is the closest to your on-premises location does not increase the AWS cost.</p>
+<p>This dramatically improves flexibility and reduces cost, when connecting from on-premises to AWS regions. Looking at the <a href="https://aws.amazon.com/directconnect/pricing/#AWS_Direct_Connect_data_transfer" rel="external nofollow noopener" target="_blank">AWS Direct Connect data transfer cost</a> for AWS Regions in North America, you can see that the data transfer OUT price to any of the Direct Connect locations in North America is the same at currently $0.02. Therefore in this case picking a Direct Connect location within North America that is the closest to your on-premises location does not increase the AWS cost.</p>
 
 <h2 id="connectivity-to-multiple-virtual-private-clouds-vpc">Connectivity to multiple Virtual Private Clouds (VPC)</h2>
 
@@ -483,7 +490,7 @@ As the AWS Direct Connect Gateway is a global object, VPCs and DX locations in a
 
 <h2 id="aws-transit-gateway-with-direct-connect">AWS Transit Gateway with Direct Connect</h2>
 
-<p>If you want to connect an <a href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS Transit Gateway</a> to on-premises via AWS Direct Connect, you have to leverage AWS Direct Connect Gateway (See Figure 3). It is not possible to connect directly to a Direct Connect connection from a Transit Gateway.</p>
+<p>If you want to connect an <a href="https://aws.amazon.com/transit-gateway/" rel="external nofollow noopener" target="_blank">AWS Transit Gateway</a> to on-premises via AWS Direct Connect, you have to leverage AWS Direct Connect Gateway (See Figure 3). It is not possible to connect directly to a Direct Connect connection from a Transit Gateway.</p>
 
 <figure class="">
 
@@ -520,7 +527,7 @@ An AWS Direct Connect <em>Dedicated Connection</em> can support up to 50 such pr
   </li>
   <li>
     <p><strong>Transit Gateway with Transit Virtual interface:</strong> A Transit Gateway is an AWS networking component, which allows you to connect multiple VPCs, Direct Connect Gateways, and Site-to-Site (IPSec) VPNs together via attachments. Currently these attachments have to reside in the same AWS region, except for peering to other TGW - which can be in the same or another region. In this case the on-premises facing attachment of the Direct Connect Gateway is a Transit Virtual Interface (VIF).
-Only AWS Direct Connect <em>Dedicated Connections</em> or <em>Hosted Connections</em> with a capacity of <a href="https://aws.amazon.com/directconnect/partners/" target="_blank" rel="noopener noreferrer">greater than or equal to 1G</a> support Transit VIFs. In the case of a Dedicated Connection you can use one Transit VIF in addition to 50 private or public VIFs. In the case of a Hosted Connection - which only provides a single Virtual Interface - that VIF can either be a private, public or transit Virtual Interface.
+Only AWS Direct Connect <em>Dedicated Connections</em> or <em>Hosted Connections</em> with a capacity of <a href="https://aws.amazon.com/directconnect/partners/" rel="external nofollow noopener" target="_blank">greater than or equal to 1G</a> support Transit VIFs. In the case of a Dedicated Connection you can use one Transit VIF in addition to 50 private or public VIFs. In the case of a Hosted Connection - which only provides a single Virtual Interface - that VIF can either be a private, public or transit Virtual Interface.
 AWS Direct Connect <em>Hosted Virtual Interfaces</em> do not support Transit VIFs at all.</p>
   </li>
 </ul>
@@ -531,16 +538,16 @@ AWS Direct Connect <em>Hosted Virtual Interfaces</em> do not support Transit VIF
 
 <ul>
   <li>
-<strong>API and SDKs:</strong> The AWS Direct Connect gateway’s API is part of the <a href="https://docs.aws.amazon.com/cli/latest/reference/directconnect/index.html" target="_blank" rel="noopener noreferrer">AWS Direct Connect API</a>. Therefore you can manage AWS Direct Connect gateway via <a href="https://aws.amazon.com/tools/" target="_blank" rel="noopener noreferrer">AWS SDKs and command line tools</a>.</li>
+<strong>API and SDKs:</strong> The AWS Direct Connect gateway’s API is part of the <a href="https://docs.aws.amazon.com/cli/latest/reference/directconnect/index.html" rel="external nofollow noopener" target="_blank">AWS Direct Connect API</a>. Therefore you can manage AWS Direct Connect gateway via <a href="https://aws.amazon.com/tools/" rel="external nofollow noopener" target="_blank">AWS SDKs and command line tools</a>.</li>
   <li>
 <strong>CloudFormation:</strong> As of today, CloudFormation does not support AWS Direct Connect and therefore also does not support AWS Direct Connect gateway.</li>
   <li>
-<strong>TerraForm:</strong> HashiCorp’s TerraForm does support creation and management of <a href="https://www.terraform.io/docs/providers/aws/r/dx_gateway.html" target="_blank" rel="noopener noreferrer">AWS Direct Connect gateways</a>.</li>
+<strong>TerraForm:</strong> HashiCorp’s TerraForm does support creation and management of <a href="https://www.terraform.io/docs/providers/aws/r/dx_gateway.html" rel="external nofollow noopener" target="_blank">AWS Direct Connect gateways</a>.</li>
 </ul>
 
 <h1 id="multi-account-support">Multi-Account support</h1>
 
-<p>Similar to AWS Direct Connect itself, DX Gateway also support multi-account setups. This is especially important for larger customer that want to split ownership of the components across teams or units. Also customers of <a href="https://aws.amazon.com/govcloud-us/" target="_blank" rel="noopener noreferrer">AWS GovCloud (US)</a> benefit from this capability, as various components can be managed from a standard commercial account instead of the GovCloud account.</p>
+<p>Similar to AWS Direct Connect itself, DX Gateway also support multi-account setups. This is especially important for larger customer that want to split ownership of the components across teams or units. Also customers of <a href="https://aws.amazon.com/govcloud-us/" rel="external nofollow noopener" target="_blank">AWS GovCloud (US)</a> benefit from this capability, as various components can be managed from a standard commercial account instead of the GovCloud account.</p>
 
 <p>Lookin at a standard deployment as depicted in Figure 4, it is possible - although not necessary - to split ownership of the three component types across different accounts.</p>
 
@@ -570,7 +577,7 @@ AWS Direct Connect <em>Hosted Virtual Interfaces</em> do not support Transit VIF
 
 <p>To share ownership between DX Gateway and the DX Connection, the owner of the DX connection creates a new Virtual Interface and assigns it to the account that owns the DX Gateway. The account owning the DX Gateway can then accept this Virtual Interface and attach it to a DX Gateway.</p>
 
-<p>Similarly if the account owning the AWS Virtual Private Gateway (VGW) or AWS Transit Gateway (TGW), as well as the account owning the Direct Connect gateway belong to the same AWS payer account ID, sharing is here possible as well. In that case the account owner of the AWS Virtual Private Gateway (VGW) or AWS Transit Gateway (TGW) <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html" target="_blank" rel="noopener noreferrer">initiates the association proposal</a>, which has to be approved by the account owning the Direct Connect Gateway.</p>
+<p>Similarly if the account owning the AWS Virtual Private Gateway (VGW) or AWS Transit Gateway (TGW), as well as the account owning the Direct Connect gateway belong to the same AWS payer account ID, sharing is here possible as well. In that case the account owner of the AWS Virtual Private Gateway (VGW) or AWS Transit Gateway (TGW) <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html" rel="external nofollow noopener" target="_blank">initiates the association proposal</a>, which has to be approved by the account owning the Direct Connect Gateway.</p>
 
 <h1 id="restrictions-and-limits">Restrictions and Limits</h1>
 
@@ -578,7 +585,7 @@ AWS Direct Connect <em>Hosted Virtual Interfaces</em> do not support Transit VIF
 
 <h2 id="object-limits">Object Limits</h2>
 
-<p>The number of AWS Direct Connect gateways and associated objects is <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/limits.html" target="_blank" rel="noopener noreferrer">limited</a> within a single AWS account to the following values:</p>
+<p>The number of AWS Direct Connect gateways and associated objects is <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/limits.html" rel="external nofollow noopener" target="_blank">limited</a> within a single AWS account to the following values:</p>
 <ul>
   <li>
 <strong>AWS Direct Connect gateways per account:</strong> 200</li>
@@ -593,7 +600,7 @@ AWS Direct Connect <em>Hosted Virtual Interfaces</em> do not support Transit VIF
 <h2 id="data-flow">Data flow</h2>
 
 <p>Direct Connect Gateway is geared towards data flows between AWS-facing Gateway associations and on-premises facing VIF attachments. This is depicted in Figure 5 as green paths. Data flow between associated Gateways connected to the same Direct Connect Gateway, depicted in Figure 5 as red path, is only possible if an aggregate route (e.g. 0.0.0.0/0) for the other gateway is announced over Direct Connect. In the depicted example announcing 172.16. 0.0/12 and 192.168. 0.0/16 from one of the on-premises locations would enable the traffic path shown in red.
-Data flow between multiple VIFs is only possible via the optional <a href="https://aws.amazon.com/blogs/aws/new-site-to-site-connectivity-with-aws-direct-connect-sitelink/" target="_blank" rel="noopener noreferrer">SiteLink</a> capability. This is depicted in Figure 5 as orange path.</p>
+Data flow between multiple VIFs is only possible via the optional <a href="https://aws.amazon.com/blogs/aws/new-site-to-site-connectivity-with-aws-direct-connect-sitelink/" rel="external nofollow noopener" target="_blank">SiteLink</a> capability. This is depicted in Figure 5 as orange path.</p>
 
 <figure class="">
 
@@ -647,7 +654,7 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
 
 </figure>
 
-<p>Looking at the example in Figure, you also want to keep aggregates in mind. While you can e.g. announce 100 prefixes from each of the two corporate data center depicted, in the case of these prefixes being non-overlapping, not all 200 prefixes will make it into an associated VPC route table. That’s due to the VPC route table only being able to hold <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-route-tables" target="_blank" rel="noopener noreferrer">100 BGP advertised (propagated) routes</a>.</p>
+<p>Looking at the example in Figure, you also want to keep aggregates in mind. While you can e.g. announce 100 prefixes from each of the two corporate data center depicted, in the case of these prefixes being non-overlapping, not all 200 prefixes will make it into an associated VPC route table. That’s due to the VPC route table only being able to hold <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-route-tables" rel="external nofollow noopener" target="_blank">100 BGP advertised (propagated) routes</a>.</p>
 
 <p class="notice--info">If you advertise more than 100 routes over the BGP session, the BGP session will go into an idle state.</p>
 
@@ -693,22 +700,22 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://toot.kytta.dev/?text=AWS%20Direct%20Connect%20Gateway%20Deep%20Dive%0Ahttps://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" target="_blank" rel="noopener noreferrer">  
+  <a href="https://toot.kytta.dev/?text=AWS%20Direct%20Connect%20Gateway%20Deep%20Dive%0Ahttps://www.edge-cloud.net/2019/09/06/dx-gateway-deep-dive/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
     <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
 
-  <a href="https://twitter.com/intent/tweet?text=AWS+Direct+Connect+Gateway+Deep+Dive%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+  <a href="https://twitter.com/intent/tweet?text=AWS+Direct+Connect+Gateway+Deep+Dive%20https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
-  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F&amp;title=AWS+Direct+Connect+Gateway+Deep+Dive" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F&amp;title=AWS+Direct+Connect+Gateway+Deep+Dive" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
 
-  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F&amp;title=AWS+Direct+Connect+Gateway+Deep+Dive" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" target="_blank" rel="noopener noreferrer">
+  <a href="https://getpocket.com/save?url=https%3A%2F%2Fwww.edge-cloud.net%2F2019%2F09%2F06%2Fdx-gateway-deep-dive%2F&amp;title=AWS+Direct+Connect+Gateway+Deep+Dive" class="btn share-button btn--pocket" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pocket" rel="external nofollow noopener" target="_blank">
     <i class="fab fa-fw fa-get-pocket" aria-hidden="true"></i><span> Pocket</span></a>
 
 </section>
@@ -736,6 +743,63 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -907,63 +971,6 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -998,15 +1005,15 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
     
       
         
-          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+          <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
         
       
         
-          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
         
       
         
-          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
         
       
     
