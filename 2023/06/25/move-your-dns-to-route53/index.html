@@ -88,7 +88,7 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
-<link href="/assets/css/fontawesome/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css">
 <noscript><link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css"></noscript>
 
 
@@ -113,6 +113,7 @@
 <link rel="preload" href="/assets/css/main.css" as="style">
 <link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.css" as="style">
 <link rel="preload" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css" as="style">
+<link rel="preload" href="/assets/css/fontawesome/css/all.min.css" as="style">
 
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
 <link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
@@ -120,7 +121,7 @@
 <link rel="preconnnect" href="https://www.google-analytics.com">
 <link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2492251344344116" crossorigin="anonymous"></script>
+
 <!-- end custom head snippets -->
 
   </head>
@@ -233,6 +234,10 @@
         
           
             <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+          
+        
+          
+            <li><a href="https://www.youtube.com/@EdgeCloud" rel="nofollow noopener noreferrer me" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i><span class="label">YouTube</span></a></li>
           
         
           
@@ -430,6 +435,8 @@
         
         <p>This blog post will walk through the migration steps of the DNS setup for a public zone to <a href="https://aws.amazon.com/route53/" rel="external nofollow noopener" target="_blank">Amazon Route 53</a>. It will include steps for both making Route 53 the DNS service for an existing domain, but also transferring the DNS registration for this domain to Route 53. While it will use Google Domains as the DNS service initially providing the zone and registration service, the steps should be easily transferable to any other DNS provider (e.g. GoDaddy) that you would want to migrate away from.</p>
 
+<p class="notice"><strong><i class="fab fa-fw fa-youtube"></i> YouTube Video:</strong> The content presented here is also available as a <a href="https://www.edge-cloud.net/2023/07/27/move-your-dns-to-route53/">series of YouTube videos</a>.</p>
+
 <p class="notice--info"><strong>Note:</strong> While you can accomplish most of the steps in this guide within about 1 hour, waiting for DNSSEC to be fully disabled will take 2 days. Therefore if you are planning to follow this guide you might want to skip ahead to the “Disable DNSSEC” step now and come back for the rest in a few days.</p>
 
 <h1 id="motivation">Motivation</h1>
@@ -464,9 +471,9 @@ Another huge benefit is the availability of an <a href="https://docs.aws.amazon.
 
 <a href="/content/uploads/2023/06/move-your-dns-to-route53-dns-components.png" title="Figure 1: Components of a typical DNS setup for a domain, enabling recursive lookups of records. " class="image-popup">
 <picture>
-  <source width="859" height="423" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-dns-components-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-800.webp 800w,  /content/uploads/2023/06/move-your-dns-to-route53-dns-components.webp 859w" sizes="859px"></source>
-  <source width="859" height="423" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-dns-components-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-800.png 800w,  /content/uploads/2023/06/move-your-dns-to-route53-dns-components.png 859w" sizes="859px"></source>
-  <img src="/content/resized/2023/06/move-your-dns-to-route53-dns-components-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-dns-components.png" class="blur-up lazyautosizes lazyload" width="859" height="423" alt="Figure 1: Components of a typical DNS setup for a domain, enabling recursive lookups of records. ">
+  <source width="860" height="423" type="image/webp" data-srcset="        /content/resized/2023/06/move-your-dns-to-route53-dns-components-320.webp 320w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-384.webp 384w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-512.webp 512w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-683.webp 683w,         /content/resized/2023/06/move-your-dns-to-route53-dns-components-800.webp 800w,  /content/uploads/2023/06/move-your-dns-to-route53-dns-components.webp 860w" sizes="860px"></source>
+  <source width="860" height="423" data-srcset="    /content/resized/2023/06/move-your-dns-to-route53-dns-components-320.png 320w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-384.png 384w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-512.png 512w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-683.png 683w,     /content/resized/2023/06/move-your-dns-to-route53-dns-components-800.png 800w,  /content/uploads/2023/06/move-your-dns-to-route53-dns-components.png 860w" sizes="860px"></source>
+  <img src="/content/resized/2023/06/move-your-dns-to-route53-dns-components-320.png" data-src="/content/uploads/2023/06/move-your-dns-to-route53-dns-components.png" class="blur-up lazyautosizes lazyload" width="860" height="423" alt="Figure 1: Components of a typical DNS setup for a domain, enabling recursive lookups of records. ">
 </picture>
 </a>
 
@@ -960,7 +967,7 @@ Once complete click on <strong>Create KSK and enable signing</strong>.</li>
 
 </figure>
 
-<p>Once complete, select <strong>Save</strong> for both sections.</p>
+<p>Once complete, select <strong>Save</strong> for both sections. Afterwards click on <strong>Switch to these settings</strong> in the yellow box at the top of the screen.</p>
 
 <p>At this point it will take up to 48 hours for the zone of the domain to be fully moved from Google Domains to Route 53. During this time you should not make any changes to the records in the zone. Unfortunately Google Domains does not offer you the capability to reduce the TTL for NS records and thereby speed up this migration window.</p>
 
@@ -1246,7 +1253,8 @@ While all shown steps and screenshots are specific to Google Domains, the same c
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/2023/07/27/move-your-dns-to-route53/" class="pagination--pager" title="How to move your DNS to Amazon Route 53 [Video]
+">Next</a>
     
   </nav>
 
@@ -1260,6 +1268,120 @@ While all shown steps and screenshots are specific to Google Domains, the same c
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/" rel="permalink">"Bring your own IP addresses" (BYOIP) for Amazon EC2 [Video]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-20T00:00:00-07:00">August 20, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Video
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">YouTube Videos with step-by-step guide for moving IP prefixes to AWS with “Bring your own IP addresses” (BYOIP) for Amazon EC2
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/07/27/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53 [Video]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-25T00:00:00-07:00">July 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53, #Video
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">YouTube Videos with step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1375,132 +1497,12 @@ While all shown steps and screenshots are specific to Google Domains, the same c
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/07/19/hands-on-with-aws-byoip/" rel="permalink">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-07-19T00:00:00-07:00">July 19, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          19 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #IPv6
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting s...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
   
 
-  <div class="page__adsense">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2492251344344116" crossorigin="anonymous"></script>
-<!-- Edge-Cloud -->
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2492251344344116" data-ad-slot="5172543623" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
+  
 
 </div>
 
@@ -1533,6 +1535,10 @@ While all shown steps and screenshots are specific to Google Domains, the same c
       
         
           <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@EdgeCloud" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> YouTube</a></li>
         
       
         

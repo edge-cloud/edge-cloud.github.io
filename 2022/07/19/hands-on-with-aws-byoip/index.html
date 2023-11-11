@@ -88,7 +88,7 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
-<link href="/assets/css/fontawesome/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css">
 <noscript><link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css"></noscript>
 
 
@@ -113,6 +113,7 @@
 <link rel="preload" href="/assets/css/main.css" as="style">
 <link rel="preload" href="/assets/js/instantsearch/dist/instantsearch.min.css" as="style">
 <link rel="preload" href="/assets/js/instantsearch/dist/instantsearch-theme-algolia.min.css" as="style">
+<link rel="preload" href="/assets/css/fontawesome/css/all.min.css" as="style">
 
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
 <link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
@@ -120,7 +121,7 @@
 <link rel="preconnnect" href="https://www.google-analytics.com">
 <link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2492251344344116" crossorigin="anonymous"></script>
+
 <!-- end custom head snippets -->
 
   </head>
@@ -233,6 +234,10 @@
         
           
             <li><a href="https://noc.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span class="label">Mastodon</span></a></li>
+          
+        
+          
+            <li><a href="https://www.youtube.com/@EdgeCloud" rel="nofollow noopener noreferrer me" itemprop="sameAs" target="_blank"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i><span class="label">YouTube</span></a></li>
           
         
           
@@ -431,6 +436,8 @@
           </aside>
         
         <p>This blog post will walk you through the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html" rel="external nofollow noopener" target="_blank">Bring your own IP addresses (BYOIP) for Amazon EC2</a> feature, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)" rel="external nofollow noopener" target="_blank">Autonomous System Numbers (ASNs)</a>. Within your AWS account, these BYOIP address ranges appear as an <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html" rel="external nofollow noopener" target="_blank">address pool</a>.</p>
+
+<p class="notice"><strong><i class="fab fa-fw fa-youtube"></i> YouTube Video:</strong> The content presented here is also available as a <a href="https://www.edge-cloud.net/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/">YouTube video</a>.</p>
 
 <p>While <a href="https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-bring-your-own-ip-byoip-for-amazon-vpc/" rel="external nofollow noopener" target="_blank">other blog posts on AWS BYOIP</a> exist, they are usually completely theoretical, using Documentation IP ranges and thereby hard to follow. In this blog post I will use real IPv6 address space instead, allowing you to validate most of the steps through various publicly available databases and systems yourself.</p>
 
@@ -808,7 +815,7 @@ This is done via the AWS CLI command <code class="language-plaintext highlighter
 
 <h3 id="advertise-the-address-space">Advertise the address space</h3>
 
-<p>Wwe are almost done and as a last step need to instruct AWS to advertise the BYOIP CIDR from the AWS region into which the address space was provisioned. This is done via the AWS CLI command <code class="language-plaintext highlighter-rouge">aws ec2 advertise-byoip-cidr --cidr &lt;cidr&gt; --region &lt;region&gt;</code>.</p>
+<p>We are almost done and as a last step need to instruct AWS to advertise the BYOIP CIDR from the AWS region into which the address space was provisioned. This is done via the AWS CLI command <code class="language-plaintext highlighter-rouge">aws ec2 advertise-byoip-cidr --cidr &lt;cidr&gt; --region &lt;region&gt;</code>.</p>
 
 <p>The result would look like this:</p>
 
@@ -1183,6 +1190,120 @@ descr:          -----BEGIN CERTIFICATE-----MIIDyTCCArGgAwIBAgIUR2P0aLZtfm2L9QZI5
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/" rel="permalink">"Bring your own IP addresses" (BYOIP) for Amazon EC2 [Video]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-20T00:00:00-07:00">August 20, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Video
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">YouTube Videos with step-by-step guide for moving IP prefixes to AWS with “Bring your own IP addresses” (BYOIP) for Amazon EC2
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/07/27/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53 [Video]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-25T00:00:00-07:00">July 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53, #Video
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">YouTube Videos with step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
 </a>
       
@@ -1288,133 +1409,12 @@ descr:          -----BEGIN CERTIFICATE-----MIIDyTCCArGgAwIBAgIUR2P0aLZtfm2L9QZI5
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2023/03/20/http-redirect-with-cloudfront/" rel="permalink">URL Redirect with Amazon CloudFront and Amazon Route 53
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-03-20T00:00:00-07:00">March 20, 2023</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          8 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #CloudFront, #Web
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2022/06/28/dx-overview/" rel="permalink">AWS Direct Connect overview
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-06-28T00:00:00-07:00">June 28, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          10 minute read
-        
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-    <span class="page__meta-tags"></span>
-      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
-      #AWS, #Network, #Direct-Connect
-    
-    
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
   
 
-  <div class="page__adsense">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2492251344344116" crossorigin="anonymous"></script>
-<!-- Edge-Cloud -->
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2492251344344116" data-ad-slot="5172543623" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
+  
 
 </div>
 
@@ -1447,6 +1447,10 @@ descr:          -----BEGIN CERTIFICATE-----MIIDyTCCArGgAwIBAgIUR2P0aLZtfm2L9QZI5
       
         
           <li><a href="https://noc.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@EdgeCloud" rel="me nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> YouTube</a></li>
         
       
         

@@ -3,7 +3,7 @@
   <channel>
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2023-07-09T14:37:05-07:00</updated>
+  <updated>2023-11-11T13:44:05-08:00</updated>
   <id>https://www.edge-cloud.net/atom.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -25,8 +25,8 @@
     <entry>
       <title>Cost considerations for centralized NAT with Transit Gateway</title>
       <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</id>
-      <updated>2023-07-09T14:36:12-07:00</updated>
-      <published>2023-07-09T14:36:12-07:00</published>
+      <updated>2023-11-11T13:41:35-08:00</updated>
+      <published>2023-11-11T13:41:35-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -46,8 +46,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2022/01/01/template/</id>
-      <updated>2023-07-09T14:36:12-07:00</updated>
-      <published>2023-07-09T14:36:12-07:00</published>
+      <updated>2023-11-11T13:41:35-08:00</updated>
+      <published>2023-11-11T13:41:35-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -116,8 +116,8 @@ Math
     <entry>
       <title>Securing your AWS networks</title>
       <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</id>
-      <updated>2023-07-09T14:36:12-07:00</updated>
-      <published>2023-07-09T14:36:12-07:00</published>
+      <updated>2023-11-11T13:41:35-08:00</updated>
+      <published>2023-11-11T13:41:35-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -137,8 +137,8 @@ Math
     <entry>
       <title>Direct Connect Public VIF for S3 traffic only</title>
       <id>https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/</id>
-      <updated>2023-07-09T14:36:12-07:00</updated>
-      <published>2023-07-09T14:36:12-07:00</published>
+      <updated>2023-11-11T13:41:35-08:00</updated>
+      <published>2023-11-11T13:41:35-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -192,6 +192,82 @@ Note: This is a notice box
       <category term="Network" />
       
       <category term="Direct-Connect" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>\&quot;Bring your own IP addresses\&quot; (BYOIP) for Amazon EC2 [Video]</title>
+      <id>https://www.edge-cloud.net/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/</id>
+      <updated>2023-08-20T00:00:00-07:00</updated>
+      <published>2023-08-20T00:00:00-07:00</published>
+      <author>
+        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
+      </author>
+      <link href="https://www.edge-cloud.net/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/" />
+      <summary type="html">YouTube Videos with step-by-step guide for moving IP prefixes to AWS with &quot;Bring your own IP addresses&quot; (BYOIP) for Amazon EC2</summary>
+      <content type="html"> YouTube Videos accompanying the previous blog post Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2.
+
+Step-by-step guide for moving IP prefixes to AWS with “Bring your own IP addresses” (BYOIP) for Amazon EC2. Steps with the RIRs ARIN and RIPE are shown, including prepartion of address space.
+
+
+
+
+    
+  
+
+</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      <category term="Video" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>How to move your DNS to Amazon Route 53 [Video]</title>
+      <id>https://www.edge-cloud.net/2023/07/27/move-your-dns-to-route53/</id>
+      <updated>2023-07-25T00:00:00-07:00</updated>
+      <published>2023-07-25T00:00:00-07:00</published>
+      <author>
+        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
+      </author>
+      <link href="https://www.edge-cloud.net/2023/07/27/move-your-dns-to-route53/" />
+      <summary type="html">YouTube Videos with step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53</summary>
+      <content type="html"> YouTube Videos accompanying the previous blog post “How to move your DNS to Amazon Route 53”.
+
+Part 1: Zone Services
+
+
+
+
+    
+  
+
+Part 2: Registration Services
+
+
+
+
+    
+  
+
+</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      <category term="Route-53" />
+      
+      <category term="Video" />
       
       
       <category term="EdgeCloud" />
@@ -286,50 +362,6 @@ Note: This is a notice box
       <category term="Network" />
       
       <category term="IPv6" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>AWS Direct Connect overview</title>
-      <id>https://www.edge-cloud.net/2022/06/28/dx-overview/</id>
-      <updated>2022-06-28T00:00:00-07:00</updated>
-      <published>2022-06-28T00:00:00-07:00</published>
-      <author>
-        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
-      </author>
-      <link href="https://www.edge-cloud.net/2022/06/28/dx-overview/" />
-      <summary type="html">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.</summary>
-      <content type="html">AWS Direct Connect (DX) makes it easy to establish a dedicated connection from an on-premises network to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your data center, office, factory or collocated environment. Such connectivity can reduce network costs, increase bandwidth, and provide a more consistent network experience than internet-based connections. This article will provide an overview of AWS Direct Connect, outlining the various elements, touch upon resiliency recommendations, connectivity...</content>
-      
-      <category term="AWS" />
-      
-      <category term="Network" />
-      
-      <category term="Direct-Connect" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Better understanding BGP</title>
-      <id>https://www.edge-cloud.net/2020/09/28/understanding-bgp/</id>
-      <updated>2020-09-28T00:00:00-07:00</updated>
-      <published>2020-09-28T00:00:00-07:00</published>
-      <author>
-        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
-      </author>
-      <link href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/" />
-      <summary type="html">Primer to better understanding BGP</summary>
-      <content type="html">In a previous post we took a look at some of the fundamental principles of IP routing. Today we want to look at some more details of related BGP Routing protocol concepts. While these principles and concepts are generic, we will again use examples based on AWS networking, along with examples from running an Autonomous System on the Internet. This blog post is not intended to be an all encompassing primer on BGP. Instead I’ve...</content>
-      
-      <category term="BGP" />
-      
-      <category term="Network" />
       
       
       <category term="EdgeCloud" />
