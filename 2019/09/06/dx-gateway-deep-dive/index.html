@@ -413,6 +413,7 @@
 <li><a href="#bgp-prefixes">BGP prefixes</a></li>
 </ul>
 </li>
+<li><a href="#behind-the-scenes">Behind the scenes</a></li>
 <li><a href="#summary">Summary</a></li>
 </ul>
 
@@ -557,7 +558,7 @@ AWS Direct Connect <em>Hosted Virtual Interfaces</em> do not support Transit VIF
 
 <p>Similar to AWS Direct Connect itself, DX Gateway also support multi-account setups. This is especially important for larger customer that want to split ownership of the components across teams or units. Also customers of <a href="https://aws.amazon.com/govcloud-us/" rel="external nofollow noopener" target="_blank">AWS GovCloud (US)</a> benefit from this capability, as various components can be managed from a standard commercial account instead of the GovCloud account.</p>
 
-<p>Lookin at a standard deployment as depicted in Figure 4, it is possible - although not necessary - to split ownership of the three component types across different accounts.</p>
+<p>Looking at a standard deployment as depicted in Figure 4, it is possible - although not necessary - to split ownership of the three component types across different accounts.</p>
 
 <figure class="">
 
@@ -665,6 +666,36 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
 <p>Looking at the example in Figure, you also want to keep aggregates in mind. While you can e.g. announce 100 prefixes from each of the two corporate data center depicted, in the case of these prefixes being non-overlapping, not all 200 prefixes will make it into an associated VPC route table. That’s due to the VPC route table only being able to hold <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-route-tables" rel="external nofollow noopener" target="_blank">100 BGP advertised (propagated) routes</a>.</p>
 
 <p class="notice--info">If you advertise more than 100 routes over the BGP session, the BGP session will go into an idle state.</p>
+
+<h1 id="behind-the-scenes">Behind the scenes</h1>
+
+<p>Behind the scenes Direct Connect Gateway is implemented as a distributed BGP route reflector. Individual nodes of this BGP route reflector are distributed across multiple AWS Regions, which means that even in case of an entire AWS Region, the functionality of Direct Connect Gateway is not impaired.
+It’s also important to point out that a Route Reflector - and thereby Direct Connect Gateway - is not in the traffic path, but rather part of the control path. Therefore traffic does not actually flow through a Direct Connect Gateway. 
+With this, it’s sometimes better suited to depict a Direct Connect Gateway as such a distributed route reflector outside the traffic path (Figure 7).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2019/09/DX-GW-RouteReflector.png" title="Figure 7: Direct Connect Gateway depicted as a distributed route reflector outside the traffic path. " class="image-popup">
+<picture>
+  <source width="559" height="317" type="image/webp" data-srcset="        /content/resized/2019/09/DX-GW-RouteReflector-320.webp 320w,         /content/resized/2019/09/DX-GW-RouteReflector-384.webp 384w,         /content/resized/2019/09/DX-GW-RouteReflector-512.webp 512w,  /content/uploads/2019/09/DX-GW-RouteReflector.webp 559w" sizes="559px"></source>
+  <source width="559" height="317" data-srcset="    /content/resized/2019/09/DX-GW-RouteReflector-320.png 320w,     /content/resized/2019/09/DX-GW-RouteReflector-384.png 384w,     /content/resized/2019/09/DX-GW-RouteReflector-512.png 512w,  /content/uploads/2019/09/DX-GW-RouteReflector.png 559w" sizes="559px"></source>
+  <img src="/content/resized/2019/09/DX-GW-RouteReflector-320.png" data-src="/content/uploads/2019/09/DX-GW-RouteReflector.png" class="blur-up lazyautosizes lazyload" width="559" height="317" alt="Figure 7: Direct Connect Gateway depicted as a distributed route reflector outside the traffic path. ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 7: Direct Connect Gateway depicted as a distributed route reflector outside the traffic path.
+</figcaption>
+
+</figure>
 
 <h1 id="summary">Summary</h1>
 
@@ -1048,7 +1079,7 @@ Data flow between multiple VIFs is only possible via the optional <a href="https
   </ul>
 </div>
 
-<div align="center" class="page__footer-copyright">© 2013 - 2023 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+<div align="center" class="page__footer-copyright">© 2013 - 2024 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
 
       </footer>
     </div>
