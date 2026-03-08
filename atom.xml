@@ -3,7 +3,7 @@
   <channel>
   <title type="text">Edge Cloud</title>
   <subtitle type="html">On the edge of cloud computing</subtitle>
-  <updated>2024-09-03T13:08:21-07:00</updated>
+  <updated>2026-03-07T16:13:40-08:00</updated>
   <id>https://www.edge-cloud.net/atom.xml</id>
   <author>
     <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
@@ -25,8 +25,8 @@
     <entry>
       <title>Cost considerations for centralized NAT with Transit Gateway</title>
       <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/</id>
-      <updated>2024-09-03T13:07:49-07:00</updated>
-      <published>2024-09-03T13:07:49-07:00</published>
+      <updated>2026-03-07T16:13:10-08:00</updated>
+      <published>2026-03-07T16:13:10-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -46,8 +46,8 @@
     <entry>
       <title>Title goes here</title>
       <id>https://www.edge-cloud.net/2022/01/01/template/</id>
-      <updated>2024-09-03T13:07:49-07:00</updated>
-      <published>2024-09-03T13:07:49-07:00</published>
+      <updated>2026-03-07T16:13:10-08:00</updated>
+      <published>2026-03-07T16:13:10-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -116,8 +116,8 @@ Math
     <entry>
       <title>Securing your AWS networks</title>
       <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/</id>
-      <updated>2024-09-03T13:07:49-07:00</updated>
-      <published>2024-09-03T13:07:49-07:00</published>
+      <updated>2026-03-07T16:13:10-08:00</updated>
+      <published>2026-03-07T16:13:10-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
@@ -135,57 +135,16 @@ Math
     </entry>
   
     <entry>
-      <title>Direct Connect Public VIF for S3 traffic only</title>
-      <id>https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/</id>
-      <updated>2024-09-03T13:07:49-07:00</updated>
-      <published>2024-09-03T13:07:49-07:00</published>
+      <title>Enhanced AWS Direct Connect Location Directory</title>
+      <id>https://www.edge-cloud.net/2026/02/03/dx-location-details/</id>
+      <updated>2026-02-03T00:00:00-08:00</updated>
+      <published>2026-02-03T00:00:00-08:00</published>
       <author>
         <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
       </author>
-      <link href="https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/" />
-      <summary type="html">How to use a Direct Connect Public VIF solely for S3 traffic only</summary>
-      <content type="html">Intro of what to accomplish
-
-Heading 1
-
-Heading 1.1
-
-Bold
-
-Note: This is a notice box
-
-#
-# Code
-#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-
-
-
-
-
-  Figure 1: Setup Overview of EC2-based VPN endpoint for Site-to-Site VPN with AWS
-
-
-
-
-\[Buffer (Mbit) = bandwidth (Mbit/s) × delay (s)\]
-</content>
+      <link href="https://www.edge-cloud.net/2026/02/03/dx-location-details/" />
+      <summary type="html">A searchable directory of AWS Direct Connect locations with geographic data, filtering capabilities, and automated updates</summary>
+      <content type="html">When planning AWS Direct Connect deployments, one of the first challenges customers face is understanding where Direct Connect locations are physically located and what capabilities they offer. While AWS provides a list of Direct Connect locations, this page has several limitations that make it difficult to use for planning and decision-making purposes. This article introduces the dx-location-details project, which addresses these limitations by providing an enhanced, interactive directory of AWS Direct Connect locations with geographic...</content>
       
       <category term="AWS" />
       
@@ -199,7 +158,30 @@ Note: This is a notice box
     </entry>
   
     <entry>
-      <title>\&quot;Bring your own IP addresses\&quot; (BYOIP) for Amazon EC2 [Video]</title>
+      <title>Direct Connect Public VIF for S3 traffic only</title>
+      <id>https://www.edge-cloud.net/2026/01/13/aws-dx-public-vid-for-s3-only/</id>
+      <updated>2026-01-13T00:00:00-08:00</updated>
+      <published>2026-01-13T00:00:00-08:00</published>
+      <author>
+        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
+      </author>
+      <link href="https://www.edge-cloud.net/2026/01/13/aws-dx-public-vid-for-s3-only/" />
+      <summary type="html">How to use a Direct Connect Public VIF solely for S3 traffic only</summary>
+      <content type="html">When using AWS Direct Connect with a Public Virtual Interface (VIF) to access S3, customers often face a challenge: by default, the Public VIF receives all AWS public IP prefixes via BGP, not just those for S3. This means traffic to all AWS services - including EC2, Lambda, and others - will route over the expensive Direct Connect connection instead of the internet, significantly increasing data transfer costs. This article explores a solution that allows...</content>
+      
+      <category term="AWS" />
+      
+      <category term="Network" />
+      
+      <category term="Direct-Connect" />
+      
+      
+      <category term="EdgeCloud" />
+      
+    </entry>
+  
+    <entry>
+      <title>Bring your own IP addresses (BYOIP) for Amazon EC2 [Video]</title>
       <id>https://www.edge-cloud.net/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/</id>
       <updated>2023-08-20T00:00:00-07:00</updated>
       <published>2023-08-20T00:00:00-07:00</published>
@@ -339,29 +321,6 @@ Part 2: Registration Services
       <category term="CloudFront" />
       
       <category term="Web" />
-      
-      
-      <category term="EdgeCloud" />
-      
-    </entry>
-  
-    <entry>
-      <title>Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title>
-      <id>https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip/</id>
-      <updated>2022-07-19T00:00:00-07:00</updated>
-      <published>2022-07-19T00:00:00-07:00</published>
-      <author>
-        <name>Christian Elsen</name><uri>https://www.edge-cloud.net/about/</uri>
-      </author>
-      <link href="https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip/" />
-      <summary type="html">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.</summary>
-      <content type="html">This blog post will walk you through the Bring your own IP addresses (BYOIP) for Amazon EC2 feature, using a real-life example. With BYOIP you can bring part or all of your publicly routable IPv4 or IPv6 address ranges to your AWS account. While you continue to own the address range, AWS advertises it on the internet for you under the Amazon Autonomous System Numbers (ASNs). Within your AWS account, these BYOIP address ranges appear...</content>
-      
-      <category term="AWS" />
-      
-      <category term="Network" />
-      
-      <category term="IPv6" />
       
       
       <category term="EdgeCloud" />

@@ -1,1 +1,508 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" /><updated>2024-09-03T13:08:21-07:00</updated><id>https://www.edge-cloud.net/feed.xml</id><title type="html">Edge Cloud</title><subtitle>On the edge of cloud computing</subtitle><author><name>Christian Elsen</name></author><entry><title type="html">Direct Connect Public VIF for S3 traffic only</title><link href="https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only/" rel="alternate" type="text/html" title="Direct Connect Public VIF for S3 traffic only" /><published>2024-09-03T13:07:49-07:00</published><updated>2024-09-03T13:07:49-07:00</updated><id>https://www.edge-cloud.net/2022/07/15/aws-dx-public-vid-for-s3-only</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="Direct-Connect" /><summary type="html"><![CDATA[How to use a Direct Connect Public VIF solely for S3 traffic only]]></summary></entry><entry><title type="html">Securing your AWS networks</title><link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" /><published>2024-09-03T13:07:49-07:00</published><updated>2024-09-03T13:07:49-07:00</updated><id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary></entry><entry><title type="html">Title goes here</title><link href="https://www.edge-cloud.net/2022/01/01/template/" rel="alternate" type="text/html" title="Title goes here" /><published>2024-09-03T13:07:49-07:00</published><updated>2024-09-03T13:07:49-07:00</updated><id>https://www.edge-cloud.net/2022/01/01/template</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Brief description goes here]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2022/06/title-dx-overview.png" /><media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2022/06/title-dx-overview.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Cost considerations for centralized NAT with Transit Gateway</title><link href="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/" rel="alternate" type="text/html" title="Cost considerations for centralized NAT with Transit Gateway" /><published>2024-09-03T13:07:49-07:00</published><updated>2024-09-03T13:07:49-07:00</updated><id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><summary type="html"><![CDATA[Determining the break-even point when a centralized NAT approach via Transit Gateway outperforms a decentralized NAT approach.]]></summary></entry><entry><title type="html">\“Bring your own IP addresses\” (BYOIP) for Amazon EC2 [Video]</title><link href="https://www.edge-cloud.net/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/" rel="alternate" type="text/html" title="\“Bring your own IP addresses\” (BYOIP) for Amazon EC2 [Video]" /><published>2023-08-20T00:00:00-07:00</published><updated>2023-08-20T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2023/08/20/video-bring-your-own-ip-for-amazon-vpc</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="Video" /><summary type="html"><![CDATA[YouTube Videos with step-by-step guide for moving IP prefixes to AWS with "Bring your own IP addresses" (BYOIP) for Amazon EC2]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/08/video-bring-your-own-ip-for-amazon-vpc.png" /><media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/08/video-bring-your-own-ip-for-amazon-vpc.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">How to move your DNS to Amazon Route 53 [Video]</title><link href="https://www.edge-cloud.net/2023/07/27/move-your-dns-to-route53/" rel="alternate" type="text/html" title="How to move your DNS to Amazon Route 53 [Video]" /><published>2023-07-25T00:00:00-07:00</published><updated>2023-07-25T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2023/07/27/video-move-your-dns-to-route53</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="Route-53" /><category term="Video" /><summary type="html"><![CDATA[YouTube Videos with step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/07/video-move-your-dns-to-route53.png" /><media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/07/video-move-your-dns-to-route53.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">How to move your DNS to Amazon Route 53</title><link href="https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/" rel="alternate" type="text/html" title="How to move your DNS to Amazon Route 53" /><published>2023-06-25T00:00:00-07:00</published><updated>2023-06-25T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="Route-53" /><summary type="html"><![CDATA[Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/06/title-move-your-dns-to-route53.png" /><media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/06/title-move-your-dns-to-route53.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Random prefix attack mitigation with Amazon Route 53</title><link href="https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/" rel="alternate" type="text/html" title="Random prefix attack mitigation with Amazon Route 53" /><published>2023-06-18T00:00:00-07:00</published><updated>2023-06-18T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="Route-53" /><summary type="html"><![CDATA[How to mitigate random prefix attacks - when someone send a lot of traffic to subdomains of your main domain - with Amazon Route 53]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/06/title-r53-random-prefix-attack-mitigation.png" /><media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/06/title-r53-random-prefix-attack-mitigation.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">URL Redirect with Amazon CloudFront and Amazon Route 53</title><link href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/" rel="alternate" type="text/html" title="URL Redirect with Amazon CloudFront and Amazon Route 53" /><published>2023-03-20T00:00:00-07:00</published><updated>2023-03-20T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2023/03/20/url-redirect-with-cloudfront</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="CloudFront" /><category term="Web" /><summary type="html"><![CDATA[How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/03/title-url-redirect-with-cloudfront.png" /><media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/03/title-url-redirect-with-cloudfront.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title><link href="https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" /><published>2022-07-19T00:00:00-07:00</published><updated>2022-07-19T00:00:00-07:00</updated><id>https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip</id><author><name>Christian Elsen</name></author><category term="EdgeCloud" /><category term="AWS" /><category term="Network" /><category term="IPv6" /><summary type="html"><![CDATA[Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2022/07/title-hands-on-with-aws-byoip.png" /><media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2022/07/title-hands-on-with-aws-byoip.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <link href="https://www.edge-cloud.net/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://www.edge-cloud.net/" rel="alternate" type="text/html" />
+  <updated>2026-03-07T16:13:40-08:00</updated>
+  <id>https://www.edge-cloud.net/feed.xml</id>
+  <title type="html">Edge Cloud</title>
+  <subtitle>On the edge of cloud computing</subtitle>
+  <author>
+    <name>Christian Elsen</name>
+  </author>
+  
+  <entry>
+    <title type="html">Cost considerations for centralized NAT with Transit Gateway</title>
+    <link href="https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven/" rel="alternate" type="text/html" title="Cost considerations for centralized NAT with Transit Gateway" />
+    <published>2026-03-07T16:13:10-08:00</published>
+    <updated>2026-03-07T16:13:10-08:00</updated>
+    <id>https://www.edge-cloud.net/2021/01/01/tgw-ngw-cost-breakeven</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <summary type="html">Determining the break-even point when a centralized NAT approach via Transit Gateway outperforms a decentralized NAT approach.</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/assets/images/og-image.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/assets/images/og-image.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Title goes here</title>
+    <link href="https://www.edge-cloud.net/2022/01/01/template/" rel="alternate" type="text/html" title="Title goes here" />
+    <published>2026-03-07T16:13:10-08:00</published>
+    <updated>2026-03-07T16:13:10-08:00</updated>
+    <id>https://www.edge-cloud.net/2022/01/01/template</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <summary type="html">Brief description goes here</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2022/06/title-dx-overview.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2022/06/title-dx-overview.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Securing your AWS networks</title>
+    <link href="https://www.edge-cloud.net/2020/01/03/securing-your-aws-network/" rel="alternate" type="text/html" title="Securing your AWS networks" />
+    <published>2026-03-07T16:13:10-08:00</published>
+    <updated>2026-03-07T16:13:10-08:00</updated>
+    <id>https://www.edge-cloud.net/2020/01/03/securing-your-aws-networks</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <summary type="html">Brief description goes here</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/assets/images/og-image.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/assets/images/og-image.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Enhanced AWS Direct Connect Location Directory</title>
+    <link href="https://www.edge-cloud.net/2026/02/03/dx-location-details/" rel="alternate" type="text/html" title="Enhanced AWS Direct Connect Location Directory" />
+    <published>2026-02-03T00:00:00-08:00</published>
+    <updated>2026-02-03T00:00:00-08:00</updated>
+    <id>https://www.edge-cloud.net/2026/02/03/dx-location-details</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Direct-Connect" />
+    
+    <summary type="html">A searchable directory of AWS Direct Connect locations with geographic data, filtering capabilities, and automated updates</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2026/02/dx-location-details.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2026/02/dx-location-details.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #DirectConnect</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Direct Connect Public VIF for S3 traffic only</title>
+    <link href="https://www.edge-cloud.net/2026/01/13/aws-dx-public-vid-for-s3-only/" rel="alternate" type="text/html" title="Direct Connect Public VIF for S3 traffic only" />
+    <published>2026-01-13T00:00:00-08:00</published>
+    <updated>2026-01-13T00:00:00-08:00</updated>
+    <id>https://www.edge-cloud.net/2026/01/13/aws-dx-public-vid-for-s3-only</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Direct-Connect" />
+    
+    <summary type="html">How to use a Direct Connect Public VIF solely for S3 traffic only</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2026/01/aws-dx-public-vid-for-s3-only.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2026/01/aws-dx-public-vid-for-s3-only.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #DirectConnect</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Bring your own IP addresses (BYOIP) for Amazon EC2 [Video]</title>
+    <link href="https://www.edge-cloud.net/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/" rel="alternate" type="text/html" title="Bring your own IP addresses (BYOIP) for Amazon EC2 [Video]" />
+    <published>2023-08-20T00:00:00-07:00</published>
+    <updated>2023-08-20T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2023/08/20/video-bring-your-own-ip-for-amazon-vpc</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Video" />
+    
+    <summary type="html">YouTube Videos with step-by-step guide for moving IP prefixes to AWS with &quot;Bring your own IP addresses&quot; (BYOIP) for Amazon EC2</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/08/video-bring-your-own-ip-for-amazon-vpc.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/08/video-bring-your-own-ip-for-amazon-vpc.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #Video</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">How to move your DNS to Amazon Route 53 [Video]</title>
+    <link href="https://www.edge-cloud.net/2023/07/27/move-your-dns-to-route53/" rel="alternate" type="text/html" title="How to move your DNS to Amazon Route 53 [Video]" />
+    <published>2023-07-25T00:00:00-07:00</published>
+    <updated>2023-07-25T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2023/07/27/video-move-your-dns-to-route53</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Route-53" />
+    
+    <category term="Video" />
+    
+    <summary type="html">YouTube Videos with step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/07/video-move-your-dns-to-route53.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/07/video-move-your-dns-to-route53.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #Route53, #Video</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">How to move your DNS to Amazon Route 53</title>
+    <link href="https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53/" rel="alternate" type="text/html" title="How to move your DNS to Amazon Route 53" />
+    <published>2023-06-25T00:00:00-07:00</published>
+    <updated>2023-06-25T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2023/06/25/move-your-dns-to-route53</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Route-53" />
+    
+    <summary type="html">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/06/title-move-your-dns-to-route53.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/06/title-move-your-dns-to-route53.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #Route53</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Random prefix attack mitigation with Amazon Route 53</title>
+    <link href="https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation/" rel="alternate" type="text/html" title="Random prefix attack mitigation with Amazon Route 53" />
+    <published>2023-06-18T00:00:00-07:00</published>
+    <updated>2023-06-18T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2023/06/18/r53-random-prefix-attack-mitigation</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Route-53" />
+    
+    <summary type="html">How to mitigate random prefix attacks - when someone send a lot of traffic to subdomains of your main domain - with Amazon Route 53</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/06/title-r53-random-prefix-attack-mitigation.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/06/title-r53-random-prefix-attack-mitigation.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #Route53</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">URL Redirect with Amazon CloudFront and Amazon Route 53</title>
+    <link href="https://www.edge-cloud.net/2023/03/20/http-redirect-with-cloudfront/" rel="alternate" type="text/html" title="URL Redirect with Amazon CloudFront and Amazon Route 53" />
+    <published>2023-03-20T00:00:00-07:00</published>
+    <updated>2023-03-20T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2023/03/20/url-redirect-with-cloudfront</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="CloudFront" />
+    
+    <category term="Web" />
+    
+    <summary type="html">How to use Amazon CloudFront and Amazon Route 53 to perform a URL redirect, e.g. from http://about.example.com to http://www.example.com/about.</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2023/03/title-url-redirect-with-cloudfront.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2023/03/title-url-redirect-with-cloudfront.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #CloudFront, #Web</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2</title>
+    <link href="https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip/" rel="alternate" type="text/html" title="Hands-on with AWS Bring your own IP addresses (BYOIP) in Amazon EC2" />
+    <published>2022-07-19T00:00:00-07:00</published>
+    <updated>2022-07-19T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2022/07/19/hands-on-with-aws-byoip</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="IPv6" />
+    
+    <summary type="html">Using AWS Bring your own IP addresses (BYOIP) in Amazon EC2 capability with a real life example of an IPv6 prefix, showing provisioning and troubleshooting steps.</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2022/07/title-hands-on-with-aws-byoip.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2022/07/title-hands-on-with-aws-byoip.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #IPv6</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">AWS Direct Connect overview</title>
+    <link href="https://www.edge-cloud.net/2022/06/28/dx-overview/" rel="alternate" type="text/html" title="AWS Direct Connect overview" />
+    <published>2022-06-28T00:00:00-07:00</published>
+    <updated>2022-06-28T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2022/06/28/dx-overview</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Direct-Connect" />
+    
+    <summary type="html">Overview of AWS Direct Connect, with which you can establish private connectivity between AWS and your data center, office, factory or collocated environment.</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2022/06/title-dx-overview.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2022/06/title-dx-overview.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #DirectConnect</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Better understanding BGP</title>
+    <link href="https://www.edge-cloud.net/2020/09/28/understanding-bgp/" rel="alternate" type="text/html" title="Better understanding BGP" />
+    <published>2020-09-28T00:00:00-07:00</published>
+    <updated>2020-09-28T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2020/09/28/understanding-bgp</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="BGP" />
+    
+    <category term="Network" />
+    
+    <summary type="html">Primer to better understanding BGP</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2020/09/title-understanding-bgp.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2020/09/title-understanding-bgp.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#BGP, #Network</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Better understanding IP Routing</title>
+    <link href="https://www.edge-cloud.net/2020/09/18/understanding-routing/" rel="alternate" type="text/html" title="Better understanding IP Routing" />
+    <published>2020-09-18T00:00:00-07:00</published>
+    <updated>2020-09-18T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2020/09/18/understanding-routing</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="BGP" />
+    
+    <category term="Network" />
+    
+    <summary type="html">Look at fundamental principles of IP routing to better design and troubleshoot networks</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2020/09/title-understanding-routing.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2020/09/title-understanding-routing.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#BGP, #Network</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">AWS Site-to-Site VPN (IPSec) with IPv6</title>
+    <link href="https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6/" rel="alternate" type="text/html" title="AWS Site-to-Site VPN (IPSec) with IPv6" />
+    <published>2020-09-11T00:00:00-07:00</published>
+    <updated>2020-09-11T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2020/09/11/aws-ipsec-vpn-ipv6</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="IPv6" />
+    
+    <category term="VPN" />
+    
+    <summary type="html">How to setup the AWS Site-to-Site VPN (IPSec) with IPv6</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2020/09/title-aws-ipsec-vpn-ipv6.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2020/09/title-aws-ipsec-vpn-ipv6.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #IPv6, #VPN</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Multicast with AWS Transit Gateway</title>
+    <link href="https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro/" rel="alternate" type="text/html" title="Multicast with AWS Transit Gateway" />
+    <published>2020-05-01T00:00:00-07:00</published>
+    <updated>2020-05-01T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2020/05/01/tgw-multicast-intro</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Transit-Gateway" />
+    
+    <summary type="html">Walkthrough for setup and testing IP Multicast with AWS Transit Gateway (TGW)</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2020/05/title-tgw-multicast-intro.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2020/05/title-tgw-multicast-intro.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #TransitGateway</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Drawing monitor for network diagrams</title>
+    <link href="https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams/" rel="alternate" type="text/html" title="Drawing monitor for network diagrams" />
+    <published>2020-04-19T00:00:00-07:00</published>
+    <updated>2020-04-19T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2020/04/19/drawing-monitor-for-network-diagrams</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <summary type="html">Home office setup with Huion Kamvas Pro 12 drawing monitor for network diagrams</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2020/04/HomeOffice3.jpg" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2020/04/HomeOffice3.jpg" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Enabling connectivity between on-premises locations connected to AWS through Direct Connect</title>
+    <link href="https://www.edge-cloud.net/2019/12/27/aws-dx-connect-on-premises/" rel="alternate" type="text/html" title="Enabling connectivity between on-premises locations connected to AWS through Direct Connect" />
+    <published>2019-12-27T00:00:00-08:00</published>
+    <updated>2019-12-27T00:00:00-08:00</updated>
+    <id>https://www.edge-cloud.net/2019/12/27/aws-dx-connect-on-premises</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Direct-Connect" />
+    
+    <summary type="html">Caveats for data flow between multiple on-premises locations, when using AWS with Direct Connect and Transit Gateway</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2019/12/AWS-Interconnect.png" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2019/12/AWS-Interconnect.png" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #DirectConnect</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Block access from certain countries with Route 53 Geolocation</title>
+    <link href="https://www.edge-cloud.net/2019/12/09/block-countries-with-route53/" rel="alternate" type="text/html" title="Block access from certain countries with Route 53 Geolocation" />
+    <published>2019-12-09T00:00:00-08:00</published>
+    <updated>2019-12-09T00:00:00-08:00</updated>
+    <id>https://www.edge-cloud.net/2019/12/09/block-countries-with-route53</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Route-53" />
+    
+    <summary type="html">Use Amazon Route 53 Geolocation Routing to block access to services from certain countries. Leverage RIPE Atlas to validate the setup.</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2019/12/GeoBlock_China.jpg" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2019/12/GeoBlock_China.jpg" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #Route53</dc:hashtags>
+  </entry>
+  
+  <entry>
+    <title type="html">Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF</title>
+    <link href="https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif/" rel="alternate" type="text/html" title="Troubleshooting BGP neighbor problem with a Direct Connect Hosted VIF" />
+    <published>2019-09-10T00:00:00-07:00</published>
+    <updated>2019-09-10T00:00:00-07:00</updated>
+    <id>https://www.edge-cloud.net/2019/09/09/troubleshooting-bgp-session-hosted-vif</id>
+    <author>
+      <name>Christian Elsen</name>
+    </author>
+    
+    <category term="AWS" />
+    
+    <category term="Network" />
+    
+    <category term="Direct-Connect" />
+    
+    <summary type="html">Troubleshooting a BGP neighbor issue of &quot;active open failed - tcb is not available&quot; on a Megaport Hosted VIF due to unset BGP MD5 Auth key</summary>
+    
+    
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.edge-cloud.net/content/uploads/2019/09/Hosted-VIF.jpg" />
+    <media:content medium="image" url="https://www.edge-cloud.net/content/uploads/2019/09/Hosted-VIF.jpg" xmlns:media="http://search.yahoo.com/mrss/" />
+    
+    <dc:hashtags>#AWS, #Network, #DirectConnect</dc:hashtags>
+  </entry>
+  
+</feed>

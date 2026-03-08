@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+--><html lang="en" class="no-js">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Enhanced AWS Direct Connect Location Directory - Edge Cloud</title>
+<meta name="description" content="A searchable directory of AWS Direct Connect locations with geographic data, filtering capabilities, and automated updates">
+
+
+  <meta name="author" content="Christian Elsen">
+  
+  <meta property="article:author" content="Christian Elsen">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Edge Cloud">
+<meta property="og:title" content="Enhanced AWS Direct Connect Location Directory">
+<meta property="og:url" content="https://www.edge-cloud.net/2026/02/03/dx-location-details/">
+
+
+  <meta property="og:description" content="A searchable directory of AWS Direct Connect locations with geographic data, filtering capabilities, and automated updates">
+
+
+
+  <meta property="og:image" content="https://www.edge-cloud.net/content/uploads/2026/02/dx-location-details.png">
+
+
+
+  <meta name="fediverse:creator" content="@chriselsen@mastodon.social">
+
+
+
+  <meta property="article:published_time" content="2026-02-03T00:00:00-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://www.edge-cloud.net/2026/02/03/dx-location-details/">
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="ZPKuOb9ie7OuRgxLoRK2REKxFW6bC0_7VaNFcTNQQxM">
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Edge Cloud Feed">
+  <link href="/feed.json" type="application/json" rel="alternate" title="Edge Cloud JSON Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css">
+<noscript><link rel="stylesheet" href="/assets/css/fontawesome/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preload" href="/assets/js/main.min.js" as="script">
+<link rel="preload" href="/assets/js/lazysizes.min.js" as="script">
+
+<link rel="preload" href="/assets/css/main.css" as="style">
+<link rel="preload" href="/assets/css/fontawesome/css/all.min.css" as="style">
+
+<script>
+  (function() {
+    var palette = localStorage.getItem("palette") || "auto";
+    var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var shouldUseDark = palette === "dark" || (palette === "auto" && prefersDark);
+    
+    document.documentElement.setAttribute("data-palette", palette);
+    
+    if (shouldUseDark) {
+      document.documentElement.classList.add("dark");
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.id = "dark-theme-style";
+      link.href = "/assets/css/dark.css";
+      document.head.appendChild(link);
+    }
+  })();
+</script>
+
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="http://5xvqigedj8-dsn.algolia.net">
+
+<link rel="preconnnect" href="https://www.google-analytics.com">
+<link rel="preconnnect" href="https://5xvqigedj8-dsn.algolia.net">
+
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/edgecloud.png" alt=" On the edge of cloud computing"></a>
+        
+        <a class="site-title" href="/">
+           On the edge of cloud computing
+          
+        </a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#aws">AWS</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/#ipv6">IPv6</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        <button id="theme-toggle" type="button">
+          <i class="fa-solid fa-circle-half-stroke"></i>
+          <i class="fas fa-sun"></i>
+          <i class="fas fa-moon"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://www.edge-cloud.net/">
+        <img src="/assets/images/chriselsen.jpg" alt="Christian Elsen" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://www.edge-cloud.net/" itemprop="url">Christian Elsen</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Technology Generalist</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">About</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.newzealand.com/int/te-anau/" rel="nofollow noopener noreferrer" target="_blank">
+            
+              <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i>
+            
+            <span class="label">Aotearoa</span></a></li>
+          
+        
+          
+            <li><a href="https://chris.elsen.xyz" rel="nofollow noopener noreferrer" target="_blank">
+            
+              <i class="fas fa-fw fa-link" aria-hidden="true"></i>
+            
+            <span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://mastodon.social/@chriselsen" rel="nofollow noopener noreferrer" target="_blank">
+            
+              <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i>
+            
+            <span class="label">Mastodon</span></a></li>
+          
+        
+          
+            <li><a href="https://bsky.app/profile/edge-cloud.net" rel="nofollow noopener noreferrer me" itemprop="sameAs" target="_blank">
+            
+              <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i>
+            
+            <span class="label">Bluesky</span></a></li>
+          
+        
+          
+            <li><a href="https://www.youtube.com/@EdgeCloud" rel="nofollow noopener noreferrer me" itemprop="sameAs" target="_blank">
+            
+              <i class="fab fa-fw fa-youtube" aria-hidden="true"></i>
+            
+            <span class="label">YouTube</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/christianelsen/" rel="nofollow noopener noreferrer" target="_blank">
+            
+              <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i>
+            
+            <span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank">
+            
+              <i class="fab fa-fw fa-github" aria-hidden="true"></i>
+            
+            <span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://as213151.net/" rel="nofollow noopener noreferrer" target="_blank">
+            
+              <i class="fas fa-fw fa-network-wired" aria-hidden="true"></i>
+            
+            <span class="label">AS213151</span></a></li>
+          
+        
+          
+            <li><a href="https://www.buymeacoffee.com/chriselsen/" rel="nofollow noopener noreferrer" target="_blank">
+            
+              <i class="fas fa-fw fa-coffee" aria-hidden="true"></i>
+            
+            <span class="label">Buy me a coffee</span></a></li>
+          
+        
+          
+            <li><a href="https://www.paypal.com/paypalme/christianelsen" rel="nofollow noopener noreferrer" target="_blank">
+            
+              <i class="fab fa-fw fa-paypal" style="color: #253B80;" aria-hidden="true"></i>
+            
+            <span class="label">PayPal Me</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Enhanced AWS Direct Connect Location Directory">
+    <meta itemprop="description" content="A searchable directory of AWS Direct Connect locations with geographic data, filtering capabilities, and automated updates">
+    <meta itemprop="datePublished" content="2026-02-03T00:00:00-08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://www.edge-cloud.net/2026/02/03/dx-location-details/" class="u-url" itemprop="url">Enhanced AWS Direct Connect Location Directory
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2026-02-03T00:00:00-08:00">February 3, 2026</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Direct-Connect
+    
+    
+    
+  </p>
+
+
+        </header>
+      
+
+      
+
+
+
+
+
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+<li>
+<a href="#the-problem-with-the-official-aws-page">The Problem with the Official AWS Page</a><ul>
+<li><a href="#missing-geographic-information">Missing Geographic Information</a></li>
+<li><a href="#regional-misclassification">Regional Misclassification</a></li>
+<li><a href="#lack-of-data-normalization">Lack of Data Normalization</a></li>
+</ul>
+</li>
+<li>
+<a href="#the-solution-dx-location-details">The Solution: dx-location-details</a><ul>
+<li><a href="#interactive-map-and-table-interface">Interactive Map and Table Interface</a></li>
+<li><a href="#location-data">Location Data</a></li>
+<li><a href="#multi-partition-support">Multi-Partition Support</a></li>
+<li>
+<a href="#automated-data-collection">Automated Data Collection</a><ul>
+<li><a href="#daily-updates-from-aws">Daily Updates from AWS</a></li>
+<li><a href="#peeringdb-integration">PeeringDB Integration</a></li>
+<li><a href="#manual-mapping-maintenance">Manual Mapping Maintenance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#use-cases">Use Cases</a><ul>
+<li><a href="#selecting-nearest-locations">Selecting Nearest Locations</a></li>
+<li><a href="#evaluating-facility-capabilities">Evaluating Facility Capabilities</a></li>
+<li><a href="#multi-region-deployments">Multi-Region Deployments</a></li>
+</ul>
+</li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>When planning AWS Direct Connect deployments, one of the first challenges customers face is understanding where Direct Connect locations are physically located and what capabilities they offer. While AWS provides a <a href="https://aws.amazon.com/directconnect/locations/" rel="external nofollow noopener" target="_blank">list of Direct Connect locations</a>, this page has several limitations that make it difficult to use for planning and decision-making purposes.</p>
+
+<p>This article introduces the <i class="fab fa-github"></i> <a href="https://github.com/chriselsen/dx-location-details" rel="external nofollow noopener" target="_blank">dx-location-details</a> project, which addresses these limitations by providing an enhanced, interactive directory of AWS Direct Connect locations with geographic data, advanced filtering, and automated updates (see Figure 1).</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2026/02/dx-location-details-screenshot.png" title="Figure 1: Interactive AWS Direct Connect Location Directory " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2026/02/dx-location-details-screenshot-320.webp 320w,         /content/resized/2026/02/dx-location-details-screenshot-384.webp 384w,         /content/resized/2026/02/dx-location-details-screenshot-512.webp 512w,         /content/resized/2026/02/dx-location-details-screenshot-683.webp 683w,         /content/resized/2026/02/dx-location-details-screenshot-800.webp 800w,         /content/resized/2026/02/dx-location-details-screenshot-960.webp 960w, " sizes="1309px"></source>
+  <source data-srcset="    /content/resized/2026/02/dx-location-details-screenshot-320.png 320w,     /content/resized/2026/02/dx-location-details-screenshot-384.png 384w,     /content/resized/2026/02/dx-location-details-screenshot-512.png 512w,     /content/resized/2026/02/dx-location-details-screenshot-683.png 683w,     /content/resized/2026/02/dx-location-details-screenshot-800.png 800w,     /content/resized/2026/02/dx-location-details-screenshot-960.png 960w, " sizes="1309px"></source>
+  <img src="/content/resized/2026/02/dx-location-details-screenshot-320.png" data-src="/content/uploads/2026/02/dx-location-details-screenshot.png" class="blur-up lazyautosizes lazyload" alt="Figure 1: Interactive AWS Direct Connect Location Directory ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 1: Interactive AWS Direct Connect Location Directory
+</figcaption>
+
+</figure>
+
+<h1 id="the-problem-with-the-official-aws-page">The Problem with the Official AWS Page</h1>
+
+<p>The official AWS Direct Connect locations page at <a href="https://aws.amazon.com/directconnect/locations/" rel="external nofollow noopener" target="_blank">https://aws.amazon.com/directconnect/locations/</a> presents several challenges for customers:</p>
+
+<h2 id="missing-geographic-information">Missing Geographic Information</h2>
+
+<p>The AWS page lists Direct Connect locations by name and associated AWS region, but provides no physical addresses, geographic coordinates, or mapping capabilities. This makes it difficult to:</p>
+
+<ul>
+  <li>Visualize where locations are physically situated</li>
+  <li>Identify the nearest Direct Connect location to your data center or office</li>
+  <li>Plan for geographic redundancy across multiple locations</li>
+  <li>Understand the physical distance between locations for latency planning</li>
+</ul>
+
+<h2 id="regional-misclassification">Regional Misclassification</h2>
+
+<p>Direct Connect locations are grouped by AWS region associations, which can be misleading. For example:</p>
+
+<ul>
+  <li>A location in Tokyo might be listed under “Asia Pacific (Tokyo)” even though it can connect to any AWS region globally via Direct Connect Gateway</li>
+  <li>A location in Dubai, UAE might appear under “Europe” due to using Dublin as the associated region, instead of appearing under Middle East</li>
+  <li>Locations in the same city might appear under different regional groupings</li>
+  <li>The grouping doesn’t reflect the actual geographic distribution of facilities</li>
+</ul>
+
+<p>This regional grouping conflates the concept of “associated region” (used for API calls to manage Direct Connect resources) with physical location, creating confusion about where facilities actually exist.</p>
+
+<h2 id="lack-of-data-normalization">Lack of Data Normalization</h2>
+
+<p>The AWS page presents location information in an inconsistent format:</p>
+
+<ul>
+  <li>Location codes use various naming conventions without standardization</li>
+  <li>Facility names may differ between AWS documentation and the actual colocation provider</li>
+  <li>No structured data format makes it difficult to programmatically process the information</li>
+  <li>Port speeds and MACsec support details are maintained manually instead of being retrieved from the API, leading to potential inconsistencies</li>
+  <li>Missing details about facility operators</li>
+</ul>
+
+<h1 id="the-solution-dx-location-details">The Solution: dx-location-details</h1>
+
+<p>The <i class="fab fa-github"></i> <a href="https://github.com/chriselsen/dx-location-details" rel="external nofollow noopener" target="_blank">dx-location-details</a> GitHub repository provides an automated solution that addresses these limitations.</p>
+
+<h2 id="interactive-map-and-table-interface">Interactive Map and Table Interface</h2>
+
+<p>The project generates an interactive web page at <a href="https://chris.elsen.xyz/dx-location-details/" rel="external nofollow noopener" target="_blank">https://chris.elsen.xyz/dx-location-details/</a> featuring:</p>
+
+<ul>
+  <li>
+<strong>Interactive world map:</strong> Visualize all Direct Connect locations with markers showing their precise geographic coordinates</li>
+  <li>
+<strong>Sortable table:</strong> View detailed information about each location in a table format with sorting capabilities</li>
+  <li>
+<strong>Advanced filtering:</strong> Filter locations by country, organization, port speeds, MACsec support, and associated AWS region</li>
+  <li>
+<strong>Search functionality:</strong> Quickly find specific locations by name, code, or other attributes</li>
+  <li>
+<strong>Nearest location finder:</strong> Click anywhere on the map to identify the two closest Direct Connect locations based on geographic distance (see Figure 2). Note that this calculation uses straight-line distance and does not account for physical obstacles like oceans or the availability of existing fiber paths, so it should be used for rough guidance only</li>
+</ul>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2026/02/dx-location-details-nearest.png" title="Figure 2: Nearest location finder showing the two closest Direct Connect locations " class="image-popup">
+<picture>
+  <source type="image/webp" data-srcset="        /content/resized/2026/02/dx-location-details-nearest-320.webp 320w,         /content/resized/2026/02/dx-location-details-nearest-384.webp 384w,         /content/resized/2026/02/dx-location-details-nearest-512.webp 512w,         /content/resized/2026/02/dx-location-details-nearest-683.webp 683w,         /content/resized/2026/02/dx-location-details-nearest-800.webp 800w,         /content/resized/2026/02/dx-location-details-nearest-960.webp 960w, " sizes="1324px"></source>
+  <source data-srcset="    /content/resized/2026/02/dx-location-details-nearest-320.png 320w,     /content/resized/2026/02/dx-location-details-nearest-384.png 384w,     /content/resized/2026/02/dx-location-details-nearest-512.png 512w,     /content/resized/2026/02/dx-location-details-nearest-683.png 683w,     /content/resized/2026/02/dx-location-details-nearest-800.png 800w,     /content/resized/2026/02/dx-location-details-nearest-960.png 960w, " sizes="1324px"></source>
+  <img src="/content/resized/2026/02/dx-location-details-nearest-320.png" data-src="/content/uploads/2026/02/dx-location-details-nearest.png" class="blur-up lazyautosizes lazyload" alt="Figure 2: Nearest location finder showing the two closest Direct Connect locations ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 2: Nearest location finder showing the two closest Direct Connect locations
+</figcaption>
+
+</figure>
+
+<h2 id="location-data">Location Data</h2>
+
+<p>For each Direct Connect location, the directory provides:</p>
+
+<ul>
+  <li>
+<strong>Geographic coordinates:</strong> Precise latitude and longitude for mapping and distance calculations</li>
+  <li>
+<strong>Facility information:</strong> Links to PeeringDB entries for detailed facility and operator information</li>
+  <li>
+<strong>AWS location code:</strong> The standardized code used in AWS API calls</li>
+  <li>
+<strong>Port speeds:</strong> Available connection speeds (1G, 10G, 100G, 400G)</li>
+  <li>
+<strong>MACsec support:</strong> Which port speeds support MACsec encryption</li>
+  <li>
+<strong>Associated region:</strong> The AWS region used for managing Direct Connect resources at this location. This helps identify locations associated with opt-in regions that must be enabled in your AWS account before the Direct Connect location can be used</li>
+  <li>
+<strong>Organization details:</strong> The colocation provider or facility operator</li>
+</ul>
+
+<h2 id="multi-partition-support">Multi-Partition Support</h2>
+
+<p>The interface includes tabs for different AWS partitions:</p>
+
+<ul>
+  <li>
+<strong>AWS Commercial:</strong> Standard AWS regions accessible globally</li>
+  <li>
+<strong>AWS GovCloud (US):</strong> US government regions with special compliance requirements</li>
+  <li>
+<strong>EU Sovereign Cloud:</strong> Isolated European partition for data sovereignty requirements</li>
+  <li>
+<strong>AWS China:</strong> Isolated Chinese partition with separate operations</li>
+</ul>
+
+<p>Each partition displays only the relevant Direct Connect locations, with appropriate filtering and mapping.</p>
+
+<p class="notice--info"><strong>Note:</strong> Most colocation facilities in China are not listed in PeeringDB. For AWS China partition locations, geographic coordinates are obtained from alternative sources, resulting in lower location data fidelity and no PeeringDB facility links.</p>
+
+<h2 id="automated-data-collection">Automated Data Collection</h2>
+
+<p>The repository implements an automated workflow to keep location data current (see Figure 3):</p>
+
+<figure class="">
+
+
+
+
+
+
+
+
+<a href="/content/uploads/2026/02/dx-location-details-workflow.png" title="Figure 3: Automated data collection workflow " class="image-popup">
+<picture>
+  <source width="561" height="581" type="image/webp" data-srcset="        /content/resized/2026/02/dx-location-details-workflow-320.webp 320w,         /content/resized/2026/02/dx-location-details-workflow-384.webp 384w,         /content/resized/2026/02/dx-location-details-workflow-512.webp 512w,  /content/uploads/2026/02/dx-location-details-workflow.webp 561w" sizes="561px"></source>
+  <source width="561" height="581" data-srcset="    /content/resized/2026/02/dx-location-details-workflow-320.png 320w,     /content/resized/2026/02/dx-location-details-workflow-384.png 384w,     /content/resized/2026/02/dx-location-details-workflow-512.png 512w,  /content/uploads/2026/02/dx-location-details-workflow.png 561w" sizes="561px"></source>
+  <img src="/content/resized/2026/02/dx-location-details-workflow-320.png" data-src="/content/uploads/2026/02/dx-location-details-workflow.png" class="blur-up lazyautosizes lazyload" width="561" height="581" alt="Figure 3: Automated data collection workflow ">
+</picture>
+</a>
+
+
+
+  <figcaption>Figure 3: Automated data collection workflow
+</figcaption>
+
+</figure>
+
+<h3 id="daily-updates-from-aws">Daily Updates from AWS</h3>
+
+<p>A GitHub Actions workflow runs daily to:</p>
+
+<ol>
+  <li>Query the AWS Direct Connect API across all regions</li>
+  <li>Extract location information including codes, names, and available port speeds</li>
+  <li>Normalize location codes (removing floor suffixes, MMR designations, etc.)</li>
+  <li>Merge data with manually curated mappings to PeeringDB facilities</li>
+</ol>
+
+<h3 id="peeringdb-integration">PeeringDB Integration</h3>
+
+<p>The project maintains mappings between AWS location codes and <a href="https://www.peeringdb.com/" rel="external nofollow noopener" target="_blank">PeeringDB</a> facility IDs.</p>
+
+<p><a href="https://www.peeringdb.com/about" rel="external nofollow noopener" target="_blank">PeeringDB</a> is a freely available, user-maintained database of networks and interconnection data. Originally created to facilitate peering between networks, it has evolved into the de facto global registry of internet infrastructure, including colocation facilities, internet exchanges, and network presence. The database is maintained by over 16,000 registered users representing networks, facilities, and internet exchanges worldwide.</p>
+
+<p>Integrating with PeeringDB makes sense for several reasons:</p>
+
+<ul>
+  <li>
+<strong>Industry standard:</strong> PeeringDB is the authoritative source for colocation facility information used across the internet industry</li>
+  <li>
+<strong>AWS alignment:</strong> Amazon is a <a href="https://www.peeringdb.com/sponsors" rel="external nofollow noopener" target="_blank">Diamond sponsor of PeeringDB</a> and heavily uses it for public peering coordination through the <a href="https://www.peeringdb.com/net/4" rel="external nofollow noopener" target="_blank">Amazon Global Network</a>
+</li>
+  <li>
+<strong>Complete data:</strong> Provides precise geographic coordinates, facility operator details, and links to specifications</li>
+  <li>
+<strong>Community maintained:</strong> Regular updates from facility operators ensure data accuracy</li>
+  <li>
+<strong>Standardized format:</strong> Structured data enables automated processing and integration</li>
+</ul>
+
+<p>A monthly synchronization process updates:</p>
+
+<ul>
+  <li>Geographic coordinates from PeeringDB</li>
+  <li>Country codes and city names</li>
+  <li>Facility operator details</li>
+  <li>Organization information</li>
+</ul>
+
+<h3 id="manual-mapping-maintenance">Manual Mapping Maintenance</h3>
+
+<p>When AWS adds new Direct Connect locations, the repository includes an interactive tool (add_location.py) to:</p>
+
+<ul>
+  <li>Identify unmapped location codes</li>
+  <li>Search PeeringDB for matching facilities</li>
+  <li>Add new mappings to the location database</li>
+  <li>Validate coordinate accuracy</li>
+</ul>
+
+<p class="notice--info"><strong>Note:</strong> Although I do work for AWS, no internal data is being used in this repository. Mapping of Direct Connect locations to PeeringDB locations is solely performed manually through public information.</p>
+
+<h1 id="use-cases">Use Cases</h1>
+
+<p>This directory supports several practical use cases:</p>
+
+<h2 id="selecting-nearest-locations">Selecting Nearest Locations</h2>
+
+<p>The interactive map allows customers to:</p>
+
+<ul>
+  <li>Click on their data center location to find the nearest Direct Connect facilities</li>
+  <li>Compare distances to multiple potential locations</li>
+  <li>Evaluate whether to use local Direct Connect or work with a partner for extension</li>
+</ul>
+
+<h2 id="evaluating-facility-capabilities">Evaluating Facility Capabilities</h2>
+
+<p>The detailed information helps customers:</p>
+
+<ul>
+  <li>Identify which locations support required port speeds (100G, 400G)</li>
+  <li>Determine MACsec availability for encryption requirements</li>
+  <li>Research facility operators and their service offerings</li>
+  <li>Access PeeringDB for additional facility details</li>
+</ul>
+
+<h2 id="multi-region-deployments">Multi-Region Deployments</h2>
+
+<p>For customers with global AWS deployments:</p>
+
+<ul>
+  <li>Filter locations by country or region</li>
+  <li>Identify Direct Connect locations near regional offices</li>
+  <li>Plan Direct Connect Gateway architectures spanning multiple regions</li>
+  <li>Optimize for both cost and performance across geographieses</li>
+</ul>
+
+<h1 id="summary">Summary</h1>
+
+<p>The dx-location-details project addresses gaps in the official AWS Direct Connect locations page by providing:</p>
+
+<ul>
+  <li>
+<strong>Geographic visualization:</strong> Interactive map showing precise facility locations</li>
+  <li>
+<strong>Enhanced filtering:</strong> Search and filter by multiple criteria including country, operator, and capabilities</li>
+  <li>
+<strong>Normalized data:</strong> Consistent location codes and structured information</li>
+  <li>
+<strong>Automated updates:</strong> Daily synchronization with AWS Direct Connect API</li>
+  <li>
+<strong>Multiple export formats:</strong> CSV, KML, and JSON for various use cases</li>
+  <li>
+<strong>PeeringDB integration:</strong> Links to detailed facility information</li>
+</ul>
+
+<p>This enhanced directory simplifies Direct Connect planning by making it easy to identify suitable locations, evaluate facility capabilities, and plan for geographic redundancy. The automated update mechanism ensures the information stays current as AWS expands its Direct Connect footprint.</p>
+
+<p>For customers planning AWS Direct Connect deployments, this tool provides the geographic and facility information needed to make informed decisions about location selection, redundancy planning, and partner engagement.</p>
+
+<p>Visit <a href="https://chris.elsen.xyz/dx-location-details/" rel="external nofollow noopener" target="_blank">https://chris.elsen.xyz/dx-location-details/</a> to explore the interactive directory, or access the <a href="https://github.com/chriselsen/dx-location-details" rel="external nofollow noopener" target="_blank">GitHub repository</a> to contribute mappings or use the data programmatically.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#aws" class="page__taxonomy-item p-category" rel="tag">AWS</a><span class="sep">, </span>
+    
+      <a href="/tags/#direct-connect" class="page__taxonomy-item p-category" rel="tag">Direct-Connect</a><span class="sep">, </span>
+    
+      <a href="/tags/#network" class="page__taxonomy-item p-category" rel="tag">Network</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-03T00:00:00-08:00">February 3, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://toot.kytta.dev/?text=Enhanced%20AWS%20Direct%20Connect%20Location%20Directory%0Ahttps://www.edge-cloud.net/2026/02/03/dx-location-details/" class="btn btn--mastodon" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Mastodon" rel="external nofollow noopener" target="_blank">  
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i><span> Mastodon</span></a>
+
+  <a href="https://bsky.app/intent/compose?text=Enhanced+AWS+Direct+Connect+Location+Directory%20https%3A%2F%2Fwww.edge-cloud.net%2F2026%2F02%2F03%2Fdx-location-details%2F" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.edge-cloud.net%2F2026%2F02%2F03%2Fdx-location-details%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.edge-cloud.net%2F2026%2F02%2F03%2Fdx-location-details%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.edge-cloud.net%2F2026%2F02%2F03%2Fdx-location-details%2F&amp;title=Enhanced+AWS+Direct+Connect+Location+Directory" class="btn btn--reddit" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Reddit" rel="external nofollow noopener" target="_blank">
+    <i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2026/01/13/aws-dx-public-vid-for-s3-only/" class="pagination--pager" title="Direct Connect Public VIF for S3 traffic only
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2026/01/13/aws-dx-public-vid-for-s3-only/" rel="permalink">Direct Connect Public VIF for S3 traffic only
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2026-01-13T00:00:00-08:00">January 13, 2026</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Direct-Connect
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">How to use a Direct Connect Public VIF solely for S3 traffic only
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/08/20/video-bring-your-own-ip-for-amazon-vpc/" rel="permalink">Bring your own IP addresses (BYOIP) for Amazon EC2 [Video]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-20T00:00:00-07:00">August 20, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Video
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">YouTube Videos with step-by-step guide for moving IP prefixes to AWS with “Bring your own IP addresses” (BYOIP) for Amazon EC2
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/07/27/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53 [Video]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-25T00:00:00-07:00">July 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53, #Video
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">YouTube Videos with step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/06/25/move-your-dns-to-route53/" rel="permalink">How to move your DNS to Amazon Route 53
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00-07:00">June 25, 2023</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+    <span class="page__meta-tags"></span>
+      <i class="fas fa-fw fa-tags" aria-hidden="true"></i>  
+      #AWS, #Network, #Route-53
+    
+    
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to move your DNS - both registration services and zone file - to Amazon Route 53
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+
+  
+
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<div class="search-searchbar"></div>
+  <div class="search-hits"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div align="center" class="page__footer-follow">
+  <ul class="social-icons">
+    <!-- 
+      <li><strong>Follow:</strong></li>
+     -->
+
+    
+      
+        
+          <li><a href="https://mastodon.social/@chriselsen" rel="me nofollow noopener noreferrer" target="_blank">
+          
+            <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i>
+          
+          Mastodon</a></li>
+        
+      
+        
+          <li><a href="https://bsky.app/profile/edge-cloud.net" rel="me nofollow noopener noreferrer" target="_blank">
+          
+            <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i>
+          
+          Bluesky</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@EdgeCloud" rel="me nofollow noopener noreferrer" target="_blank">
+          
+            <i class="fab fa-fw fa-youtube" aria-hidden="true"></i>
+          
+          YouTube</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/christianelsen/" rel="me nofollow noopener noreferrer" target="_blank">
+          
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i>
+          
+          LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank">
+          
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i>
+          
+          Github</a></li>
+        
+      
+        
+          <li><a href="https://www.buymeacoffee.com/chriselsen/" rel="me nofollow noopener noreferrer" target="_blank">
+          
+            <svg width="1em" height="1em" viewbox="0 0 884 1279" fill="currentColor" style="vertical-align: -0.125em;" aria-hidden="true"><path d="M791.109 297.518L790.231 297.002L788.201 296.383C789.018 297.072 790.04 297.472 791.109 297.518V297.518Z"></path><path d="M791.113 297.529H791.244V297.447L791.113 297.529Z"></path><path d="M472.623 590.836C426.682 610.503 374.546 632.802 306.976 632.802C278.71 632.746 250.58 628.868 223.353 621.274L270.086 1101.08C271.74 1121.13 280.876 1139.83 295.679 1153.46C310.482 1167.09 329.87 1174.65 349.992 1174.65C349.992 1174.65 416.254 1178.09 438.365 1178.09C462.161 1178.09 533.516 1174.65 533.516 1174.65C553.636 1174.65 573.019 1167.08 587.819 1153.45C602.619 1139.82 611.752 1121.13 613.406 1101.08L663.459 570.876C641.091 563.237 618.516 558.161 593.068 558.161C549.054 558.144 513.591 573.303 472.623 590.836Z" fill="#FFDD00"></path><path d="M879.567 341.849L872.53 306.352C866.215 274.503 851.882 244.409 819.19 232.898C808.711 229.215 796.821 227.633 788.786 220.01C780.751 212.388 778.376 200.55 776.518 189.572C773.076 169.423 769.842 149.257 766.314 129.143C763.269 111.85 760.86 92.4243 752.928 76.56C742.604 55.2584 721.182 42.8009 699.88 34.559C688.965 30.4844 677.826 27.0375 666.517 24.2352C613.297 10.1947 557.342 5.03277 502.591 2.09047C436.875 -1.53577 370.983 -0.443234 305.422 5.35968C256.625 9.79894 205.229 15.1674 158.858 32.0469C141.91 38.224 124.445 45.6399 111.558 58.7341C95.7448 74.8221 90.5829 99.7026 102.128 119.765C110.336 134.012 124.239 144.078 138.985 150.737C158.192 159.317 178.251 165.846 198.829 170.215C256.126 182.879 315.471 187.851 374.007 189.968C438.887 192.586 503.87 190.464 568.44 183.618C584.408 181.863 600.347 179.758 616.257 177.304C634.995 174.43 647.022 149.928 641.499 132.859C634.891 112.453 617.134 104.538 597.055 107.618C594.095 108.082 591.153 108.512 588.193 108.942L586.06 109.252C579.257 110.113 572.455 110.915 565.653 111.661C551.601 113.175 537.515 114.414 523.394 115.378C491.768 117.58 460.057 118.595 428.363 118.647C397.219 118.647 366.058 117.769 334.983 115.722C320.805 114.793 306.661 113.611 292.552 112.177C286.134 111.506 279.733 110.801 273.333 110.009L267.241 109.235L265.917 109.046L259.602 108.134C246.697 106.189 233.792 103.953 221.025 101.251C219.737 100.965 218.584 100.249 217.758 99.2193C216.932 98.1901 216.482 96.9099 216.482 95.5903C216.482 94.2706 216.932 92.9904 217.758 91.9612C218.584 90.9319 219.737 90.2152 221.025 89.9293H221.266C232.33 87.5721 243.479 85.5589 254.663 83.8038C258.392 83.2188 262.131 82.6453 265.882 82.0832H265.985C272.988 81.6186 280.026 80.3625 286.994 79.5366C347.624 73.2302 408.614 71.0801 469.538 73.1014C499.115 73.9618 528.676 75.6996 558.116 78.6935C564.448 79.3474 570.746 80.0357 577.043 80.8099C579.452 81.1025 581.878 81.4465 584.305 81.7391L589.191 82.4445C603.438 84.5667 617.61 87.1419 631.708 90.1703C652.597 94.7128 679.422 96.1925 688.713 119.077C691.673 126.338 693.015 134.408 694.649 142.03L696.731 151.752C696.786 151.926 696.826 152.105 696.852 152.285C701.773 175.227 706.7 198.169 711.632 221.111C711.994 222.806 712.002 224.557 711.657 226.255C711.312 227.954 710.621 229.562 709.626 230.982C708.632 232.401 707.355 233.6 705.877 234.504C704.398 235.408 702.75 235.997 701.033 236.236H700.895L697.884 236.649L694.908 237.044C685.478 238.272 676.038 239.419 666.586 240.486C647.968 242.608 629.322 244.443 610.648 245.992C573.539 249.077 536.356 251.102 499.098 252.066C480.114 252.57 461.135 252.806 442.162 252.771C366.643 252.712 291.189 248.322 216.173 239.625C208.051 238.662 199.93 237.629 191.808 236.58C198.106 237.389 187.231 235.96 185.029 235.651C179.867 234.928 174.705 234.177 169.543 233.397C152.216 230.798 134.993 227.598 117.7 224.793C96.7944 221.352 76.8005 223.073 57.8906 233.397C42.3685 241.891 29.8055 254.916 21.8776 270.735C13.7217 287.597 11.2956 305.956 7.64786 324.075C4.00009 342.193 -1.67805 361.688 0.472751 380.288C5.10128 420.431 33.165 453.054 73.5313 460.35C111.506 467.232 149.687 472.807 187.971 477.556C338.361 495.975 490.294 498.178 641.155 484.129C653.44 482.982 665.708 481.732 677.959 480.378C681.786 479.958 685.658 480.398 689.292 481.668C692.926 482.938 696.23 485.005 698.962 487.717C701.694 490.429 703.784 493.718 705.08 497.342C706.377 500.967 706.846 504.836 706.453 508.665L702.633 545.797C694.936 620.828 687.239 695.854 679.542 770.874C671.513 849.657 663.431 928.434 655.298 1007.2C653.004 1029.39 650.71 1051.57 648.416 1073.74C646.213 1095.58 645.904 1118.1 641.757 1139.68C635.218 1173.61 612.248 1194.45 578.73 1202.07C548.022 1209.06 516.652 1212.73 485.161 1213.01C450.249 1213.2 415.355 1211.65 380.443 1211.84C343.173 1212.05 297.525 1208.61 268.756 1180.87C243.479 1156.51 239.986 1118.36 236.545 1085.37C231.957 1041.7 227.409 998.039 222.9 954.381L197.607 711.615L181.244 554.538C180.968 551.94 180.693 549.376 180.435 546.76C178.473 528.023 165.207 509.681 144.301 510.627C126.407 511.418 106.069 526.629 108.168 546.76L120.298 663.214L145.385 904.104C152.532 972.528 159.661 1040.96 166.773 1109.41C168.15 1122.52 169.44 1135.67 170.885 1148.78C178.749 1220.43 233.465 1259.04 301.224 1269.91C340.799 1276.28 381.337 1277.59 421.497 1278.24C472.979 1279.07 524.977 1281.05 575.615 1271.72C650.653 1257.95 706.952 1207.85 714.987 1130.13C717.282 1107.69 719.576 1085.25 721.87 1062.8C729.498 988.559 737.115 914.313 744.72 840.061L769.601 597.451L781.009 486.263C781.577 480.749 783.905 475.565 787.649 471.478C791.392 467.391 796.352 464.617 801.794 463.567C823.25 459.386 843.761 452.245 859.023 435.916C883.318 409.918 888.153 376.021 879.567 341.849Z"></path></svg>
+          
+          Buy me a coffee</a></li>
+        
+      
+        
+          <li><a href="https://www.paypal.com/paypalme/christianelsen" rel="me nofollow noopener noreferrer" target="_blank">
+          
+            <i class="fab fa-fw fa-paypal" style="color: #253B80;" aria-hidden="true"></i>
+          
+          PayPal Me</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div align="center" class="page__footer-copyright">© 2013 - 2026 Christian Elsen. <a href="/terms/">Terms &amp; Privacy Policy</a>.</div>
+
+      </footer>
+    </div>
+
+    <aside class="sidebar__top">
+      <a href="#"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+    
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  
+
+
+
+<script src="/assets/js/lazysizes.min.js"></script>
+
+<script>
+const loadSearch = function() {
+  const loadCSS = function(src) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = src;
+    document.head.appendChild(link);
+  };
+
+  var script = document.createElement('script');
+  script.src = "https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch.min.js";
+  script.addEventListener("load", function() {
+    const search = instantsearch({
+      appId: '5XVQIGEDJ8',
+      apiKey: '4e0733cbaacd194a6cf59b61024f966f',
+      indexName: 'edge-cloud-net',
+      searchParameters: {
+        restrictSearchableAttributes: ['title', 'content']
+      }
+    });
+
+    const hitTemplate = function(hit) {
+      const url = hit.url;
+      const hightlight = hit._highlightResult;
+      const title = hightlight.title && hightlight.title.value  || "";
+      const content = hightlight.html && hightlight.html.value  || "";
+
+      return `
+        <div class="list__item">
+          <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+            <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+            <div class="archive__item-excerpt" itemprop="description">${content}</div>
+          </article>
+        </div>
+      `;
+    }
+
+    search.addWidget(
+      instantsearch.widgets.searchBox({
+        container: '.search-searchbar',
+        poweredBy: true,
+        placeholder: 'Enter your search term...'
+      })
+    );
+    search.addWidget(
+      instantsearch.widgets.hits({
+        container: '.search-hits',
+        templates: {
+          item: hitTemplate,
+          empty: 'No results',
+        }
+      })
+    );
+
+    if (!search.started) {
+      search.start();
+    }
+  });
+  document.body.appendChild(script);
+
+  loadCSS("https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch.min.css");
+  loadCSS("https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch-theme-algolia.min.css");
+};
+
+$(document).ready(function() {
+  var scriptLoaded = false;
+  $(".search__toggle").on("click", function() {
+    if (!scriptLoaded) {
+      loadSearch();
+      scriptLoaded = true;
+    }
+  });
+});
+</script>
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'edge-cloud/www.edge-cloud.net');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
